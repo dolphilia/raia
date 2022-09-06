@@ -133,7 +133,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="include\duktape\duktape.c" />
-    <ClCompile Include="raia-engine.c" />
+    <ClCompile Include="src\raia-engine.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\duktape\duktape.h" />
