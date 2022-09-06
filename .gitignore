@@ -1,4 +1,8 @@
 # --
+# macOS
+.DS_Store
+
+# --
 # C Template
 #
 
