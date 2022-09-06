@@ -9,6 +9,9 @@
 #include <stdlib.h>
 #ifdef __APPLE__
 #include <OpenGL/gl.h>
+#include <AL/al.h>
+#include <AL/alc.h>
+#include <unistd.h>
 #endif
 #include <GLFW/glfw3.h>
 #include "duktape/duktape.h"
@@ -46,7 +49,11 @@ int main(int argc, char* argv[]) {
     alGenSources(1, &source);
     alSourcei(source, AL_BUFFER, buffer);
     alSourcePlay(source);
+#ifdef __WINDOWS__
     Sleep(3000);
+#else
+    sleep(3);
+#endif
     alSourceStop(source);
     alDeleteSources(1, &source);
     alDeleteBuffers(1, &buffer);
@@ -93,37 +100,3 @@ int main(int argc, char* argv[]) {
 
     return EXIT_SUCCESS;
 }
-
-/*
-
-
-
-
-
-int main() {
-    printf("Hello\n");
-    ALCdevice* device;
-    ALCcontext* context;
-    ALshort data[44100 * 3];
-    ALuint buffer, source;
-    device = alcOpenDevice(NULL);
-    context = alcCreateContext(device, NULL);
-    alcMakeContextCurrent(context);
-    alGenBuffers(1, &buffer);
-    for (int i = 0; i < 44100 * 3; i++)
-        data[i] = rnd(-32767, 32767);
-    alBufferData(buffer, AL_FORMAT_MONO16, data, sizeof(data), 44100);
-    alGenSources(1, &source);
-    alSourcei(source, AL_BUFFER, buffer);
-    alSourcePlay(source);
-    Sleep(3000);
-    printf("wait?\n");
-    alSourceStop(source);
-    alDeleteSources(1, &source);
-    alDeleteBuffers(1, &buffer);
-    alcMakeContextCurrent(NULL);
-    alcDestroyContext(context);
-    alcCloseDevice(device);
-    return 0;
-}
-*/
