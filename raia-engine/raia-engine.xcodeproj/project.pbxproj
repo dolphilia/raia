@@ -10,6 +10,7 @@
 		8B03C63E28C73ED000CAF418 /* raia-engine.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B03C63D28C73ED000CAF418 /* raia-engine.c */; };
 		8B03C64028C7413F00CAF418 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B03C63F28C7413F00CAF418 /* libglfw.3.3.dylib */; };
 		8B03C64528C7415E00CAF418 /* duktape.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B03C64228C7415E00CAF418 /* duktape.c */; };
+		8B41BD2628C7844300EC9E86 /* libopenal.1.22.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B41BD2528C7844300EC9E86 /* libopenal.1.22.2.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,7 @@
 		8B03C64228C7415E00CAF418 /* duktape.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = duktape.c; path = include/duktape/duktape.c; sourceTree = "<group>"; };
 		8B03C64328C7415E00CAF418 /* duktape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = duktape.h; path = include/duktape/duktape.h; sourceTree = "<group>"; };
 		8B03C64428C7415E00CAF418 /* duk_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = duk_config.h; path = include/duktape/duk_config.h; sourceTree = "<group>"; };
+		8B41BD2528C7844300EC9E86 /* libopenal.1.22.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopenal.1.22.2.dylib; path = lib/libopenal.1.22.2.dylib; sourceTree = "<group>"; };
 		8B6D9C9428C73E2F004D6A6C /* raia-engine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "raia-engine"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -40,6 +42,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B03C64028C7413F00CAF418 /* libglfw.3.3.dylib in Frameworks */,
+				8B41BD2628C7844300EC9E86 /* libopenal.1.22.2.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +73,7 @@
 				8B03C64228C7415E00CAF418 /* duktape.c */,
 				8B03C64328C7415E00CAF418 /* duktape.h */,
 				8B03C63F28C7413F00CAF418 /* libglfw.3.3.dylib */,
+				8B41BD2528C7844300EC9E86 /* libopenal.1.22.2.dylib */,
 				8B03C63D28C73ED000CAF418 /* raia-engine.c */,
 			);
 			path = "raia-engine";
@@ -260,6 +264,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/raia-engine/lib",
+					"/opt/homebrew/Cellar/openal-soft/1.22.2/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -272,6 +277,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/raia-engine/lib",
+					"/opt/homebrew/Cellar/openal-soft/1.22.2/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
