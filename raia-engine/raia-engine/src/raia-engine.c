@@ -1,4 +1,4 @@
-﻿//
+//
 // macos:
 // clang glfw-template.c -o glfw-template -lglfw -framework OpenGL -I /opt/homebrew/include -L /opt/homebrew/lib
 // clang -std=c99 -oduktape-one-dot duktape-one-dot.c duktape.c -lm
