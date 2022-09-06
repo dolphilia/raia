@@ -113,7 +113,8 @@
       <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);;glfw3.lib;opengl32.lib;openal32.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)lib\OpenAL32.dll" $(OutDir) /Y</Command>
+      <Command>xcopy "$(ProjectDir)lib\OpenAL32.dll" $(OutDir) /Y
+xcopy "$(ProjectDir)lib\glfw3.dll" $(OutDir) /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -132,7 +133,12 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;openal32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)lib\OpenAL32.dll" $(OutDir) /Y
+xcopy "$(ProjectDir)lib\glfw3.dll" $(OutDir) /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="include\duktape\duktape.c" />
