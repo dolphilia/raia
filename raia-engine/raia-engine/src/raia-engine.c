@@ -1,7 +1,6 @@
 //
 // macos:
-// clang glfw-template.c -o glfw-template -lglfw -framework OpenGL -I /opt/homebrew/include -L /opt/homebrew/lib
-// clang -std=c99 -oduktape-one-dot duktape-one-dot.c duktape.c -lm
+// clang -o raia-engine.out src/raia-engine.c include/duktape/duktape.c -lm -lglfw -framework OpenGL -framework OpenAL -I /opt/homebrew/include -I include -L /opt/homebrew/opt/openal-soft/lib -L /opt/homebrew/opt/glfw/lib
 //
 
 #include <stdio.h>
