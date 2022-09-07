@@ -1,6 +1,7 @@
 //
 // macos:
-// clang -o raia-engine.out src/raia-engine.c include/duktape/duktape.c -lm -lglfw -framework OpenGL -framework OpenAL -I /opt/homebrew/include -I include -L /opt/homebrew/opt/openal-soft/lib -L /opt/homebrew/opt/glfw/lib
+// HomebrewでGLFWとOpenAL-Softを導入済みの場合:
+// $ clang -o raia-engine.out src/raia-engine.c include/duktape/duktape.c -lm -lglfw -framework OpenGL -framework OpenAL -I /opt/homebrew/include -I include -L /opt/homebrew/opt/openal-soft/lib -L /opt/homebrew/opt/glfw/lib
 //
 
 #include <stdio.h>
