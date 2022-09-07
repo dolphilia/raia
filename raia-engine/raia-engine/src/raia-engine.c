@@ -4,29 +4,46 @@
 // $ clang -o raia-engine.out src/raia-engine.c include/duktape/duktape.c -lm -lglfw -framework OpenGL -framework OpenAL -I /opt/homebrew/include -I include -L /opt/homebrew/opt/openal-soft/lib -L /opt/homebrew/opt/glfw/lib
 //
 
+#ifdef _WIN32
+#define __WIN32__
+#define __WINDOWS__
+#endif
+
+#ifdef _WIN64
+#define __WIN64__
+#define __WINDOWS__
+#endif
+
+#ifdef _WINDOWS
+#define __WINGUI__
+#endif
+
+#ifdef _CONSOLE
+#define __WINCUI__
+#endif
+
+#ifdef __APPLE__
+#define __MACOS__
+#endif
+
+#ifdef __linux
+#define __LINUX__
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdlib.h>
-#ifdef __APPLE__
-#include <OpenGL/gl.h>
+#include <GLFW/glfw3.h>
 #include <AL/al.h>
 #include <AL/alc.h>
-#include <unistd.h>
-#endif
-#include <GLFW/glfw3.h>
 #include "duktape/duktape.h"
 
-#ifdef _WIN32
-#define __WINDOWS__
-#endif
-#ifdef _WIN64
-#define __WINDOWS__
+#ifdef __MACOS__
+#include <unistd.h>
 #endif
 
 #ifdef __WINDOWS__
 #include <windows.h>
-#include <AL/al.h>
-#include <AL/alc.h>
 #endif
 
 int rnd(int _min, int _max) {
