@@ -123,7 +123,8 @@ void set_array_from_str(char* array, char* src) {
 char* load_string_filename(const char* filename) {
     size_t file_index = 0;
     char* str = NULL;
-    FILE* file_ptr = fopen(filename, "r");
+    FILE* file_ptr;
+    fopen_s(&file_ptr, filename, "r");
     if (file_ptr == NULL) {
         printf("ファイルの読み取りに失敗しました %s\n", filename); // ファイルの読み込みに失敗しました
         exit(EXIT_FAILURE);
@@ -154,7 +155,7 @@ char* load_string_filename(const char* filename) {
 /// 文字列を結合する
 char* str_join(const char* str1, const char* str2) {
     char* result = (char*)malloc((int)strlen(str1) + (int)strlen(str2));
-    sprintf(result, "%s%s", str1, str2); // 文字列を結合する
+    sprintf_s(result, "%s%s", str1, str2); // 文字列を結合する
     return result;
 }
 
@@ -221,6 +222,7 @@ void glfw_redraw(uint8_t* pixel_data) {
         mag = raia_header.magnification * 2;
     }
 #endif
+
     // ピクセルを描画
     int mag_width = mag * raia_header.resolution_width;
     int mag_height = mag * raia_header.resolution_height;;
@@ -247,6 +249,7 @@ void glfw_redraw(uint8_t* pixel_data) {
 }
 
 /// ウィンドウを閉じるまでループ
+/*
 void glfw_loop(void) {
     uint8_t pixel_data[raia_header.window_width * raia_header.window_height * raia_header.samples_per_pixel];
     while (!glfwWindowShouldClose(raia_header.glfw_window)) {
@@ -257,6 +260,7 @@ void glfw_loop(void) {
         glfwPollEvents();
     }
 }
+*/
 
 /// GLFWのテスト
 void glfw_sample(void) {
@@ -295,8 +299,8 @@ duk_ret_t regist_set_pixel(duk_context *ctx) {
         glfwTerminate();
         exit(EXIT_FAILURE);
     }
-    int point_x = duk_to_number(ctx, 0);
-    int point_y = duk_to_number(ctx, 1);
+    int point_x = (int)duk_to_number(ctx, 0);
+    int point_y = (int)duk_to_number(ctx, 1);
     set_pixel_rgb(raia_header.pixel_data, point_x, point_y, 0, 0, 0, raia_header.window_width, raia_header.window_height, raia_header.samples_per_pixel);
     return 0;
 }
@@ -337,7 +341,7 @@ void setup_raia_header(void) {
     raia_header.window_width = 640; // ウィンドウの幅と高さ
     raia_header.window_height = 480;
     raia_header.resolution_width = 640; // 画面解像度の幅と高さ
-    raia_header.resolution_height = 640;
+    raia_header.resolution_height = 480;
     raia_header.magnification = 1; // 倍率 = WINDOW_WIDTH / SCREEN_WIDTH
     raia_header.samples_per_pixel = 3; // 3=RGBカラー, 4=RGBAカラー
     
