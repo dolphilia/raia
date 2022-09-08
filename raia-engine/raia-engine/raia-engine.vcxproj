@@ -114,7 +114,8 @@
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)lib\OpenAL32.dll" $(OutDir) /Y
-xcopy "$(ProjectDir)lib\glfw3.dll" $(OutDir) /Y</Command>
+xcopy "$(ProjectDir)lib\glfw3.dll" $(OutDir) /Y
+xcopy "$(ProjectDir)startup.js" $(OutDir) /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -137,7 +138,8 @@ xcopy "$(ProjectDir)lib\glfw3.dll" $(OutDir) /Y</Command>
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)lib\OpenAL32.dll" $(OutDir) /Y
-xcopy "$(ProjectDir)lib\glfw3.dll" $(OutDir) /Y</Command>
+xcopy "$(ProjectDir)lib\glfw3.dll" $(OutDir) /Y
+xcopy "$(ProjectDir)startup.js" $(OutDir) /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -146,6 +148,9 @@ xcopy "$(ProjectDir)lib\glfw3.dll" $(OutDir) /Y</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\duktape\duktape.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="startup.js" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
