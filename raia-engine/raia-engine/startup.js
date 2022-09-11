@@ -9,6 +9,10 @@ function rnd(max) {
   return Math.floor(Math.random() * max);
 }
 
+function updata() {
+    
+}
+
 var px = 0;
 var py = 0;
 var sx = 20;
