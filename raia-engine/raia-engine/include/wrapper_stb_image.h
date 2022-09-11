@@ -20,9 +20,9 @@
 typedef struct{
     int32_t width;
     int32_t height;
-} _Size;
+} frame_t;
 
-_Size load_image_init_canvas(char const *file_name, uint8_t *pixel_data);
-_Size load_image(char const *file_ename, uint8_t *pixel_data, int32_t point_x, int32_t point_y, int32_t canvas_size_width, int32_t canvas_size_height);
+frame_t load_image_init_canvas(char const *file_name, uint8_t *pixel_data);
+frame_t load_image(char const *file_ename, uint8_t *pixel_data, int32_t point_x, int32_t point_y, int32_t canvas_size_width, int32_t canvas_size_height);
 
 #endif /* wrapper_stb_image_h */
