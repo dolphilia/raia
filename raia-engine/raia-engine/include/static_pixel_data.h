@@ -10,6 +10,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 
 void init_pixel_data(int width, int height, int samples_per_pixel);
 void free_pixel_data(void);
