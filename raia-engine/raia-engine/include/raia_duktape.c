@@ -9,8 +9,8 @@
 
 // 登録用のprint関数
 duk_ret_t regist_print(duk_context *ctx) {
-  printf("%s\n", duk_to_string(ctx, 0));
-  return 0;  /* no return value (= undefined) */
+    printf("%s\n", duk_to_string(ctx, 0));
+    return 0;  /* no return value (= undefined) */
 }
 
 // 登録用のglfw_pool_events関数（イベント待ち）
@@ -73,6 +73,12 @@ duk_ret_t regist_fill_rect_rgb(duk_context *ctx) {
     return 0;
 }
 
+duk_ret_t regist_set_title(duk_context *ctx) {
+    GLFWwindow* window = get_raia_window();
+    glfwSetWindowTitle(window, duk_to_string(ctx, 0));
+    return 0;  /* no return value (= undefined) */
+}
+
 /// 関数群を登録する
 void regist_functions(duk_context *ctx) {
     regist_func(ctx, regist_print, "print", 1);
@@ -81,6 +87,7 @@ void regist_functions(duk_context *ctx) {
     regist_func(ctx, regist_glfw_redraw, "glfw_redraw", 0);
     regist_func(ctx, regist_set_pixel_rgb, "set_pixel_rgb", 5);
     regist_func(ctx, regist_fill_rect_rgb, "fill_rect_rgb", 7);
+    regist_func(ctx, regist_set_title, "set_title", 1);
 }
 
 /// Duktapeの開始
