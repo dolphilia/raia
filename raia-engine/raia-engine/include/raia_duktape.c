@@ -95,6 +95,12 @@ void duktape_start(void) {
     duk_context* ctx = duk_create_heap_default();
     regist_functions(ctx); // 関数群を登録する
     load_script_filename(ctx, "startup.js"); // スクリプトファイルを読み込んでスタックにプッシュする
+    //duk_push_string(ctx, "startup.js");
+    //duk_compile_string_filename(ctx, 0, "startup.js");
+    //duk_compile(ctx, DUK_COMPILE_EVAL);
+    //duk_call(ctx, 0);
+    //duk_eval_string(ctx, "if (typeof update == 'function'){1;}else{0;}");
+    //printf("%d\n", (int)duk_get_int(ctx, -1));
     duk_eval(ctx); // 実行する
     duk_destroy_heap(ctx); // ヒープを削除する
 }
