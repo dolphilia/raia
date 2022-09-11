@@ -17,7 +17,7 @@ void glfw_init(void) {
 
 /// ウィンドウの生成
 GLFWwindow* glfw_create_window(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share) {
-    GLFWwindow* window = glfwCreateWindow(640, 480, "Window", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(640, 480, title, NULL, NULL);
     if (!window) {
         fprintf(stderr, "ウィンドウの生成に失敗しました\n");
         glfwTerminate();
