@@ -7,8 +7,8 @@
 
 #include "wrapper_stb_image.h"
 
-_Size load_image_init_canvas(char const *file_name, uint8_t *pixel_data) {
-    _Size image_size;
+frame_t load_image_init_canvas(char const *file_name, uint8_t *pixel_data) {
+    frame_t image_size;
     uint8_t *image_pixels;
     int image_width;
     int image_height;
@@ -22,7 +22,7 @@ _Size load_image_init_canvas(char const *file_name, uint8_t *pixel_data) {
         memcpy(pixel_data, image_pixels, image_width * image_height * image_bpp * sizeof(unsigned char));
     } else {
         int i = 0;
-        for(int j = 0;j<image_width * image_height * image_bpp; j += 3) {
+        for(int j = 0; j < image_width * image_height * image_bpp; j += 3) {
             memcpy(&pixel_data[i], &image_pixels[j], 3);
             pixel_data[i+3] = 255;
             i += 4;
@@ -33,8 +33,8 @@ _Size load_image_init_canvas(char const *file_name, uint8_t *pixel_data) {
     return image_size;
 }
 
-_Size load_image(char const *file_name, uint8_t *pixel_data, int32_t point_x, int32_t point_y, int32_t canvas_size_width, int32_t canvas_size_height) {
-    _Size image_size;
+frame_t load_image(char const *file_name, uint8_t *pixel_data, int32_t point_x, int32_t point_y, int32_t canvas_size_width, int32_t canvas_size_height) {
+    frame_t image_size;
     uint8_t *image_pixels;
     int image_width;
     int image_height;
