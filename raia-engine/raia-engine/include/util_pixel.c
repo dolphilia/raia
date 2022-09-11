@@ -101,7 +101,9 @@ void fill_rect_rgb(uint8_t *pixel_data, int32_t start_point_x, int32_t start_poi
     int miny = MIN(start_point_y, end_point_y);
     int diffx = MAX(start_point_x, end_point_x) - MIN(start_point_x, end_point_x) + 1;
     int diffy = MAX(start_point_y, end_point_y) - MIN(start_point_y, end_point_y) + 1;
+//#pragma omp parallel for
     for (int y = 0; y < diffy; y++) {
+//#pragma omp parallel for
         for (int x = 0; x < diffx; x++) {
             set_pixel_rgb(pixel_data,
                 minx + x, miny + y,
