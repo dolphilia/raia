@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8B03C63E28C73ED000CAF418 /* raia-engine.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B03C63D28C73ED000CAF418 /* raia-engine.c */; };
 		8B03C64028C7413F00CAF418 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B03C63F28C7413F00CAF418 /* libglfw.3.3.dylib */; };
 		8B41BD2628C7844300EC9E86 /* libopenal.1.22.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B41BD2528C7844300EC9E86 /* libopenal.1.22.2.dylib */; };
 		8B41BD2828C8CCAA00EC9E86 /* startup.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8B41BD2728C8CC2100EC9E86 /* startup.js */; };
@@ -26,6 +25,7 @@
 		8B99926428CB725900DDF5DE /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99925F28CB725900DDF5DE /* stb_image.c */; };
 		8B99926A28CB72A600DDF5DE /* duktape.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99926928CB72A600DDF5DE /* duktape.c */; };
 		8B99926D28CB733400DDF5DE /* wrapper_stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99926C28CB733400DDF5DE /* wrapper_stb_image.c */; };
+		8B99927428CDB8AF00DDF5DE /* raia-engine.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99927328CDB8AF00DDF5DE /* raia-engine.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -42,7 +42,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		8B03C63D28C73ED000CAF418 /* raia-engine.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "raia-engine.c"; path = "src/raia-engine.c"; sourceTree = "<group>"; };
 		8B03C63F28C7413F00CAF418 /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
 		8B41BD2528C7844300EC9E86 /* libopenal.1.22.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopenal.1.22.2.dylib; path = lib/libopenal.1.22.2.dylib; sourceTree = "<group>"; };
 		8B41BD2728C8CC2100EC9E86 /* startup.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = startup.js; sourceTree = "<group>"; };
@@ -84,6 +83,7 @@
 		8B99926928CB72A600DDF5DE /* duktape.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duktape.c; sourceTree = "<group>"; };
 		8B99926B28CB733400DDF5DE /* wrapper_stb_image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = wrapper_stb_image.h; path = include/wrapper_stb_image.h; sourceTree = "<group>"; };
 		8B99926C28CB733400DDF5DE /* wrapper_stb_image.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = wrapper_stb_image.c; path = include/wrapper_stb_image.c; sourceTree = "<group>"; };
+		8B99927328CDB8AF00DDF5DE /* raia-engine.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "raia-engine.c"; path = "../../src/raia-engine.c"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,7 +148,7 @@
 				8B99925728CB644D00DDF5DE /* raia_duktape.h */,
 				8B99925828CB644D00DDF5DE /* raia_duktape.c */,
 				8B99925D28CB66DF00DDF5DE /* raia-engine.h */,
-				8B03C63D28C73ED000CAF418 /* raia-engine.c */,
+				8B99927328CDB8AF00DDF5DE /* raia-engine.c */,
 				8B99926528CB72A600DDF5DE /* duktape */,
 				8B99925E28CB725900DDF5DE /* stb */,
 				8B03C63F28C7413F00CAF418 /* libglfw.3.3.dylib */,
@@ -256,11 +256,11 @@
 				8B99924A28CB58E500DDF5DE /* static_pixel_data.c in Sources */,
 				8B99923428CAEC8A00DDF5DE /* util_string.c in Sources */,
 				8B99925C28CB648600DDF5DE /* raia_al.c in Sources */,
-				8B03C63E28C73ED000CAF418 /* raia-engine.c in Sources */,
 				8B99926428CB725900DDF5DE /* stb_image.c in Sources */,
 				8B99923728CAEE1700DDF5DE /* util_io.c in Sources */,
 				8B99925928CB644D00DDF5DE /* raia_duktape.c in Sources */,
 				8B99924728CB57D300DDF5DE /* static_header.c in Sources */,
+				8B99927428CDB8AF00DDF5DE /* raia-engine.c in Sources */,
 				8B99926D28CB733400DDF5DE /* wrapper_stb_image.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
