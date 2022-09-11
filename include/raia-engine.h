@@ -18,7 +18,7 @@
 #include "util/util_math.h"
 #include "wrapper/wrapper_glfw.h"
 #include "wrapper/wrapper_duktape.h"
-#include "static_header.h"
+#include "static/static_header.h"
 #include "static/static_pixel_data.h"
 #include "static/static_window.h"
 #include "raia/raia_gl.h"

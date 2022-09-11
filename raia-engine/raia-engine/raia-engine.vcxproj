@@ -104,7 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)../../include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -143,47 +143,48 @@ xcopy "$(ProjectDir)startup.js" $(OutDir) /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\include\duktape\duktape.c" />
+    <ClCompile Include="..\..\include\raia\raia_al.c" />
+    <ClCompile Include="..\..\include\raia\raia_duktape.c" />
+    <ClCompile Include="..\..\include\raia\raia_gl.c" />
+    <ClCompile Include="..\..\include\static\static_header.c" />
+    <ClCompile Include="..\..\include\static\static_pixel_data.c" />
+    <ClCompile Include="..\..\include\static\static_window.c" />
+    <ClCompile Include="..\..\include\stb\stb_image.c" />
+    <ClCompile Include="..\..\include\util\util_io.c" />
+    <ClCompile Include="..\..\include\util\util_math.c" />
+    <ClCompile Include="..\..\include\util\util_pixel.c" />
+    <ClCompile Include="..\..\include\util\util_string.c" />
+    <ClCompile Include="..\..\include\wrapper\wrapper_duktape.c" />
+    <ClCompile Include="..\..\include\wrapper\wrapper_glfw.c" />
+    <ClCompile Include="..\..\include\wrapper\wrapper_stb_image.c" />
     <ClCompile Include="..\..\src\raia-engine.c" />
-    <ClCompile Include="include\duktape\duktape.c" />
-    <ClCompile Include="include\raia_al.c" />
-    <ClCompile Include="include\raia_duktape.c" />
-    <ClCompile Include="include\raia_gl.c" />
-    <ClCompile Include="include\static_header.c" />
-    <ClCompile Include="include\static_pixel_data.c" />
-    <ClCompile Include="include\static_window.c" />
-    <ClCompile Include="include\stb\stb_image.c" />
-    <ClCompile Include="include\util_io.c" />
-    <ClCompile Include="include\util_math.c" />
-    <ClCompile Include="include\util_pixel.c" />
-    <ClCompile Include="include\util_string.c" />
-    <ClCompile Include="include\wrapper_duktape.c" />
-    <ClCompile Include="include\wrapper_glfw.c" />
-    <ClCompile Include="include\wrapper_stb_image.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="include\duktape\duktape.h" />
-    <ClInclude Include="include\platforms.h" />
-    <ClInclude Include="include\raia-engine.h" />
-    <ClInclude Include="include\raia_al.h" />
-    <ClInclude Include="include\raia_duktape.h" />
-    <ClInclude Include="include\raia_gl.h" />
-    <ClInclude Include="include\static_header.h" />
-    <ClInclude Include="include\static_pixel_data.h" />
-    <ClInclude Include="include\static_window.h" />
-    <ClInclude Include="include\stb\stb.h" />
-    <ClInclude Include="include\stb\stb_image.h" />
-    <ClInclude Include="include\stb\stb_image_resize.h" />
-    <ClInclude Include="include\stb\stb_image_write.h" />
-    <ClInclude Include="include\util_io.h" />
-    <ClInclude Include="include\util_math.h" />
-    <ClInclude Include="include\util_pixel.h" />
-    <ClInclude Include="include\util_string.h" />
-    <ClInclude Include="include\wrapper_duktape.h" />
-    <ClInclude Include="include\wrapper_glfw.h" />
-    <ClInclude Include="include\wrapper_stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="startup.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\duktape\duktape.h" />
+    <ClInclude Include="..\..\include\duktape\duk_config.h" />
+    <ClInclude Include="..\..\include\platforms.h" />
+    <ClInclude Include="..\..\include\raia-engine.h" />
+    <ClInclude Include="..\..\include\raia\raia_al.h" />
+    <ClInclude Include="..\..\include\raia\raia_duktape.h" />
+    <ClInclude Include="..\..\include\raia\raia_gl.h" />
+    <ClInclude Include="..\..\include\static\static_header.h" />
+    <ClInclude Include="..\..\include\static\static_pixel_data.h" />
+    <ClInclude Include="..\..\include\static\static_window.h" />
+    <ClInclude Include="..\..\include\stb\stb.h" />
+    <ClInclude Include="..\..\include\stb\stb_image.h" />
+    <ClInclude Include="..\..\include\stb\stb_image_resize.h" />
+    <ClInclude Include="..\..\include\stb\stb_image_write.h" />
+    <ClInclude Include="..\..\include\util\util_io.h" />
+    <ClInclude Include="..\..\include\util\util_math.h" />
+    <ClInclude Include="..\..\include\util\util_pixel.h" />
+    <ClInclude Include="..\..\include\util\util_string.h" />
+    <ClInclude Include="..\..\include\wrapper\wrapper_duktape.h" />
+    <ClInclude Include="..\..\include\wrapper\wrapper_glfw.h" />
+    <ClInclude Include="..\..\include\wrapper\wrapper_stb_image.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

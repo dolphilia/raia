@@ -13,122 +13,143 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ソース ファイル\raia">
+      <UniqueIdentifier>{bfb8a803-b2b7-49fa-a30b-fb21f8cea0c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\duktape">
+      <UniqueIdentifier>{754d3992-d3a4-4bb4-963f-f012dba328ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\static">
+      <UniqueIdentifier>{6c0d672c-47dc-4fb6-80fa-6093f597a90c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\stb">
+      <UniqueIdentifier>{3d6ee54f-d680-4f1b-a869-e05092d6c098}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\util">
+      <UniqueIdentifier>{27e44e65-eb45-491f-8530-7f5027094b26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\wrapper">
+      <UniqueIdentifier>{9875e35e-c8b7-4184-8448-3c8afca27426}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="include\duktape\duktape.c">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="include\raia_al.c">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="include\raia_duktape.c">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="include\raia_gl.c">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="include\static_header.c">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="include\static_pixel_data.c">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="include\static_window.c">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="include\util_io.c">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="include\util_math.c">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="include\util_pixel.c">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="include\util_string.c">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="include\wrapper_duktape.c">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="include\wrapper_glfw.c">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="include\wrapper_stb_image.c">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="include\stb\stb_image.c">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\raia-engine.c">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="include\duktape\duktape.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\platforms.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\raia_al.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\raia_duktape.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\raia_gl.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\raia-engine.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\static_header.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\static_pixel_data.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\static_window.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\util_io.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\util_math.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\util_pixel.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\util_string.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\wrapper_duktape.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\wrapper_glfw.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\wrapper_stb_image.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\stb\stb.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\stb\stb_image.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\stb\stb_image_resize.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="include\stb\stb_image_write.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
+    <ClCompile Include="..\..\include\duktape\duktape.c">
+      <Filter>ソース ファイル\duktape</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\raia\raia_al.c">
+      <Filter>ソース ファイル\raia</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\raia\raia_duktape.c">
+      <Filter>ソース ファイル\raia</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\raia\raia_gl.c">
+      <Filter>ソース ファイル\raia</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\static\static_header.c">
+      <Filter>ソース ファイル\static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\static\static_pixel_data.c">
+      <Filter>ソース ファイル\static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\static\static_window.c">
+      <Filter>ソース ファイル\static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\stb\stb_image.c">
+      <Filter>ソース ファイル\stb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\util\util_io.c">
+      <Filter>ソース ファイル\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\util\util_math.c">
+      <Filter>ソース ファイル\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\util\util_pixel.c">
+      <Filter>ソース ファイル\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\util\util_string.c">
+      <Filter>ソース ファイル\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\wrapper\wrapper_duktape.c">
+      <Filter>ソース ファイル\wrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\wrapper\wrapper_glfw.c">
+      <Filter>ソース ファイル\wrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\wrapper\wrapper_stb_image.c">
+      <Filter>ソース ファイル\wrapper</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="startup.js">
       <Filter>リソース ファイル</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\duktape\duktape.h">
+      <Filter>ソース ファイル\duktape</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\duktape\duk_config.h">
+      <Filter>ソース ファイル\duktape</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\raia\raia_al.h">
+      <Filter>ソース ファイル\raia</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\raia\raia_duktape.h">
+      <Filter>ソース ファイル\raia</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\raia\raia_gl.h">
+      <Filter>ソース ファイル\raia</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\raia-engine.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\platforms.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\static\static_header.h">
+      <Filter>ソース ファイル\static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\static\static_pixel_data.h">
+      <Filter>ソース ファイル\static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\static\static_window.h">
+      <Filter>ソース ファイル\static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\stb\stb.h">
+      <Filter>ソース ファイル\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\stb\stb_image.h">
+      <Filter>ソース ファイル\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\stb\stb_image_resize.h">
+      <Filter>ソース ファイル\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\stb\stb_image_write.h">
+      <Filter>ソース ファイル\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\util\util_io.h">
+      <Filter>ソース ファイル\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\util\util_math.h">
+      <Filter>ソース ファイル\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\util\util_pixel.h">
+      <Filter>ソース ファイル\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\util\util_string.h">
+      <Filter>ソース ファイル\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\wrapper\wrapper_duktape.h">
+      <Filter>ソース ファイル\wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\wrapper\wrapper_glfw.h">
+      <Filter>ソース ファイル\wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\wrapper\wrapper_stb_image.h">
+      <Filter>ソース ファイル\wrapper</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
