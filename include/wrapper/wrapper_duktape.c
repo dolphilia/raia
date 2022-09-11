@@ -5,7 +5,7 @@
 //  Created by dolphilia on 2022/09/09.
 //
 
-#include "wrapper_duktape.h"
+#include "wrapper/wrapper_duktape.h"
 
 /// スクリプトファイルを読み込んでスタックにプッシュする
 void load_script_filename(duk_context *ctx, const char* filename) {

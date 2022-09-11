@@ -5,7 +5,7 @@
 //  Created by dolphilia on 2022/09/09.
 //
 
-#include "static_pixel_data.h"
+#include "static/static_pixel_data.h"
 
 static uint8_t* pixel_data;
 

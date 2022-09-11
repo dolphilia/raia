@@ -9,7 +9,7 @@
 #define static_header_h
 
 #include <stdint.h>
-#include "util_string.h"
+#include "util/util_string.h"
 
 // raia_header ヘッダー構造体
 typedef struct raia_header_t {

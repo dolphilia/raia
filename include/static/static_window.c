@@ -5,7 +5,7 @@
 //  Created by dolphilia on 2022/09/09.
 //
 
-#include "static_window.h"
+#include "static/static_window.h"
 
 static GLFWwindow* raia_window;
 

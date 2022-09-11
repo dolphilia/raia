@@ -5,7 +5,7 @@
 //  Created by dolphilia on 2022/09/09.
 //
 
-#include "raia_duktape.h"
+#include "raia/raia_duktape.h"
 
 // 登録用のprint関数
 duk_ret_t regist_print(duk_context *ctx) {

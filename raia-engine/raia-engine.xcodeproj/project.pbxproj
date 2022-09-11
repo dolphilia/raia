@@ -10,22 +10,22 @@
 		8B03C64028C7413F00CAF418 /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B03C63F28C7413F00CAF418 /* libglfw.3.3.dylib */; };
 		8B41BD2628C7844300EC9E86 /* libopenal.1.22.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B41BD2528C7844300EC9E86 /* libopenal.1.22.2.dylib */; };
 		8B41BD2828C8CCAA00EC9E86 /* startup.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8B41BD2728C8CC2100EC9E86 /* startup.js */; };
-		8B99923428CAEC8A00DDF5DE /* util_string.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99923328CAEC8A00DDF5DE /* util_string.c */; };
-		8B99923728CAEE1700DDF5DE /* util_io.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99923628CAEE1700DDF5DE /* util_io.c */; };
-		8B99923A28CAEEB400DDF5DE /* util_pixel.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99923928CAEEB400DDF5DE /* util_pixel.c */; };
-		8B99923D28CAEF6300DDF5DE /* util_math.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99923C28CAEF6300DDF5DE /* util_math.c */; };
-		8B99924528CB567100DDF5DE /* wrapper_duktape.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99924428CB567100DDF5DE /* wrapper_duktape.c */; };
-		8B99924728CB57D300DDF5DE /* static_header.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99924628CB57D300DDF5DE /* static_header.c */; };
-		8B99924A28CB58E500DDF5DE /* static_pixel_data.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99924928CB58E500DDF5DE /* static_pixel_data.c */; };
-		8B99925028CB5FD300DDF5DE /* wrapper_glfw.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99924E28CB5FD300DDF5DE /* wrapper_glfw.c */; };
-		8B99925328CB5FE300DDF5DE /* static_window.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99925128CB5FE300DDF5DE /* static_window.c */; };
-		8B99925628CB62F500DDF5DE /* raia_gl.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99925528CB62F500DDF5DE /* raia_gl.c */; };
-		8B99925928CB644D00DDF5DE /* raia_duktape.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99925828CB644D00DDF5DE /* raia_duktape.c */; };
-		8B99925C28CB648600DDF5DE /* raia_al.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99925B28CB648600DDF5DE /* raia_al.c */; };
-		8B99926428CB725900DDF5DE /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99925F28CB725900DDF5DE /* stb_image.c */; };
-		8B99926A28CB72A600DDF5DE /* duktape.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99926928CB72A600DDF5DE /* duktape.c */; };
-		8B99926D28CB733400DDF5DE /* wrapper_stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99926C28CB733400DDF5DE /* wrapper_stb_image.c */; };
 		8B99927428CDB8AF00DDF5DE /* raia-engine.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99927328CDB8AF00DDF5DE /* raia-engine.c */; };
+		8B9992AE28CDBDE600DDF5DE /* static_header.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9992A328CDB9F900DDF5DE /* static_header.c */; };
+		8B9992AF28CDBDFF00DDF5DE /* raia_al.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99929628CDB9E700DDF5DE /* raia_al.c */; };
+		8B9992B028CDBE0100DDF5DE /* raia_gl.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99929028CDB9E700DDF5DE /* raia_gl.c */; };
+		8B9992B128CDBE0600DDF5DE /* raia_duktape.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99929328CDB9E700DDF5DE /* raia_duktape.c */; };
+		8B9992B228CDBE0D00DDF5DE /* wrapper_stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9992A928CDBA0900DDF5DE /* wrapper_stb_image.c */; };
+		8B9992B328CDBE1100DDF5DE /* wrapper_glfw.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9992A828CDBA0900DDF5DE /* wrapper_glfw.c */; };
+		8B9992B428CDBE1300DDF5DE /* wrapper_duktape.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9992AA28CDBA0900DDF5DE /* wrapper_duktape.c */; };
+		8B9992B528CDBE1E00DDF5DE /* static_pixel_data.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9992A028CDB9F900DDF5DE /* static_pixel_data.c */; };
+		8B9992B628CDBE2200DDF5DE /* static_window.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9992A228CDB9F900DDF5DE /* static_window.c */; };
+		8B9992B728CDBE2900DDF5DE /* util_io.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99928728CDB9A900DDF5DE /* util_io.c */; };
+		8B9992B828CDBE2B00DDF5DE /* util_pixel.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99928B28CDB9A900DDF5DE /* util_pixel.c */; };
+		8B9992B928CDBE2E00DDF5DE /* util_string.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99928D28CDB9A900DDF5DE /* util_string.c */; };
+		8B9992BA28CDBE3000DDF5DE /* util_math.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99928A28CDB9A900DDF5DE /* util_math.c */; };
+		8B9992BB28CDBE3D00DDF5DE /* duktape.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99927928CDB95200DDF5DE /* duktape.c */; };
+		8B9992BC28CDBE4900DDF5DE /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99928128CDB96B00DDF5DE /* stb_image.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,44 +46,44 @@
 		8B41BD2528C7844300EC9E86 /* libopenal.1.22.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopenal.1.22.2.dylib; path = lib/libopenal.1.22.2.dylib; sourceTree = "<group>"; };
 		8B41BD2728C8CC2100EC9E86 /* startup.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = startup.js; sourceTree = "<group>"; };
 		8B6D9C9428C73E2F004D6A6C /* raia-engine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "raia-engine"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B99923128CA16B200DDF5DE /* platforms.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = platforms.h; path = include/platforms.h; sourceTree = "<group>"; };
-		8B99923228CAEC8A00DDF5DE /* util_string.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = util_string.h; path = include/util_string.h; sourceTree = "<group>"; };
-		8B99923328CAEC8A00DDF5DE /* util_string.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = util_string.c; path = include/util_string.c; sourceTree = "<group>"; };
-		8B99923528CAEE1700DDF5DE /* util_io.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = util_io.h; path = include/util_io.h; sourceTree = "<group>"; };
-		8B99923628CAEE1700DDF5DE /* util_io.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = util_io.c; path = include/util_io.c; sourceTree = "<group>"; };
-		8B99923828CAEEB400DDF5DE /* util_pixel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = util_pixel.h; path = include/util_pixel.h; sourceTree = "<group>"; };
-		8B99923928CAEEB400DDF5DE /* util_pixel.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = util_pixel.c; path = include/util_pixel.c; sourceTree = "<group>"; };
-		8B99923B28CAEF6300DDF5DE /* util_math.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = util_math.h; path = include/util_math.h; sourceTree = "<group>"; };
-		8B99923C28CAEF6300DDF5DE /* util_math.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = util_math.c; path = include/util_math.c; sourceTree = "<group>"; };
-		8B99923E28CAF02900DDF5DE /* static_header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = static_header.h; path = include/static_header.h; sourceTree = "<group>"; };
-		8B99924328CB567100DDF5DE /* wrapper_duktape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = wrapper_duktape.h; path = include/wrapper_duktape.h; sourceTree = "<group>"; };
-		8B99924428CB567100DDF5DE /* wrapper_duktape.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = wrapper_duktape.c; path = include/wrapper_duktape.c; sourceTree = "<group>"; };
-		8B99924628CB57D300DDF5DE /* static_header.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = static_header.c; path = include/static_header.c; sourceTree = "<group>"; };
-		8B99924828CB58E500DDF5DE /* static_pixel_data.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = static_pixel_data.h; path = include/static_pixel_data.h; sourceTree = "<group>"; };
-		8B99924928CB58E500DDF5DE /* static_pixel_data.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = static_pixel_data.c; path = include/static_pixel_data.c; sourceTree = "<group>"; };
-		8B99924E28CB5FD300DDF5DE /* wrapper_glfw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = wrapper_glfw.c; path = include/wrapper_glfw.c; sourceTree = "<group>"; };
-		8B99924F28CB5FD300DDF5DE /* wrapper_glfw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wrapper_glfw.h; path = include/wrapper_glfw.h; sourceTree = "<group>"; };
-		8B99925128CB5FE300DDF5DE /* static_window.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = static_window.c; path = include/static_window.c; sourceTree = "<group>"; };
-		8B99925228CB5FE300DDF5DE /* static_window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = static_window.h; path = include/static_window.h; sourceTree = "<group>"; };
-		8B99925428CB62F500DDF5DE /* raia_gl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = raia_gl.h; path = include/raia_gl.h; sourceTree = "<group>"; };
-		8B99925528CB62F500DDF5DE /* raia_gl.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = raia_gl.c; path = include/raia_gl.c; sourceTree = "<group>"; };
-		8B99925728CB644D00DDF5DE /* raia_duktape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = raia_duktape.h; path = include/raia_duktape.h; sourceTree = "<group>"; };
-		8B99925828CB644D00DDF5DE /* raia_duktape.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = raia_duktape.c; path = include/raia_duktape.c; sourceTree = "<group>"; };
-		8B99925A28CB648600DDF5DE /* raia_al.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = raia_al.h; path = include/raia_al.h; sourceTree = "<group>"; };
-		8B99925B28CB648600DDF5DE /* raia_al.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = raia_al.c; path = include/raia_al.c; sourceTree = "<group>"; };
-		8B99925D28CB66DF00DDF5DE /* raia-engine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "raia-engine.h"; path = "include/raia-engine.h"; sourceTree = "<group>"; };
-		8B99925F28CB725900DDF5DE /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stb_image.c; sourceTree = "<group>"; };
-		8B99926028CB725900DDF5DE /* stb_image_write.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image_write.h; sourceTree = "<group>"; };
-		8B99926128CB725900DDF5DE /* stb_image_resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image_resize.h; sourceTree = "<group>"; };
-		8B99926228CB725900DDF5DE /* stb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb.h; sourceTree = "<group>"; };
-		8B99926328CB725900DDF5DE /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
-		8B99926628CB72A600DDF5DE /* duk_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_config.h; sourceTree = "<group>"; };
-		8B99926728CB72A600DDF5DE /* duktape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duktape.h; sourceTree = "<group>"; };
-		8B99926828CB72A600DDF5DE /* duk_source_meta.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = duk_source_meta.json; sourceTree = "<group>"; };
-		8B99926928CB72A600DDF5DE /* duktape.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duktape.c; sourceTree = "<group>"; };
-		8B99926B28CB733400DDF5DE /* wrapper_stb_image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = wrapper_stb_image.h; path = include/wrapper_stb_image.h; sourceTree = "<group>"; };
-		8B99926C28CB733400DDF5DE /* wrapper_stb_image.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = wrapper_stb_image.c; path = include/wrapper_stb_image.c; sourceTree = "<group>"; };
 		8B99927328CDB8AF00DDF5DE /* raia-engine.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "raia-engine.c"; path = "../../src/raia-engine.c"; sourceTree = "<group>"; };
+		8B99927628CDB95200DDF5DE /* duk_config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = duk_config.h; sourceTree = "<group>"; };
+		8B99927728CDB95200DDF5DE /* duktape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = duktape.h; sourceTree = "<group>"; };
+		8B99927828CDB95200DDF5DE /* duk_source_meta.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = duk_source_meta.json; sourceTree = "<group>"; };
+		8B99927928CDB95200DDF5DE /* duktape.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = duktape.c; sourceTree = "<group>"; };
+		8B99928128CDB96B00DDF5DE /* stb_image.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = stb_image.c; sourceTree = "<group>"; };
+		8B99928228CDB96B00DDF5DE /* stb_image_write.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image_write.h; sourceTree = "<group>"; };
+		8B99928328CDB96B00DDF5DE /* stb_image_resize.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image_resize.h; sourceTree = "<group>"; };
+		8B99928428CDB96B00DDF5DE /* stb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb.h; sourceTree = "<group>"; };
+		8B99928528CDB96B00DDF5DE /* stb_image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
+		8B99928728CDB9A900DDF5DE /* util_io.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = util_io.c; sourceTree = "<group>"; };
+		8B99928828CDB9A900DDF5DE /* util_pixel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = util_pixel.h; sourceTree = "<group>"; };
+		8B99928928CDB9A900DDF5DE /* util_string.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = util_string.h; sourceTree = "<group>"; };
+		8B99928A28CDB9A900DDF5DE /* util_math.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = util_math.c; sourceTree = "<group>"; };
+		8B99928B28CDB9A900DDF5DE /* util_pixel.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = util_pixel.c; sourceTree = "<group>"; };
+		8B99928C28CDB9A900DDF5DE /* util_io.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = util_io.h; sourceTree = "<group>"; };
+		8B99928D28CDB9A900DDF5DE /* util_string.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = util_string.c; sourceTree = "<group>"; };
+		8B99928E28CDB9A900DDF5DE /* util_math.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = util_math.h; sourceTree = "<group>"; };
+		8B99929028CDB9E700DDF5DE /* raia_gl.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = raia_gl.c; sourceTree = "<group>"; };
+		8B99929228CDB9E700DDF5DE /* raia_al.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = raia_al.h; sourceTree = "<group>"; };
+		8B99929328CDB9E700DDF5DE /* raia_duktape.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = raia_duktape.c; sourceTree = "<group>"; };
+		8B99929428CDB9E700DDF5DE /* raia_gl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = raia_gl.h; sourceTree = "<group>"; };
+		8B99929528CDB9E700DDF5DE /* raia_duktape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = raia_duktape.h; sourceTree = "<group>"; };
+		8B99929628CDB9E700DDF5DE /* raia_al.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = raia_al.c; sourceTree = "<group>"; };
+		8B99929F28CDB9F900DDF5DE /* static_window.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = static_window.h; sourceTree = "<group>"; };
+		8B9992A028CDB9F900DDF5DE /* static_pixel_data.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = static_pixel_data.c; sourceTree = "<group>"; };
+		8B9992A128CDB9F900DDF5DE /* static_header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = static_header.h; sourceTree = "<group>"; };
+		8B9992A228CDB9F900DDF5DE /* static_window.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = static_window.c; sourceTree = "<group>"; };
+		8B9992A328CDB9F900DDF5DE /* static_header.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = static_header.c; sourceTree = "<group>"; };
+		8B9992A428CDB9F900DDF5DE /* static_pixel_data.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = static_pixel_data.h; sourceTree = "<group>"; };
+		8B9992A628CDBA0900DDF5DE /* wrapper_stb_image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wrapper_stb_image.h; sourceTree = "<group>"; };
+		8B9992A728CDBA0900DDF5DE /* wrapper_duktape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wrapper_duktape.h; sourceTree = "<group>"; };
+		8B9992A828CDBA0900DDF5DE /* wrapper_glfw.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wrapper_glfw.c; sourceTree = "<group>"; };
+		8B9992A928CDBA0900DDF5DE /* wrapper_stb_image.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wrapper_stb_image.c; sourceTree = "<group>"; };
+		8B9992AA28CDBA0900DDF5DE /* wrapper_duktape.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wrapper_duktape.c; sourceTree = "<group>"; };
+		8B9992AB28CDBA0900DDF5DE /* wrapper_glfw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wrapper_glfw.h; sourceTree = "<group>"; };
+		8B9992AC28CDBA7000DDF5DE /* raia-engine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "raia-engine.h"; path = "../../include/raia-engine.h"; sourceTree = "<group>"; };
+		8B9992AD28CDBC9C00DDF5DE /* platforms.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = platforms.h; path = ../../include/platforms.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,66 +120,19 @@
 			isa = PBXGroup;
 			children = (
 				8B41BD2728C8CC2100EC9E86 /* startup.js */,
-				8B99923128CA16B200DDF5DE /* platforms.h */,
-				8B99923528CAEE1700DDF5DE /* util_io.h */,
-				8B99923628CAEE1700DDF5DE /* util_io.c */,
-				8B99923228CAEC8A00DDF5DE /* util_string.h */,
-				8B99923328CAEC8A00DDF5DE /* util_string.c */,
-				8B99923828CAEEB400DDF5DE /* util_pixel.h */,
-				8B99923928CAEEB400DDF5DE /* util_pixel.c */,
-				8B99923B28CAEF6300DDF5DE /* util_math.h */,
-				8B99923C28CAEF6300DDF5DE /* util_math.c */,
-				8B99924F28CB5FD300DDF5DE /* wrapper_glfw.h */,
-				8B99924E28CB5FD300DDF5DE /* wrapper_glfw.c */,
-				8B99924328CB567100DDF5DE /* wrapper_duktape.h */,
-				8B99924428CB567100DDF5DE /* wrapper_duktape.c */,
-				8B99926B28CB733400DDF5DE /* wrapper_stb_image.h */,
-				8B99926C28CB733400DDF5DE /* wrapper_stb_image.c */,
-				8B99923E28CAF02900DDF5DE /* static_header.h */,
-				8B99924628CB57D300DDF5DE /* static_header.c */,
-				8B99924828CB58E500DDF5DE /* static_pixel_data.h */,
-				8B99924928CB58E500DDF5DE /* static_pixel_data.c */,
-				8B99925228CB5FE300DDF5DE /* static_window.h */,
-				8B99925128CB5FE300DDF5DE /* static_window.c */,
-				8B99925428CB62F500DDF5DE /* raia_gl.h */,
-				8B99925528CB62F500DDF5DE /* raia_gl.c */,
-				8B99925A28CB648600DDF5DE /* raia_al.h */,
-				8B99925B28CB648600DDF5DE /* raia_al.c */,
-				8B99925728CB644D00DDF5DE /* raia_duktape.h */,
-				8B99925828CB644D00DDF5DE /* raia_duktape.c */,
-				8B99925D28CB66DF00DDF5DE /* raia-engine.h */,
+				8B9992AD28CDBC9C00DDF5DE /* platforms.h */,
+				8B9992AC28CDBA7000DDF5DE /* raia-engine.h */,
 				8B99927328CDB8AF00DDF5DE /* raia-engine.c */,
-				8B99926528CB72A600DDF5DE /* duktape */,
-				8B99925E28CB725900DDF5DE /* stb */,
+				8B99928F28CDB9E700DDF5DE /* raia */,
+				8B9992A528CDBA0900DDF5DE /* wrapper */,
+				8B99929E28CDB9F900DDF5DE /* static */,
+				8B99928628CDB9A900DDF5DE /* util */,
+				8B99928028CDB96B00DDF5DE /* stb */,
+				8B99927528CDB95200DDF5DE /* duktape */,
 				8B03C63F28C7413F00CAF418 /* libglfw.3.3.dylib */,
 				8B41BD2528C7844300EC9E86 /* libopenal.1.22.2.dylib */,
 			);
 			path = "raia-engine";
-			sourceTree = "<group>";
-		};
-		8B99925E28CB725900DDF5DE /* stb */ = {
-			isa = PBXGroup;
-			children = (
-				8B99925F28CB725900DDF5DE /* stb_image.c */,
-				8B99926028CB725900DDF5DE /* stb_image_write.h */,
-				8B99926128CB725900DDF5DE /* stb_image_resize.h */,
-				8B99926228CB725900DDF5DE /* stb.h */,
-				8B99926328CB725900DDF5DE /* stb_image.h */,
-			);
-			name = stb;
-			path = include/stb;
-			sourceTree = "<group>";
-		};
-		8B99926528CB72A600DDF5DE /* duktape */ = {
-			isa = PBXGroup;
-			children = (
-				8B99926628CB72A600DDF5DE /* duk_config.h */,
-				8B99926728CB72A600DDF5DE /* duktape.h */,
-				8B99926828CB72A600DDF5DE /* duk_source_meta.json */,
-				8B99926928CB72A600DDF5DE /* duktape.c */,
-			);
-			name = duktape;
-			path = include/duktape;
 			sourceTree = "<group>";
 		};
 		8B99927128CD91BB00DDF5DE /* Frameworks */ = {
@@ -187,6 +140,89 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8B99927528CDB95200DDF5DE /* duktape */ = {
+			isa = PBXGroup;
+			children = (
+				8B99927628CDB95200DDF5DE /* duk_config.h */,
+				8B99927728CDB95200DDF5DE /* duktape.h */,
+				8B99927828CDB95200DDF5DE /* duk_source_meta.json */,
+				8B99927928CDB95200DDF5DE /* duktape.c */,
+			);
+			name = duktape;
+			path = ../../include/duktape;
+			sourceTree = "<group>";
+		};
+		8B99928028CDB96B00DDF5DE /* stb */ = {
+			isa = PBXGroup;
+			children = (
+				8B99928128CDB96B00DDF5DE /* stb_image.c */,
+				8B99928228CDB96B00DDF5DE /* stb_image_write.h */,
+				8B99928328CDB96B00DDF5DE /* stb_image_resize.h */,
+				8B99928428CDB96B00DDF5DE /* stb.h */,
+				8B99928528CDB96B00DDF5DE /* stb_image.h */,
+			);
+			name = stb;
+			path = ../../include/stb;
+			sourceTree = "<group>";
+		};
+		8B99928628CDB9A900DDF5DE /* util */ = {
+			isa = PBXGroup;
+			children = (
+				8B99928C28CDB9A900DDF5DE /* util_io.h */,
+				8B99928728CDB9A900DDF5DE /* util_io.c */,
+				8B99928828CDB9A900DDF5DE /* util_pixel.h */,
+				8B99928B28CDB9A900DDF5DE /* util_pixel.c */,
+				8B99928928CDB9A900DDF5DE /* util_string.h */,
+				8B99928D28CDB9A900DDF5DE /* util_string.c */,
+				8B99928E28CDB9A900DDF5DE /* util_math.h */,
+				8B99928A28CDB9A900DDF5DE /* util_math.c */,
+			);
+			name = util;
+			path = ../../include/util;
+			sourceTree = "<group>";
+		};
+		8B99928F28CDB9E700DDF5DE /* raia */ = {
+			isa = PBXGroup;
+			children = (
+				8B99929228CDB9E700DDF5DE /* raia_al.h */,
+				8B99929628CDB9E700DDF5DE /* raia_al.c */,
+				8B99929428CDB9E700DDF5DE /* raia_gl.h */,
+				8B99929028CDB9E700DDF5DE /* raia_gl.c */,
+				8B99929528CDB9E700DDF5DE /* raia_duktape.h */,
+				8B99929328CDB9E700DDF5DE /* raia_duktape.c */,
+			);
+			name = raia;
+			path = ../../include/raia;
+			sourceTree = "<group>";
+		};
+		8B99929E28CDB9F900DDF5DE /* static */ = {
+			isa = PBXGroup;
+			children = (
+				8B9992A428CDB9F900DDF5DE /* static_pixel_data.h */,
+				8B9992A028CDB9F900DDF5DE /* static_pixel_data.c */,
+				8B9992A128CDB9F900DDF5DE /* static_header.h */,
+				8B9992A328CDB9F900DDF5DE /* static_header.c */,
+				8B99929F28CDB9F900DDF5DE /* static_window.h */,
+				8B9992A228CDB9F900DDF5DE /* static_window.c */,
+			);
+			name = static;
+			path = ../../include/static;
+			sourceTree = "<group>";
+		};
+		8B9992A528CDBA0900DDF5DE /* wrapper */ = {
+			isa = PBXGroup;
+			children = (
+				8B9992A628CDBA0900DDF5DE /* wrapper_stb_image.h */,
+				8B9992A928CDBA0900DDF5DE /* wrapper_stb_image.c */,
+				8B9992AB28CDBA0900DDF5DE /* wrapper_glfw.h */,
+				8B9992A828CDBA0900DDF5DE /* wrapper_glfw.c */,
+				8B9992A728CDBA0900DDF5DE /* wrapper_duktape.h */,
+				8B9992AA28CDBA0900DDF5DE /* wrapper_duktape.c */,
+			);
+			name = wrapper;
+			path = ../../include/wrapper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,22 +282,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B99925628CB62F500DDF5DE /* raia_gl.c in Sources */,
-				8B99923A28CAEEB400DDF5DE /* util_pixel.c in Sources */,
-				8B99923D28CAEF6300DDF5DE /* util_math.c in Sources */,
-				8B99925028CB5FD300DDF5DE /* wrapper_glfw.c in Sources */,
-				8B99926A28CB72A600DDF5DE /* duktape.c in Sources */,
-				8B99924528CB567100DDF5DE /* wrapper_duktape.c in Sources */,
-				8B99925328CB5FE300DDF5DE /* static_window.c in Sources */,
-				8B99924A28CB58E500DDF5DE /* static_pixel_data.c in Sources */,
-				8B99923428CAEC8A00DDF5DE /* util_string.c in Sources */,
-				8B99925C28CB648600DDF5DE /* raia_al.c in Sources */,
-				8B99926428CB725900DDF5DE /* stb_image.c in Sources */,
-				8B99923728CAEE1700DDF5DE /* util_io.c in Sources */,
-				8B99925928CB644D00DDF5DE /* raia_duktape.c in Sources */,
-				8B99924728CB57D300DDF5DE /* static_header.c in Sources */,
 				8B99927428CDB8AF00DDF5DE /* raia-engine.c in Sources */,
-				8B99926D28CB733400DDF5DE /* wrapper_stb_image.c in Sources */,
+				8B9992AF28CDBDFF00DDF5DE /* raia_al.c in Sources */,
+				8B9992B028CDBE0100DDF5DE /* raia_gl.c in Sources */,
+				8B9992B128CDBE0600DDF5DE /* raia_duktape.c in Sources */,
+				8B9992B228CDBE0D00DDF5DE /* wrapper_stb_image.c in Sources */,
+				8B9992B328CDBE1100DDF5DE /* wrapper_glfw.c in Sources */,
+				8B9992B428CDBE1300DDF5DE /* wrapper_duktape.c in Sources */,
+				8B9992B528CDBE1E00DDF5DE /* static_pixel_data.c in Sources */,
+				8B9992AE28CDBDE600DDF5DE /* static_header.c in Sources */,
+				8B9992B628CDBE2200DDF5DE /* static_window.c in Sources */,
+				8B9992B728CDBE2900DDF5DE /* util_io.c in Sources */,
+				8B9992B828CDBE2B00DDF5DE /* util_pixel.c in Sources */,
+				8B9992B928CDBE2E00DDF5DE /* util_string.c in Sources */,
+				8B9992BA28CDBE3000DDF5DE /* util_math.c in Sources */,
+				8B9992BC28CDBE4900DDF5DE /* stb_image.c in Sources */,
+				8B9992BB28CDBE3D00DDF5DE /* duktape.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,8 +354,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "raia-engine/include";
-				LIBRARY_SEARCH_PATHS = "raia-engine/lib";
+				HEADER_SEARCH_PATHS = (
+					../include,
+					"raia-engine/include",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"raia-engine/lib",
+					../lib,
+				);
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -373,8 +415,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "raia-engine/include";
-				LIBRARY_SEARCH_PATHS = "raia-engine/lib";
+				HEADER_SEARCH_PATHS = (
+					../include,
+					"raia-engine/include",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"raia-engine/lib",
+					../lib,
+				);
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;

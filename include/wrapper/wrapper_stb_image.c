@@ -5,7 +5,7 @@
 //  Created by dolphilia on 2022/09/09.
 //
 
-#include "wrapper_stb_image.h"
+#include "wrapper/wrapper_stb_image.h"
 
 frame_t load_image_init_canvas(char const *file_name, uint8_t *pixel_data) {
     frame_t image_size;

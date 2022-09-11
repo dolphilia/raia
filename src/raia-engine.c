@@ -6,7 +6,6 @@
 
 #include "raia-engine.h"
 
-
 int main(int argc, char* argv[]) {
     init_raia_header(); // ヘッダー情報を初期化
     raia_header_t header = get_raia_header(); // ヘッダーを取得

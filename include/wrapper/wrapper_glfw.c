@@ -5,7 +5,7 @@
 //  Created by dolphilia on 2022/09/09.
 //
 
-#include "wrapper_glfw.h"
+#include "wrapper/wrapper_glfw.h"
 
 /// GLFWの初期化
 void glfw_init(void) {

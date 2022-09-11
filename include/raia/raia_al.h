@@ -20,6 +20,6 @@
 #include <windows.h>
 #endif
 
-#include "util_math.h"
+#include "util/util_math.h"
 
 #endif /* raia_al_h */

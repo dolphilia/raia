@@ -5,7 +5,7 @@
 //  Created by dolphilia on 2022/09/09.
 //
 
-#include "util_string.h"
+#include "util/util_string.h"
 
 /// ２つの文字列は一致するか
 bool is_equal_string(char *s1, char *s2) {

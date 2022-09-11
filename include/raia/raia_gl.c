@@ -5,7 +5,7 @@
 //  Created by dolphilia on 2022/09/09.
 //
 
-#include "raia_gl.h"
+#include "raia/raia_gl.h"
 
 /// GLFWのテスト
 void glfw_start(void) {

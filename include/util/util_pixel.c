@@ -5,7 +5,7 @@
 //  Created by dolphilia on 2022/09/09.
 //
 
-#include "util_pixel.h"
+#include "util/util_pixel.h"
 
 color_t get_pixel_color(uint8_t *pixel_data, int32_t point_x, int32_t point_y, int32_t canvas_size_width, int32_t canvas_size_height, int32_t samples_per_pixel) {
     int index = (canvas_size_height - 1 - point_y) * canvas_size_width * samples_per_pixel + point_x * samples_per_pixel;

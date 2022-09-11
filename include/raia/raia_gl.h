@@ -9,9 +9,9 @@
 #define raia_gl_h
 
 #include <stdio.h>
-#include "static_header.h"
-#include "static_window.h"
-#include "static_pixel_data.h"
+#include "static/static_header.h"
+#include "static/static_window.h"
+#include "static/static_pixel_data.h"
 
 void glfw_start(void);
 void glfw_redraw(void);

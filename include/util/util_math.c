@@ -5,7 +5,7 @@
 //  Created by dolphilia on 2022/09/09.
 //
 
-#include "util_math.h"
+#include "util/util_math.h"
 
 int rnd(int min, int max) {
     return min + (int)(rand() * (max - min + 1.0) / (1.0 + RAND_MAX));

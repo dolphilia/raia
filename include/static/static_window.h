@@ -10,7 +10,7 @@
 
 #include <stdio.h>
 #include "GLFW/glfw3.h"
-#include "wrapper_glfw.h"
+#include "wrapper/wrapper_glfw.h"
 
 void init_raia_window(int width, int height, const char* title);
 GLFWwindow* get_raia_window(void);

@@ -5,7 +5,7 @@
 //  Created by dolphilia on 2022/09/09.
 //
 
-#include "raia_al.h"
+#include "raia/raia_al.h"
 
 /// OpenALのテスト
 void openal_start(void) {
