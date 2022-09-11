@@ -21,9 +21,10 @@ void glfw_redraw(void) {
     raia_header_t header = get_raia_header();
     int mag = header.magnification; // mag = magnification = 倍率
 
+    GLFWwindow* glfw_window = get_raia_window();
+
 #ifdef __MACOS__
     int now_width, now_height;
-    GLFWwindow* glfw_window = get_raia_window();
     glfwGetFramebufferSize(glfw_window, &now_width, &now_height);
     if (now_width > header.window_width) {
         mag = header.magnification * 2;
