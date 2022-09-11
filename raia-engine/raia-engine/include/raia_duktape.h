@@ -9,7 +9,6 @@
 #define raia_duktape_h
 
 #include <stdio.h>
-#include "duktape.h"
 #include "GLFW/glfw3.h"
 #include "static_pixel_data.h"
 #include "static_header.h"
@@ -18,6 +17,7 @@
 #include "wrapper_duktape.h"
 #include "util_pixel.h"
 #include "raia_gl.h"
+#include "duktape/duktape.h"
 
 void duktape_start(void);
 
