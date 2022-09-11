@@ -9,8 +9,23 @@ function rnd(max) {
   return Math.floor(Math.random() * max);
 }
 
+var px = 0;
+var py = 0;
+var sx = 20;
+var sy = 20;
+
 while(!glfw_window_should_close()) {
-    fill_rect_rgb(0,0,100,100, 255,255,0);
+    set_title(px);
+    fill_rect_rgb(0,0,640,480, 255,255,255)
+    fill_rect_rgb(px, py, px + sx, py + sy, 100,100,100);
+    px += 5;
+    py += 5;
+    if ((px + sx) > 640) {
+        px = 0;
+    }
+    if ((py + sy) > 480) {
+        py = 0;
+    }
     for (var x = 0; x < 640; x++) {
         set_pixel_rgb(x, 10, rnd(255),rnd(255),rnd(255));
     }
