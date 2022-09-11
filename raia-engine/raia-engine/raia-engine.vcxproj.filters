@@ -18,9 +18,6 @@
     <ClCompile Include="include\duktape\duktape.c">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="src\raia-engine.c">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="include\raia_al.c">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -61,6 +58,9 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="include\stb\stb_image.c">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\raia-engine.c">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>

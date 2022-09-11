@@ -143,6 +143,7 @@ xcopy "$(ProjectDir)startup.js" $(OutDir) /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\raia-engine.c" />
     <ClCompile Include="include\duktape\duktape.c" />
     <ClCompile Include="include\raia_al.c" />
     <ClCompile Include="include\raia_duktape.c" />
@@ -158,7 +159,6 @@ xcopy "$(ProjectDir)startup.js" $(OutDir) /Y</Command>
     <ClCompile Include="include\wrapper_duktape.c" />
     <ClCompile Include="include\wrapper_glfw.c" />
     <ClCompile Include="include\wrapper_stb_image.c" />
-    <ClCompile Include="src\raia-engine.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\duktape\duktape.h" />

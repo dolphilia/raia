@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\raia-engine\src\raia-engine-win.cpp">
+    <ClCompile Include="..\..\src\raia-engine-win.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
