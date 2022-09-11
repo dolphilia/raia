@@ -6,7 +6,6 @@
 //
 
 #include "util/util_io.h"
-#include "windows.h"
 
 // テキストファイルの読み込み
 char* load_string_filename(const char* filename) {
