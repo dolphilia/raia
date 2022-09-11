@@ -94,6 +94,13 @@ void regist_functions(duk_context *ctx) {
 void duktape_start(void) {
     duk_context* ctx = duk_create_heap_default();
     regist_functions(ctx); // 関数群を登録する
+    duk_eval_string(ctx, "device = 'desktop';");
+#ifdef __WINDOWS__
+    duk_eval_string(ctx, "platform = 'windows';");
+#endif
+#ifdef __MACOS__
+    duk_eval_string(ctx, "platform = 'macos';");
+#endif
     load_script_filename(ctx, "startup.js"); // スクリプトファイルを読み込んでスタックにプッシュする
 
     duk_eval(ctx); // 実行する
