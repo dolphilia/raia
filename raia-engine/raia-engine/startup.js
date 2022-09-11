@@ -9,16 +9,7 @@ function rnd(max) {
   return Math.floor(Math.random() * max);
 }
 
-function updata() {
-    
-}
-
-var px = 0;
-var py = 0;
-var sx = 20;
-var sy = 20;
-
-while(!glfw_window_should_close()) {
+function update() {
     set_title(px);
     fill_rect_rgb(0,0,640,480, 255,255,255)
     fill_rect_rgb(px, py, px + sx, py + sy, 100,100,100);
@@ -30,9 +21,24 @@ while(!glfw_window_should_close()) {
     if ((py + sy) > 480) {
         py = 0;
     }
-    for (var x = 0; x < 640; x++) {
-        set_pixel_rgb(x, 10, rnd(255),rnd(255),rnd(255));
-    }
+    //for (var x = 0; x < 640; x++) {
+    //    set_pixel_rgb(x, 10, rnd(255),rnd(255),rnd(255));
+    //}
     glfw_redraw();
-    glfw_pool_events();
 }
+
+if (device == 'desktop') {
+    print('desktop');
+} else {
+    print('none');
+}
+
+var px = 0;
+var py = 0;
+var sx = 20;
+var sy = 20;
+
+//while(!glfw_window_should_close()) {
+
+//    glfw_pool_events();
+//}

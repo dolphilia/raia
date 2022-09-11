@@ -94,13 +94,40 @@ void regist_functions(duk_context *ctx) {
 void duktape_start(void) {
     duk_context* ctx = duk_create_heap_default();
     regist_functions(ctx); // 関数群を登録する
+    duk_eval_string(ctx, "device = 'desktop';");
+#ifdef __WINDOWS__
+    duk_eval_string(ctx, "platform = 'windows';");
+#endif
+#ifdef __MACOS__
+    duk_eval_string(ctx, "platform = 'macos';");
+#endif
     load_script_filename(ctx, "startup.js"); // スクリプトファイルを読み込んでスタックにプッシュする
-    //duk_push_string(ctx, "startup.js");
-    //duk_compile_string_filename(ctx, 0, "startup.js");
-    //duk_compile(ctx, DUK_COMPILE_EVAL);
-    //duk_call(ctx, 0);
-    //duk_eval_string(ctx, "if (typeof update == 'function'){1;}else{0;}");
-    //printf("%d\n", (int)duk_get_int(ctx, -1));
+
     duk_eval(ctx); // 実行する
+    
+    duk_eval_string(ctx, "if(typeof update == 'function'){1;}else{0;}");
+    int is_exist_update_func = (int)duk_get_int(ctx, -1);
+    if (is_exist_update_func == 1) {
+        //printf("update関数は存在する\n");
+        double now = (double)clock() / CLOCKS_PER_SEC;
+        double prev = (double)clock() / CLOCKS_PER_SEC;
+        while(!glfwWindowShouldClose(get_raia_window())) {
+            now = (double)clock() / CLOCKS_PER_SEC;
+            //printf("%f\n", 1.0 / (now - prev));
+            duk_eval_string(ctx, "update();");
+            prev = now;
+            // ほぼ 60fps になるように待つ
+            while(!glfwWindowShouldClose(get_raia_window())) {
+                now = (double)clock() / CLOCKS_PER_SEC;
+                if ((now - prev) > 0.016667) {
+                    break;
+                }
+                glfwPollEvents();
+            }
+            glfwPollEvents();
+        }
+    } else {
+        // printf("update関数は存在しない\n");
+    }
     duk_destroy_heap(ctx); // ヒープを削除する
 }
