@@ -6,12 +6,14 @@
 //
 
 #include "util/util_io.h"
+#include "windows.h"
 
 // テキストファイルの読み込み
 char* load_string_filename(const char* filename) {
     size_t file_index = 0;
     char* str = NULL;
     FILE* file_ptr;
+
 #ifdef __WINDOWS__
     fopen_s(&file_ptr, filename, "r");
 #else

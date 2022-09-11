@@ -115,7 +115,7 @@
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)lib\OpenAL32.dll" $(OutDir) /Y
 xcopy "$(ProjectDir)lib\glfw3.dll" $(OutDir) /Y
-xcopy "$(ProjectDir)startup.js" $(OutDir) /Y</Command>
+xcopy "$(ProjectDir)..\..\js\startup.js" "$(OutDir)" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -139,7 +139,7 @@ xcopy "$(ProjectDir)startup.js" $(OutDir) /Y</Command>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)lib\OpenAL32.dll" $(OutDir) /Y
 xcopy "$(ProjectDir)lib\glfw3.dll" $(OutDir) /Y
-xcopy "$(ProjectDir)startup.js" $(OutDir) /Y</Command>
+xcopy "$(ProjectDir)..\..\startup.js" $(OutDir) /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -159,9 +159,6 @@ xcopy "$(ProjectDir)startup.js" $(OutDir) /Y</Command>
     <ClCompile Include="..\..\include\wrapper\wrapper_glfw.c" />
     <ClCompile Include="..\..\include\wrapper\wrapper_stb_image.c" />
     <ClCompile Include="..\..\src\raia-engine.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="startup.js" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\duktape\duktape.h" />
@@ -185,6 +182,9 @@ xcopy "$(ProjectDir)startup.js" $(OutDir) /Y</Command>
     <ClInclude Include="..\..\include\wrapper\wrapper_duktape.h" />
     <ClInclude Include="..\..\include\wrapper\wrapper_glfw.h" />
     <ClInclude Include="..\..\include\wrapper\wrapper_stb_image.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\js\startup.js" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
