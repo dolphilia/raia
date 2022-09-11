@@ -10,8 +10,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "duktape.h"
 #include "platforms.h"
+#include "duktape/duktape.h"
 #include "util_io.h"
 #include "util_string.h"
 #include "util_pixel.h"
