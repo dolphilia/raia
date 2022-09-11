@@ -104,6 +104,7 @@
 			children = (
 				8B6D9C9628C73E2F004D6A6C /* raia-engine */,
 				8B6D9C9528C73E2F004D6A6C /* Products */,
+				8B99927128CD91BB00DDF5DE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -179,6 +180,13 @@
 			);
 			name = duktape;
 			path = include/duktape;
+			sourceTree = "<group>";
+		};
+		8B99927128CD91BB00DDF5DE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -316,6 +324,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -369,6 +378,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_CFLAGS = "";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -381,6 +391,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/raia-engine/lib",
 					"/opt/homebrew/Cellar/openal-soft/1.22.2/lib",
+					/opt/homebrew/Cellar/libomp/14.0.6/lib,
+					"$(PROJECT_DIR)/raia-engine",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -394,6 +406,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/raia-engine/lib",
 					"/opt/homebrew/Cellar/openal-soft/1.22.2/lib",
+					/opt/homebrew/Cellar/libomp/14.0.6/lib,
+					"$(PROJECT_DIR)/raia-engine",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
