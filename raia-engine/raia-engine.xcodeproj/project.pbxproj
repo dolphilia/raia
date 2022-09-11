@@ -19,13 +19,116 @@
 		8B9992F728CDCE8500DDF5DE /* util_math.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9992DA28CDCE8500DDF5DE /* util_math.c */; };
 		8B9992F828CDCE8500DDF5DE /* util_pixel.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9992DB28CDCE8500DDF5DE /* util_pixel.c */; };
 		8B9992F928CDCE8500DDF5DE /* util_string.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9992DD28CDCE8500DDF5DE /* util_string.c */; };
-		8B9992FA28CDCE8500DDF5DE /* duktape.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9992E328CDCE8500DDF5DE /* duktape.c */; };
 		8B9992FB28CDCE8500DDF5DE /* static_pixel_data.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9992E628CDCE8500DDF5DE /* static_pixel_data.c */; };
 		8B9992FC28CDCE8500DDF5DE /* static_window.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9992E828CDCE8500DDF5DE /* static_window.c */; };
 		8B9992FD28CDCE8500DDF5DE /* static_header.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9992E928CDCE8500DDF5DE /* static_header.c */; };
 		8B9992FE28CDCE8500DDF5DE /* raia_gl.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9992EC28CDCE8500DDF5DE /* raia_gl.c */; };
 		8B9992FF28CDCE8500DDF5DE /* raia_duktape.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9992EE28CDCE8500DDF5DE /* raia_duktape.c */; };
 		8B99930028CDCE8500DDF5DE /* raia_al.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9992F128CDCE8500DDF5DE /* raia_al.c */; };
+		8B99930628CDE39F00DDF5DE /* CException.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99930428CDE39F00DDF5DE /* CException.c */; };
+		8B99939E28CDE83300DDF5DE /* duk_hbuffer_ops.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99930D28CDE83300DDF5DE /* duk_hbuffer_ops.c */; };
+		8B99939F28CDE83300DDF5DE /* duk_api_debug.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99930E28CDE83300DDF5DE /* duk_api_debug.c */; };
+		8B9993A028CDE83300DDF5DE /* duk_util_bitencoder.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99930F28CDE83300DDF5DE /* duk_util_bitencoder.c */; };
+		8B9993A128CDE83300DDF5DE /* duk_regexp_executor.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99931028CDE83300DDF5DE /* duk_regexp_executor.c */; };
+		8B9993A228CDE83300DDF5DE /* duk_hobject_props.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99931128CDE83300DDF5DE /* duk_hobject_props.c */; };
+		8B9993A328CDE83300DDF5DE /* duk_js_ops.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99931228CDE83300DDF5DE /* duk_js_ops.c */; };
+		8B9993A428CDE83300DDF5DE /* duk_bi_number.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99931328CDE83300DDF5DE /* duk_bi_number.c */; };
+		8B9993A528CDE83300DDF5DE /* duk_bi_promise.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99931528CDE83300DDF5DE /* duk_bi_promise.c */; };
+		8B9993A628CDE83300DDF5DE /* duk_bi_function.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99931628CDE83300DDF5DE /* duk_bi_function.c */; };
+		8B9993A728CDE83300DDF5DE /* duk_bi_error.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99931728CDE83300DDF5DE /* duk_bi_error.c */; };
+		8B9993A828CDE83300DDF5DE /* duk_bi_date.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99931828CDE83300DDF5DE /* duk_bi_date.c */; };
+		8B9993A928CDE83300DDF5DE /* duk_api_memory.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99931928CDE83300DDF5DE /* duk_api_memory.c */; };
+		8B9993AA28CDE83300DDF5DE /* duk_hobject_pc2line.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99931A28CDE83300DDF5DE /* duk_hobject_pc2line.c */; };
+		8B9993AB28CDE83300DDF5DE /* duk_api_object.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99931B28CDE83300DDF5DE /* duk_api_object.c */; };
+		8B9993AC28CDE83300DDF5DE /* duk_bi_date_unix.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99931D28CDE83300DDF5DE /* duk_bi_date_unix.c */; };
+		8B9993AD28CDE83300DDF5DE /* duk_heap_refcount.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99931E28CDE83300DDF5DE /* duk_heap_refcount.c */; };
+		8B9993AE28CDE83300DDF5DE /* duk_hthread_stacks.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99931F28CDE83300DDF5DE /* duk_hthread_stacks.c */; };
+		8B9993AF28CDE83300DDF5DE /* duk_selftest.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99932028CDE83300DDF5DE /* duk_selftest.c */; };
+		8B9993B028CDE83300DDF5DE /* duk_heaphdr_assert.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99932128CDE83300DDF5DE /* duk_heaphdr_assert.c */; };
+		8B9993B128CDE83300DDF5DE /* duk_bi_regexp.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99932328CDE83300DDF5DE /* duk_bi_regexp.c */; };
+		8B9993B228CDE83300DDF5DE /* duk_bi_boolean.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99932428CDE83300DDF5DE /* duk_bi_boolean.c */; };
+		8B9993B328CDE83300DDF5DE /* duk_error_macros.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99932528CDE83300DDF5DE /* duk_error_macros.c */; };
+		8B9993B428CDE83300DDF5DE /* duk_api_buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99932628CDE83300DDF5DE /* duk_api_buffer.c */; };
+		8B9993B528CDE83300DDF5DE /* duk_heap_markandsweep.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99932728CDE83300DDF5DE /* duk_heap_markandsweep.c */; };
+		8B9993B628CDE83300DDF5DE /* duk_js_call.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99932828CDE83300DDF5DE /* duk_js_call.c */; };
+		8B9993B728CDE83300DDF5DE /* duk_debug_vsnprintf.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99932A28CDE83300DDF5DE /* duk_debug_vsnprintf.c */; };
+		8B9993B828CDE83300DDF5DE /* duk_bi_string.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99932D28CDE83300DDF5DE /* duk_bi_string.c */; };
+		8B9993B928CDE83300DDF5DE /* duk_unicode_support.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99932E28CDE83300DDF5DE /* duk_unicode_support.c */; };
+		8B9993BA28CDE83300DDF5DE /* duk_error_augment.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99932F28CDE83300DDF5DE /* duk_error_augment.c */; };
+		8B9993BB28CDE83300DDF5DE /* duk_bi_performance.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99933128CDE83300DDF5DE /* duk_bi_performance.c */; };
+		8B9993BC28CDE83300DDF5DE /* duk_tval.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99933228CDE83300DDF5DE /* duk_tval.c */; };
+		8B9993BD28CDE83300DDF5DE /* duk_unicode_tables.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99933428CDE83300DDF5DE /* duk_unicode_tables.c */; };
+		8B9993BE28CDE83300DDF5DE /* duk_alloc_default.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99933528CDE83300DDF5DE /* duk_alloc_default.c */; };
+		8B9993BF28CDE83300DDF5DE /* duk_bi_buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99933628CDE83300DDF5DE /* duk_bi_buffer.c */; };
+		8B9993C028CDE83300DDF5DE /* duk_js_executor.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99933728CDE83300DDF5DE /* duk_js_executor.c */; };
+		8B9993C128CDE83300DDF5DE /* duk_hstring_assert.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99933A28CDE83300DDF5DE /* duk_hstring_assert.c */; };
+		8B9993C228CDE83300DDF5DE /* duk_bi_thread.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99933B28CDE83300DDF5DE /* duk_bi_thread.c */; };
+		8B9993C328CDE83300DDF5DE /* duk_heap_finalize.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99933C28CDE83300DDF5DE /* duk_heap_finalize.c */; };
+		8B9993C428CDE83300DDF5DE /* duk_api_random.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99933D28CDE83300DDF5DE /* duk_api_random.c */; };
+		8B9993C528CDE83300DDF5DE /* duk_bi_pointer.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99934028CDE83300DDF5DE /* duk_bi_pointer.c */; };
+		8B9993C628CDE83300DDF5DE /* duk_api_string.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99934428CDE83300DDF5DE /* duk_api_string.c */; };
+		8B9993C728CDE83300DDF5DE /* duk_util_cast.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99934528CDE83300DDF5DE /* duk_util_cast.c */; };
+		8B9993C828CDE83300DDF5DE /* duk_heap_stringcache.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99934628CDE83300DDF5DE /* duk_heap_stringcache.c */; };
+		8B9993C928CDE83300DDF5DE /* duk_debug_fixedbuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99934B28CDE83300DDF5DE /* duk_debug_fixedbuffer.c */; };
+		8B9993CA28CDE83300DDF5DE /* duk_bi_reflect.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99934D28CDE83300DDF5DE /* duk_bi_reflect.c */; };
+		8B9993CB28CDE83300DDF5DE /* duk_error_longjmp.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99934E28CDE83300DDF5DE /* duk_error_longjmp.c */; };
+		8B9993CC28CDE83300DDF5DE /* duk_api_heap.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99935028CDE83300DDF5DE /* duk_api_heap.c */; };
+		8B9993CD28CDE83300DDF5DE /* duk_heap_memory.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99935128CDE83300DDF5DE /* duk_heap_memory.c */; };
+		8B9993CE28CDE83300DDF5DE /* duk_bi_cbor.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99935328CDE83300DDF5DE /* duk_bi_cbor.c */; };
+		8B9993CF28CDE83300DDF5DE /* duk_hthread_misc.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99935428CDE83300DDF5DE /* duk_hthread_misc.c */; };
+		8B9993D028CDE83300DDF5DE /* duk_bi_thrower.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99935628CDE83300DDF5DE /* duk_bi_thrower.c */; };
+		8B9993D128CDE83300DDF5DE /* duk_bi_object.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99935728CDE83300DDF5DE /* duk_bi_object.c */; };
+		8B9993D228CDE83300DDF5DE /* duk_hbuffer_alloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99935828CDE83300DDF5DE /* duk_hbuffer_alloc.c */; };
+		8B9993D328CDE83300DDF5DE /* duk_bi_encoding.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99935928CDE83300DDF5DE /* duk_bi_encoding.c */; };
+		8B9993D428CDE83300DDF5DE /* duk_builtins.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99935A28CDE83300DDF5DE /* duk_builtins.c */; };
+		8B9993D528CDE83300DDF5DE /* duk_bi_global.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99935C28CDE83300DDF5DE /* duk_bi_global.c */; };
+		8B9993D628CDE83300DDF5DE /* duk_bi_proxy.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99935D28CDE83300DDF5DE /* duk_bi_proxy.c */; };
+		8B9993D728CDE83300DDF5DE /* duk_hobject_misc.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99935F28CDE83300DDF5DE /* duk_hobject_misc.c */; };
+		8B9993D828CDE83300DDF5DE /* duk_js_var.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99936028CDE83300DDF5DE /* duk_js_var.c */; };
+		8B9993D928CDE83300DDF5DE /* duk_js_arith.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99936128CDE83300DDF5DE /* duk_js_arith.c */; };
+		8B9993DA28CDE83300DDF5DE /* duk_api_codec.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99936428CDE83300DDF5DE /* duk_api_codec.c */; };
+		8B9993DB28CDE83300DDF5DE /* duk_util_memory.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99936628CDE83300DDF5DE /* duk_util_memory.c */; };
+		8B9993DC28CDE83300DDF5DE /* duk_heap_hashstring.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99936728CDE83300DDF5DE /* duk_heap_hashstring.c */; };
+		8B9993DD28CDE83300DDF5DE /* duk_api_compile.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99936828CDE83300DDF5DE /* duk_api_compile.c */; };
+		8B9993DE28CDE83300DDF5DE /* duk_util_double.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99936928CDE83300DDF5DE /* duk_util_double.c */; };
+		8B9993DF28CDE83300DDF5DE /* duk_lexer.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99936A28CDE83300DDF5DE /* duk_lexer.c */; };
+		8B9993E028CDE83300DDF5DE /* duk_util_tinyrandom.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99936B28CDE83300DDF5DE /* duk_util_tinyrandom.c */; };
+		8B9993E128CDE83300DDF5DE /* duk_hstring_misc.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99936D28CDE83300DDF5DE /* duk_hstring_misc.c */; };
+		8B9993E228CDE83300DDF5DE /* duk_bi_date_windows.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99936E28CDE83300DDF5DE /* duk_bi_date_windows.c */; };
+		8B9993E328CDE83300DDF5DE /* duk_numconv.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99936F28CDE83300DDF5DE /* duk_numconv.c */; };
+		8B9993E428CDE83300DDF5DE /* duk_hobject_class.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99937028CDE83300DDF5DE /* duk_hobject_class.c */; };
+		8B9993E528CDE83300DDF5DE /* duk_api_call.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99937128CDE83300DDF5DE /* duk_api_call.c */; };
+		8B9993E628CDE83300DDF5DE /* duk_api_stack.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99937228CDE83300DDF5DE /* duk_api_stack.c */; };
+		8B9993E728CDE83300DDF5DE /* duk_util_hashbytes.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99937328CDE83300DDF5DE /* duk_util_hashbytes.c */; };
+		8B9993E828CDE83300DDF5DE /* duk_hobject_assert.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99937428CDE83300DDF5DE /* duk_hobject_assert.c */; };
+		8B9993E928CDE83300DDF5DE /* duk_hbufobj_misc.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99937628CDE83300DDF5DE /* duk_hbufobj_misc.c */; };
+		8B9993EA28CDE83300DDF5DE /* duk_api_bytecode.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99937728CDE83300DDF5DE /* duk_api_bytecode.c */; };
+		8B9993EB28CDE83300DDF5DE /* duk_util_misc.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99937928CDE83300DDF5DE /* duk_util_misc.c */; };
+		8B9993EC28CDE83300DDF5DE /* duk_regexp_compiler.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99937A28CDE83300DDF5DE /* duk_regexp_compiler.c */; };
+		8B9993ED28CDE83300DDF5DE /* duk_heap_stringtable.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99937B28CDE83300DDF5DE /* duk_heap_stringtable.c */; };
+		8B9993EE28CDE83300DDF5DE /* duk_bi_array.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99937D28CDE83300DDF5DE /* duk_bi_array.c */; };
+		8B9993EF28CDE83300DDF5DE /* duk_heap_alloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99937E28CDE83300DDF5DE /* duk_heap_alloc.c */; };
+		8B9993F028CDE83300DDF5DE /* duk_api_time.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99937F28CDE83300DDF5DE /* duk_api_time.c */; };
+		8B9993F128CDE83300DDF5DE /* duk_debugger.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99938028CDE83300DDF5DE /* duk_debugger.c */; };
+		8B9993F228CDE83300DDF5DE /* duk_hthread_alloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99938128CDE83300DDF5DE /* duk_hthread_alloc.c */; };
+		8B9993F328CDE83300DDF5DE /* duk_util_bufwriter.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99938228CDE83300DDF5DE /* duk_util_bufwriter.c */; };
+		8B9993F428CDE83300DDF5DE /* duk_replacements.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99938428CDE83300DDF5DE /* duk_replacements.c */; };
+		8B9993F528CDE83300DDF5DE /* duk_api_inspect.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99938628CDE83300DDF5DE /* duk_api_inspect.c */; };
+		8B9993F628CDE83300DDF5DE /* duk_bi_json.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99938728CDE83300DDF5DE /* duk_bi_json.c */; };
+		8B9993F728CDE83300DDF5DE /* duk_error_misc.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99938828CDE83300DDF5DE /* duk_error_misc.c */; };
+		8B9993F828CDE83300DDF5DE /* duk_hthread_builtins.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99938A28CDE83300DDF5DE /* duk_hthread_builtins.c */; };
+		8B9993F928CDE83300DDF5DE /* duk_hobject_alloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99938E28CDE83300DDF5DE /* duk_hobject_alloc.c */; };
+		8B9993FA28CDE83300DDF5DE /* duk_util_memrw.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99938F28CDE83300DDF5DE /* duk_util_memrw.c */; };
+		8B9993FB28CDE83300DDF5DE /* duk_debug_macros.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99939028CDE83300DDF5DE /* duk_debug_macros.c */; };
+		8B9993FC28CDE83300DDF5DE /* duk_error_throw.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99939128CDE83300DDF5DE /* duk_error_throw.c */; };
+		8B9993FD28CDE83300DDF5DE /* duk_hobject_enum.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99939228CDE83300DDF5DE /* duk_hobject_enum.c */; };
+		8B9993FE28CDE83300DDF5DE /* duk_bi_duktape.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99939328CDE83300DDF5DE /* duk_bi_duktape.c */; };
+		8B9993FF28CDE83300DDF5DE /* duk_bi_symbol.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99939628CDE83300DDF5DE /* duk_bi_symbol.c */; };
+		8B99940028CDE83300DDF5DE /* duk_js_compiler.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99939828CDE83300DDF5DE /* duk_js_compiler.c */; };
+		8B99940128CDE83300DDF5DE /* duk_heap_misc.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99939928CDE83300DDF5DE /* duk_heap_misc.c */; };
+		8B99940228CDE83300DDF5DE /* duk_util_bitdecoder.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99939A28CDE83300DDF5DE /* duk_util_bitdecoder.c */; };
+		8B99940328CDE83300DDF5DE /* duk_bi_math.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99939C28CDE83300DDF5DE /* duk_bi_math.c */; };
+		8B99940428CDE83300DDF5DE /* duk_hbuffer_assert.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99939D28CDE83300DDF5DE /* duk_hbuffer_assert.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -66,10 +169,6 @@
 		8B9992DC28CDCE8500DDF5DE /* util_io.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util_io.h; sourceTree = "<group>"; };
 		8B9992DD28CDCE8500DDF5DE /* util_string.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = util_string.c; sourceTree = "<group>"; };
 		8B9992DE28CDCE8500DDF5DE /* util_math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util_math.h; sourceTree = "<group>"; };
-		8B9992E028CDCE8500DDF5DE /* duk_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_config.h; sourceTree = "<group>"; };
-		8B9992E128CDCE8500DDF5DE /* duktape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duktape.h; sourceTree = "<group>"; };
-		8B9992E228CDCE8500DDF5DE /* duk_source_meta.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = duk_source_meta.json; sourceTree = "<group>"; };
-		8B9992E328CDCE8500DDF5DE /* duktape.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duktape.c; sourceTree = "<group>"; };
 		8B9992E528CDCE8500DDF5DE /* static_window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = static_window.h; sourceTree = "<group>"; };
 		8B9992E628CDCE8500DDF5DE /* static_pixel_data.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = static_pixel_data.c; sourceTree = "<group>"; };
 		8B9992E728CDCE8500DDF5DE /* static_header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = static_header.h; sourceTree = "<group>"; };
@@ -84,6 +183,153 @@
 		8B9992F128CDCE8500DDF5DE /* raia_al.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = raia_al.c; sourceTree = "<group>"; };
 		8B99930128CDCE9600DDF5DE /* raia-engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "raia-engine.h"; path = "../../src/raia-engine.h"; sourceTree = "<group>"; };
 		8B99930228CDCE9600DDF5DE /* platforms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = platforms.h; path = ../../src/platforms.h; sourceTree = "<group>"; };
+		8B99930428CDE39F00DDF5DE /* CException.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CException.c; sourceTree = "<group>"; };
+		8B99930528CDE39F00DDF5DE /* CException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CException.h; sourceTree = "<group>"; };
+		8B99930D28CDE83300DDF5DE /* duk_hbuffer_ops.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_hbuffer_ops.c; sourceTree = "<group>"; };
+		8B99930E28CDE83300DDF5DE /* duk_api_debug.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_api_debug.c; sourceTree = "<group>"; };
+		8B99930F28CDE83300DDF5DE /* duk_util_bitencoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_util_bitencoder.c; sourceTree = "<group>"; };
+		8B99931028CDE83300DDF5DE /* duk_regexp_executor.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_regexp_executor.c; sourceTree = "<group>"; };
+		8B99931128CDE83300DDF5DE /* duk_hobject_props.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_hobject_props.c; sourceTree = "<group>"; };
+		8B99931228CDE83300DDF5DE /* duk_js_ops.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_js_ops.c; sourceTree = "<group>"; };
+		8B99931328CDE83300DDF5DE /* duk_bi_number.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_bi_number.c; sourceTree = "<group>"; };
+		8B99931428CDE83300DDF5DE /* duk_hstring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_hstring.h; sourceTree = "<group>"; };
+		8B99931528CDE83300DDF5DE /* duk_bi_promise.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_bi_promise.c; sourceTree = "<group>"; };
+		8B99931628CDE83300DDF5DE /* duk_bi_function.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_bi_function.c; sourceTree = "<group>"; };
+		8B99931728CDE83300DDF5DE /* duk_bi_error.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_bi_error.c; sourceTree = "<group>"; };
+		8B99931828CDE83300DDF5DE /* duk_bi_date.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_bi_date.c; sourceTree = "<group>"; };
+		8B99931928CDE83300DDF5DE /* duk_api_memory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_api_memory.c; sourceTree = "<group>"; };
+		8B99931A28CDE83300DDF5DE /* duk_hobject_pc2line.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_hobject_pc2line.c; sourceTree = "<group>"; };
+		8B99931B28CDE83300DDF5DE /* duk_api_object.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_api_object.c; sourceTree = "<group>"; };
+		8B99931C28CDE83300DDF5DE /* duk_builtins.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_builtins.h; sourceTree = "<group>"; };
+		8B99931D28CDE83300DDF5DE /* duk_bi_date_unix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_bi_date_unix.c; sourceTree = "<group>"; };
+		8B99931E28CDE83300DDF5DE /* duk_heap_refcount.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_heap_refcount.c; sourceTree = "<group>"; };
+		8B99931F28CDE83300DDF5DE /* duk_hthread_stacks.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_hthread_stacks.c; sourceTree = "<group>"; };
+		8B99932028CDE83300DDF5DE /* duk_selftest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_selftest.c; sourceTree = "<group>"; };
+		8B99932128CDE83300DDF5DE /* duk_heaphdr_assert.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_heaphdr_assert.c; sourceTree = "<group>"; };
+		8B99932228CDE83300DDF5DE /* duk_heaphdr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_heaphdr.h; sourceTree = "<group>"; };
+		8B99932328CDE83300DDF5DE /* duk_bi_regexp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_bi_regexp.c; sourceTree = "<group>"; };
+		8B99932428CDE83300DDF5DE /* duk_bi_boolean.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_bi_boolean.c; sourceTree = "<group>"; };
+		8B99932528CDE83300DDF5DE /* duk_error_macros.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_error_macros.c; sourceTree = "<group>"; };
+		8B99932628CDE83300DDF5DE /* duk_api_buffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_api_buffer.c; sourceTree = "<group>"; };
+		8B99932728CDE83300DDF5DE /* duk_heap_markandsweep.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_heap_markandsweep.c; sourceTree = "<group>"; };
+		8B99932828CDE83300DDF5DE /* duk_js_call.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_js_call.c; sourceTree = "<group>"; };
+		8B99932928CDE83300DDF5DE /* duk_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_config.h; sourceTree = "<group>"; };
+		8B99932A28CDE83300DDF5DE /* duk_debug_vsnprintf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_debug_vsnprintf.c; sourceTree = "<group>"; };
+		8B99932B28CDE83300DDF5DE /* duk_numconv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_numconv.h; sourceTree = "<group>"; };
+		8B99932C28CDE83300DDF5DE /* duk_lexer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_lexer.h; sourceTree = "<group>"; };
+		8B99932D28CDE83300DDF5DE /* duk_bi_string.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_bi_string.c; sourceTree = "<group>"; };
+		8B99932E28CDE83300DDF5DE /* duk_unicode_support.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_unicode_support.c; sourceTree = "<group>"; };
+		8B99932F28CDE83300DDF5DE /* duk_error_augment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_error_augment.c; sourceTree = "<group>"; };
+		8B99933028CDE83300DDF5DE /* duk_forwdecl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_forwdecl.h; sourceTree = "<group>"; };
+		8B99933128CDE83300DDF5DE /* duk_bi_performance.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_bi_performance.c; sourceTree = "<group>"; };
+		8B99933228CDE83300DDF5DE /* duk_tval.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_tval.c; sourceTree = "<group>"; };
+		8B99933328CDE83300DDF5DE /* duk_json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_json.h; sourceTree = "<group>"; };
+		8B99933428CDE83300DDF5DE /* duk_unicode_tables.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_unicode_tables.c; sourceTree = "<group>"; };
+		8B99933528CDE83300DDF5DE /* duk_alloc_default.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_alloc_default.c; sourceTree = "<group>"; };
+		8B99933628CDE83300DDF5DE /* duk_bi_buffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_bi_buffer.c; sourceTree = "<group>"; };
+		8B99933728CDE83300DDF5DE /* duk_js_executor.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_js_executor.c; sourceTree = "<group>"; };
+		8B99933828CDE83300DDF5DE /* duk_hobject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_hobject.h; sourceTree = "<group>"; };
+		8B99933928CDE83300DDF5DE /* duk_replacements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_replacements.h; sourceTree = "<group>"; };
+		8B99933A28CDE83300DDF5DE /* duk_hstring_assert.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_hstring_assert.c; sourceTree = "<group>"; };
+		8B99933B28CDE83300DDF5DE /* duk_bi_thread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_bi_thread.c; sourceTree = "<group>"; };
+		8B99933C28CDE83300DDF5DE /* duk_heap_finalize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_heap_finalize.c; sourceTree = "<group>"; };
+		8B99933D28CDE83300DDF5DE /* duk_api_random.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_api_random.c; sourceTree = "<group>"; };
+		8B99933E28CDE83300DDF5DE /* duk_jmpbuf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_jmpbuf.h; sourceTree = "<group>"; };
+		8B99933F28CDE83300DDF5DE /* duk_hcompfunc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_hcompfunc.h; sourceTree = "<group>"; };
+		8B99934028CDE83300DDF5DE /* duk_bi_pointer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_bi_pointer.c; sourceTree = "<group>"; };
+		8B99934128CDE83300DDF5DE /* duk_debugger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_debugger.h; sourceTree = "<group>"; };
+		8B99934228CDE83300DDF5DE /* duk_refcount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_refcount.h; sourceTree = "<group>"; };
+		8B99934328CDE83300DDF5DE /* duktape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duktape.h; sourceTree = "<group>"; };
+		8B99934428CDE83300DDF5DE /* duk_api_string.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_api_string.c; sourceTree = "<group>"; };
+		8B99934528CDE83300DDF5DE /* duk_util_cast.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_util_cast.c; sourceTree = "<group>"; };
+		8B99934628CDE83300DDF5DE /* duk_heap_stringcache.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_heap_stringcache.c; sourceTree = "<group>"; };
+		8B99934728CDE83300DDF5DE /* duk_heap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_heap.h; sourceTree = "<group>"; };
+		8B99934828CDE83300DDF5DE /* duk_hthread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_hthread.h; sourceTree = "<group>"; };
+		8B99934928CDE83300DDF5DE /* duk_hbufobj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_hbufobj.h; sourceTree = "<group>"; };
+		8B99934A28CDE83300DDF5DE /* duk_js_compiler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_js_compiler.h; sourceTree = "<group>"; };
+		8B99934B28CDE83300DDF5DE /* duk_debug_fixedbuffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_debug_fixedbuffer.c; sourceTree = "<group>"; };
+		8B99934C28CDE83300DDF5DE /* duk_util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_util.h; sourceTree = "<group>"; };
+		8B99934D28CDE83300DDF5DE /* duk_bi_reflect.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_bi_reflect.c; sourceTree = "<group>"; };
+		8B99934E28CDE83300DDF5DE /* duk_error_longjmp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_error_longjmp.c; sourceTree = "<group>"; };
+		8B99934F28CDE83300DDF5DE /* duk_source_meta.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = duk_source_meta.json; sourceTree = "<group>"; };
+		8B99935028CDE83300DDF5DE /* duk_api_heap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_api_heap.c; sourceTree = "<group>"; };
+		8B99935128CDE83300DDF5DE /* duk_heap_memory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_heap_memory.c; sourceTree = "<group>"; };
+		8B99935228CDE83300DDF5DE /* duk_hboundfunc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_hboundfunc.h; sourceTree = "<group>"; };
+		8B99935328CDE83300DDF5DE /* duk_bi_cbor.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_bi_cbor.c; sourceTree = "<group>"; };
+		8B99935428CDE83300DDF5DE /* duk_hthread_misc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_hthread_misc.c; sourceTree = "<group>"; };
+		8B99935528CDE83300DDF5DE /* duk_hbuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_hbuffer.h; sourceTree = "<group>"; };
+		8B99935628CDE83300DDF5DE /* duk_bi_thrower.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_bi_thrower.c; sourceTree = "<group>"; };
+		8B99935728CDE83300DDF5DE /* duk_bi_object.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_bi_object.c; sourceTree = "<group>"; };
+		8B99935828CDE83300DDF5DE /* duk_hbuffer_alloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_hbuffer_alloc.c; sourceTree = "<group>"; };
+		8B99935928CDE83300DDF5DE /* duk_bi_encoding.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_bi_encoding.c; sourceTree = "<group>"; };
+		8B99935A28CDE83300DDF5DE /* duk_builtins.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_builtins.c; sourceTree = "<group>"; };
+		8B99935B28CDE83300DDF5DE /* duk_strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_strings.h; sourceTree = "<group>"; };
+		8B99935C28CDE83300DDF5DE /* duk_bi_global.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_bi_global.c; sourceTree = "<group>"; };
+		8B99935D28CDE83300DDF5DE /* duk_bi_proxy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_bi_proxy.c; sourceTree = "<group>"; };
+		8B99935E28CDE83300DDF5DE /* duk_unicode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_unicode.h; sourceTree = "<group>"; };
+		8B99935F28CDE83300DDF5DE /* duk_hobject_misc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_hobject_misc.c; sourceTree = "<group>"; };
+		8B99936028CDE83300DDF5DE /* duk_js_var.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_js_var.c; sourceTree = "<group>"; };
+		8B99936128CDE83300DDF5DE /* duk_js_arith.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_js_arith.c; sourceTree = "<group>"; };
+		8B99936228CDE83300DDF5DE /* duk_harray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_harray.h; sourceTree = "<group>"; };
+		8B99936328CDE83300DDF5DE /* duk_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_internal.h; sourceTree = "<group>"; };
+		8B99936428CDE83300DDF5DE /* duk_api_codec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_api_codec.c; sourceTree = "<group>"; };
+		8B99936528CDE83300DDF5DE /* duk_henv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_henv.h; sourceTree = "<group>"; };
+		8B99936628CDE83300DDF5DE /* duk_util_memory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_util_memory.c; sourceTree = "<group>"; };
+		8B99936728CDE83300DDF5DE /* duk_heap_hashstring.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_heap_hashstring.c; sourceTree = "<group>"; };
+		8B99936828CDE83300DDF5DE /* duk_api_compile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_api_compile.c; sourceTree = "<group>"; };
+		8B99936928CDE83300DDF5DE /* duk_util_double.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_util_double.c; sourceTree = "<group>"; };
+		8B99936A28CDE83300DDF5DE /* duk_lexer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_lexer.c; sourceTree = "<group>"; };
+		8B99936B28CDE83300DDF5DE /* duk_util_tinyrandom.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_util_tinyrandom.c; sourceTree = "<group>"; };
+		8B99936C28CDE83300DDF5DE /* duk_api_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_api_internal.h; sourceTree = "<group>"; };
+		8B99936D28CDE83300DDF5DE /* duk_hstring_misc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_hstring_misc.c; sourceTree = "<group>"; };
+		8B99936E28CDE83300DDF5DE /* duk_bi_date_windows.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_bi_date_windows.c; sourceTree = "<group>"; };
+		8B99936F28CDE83300DDF5DE /* duk_numconv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_numconv.c; sourceTree = "<group>"; };
+		8B99937028CDE83300DDF5DE /* duk_hobject_class.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_hobject_class.c; sourceTree = "<group>"; };
+		8B99937128CDE83300DDF5DE /* duk_api_call.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_api_call.c; sourceTree = "<group>"; };
+		8B99937228CDE83300DDF5DE /* duk_api_stack.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_api_stack.c; sourceTree = "<group>"; };
+		8B99937328CDE83300DDF5DE /* duk_util_hashbytes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_util_hashbytes.c; sourceTree = "<group>"; };
+		8B99937428CDE83300DDF5DE /* duk_hobject_assert.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_hobject_assert.c; sourceTree = "<group>"; };
+		8B99937528CDE83300DDF5DE /* duk_selftest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_selftest.h; sourceTree = "<group>"; };
+		8B99937628CDE83300DDF5DE /* duk_hbufobj_misc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_hbufobj_misc.c; sourceTree = "<group>"; };
+		8B99937728CDE83300DDF5DE /* duk_api_bytecode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_api_bytecode.c; sourceTree = "<group>"; };
+		8B99937828CDE83300DDF5DE /* duk_hproxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_hproxy.h; sourceTree = "<group>"; };
+		8B99937928CDE83300DDF5DE /* duk_util_misc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_util_misc.c; sourceTree = "<group>"; };
+		8B99937A28CDE83300DDF5DE /* duk_regexp_compiler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_regexp_compiler.c; sourceTree = "<group>"; };
+		8B99937B28CDE83300DDF5DE /* duk_heap_stringtable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_heap_stringtable.c; sourceTree = "<group>"; };
+		8B99937C28CDE83300DDF5DE /* duk_hnatfunc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_hnatfunc.h; sourceTree = "<group>"; };
+		8B99937D28CDE83300DDF5DE /* duk_bi_array.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_bi_array.c; sourceTree = "<group>"; };
+		8B99937E28CDE83300DDF5DE /* duk_heap_alloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_heap_alloc.c; sourceTree = "<group>"; };
+		8B99937F28CDE83300DDF5DE /* duk_api_time.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_api_time.c; sourceTree = "<group>"; };
+		8B99938028CDE83300DDF5DE /* duk_debugger.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_debugger.c; sourceTree = "<group>"; };
+		8B99938128CDE83300DDF5DE /* duk_hthread_alloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_hthread_alloc.c; sourceTree = "<group>"; };
+		8B99938228CDE83300DDF5DE /* duk_util_bufwriter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_util_bufwriter.c; sourceTree = "<group>"; };
+		8B99938328CDE83300DDF5DE /* duk_tval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_tval.h; sourceTree = "<group>"; };
+		8B99938428CDE83300DDF5DE /* duk_replacements.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_replacements.c; sourceTree = "<group>"; };
+		8B99938528CDE83300DDF5DE /* duk_js_bytecode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_js_bytecode.h; sourceTree = "<group>"; };
+		8B99938628CDE83300DDF5DE /* duk_api_inspect.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_api_inspect.c; sourceTree = "<group>"; };
+		8B99938728CDE83300DDF5DE /* duk_bi_json.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_bi_json.c; sourceTree = "<group>"; };
+		8B99938828CDE83300DDF5DE /* duk_error_misc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_error_misc.c; sourceTree = "<group>"; };
+		8B99938928CDE83300DDF5DE /* duk_dblunion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_dblunion.h; sourceTree = "<group>"; };
+		8B99938A28CDE83300DDF5DE /* duk_hthread_builtins.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_hthread_builtins.c; sourceTree = "<group>"; };
+		8B99938B28CDE83300DDF5DE /* duk_debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_debug.h; sourceTree = "<group>"; };
+		8B99938C28CDE83300DDF5DE /* duk_js.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_js.h; sourceTree = "<group>"; };
+		8B99938D28CDE83300DDF5DE /* duk_fltunion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_fltunion.h; sourceTree = "<group>"; };
+		8B99938E28CDE83300DDF5DE /* duk_hobject_alloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_hobject_alloc.c; sourceTree = "<group>"; };
+		8B99938F28CDE83300DDF5DE /* duk_util_memrw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_util_memrw.c; sourceTree = "<group>"; };
+		8B99939028CDE83300DDF5DE /* duk_debug_macros.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_debug_macros.c; sourceTree = "<group>"; };
+		8B99939128CDE83300DDF5DE /* duk_error_throw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_error_throw.c; sourceTree = "<group>"; };
+		8B99939228CDE83300DDF5DE /* duk_hobject_enum.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_hobject_enum.c; sourceTree = "<group>"; };
+		8B99939328CDE83300DDF5DE /* duk_bi_duktape.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_bi_duktape.c; sourceTree = "<group>"; };
+		8B99939428CDE83300DDF5DE /* duk_regexp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_regexp.h; sourceTree = "<group>"; };
+		8B99939528CDE83300DDF5DE /* duk_bi_protos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_bi_protos.h; sourceTree = "<group>"; };
+		8B99939628CDE83300DDF5DE /* duk_bi_symbol.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_bi_symbol.c; sourceTree = "<group>"; };
+		8B99939728CDE83300DDF5DE /* duk_exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_exception.h; sourceTree = "<group>"; };
+		8B99939828CDE83300DDF5DE /* duk_js_compiler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_js_compiler.c; sourceTree = "<group>"; };
+		8B99939928CDE83300DDF5DE /* duk_heap_misc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_heap_misc.c; sourceTree = "<group>"; };
+		8B99939A28CDE83300DDF5DE /* duk_util_bitdecoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_util_bitdecoder.c; sourceTree = "<group>"; };
+		8B99939B28CDE83300DDF5DE /* duk_error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_error.h; sourceTree = "<group>"; };
+		8B99939C28CDE83300DDF5DE /* duk_bi_math.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_bi_math.c; sourceTree = "<group>"; };
+		8B99939D28CDE83300DDF5DE /* duk_hbuffer_assert.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_hbuffer_assert.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,7 +371,8 @@
 				8B99927328CDB8AF00DDF5DE /* raia-engine.c */,
 				8B9992C328CDCC9500DDF5DE /* libglfw.3.3.dylib */,
 				8B9992C428CDCC9500DDF5DE /* libopenal.1.22.2.dylib */,
-				8B9992DF28CDCE8500DDF5DE /* duktape */,
+				8B99930C28CDE83300DDF5DE /* duktape_separate */,
+				8B99930328CDE39F00DDF5DE /* CException */,
 				8B9992EB28CDCE8500DDF5DE /* raia */,
 				8B9992E428CDCE8500DDF5DE /* static */,
 				8B9992C928CDCE8500DDF5DE /* stb */,
@@ -175,26 +422,14 @@
 				8B9992D728CDCE8500DDF5DE /* util_io.c */,
 				8B9992D828CDCE8500DDF5DE /* util_pixel.h */,
 				8B9992D928CDCE8500DDF5DE /* util_string.h */,
+				8B9992DD28CDCE8500DDF5DE /* util_string.c */,
 				8B9992DA28CDCE8500DDF5DE /* util_math.c */,
 				8B9992DB28CDCE8500DDF5DE /* util_pixel.c */,
 				8B9992DC28CDCE8500DDF5DE /* util_io.h */,
-				8B9992DD28CDCE8500DDF5DE /* util_string.c */,
 				8B9992DE28CDCE8500DDF5DE /* util_math.h */,
 			);
 			name = util;
 			path = ../../src/util;
-			sourceTree = "<group>";
-		};
-		8B9992DF28CDCE8500DDF5DE /* duktape */ = {
-			isa = PBXGroup;
-			children = (
-				8B9992E028CDCE8500DDF5DE /* duk_config.h */,
-				8B9992E128CDCE8500DDF5DE /* duktape.h */,
-				8B9992E228CDCE8500DDF5DE /* duk_source_meta.json */,
-				8B9992E328CDCE8500DDF5DE /* duktape.c */,
-			);
-			name = duktape;
-			path = ../../src/duktape;
 			sourceTree = "<group>";
 		};
 		8B9992E428CDCE8500DDF5DE /* static */ = {
@@ -214,15 +449,178 @@
 		8B9992EB28CDCE8500DDF5DE /* raia */ = {
 			isa = PBXGroup;
 			children = (
-				8B9992EC28CDCE8500DDF5DE /* raia_gl.c */,
 				8B9992ED28CDCE8500DDF5DE /* raia_al.h */,
-				8B9992EE28CDCE8500DDF5DE /* raia_duktape.c */,
-				8B9992EF28CDCE8500DDF5DE /* raia_gl.h */,
-				8B9992F028CDCE8500DDF5DE /* raia_duktape.h */,
 				8B9992F128CDCE8500DDF5DE /* raia_al.c */,
+				8B9992EF28CDCE8500DDF5DE /* raia_gl.h */,
+				8B9992EC28CDCE8500DDF5DE /* raia_gl.c */,
+				8B9992F028CDCE8500DDF5DE /* raia_duktape.h */,
+				8B9992EE28CDCE8500DDF5DE /* raia_duktape.c */,
 			);
 			name = raia;
 			path = ../../src/raia;
+			sourceTree = "<group>";
+		};
+		8B99930328CDE39F00DDF5DE /* CException */ = {
+			isa = PBXGroup;
+			children = (
+				8B99930428CDE39F00DDF5DE /* CException.c */,
+				8B99930528CDE39F00DDF5DE /* CException.h */,
+			);
+			name = CException;
+			path = ../../src/CException;
+			sourceTree = "<group>";
+		};
+		8B99930C28CDE83300DDF5DE /* duktape_separate */ = {
+			isa = PBXGroup;
+			children = (
+				8B99930D28CDE83300DDF5DE /* duk_hbuffer_ops.c */,
+				8B99930E28CDE83300DDF5DE /* duk_api_debug.c */,
+				8B99930F28CDE83300DDF5DE /* duk_util_bitencoder.c */,
+				8B99931028CDE83300DDF5DE /* duk_regexp_executor.c */,
+				8B99931128CDE83300DDF5DE /* duk_hobject_props.c */,
+				8B99931228CDE83300DDF5DE /* duk_js_ops.c */,
+				8B99931328CDE83300DDF5DE /* duk_bi_number.c */,
+				8B99931428CDE83300DDF5DE /* duk_hstring.h */,
+				8B99931528CDE83300DDF5DE /* duk_bi_promise.c */,
+				8B99931628CDE83300DDF5DE /* duk_bi_function.c */,
+				8B99931728CDE83300DDF5DE /* duk_bi_error.c */,
+				8B99931828CDE83300DDF5DE /* duk_bi_date.c */,
+				8B99931928CDE83300DDF5DE /* duk_api_memory.c */,
+				8B99931A28CDE83300DDF5DE /* duk_hobject_pc2line.c */,
+				8B99931B28CDE83300DDF5DE /* duk_api_object.c */,
+				8B99931C28CDE83300DDF5DE /* duk_builtins.h */,
+				8B99931D28CDE83300DDF5DE /* duk_bi_date_unix.c */,
+				8B99931E28CDE83300DDF5DE /* duk_heap_refcount.c */,
+				8B99931F28CDE83300DDF5DE /* duk_hthread_stacks.c */,
+				8B99932028CDE83300DDF5DE /* duk_selftest.c */,
+				8B99932128CDE83300DDF5DE /* duk_heaphdr_assert.c */,
+				8B99932228CDE83300DDF5DE /* duk_heaphdr.h */,
+				8B99932328CDE83300DDF5DE /* duk_bi_regexp.c */,
+				8B99932428CDE83300DDF5DE /* duk_bi_boolean.c */,
+				8B99932528CDE83300DDF5DE /* duk_error_macros.c */,
+				8B99932628CDE83300DDF5DE /* duk_api_buffer.c */,
+				8B99932728CDE83300DDF5DE /* duk_heap_markandsweep.c */,
+				8B99932828CDE83300DDF5DE /* duk_js_call.c */,
+				8B99932928CDE83300DDF5DE /* duk_config.h */,
+				8B99932A28CDE83300DDF5DE /* duk_debug_vsnprintf.c */,
+				8B99932B28CDE83300DDF5DE /* duk_numconv.h */,
+				8B99932C28CDE83300DDF5DE /* duk_lexer.h */,
+				8B99932D28CDE83300DDF5DE /* duk_bi_string.c */,
+				8B99932E28CDE83300DDF5DE /* duk_unicode_support.c */,
+				8B99932F28CDE83300DDF5DE /* duk_error_augment.c */,
+				8B99933028CDE83300DDF5DE /* duk_forwdecl.h */,
+				8B99933128CDE83300DDF5DE /* duk_bi_performance.c */,
+				8B99933228CDE83300DDF5DE /* duk_tval.c */,
+				8B99933328CDE83300DDF5DE /* duk_json.h */,
+				8B99933428CDE83300DDF5DE /* duk_unicode_tables.c */,
+				8B99933528CDE83300DDF5DE /* duk_alloc_default.c */,
+				8B99933628CDE83300DDF5DE /* duk_bi_buffer.c */,
+				8B99933728CDE83300DDF5DE /* duk_js_executor.c */,
+				8B99933828CDE83300DDF5DE /* duk_hobject.h */,
+				8B99933928CDE83300DDF5DE /* duk_replacements.h */,
+				8B99933A28CDE83300DDF5DE /* duk_hstring_assert.c */,
+				8B99933B28CDE83300DDF5DE /* duk_bi_thread.c */,
+				8B99933C28CDE83300DDF5DE /* duk_heap_finalize.c */,
+				8B99933D28CDE83300DDF5DE /* duk_api_random.c */,
+				8B99933E28CDE83300DDF5DE /* duk_jmpbuf.h */,
+				8B99933F28CDE83300DDF5DE /* duk_hcompfunc.h */,
+				8B99934028CDE83300DDF5DE /* duk_bi_pointer.c */,
+				8B99934128CDE83300DDF5DE /* duk_debugger.h */,
+				8B99934228CDE83300DDF5DE /* duk_refcount.h */,
+				8B99934328CDE83300DDF5DE /* duktape.h */,
+				8B99934428CDE83300DDF5DE /* duk_api_string.c */,
+				8B99934528CDE83300DDF5DE /* duk_util_cast.c */,
+				8B99934628CDE83300DDF5DE /* duk_heap_stringcache.c */,
+				8B99934728CDE83300DDF5DE /* duk_heap.h */,
+				8B99934828CDE83300DDF5DE /* duk_hthread.h */,
+				8B99934928CDE83300DDF5DE /* duk_hbufobj.h */,
+				8B99934A28CDE83300DDF5DE /* duk_js_compiler.h */,
+				8B99934B28CDE83300DDF5DE /* duk_debug_fixedbuffer.c */,
+				8B99934C28CDE83300DDF5DE /* duk_util.h */,
+				8B99934D28CDE83300DDF5DE /* duk_bi_reflect.c */,
+				8B99934E28CDE83300DDF5DE /* duk_error_longjmp.c */,
+				8B99934F28CDE83300DDF5DE /* duk_source_meta.json */,
+				8B99935028CDE83300DDF5DE /* duk_api_heap.c */,
+				8B99935128CDE83300DDF5DE /* duk_heap_memory.c */,
+				8B99935228CDE83300DDF5DE /* duk_hboundfunc.h */,
+				8B99935328CDE83300DDF5DE /* duk_bi_cbor.c */,
+				8B99935428CDE83300DDF5DE /* duk_hthread_misc.c */,
+				8B99935528CDE83300DDF5DE /* duk_hbuffer.h */,
+				8B99935628CDE83300DDF5DE /* duk_bi_thrower.c */,
+				8B99935728CDE83300DDF5DE /* duk_bi_object.c */,
+				8B99935828CDE83300DDF5DE /* duk_hbuffer_alloc.c */,
+				8B99935928CDE83300DDF5DE /* duk_bi_encoding.c */,
+				8B99935A28CDE83300DDF5DE /* duk_builtins.c */,
+				8B99935B28CDE83300DDF5DE /* duk_strings.h */,
+				8B99935C28CDE83300DDF5DE /* duk_bi_global.c */,
+				8B99935D28CDE83300DDF5DE /* duk_bi_proxy.c */,
+				8B99935E28CDE83300DDF5DE /* duk_unicode.h */,
+				8B99935F28CDE83300DDF5DE /* duk_hobject_misc.c */,
+				8B99936028CDE83300DDF5DE /* duk_js_var.c */,
+				8B99936128CDE83300DDF5DE /* duk_js_arith.c */,
+				8B99936228CDE83300DDF5DE /* duk_harray.h */,
+				8B99936328CDE83300DDF5DE /* duk_internal.h */,
+				8B99936428CDE83300DDF5DE /* duk_api_codec.c */,
+				8B99936528CDE83300DDF5DE /* duk_henv.h */,
+				8B99936628CDE83300DDF5DE /* duk_util_memory.c */,
+				8B99936728CDE83300DDF5DE /* duk_heap_hashstring.c */,
+				8B99936828CDE83300DDF5DE /* duk_api_compile.c */,
+				8B99936928CDE83300DDF5DE /* duk_util_double.c */,
+				8B99936A28CDE83300DDF5DE /* duk_lexer.c */,
+				8B99936B28CDE83300DDF5DE /* duk_util_tinyrandom.c */,
+				8B99936C28CDE83300DDF5DE /* duk_api_internal.h */,
+				8B99936D28CDE83300DDF5DE /* duk_hstring_misc.c */,
+				8B99936E28CDE83300DDF5DE /* duk_bi_date_windows.c */,
+				8B99936F28CDE83300DDF5DE /* duk_numconv.c */,
+				8B99937028CDE83300DDF5DE /* duk_hobject_class.c */,
+				8B99937128CDE83300DDF5DE /* duk_api_call.c */,
+				8B99937228CDE83300DDF5DE /* duk_api_stack.c */,
+				8B99937328CDE83300DDF5DE /* duk_util_hashbytes.c */,
+				8B99937428CDE83300DDF5DE /* duk_hobject_assert.c */,
+				8B99937528CDE83300DDF5DE /* duk_selftest.h */,
+				8B99937628CDE83300DDF5DE /* duk_hbufobj_misc.c */,
+				8B99937728CDE83300DDF5DE /* duk_api_bytecode.c */,
+				8B99937828CDE83300DDF5DE /* duk_hproxy.h */,
+				8B99937928CDE83300DDF5DE /* duk_util_misc.c */,
+				8B99937A28CDE83300DDF5DE /* duk_regexp_compiler.c */,
+				8B99937B28CDE83300DDF5DE /* duk_heap_stringtable.c */,
+				8B99937C28CDE83300DDF5DE /* duk_hnatfunc.h */,
+				8B99937D28CDE83300DDF5DE /* duk_bi_array.c */,
+				8B99937E28CDE83300DDF5DE /* duk_heap_alloc.c */,
+				8B99937F28CDE83300DDF5DE /* duk_api_time.c */,
+				8B99938028CDE83300DDF5DE /* duk_debugger.c */,
+				8B99938128CDE83300DDF5DE /* duk_hthread_alloc.c */,
+				8B99938228CDE83300DDF5DE /* duk_util_bufwriter.c */,
+				8B99938328CDE83300DDF5DE /* duk_tval.h */,
+				8B99938428CDE83300DDF5DE /* duk_replacements.c */,
+				8B99938528CDE83300DDF5DE /* duk_js_bytecode.h */,
+				8B99938628CDE83300DDF5DE /* duk_api_inspect.c */,
+				8B99938728CDE83300DDF5DE /* duk_bi_json.c */,
+				8B99938828CDE83300DDF5DE /* duk_error_misc.c */,
+				8B99938928CDE83300DDF5DE /* duk_dblunion.h */,
+				8B99938A28CDE83300DDF5DE /* duk_hthread_builtins.c */,
+				8B99938B28CDE83300DDF5DE /* duk_debug.h */,
+				8B99938C28CDE83300DDF5DE /* duk_js.h */,
+				8B99938D28CDE83300DDF5DE /* duk_fltunion.h */,
+				8B99938E28CDE83300DDF5DE /* duk_hobject_alloc.c */,
+				8B99938F28CDE83300DDF5DE /* duk_util_memrw.c */,
+				8B99939028CDE83300DDF5DE /* duk_debug_macros.c */,
+				8B99939128CDE83300DDF5DE /* duk_error_throw.c */,
+				8B99939228CDE83300DDF5DE /* duk_hobject_enum.c */,
+				8B99939328CDE83300DDF5DE /* duk_bi_duktape.c */,
+				8B99939428CDE83300DDF5DE /* duk_regexp.h */,
+				8B99939528CDE83300DDF5DE /* duk_bi_protos.h */,
+				8B99939628CDE83300DDF5DE /* duk_bi_symbol.c */,
+				8B99939728CDE83300DDF5DE /* duk_exception.h */,
+				8B99939828CDE83300DDF5DE /* duk_js_compiler.c */,
+				8B99939928CDE83300DDF5DE /* duk_heap_misc.c */,
+				8B99939A28CDE83300DDF5DE /* duk_util_bitdecoder.c */,
+				8B99939B28CDE83300DDF5DE /* duk_error.h */,
+				8B99939C28CDE83300DDF5DE /* duk_bi_math.c */,
+				8B99939D28CDE83300DDF5DE /* duk_hbuffer_assert.c */,
+			);
+			name = duktape_separate;
+			path = ../../src/duktape_separate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,22 +680,125 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B9993AB28CDE83300DDF5DE /* duk_api_object.c in Sources */,
+				8B9993EA28CDE83300DDF5DE /* duk_api_bytecode.c in Sources */,
+				8B9993E928CDE83300DDF5DE /* duk_hbufobj_misc.c in Sources */,
+				8B9993E328CDE83300DDF5DE /* duk_numconv.c in Sources */,
+				8B9993F228CDE83300DDF5DE /* duk_hthread_alloc.c in Sources */,
+				8B9993CE28CDE83300DDF5DE /* duk_bi_cbor.c in Sources */,
+				8B9993AE28CDE83300DDF5DE /* duk_hthread_stacks.c in Sources */,
+				8B9993C328CDE83300DDF5DE /* duk_heap_finalize.c in Sources */,
+				8B9993E828CDE83300DDF5DE /* duk_hobject_assert.c in Sources */,
+				8B9993AF28CDE83300DDF5DE /* duk_selftest.c in Sources */,
 				8B99927428CDB8AF00DDF5DE /* raia-engine.c in Sources */,
+				8B9993EF28CDE83300DDF5DE /* duk_heap_alloc.c in Sources */,
 				8B9992F328CDCE8500DDF5DE /* wrapper_glfw.c in Sources */,
 				8B9992FD28CDCE8500DDF5DE /* static_header.c in Sources */,
+				8B9993C928CDE83300DDF5DE /* duk_debug_fixedbuffer.c in Sources */,
+				8B9993C228CDE83300DDF5DE /* duk_bi_thread.c in Sources */,
+				8B9993BE28CDE83300DDF5DE /* duk_alloc_default.c in Sources */,
+				8B9993C728CDE83300DDF5DE /* duk_util_cast.c in Sources */,
+				8B9993A028CDE83300DDF5DE /* duk_util_bitencoder.c in Sources */,
+				8B9993B728CDE83300DDF5DE /* duk_debug_vsnprintf.c in Sources */,
+				8B99939F28CDE83300DDF5DE /* duk_api_debug.c in Sources */,
+				8B9993B128CDE83300DDF5DE /* duk_bi_regexp.c in Sources */,
+				8B9993D728CDE83300DDF5DE /* duk_hobject_misc.c in Sources */,
+				8B9993A828CDE83300DDF5DE /* duk_bi_date.c in Sources */,
+				8B9993AA28CDE83300DDF5DE /* duk_hobject_pc2line.c in Sources */,
+				8B9993FD28CDE83300DDF5DE /* duk_hobject_enum.c in Sources */,
+				8B9993A928CDE83300DDF5DE /* duk_api_memory.c in Sources */,
+				8B9993EB28CDE83300DDF5DE /* duk_util_misc.c in Sources */,
 				8B99930028CDCE8500DDF5DE /* raia_al.c in Sources */,
+				8B9993BB28CDE83300DDF5DE /* duk_bi_performance.c in Sources */,
+				8B9993C128CDE83300DDF5DE /* duk_hstring_assert.c in Sources */,
+				8B9993AD28CDE83300DDF5DE /* duk_heap_refcount.c in Sources */,
+				8B99940228CDE83300DDF5DE /* duk_util_bitdecoder.c in Sources */,
+				8B9993C628CDE83300DDF5DE /* duk_api_string.c in Sources */,
+				8B9993E728CDE83300DDF5DE /* duk_util_hashbytes.c in Sources */,
+				8B99940028CDE83300DDF5DE /* duk_js_compiler.c in Sources */,
+				8B9993F028CDE83300DDF5DE /* duk_api_time.c in Sources */,
+				8B9993FE28CDE83300DDF5DE /* duk_bi_duktape.c in Sources */,
+				8B9993B328CDE83300DDF5DE /* duk_error_macros.c in Sources */,
 				8B9992F228CDCE8500DDF5DE /* stb_image.c in Sources */,
+				8B9993F528CDE83300DDF5DE /* duk_api_inspect.c in Sources */,
+				8B9993CC28CDE83300DDF5DE /* duk_api_heap.c in Sources */,
+				8B9993DA28CDE83300DDF5DE /* duk_api_codec.c in Sources */,
+				8B9993FC28CDE83300DDF5DE /* duk_error_throw.c in Sources */,
+				8B9993DB28CDE83300DDF5DE /* duk_util_memory.c in Sources */,
 				8B9992FC28CDCE8500DDF5DE /* static_window.c in Sources */,
+				8B9993CD28CDE83300DDF5DE /* duk_heap_memory.c in Sources */,
+				8B9993C528CDE83300DDF5DE /* duk_bi_pointer.c in Sources */,
 				8B9992F628CDCE8500DDF5DE /* util_io.c in Sources */,
+				8B9993C428CDE83300DDF5DE /* duk_api_random.c in Sources */,
+				8B9993B428CDE83300DDF5DE /* duk_api_buffer.c in Sources */,
+				8B9993E428CDE83300DDF5DE /* duk_hobject_class.c in Sources */,
 				8B9992FF28CDCE8500DDF5DE /* raia_duktape.c in Sources */,
+				8B9993D028CDE83300DDF5DE /* duk_bi_thrower.c in Sources */,
+				8B9993D628CDE83300DDF5DE /* duk_bi_proxy.c in Sources */,
+				8B9993DD28CDE83300DDF5DE /* duk_api_compile.c in Sources */,
+				8B9993EE28CDE83300DDF5DE /* duk_bi_array.c in Sources */,
 				8B9992FB28CDCE8500DDF5DE /* static_pixel_data.c in Sources */,
-				8B9992FA28CDCE8500DDF5DE /* duktape.c in Sources */,
+				8B9993EC28CDE83300DDF5DE /* duk_regexp_compiler.c in Sources */,
+				8B9993FA28CDE83300DDF5DE /* duk_util_memrw.c in Sources */,
+				8B9993B028CDE83300DDF5DE /* duk_heaphdr_assert.c in Sources */,
+				8B9993DE28CDE83300DDF5DE /* duk_util_double.c in Sources */,
+				8B9993FB28CDE83300DDF5DE /* duk_debug_macros.c in Sources */,
+				8B99939E28CDE83300DDF5DE /* duk_hbuffer_ops.c in Sources */,
+				8B9993CF28CDE83300DDF5DE /* duk_hthread_misc.c in Sources */,
+				8B9993A728CDE83300DDF5DE /* duk_bi_error.c in Sources */,
+				8B9993E028CDE83300DDF5DE /* duk_util_tinyrandom.c in Sources */,
+				8B9993D328CDE83300DDF5DE /* duk_bi_encoding.c in Sources */,
+				8B9993F128CDE83300DDF5DE /* duk_debugger.c in Sources */,
+				8B99930628CDE39F00DDF5DE /* CException.c in Sources */,
 				8B9992F828CDCE8500DDF5DE /* util_pixel.c in Sources */,
+				8B9993E628CDE83300DDF5DE /* duk_api_stack.c in Sources */,
+				8B9993CA28CDE83300DDF5DE /* duk_bi_reflect.c in Sources */,
+				8B9993D228CDE83300DDF5DE /* duk_hbuffer_alloc.c in Sources */,
+				8B9993E128CDE83300DDF5DE /* duk_hstring_misc.c in Sources */,
+				8B9993DC28CDE83300DDF5DE /* duk_heap_hashstring.c in Sources */,
+				8B9993B528CDE83300DDF5DE /* duk_heap_markandsweep.c in Sources */,
+				8B9993A128CDE83300DDF5DE /* duk_regexp_executor.c in Sources */,
+				8B9993F728CDE83300DDF5DE /* duk_error_misc.c in Sources */,
+				8B9993D828CDE83300DDF5DE /* duk_js_var.c in Sources */,
+				8B9993F328CDE83300DDF5DE /* duk_util_bufwriter.c in Sources */,
+				8B9993FF28CDE83300DDF5DE /* duk_bi_symbol.c in Sources */,
 				8B9992F728CDCE8500DDF5DE /* util_math.c in Sources */,
+				8B9993F628CDE83300DDF5DE /* duk_bi_json.c in Sources */,
+				8B9993C028CDE83300DDF5DE /* duk_js_executor.c in Sources */,
+				8B9993B628CDE83300DDF5DE /* duk_js_call.c in Sources */,
+				8B9993D128CDE83300DDF5DE /* duk_bi_object.c in Sources */,
+				8B9993ED28CDE83300DDF5DE /* duk_heap_stringtable.c in Sources */,
+				8B9993E528CDE83300DDF5DE /* duk_api_call.c in Sources */,
 				8B9992F428CDCE8500DDF5DE /* wrapper_stb_image.c in Sources */,
+				8B9993D428CDE83300DDF5DE /* duk_builtins.c in Sources */,
+				8B9993BA28CDE83300DDF5DE /* duk_error_augment.c in Sources */,
+				8B9993BF28CDE83300DDF5DE /* duk_bi_buffer.c in Sources */,
+				8B9993A228CDE83300DDF5DE /* duk_hobject_props.c in Sources */,
+				8B9993E228CDE83300DDF5DE /* duk_bi_date_windows.c in Sources */,
+				8B9993A428CDE83300DDF5DE /* duk_bi_number.c in Sources */,
+				8B9993C828CDE83300DDF5DE /* duk_heap_stringcache.c in Sources */,
+				8B9993A328CDE83300DDF5DE /* duk_js_ops.c in Sources */,
 				8B9992FE28CDCE8500DDF5DE /* raia_gl.c in Sources */,
+				8B9993B928CDE83300DDF5DE /* duk_unicode_support.c in Sources */,
+				8B9993BC28CDE83300DDF5DE /* duk_tval.c in Sources */,
+				8B9993D528CDE83300DDF5DE /* duk_bi_global.c in Sources */,
+				8B9993A628CDE83300DDF5DE /* duk_bi_function.c in Sources */,
+				8B9993F828CDE83300DDF5DE /* duk_hthread_builtins.c in Sources */,
+				8B9993BD28CDE83300DDF5DE /* duk_unicode_tables.c in Sources */,
+				8B99940128CDE83300DDF5DE /* duk_heap_misc.c in Sources */,
+				8B9993DF28CDE83300DDF5DE /* duk_lexer.c in Sources */,
+				8B9993A528CDE83300DDF5DE /* duk_bi_promise.c in Sources */,
+				8B9993B828CDE83300DDF5DE /* duk_bi_string.c in Sources */,
+				8B99940328CDE83300DDF5DE /* duk_bi_math.c in Sources */,
+				8B9993D928CDE83300DDF5DE /* duk_js_arith.c in Sources */,
+				8B9993CB28CDE83300DDF5DE /* duk_error_longjmp.c in Sources */,
 				8B9992F928CDCE8500DDF5DE /* util_string.c in Sources */,
+				8B9993F428CDE83300DDF5DE /* duk_replacements.c in Sources */,
+				8B9993F928CDE83300DDF5DE /* duk_hobject_alloc.c in Sources */,
+				8B9993B228CDE83300DDF5DE /* duk_bi_boolean.c in Sources */,
 				8B9992F528CDCE8500DDF5DE /* wrapper_duktape.c in Sources */,
+				8B99940428CDE83300DDF5DE /* duk_hbuffer_assert.c in Sources */,
+				8B9993AC28CDE83300DDF5DE /* duk_bi_date_unix.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
