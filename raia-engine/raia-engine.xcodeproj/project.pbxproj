@@ -24,8 +24,8 @@
 		8B9992BB28CDBE3D00DDF5DE /* duktape.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99927928CDB95200DDF5DE /* duktape.c */; };
 		8B9992BC28CDBE4900DDF5DE /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99928128CDB96B00DDF5DE /* stb_image.c */; };
 		8B9992BE28CDC05100DDF5DE /* startup.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8B9992BD28CDC03E00DDF5DE /* startup.js */; };
-		8B9992C128CDCB0000DDF5DE /* libopenal.1.22.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9992BF28CDCB0000DDF5DE /* libopenal.1.22.2.dylib */; };
-		8B9992C228CDCB0000DDF5DE /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9992C028CDCB0000DDF5DE /* libglfw.3.3.dylib */; };
+		8B9992C528CDCC9500DDF5DE /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9992C328CDCC9500DDF5DE /* libglfw.3.3.dylib */; };
+		8B9992C628CDCC9500DDF5DE /* libopenal.1.22.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9992C428CDCC9500DDF5DE /* libopenal.1.22.2.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -82,8 +82,8 @@
 		8B9992AC28CDBA7000DDF5DE /* raia-engine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "raia-engine.h"; path = "../../include/raia-engine.h"; sourceTree = "<group>"; };
 		8B9992AD28CDBC9C00DDF5DE /* platforms.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = platforms.h; path = ../../include/platforms.h; sourceTree = "<group>"; };
 		8B9992BD28CDC03E00DDF5DE /* startup.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = startup.js; path = ../../js/startup.js; sourceTree = "<group>"; };
-		8B9992BF28CDCB0000DDF5DE /* libopenal.1.22.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libopenal.1.22.2.dylib; sourceTree = "<group>"; };
-		8B9992C028CDCB0000DDF5DE /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libglfw.3.3.dylib; sourceTree = "<group>"; };
+		8B9992C328CDCC9500DDF5DE /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
+		8B9992C428CDCC9500DDF5DE /* libopenal.1.22.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopenal.1.22.2.dylib; path = ../../lib/libopenal.1.22.2.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,8 +91,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B9992C228CDCB0000DDF5DE /* libglfw.3.3.dylib in Frameworks */,
-				8B9992C128CDCB0000DDF5DE /* libopenal.1.22.2.dylib in Frameworks */,
+				8B9992C528CDCC9500DDF5DE /* libglfw.3.3.dylib in Frameworks */,
+				8B9992C628CDCC9500DDF5DE /* libopenal.1.22.2.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,8 +123,8 @@
 				8B9992AD28CDBC9C00DDF5DE /* platforms.h */,
 				8B9992AC28CDBA7000DDF5DE /* raia-engine.h */,
 				8B99927328CDB8AF00DDF5DE /* raia-engine.c */,
-				8B9992C028CDCB0000DDF5DE /* libglfw.3.3.dylib */,
-				8B9992BF28CDCB0000DDF5DE /* libopenal.1.22.2.dylib */,
+				8B9992C328CDCC9500DDF5DE /* libglfw.3.3.dylib */,
+				8B9992C428CDCC9500DDF5DE /* libopenal.1.22.2.dylib */,
 				8B99928F28CDB9E700DDF5DE /* raia */,
 				8B9992A528CDBA0900DDF5DE /* wrapper */,
 				8B99929E28CDB9F900DDF5DE /* static */,
