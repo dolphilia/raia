@@ -10,6 +10,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 
 int rnd(int min, int max);
 int32_t rand_xor128(int32_t min_value, int32_t max_value);
