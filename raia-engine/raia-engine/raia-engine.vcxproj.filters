@@ -387,6 +387,12 @@
     <ClCompile Include="..\..\src\duktape_separate\duk_util_tinyrandom.c">
       <Filter>ソース ファイル\duktape_separate</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\static\static_shader.c">
+      <Filter>ソース ファイル\static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\wrapper\wrapper_gles.c">
+      <Filter>ソース ファイル\wrapper</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\platforms.h">
@@ -568,6 +574,12 @@
     </ClInclude>
     <ClInclude Include="..\..\src\duktape_separate\duk_util.h">
       <Filter>ソース ファイル\duktape_separate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\static\static_shader.h">
+      <Filter>ソース ファイル\static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\wrapper\wrapper_gles.h">
+      <Filter>ソース ファイル\wrapper</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

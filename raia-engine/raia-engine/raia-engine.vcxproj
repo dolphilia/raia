@@ -110,11 +110,14 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)lib;$(ProjectDir)../../lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);;glfw3.lib;opengl32.lib;openal32.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);glfw3.lib;libEGL.dll.lib;libGLESv2.dll.lib;openal32.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)..\..\lib\OpenAL32.dll" $(OutDir) /Y
 xcopy "$(ProjectDir)..\..\lib\glfw3.dll" $(OutDir) /Y
+xcopy "$(ProjectDir)..\..\lib\libEGL.dll" $(OutDir) /Y
+xcopy "$(ProjectDir)..\..\lib\libGLESv2.dll" $(OutDir) /Y
+xcopy "$(ProjectDir)..\..\lib\d3dcompiler_47.dll" $(OutDir) /Y
 xcopy "$(ProjectDir)..\..\js\startup.js" "$(OutDir)" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -134,12 +137,15 @@ xcopy "$(ProjectDir)..\..\js\startup.js" "$(OutDir)" /Y</Command>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)lib;$(ProjectDir)../../lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;openal32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);glfw3.lib;libEGL.dll.lib;libGLESv2.dll.lib;openal32.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)..\..\lib\OpenAL32.dll" $(OutDir) /Y
-xcopy "$(ProjectDir)..\l..\lib\glfw3.dll" $(OutDir) /Y
-xcopy "$(ProjectDir)..\..\startup.js" $(OutDir) /Y</Command>
+xcopy "$(ProjectDir)..\..\lib\glfw3.dll" $(OutDir) /Y
+xcopy "$(ProjectDir)..\..\lib\libEGL.dll" $(OutDir) /Y
+xcopy "$(ProjectDir)..\..\lib\libGLESv2.dll" $(OutDir) /Y
+xcopy "$(ProjectDir)..\..\lib\d3dcompiler_47.dll" $(OutDir) /Y
+xcopy "$(ProjectDir)..\..\js\startup.js" "$(OutDir)" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -252,6 +258,7 @@ xcopy "$(ProjectDir)..\..\startup.js" $(OutDir) /Y</Command>
     <ClCompile Include="..\..\src\raia\raia_gl.c" />
     <ClCompile Include="..\..\src\static\static_header.c" />
     <ClCompile Include="..\..\src\static\static_pixel_data.c" />
+    <ClCompile Include="..\..\src\static\static_shader.c" />
     <ClCompile Include="..\..\src\static\static_window.c" />
     <ClCompile Include="..\..\src\stb\stb_image.c" />
     <ClCompile Include="..\..\src\util\util_io.c" />
@@ -259,6 +266,7 @@ xcopy "$(ProjectDir)..\..\startup.js" $(OutDir) /Y</Command>
     <ClCompile Include="..\..\src\util\util_pixel.c" />
     <ClCompile Include="..\..\src\util\util_string.c" />
     <ClCompile Include="..\..\src\wrapper\wrapper_duktape.c" />
+    <ClCompile Include="..\..\src\wrapper\wrapper_gles.c" />
     <ClCompile Include="..\..\src\wrapper\wrapper_glfw.c" />
     <ClCompile Include="..\..\src\wrapper\wrapper_stb_image.c" />
   </ItemGroup>
@@ -311,6 +319,7 @@ xcopy "$(ProjectDir)..\..\startup.js" $(OutDir) /Y</Command>
     <ClInclude Include="..\..\src\raia\raia_gl.h" />
     <ClInclude Include="..\..\src\static\static_header.h" />
     <ClInclude Include="..\..\src\static\static_pixel_data.h" />
+    <ClInclude Include="..\..\src\static\static_shader.h" />
     <ClInclude Include="..\..\src\static\static_window.h" />
     <ClInclude Include="..\..\src\stb\stb.h" />
     <ClInclude Include="..\..\src\stb\stb_image.h" />
@@ -321,6 +330,7 @@ xcopy "$(ProjectDir)..\..\startup.js" $(OutDir) /Y</Command>
     <ClInclude Include="..\..\src\util\util_pixel.h" />
     <ClInclude Include="..\..\src\util\util_string.h" />
     <ClInclude Include="..\..\src\wrapper\wrapper_duktape.h" />
+    <ClInclude Include="..\..\src\wrapper\wrapper_gles.h" />
     <ClInclude Include="..\..\src\wrapper\wrapper_glfw.h" />
     <ClInclude Include="..\..\src\wrapper\wrapper_stb_image.h" />
   </ItemGroup>
