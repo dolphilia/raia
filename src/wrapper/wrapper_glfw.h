@@ -10,7 +10,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#define GLFW_INCLUDE_ES2
+#define GL_GLEXT_PROTOTYPES
 #include "GLFW/glfw3.h"
+#include "EGL/egl.h"
 
 void glfw_init(void);
 GLFWwindow* glfw_create_window(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share);

@@ -8,6 +8,8 @@
 #ifndef raia_engine_h
 #define raia_engine_h
 
+#define GLFW_INCLUDE_ES2
+#define GL_GLEXT_PROTOTYPES
 #include <stdio.h>
 #include <stdlib.h>
 #include "platforms.h"
@@ -21,6 +23,7 @@
 #include "static/static_header.h"
 #include "static/static_pixel_data.h"
 #include "static/static_window.h"
+#include "static/static_shader.h"
 #include "raia/raia_gl.h"
 #include "raia/raia_al.h"
 #include "raia/raia_duktape.h"

@@ -10,6 +10,7 @@ int main(int argc, char* argv[]) {
     init_pixel_data(header.window_width, header.window_height, header.samples_per_pixel); // ピクセルデータを初期化
     //openal_start(); // OpenALを開始
     glfw_start(); // GLFWを開始
+    init_raia_shader(get_pixel_data(), header.window_width, header.window_height);
     glfw_redraw(); // 画面を再描画しておく
     duktape_start(); // Duktapeを開始
     glfwTerminate(); // GLFWを終了

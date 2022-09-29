@@ -25,5 +25,6 @@ typedef struct raia_header_t {
 
 void init_raia_header(void);
 raia_header_t get_raia_header(void);
+void set_resolution_size(int width, int height);
 
 #endif /* raia_struct_h */

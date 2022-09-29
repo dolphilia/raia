@@ -15,10 +15,6 @@
 		8B9992F328CDCE8500DDF5DE /* wrapper_glfw.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9992D228CDCE8500DDF5DE /* wrapper_glfw.c */; };
 		8B9992F428CDCE8500DDF5DE /* wrapper_stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9992D328CDCE8500DDF5DE /* wrapper_stb_image.c */; };
 		8B9992F528CDCE8500DDF5DE /* wrapper_duktape.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9992D428CDCE8500DDF5DE /* wrapper_duktape.c */; };
-		8B9992F628CDCE8500DDF5DE /* util_io.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9992D728CDCE8500DDF5DE /* util_io.c */; };
-		8B9992F728CDCE8500DDF5DE /* util_math.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9992DA28CDCE8500DDF5DE /* util_math.c */; };
-		8B9992F828CDCE8500DDF5DE /* util_pixel.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9992DB28CDCE8500DDF5DE /* util_pixel.c */; };
-		8B9992F928CDCE8500DDF5DE /* util_string.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9992DD28CDCE8500DDF5DE /* util_string.c */; };
 		8B9992FB28CDCE8500DDF5DE /* static_pixel_data.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9992E628CDCE8500DDF5DE /* static_pixel_data.c */; };
 		8B9992FC28CDCE8500DDF5DE /* static_window.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9992E828CDCE8500DDF5DE /* static_window.c */; };
 		8B9992FD28CDCE8500DDF5DE /* static_header.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9992E928CDCE8500DDF5DE /* static_header.c */; };
@@ -129,6 +125,22 @@
 		8B99940228CDE83300DDF5DE /* duk_util_bitdecoder.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99939A28CDE83300DDF5DE /* duk_util_bitdecoder.c */; };
 		8B99940328CDE83300DDF5DE /* duk_bi_math.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99939C28CDE83300DDF5DE /* duk_bi_math.c */; };
 		8B99940428CDE83300DDF5DE /* duk_hbuffer_assert.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99939D28CDE83300DDF5DE /* duk_hbuffer_assert.c */; };
+		8BAAC39A28E6196600B1CCD1 /* util_io.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAC39228E6196600B1CCD1 /* util_io.c */; };
+		8BAAC39B28E6196600B1CCD1 /* util_math.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAC39528E6196600B1CCD1 /* util_math.c */; };
+		8BAAC39C28E6196600B1CCD1 /* util_pixel.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAC39628E6196600B1CCD1 /* util_pixel.c */; };
+		8BAAC39D28E6196600B1CCD1 /* util_string.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAC39828E6196600B1CCD1 /* util_string.c */; };
+		8BAAC3A328E61AFD00B1CCD1 /* libc++_chrome.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BAAC39E28E61AFD00B1CCD1 /* libc++_chrome.dylib */; };
+		8BAAC3A428E61AFD00B1CCD1 /* libchrome_zlib.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BAAC39F28E61AFD00B1CCD1 /* libchrome_zlib.dylib */; };
+		8BAAC3A528E61AFD00B1CCD1 /* libabsl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BAAC3A028E61AFD00B1CCD1 /* libabsl.dylib */; };
+		8BAAC3A628E61AFD00B1CCD1 /* libEGL.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BAAC3A128E61AFD00B1CCD1 /* libEGL.dylib */; };
+		8BAAC3A728E61AFD00B1CCD1 /* libGLESv2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BAAC3A228E61AFD00B1CCD1 /* libGLESv2.dylib */; };
+		8BAAC3A828E61B2C00B1CCD1 /* libabsl.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8BAAC3A028E61AFD00B1CCD1 /* libabsl.dylib */; };
+		8BAAC3A928E61B2E00B1CCD1 /* libc++_chrome.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8BAAC39E28E61AFD00B1CCD1 /* libc++_chrome.dylib */; };
+		8BAAC3AA28E61B3200B1CCD1 /* libchrome_zlib.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8BAAC39F28E61AFD00B1CCD1 /* libchrome_zlib.dylib */; };
+		8BAAC3AB28E61B3500B1CCD1 /* libEGL.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8BAAC3A128E61AFD00B1CCD1 /* libEGL.dylib */; };
+		8BAAC3AC28E61B3700B1CCD1 /* libGLESv2.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8BAAC3A228E61AFD00B1CCD1 /* libGLESv2.dylib */; };
+		8BAAC3AF28E61BCE00B1CCD1 /* wrapper_gles.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAC3AE28E61BCE00B1CCD1 /* wrapper_gles.c */; };
+		8BAAC3B228E6217D00B1CCD1 /* static_shader.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAC3B128E6217D00B1CCD1 /* static_shader.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -139,6 +151,11 @@
 			dstSubfolderSpec = 16;
 			files = (
 				8B9992BE28CDC05100DDF5DE /* startup.js in CopyFiles */,
+				8BAAC3A828E61B2C00B1CCD1 /* libabsl.dylib in CopyFiles */,
+				8BAAC3A928E61B2E00B1CCD1 /* libc++_chrome.dylib in CopyFiles */,
+				8BAAC3AA28E61B3200B1CCD1 /* libchrome_zlib.dylib in CopyFiles */,
+				8BAAC3AB28E61B3500B1CCD1 /* libEGL.dylib in CopyFiles */,
+				8BAAC3AC28E61B3700B1CCD1 /* libGLESv2.dylib in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,14 +178,6 @@
 		8B9992D328CDCE8500DDF5DE /* wrapper_stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wrapper_stb_image.c; sourceTree = "<group>"; };
 		8B9992D428CDCE8500DDF5DE /* wrapper_duktape.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wrapper_duktape.c; sourceTree = "<group>"; };
 		8B9992D528CDCE8500DDF5DE /* wrapper_glfw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wrapper_glfw.h; sourceTree = "<group>"; };
-		8B9992D728CDCE8500DDF5DE /* util_io.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = util_io.c; sourceTree = "<group>"; };
-		8B9992D828CDCE8500DDF5DE /* util_pixel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util_pixel.h; sourceTree = "<group>"; };
-		8B9992D928CDCE8500DDF5DE /* util_string.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util_string.h; sourceTree = "<group>"; };
-		8B9992DA28CDCE8500DDF5DE /* util_math.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = util_math.c; sourceTree = "<group>"; };
-		8B9992DB28CDCE8500DDF5DE /* util_pixel.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = util_pixel.c; sourceTree = "<group>"; };
-		8B9992DC28CDCE8500DDF5DE /* util_io.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util_io.h; sourceTree = "<group>"; };
-		8B9992DD28CDCE8500DDF5DE /* util_string.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = util_string.c; sourceTree = "<group>"; };
-		8B9992DE28CDCE8500DDF5DE /* util_math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util_math.h; sourceTree = "<group>"; };
 		8B9992E528CDCE8500DDF5DE /* static_window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = static_window.h; sourceTree = "<group>"; };
 		8B9992E628CDCE8500DDF5DE /* static_pixel_data.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = static_pixel_data.c; sourceTree = "<group>"; };
 		8B9992E728CDCE8500DDF5DE /* static_header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = static_header.h; sourceTree = "<group>"; };
@@ -330,6 +339,23 @@
 		8B99939B28CDE83300DDF5DE /* duk_error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_error.h; sourceTree = "<group>"; };
 		8B99939C28CDE83300DDF5DE /* duk_bi_math.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_bi_math.c; sourceTree = "<group>"; };
 		8B99939D28CDE83300DDF5DE /* duk_hbuffer_assert.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_hbuffer_assert.c; sourceTree = "<group>"; };
+		8BAAC39228E6196600B1CCD1 /* util_io.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = util_io.c; sourceTree = "<group>"; };
+		8BAAC39328E6196600B1CCD1 /* util_pixel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util_pixel.h; sourceTree = "<group>"; };
+		8BAAC39428E6196600B1CCD1 /* util_string.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util_string.h; sourceTree = "<group>"; };
+		8BAAC39528E6196600B1CCD1 /* util_math.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = util_math.c; sourceTree = "<group>"; };
+		8BAAC39628E6196600B1CCD1 /* util_pixel.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = util_pixel.c; sourceTree = "<group>"; };
+		8BAAC39728E6196600B1CCD1 /* util_io.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util_io.h; sourceTree = "<group>"; };
+		8BAAC39828E6196600B1CCD1 /* util_string.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = util_string.c; sourceTree = "<group>"; };
+		8BAAC39928E6196600B1CCD1 /* util_math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util_math.h; sourceTree = "<group>"; };
+		8BAAC39E28E61AFD00B1CCD1 /* libc++_chrome.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++_chrome.dylib"; path = "../../lib/libc++_chrome.dylib"; sourceTree = "<group>"; };
+		8BAAC39F28E61AFD00B1CCD1 /* libchrome_zlib.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libchrome_zlib.dylib; path = ../../lib/libchrome_zlib.dylib; sourceTree = "<group>"; };
+		8BAAC3A028E61AFD00B1CCD1 /* libabsl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libabsl.dylib; path = ../../lib/libabsl.dylib; sourceTree = "<group>"; };
+		8BAAC3A128E61AFD00B1CCD1 /* libEGL.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libEGL.dylib; path = ../../lib/libEGL.dylib; sourceTree = "<group>"; };
+		8BAAC3A228E61AFD00B1CCD1 /* libGLESv2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLESv2.dylib; path = ../../lib/libGLESv2.dylib; sourceTree = "<group>"; };
+		8BAAC3AD28E61BCE00B1CCD1 /* wrapper_gles.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wrapper_gles.h; sourceTree = "<group>"; };
+		8BAAC3AE28E61BCE00B1CCD1 /* wrapper_gles.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wrapper_gles.c; sourceTree = "<group>"; };
+		8BAAC3B028E6217D00B1CCD1 /* static_shader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = static_shader.h; sourceTree = "<group>"; };
+		8BAAC3B128E6217D00B1CCD1 /* static_shader.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = static_shader.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -337,8 +363,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BAAC3A328E61AFD00B1CCD1 /* libc++_chrome.dylib in Frameworks */,
 				8B9992C528CDCC9500DDF5DE /* libglfw.3.3.dylib in Frameworks */,
+				8BAAC3A528E61AFD00B1CCD1 /* libabsl.dylib in Frameworks */,
+				8BAAC3A728E61AFD00B1CCD1 /* libGLESv2.dylib in Frameworks */,
+				8BAAC3A628E61AFD00B1CCD1 /* libEGL.dylib in Frameworks */,
 				8B9992C628CDCC9500DDF5DE /* libopenal.1.22.2.dylib in Frameworks */,
+				8BAAC3A428E61AFD00B1CCD1 /* libchrome_zlib.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,13 +402,18 @@
 				8B99927328CDB8AF00DDF5DE /* raia-engine.c */,
 				8B9992C328CDCC9500DDF5DE /* libglfw.3.3.dylib */,
 				8B9992C428CDCC9500DDF5DE /* libopenal.1.22.2.dylib */,
+				8BAAC3A028E61AFD00B1CCD1 /* libabsl.dylib */,
+				8BAAC39E28E61AFD00B1CCD1 /* libc++_chrome.dylib */,
+				8BAAC39F28E61AFD00B1CCD1 /* libchrome_zlib.dylib */,
+				8BAAC3A128E61AFD00B1CCD1 /* libEGL.dylib */,
+				8BAAC3A228E61AFD00B1CCD1 /* libGLESv2.dylib */,
+				8B9992EB28CDCE8500DDF5DE /* raia */,
+				8B9992CF28CDCE8500DDF5DE /* wrapper */,
+				8B9992E428CDCE8500DDF5DE /* static */,
+				8BAAC39128E6196600B1CCD1 /* util */,
 				8B99930C28CDE83300DDF5DE /* duktape_separate */,
 				8B99930328CDE39F00DDF5DE /* CException */,
-				8B9992EB28CDCE8500DDF5DE /* raia */,
-				8B9992E428CDCE8500DDF5DE /* static */,
 				8B9992C928CDCE8500DDF5DE /* stb */,
-				8B9992D628CDCE8500DDF5DE /* util */,
-				8B9992CF28CDCE8500DDF5DE /* wrapper */,
 			);
 			path = "raia-engine";
 			sourceTree = "<group>";
@@ -406,41 +442,29 @@
 			isa = PBXGroup;
 			children = (
 				8B9992D028CDCE8500DDF5DE /* wrapper_stb_image.h */,
-				8B9992D128CDCE8500DDF5DE /* wrapper_duktape.h */,
-				8B9992D228CDCE8500DDF5DE /* wrapper_glfw.c */,
 				8B9992D328CDCE8500DDF5DE /* wrapper_stb_image.c */,
+				8B9992D128CDCE8500DDF5DE /* wrapper_duktape.h */,
 				8B9992D428CDCE8500DDF5DE /* wrapper_duktape.c */,
 				8B9992D528CDCE8500DDF5DE /* wrapper_glfw.h */,
+				8B9992D228CDCE8500DDF5DE /* wrapper_glfw.c */,
+				8BAAC3AD28E61BCE00B1CCD1 /* wrapper_gles.h */,
+				8BAAC3AE28E61BCE00B1CCD1 /* wrapper_gles.c */,
 			);
 			name = wrapper;
 			path = ../../src/wrapper;
-			sourceTree = "<group>";
-		};
-		8B9992D628CDCE8500DDF5DE /* util */ = {
-			isa = PBXGroup;
-			children = (
-				8B9992D728CDCE8500DDF5DE /* util_io.c */,
-				8B9992D828CDCE8500DDF5DE /* util_pixel.h */,
-				8B9992D928CDCE8500DDF5DE /* util_string.h */,
-				8B9992DD28CDCE8500DDF5DE /* util_string.c */,
-				8B9992DA28CDCE8500DDF5DE /* util_math.c */,
-				8B9992DB28CDCE8500DDF5DE /* util_pixel.c */,
-				8B9992DC28CDCE8500DDF5DE /* util_io.h */,
-				8B9992DE28CDCE8500DDF5DE /* util_math.h */,
-			);
-			name = util;
-			path = ../../src/util;
 			sourceTree = "<group>";
 		};
 		8B9992E428CDCE8500DDF5DE /* static */ = {
 			isa = PBXGroup;
 			children = (
 				8B9992E528CDCE8500DDF5DE /* static_window.h */,
-				8B9992E628CDCE8500DDF5DE /* static_pixel_data.c */,
-				8B9992E728CDCE8500DDF5DE /* static_header.h */,
 				8B9992E828CDCE8500DDF5DE /* static_window.c */,
+				8BAAC3B028E6217D00B1CCD1 /* static_shader.h */,
+				8BAAC3B128E6217D00B1CCD1 /* static_shader.c */,
+				8B9992E728CDCE8500DDF5DE /* static_header.h */,
 				8B9992E928CDCE8500DDF5DE /* static_header.c */,
 				8B9992EA28CDCE8500DDF5DE /* static_pixel_data.h */,
+				8B9992E628CDCE8500DDF5DE /* static_pixel_data.c */,
 			);
 			name = static;
 			path = ../../src/static;
@@ -623,6 +647,22 @@
 			path = ../../src/duktape_separate;
 			sourceTree = "<group>";
 		};
+		8BAAC39128E6196600B1CCD1 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				8BAAC39228E6196600B1CCD1 /* util_io.c */,
+				8BAAC39328E6196600B1CCD1 /* util_pixel.h */,
+				8BAAC39428E6196600B1CCD1 /* util_string.h */,
+				8BAAC39528E6196600B1CCD1 /* util_math.c */,
+				8BAAC39628E6196600B1CCD1 /* util_pixel.c */,
+				8BAAC39728E6196600B1CCD1 /* util_io.h */,
+				8BAAC39828E6196600B1CCD1 /* util_string.c */,
+				8BAAC39928E6196600B1CCD1 /* util_math.h */,
+			);
+			name = util;
+			path = ../../src/util;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -630,9 +670,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8B6D9C9B28C73E2F004D6A6C /* Build configuration list for PBXNativeTarget "raia-engine" */;
 			buildPhases = (
+				8B6D9C9228C73E2F004D6A6C /* CopyFiles */,
 				8B6D9C9028C73E2F004D6A6C /* Sources */,
 				8B6D9C9128C73E2F004D6A6C /* Frameworks */,
-				8B6D9C9228C73E2F004D6A6C /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -687,6 +727,7 @@
 				8B9993F228CDE83300DDF5DE /* duk_hthread_alloc.c in Sources */,
 				8B9993CE28CDE83300DDF5DE /* duk_bi_cbor.c in Sources */,
 				8B9993AE28CDE83300DDF5DE /* duk_hthread_stacks.c in Sources */,
+				8BAAC3B228E6217D00B1CCD1 /* static_shader.c in Sources */,
 				8B9993C328CDE83300DDF5DE /* duk_heap_finalize.c in Sources */,
 				8B9993E828CDE83300DDF5DE /* duk_hobject_assert.c in Sources */,
 				8B9993AF28CDE83300DDF5DE /* duk_selftest.c in Sources */,
@@ -728,7 +769,6 @@
 				8B9992FC28CDCE8500DDF5DE /* static_window.c in Sources */,
 				8B9993CD28CDE83300DDF5DE /* duk_heap_memory.c in Sources */,
 				8B9993C528CDE83300DDF5DE /* duk_bi_pointer.c in Sources */,
-				8B9992F628CDCE8500DDF5DE /* util_io.c in Sources */,
 				8B9993C428CDE83300DDF5DE /* duk_api_random.c in Sources */,
 				8B9993B428CDE83300DDF5DE /* duk_api_buffer.c in Sources */,
 				8B9993E428CDE83300DDF5DE /* duk_hobject_class.c in Sources */,
@@ -748,9 +788,9 @@
 				8B9993A728CDE83300DDF5DE /* duk_bi_error.c in Sources */,
 				8B9993E028CDE83300DDF5DE /* duk_util_tinyrandom.c in Sources */,
 				8B9993D328CDE83300DDF5DE /* duk_bi_encoding.c in Sources */,
+				8BAAC39A28E6196600B1CCD1 /* util_io.c in Sources */,
 				8B9993F128CDE83300DDF5DE /* duk_debugger.c in Sources */,
 				8B99930628CDE39F00DDF5DE /* CException.c in Sources */,
-				8B9992F828CDCE8500DDF5DE /* util_pixel.c in Sources */,
 				8B9993E628CDE83300DDF5DE /* duk_api_stack.c in Sources */,
 				8B9993CA28CDE83300DDF5DE /* duk_bi_reflect.c in Sources */,
 				8B9993D228CDE83300DDF5DE /* duk_hbuffer_alloc.c in Sources */,
@@ -762,16 +802,17 @@
 				8B9993D828CDE83300DDF5DE /* duk_js_var.c in Sources */,
 				8B9993F328CDE83300DDF5DE /* duk_util_bufwriter.c in Sources */,
 				8B9993FF28CDE83300DDF5DE /* duk_bi_symbol.c in Sources */,
-				8B9992F728CDCE8500DDF5DE /* util_math.c in Sources */,
 				8B9993F628CDE83300DDF5DE /* duk_bi_json.c in Sources */,
 				8B9993C028CDE83300DDF5DE /* duk_js_executor.c in Sources */,
 				8B9993B628CDE83300DDF5DE /* duk_js_call.c in Sources */,
 				8B9993D128CDE83300DDF5DE /* duk_bi_object.c in Sources */,
 				8B9993ED28CDE83300DDF5DE /* duk_heap_stringtable.c in Sources */,
 				8B9993E528CDE83300DDF5DE /* duk_api_call.c in Sources */,
+				8BAAC39D28E6196600B1CCD1 /* util_string.c in Sources */,
 				8B9992F428CDCE8500DDF5DE /* wrapper_stb_image.c in Sources */,
 				8B9993D428CDE83300DDF5DE /* duk_builtins.c in Sources */,
 				8B9993BA28CDE83300DDF5DE /* duk_error_augment.c in Sources */,
+				8BAAC39C28E6196600B1CCD1 /* util_pixel.c in Sources */,
 				8B9993BF28CDE83300DDF5DE /* duk_bi_buffer.c in Sources */,
 				8B9993A228CDE83300DDF5DE /* duk_hobject_props.c in Sources */,
 				8B9993E228CDE83300DDF5DE /* duk_bi_date_windows.c in Sources */,
@@ -779,12 +820,14 @@
 				8B9993C828CDE83300DDF5DE /* duk_heap_stringcache.c in Sources */,
 				8B9993A328CDE83300DDF5DE /* duk_js_ops.c in Sources */,
 				8B9992FE28CDCE8500DDF5DE /* raia_gl.c in Sources */,
+				8BAAC39B28E6196600B1CCD1 /* util_math.c in Sources */,
 				8B9993B928CDE83300DDF5DE /* duk_unicode_support.c in Sources */,
 				8B9993BC28CDE83300DDF5DE /* duk_tval.c in Sources */,
 				8B9993D528CDE83300DDF5DE /* duk_bi_global.c in Sources */,
 				8B9993A628CDE83300DDF5DE /* duk_bi_function.c in Sources */,
 				8B9993F828CDE83300DDF5DE /* duk_hthread_builtins.c in Sources */,
 				8B9993BD28CDE83300DDF5DE /* duk_unicode_tables.c in Sources */,
+				8BAAC3AF28E61BCE00B1CCD1 /* wrapper_gles.c in Sources */,
 				8B99940128CDE83300DDF5DE /* duk_heap_misc.c in Sources */,
 				8B9993DF28CDE83300DDF5DE /* duk_lexer.c in Sources */,
 				8B9993A528CDE83300DDF5DE /* duk_bi_promise.c in Sources */,
@@ -792,7 +835,6 @@
 				8B99940328CDE83300DDF5DE /* duk_bi_math.c in Sources */,
 				8B9993D928CDE83300DDF5DE /* duk_js_arith.c in Sources */,
 				8B9993CB28CDE83300DDF5DE /* duk_error_longjmp.c in Sources */,
-				8B9992F928CDCE8500DDF5DE /* util_string.c in Sources */,
 				8B9993F428CDE83300DDF5DE /* duk_replacements.c in Sources */,
 				8B9993F928CDE83300DDF5DE /* duk_hobject_alloc.c in Sources */,
 				8B9993B228CDE83300DDF5DE /* duk_bi_boolean.c in Sources */,

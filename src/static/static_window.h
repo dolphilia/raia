@@ -9,7 +9,6 @@
 #define static_window_h
 
 #include <stdio.h>
-#include "GLFW/glfw3.h"
 #include "wrapper/wrapper_glfw.h"
 
 void init_raia_window(int width, int height, const char* title);

@@ -7,7 +7,7 @@
 
 #include "raia/raia_al.h"
 
-/// OpenALのテスト
+/// OpenALの開始
 void openal_start(void) {
     ALCdevice* device;
     ALCcontext* context;

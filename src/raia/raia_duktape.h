@@ -8,9 +8,12 @@
 #ifndef raia_duktape_h
 #define raia_duktape_h
 
+#define GLFW_INCLUDE_ES2
+#define GL_GLEXT_PROTOTYPES
 #include <stdio.h>
 #include <time.h>
 #include "GLFW/glfw3.h"
+#include "EGL/egl.h"
 #include "static/static_pixel_data.h"
 #include "static/static_header.h"
 #include "static/static_window.h"
