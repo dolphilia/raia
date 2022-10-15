@@ -17,6 +17,10 @@ void init_raia_header(void) {
     raia_header.resolution_height = 480;
     raia_header.magnification = 1; // 倍率 = WINDOW_WIDTH / SCREEN_WIDTH
     raia_header.samples_per_pixel = 3; // 3=RGBカラー, 4=RGBAカラー
+    raia_header.current_color.red = 0;
+    raia_header.current_color.green = 0;
+    raia_header.current_color.blue = 0;
+    raia_header.exist_update_callback = false;
 }
 
 raia_header_t get_raia_header(void) {
@@ -26,4 +30,18 @@ raia_header_t get_raia_header(void) {
 void set_resolution_size(int width, int height) {
     raia_header.resolution_width = width; // 画面解像度の幅と高さ
     raia_header.resolution_height = height;
+}
+
+void set_title(char* title) {
+    set_array_from_str(raia_header.window_title, title);
+}
+
+void set_current_color(int r, int g, int b) {
+    raia_header.current_color.red = r;
+    raia_header.current_color.green = g;
+    raia_header.current_color.blue = b;
+}
+
+void set_exist_update_callback(bool is_exist) {
+    raia_header.exist_update_callback = is_exist;
 }
