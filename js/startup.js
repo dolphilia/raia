@@ -5,32 +5,66 @@ var b = 200;
 
 print(a + b);
 
+const byebye = function(){
+  print('byebye');
+}
+
+const hello = function(){
+  print('hello');
+}
+
+callback(byebye);
+call();
+callback(hello);
+call();
+
+// Event.setErrorCallback
+// Event.setKeyCallback
+// Event.setMouseCallback
+// Event.setUpdateCallback
+
+Event.setErrorCallback(function(error, message) {
+    print(error);
+    print(message);
+});
+
+Event.setKeyCallback(function(key, scancode, action, mods) {
+    print(key);
+    print(scancode);
+    print(action);
+    print(mods);
+});
+
+Event.setUpdateCallback(function() {
+    Window.setTitle(px);
+    Draw.setColor(0, 255, 0);
+    Draw.fillRect(0, 0, 640, 480);
+    Draw.setColor(0, 0, 0);
+    Draw.fillRect(px, py, px + sx, py + sy);
+    px += 5;
+    py += 5;
+    if ((px + sx) > Window.getWidth()) {
+        px = 0;
+    }
+    if ((py + sy) > Window.getHeight()) {
+        py = 0;
+    }
+    for (var x = 0; x < 640; x++) {
+        Draw.setColor(rnd(255), rnd(255), rnd(255));
+        Draw.setPixel(x, 10);
+    }
+});
+
 function rnd(max) {
   return Math.floor(Math.random() * max);
 }
 
-function update() {
-    set_title(px);
-    fill_rect_rgb(0,0,640,480, 255,255,255)
-    fill_rect_rgb(px, py, px + sx, py + sy, 100,100,100);
-    px += 5;
-    py += 5;
-    if ((px + sx) > 640) {
-        px = 0;
-    }
-    if ((py + sy) > 480) {
-        py = 0;
-    }
-    //for (var x = 0; x < 640; x++) {
-    //    set_pixel_rgb(x, 10, rnd(255),rnd(255),rnd(255));
-    //}
-    glfw_redraw();
-}
 
-if (device == 'desktop') {
-    print('desktop');
-} else {
-    print('none');
+if (OS.platform == 'windows') {
+    print('windows');
+}
+if (OS.platform == 'macos') {
+    print('macos');
 }
 
 var px = 0;
@@ -38,7 +72,10 @@ var py = 0;
 var sx = 20;
 var sy = 20;
 
-//while(!glfw_window_should_close()) {
+STDC.puts("hello");
 
-//    glfw_pool_events();
-//}
+/*
+while(!GLFW.windowShouldClose()) {
+    GLFW.poolEvents();
+}
+*/
