@@ -24,6 +24,7 @@
 #include "static/static_pixel_data.h"
 #include "static/static_window.h"
 #include "static/static_shader.h"
+#include "static/static_duk_ctx.h"
 #include "raia/raia_gl.h"
 #include "raia/raia_al.h"
 #include "raia/raia_duktape.h"
