@@ -141,6 +141,7 @@
 		8BAAC3AC28E61B3700B1CCD1 /* libGLESv2.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8BAAC3A228E61AFD00B1CCD1 /* libGLESv2.dylib */; };
 		8BAAC3AF28E61BCE00B1CCD1 /* wrapper_gles.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAC3AE28E61BCE00B1CCD1 /* wrapper_gles.c */; };
 		8BAAC3B228E6217D00B1CCD1 /* static_shader.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAC3B128E6217D00B1CCD1 /* static_shader.c */; };
+		8BAAC3B528E6802300B1CCD1 /* static_duk_ctx.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAC3B428E6802300B1CCD1 /* static_duk_ctx.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -356,6 +357,8 @@
 		8BAAC3AE28E61BCE00B1CCD1 /* wrapper_gles.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wrapper_gles.c; sourceTree = "<group>"; };
 		8BAAC3B028E6217D00B1CCD1 /* static_shader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = static_shader.h; sourceTree = "<group>"; };
 		8BAAC3B128E6217D00B1CCD1 /* static_shader.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = static_shader.c; sourceTree = "<group>"; };
+		8BAAC3B328E6802300B1CCD1 /* static_duk_ctx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = static_duk_ctx.h; sourceTree = "<group>"; };
+		8BAAC3B428E6802300B1CCD1 /* static_duk_ctx.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = static_duk_ctx.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -465,6 +468,8 @@
 				8B9992E928CDCE8500DDF5DE /* static_header.c */,
 				8B9992EA28CDCE8500DDF5DE /* static_pixel_data.h */,
 				8B9992E628CDCE8500DDF5DE /* static_pixel_data.c */,
+				8BAAC3B328E6802300B1CCD1 /* static_duk_ctx.h */,
+				8BAAC3B428E6802300B1CCD1 /* static_duk_ctx.c */,
 			);
 			name = static;
 			path = ../../src/static;
@@ -650,14 +655,14 @@
 		8BAAC39128E6196600B1CCD1 /* util */ = {
 			isa = PBXGroup;
 			children = (
-				8BAAC39228E6196600B1CCD1 /* util_io.c */,
 				8BAAC39328E6196600B1CCD1 /* util_pixel.h */,
-				8BAAC39428E6196600B1CCD1 /* util_string.h */,
-				8BAAC39528E6196600B1CCD1 /* util_math.c */,
 				8BAAC39628E6196600B1CCD1 /* util_pixel.c */,
 				8BAAC39728E6196600B1CCD1 /* util_io.h */,
+				8BAAC39228E6196600B1CCD1 /* util_io.c */,
+				8BAAC39428E6196600B1CCD1 /* util_string.h */,
 				8BAAC39828E6196600B1CCD1 /* util_string.c */,
 				8BAAC39928E6196600B1CCD1 /* util_math.h */,
+				8BAAC39528E6196600B1CCD1 /* util_math.c */,
 			);
 			name = util;
 			path = ../../src/util;
@@ -822,6 +827,7 @@
 				8B9992FE28CDCE8500DDF5DE /* raia_gl.c in Sources */,
 				8BAAC39B28E6196600B1CCD1 /* util_math.c in Sources */,
 				8B9993B928CDE83300DDF5DE /* duk_unicode_support.c in Sources */,
+				8BAAC3B528E6802300B1CCD1 /* static_duk_ctx.c in Sources */,
 				8B9993BC28CDE83300DDF5DE /* duk_tval.c in Sources */,
 				8B9993D528CDE83300DDF5DE /* duk_bi_global.c in Sources */,
 				8B9993A628CDE83300DDF5DE /* duk_bi_function.c in Sources */,
