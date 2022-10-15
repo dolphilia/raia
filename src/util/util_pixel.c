@@ -21,7 +21,8 @@ void set_pixel_rgb(uint8_t *pixel_data, int32_t point_x, int32_t point_y, uint8_
     if (point_x < 0 || point_y < 0 || point_x >= canvas_size_width || point_y >= canvas_size_height) {
         return;
     }
-    int index = (canvas_size_height - 1 - point_y) * canvas_size_width * samples_per_pixel + point_x * samples_per_pixel;
+    //int index = point_y * canvas_size_width * 3 + point_x * 3;
+    int index = point_y * canvas_size_width * samples_per_pixel + point_x * samples_per_pixel;
     pixel_data[index] = color_red;
     pixel_data[index + 1] = color_green;
     pixel_data[index + 2] = color_blue;
@@ -45,7 +46,7 @@ void set_pixel_rgb_protect_alpha(uint8_t *pixel_data, int32_t point_x, int32_t p
         color.green = (uint8_t)((color_green * srcA + color.green * dstA * (1 - srcA)) / newA + 0.5);
         color.blue = (uint8_t)((color_blue * srcA + color.blue * dstA * (1 - srcA)) / newA + 0.5);
     }
-    int index = (canvas_size_height - 1 - point_y) * canvas_size_width * 3 + point_x * 3;
+    int index = point_y * canvas_size_width * 3 + point_x * 3;
     pixel_data[index] = color.red;
     pixel_data[index + 1] = color.green;
     pixel_data[index + 2] = color.blue;
@@ -95,15 +96,13 @@ void set_line_rgb(uint8_t *pixel_data, int32_t start_point_x, int32_t start_poin
 #define MIN(a,b) (((a)<(b))?(a):(b))
 #define MAX(a,b) (((a)>(b))?(a):(b))
 
+//普通に描画する方法：若干遅い
 void fill_rect_rgb(uint8_t *pixel_data, int32_t start_point_x, int32_t start_point_y, int32_t end_point_x, int32_t end_point_y, uint8_t color_red, uint8_t color_green, uint8_t color_blue, int32_t canvas_size_width, int32_t canvas_size_height, int32_t samples_per_pixel) {
-    //普通に描画する方法：若干遅い
     int minx = MIN(start_point_x, end_point_x);
     int miny = MIN(start_point_y, end_point_y);
     int diffx = MAX(start_point_x, end_point_x) - MIN(start_point_x, end_point_x) + 1;
     int diffy = MAX(start_point_y, end_point_y) - MIN(start_point_y, end_point_y) + 1;
-//#pragma omp parallel for
     for (int y = 0; y < diffy; y++) {
-//#pragma omp parallel for
         for (int x = 0; x < diffx; x++) {
             set_pixel_rgb(pixel_data,
                 minx + x, miny + y,
