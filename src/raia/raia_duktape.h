@@ -17,6 +17,7 @@
 #include "static/static_pixel_data.h"
 #include "static/static_header.h"
 #include "static/static_window.h"
+#include "static/static_duk_ctx.h"
 #include "wrapper/wrapper_glfw.h"
 #include "wrapper/wrapper_duktape.h"
 #include "util/util_pixel.h"
