@@ -31,6 +31,9 @@
     <Filter Include="ソース ファイル\duktape_separate">
       <UniqueIdentifier>{9d974271-7e2c-4b19-ae32-8e0ce80a8abe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\duktape_module">
+      <UniqueIdentifier>{8bebca53-0856-4adf-bd75-0456fdd97f42}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\raia-engine.c">
@@ -393,6 +396,12 @@
     <ClCompile Include="..\..\src\wrapper\wrapper_gles.c">
       <Filter>ソース ファイル\wrapper</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\duktape_module\duk_module_duktape.c">
+      <Filter>ソース ファイル\duktape_module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\static\static_duk_ctx.c">
+      <Filter>ソース ファイル\static</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\platforms.h">
@@ -580,6 +589,12 @@
     </ClInclude>
     <ClInclude Include="..\..\src\wrapper\wrapper_gles.h">
       <Filter>ソース ファイル\wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\duktape_module\duk_module_duktape.h">
+      <Filter>ソース ファイル\duktape_module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\static\static_duk_ctx.h">
+      <Filter>ソース ファイル\static</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

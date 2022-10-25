@@ -2,8 +2,8 @@
  *  Duktape 1.x compatible module loading framework
  */
 
-#include "duktape.h"
-#include "duk_module_duktape.h"
+#include "duktape/duktape.h"
+#include "duktape_module/duk_module_duktape.h"
 
 /* (v)snprintf() is missing before MSVC 2015.  Note that _(v)snprintf() does
  * NOT NUL terminate on truncation, but that's OK here.

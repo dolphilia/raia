@@ -3,8 +3,8 @@
 //var __tsc = require('typescriptServices.min');
 var Raia = require('raia');
 Raia.yeah();
-var mod = require('foo/bar');
-mod.hello();
+//var mod = require('foo/bar');
+//mod.hello();
 //adder(2,3);
 // sample
 

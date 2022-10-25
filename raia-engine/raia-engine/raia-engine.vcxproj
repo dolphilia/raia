@@ -118,7 +118,13 @@ xcopy "$(ProjectDir)..\..\lib\glfw3.dll" $(OutDir) /Y
 xcopy "$(ProjectDir)..\..\lib\libEGL.dll" $(OutDir) /Y
 xcopy "$(ProjectDir)..\..\lib\libGLESv2.dll" $(OutDir) /Y
 xcopy "$(ProjectDir)..\..\lib\d3dcompiler_47.dll" $(OutDir) /Y
-xcopy "$(ProjectDir)..\..\js\startup.js" "$(OutDir)" /Y</Command>
+xcopy "$(ProjectDir)..\..\js\startup.js" "$(OutDir)" /Y
+if exist $(OutDir)modules (
+    echo true
+) else (
+    mkdir exist $(OutDir)modules
+)
+xcopy "$(ProjectDir)..\..\js\raia.js" "$(OutDir)modules" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -145,10 +151,17 @@ xcopy "$(ProjectDir)..\..\lib\glfw3.dll" $(OutDir) /Y
 xcopy "$(ProjectDir)..\..\lib\libEGL.dll" $(OutDir) /Y
 xcopy "$(ProjectDir)..\..\lib\libGLESv2.dll" $(OutDir) /Y
 xcopy "$(ProjectDir)..\..\lib\d3dcompiler_47.dll" $(OutDir) /Y
-xcopy "$(ProjectDir)..\..\js\startup.js" "$(OutDir)" /Y</Command>
+xcopy "$(ProjectDir)..\..\js\startup.js" "$(OutDir)" /Y
+if exist $(OutDir)modules (
+    echo true
+) else (
+    mkdir exist $(OutDir)modules
+)
+xcopy "$(ProjectDir)..\..\js\raia.js" "$(OutDir)modules" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\duktape_module\duk_module_duktape.c" />
     <ClCompile Include="..\..\src\duktape_separate\duk_alloc_default.c" />
     <ClCompile Include="..\..\src\duktape_separate\duk_api_buffer.c" />
     <ClCompile Include="..\..\src\duktape_separate\duk_api_bytecode.c" />
@@ -256,6 +269,7 @@ xcopy "$(ProjectDir)..\..\js\startup.js" "$(OutDir)" /Y</Command>
     <ClCompile Include="..\..\src\raia\raia_al.c" />
     <ClCompile Include="..\..\src\raia\raia_duktape.c" />
     <ClCompile Include="..\..\src\raia\raia_gl.c" />
+    <ClCompile Include="..\..\src\static\static_duk_ctx.c" />
     <ClCompile Include="..\..\src\static\static_header.c" />
     <ClCompile Include="..\..\src\static\static_pixel_data.c" />
     <ClCompile Include="..\..\src\static\static_shader.c" />
@@ -271,6 +285,7 @@ xcopy "$(ProjectDir)..\..\js\startup.js" "$(OutDir)" /Y</Command>
     <ClCompile Include="..\..\src\wrapper\wrapper_stb_image.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\src\duktape_module\duk_module_duktape.h" />
     <ClInclude Include="..\..\src\duktape_separate\duktape.h" />
     <ClInclude Include="..\..\src\duktape_separate\duk_api_internal.h" />
     <ClInclude Include="..\..\src\duktape_separate\duk_bi_protos.h" />
@@ -317,6 +332,7 @@ xcopy "$(ProjectDir)..\..\js\startup.js" "$(OutDir)" /Y</Command>
     <ClInclude Include="..\..\src\raia\raia_al.h" />
     <ClInclude Include="..\..\src\raia\raia_duktape.h" />
     <ClInclude Include="..\..\src\raia\raia_gl.h" />
+    <ClInclude Include="..\..\src\static\static_duk_ctx.h" />
     <ClInclude Include="..\..\src\static\static_header.h" />
     <ClInclude Include="..\..\src\static\static_pixel_data.h" />
     <ClInclude Include="..\..\src\static\static_shader.h" />

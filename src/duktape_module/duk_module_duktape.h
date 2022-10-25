@@ -1,7 +1,7 @@
 #if !defined(DUK_MODULE_DUKTAPE_H_INCLUDED)
 #define DUK_MODULE_DUKTAPE_H_INCLUDED
 
-#include "duktape.h"
+#include "duktape/duktape.h"
 
 #if defined(__cplusplus)
 extern "C" {
