@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8B8DFBB02903BA09002B47A7 /* duk_module_duktape.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B8DFBAF2903BA09002B47A7 /* duk_module_duktape.c */; };
 		8B99927428CDB8AF00DDF5DE /* raia-engine.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99927328CDB8AF00DDF5DE /* raia-engine.c */; };
 		8B9992BE28CDC05100DDF5DE /* startup.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8B9992BD28CDC03E00DDF5DE /* startup.js */; };
 		8B9992C528CDCC9500DDF5DE /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9992C328CDCC9500DDF5DE /* libglfw.3.3.dylib */; };
@@ -143,6 +142,7 @@
 		8BAAC3AF28E61BCE00B1CCD1 /* wrapper_gles.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAC3AE28E61BCE00B1CCD1 /* wrapper_gles.c */; };
 		8BAAC3B228E6217D00B1CCD1 /* static_shader.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAC3B128E6217D00B1CCD1 /* static_shader.c */; };
 		8BAAC3B528E6802300B1CCD1 /* static_duk_ctx.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAC3B428E6802300B1CCD1 /* static_duk_ctx.c */; };
+		8BD53FC9290773BF00531E18 /* duk_module_duktape.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BD53FC8290773BF00531E18 /* duk_module_duktape.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -165,8 +165,6 @@
 
 /* Begin PBXFileReference section */
 		8B6D9C9428C73E2F004D6A6C /* raia-engine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "raia-engine"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B8DFBAE2903BA02002B47A7 /* duk_module_duktape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = duk_module_duktape.h; path = ../../../src/duktape_module/duk_module_duktape.h; sourceTree = "<group>"; };
-		8B8DFBAF2903BA09002B47A7 /* duk_module_duktape.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = duk_module_duktape.c; path = ../../../src/duktape_module/duk_module_duktape.c; sourceTree = "<group>"; };
 		8B8DFBB129041142002B47A7 /* raia.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = raia.js; path = ../../js/raia.js; sourceTree = "<group>"; };
 		8B99927328CDB8AF00DDF5DE /* raia-engine.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "raia-engine.c"; path = "../../src/raia-engine.c"; sourceTree = "<group>"; };
 		8B9992BD28CDC03E00DDF5DE /* startup.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = startup.js; path = ../../js/startup.js; sourceTree = "<group>"; };
@@ -363,6 +361,8 @@
 		8BAAC3B128E6217D00B1CCD1 /* static_shader.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = static_shader.c; sourceTree = "<group>"; };
 		8BAAC3B328E6802300B1CCD1 /* static_duk_ctx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = static_duk_ctx.h; sourceTree = "<group>"; };
 		8BAAC3B428E6802300B1CCD1 /* static_duk_ctx.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = static_duk_ctx.c; sourceTree = "<group>"; };
+		8BD53FC7290773BF00531E18 /* duk_module_duktape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_module_duktape.h; sourceTree = "<group>"; };
+		8BD53FC8290773BF00531E18 /* duk_module_duktape.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_module_duktape.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -415,7 +415,7 @@
 				8BAAC39F28E61AFD00B1CCD1 /* libchrome_zlib.dylib */,
 				8BAAC3A128E61AFD00B1CCD1 /* libEGL.dylib */,
 				8BAAC3A228E61AFD00B1CCD1 /* libGLESv2.dylib */,
-				8B8DFBAA2903B899002B47A7 /* duktape_module */,
+				8BD53FC6290773A900531E18 /* duktape_module */,
 				8B9992EB28CDCE8500DDF5DE /* raia */,
 				8B9992CF28CDCE8500DDF5DE /* wrapper */,
 				8B9992E428CDCE8500DDF5DE /* static */,
@@ -425,15 +425,6 @@
 				8B9992C928CDCE8500DDF5DE /* stb */,
 			);
 			path = "raia-engine";
-			sourceTree = "<group>";
-		};
-		8B8DFBAA2903B899002B47A7 /* duktape_module */ = {
-			isa = PBXGroup;
-			children = (
-				8B8DFBAF2903BA09002B47A7 /* duk_module_duktape.c */,
-				8B8DFBAE2903BA02002B47A7 /* duk_module_duktape.h */,
-			);
-			path = duktape_module;
 			sourceTree = "<group>";
 		};
 		8B99927128CD91BB00DDF5DE /* Frameworks */ = {
@@ -683,6 +674,16 @@
 			path = ../../src/util;
 			sourceTree = "<group>";
 		};
+		8BD53FC6290773A900531E18 /* duktape_module */ = {
+			isa = PBXGroup;
+			children = (
+				8BD53FC8290773BF00531E18 /* duk_module_duktape.c */,
+				8BD53FC7290773BF00531E18 /* duk_module_duktape.h */,
+			);
+			name = duktape_module;
+			path = ../../src/duktape_module;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -799,6 +800,7 @@
 				8B9993E728CDE83300DDF5DE /* duk_util_hashbytes.c in Sources */,
 				8B99940028CDE83300DDF5DE /* duk_js_compiler.c in Sources */,
 				8B9993F028CDE83300DDF5DE /* duk_api_time.c in Sources */,
+				8BD53FC9290773BF00531E18 /* duk_module_duktape.c in Sources */,
 				8B9993FE28CDE83300DDF5DE /* duk_bi_duktape.c in Sources */,
 				8B9993B328CDE83300DDF5DE /* duk_error_macros.c in Sources */,
 				8B9992F228CDCE8500DDF5DE /* stb_image.c in Sources */,
@@ -851,7 +853,6 @@
 				8B9993E528CDE83300DDF5DE /* duk_api_call.c in Sources */,
 				8BAAC39D28E6196600B1CCD1 /* util_string.c in Sources */,
 				8B9992F428CDCE8500DDF5DE /* wrapper_stb_image.c in Sources */,
-				8B8DFBB02903BA09002B47A7 /* duk_module_duktape.c in Sources */,
 				8B9993D428CDE83300DDF5DE /* duk_builtins.c in Sources */,
 				8B9993BA28CDE83300DDF5DE /* duk_error_augment.c in Sources */,
 				8BAAC39C28E6196600B1CCD1 /* util_pixel.c in Sources */,
