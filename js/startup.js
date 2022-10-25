@@ -1,3 +1,11 @@
+//var str = IO.loadStringFilename('foo/bar.js');
+//print(str);
+//var __tsc = require('typescriptServices.min');
+var Raia = require('raia');
+Raia.yeah();
+var mod = require('foo/bar');
+mod.hello();
+//adder(2,3);
 // sample
 
 var a = 100;

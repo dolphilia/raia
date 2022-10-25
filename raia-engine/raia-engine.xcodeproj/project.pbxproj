@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B8DFBB02903BA09002B47A7 /* duk_module_duktape.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B8DFBAF2903BA09002B47A7 /* duk_module_duktape.c */; };
 		8B99927428CDB8AF00DDF5DE /* raia-engine.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99927328CDB8AF00DDF5DE /* raia-engine.c */; };
 		8B9992BE28CDC05100DDF5DE /* startup.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8B9992BD28CDC03E00DDF5DE /* startup.js */; };
 		8B9992C528CDCC9500DDF5DE /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9992C328CDCC9500DDF5DE /* libglfw.3.3.dylib */; };
@@ -164,6 +165,9 @@
 
 /* Begin PBXFileReference section */
 		8B6D9C9428C73E2F004D6A6C /* raia-engine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "raia-engine"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B8DFBAE2903BA02002B47A7 /* duk_module_duktape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = duk_module_duktape.h; path = ../../../src/duktape_module/duk_module_duktape.h; sourceTree = "<group>"; };
+		8B8DFBAF2903BA09002B47A7 /* duk_module_duktape.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = duk_module_duktape.c; path = ../../../src/duktape_module/duk_module_duktape.c; sourceTree = "<group>"; };
+		8B8DFBB129041142002B47A7 /* raia.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = raia.js; path = ../../js/raia.js; sourceTree = "<group>"; };
 		8B99927328CDB8AF00DDF5DE /* raia-engine.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "raia-engine.c"; path = "../../src/raia-engine.c"; sourceTree = "<group>"; };
 		8B9992BD28CDC03E00DDF5DE /* startup.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = startup.js; path = ../../js/startup.js; sourceTree = "<group>"; };
 		8B9992C328CDCC9500DDF5DE /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
@@ -400,6 +404,7 @@
 			isa = PBXGroup;
 			children = (
 				8B9992BD28CDC03E00DDF5DE /* startup.js */,
+				8B8DFBB129041142002B47A7 /* raia.js */,
 				8B99930228CDCE9600DDF5DE /* platforms.h */,
 				8B99930128CDCE9600DDF5DE /* raia-engine.h */,
 				8B99927328CDB8AF00DDF5DE /* raia-engine.c */,
@@ -410,6 +415,7 @@
 				8BAAC39F28E61AFD00B1CCD1 /* libchrome_zlib.dylib */,
 				8BAAC3A128E61AFD00B1CCD1 /* libEGL.dylib */,
 				8BAAC3A228E61AFD00B1CCD1 /* libGLESv2.dylib */,
+				8B8DFBAA2903B899002B47A7 /* duktape_module */,
 				8B9992EB28CDCE8500DDF5DE /* raia */,
 				8B9992CF28CDCE8500DDF5DE /* wrapper */,
 				8B9992E428CDCE8500DDF5DE /* static */,
@@ -419,6 +425,15 @@
 				8B9992C928CDCE8500DDF5DE /* stb */,
 			);
 			path = "raia-engine";
+			sourceTree = "<group>";
+		};
+		8B8DFBAA2903B899002B47A7 /* duktape_module */ = {
+			isa = PBXGroup;
+			children = (
+				8B8DFBAF2903BA09002B47A7 /* duk_module_duktape.c */,
+				8B8DFBAE2903BA02002B47A7 /* duk_module_duktape.h */,
+			);
+			path = duktape_module;
 			sourceTree = "<group>";
 		};
 		8B99927128CD91BB00DDF5DE /* Frameworks */ = {
@@ -678,6 +693,7 @@
 				8B6D9C9228C73E2F004D6A6C /* CopyFiles */,
 				8B6D9C9028C73E2F004D6A6C /* Sources */,
 				8B6D9C9128C73E2F004D6A6C /* Frameworks */,
+				8B8DFBA92902D7F9002B47A7 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -719,6 +735,26 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8B8DFBA92902D7F9002B47A7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "#!/bin/bash\n# Type a script or drag a script file from your workspace to insert its path.\necho helloworld.\necho ${SRCROOT}\necho ${PROJECT_DIR}\necho ${BUILD_DIR}\nls ${PROJECT_DIR}/../js/\n#cd ${BUILD_DIR}\nDEBUG_DIR=\"${BUILD_DIR}/Debug\"\n# moduleディレクトリのパス\nMODULES_DIR=\"${BUILD_DIR}/Debug/modules\"\n# modulesディレクトリがないときディレクトリを作成する\nif [ ! -d $MODULES_DIR ];then\n  mkdir ${MODULES_DIR}\nfi\n# raia.jsをコピーする\nSRC_RAIA_JS=\"${PROJECT_DIR}/../js/raia.js\"\nDST_RAIA_JS=\"${MODULES_DIR}/raia.js\"\ncp ${SRC_RAIA_JS} ${DST_RAIA_JS}\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8B6D9C9028C73E2F004D6A6C /* Sources */ = {
@@ -815,6 +851,7 @@
 				8B9993E528CDE83300DDF5DE /* duk_api_call.c in Sources */,
 				8BAAC39D28E6196600B1CCD1 /* util_string.c in Sources */,
 				8B9992F428CDCE8500DDF5DE /* wrapper_stb_image.c in Sources */,
+				8B8DFBB02903BA09002B47A7 /* duk_module_duktape.c in Sources */,
 				8B9993D428CDE83300DDF5DE /* duk_builtins.c in Sources */,
 				8B9993BA28CDE83300DDF5DE /* duk_error_augment.c in Sources */,
 				8BAAC39C28E6196600B1CCD1 /* util_pixel.c in Sources */,

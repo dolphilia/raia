@@ -15,6 +15,12 @@ static duk_ret_t regist_global_print(duk_context *ctx) {
     return 0;  /* no return value (= undefined) */
 }
 
+static duk_ret_t regist_io_load_string_filename(duk_context *ctx) {
+    char * ret = load_string_filename(duk_to_string(ctx, 0));
+    duk_push_string(ctx, ret);
+    return 1;  /* no return value (= undefined) */
+}
+
 // Function: regist_stdc_puts
 // C言語のputsに相当する。RaiaAPIとして登録される。
 //
@@ -245,6 +251,7 @@ static void regist_callbacks(duk_context *ctx) {
 //
 static void regist_functions(duk_context *ctx) {
     regist_func(ctx, regist_global_print, "print", 1);
+    regist_func(ctx, regist_io_load_string_filename, "_io_load_string_filename", 1);
     regist_func(ctx, regist_stdc_puts, "_stdc_puts", 1);
     regist_func(ctx, regist_glfw_pool_events, "_glfw_pool_events", 0);
     regist_func(ctx, regist_glfw_window_should_close, "_glfw_window_should_close", 0);
@@ -270,11 +277,12 @@ static void regist_functions(duk_context *ctx) {
 //
 static void regist_objects(duk_context *ctx) {
     char* objects =
-    "var STDC = new Object();"
-    "var GLFW = new Object();"
-    "var Draw = new Object();"
-    "var Window = new Object();"
-    "var Event = new Object();";
+        "var STDC = {};"
+        "var IO = {};"
+        "var GLFW = {};"
+        "var Draw = {};"
+        "var Window = {};"
+        "var Event = {};";
     duk_eval_string(ctx, objects);
 }
 
@@ -283,22 +291,36 @@ static void regist_objects(duk_context *ctx) {
 //
 static void regist_methods(duk_context *ctx) {
     char* methods =
-    "Window.setTitle = function(a){_window_set_title(a);};"
-    "Window.getTitle = function(){return _window_get_title();};"
-    "Window.getWidth = function(){return _window_get_width();};"
-    "Window.getHeight = function(){return _window_get_height();};"
-    "Draw.redraw = function(){return _draw_redraw();};"
-    "Draw.setColor = function(a,b,c){_draw_set_current_color(a,b,c);};"
-    "Draw.setPixel = function(a,b){_draw_set_pixel(a,b);};"
-    "Draw.fillRect = function(a,b,c,d){_draw_fill_rect(a,b,c,d);};"
-    "Draw.setPixelRGB = function(a,b,c,d,e){_draw_set_pixel_rgb(a,b,c,d,e);};"
-    "Draw.fillRectRGB = function(a,b,c,d,e,f,g){_draw_fill_rect_rgb(a,b,c,d,e,f,g);};"
-    "GLFW.poolEvents = function(){_glfw_pool_events();};"
-    "GLFW.windowShouldClose = function(){return _glfw_window_should_close();};"
-    "Event.setKeyCallback = function(a,b,c,d){return _event_set_key_callback(a,b,c,d);};"
-    "Event.setErrorCallback = function(a,b){return _event_set_error_callback(a,b);};"
-    "Event.setUpdateCallback = function(a){return _event_set_update_callback(a);};"
-    "STDC.puts = function(a){_stdc_puts(a);};";
+    "STDC = {"
+    "    puts: function(a){_stdc_puts(a);},"
+    "};"
+    "IO = {"
+    "    loadStringFilename: function(a){return _io_load_string_filename(a);},"
+    "};"
+    "Window = {"
+    "    setTitle: function(a){_window_set_title(a);},"
+    "    getTitle: function(){return _window_get_title();},"
+    "    getWidth: function(){return _window_get_width();},"
+    "    getHeight: function(){return _window_get_height();},"
+    "};"
+    "Draw = {"
+    "    redraw: function(){return _draw_redraw();},"
+    "    setColor: function(a,b,c){_draw_set_current_color(a,b,c);},"
+    "    setPixel: function(a,b){_draw_set_pixel(a,b);},"
+    "    fillRect: function(a,b,c,d){_draw_fill_rect(a,b,c,d);},"
+    "    setPixelRGB: function(a,b,c,d,e){_draw_set_pixel_rgb(a,b,c,d,e);},"
+    "    fillRectRGB: function(a,b,c,d,e,f,g){_draw_fill_rect_rgb(a,b,c,d,e,f,g);},"
+    "};"
+    "GLFW = {"
+    "    poolEvents: function(){_glfw_pool_events();},"
+    "    windowShouldClose: function(){return _glfw_window_should_close();},"
+    "};"
+    "Event = {"
+    "    setKeyCallback: function(a,b,c,d){return _event_set_key_callback(a,b,c,d);},"
+    "    setErrorCallback: function(a,b){return _event_set_error_callback(a,b);},"
+    "    setUpdateCallback: function(a){return _event_set_update_callback(a);},"
+    "};"
+    ;
     duk_eval_string(ctx, methods);
 }
 
@@ -307,51 +329,53 @@ static void regist_methods(duk_context *ctx) {
 //
 static void regist_constants(duk_context *ctx) {
     char* constants =
-    "GLFW.FOCUSED = 0x00020001;"
-    "GLFW.ICONIFIED = 0x00020002;"
-    "GLFW.RESIZABLE = 0x00020003;"
-    "GLFW.VISIBLE = 0x00020004;"
-    "GLFW.DECORATED = 0x00020005;"
-    "GLFW.AUTO_ICONIFY = 0x00020006;"
-    "GLFW.FLOATING = 0x00020007;"
-    "GLFW.MAXIMIZED = 0x00020008;"
-    "GLFW.CENTER_CURSOR = 0x00020009;"
-    "GLFW.TRANSPARENT_FRAMEBUFFER = 0x0002000A;"
-    "GLFW.HOVERED = 0x0002000B;"
-    "GLFW.FOCUS_ON_SHOW = 0x0002000C;"
-    "GLFW.RED_BITS = 0x00021001;"
-    "GLFW.GREEN_BITS = 0x00021002;"
-    "GLFW.BLUE_BITS = 0x00021003;"
-    "GLFW.ALPHA_BITS = 0x00021004;"
-    "GLFW.DEPTH_BITS = 0x00021005;"
-    "GLFW.STENCIL_BITS = 0x00021006;"
-    "GLFW.ACCUM_RED_BITS = 0x00021007;"
-    "GLFW.ACCUM_GREEN_BITS = 0x00021008;"
-    "GLFW.ACCUM_BLUE_BITS = 0x00021009;"
-    "GLFW.ACCUM_ALPHA_BITS = 0x0002100A;"
-    "GLFW.AUX_BUFFERS = 0x0002100B;"
-    "GLFW.STEREO = 0x0002100C;"
-    "GLFW.SAMPLES = 0x0002100D;"
-    "GLFW.SRGB_CAPABLE = 0x0002100E;"
-    "GLFW.REFRESH_RATE = 0x0002100F;"
-    "GLFW.DOUBLEBUFFER = 0x00021010;"
-    "GLFW.CLIENT_API = 0x00022001;"
-    "GLFW.CONTEXT_VERSION_MAJOR = 0x00022002;"
-    "GLFW.CONTEXT_VERSION_MINOR = 0x00022003;"
-    "GLFW.CONTEXT_REVISION = 0x00022004;"
-    "GLFW.CONTEXT_ROBUSTNESS = 0x00022005;"
-    "GLFW.OPENGL_FORWARD_COMPAT = 0x00022006;"
-    "GLFW.OPENGL_DEBUG_CONTEXT = 0x00022007;"
-    "GLFW.OPENGL_PROFILE = 0x00022008;"
-    "GLFW.CONTEXT_RELEASE_BEHAVIOR = 0x00022009;"
-    "GLFW.CONTEXT_NO_ERROR = 0x0002200A;"
-    "GLFW.CONTEXT_CREATION_API = 0x0002200B;"
-    "GLFW.SCALE_TO_MONITOR = 0x0002200C;"
-    "GLFW.COCOA_RETINA_FRAMEBUFFER = 0x00023001;"
-    "GLFW.COCOA_FRAME_NAME = 0x00023002;"
-    "GLFW.COCOA_GRAPHICS_SWITCHING = 0x00023003;"
-    "GLFW.X11_CLASS_NAME = 0x00024001;"
-    "GLFW.X11_INSTANCE_NAME = 0x00024002;";
+        "GLFW = {"
+        "    FOCUSED: 0x00020001,"
+        "    ICONIFIED: 0x00020002,"
+        "    RESIZABLE: 0x00020003,"
+        "    VISIBLE: 0x00020004,"
+        "    DECORATED: 0x00020005,"
+        "    AUTO_ICONIFY: 0x00020006,"
+        "    FLOATING: 0x00020007,"
+        "    MAXIMIZED: 0x00020008,"
+        "    CENTER_CURSOR: 0x00020009,"
+        "    TRANSPARENT_FRAMEBUFFER: 0x0002000A,"
+        "    HOVERED: 0x0002000B,"
+        "    FOCUS_ON_SHOW: 0x0002000C,"
+        "    RED_BITS: 0x00021001,"
+        "    GREEN_BITS: 0x00021002,"
+        "    BLUE_BITS: 0x00021003,"
+        "    ALPHA_BITS: 0x00021004,"
+        "    DEPTH_BITS: 0x00021005,"
+        "    STENCIL_BITS: 0x00021006,"
+        "    ACCUM_RED_BITS: 0x00021007,"
+        "    ACCUM_GREEN_BITS: 0x00021008,"
+        "    ACCUM_BLUE_BITS: 0x00021009,"
+        "    ACCUM_ALPHA_BITS: 0x0002100A,"
+        "    AUX_BUFFERS: 0x0002100B,"
+        "    STEREO: 0x0002100C,"
+        "    SAMPLES: 0x0002100D,"
+        "    SRGB_CAPABLE: 0x0002100E,"
+        "    REFRESH_RATE: 0x0002100F,"
+        "    DOUBLEBUFFER: 0x00021010,"
+        "    CLIENT_API: 0x00022001,"
+        "    CONTEXT_VERSION_MAJOR: 0x00022002,"
+        "    CONTEXT_VERSION_MINOR: 0x00022003,"
+        "    CONTEXT_REVISION: 0x00022004,"
+        "    CONTEXT_ROBUSTNESS: 0x00022005,"
+        "    OPENGL_FORWARD_COMPAT: 0x00022006,"
+        "    OPENGL_DEBUG_CONTEXT: 0x00022007,"
+        "    OPENGL_PROFILE: 0x00022008,"
+        "    CONTEXT_RELEASE_BEHAVIOR: 0x00022009,"
+        "    CONTEXT_NO_ERROR: 0x0002200A,"
+        "    CONTEXT_CREATION_API: 0x0002200B,"
+        "    SCALE_TO_MONITOR: 0x0002200C,"
+        "    COCOA_RETINA_FRAMEBUFFER: 0x00023001,"
+        "    COCOA_FRAME_NAME: 0x00023002,"
+        "    COCOA_GRAPHICS_SWITCHING: 0x00023003,"
+        "    X11_CLASS_NAME: 0x00024001,"
+        "    X11_INSTANCE_NAME: 0x00024002,"
+        "};";
     duk_eval_string(ctx, constants);
     
     duk_eval_string(ctx, "var OS = new Object();");
@@ -369,6 +393,22 @@ static void regist_elements(duk_context *ctx) {
     regist_objects(ctx); // オブジェクト群を登録する
     regist_methods(ctx); // メソッド群を登録する
     regist_constants(ctx); // 定数群を登録する
+}
+
+static void enable_module(duk_context *ctx) {
+    // モジュールのソースコードを返すか、エラーを投げる.
+    char * code =
+    "Duktape.modSearch = function (id, require, exports, module) {"
+    "    var filename = 'modules/' + id + '.js';"
+    "    var src = IO.loadStringFilename(filename);"
+    "    if (typeof src === 'string') {"
+    "        print('loaded ECMAScript:', filename);"
+    "    } else {"
+    "        throw new Error('module not found: ' + id);"
+    "    }"
+    "    return src;"
+    "};";
+    duk_eval_string(ctx, code);
 }
 
 static void wait_time_with_fps(double now, double prev, int fps) {
@@ -406,6 +446,8 @@ static void run_update(void) {
 void duktape_start(void) {
     duk_context* ctx = get_duk_ctx();
     regist_elements(ctx);
+    duk_module_duktape_init(ctx);
+    enable_module(ctx);
     load_script_filename(ctx, "startup.js"); // スクリプトファイルを読み込んでスタックにプッシュする
     duk_eval(ctx); // 実行する
     run_update();

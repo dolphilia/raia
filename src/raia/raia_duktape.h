@@ -24,6 +24,7 @@
 #include "util/util_math.h"
 #include "raia/raia_gl.h"
 #include "duktape/duktape.h"
+#include "duktape_module/duk_module_duktape.h"
 
 void duktape_start(void);
 

@@ -11,11 +11,8 @@ static uint8_t* pixel_data;
 
 // ピクセルデータ領域を初期化する
 void init_pixel_data(int width, int height, int samples_per_pixel) {
-    // ピクセルデータ領域を確保する
-    pixel_data = calloc(width * height * samples_per_pixel, sizeof(uint8_t));
-    
-    // ピクセルデータ領域を白で塗りつぶす
-    for (int i = 0; i < width * height * samples_per_pixel; i++) {
+    pixel_data = calloc(width * height * samples_per_pixel, sizeof(uint8_t)); // ピクセルデータ領域を確保する
+    for (int i = 0; i < width * height * samples_per_pixel; i++) { // ピクセルデータ領域を白で塗りつぶす
         pixel_data[i] = 255;
     }
 }

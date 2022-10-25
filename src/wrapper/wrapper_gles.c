@@ -18,20 +18,20 @@ GLuint create_shader(GLenum type, const char *shader_src) {
 
 GLuint create_program(void) {
     GLbyte vShaderStr[] =
-        "attribute vec4 a_position;\n"
-        "attribute vec2 a_texCoord;\n"
-        "varying vec2 v_texCoord;\n"
-        "void main() {\n"
-        "gl_Position = a_position;\n"
-        "v_texCoord = a_texCoord;\n"
+        "attribute vec4 a_position;"
+        "attribute vec2 a_texCoord;"
+        "varying vec2 v_texCoord;"
+        "void main() {"
+        "    gl_Position = a_position;"
+        "    v_texCoord = a_texCoord;"
         "}";
     GLbyte fShaderStr[] =
-        "precision mediump float;\n"
-        "varying vec2 v_texCoord;\n"
-        "uniform sampler2D s_texture;\n"
-        "void main() {\n"
-        "gl_FragColor = texture2D(s_texture, v_texCoord);\n"
-        "}\n";
+        "precision mediump float;"
+        "varying vec2 v_texCoord;"
+        "uniform sampler2D s_texture;"
+        "void main() {"
+        "    gl_FragColor = texture2D(s_texture, v_texCoord);"
+        "}";
     GLuint program = glCreateProgram(); // Handle to a program object
     GLuint vs = create_shader(GL_VERTEX_SHADER, (const char*)vShaderStr);
     GLuint fs = create_shader(GL_FRAGMENT_SHADER, (const char*)fShaderStr);
