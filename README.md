@@ -1,5 +1,12 @@
 # raia-engine
 
+## Todo
+
+- [ ] Linuxでのビルド
+- [ ] 拡張プラグインサポート(dlfun.h)
+- [ ] Babel,TypeScriptによるトランスコンパイル
+  - [ ] 複数ファイルのトランスコンパイル
+
 ## ビルド
 
 ### macOS コマンドライン
