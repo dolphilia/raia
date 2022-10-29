@@ -1,6 +1,7 @@
 //var str = IO.loadStringFilename('foo/bar.js');
 //print(str);
 //var __tsc = require('typescriptServices.min');
+var tsc = require('tsc');
 var Raia = require('raia');
 Raia.yeah();
 //var mod = require('foo/bar');
