@@ -12,6 +12,7 @@
   - [ ] Babel
   - [ ] TypeScript
   - [ ] 複数ファイルのトランスコンパイル
+  - [ ] RaiaToolsとの連携
 - [ ] APIの選定
 
 ## ビルド
