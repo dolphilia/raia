@@ -2,9 +2,15 @@
 
 ## Todo
 
-- [ ] Linuxでのビルド
+- [ ] コマンドラインからのビルド
+  - [ ] clang/gcc単体
+    - [x] macOS
+    - [ ] Linux
+    - [ ] Windows(MinGW)
 - [ ] 拡張プラグインサポート(dlfun.h)
-- [ ] Babel,TypeScriptによるトランスコンパイル
+- [ ] トランスコンパイル
+  - [ ] Babel
+  - [ ] TypeScript
   - [ ] 複数ファイルのトランスコンパイル
 
 ## ビルド
