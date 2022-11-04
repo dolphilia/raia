@@ -14,9 +14,11 @@
   - [ ] 複数ファイルのトランスコンパイル
   - [ ] RaiaToolsとの連携
 - [ ] APIの選定
-- [ ] ドキュメント
-  - [ ] ウェブサイト
-  - [ ] 翻訳
+- [ ] ドキュメントの作成
+  - [ ] ウェブサイトの作成
+  - [ ] ドキュメントの翻訳
+- [ ] パッケージ処理
+
 
 ## ビルド
 
@@ -26,7 +28,7 @@ HomebrewでGLFWとOpenAL-Softを導入しておく。
 
 ```sh
 clang \
--o raia-engine.out \
+-o raia-engine \
 src/raia-engine.c \
 src/duktape/duktape.c \
 src/duktape_module/duk_module_duktape.c \
@@ -49,14 +51,56 @@ src/wrapper/wrapper_glfw.c \
 src/wrapper/wrapper_stb_image.c \
 -lm \
 -framework OpenAL \
--I /opt/homebrew/include \
 -I include \
 -I src \
--L /opt/homebrew/opt/openal-soft/lib \
--L /opt/homebrew/opt/glfw/lib \
 -L lib \
 -lEGL \
 -lGLESv2 \
 -lglfw \
 -Wl,-rpath,'.'
+```
+
+## macOS App化（シェルスクリプト経由）
+
+- raia_engine.app
+  - Contents
+    - Info.plist
+    - MacOS
+      - run.sh
+      - raia-engine
+      - .dylib
+      - ...
+    - Resources
+      - startup.js
+      - app.icns
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleExecutable</key>
+    <string>run.sh</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleSignature</key>
+    <string>run</string>
+    <key>CFBundleIconFile</key>
+    <string>app.icns</string>
+</dict>
+</plist>
+```
+
+```sh
+#!/bin/bash
+
+CURRENT=$(cd $(dirname $0);pwd)
+cd $CURRENT
+$CURRENT/raia-engine
+```
+
+`run.sh`にスクリプトの実行権限を付与しておく
+
+```
+chmod +x run.sh
 ```
