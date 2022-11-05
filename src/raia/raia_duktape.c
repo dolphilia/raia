@@ -245,22 +245,33 @@ static duk_ret_t regist_event_set_cursor_position_callback(duk_context *ctx) {
 }
 
 static void event_cursor_position_callback(GLFWwindow* window, double xpos, double ypos) {
-    //if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
-    //    glfwSetWindowShouldClose(window, GL_TRUE);
-    //}
     duk_context* ctx = get_duk_ctx();
     duk_get_global_string(ctx, "_glfw_cursor_position_callback");
     duk_push_number(ctx, xpos);
     duk_push_number(ctx, ypos);
-    //duk_push_int(ctx, key);
-    //duk_push_int(ctx, scancode);
-    //duk_push_int(ctx, action);
-    //duk_push_int(ctx, mods);
     duk_int_t rc = duk_pcall(ctx, 2);  /* no arguments in this example */
     //if (rc != 0) {
     //    printf("Callback failed: %s\n", duk_safe_to_string(ctx, -1));
     //}
-    //printf("%f", xpos);
+    duk_pop(ctx);  /* pop result */
+}
+
+static duk_ret_t regist_event_set_mouse_button_callback(duk_context *ctx) {
+    duk_dup(ctx, 0);
+    duk_put_global_string(ctx, "_glfw_mouse_button_callback");
+    return 0;
+}
+
+static void event_mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
+    duk_context* ctx = get_duk_ctx();
+    duk_get_global_string(ctx, "_glfw_mouse_button_callback");
+    duk_push_int(ctx, button);
+    duk_push_int(ctx, action);
+    duk_push_int(ctx, mods);
+    duk_int_t rc = duk_pcall(ctx, 3);  /* no arguments in this example */
+    //if (rc != 0) {
+    //    printf("Callback failed: %s\n", duk_safe_to_string(ctx, -1));
+    //}
     duk_pop(ctx);  /* pop result */
 }
 
@@ -270,7 +281,8 @@ static void event_cursor_position_callback(GLFWwindow* window, double xpos, doub
 static void regist_callbacks(duk_context *ctx) {
     glfwSetKeyCallback(get_raia_window(), event_key_callback); // キー入力コールバック
     glfwSetErrorCallback(event_error_callback); // エラーコールバック
-    glfwSetCursorPosCallback(get_raia_window(), event_cursor_position_callback); // マウス入力
+    glfwSetCursorPosCallback(get_raia_window(), event_cursor_position_callback); // マウス移動
+    glfwSetMouseButtonCallback(get_raia_window(), event_mouse_button_callback); // マウスボタン
 }
 
 // Function: regist_functions
@@ -296,6 +308,7 @@ static void regist_functions(duk_context *ctx) {
     regist_func(ctx, regist_event_set_error_callback, "_event_set_error_callback", 1);
     regist_func(ctx, regist_event_set_update_callback, "_event_set_update_callback", 1);
     regist_func(ctx, regist_event_set_cursor_position_callback, "_event_set_cursor_position_callback", 1);
+    regist_func(ctx, regist_event_set_mouse_button_callback, "_event_set_mouse_button_callback", 1);
     regist_func(ctx, regist_callback, "callback", 1);
     regist_func(ctx, regist_call, "call", 0);
 }
@@ -348,6 +361,7 @@ static void regist_methods(duk_context *ctx) {
     "    setErrorCallback: function(a,b){return _event_set_error_callback(a,b);},"
     "    setUpdateCallback: function(a){return _event_set_update_callback(a);},"
     "    setCursorPositionCallback: function(a,b,c,d){return _event_set_cursor_position_callback(a,b,c,d);},"
+    "    setMouseButtonCallback: function(a,b,c,d){return _event_set_mouse_button_callback(a,b,c,d);},"
     "};"
     ;
     duk_eval_string(ctx, methods);
