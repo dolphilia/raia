@@ -9,6 +9,7 @@
 #define wrapper_duktape_h
 
 #include <stdio.h>
+#include <stdbool.h>
 #include "duktape/duktape.h"
 #include "util/util_io.h"
 

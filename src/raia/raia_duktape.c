@@ -30,19 +30,20 @@ static duk_ret_t regist_stdc_puts(duk_context *ctx) {
     return 1;  /* no return value (= undefined) */
 }
 
-static duk_ret_t regist_stdc_dlopen(duk_context *ctx) {
+static duk_ret_t regist_plugin_init(duk_context *ctx) {
     const char* dll_file = duk_to_string(ctx, 0);
     init_dlfcn(dll_file);
     return 0;  /* no return value (= undefined) */
 }
 
-static duk_ret_t regist_stdc_dlsym(duk_context *ctx) {
+static duk_ret_t regist_plugin_add(duk_context *ctx) {
     //void * handle = get_dlfcn_handle();
     const char* dll_func_name = duk_to_string(ctx, 0);
     const char* regist_func_name = duk_to_string(ctx, 1);
     int nargs = (int)duk_to_number(ctx, 2);
-    add_dlfcn_func(ctx, dll_func_name, nargs);
+    duk_ret_t (*pfunc)(duk_context * ctx) = add_dlfcn_func(ctx, dll_func_name);
     //duk_push_number(ctx, ret);
+    duk_push_c_function(ctx, pfunc, nargs);
     duk_put_global_string(ctx, regist_func_name);
     return 0;  /* no return value (= undefined) */
 }
@@ -309,8 +310,8 @@ static void regist_functions(duk_context *ctx) {
     regist_func(ctx, regist_global_print, "print", 1);
     regist_func(ctx, regist_io_load_string_filename, "_io_load_string_filename", 1);
     regist_func(ctx, regist_stdc_puts, "_stdc_puts", 1);
-    regist_func(ctx, regist_stdc_dlopen, "_stdc_dlopen", 1);
-    regist_func(ctx, regist_stdc_dlsym, "_stdc_dlsym", 3);
+    regist_func(ctx, regist_plugin_init, "_plugin_init", 1);
+    regist_func(ctx, regist_plugin_add, "_plugin_add", 3);
     regist_func(ctx, regist_glfw_pool_events, "_glfw_pool_events", 0);
     regist_func(ctx, regist_glfw_window_should_close, "_glfw_window_should_close", 0);
     regist_func(ctx, regist_draw_redraw, "_draw_redraw", 0);
@@ -338,6 +339,7 @@ static void regist_functions(duk_context *ctx) {
 static void regist_objects(duk_context *ctx) {
     char* objects =
         "var STDC = {};"
+        "var Plugin = {};"
         "var IO = {};"
         "var GLFW = {};"
         "var Draw = {};"
@@ -353,8 +355,10 @@ static void regist_methods(duk_context *ctx) {
     char* methods =
     "STDC = {"
     "    puts: function(a){_stdc_puts(a);},"
-    "    dlopen: function(a){_stdc_dlopen(a);},"
-    "    dlsym: function(a){_stdc_dlsym(a);},"
+    "};"
+    "Plugin = {"
+    "    init: function(a){_plugin_init(a);},"
+    "    add: function(a,b,c){_plugin_add(a,b,c);},"
     "};"
     "IO = {"
     "    loadStringFilename: function(a){return _io_load_string_filename(a);},"
@@ -393,55 +397,66 @@ static void regist_methods(duk_context *ctx) {
 //
 static void regist_constants(duk_context *ctx) {
     char* constants =
-        "GLFW = {"
-        "    FOCUSED: 0x00020001,"
-        "    ICONIFIED: 0x00020002,"
-        "    RESIZABLE: 0x00020003,"
-        "    VISIBLE: 0x00020004,"
-        "    DECORATED: 0x00020005,"
-        "    AUTO_ICONIFY: 0x00020006,"
-        "    FLOATING: 0x00020007,"
-        "    MAXIMIZED: 0x00020008,"
-        "    CENTER_CURSOR: 0x00020009,"
-        "    TRANSPARENT_FRAMEBUFFER: 0x0002000A,"
-        "    HOVERED: 0x0002000B,"
-        "    FOCUS_ON_SHOW: 0x0002000C,"
-        "    RED_BITS: 0x00021001,"
-        "    GREEN_BITS: 0x00021002,"
-        "    BLUE_BITS: 0x00021003,"
-        "    ALPHA_BITS: 0x00021004,"
-        "    DEPTH_BITS: 0x00021005,"
-        "    STENCIL_BITS: 0x00021006,"
-        "    ACCUM_RED_BITS: 0x00021007,"
-        "    ACCUM_GREEN_BITS: 0x00021008,"
-        "    ACCUM_BLUE_BITS: 0x00021009,"
-        "    ACCUM_ALPHA_BITS: 0x0002100A,"
-        "    AUX_BUFFERS: 0x0002100B,"
-        "    STEREO: 0x0002100C,"
-        "    SAMPLES: 0x0002100D,"
-        "    SRGB_CAPABLE: 0x0002100E,"
-        "    REFRESH_RATE: 0x0002100F,"
-        "    DOUBLEBUFFER: 0x00021010,"
-        "    CLIENT_API: 0x00022001,"
-        "    CONTEXT_VERSION_MAJOR: 0x00022002,"
-        "    CONTEXT_VERSION_MINOR: 0x00022003,"
-        "    CONTEXT_REVISION: 0x00022004,"
-        "    CONTEXT_ROBUSTNESS: 0x00022005,"
-        "    OPENGL_FORWARD_COMPAT: 0x00022006,"
-        "    OPENGL_DEBUG_CONTEXT: 0x00022007,"
-        "    OPENGL_PROFILE: 0x00022008,"
-        "    CONTEXT_RELEASE_BEHAVIOR: 0x00022009,"
-        "    CONTEXT_NO_ERROR: 0x0002200A,"
-        "    CONTEXT_CREATION_API: 0x0002200B,"
-        "    SCALE_TO_MONITOR: 0x0002200C,"
-        "    COCOA_RETINA_FRAMEBUFFER: 0x00023001,"
-        "    COCOA_FRAME_NAME: 0x00023002,"
-        "    COCOA_GRAPHICS_SWITCHING: 0x00023003,"
-        "    X11_CLASS_NAME: 0x00024001,"
-        "    X11_INSTANCE_NAME: 0x00024002,"
-        "};";
+    "GLFW = {"
+    "    FOCUSED: 0x00020001,"
+    "    ICONIFIED: 0x00020002,"
+    "    RESIZABLE: 0x00020003,"
+    "    VISIBLE: 0x00020004,"
+    "    DECORATED: 0x00020005,"
+    "    AUTO_ICONIFY: 0x00020006,"
+    "    FLOATING: 0x00020007,"
+    "    MAXIMIZED: 0x00020008,"
+    "    CENTER_CURSOR: 0x00020009,"
+    "    TRANSPARENT_FRAMEBUFFER: 0x0002000A,"
+    "    HOVERED: 0x0002000B,"
+    "    FOCUS_ON_SHOW: 0x0002000C,"
+    "    RED_BITS: 0x00021001,"
+    "    GREEN_BITS: 0x00021002,"
+    "    BLUE_BITS: 0x00021003,"
+    "    ALPHA_BITS: 0x00021004,"
+    "    DEPTH_BITS: 0x00021005,"
+    "    STENCIL_BITS: 0x00021006,"
+    "    ACCUM_RED_BITS: 0x00021007,"
+    "    ACCUM_GREEN_BITS: 0x00021008,"
+    "    ACCUM_BLUE_BITS: 0x00021009,"
+    "    ACCUM_ALPHA_BITS: 0x0002100A,"
+    "    AUX_BUFFERS: 0x0002100B,"
+    "    STEREO: 0x0002100C,"
+    "    SAMPLES: 0x0002100D,"
+    "    SRGB_CAPABLE: 0x0002100E,"
+    "    REFRESH_RATE: 0x0002100F,"
+    "    DOUBLEBUFFER: 0x00021010,"
+    "    CLIENT_API: 0x00022001,"
+    "    CONTEXT_VERSION_MAJOR: 0x00022002,"
+    "    CONTEXT_VERSION_MINOR: 0x00022003,"
+    "    CONTEXT_REVISION: 0x00022004,"
+    "    CONTEXT_ROBUSTNESS: 0x00022005,"
+    "    OPENGL_FORWARD_COMPAT: 0x00022006,"
+    "    OPENGL_DEBUG_CONTEXT: 0x00022007,"
+    "    OPENGL_PROFILE: 0x00022008,"
+    "    CONTEXT_RELEASE_BEHAVIOR: 0x00022009,"
+    "    CONTEXT_NO_ERROR: 0x0002200A,"
+    "    CONTEXT_CREATION_API: 0x0002200B,"
+    "    SCALE_TO_MONITOR: 0x0002200C,"
+    "    COCOA_RETINA_FRAMEBUFFER: 0x00023001,"
+    "    COCOA_FRAME_NAME: 0x00023002,"
+    "    COCOA_GRAPHICS_SWITCHING: 0x00023003,"
+    "    X11_CLASS_NAME: 0x00024001,"
+    "    X11_INSTANCE_NAME: 0x00024002,"
+    "};"
+    "var OS = {"
+#ifdef __WINDOWS__
+    "    PLATFORM: 'Windows',"
+#endif
+#ifdef __MACOS__
+    "    PLATFORM: 'macOS',"
+#endif
+#ifdef __LINUX__
+    "    PLATFORM: 'Linux',"
+#endif
+    "};";
     duk_eval_string(ctx, constants);
-    
+/*
     duk_eval_string(ctx, "var OS = new Object();");
 #ifdef __WINDOWS__
     duk_eval_string(ctx, "OS.PLATFORM = 'windows';");
@@ -449,6 +464,7 @@ static void regist_constants(duk_context *ctx) {
 #ifdef __MACOS__
     duk_eval_string(ctx, "OS.PLATFORM = 'macos';");
 #endif
+*/
 }
 
 static void regist_elements(duk_context *ctx) {

@@ -11,8 +11,14 @@ Raia.yeah();
 
 var a = 100;
 var b = 200;
-STDC.dlopen("foo.dylib");
-STDC.dlsym("foo", "fooooo", 0);
+
+Plugin.init("foo.dylib");
+Plugin.add("foo", "foo", 1);
+Plugin.add("plus", "plus", 2);
+
+foo("hello world");
+foo("Thank you!");
+print(plus(100,20));
 
 print(a + b);
 
@@ -260,11 +266,11 @@ function rnd(max) {
   return Math.floor(Math.random() * max);
 }
 
-if (OS.platform == 'windows') {
-    print('windows');
+if (OS.PLATFORM === 'Windows') {
+    print('Windows');
 }
-if (OS.platform == 'macos') {
-    print('macos');
+if (OS.PLATFORM == 'macOS') {
+    print('macOS');
 }
 
 STDC.puts("hello");

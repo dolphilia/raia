@@ -19,4 +19,3 @@ void regist_func(duk_context *ctx, duk_c_function func, const char *str, int nar
     duk_push_c_function(ctx, func, nargs);
     duk_put_global_string(ctx, str);
 }
-
