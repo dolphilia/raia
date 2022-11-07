@@ -402,6 +402,9 @@
     <ClCompile Include="..\..\src\static\static_duk_ctx.c">
       <Filter>ソース ファイル\static</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\static\static_dlfcn.c">
+      <Filter>ソース ファイル\static</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\platforms.h">
@@ -594,6 +597,9 @@
       <Filter>ソース ファイル\duktape_module</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\static\static_duk_ctx.h">
+      <Filter>ソース ファイル\static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\static\static_dlfcn.h">
       <Filter>ソース ファイル\static</Filter>
     </ClInclude>
   </ItemGroup>

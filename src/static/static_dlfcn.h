@@ -9,7 +9,11 @@
 #define static_dlfcn_h
 
 #include <stdio.h>
+#ifdef _WIN32
+#include <windows.h>
+#else
 #include <dlfcn.h>
+#endif
 #include "duktape/duktape.h"
 #include "wrapper/wrapper_duktape.h"
 

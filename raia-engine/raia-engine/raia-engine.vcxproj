@@ -269,6 +269,7 @@ xcopy "$(ProjectDir)..\..\js\raia.js" "$(OutDir)modules" /Y</Command>
     <ClCompile Include="..\..\src\raia\raia_al.c" />
     <ClCompile Include="..\..\src\raia\raia_duktape.c" />
     <ClCompile Include="..\..\src\raia\raia_gl.c" />
+    <ClCompile Include="..\..\src\static\static_dlfcn.c" />
     <ClCompile Include="..\..\src\static\static_duk_ctx.c" />
     <ClCompile Include="..\..\src\static\static_header.c" />
     <ClCompile Include="..\..\src\static\static_pixel_data.c" />
@@ -332,6 +333,7 @@ xcopy "$(ProjectDir)..\..\js\raia.js" "$(OutDir)modules" /Y</Command>
     <ClInclude Include="..\..\src\raia\raia_al.h" />
     <ClInclude Include="..\..\src\raia\raia_duktape.h" />
     <ClInclude Include="..\..\src\raia\raia_gl.h" />
+    <ClInclude Include="..\..\src\static\static_dlfcn.h" />
     <ClInclude Include="..\..\src\static\static_duk_ctx.h" />
     <ClInclude Include="..\..\src\static\static_header.h" />
     <ClInclude Include="..\..\src\static\static_pixel_data.h" />
