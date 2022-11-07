@@ -30,6 +30,23 @@ static duk_ret_t regist_stdc_puts(duk_context *ctx) {
     return 1;  /* no return value (= undefined) */
 }
 
+static duk_ret_t regist_stdc_dlopen(duk_context *ctx) {
+    const char* dll_file = duk_to_string(ctx, 0);
+    init_dlfcn(dll_file);
+    return 0;  /* no return value (= undefined) */
+}
+
+static duk_ret_t regist_stdc_dlsym(duk_context *ctx) {
+    //void * handle = get_dlfcn_handle();
+    const char* dll_func_name = duk_to_string(ctx, 0);
+    const char* regist_func_name = duk_to_string(ctx, 1);
+    int nargs = (int)duk_to_number(ctx, 2);
+    add_dlfcn_func(ctx, dll_func_name, nargs);
+    //duk_push_number(ctx, ret);
+    duk_put_global_string(ctx, regist_func_name);
+    return 0;  /* no return value (= undefined) */
+}
+
 // Function: regist_glfw_pool_events
 // GLFWのglfwPoolEventsに相当する。
 //
@@ -292,6 +309,8 @@ static void regist_functions(duk_context *ctx) {
     regist_func(ctx, regist_global_print, "print", 1);
     regist_func(ctx, regist_io_load_string_filename, "_io_load_string_filename", 1);
     regist_func(ctx, regist_stdc_puts, "_stdc_puts", 1);
+    regist_func(ctx, regist_stdc_dlopen, "_stdc_dlopen", 1);
+    regist_func(ctx, regist_stdc_dlsym, "_stdc_dlsym", 3);
     regist_func(ctx, regist_glfw_pool_events, "_glfw_pool_events", 0);
     regist_func(ctx, regist_glfw_window_should_close, "_glfw_window_should_close", 0);
     regist_func(ctx, regist_draw_redraw, "_draw_redraw", 0);
@@ -334,6 +353,8 @@ static void regist_methods(duk_context *ctx) {
     char* methods =
     "STDC = {"
     "    puts: function(a){_stdc_puts(a);},"
+    "    dlopen: function(a){_stdc_dlopen(a);},"
+    "    dlsym: function(a){_stdc_dlsym(a);},"
     "};"
     "IO = {"
     "    loadStringFilename: function(a){return _io_load_string_filename(a);},"

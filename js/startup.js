@@ -11,6 +11,8 @@ Raia.yeah();
 
 var a = 100;
 var b = 200;
+STDC.dlopen("foo.dylib");
+STDC.dlsym("foo", "fooooo", 0);
 
 print(a + b);
 

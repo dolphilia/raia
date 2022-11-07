@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B1F615E2918682D000687B5 /* static_dlfcn.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F615D2918682D000687B5 /* static_dlfcn.c */; };
 		8B99927428CDB8AF00DDF5DE /* raia-engine.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99927328CDB8AF00DDF5DE /* raia-engine.c */; };
 		8B9992BE28CDC05100DDF5DE /* startup.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8B9992BD28CDC03E00DDF5DE /* startup.js */; };
 		8B9992C528CDCC9500DDF5DE /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9992C328CDCC9500DDF5DE /* libglfw.3.3.dylib */; };
@@ -164,6 +165,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8B1F615C2918682D000687B5 /* static_dlfcn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = static_dlfcn.h; sourceTree = "<group>"; };
+		8B1F615D2918682D000687B5 /* static_dlfcn.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = static_dlfcn.c; sourceTree = "<group>"; };
 		8B6D9C9428C73E2F004D6A6C /* raia-engine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "raia-engine"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B8DFBB129041142002B47A7 /* raia.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = raia.js; path = ../../js/raia.js; sourceTree = "<group>"; };
 		8B99927328CDB8AF00DDF5DE /* raia-engine.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "raia-engine.c"; path = "../../src/raia-engine.c"; sourceTree = "<group>"; };
@@ -476,6 +479,8 @@
 				8B9992E628CDCE8500DDF5DE /* static_pixel_data.c */,
 				8BAAC3B328E6802300B1CCD1 /* static_duk_ctx.h */,
 				8BAAC3B428E6802300B1CCD1 /* static_duk_ctx.c */,
+				8B1F615C2918682D000687B5 /* static_dlfcn.h */,
+				8B1F615D2918682D000687B5 /* static_dlfcn.c */,
 			);
 			name = static;
 			path = ../../src/static;
@@ -819,6 +824,7 @@
 				8B9993D028CDE83300DDF5DE /* duk_bi_thrower.c in Sources */,
 				8B9993D628CDE83300DDF5DE /* duk_bi_proxy.c in Sources */,
 				8B9993DD28CDE83300DDF5DE /* duk_api_compile.c in Sources */,
+				8B1F615E2918682D000687B5 /* static_dlfcn.c in Sources */,
 				8B9993EE28CDE83300DDF5DE /* duk_bi_array.c in Sources */,
 				8B9992FB28CDCE8500DDF5DE /* static_pixel_data.c in Sources */,
 				8B9993EC28CDE83300DDF5DE /* duk_regexp_compiler.c in Sources */,
