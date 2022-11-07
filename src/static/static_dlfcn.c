@@ -247,7 +247,10 @@ raia_handle_t get_dlfcn_handle(void) {
 duk_ret_t (*add_dlfcn_func(duk_context *ctx, const char* dll_func_name)) (duk_context * ctx) {
     bool err_a;
     raia_handle_t handle = nth_plugin_list(plugin_list, 0, &err_a);
+
     duk_ret_t (*pfunc)(duk_context * ctx) = raia_dlsym(handle, dll_func_name);
+
+    //FARPROC pfunc = raia_dlsym(handle, dll_func_name);
     push_func_list(func_list, pfunc);
     bool err_b;
     pfunc = nth_func_list(func_list, 0, &err_b);

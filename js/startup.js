@@ -2,6 +2,7 @@
 //print(str);
 //var __tsc = require('typescriptServices.min');
 //var tsc = require('tsc');
+
 var Raia = require('raia');
 Raia.yeah();
 //var mod = require('foo/bar');
@@ -12,10 +13,13 @@ Raia.yeah();
 var a = 100;
 var b = 200;
 
-Plugin.init("foo.dylib");
+if (OS.PLATFORM === 'Windows') {
+    Plugin.init("foo.dll");
+} else if (OS.PLATFORM === 'macOS') {
+    Plugin.init("foo.dylib")
+}
 Plugin.add("foo", "foo", 1);
 Plugin.add("plus", "plus", 2);
-
 foo("hello world");
 foo("Thank you!");
 print(plus(100,20));
@@ -274,9 +278,3 @@ if (OS.PLATFORM == 'macOS') {
 }
 
 STDC.puts("hello");
-
-/*
-while(!GLFW.windowShouldClose()) {
-    GLFW.poolEvents();
-}
-*/

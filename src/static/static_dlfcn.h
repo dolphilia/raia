@@ -19,7 +19,7 @@
 
 #ifdef _WIN32
 #define raia_handle_t HMODULE
-#define raia_dlopen(file) LoadLibrary(file)
+#define raia_dlopen(file) LoadLibraryA(file)
 #define raia_dlsym(handle,name) GetProcAddress(handle,name)
 #define raia_dlclose(handle) FreeLibrary(handle)
 #else
