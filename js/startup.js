@@ -24,6 +24,11 @@ foo("hello world");
 foo("Thank you!");
 print(plus(100,20));
 
+Plugin.init("bar.dylib");
+Plugin.add("bar", "bar", 1);
+bar("bar");
+
+
 print(a + b);
 
 const byebye = function(){
