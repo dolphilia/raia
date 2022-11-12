@@ -1,9 +1,9 @@
 ---
 name: Issue
-about: プロジェクト管理のためのIssues
+about: Issue for project management
 title: ''
-labels: ToDo
-assignees: dolphilia
+labels: ''
+assignees: ''
 
 ---
 
