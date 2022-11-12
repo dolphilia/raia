@@ -7,10 +7,13 @@
     - [x] macOS
     - [ ] Linux
     - [ ] Windows(MinGW)
-- [ ] 拡張プラグインサポート(dlfun.h)
+- [x] 拡張プラグインサポート(dlfun.h)
+  - [x] C言語
+  - [x] C++言語
+- [ ] プラグイン作成のサポート(SDK)
 - [ ] トランスコンパイル
-  - [ ] Babel
-  - [ ] TypeScript
+  - [x] Babel
+  - [x] TypeScript
   - [ ] 複数ファイルのトランスコンパイル
   - [ ] RaiaToolsとの連携
 - [ ] APIの選定
