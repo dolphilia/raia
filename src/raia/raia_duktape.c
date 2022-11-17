@@ -30,13 +30,13 @@ static duk_ret_t regist_stdc_puts(duk_context *ctx) {
     return 1;  /* no return value (= undefined) */
 }
 
-static duk_ret_t regist_plugin_init(duk_context *ctx) {
+static duk_ret_t regist_library_init(duk_context *ctx) {
     const char* dll_file = duk_to_string(ctx, 0);
     init_dlfcn(dll_file);
     return 0;  /* no return value (= undefined) */
 }
 
-static duk_ret_t regist_plugin_add(duk_context *ctx) {
+static duk_ret_t regist_library_add(duk_context *ctx) {
     //void * handle = get_dlfcn_handle();
     const char* dll_func_name = duk_to_string(ctx, 0);
     const char* regist_func_name = duk_to_string(ctx, 1);
@@ -310,8 +310,8 @@ static void regist_functions(duk_context *ctx) {
     regist_func(ctx, regist_global_print, "print", 1);
     regist_func(ctx, regist_io_load_string_filename, "_io_load_string_filename", 1);
     regist_func(ctx, regist_stdc_puts, "_stdc_puts", 1);
-    regist_func(ctx, regist_plugin_init, "_plugin_init", 1);
-    regist_func(ctx, regist_plugin_add, "_plugin_add", 3);
+    regist_func(ctx, regist_library_init, "_library_init", 1);
+    regist_func(ctx, regist_library_add, "_library_add", 3);
     regist_func(ctx, regist_glfw_pool_events, "_glfw_pool_events", 0);
     regist_func(ctx, regist_glfw_window_should_close, "_glfw_window_should_close", 0);
     regist_func(ctx, regist_draw_redraw, "_draw_redraw", 0);
@@ -339,7 +339,7 @@ static void regist_functions(duk_context *ctx) {
 static void regist_objects(duk_context *ctx) {
     char* objects =
         "var STDC = {};"
-        "var Plugin = {};"
+        "var Library = {};"
         "var IO = {};"
         "var GLFW = {};"
         "var Draw = {};"
@@ -356,9 +356,9 @@ static void regist_methods(duk_context *ctx) {
     "STDC = {"
     "    puts: function(a){_stdc_puts(a);},"
     "};"
-    "Plugin = {"
-    "    init: function(a){_plugin_init(a);},"
-    "    add: function(a,b,c){_plugin_add(a,b,c);},"
+    "Library = {"
+    "    init: function(a){_library_init(a);},"
+    "    add: function(a,b,c){_library_add(a,b,c);},"
     "};"
     "IO = {"
     "    loadStringFilename: function(a){return _io_load_string_filename(a);},"

@@ -14,18 +14,18 @@ var a = 100;
 var b = 200;
 
 if (OS.PLATFORM === 'Windows') {
-    Plugin.init("foo.dll");
+    Library.init("foo.dll");
 } else if (OS.PLATFORM === 'macOS') {
-    Plugin.init("foo.dylib")
+    Library.init("foo.dylib")
 }
-Plugin.add("foo", "foo", 1);
-Plugin.add("plus", "plus", 2);
+Library.add("foo", "foo", 1);
+Library.add("plus", "plus", 2);
 foo("hello world");
 foo("Thank you!");
 print(plus(100,20));
 
-Plugin.init("bar.dylib");
-Plugin.add("bar", "bar", 1);
+Library.init("bar.dylib");
+Library.add("bar", "bar", 1);
 bar("bar");
 
 
