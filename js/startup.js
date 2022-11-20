@@ -1,14 +1,23 @@
-//var str = IO.loadStringFilename('foo/bar.js');
-//print(str);
-//var __tsc = require('typescriptServices.min');
-//var tsc = require('tsc');
 
+Draw.setPoint(100,100);
+Image.load("gaurin-cute_200px.png");
+Draw.redraw();
+
+while(!GLFW.windowShouldClose()) {
+    GLFW.poolEvents();
+}
+
+//GLFW.windowShouldClose();
+Window.setTitle("title");
+
+//Event.setUpdateCallback(function() {
+//    Draw.setColor(0, 255, 255);
+//    Draw.fillRect(0, 0, 640, 480);
+//});
+
+/*
 var Raia = require('raia');
 Raia.yeah();
-//var mod = require('foo/bar');
-//mod.hello();
-//adder(2,3);
-// sample
 
 var a = 100;
 var b = 200;
@@ -18,6 +27,7 @@ if (OS.PLATFORM === 'Windows') {
 } else if (OS.PLATFORM === 'macOS') {
     Library.init("foo.dylib")
 }
+
 Library.add("foo", "foo", 1);
 Library.add("plus", "plus", 2);
 foo("hello world");
@@ -43,11 +53,6 @@ callback(byebye);
 call();
 callback(hello);
 call();
-
-// Event.setErrorCallback
-// Event.setKeyCallback
-// Event.setMouseCallback
-// Event.setUpdateCallback
 
 var game_scene = 0; // 0 = タイトル画面, 1 = ゲーム中, 2 = ゲームオーバー
 Window.setTitle("Click to start");
@@ -283,3 +288,4 @@ if (OS.PLATFORM == 'macOS') {
 }
 
 STDC.puts("hello");
+*/

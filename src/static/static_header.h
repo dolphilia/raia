@@ -42,6 +42,7 @@ raia_header_t get_raia_header(void);
 void set_resolution_size(int width, int height);
 void set_title(char* title);
 void set_current_color(int r, int g, int b);
+void set_current_point(int x, int y);
 void set_exist_update_callback(bool is_exist);
 
 #endif /* raia_struct_h */

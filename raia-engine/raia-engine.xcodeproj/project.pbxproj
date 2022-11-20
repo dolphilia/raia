@@ -12,7 +12,6 @@
 		8B9992BE28CDC05100DDF5DE /* startup.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8B9992BD28CDC03E00DDF5DE /* startup.js */; };
 		8B9992C528CDCC9500DDF5DE /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9992C328CDCC9500DDF5DE /* libglfw.3.3.dylib */; };
 		8B9992C628CDCC9500DDF5DE /* libopenal.1.22.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9992C428CDCC9500DDF5DE /* libopenal.1.22.2.dylib */; };
-		8B9992F228CDCE8500DDF5DE /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9992CA28CDCE8500DDF5DE /* stb_image.c */; };
 		8B9992F328CDCE8500DDF5DE /* wrapper_glfw.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9992D228CDCE8500DDF5DE /* wrapper_glfw.c */; };
 		8B9992F428CDCE8500DDF5DE /* wrapper_stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9992D328CDCE8500DDF5DE /* wrapper_stb_image.c */; };
 		8B9992F528CDCE8500DDF5DE /* wrapper_duktape.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B9992D428CDCE8500DDF5DE /* wrapper_duktape.c */; };
@@ -143,6 +142,7 @@
 		8BAAC3AF28E61BCE00B1CCD1 /* wrapper_gles.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAC3AE28E61BCE00B1CCD1 /* wrapper_gles.c */; };
 		8BAAC3B228E6217D00B1CCD1 /* static_shader.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAC3B128E6217D00B1CCD1 /* static_shader.c */; };
 		8BAAC3B528E6802300B1CCD1 /* static_duk_ctx.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAC3B428E6802300B1CCD1 /* static_duk_ctx.c */; };
+		8BBE0FBA292614F00068EBD9 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BBE0FB9292614F00068EBD9 /* stb_image.c */; };
 		8BD53FC9290773BF00531E18 /* duk_module_duktape.c in Sources */ = {isa = PBXBuildFile; fileRef = 8BD53FC8290773BF00531E18 /* duk_module_duktape.c */; };
 /* End PBXBuildFile section */
 
@@ -173,10 +173,8 @@
 		8B9992BD28CDC03E00DDF5DE /* startup.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = startup.js; path = ../../js/startup.js; sourceTree = "<group>"; };
 		8B9992C328CDCC9500DDF5DE /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
 		8B9992C428CDCC9500DDF5DE /* libopenal.1.22.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopenal.1.22.2.dylib; path = ../../lib/libopenal.1.22.2.dylib; sourceTree = "<group>"; };
-		8B9992CA28CDCE8500DDF5DE /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stb_image.c; sourceTree = "<group>"; };
 		8B9992CB28CDCE8500DDF5DE /* stb_image_write.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image_write.h; sourceTree = "<group>"; };
 		8B9992CC28CDCE8500DDF5DE /* stb_image_resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image_resize.h; sourceTree = "<group>"; };
-		8B9992CD28CDCE8500DDF5DE /* stb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb.h; sourceTree = "<group>"; };
 		8B9992CE28CDCE8500DDF5DE /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 		8B9992D028CDCE8500DDF5DE /* wrapper_stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wrapper_stb_image.h; sourceTree = "<group>"; };
 		8B9992D128CDCE8500DDF5DE /* wrapper_duktape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wrapper_duktape.h; sourceTree = "<group>"; };
@@ -364,6 +362,8 @@
 		8BAAC3B128E6217D00B1CCD1 /* static_shader.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = static_shader.c; sourceTree = "<group>"; };
 		8BAAC3B328E6802300B1CCD1 /* static_duk_ctx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = static_duk_ctx.h; sourceTree = "<group>"; };
 		8BAAC3B428E6802300B1CCD1 /* static_duk_ctx.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = static_duk_ctx.c; sourceTree = "<group>"; };
+		8BBE0FB9292614F00068EBD9 /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stb_image.c; sourceTree = "<group>"; };
+		8BBE0FBB292614F30068EBD9 /* stb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb.h; sourceTree = "<group>"; };
 		8BD53FC7290773BF00531E18 /* duk_module_duktape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = duk_module_duktape.h; sourceTree = "<group>"; };
 		8BD53FC8290773BF00531E18 /* duk_module_duktape.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = duk_module_duktape.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -440,11 +440,11 @@
 		8B9992C928CDCE8500DDF5DE /* stb */ = {
 			isa = PBXGroup;
 			children = (
-				8B9992CA28CDCE8500DDF5DE /* stb_image.c */,
+				8BBE0FBB292614F30068EBD9 /* stb.h */,
 				8B9992CB28CDCE8500DDF5DE /* stb_image_write.h */,
 				8B9992CC28CDCE8500DDF5DE /* stb_image_resize.h */,
-				8B9992CD28CDCE8500DDF5DE /* stb.h */,
 				8B9992CE28CDCE8500DDF5DE /* stb_image.h */,
+				8BBE0FB9292614F00068EBD9 /* stb_image.c */,
 			);
 			name = stb;
 			path = ../../src/stb;
@@ -682,8 +682,8 @@
 		8BD53FC6290773A900531E18 /* duktape_module */ = {
 			isa = PBXGroup;
 			children = (
-				8BD53FC8290773BF00531E18 /* duk_module_duktape.c */,
 				8BD53FC7290773BF00531E18 /* duk_module_duktape.h */,
+				8BD53FC8290773BF00531E18 /* duk_module_duktape.c */,
 			);
 			name = duktape_module;
 			path = ../../src/duktape_module;
@@ -774,6 +774,7 @@
 				8B9993F228CDE83300DDF5DE /* duk_hthread_alloc.c in Sources */,
 				8B9993CE28CDE83300DDF5DE /* duk_bi_cbor.c in Sources */,
 				8B9993AE28CDE83300DDF5DE /* duk_hthread_stacks.c in Sources */,
+				8BBE0FBA292614F00068EBD9 /* stb_image.c in Sources */,
 				8BAAC3B228E6217D00B1CCD1 /* static_shader.c in Sources */,
 				8B9993C328CDE83300DDF5DE /* duk_heap_finalize.c in Sources */,
 				8B9993E828CDE83300DDF5DE /* duk_hobject_assert.c in Sources */,
@@ -808,7 +809,6 @@
 				8BD53FC9290773BF00531E18 /* duk_module_duktape.c in Sources */,
 				8B9993FE28CDE83300DDF5DE /* duk_bi_duktape.c in Sources */,
 				8B9993B328CDE83300DDF5DE /* duk_error_macros.c in Sources */,
-				8B9992F228CDCE8500DDF5DE /* stb_image.c in Sources */,
 				8B9993F528CDE83300DDF5DE /* duk_api_inspect.c in Sources */,
 				8B9993CC28CDE83300DDF5DE /* duk_api_heap.c in Sources */,
 				8B9993DA28CDE83300DDF5DE /* duk_api_codec.c in Sources */,

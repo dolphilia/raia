@@ -43,8 +43,10 @@ frame_t load_image(char const *file_name, uint8_t *pixel_data, int32_t point_x, 
     image_pixels = stbi_load(file_name, &image_width, &image_height, &image_bpp, 0);
     image_size.width = image_width;
     image_size.height = image_height;
+    //image_bpp = 3;
     
-    int i = point_x * 4 + point_y * canvas_size_width * 4;
+    //int i = point_x * 4 + point_y * canvas_size_width * 4;
+    int i = point_x * 3 + point_y * canvas_size_width * 3;
     int j = 0;
     int posx_now = point_x;
     
@@ -54,7 +56,7 @@ frame_t load_image(char const *file_name, uint8_t *pixel_data, int32_t point_x, 
         }
         posx_now = point_x;
         for (int x = 0; x < image_width; x++) {
-            if(canvas_size_width <= x+point_x || posx_now < 0) {
+            if(canvas_size_width <= x + point_x || posx_now < 0) {
                 j += image_bpp;
                 i += 4;
                 posx_now++;
@@ -62,15 +64,18 @@ frame_t load_image(char const *file_name, uint8_t *pixel_data, int32_t point_x, 
             }
             if(image_bpp == 4) {
                 memcpy(&pixel_data[i], &image_pixels[j], 4);
+                //pixel_data[i + 3] = 255;
             } else {
                 memcpy(&pixel_data[i], &image_pixels[j], 3);
-                pixel_data[i+3] = 255;
+                pixel_data[i + 3] = 255;
             }
-            j += image_bpp;
-            i += 4;
+            j += 4;//image_bpp;
+            //i += 4;
+            i += 3;
             posx_now++;
         }
-        i += canvas_size_width * 4 - image_width * 4;
+        i += canvas_size_width * 3 - image_width * 3;
+        //i += canvas_size_width * 4 - image_width * 4;
     }
     
     free(image_pixels);

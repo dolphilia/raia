@@ -26,11 +26,13 @@
 #include "static/static_dlfcn.h"
 #include "wrapper/wrapper_glfw.h"
 #include "wrapper/wrapper_duktape.h"
+#include "wrapper/wrapper_stb_image.h"
 #include "util/util_pixel.h"
 #include "util/util_math.h"
 #include "raia/raia_gl.h"
 #include "duktape/duktape.h"
 #include "duktape_module/duk_module_duktape.h"
+
 
 void duktape_start(void);
 

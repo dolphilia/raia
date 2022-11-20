@@ -20,6 +20,8 @@ void init_raia_header(void) {
     raia_header.current_color.red = 0;
     raia_header.current_color.green = 0;
     raia_header.current_color.blue = 0;
+    raia_header.current_point.x = 0;
+    raia_header.current_point.y = 0;
     raia_header.exist_update_callback = false;
 }
 
@@ -40,6 +42,11 @@ void set_current_color(int r, int g, int b) {
     raia_header.current_color.red = r;
     raia_header.current_color.green = g;
     raia_header.current_color.blue = b;
+}
+
+void set_current_point(int x, int y) {
+    raia_header.current_point.x = x;
+    raia_header.current_point.y = y;
 }
 
 void set_exist_update_callback(bool is_exist) {

@@ -152,6 +152,13 @@ static duk_ret_t regist_draw_set_current_color(duk_context *ctx) {
     return 0;  /* no return value (= undefined) */
 }
 
+static duk_ret_t regist_draw_set_current_point(duk_context *ctx) {
+    int x = duk_to_int(ctx, 0);
+    int y = duk_to_int(ctx, 1);
+    set_current_point(x, y);
+    return 0;  /* no return value (= undefined) */
+}
+
 static duk_ret_t regist_window_set_title(duk_context *ctx) {
     GLFWwindow* window = get_raia_window();
     const char* title = duk_to_string(ctx, 0);
@@ -176,6 +183,17 @@ static duk_ret_t regist_window_get_height(duk_context *ctx) {
     raia_header_t header = get_raia_header();
     duk_push_int(ctx, header.window_height);
     return 1;  /* no return value (= undefined) */
+}
+
+static duk_ret_t regist_image_load(duk_context *ctx) {
+    //GLFWwindow* window = get_raia_window();
+    const char* filename = duk_to_string(ctx, 0);
+    uint8_t* pixel_data = get_pixel_data();
+    raia_header_t header = get_raia_header();
+    load_image(filename, pixel_data, header.current_point.x, header.current_point.y, header.window_width, header.window_height);
+    //glfwSetWindowTitle(window, title);
+    //set_title((char*)title);
+    return 0;  /* no return value (= undefined) */
 }
 
 static duk_ret_t regist_callback(duk_context *ctx) {
@@ -320,10 +338,12 @@ static void regist_functions(duk_context *ctx) {
     regist_func(ctx, regist_draw_fill_rect_rgb, "_draw_fill_rect_rgb", 7);
     regist_func(ctx, regist_draw_fill_rect, "_draw_fill_rect", 4);
     regist_func(ctx, regist_draw_set_current_color, "_draw_set_current_color", 3);
+    regist_func(ctx, regist_draw_set_current_point, "_draw_set_current_point", 2);
     regist_func(ctx, regist_window_set_title, "_window_set_title", 1);
     regist_func(ctx, regist_window_get_title, "_window_get_title", 0);
     regist_func(ctx, regist_window_get_width, "_window_get_width", 0);
     regist_func(ctx, regist_window_get_height, "_window_get_height", 0);
+    regist_func(ctx, regist_image_load, "_image_load", 1);
     regist_func(ctx, regist_event_set_key_callback, "_event_set_key_callback", 1);
     regist_func(ctx, regist_event_set_error_callback, "_event_set_error_callback", 1);
     regist_func(ctx, regist_event_set_update_callback, "_event_set_update_callback", 1);
@@ -338,13 +358,15 @@ static void regist_functions(duk_context *ctx) {
 //
 static void regist_objects(duk_context *ctx) {
     char* objects =
-        "var STDC = {};"
-        "var Library = {};"
-        "var IO = {};"
-        "var GLFW = {};"
-        "var Draw = {};"
-        "var Window = {};"
-        "var Event = {};";
+    "var STDC = {};"
+    "var Library = {};"
+    "var IO = {};"
+    "var GLFW = {};"
+    "var Draw = {};"
+    "var Image = {};"
+    "var Window = {};"
+    "var Event = {};"
+    ;
     duk_eval_string(ctx, objects);
 }
 
@@ -372,6 +394,7 @@ static void regist_methods(duk_context *ctx) {
     "Draw = {"
     "    redraw: function(){return _draw_redraw();},"
     "    setColor: function(a,b,c){_draw_set_current_color(a,b,c);},"
+    "    setPoint: function(a,b){_draw_set_current_point(a,b);},"
     "    setPixel: function(a,b){_draw_set_pixel(a,b);},"
     "    fillRect: function(a,b,c,d){_draw_fill_rect(a,b,c,d);},"
     "    setPixelRGB: function(a,b,c,d,e){_draw_set_pixel_rgb(a,b,c,d,e);},"
@@ -380,6 +403,9 @@ static void regist_methods(duk_context *ctx) {
     "GLFW = {"
     "    poolEvents: function(){_glfw_pool_events();},"
     "    windowShouldClose: function(){return _glfw_window_should_close();},"
+    "};"
+    "Image = {"
+    "    load: function(a){_image_load(a)},"
     "};"
     "Event = {"
     "    setKeyCallback: function(a,b,c,d){return _event_set_key_callback(a,b,c,d);},"
@@ -397,6 +423,7 @@ static void regist_methods(duk_context *ctx) {
 //
 static void regist_constants(duk_context *ctx) {
     char* constants =
+    /*
     "GLFW = {"
     "    FOCUSED: 0x00020001,"
     "    ICONIFIED: 0x00020002,"
@@ -444,6 +471,7 @@ static void regist_constants(duk_context *ctx) {
     "    X11_CLASS_NAME: 0x00024001,"
     "    X11_INSTANCE_NAME: 0x00024002,"
     "};"
+    */
     "var OS = {"
 #ifdef __WINDOWS__
     "    PLATFORM: 'Windows',"
