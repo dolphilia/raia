@@ -1,4 +1,4 @@
-
+/*
 Draw.setPoint(100,100);
 Image.load("gaurin-cute_200px.png");
 Draw.redraw();
@@ -14,45 +14,72 @@ Window.setTitle("title");
 //    Draw.setColor(0, 255, 255);
 //    Draw.fillRect(0, 0, 640, 480);
 //});
+*/
 
-/*
-var Raia = require('raia');
-Raia.yeah();
+//var Raia = require('raia');
+//Raia.yeah();
 
-var a = 100;
-var b = 200;
+//var a = 100;
+//var b = 200;
+//
+//if (OS.PLATFORM === 'Windows') {
+//    Library.init("foo.dll");
+//} else if (OS.PLATFORM === 'macOS') {
+//    Library.init("foo.dylib")
+//}
+//
+//Library.add("foo", "foo", 1);
+//Library.add("plus", "plus", 2);
+//foo("hello world");
+//foo("Thank you!");
+//print(plus(100,20));
+//
+//Library.init("bar.dylib");
+//Library.add("bar", "bar", 1);
+//bar("bar");
+//
+//
+//print(a + b);
+//
+//const byebye = function(){
+//  print('byebye');
+//}
+//
+//const hello = function(){
+//  print('hello');
+//}
+//
+//callback(byebye);
+//call();
+//callback(hello);
+//call();
 
-if (OS.PLATFORM === 'Windows') {
-    Library.init("foo.dll");
-} else if (OS.PLATFORM === 'macOS') {
-    Library.init("foo.dylib")
+var buffer = new ArrayBuffer(8);
+var view = new Uint8Array(buffer);
+view[0] = 255;
+//const view = new DataView(buffer);
+//view.setUint8(0, 255); // (max unsigned 8-bit integer)
+//print(view.getUint8(0));
+
+var plain = Uint8Array.allocPlain(8);  // Duktapeカスタムコール
+plain[0] = 200;
+print(plain[0]);
+
+//buffer_test(plain); // plain buffer
+buffer_test(buffer);
+
+var obj = {
+    apple: 100,
+    orange: 200,
 }
 
-Library.add("foo", "foo", 1);
-Library.add("plus", "plus", 2);
-foo("hello world");
-foo("Thank you!");
-print(plus(100,20));
+object_test(obj);
 
-Library.init("bar.dylib");
-Library.add("bar", "bar", 1);
-bar("bar");
-
-
-print(a + b);
-
-const byebye = function(){
-  print('byebye');
-}
-
-const hello = function(){
-  print('hello');
-}
-
-callback(byebye);
-call();
-callback(hello);
-call();
+var o = get_object_test();
+print(o.meaningOfLife);
+print(o.raia_value);
+print(o.raia_str);
+print(o.raia_array[0]);
 
 var game_scene = 0; // 0 = タイトル画面, 1 = ゲーム中, 2 = ゲームオーバー
 Window.setTitle("Click to start");
@@ -288,4 +315,4 @@ if (OS.PLATFORM == 'macOS') {
 }
 
 STDC.puts("hello");
-*/
+

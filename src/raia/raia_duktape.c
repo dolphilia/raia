@@ -7,9 +7,68 @@
 
 #include "raia/raia_duktape.h"
 
-// Function: regist_global_print
-// console.logの代替
-//
+static duk_ret_t regist_global_buffer_test(duk_context *ctx) {
+    unsigned char *ptr;
+    duk_size_t len;
+    //duk_size_t i;
+    ptr = (unsigned char *) duk_require_buffer_data(ctx, 0 /*idx*/, &len);
+    printf("%d %d\n", (int)ptr[0], (int)len);
+    //duk_size_t size;
+    //void * ptr = duk_to_buffer(ctx, 0, &size);
+    //printf("coerced data at %p, size %lu\n", ptr, (unsigned long) size);
+    //uint8_t * u8 = (uint8_t *)ptr;
+    //printf("%d\n", (int)u8[0]);
+    
+    //printf("%s\n", duk_to_string(ctx, 0));
+    //ptr = duk_require_buffer_data(ctx, -3, &sz);
+    //duk_get_buffer_data(ctx, <#duk_idx_t idx#>, <#duk_size_t *out_size#>)
+    return 0;  /* no return value (= undefined) */
+}
+
+static duk_ret_t regist_global_object_test(duk_context *ctx) {
+   // void *ptr = duk_get_heapptr(ctx, 0);
+    
+    //printf("%s\n", duk_to_string(ctx, 0));
+    //if (duk_is_object(ctx, 0)) {
+    //    printf("true\n");
+    //    /* ... */
+    //}
+
+    //duk_push_object(ctx);
+    //printf("JSON encoded: %s\n", duk_json_encode(ctx, -1));
+    
+    return 1;  /* no return value (= undefined) */
+}
+
+static duk_ret_t regist_global_get_object_test(duk_context *ctx) {
+    //printf("%s\n", duk_to_string(ctx, 0));
+    // return {
+    //     raia_ver: 1,
+    //     raia_value: 102,
+    //     raia_str: hello raia,
+    //     raia_array: ["foo", "bar"],
+    // }
+    duk_push_object(ctx);
+    duk_push_int(ctx, 1);
+    duk_put_prop_string(ctx, -2, "raia_ver");
+    duk_push_int(ctx, 102);
+    duk_put_prop_string(ctx, -2, "raia_value");
+    duk_push_string(ctx, "hello raia");
+    duk_put_prop_string(ctx, -2, "raia_str");
+    
+    duk_idx_t arr_idx;
+    arr_idx = duk_push_array(ctx);
+    duk_push_string(ctx, "foo");
+    duk_put_prop_index(ctx, arr_idx, 0);
+    duk_push_string(ctx, "bar");
+    duk_put_prop_index(ctx, arr_idx, 1);
+    //duk_pop(ctx);
+    duk_put_prop_string(ctx, -2, "raia_array");
+    
+    return 1;  /* no return value (= undefined) */
+}
+
+
 static duk_ret_t regist_global_print(duk_context *ctx) {
     printf("%s\n", duk_to_string(ctx, 0));
     return 0;  /* no return value (= undefined) */
@@ -325,6 +384,9 @@ static void regist_callbacks(duk_context *ctx) {
 // 関数群を登録する
 //
 static void regist_functions(duk_context *ctx) {
+    regist_func(ctx, regist_global_buffer_test, "buffer_test", 1);
+    regist_func(ctx, regist_global_object_test, "object_test", 1);
+    regist_func(ctx, regist_global_get_object_test, "get_object_test", 1);
     regist_func(ctx, regist_global_print, "print", 1);
     regist_func(ctx, regist_io_load_string_filename, "_io_load_string_filename", 1);
     regist_func(ctx, regist_stdc_puts, "_stdc_puts", 1);
