@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8B1F615E2918682D000687B5 /* static_dlfcn.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B1F615D2918682D000687B5 /* static_dlfcn.c */; };
+		8B5AD5A8294EEEDE00CBB264 /* gamepad.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B5AD5A7294EEEDE00CBB264 /* gamepad.c */; };
 		8B99927428CDB8AF00DDF5DE /* raia-engine.c in Sources */ = {isa = PBXBuildFile; fileRef = 8B99927328CDB8AF00DDF5DE /* raia-engine.c */; };
 		8B9992BE28CDC05100DDF5DE /* startup.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8B9992BD28CDC03E00DDF5DE /* startup.js */; };
 		8B9992C528CDCC9500DDF5DE /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9992C328CDCC9500DDF5DE /* libglfw.3.3.dylib */; };
@@ -167,6 +168,8 @@
 /* Begin PBXFileReference section */
 		8B1F615C2918682D000687B5 /* static_dlfcn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = static_dlfcn.h; sourceTree = "<group>"; };
 		8B1F615D2918682D000687B5 /* static_dlfcn.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = static_dlfcn.c; sourceTree = "<group>"; };
+		8B5AD5A6294EEEDE00CBB264 /* gamepad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = gamepad.h; path = ../../../src/gamepad/gamepad.h; sourceTree = "<group>"; };
+		8B5AD5A7294EEEDE00CBB264 /* gamepad.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = gamepad.c; path = ../../../src/gamepad/gamepad.c; sourceTree = "<group>"; };
 		8B6D9C9428C73E2F004D6A6C /* raia-engine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "raia-engine"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B8DFBB129041142002B47A7 /* raia.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = raia.js; path = ../../js/raia.js; sourceTree = "<group>"; };
 		8B99927328CDB8AF00DDF5DE /* raia-engine.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "raia-engine.c"; path = "../../src/raia-engine.c"; sourceTree = "<group>"; };
@@ -386,6 +389,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B5AD5A5294EEECE00CBB264 /* gamepad */ = {
+			isa = PBXGroup;
+			children = (
+				8B5AD5A7294EEEDE00CBB264 /* gamepad.c */,
+				8B5AD5A6294EEEDE00CBB264 /* gamepad.h */,
+			);
+			path = gamepad;
+			sourceTree = "<group>";
+		};
 		8B6D9C8B28C73E2F004D6A6C = {
 			isa = PBXGroup;
 			children = (
@@ -418,6 +430,7 @@
 				8BAAC39F28E61AFD00B1CCD1 /* libchrome_zlib.dylib */,
 				8BAAC3A128E61AFD00B1CCD1 /* libEGL.dylib */,
 				8BAAC3A228E61AFD00B1CCD1 /* libGLESv2.dylib */,
+				8B5AD5A5294EEECE00CBB264 /* gamepad */,
 				8BD53FC6290773A900531E18 /* duktape_module */,
 				8B9992EB28CDCE8500DDF5DE /* raia */,
 				8B9992CF28CDCE8500DDF5DE /* wrapper */,
@@ -825,6 +838,7 @@
 				8B9993D628CDE83300DDF5DE /* duk_bi_proxy.c in Sources */,
 				8B9993DD28CDE83300DDF5DE /* duk_api_compile.c in Sources */,
 				8B1F615E2918682D000687B5 /* static_dlfcn.c in Sources */,
+				8B5AD5A8294EEEDE00CBB264 /* gamepad.c in Sources */,
 				8B9993EE28CDE83300DDF5DE /* duk_bi_array.c in Sources */,
 				8B9992FB28CDCE8500DDF5DE /* static_pixel_data.c in Sources */,
 				8B9993EC28CDE83300DDF5DE /* duk_regexp_compiler.c in Sources */,
