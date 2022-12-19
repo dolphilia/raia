@@ -34,6 +34,9 @@
     <Filter Include="ソース ファイル\duktape_module">
       <UniqueIdentifier>{8bebca53-0856-4adf-bd75-0456fdd97f42}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\gamepad">
+      <UniqueIdentifier>{9d57fe57-5a63-436e-8aca-a82b3c73bd13}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\raia-engine.c">
@@ -405,6 +408,9 @@
     <ClCompile Include="..\..\src\static\static_dlfcn.c">
       <Filter>ソース ファイル\static</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\gamepad\gamepad.c">
+      <Filter>ソース ファイル\gamepad</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\platforms.h">
@@ -601,6 +607,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\static\static_dlfcn.h">
       <Filter>ソース ファイル\static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\gamepad\gamepad.h">
+      <Filter>ソース ファイル\gamepad</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

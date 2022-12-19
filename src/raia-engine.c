@@ -3,6 +3,10 @@
 //
 
 #include "raia-engine.h"
+
+#include "platforms.h"
+
+#ifdef __MACOS__
 #include "gamepad.h"
 
 void callback(int type, int page, int usage, int value) {
@@ -39,8 +43,64 @@ void callback(int type, int page, int usage, int value) {
     if (type == 1 && page != 65280 && usage!=48 && usage!=53)
         printf("type=%d, page=%d, usage=%d, value=%d\n", type, page, usage, value);
 }
+#endif
+
+#ifdef __WINDOWS__
+#pragma comment(lib, "winmm.lib")
+#include <stdio.h>
+#include <windows.h>
+#include <mmsystem.h>
+#endif
 
 int main(int argc, char* argv[]) {
+
+#ifdef __WINDOWS__
+    JOYINFOEX JoyInfoEx;
+    JoyInfoEx.dwSize = sizeof(JOYINFOEX);
+    JoyInfoEx.dwFlags = JOY_RETURNALL;
+
+    for (unsigned int i = 0; i < joyGetNumDevs(); i++) {//サポートされているジョイスティックの数を返す
+        if (JOYERR_NOERROR == joyGetPosEx(i, &JoyInfoEx))
+            printf("JoyStick No.%d OK\n", i);
+    }
+    Sleep(1000);
+    //DWORD dwSize;                /* size of structure */
+    //DWORD dwFlags;               /* flags to indicate what to return */
+    //DWORD dwXpos;                /* x position */
+    //DWORD dwYpos;                /* y position */
+    //DWORD dwZpos;                /* z position */
+    //DWORD dwRpos;                /* rudder/4th axis position */
+    //DWORD dwUpos;                /* 5th axis position */
+    //DWORD dwVpos;                /* 6th axis position */
+    //DWORD dwButtons;             /* button states */
+    //DWORD dwButtonNumber;        /* current button number pressed */
+    //DWORD dwPOV;                 /* point of view state */
+    //DWORD dwReserved1;           /* reserved for communication between winmm & driver */
+    //DWORD dwReserved2;           /* reserved for future expansion */
+    while (1) {
+        if (JOYERR_NOERROR == joyGetPosEx(0, &JoyInfoEx)) { //0番のジョイスティックの情報を見る
+            printf("dwSize = 0x%x, ", JoyInfoEx.dwSize);
+            printf("dwFlags = 0x%x, ", JoyInfoEx.dwFlags);
+            printf("dwXpos = 0x%x, ", JoyInfoEx.dwXpos);
+            printf("dwYpos = 0x%x, ", JoyInfoEx.dwYpos);
+            printf("dwXpos = 0x%x, ", JoyInfoEx.dwZpos);
+            printf("dwRpos = 0x%x, ", JoyInfoEx.dwRpos);
+            printf("dwUpos = 0x%x, ", JoyInfoEx.dwUpos);
+            printf("dwVpos = 0x%x, ", JoyInfoEx.dwVpos);
+            printf("dwButtons = 0x%x, ", JoyInfoEx.dwButtons);
+            printf("dwButtonNumber = 0x%x, ", JoyInfoEx.dwButtonNumber);
+            printf("dwPOV = 0x%x, ", JoyInfoEx.dwPOV);
+            printf("dwReserved1 = 0x%x, ", JoyInfoEx.dwReserved1);
+            printf("dwReserved2 = 0x%x, ", JoyInfoEx.dwReserved2);
+            printf("\n");
+        }
+        else {
+            printf("error\n");
+        }
+        Sleep(100);
+}
+#endif
+#ifdef __MACOS__
     /* initialize gamepad */
     void* ctx = gamepad_init(1, 1, 0);
     if (!ctx) {
@@ -50,6 +110,7 @@ int main(int argc, char* argv[]) {
 
     /* set callback */
     gamepad_set_callback(ctx, callback);
+#endif
     
     init_raia_header(); // ヘッダー情報を初期化
     raia_header_t header = get_raia_header(); // ヘッダーを取得

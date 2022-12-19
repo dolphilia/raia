@@ -1,3 +1,6 @@
+#include "platforms.h"
+
+#ifdef __MACOS__
 #include <IOKit/hid/IOHIDManager.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -168,3 +171,5 @@ void gamepad_term(void* ctx)
     }
     free(c);
 }
+
+#endif

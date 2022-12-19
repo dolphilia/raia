@@ -265,6 +265,7 @@ xcopy "$(ProjectDir)..\..\js\raia.js" "$(OutDir)modules" /Y</Command>
     <ClCompile Include="..\..\src\duktape_separate\duk_util_memrw.c" />
     <ClCompile Include="..\..\src\duktape_separate\duk_util_misc.c" />
     <ClCompile Include="..\..\src\duktape_separate\duk_util_tinyrandom.c" />
+    <ClCompile Include="..\..\src\gamepad\gamepad.c" />
     <ClCompile Include="..\..\src\raia-engine.c" />
     <ClCompile Include="..\..\src\raia\raia_al.c" />
     <ClCompile Include="..\..\src\raia\raia_duktape.c" />
@@ -328,6 +329,7 @@ xcopy "$(ProjectDir)..\..\js\raia.js" "$(OutDir)modules" /Y</Command>
     <ClInclude Include="..\..\src\duktape_separate\duk_tval.h" />
     <ClInclude Include="..\..\src\duktape_separate\duk_unicode.h" />
     <ClInclude Include="..\..\src\duktape_separate\duk_util.h" />
+    <ClInclude Include="..\..\src\gamepad\gamepad.h" />
     <ClInclude Include="..\..\src\platforms.h" />
     <ClInclude Include="..\..\src\raia-engine.h" />
     <ClInclude Include="..\..\src\raia\raia_al.h" />
