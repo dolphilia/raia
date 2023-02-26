@@ -1,3 +1,7 @@
+
+#include "platforms.h"
+
+#ifdef __MACOS__
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -8,4 +12,5 @@ void gamepad_term(void* ctx);
 
 #ifdef __cplusplus
 };
+#endif
 #endif
