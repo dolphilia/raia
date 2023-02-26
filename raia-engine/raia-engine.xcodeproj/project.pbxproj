@@ -1051,6 +1051,7 @@
 					/opt/homebrew/Cellar/libomp/14.0.6/lib,
 					"$(PROJECT_DIR)/raia-engine",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1066,6 +1067,7 @@
 					/opt/homebrew/Cellar/libomp/14.0.6/lib,
 					"$(PROJECT_DIR)/raia-engine",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
