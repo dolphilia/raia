@@ -1,0 +1,33 @@
+__Raia__.Core.Lib.open("raia_draw");
+
+module.exports = {
+    noise: __Raia__.Core.Lib.func("raia_draw_noise", 3), // uint8_t *pixels, int width, int height
+    point: __Raia__.Core.Lib.func("raia_draw_point", 8),
+    pointRGBA: __Raia__.Core.Lib.func("raia_draw_point_rgba", 9),
+    pointAlpha: __Raia__.Core.Lib.func("raia_draw_point_alpha", 9),
+    line: __Raia__.Core.Lib.func("raia_draw_line", 10),
+    lineRGBA: __Raia__.Core.Lib.func("raia_draw_line_rgba", 11),
+    fillRect: __Raia__.Core.Lib.func("raia_draw_fill_rect", 10),
+    fillRectRGBA: __Raia__.Core.Lib.func("raia_draw_fill_rect_rgba", 11),
+    fillRectFast: __Raia__.Core.Lib.func("raia_draw_fill_rect_fast", 10),
+    fillRectAlpha: __Raia__.Core.Lib.func("raia_draw_fill_rect_alpha", 11),
+    drawEllipse: __Raia__.Core.Lib.func("raia_draw_ellipse", 10),
+    drawEllipseRGBA: __Raia__.Core.Lib.func("raia_draw_ellipse_rgba", 11),
+    drawFilledEllipse: __Raia__.Core.Lib.func("raia_draw_filled_ellipse", 10),
+    drawFilledEllipseRGBA: __Raia__.Core.Lib.func("raia_draw_filled_ellipse_rgba", 11),
+    drawFilledEllipseSmooth: __Raia__.Core.Lib.func("raia_draw_filled_ellipse_smooth", 10),
+    fillCircle: __Raia__.Core.Lib.func("raia_draw_fill_circle", 10),
+    blendPixelsRGBAtoRGB: __Raia__.Core.Lib.func("raia_draw_blend_pixels_rgba_to_rgb", 12),
+    blendPixelsRGBAtoRGBA: __Raia__.Core.Lib.func("raia_draw_blend_pixels_rgba_to_rgba", 12),
+    loadImageRGB: __Raia__.Core.Lib.func("raia_draw_load_and_blend_image_rgb", 10),
+    loadImageRGBA: __Raia__.Core.Lib.func("raia_draw_load_and_blend_image_rgba", 10),
+    openFont: __Raia__.Core.Lib.func("raia_draw_font_open", 1),
+    initFontBuffer: __Raia__.Core.Lib.func("raia_draw_font_init_buffer", 2),
+    getTextSize: __Raia__.Core.Lib.func("raia_draw_get_text_size", 34),
+    drawTextRGB: __Raia__.Core.Lib.func("raia_draw_text_rgb", 43),
+    drawText: __Raia__.Core.Lib.func("raia_draw_text_rgba", 43),
+    drawTextOld: __Raia__.Core.Lib.func("raia_draw_text_rgba_old", 8),
+    d3mInit: __Raia__.Core.Lib.func("raia_draw_d3m_init", 2),
+    d3mSetCamera: __Raia__.Core.Lib.func("raia_draw_d3m_set_camera", 6),
+    d3mTransform3Dto2D: __Raia__.Core.Lib.func("raia_draw_d3m_calc_position", 3),
+}

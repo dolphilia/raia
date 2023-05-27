@@ -1,0 +1,9 @@
+{
+  "debug_mode": false,
+  "typescript_mode": false,
+  "es2015_mode": true,
+  "startup_script": "main.js",
+  "preprocess": true,
+  "preprocess_script": "preprocess.js",
+  "modules_directory": "modules"
+}
