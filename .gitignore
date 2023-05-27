@@ -1,4 +1,12 @@
 copy_directory.sh
+raia-core/raia_core
+raia-*/*.dylib
+
+
+*.cmake
+CMakeCache.txt
+CMakeFiles/
+Makefile
 
 #======================================
 # macOS
