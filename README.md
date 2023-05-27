@@ -1,3 +1,3 @@
 # RaiaEngine
 
-RaiaEngine開発リポジトリは[https://github.com/raia-engine](https://github.com/raia-engine)に移動しました。
+RaiaEngineは個人ゲーム開発者向けのゲームエンジンです。現在、開発中です。
