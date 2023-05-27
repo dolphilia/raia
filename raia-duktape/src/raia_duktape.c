@@ -100,20 +100,21 @@ static duk_ret_t raia_lib_call(duk_context *ctx) { // func_hash
     if (duk_is_number(ctx, 3)) {
         size = (duk_size_t)duk_require_number(ctx, 3);
     }
-    JSON_Value *root_value = json_parse_string(src);
-    if (root_value == ((void *) 0)) {
-        fprintf(__stderrp, "Error: Unable to parse JSON string.\n");
-        return 0;
-    }
+
     if (src != NULL) {
-        JSON_Object *root_object = json_value_get_object(root_value);
-        const char *return_type = json_object_get_string(root_object, "@return");
+        yyjson_doc *arg_doc = yyjson_read(src, strlen(src), 0);
+        yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+        yyjson_val *arg_val = yyjson_obj_get(arg_root, "@return");
+        const char *return_type = yyjson_get_str(arg_val);
         if (strcmp(return_type, "pointer") == 0 && return_type != NULL) {
             void *dest = call_func_hash(dll_func_name, src, data, (int)size);
             duk_push_pointer(ctx, dest);
+            yyjson_doc_free(arg_doc);
             return 1;
         }
+        yyjson_doc_free(arg_doc);
     }
+
     char *dest = (char *)call_func_hash(dll_func_name, src, data, (int)size);
     duk_push_string(ctx, dest);
     if(dest != NULL) {
@@ -152,39 +153,24 @@ typedef struct {
 } raia_config_t;
 
 static raia_config_t raia_load_config(const char *json_file_name) {
-    char *json_string = file_load_string(json_file_name);
+    yyjson_doc *doc = yyjson_read_file(json_file_name, 0, NULL, NULL);
+    yyjson_val *root = yyjson_doc_get_root(doc);
 
-    if (!json_string) {
-        fprintf(stderr, "Failed to read JSON file: %s\n", json_file_name);
-        exit(1);
-    }
-
-    JSON_Value *root_value = json_parse_string(json_string);
-    if (!root_value) {
-        fprintf(stderr, "Failed to parse JSON\n");
-        free(json_string);
-        exit(1);
-    }
-
-    JSON_Object *root_object = json_value_get_object(root_value);
-
-    // JSONオブジェクトから値を取得
     raia_config_t config;
-    config.debug_mode = json_object_get_boolean(root_object, "debug_mode");
-    config.typescript_mode = json_object_get_boolean(root_object, "typescript_mode");
-    config.es2015_mode = json_object_get_boolean(root_object, "es2015_mode");
-    config.preprocess = json_object_get_boolean(root_object, "preprocess");
+    config.debug_mode = yyjson_get_bool(yyjson_obj_get(root, "debug_mode"));
+    config.typescript_mode = yyjson_get_bool(yyjson_obj_get(root, "typescript_mode"));
+    config.es2015_mode = yyjson_get_bool(yyjson_obj_get(root, "es2015_mode"));
+    config.preprocess = yyjson_get_bool(yyjson_obj_get(root, "preprocess"));
 
-    const char *startup_script = json_object_get_string(root_object, "startup_script");
+    const char *startup_script = yyjson_get_str(yyjson_obj_get(root, "startup_script"));
     STRNCPY(config.startup_script, startup_script, sizeof(config.startup_script) - 1);
     config.startup_script[sizeof(config.startup_script) - 1] = '\0';
 
-    const char *preprocess_script = json_object_get_string(root_object, "preprocess_script");
+    const char *preprocess_script = yyjson_get_str(yyjson_obj_get(root, "preprocess_script"));
     STRNCPY(config.preprocess_script, preprocess_script, sizeof(config.preprocess_script) - 1);
     config.preprocess_script[sizeof(config.preprocess_script) - 1] = '\0';
 
-    json_value_free(root_value);
-    free(json_string);
+    yyjson_doc_free(doc);
     return config;
 }
 

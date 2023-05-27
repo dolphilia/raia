@@ -8,7 +8,6 @@ set(CMAKE_C_STANDARD 11)
 
 add_library(raia_duktape SHARED
         src/raia_duktape.c
-        src/parson/parson.c
         src/util/util_file.c
         src/list/list.c
         src/list/list_iterator.c
@@ -16,6 +15,6 @@ add_library(raia_duktape SHARED
         src/duktape/duktape.c
         src/duktape-module/duk_module_duktape.c
         src/static/static_func_hash.c
-        src/static/static_plugin_loader.c)
+        src/static/static_plugin_loader.c src/yyjson/yyjson.c)
 
 set_target_properties(raia_duktape PROPERTIES PREFIX "")
