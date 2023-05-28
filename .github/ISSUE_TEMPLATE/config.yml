@@ -1,5 +1,0 @@
-blank_issues_enabled: true
-contact_links:
-  - name: Issue
-    about: Issue for project management
-    url: https://github.com/raia-engine/issues/new?template=custom.md&projects=raia-engine/1&labels=enhancement
