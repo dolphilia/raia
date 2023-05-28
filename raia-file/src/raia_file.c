@@ -1,6 +1,7 @@
 #include "raia_file.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #ifdef __WINDOWS__
 #define RAIA_EXPORT __declspec(dllexport) 
@@ -76,7 +77,7 @@ RAIA_EXPORT void *raia_file_load_binary(const char *s, void *p, int n) {
     size_t file_size;
     uint8_t *file_data = file_load_binary(path, &file_size);
     if (file_data == NULL) {
-        fprintf(__stderrp, "Failed to read binary file: %s", path);
+        fprintf(stderr, "Failed to read binary file: %s", path);
         return NULL;
     }
 

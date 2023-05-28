@@ -7,6 +7,4 @@ add_executable(raia_core
         src/raia-core.c
         src/yyjson/yyjson.c)
 
-target_link_libraries(raia_core)
-
 set_target_properties(raia_core PROPERTIES PREFIX "")
