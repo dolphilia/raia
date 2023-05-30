@@ -1,3 +1,5 @@
+enable_testing()
+
 cmake_minimum_required(VERSION 3.0)
 
 # ビルドディレクトリ内の子ディレクトリを取得
@@ -11,3 +13,6 @@ foreach(subdirectory ${subdirectories})
         endif()
     endif()
 endforeach()
+
+add_executable(test_program Testing/test.c)
+add_test(NAME TestProgram COMMAND test_program)

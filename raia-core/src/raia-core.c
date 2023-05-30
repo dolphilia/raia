@@ -4,7 +4,7 @@
 
 #include "raia-core.h"
 
-const char *get_runtime_from_json(yyjson_doc *doc) {
+static const char *get_runtime_from_json(yyjson_doc *doc) {
     yyjson_val *root = yyjson_doc_get_root(doc);
     yyjson_val *runtime_val = yyjson_obj_get(root, "runtime");
     const char *runtime = yyjson_get_str(runtime_val);
@@ -15,7 +15,7 @@ const char *get_runtime_from_json(yyjson_doc *doc) {
     return runtime;
 }
 
-void *load_dll_file(const char *dll_file_name) {
+static void *load_dll_file(const char *dll_file_name) {
     void *handle = raia_dlopen(dll_file_name);
     if (!handle) {
         fprintf(stderr, "Failed to load DLL file: %s\n", dll_file_name);
@@ -24,7 +24,7 @@ void *load_dll_file(const char *dll_file_name) {
     return handle;
 }
 
-raia_runtime_func_t get_raia_runtime_func(void *handle, const char *func_name) {
+static raia_runtime_func_t get_raia_runtime_func(void *handle, const char *func_name) {
     raia_runtime_func_t func = (raia_runtime_func_t) raia_dlsym(handle, func_name);
     if (!func) {
         fprintf(stderr, "Failed to get function from DLL: %s\n", func_name);

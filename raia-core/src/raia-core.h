@@ -52,10 +52,4 @@
 
 typedef int(*raia_runtime_func_t)(int argc, char *argv[]);
 
-const char *get_runtime_from_json(yyjson_doc *doc);
-
-void *load_dll_file(const char *dll_file_name);
-
-raia_runtime_func_t get_raia_runtime_func(void *handle, const char *func_name);
-
 #endif //RAIA_CORE_RAIA_CORE_H

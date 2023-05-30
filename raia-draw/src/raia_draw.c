@@ -709,7 +709,7 @@ RAIA_EXPORT duk_ret_t raia_draw_text_rgb(duk_context *ctx) {
     uint8_t *font_buffer = (uint8_t *) duk_require_buffer_data(ctx, 10, &font_buffer_len);
     stbtt_fontinfo font_info;
     font_info.userdata = duk_require_pointer(ctx, 11);
-    font_info.data = duk_require_pointer(ctx, 12);
+    font_info.data = (unsigned char *)duk_require_pointer(ctx, 12);
     font_info.fontstart = duk_to_int(ctx, 13);
     font_info.numGlyphs = duk_to_int(ctx, 14);
     font_info.loca = duk_to_int(ctx, 15);
@@ -722,22 +722,22 @@ RAIA_EXPORT duk_ret_t raia_draw_text_rgb(duk_context *ctx) {
     font_info.svg = duk_to_int(ctx, 22);
     font_info.index_map = duk_to_int(ctx, 23);
     font_info.indexToLocFormat = duk_to_int(ctx, 24);
-    font_info.cff.data = duk_require_pointer(ctx, 25);
+    font_info.cff.data = (unsigned char *)duk_require_pointer(ctx, 25);
     font_info.cff.cursor = duk_to_int(ctx, 26);
     font_info.cff.size = duk_to_int(ctx, 27);
-    font_info.charstrings.data = duk_require_pointer(ctx, 28);
+    font_info.charstrings.data = (unsigned char *)duk_require_pointer(ctx, 28);
     font_info.charstrings.cursor = duk_to_int(ctx, 29);
     font_info.charstrings.size = duk_to_int(ctx, 30);
-    font_info.gsubrs.data = duk_require_pointer(ctx, 31);
+    font_info.gsubrs.data = (unsigned char *)duk_require_pointer(ctx, 31);
     font_info.gsubrs.cursor = duk_to_int(ctx, 32);
     font_info.gsubrs.size = duk_to_int(ctx, 33);
-    font_info.subrs.data = duk_require_pointer(ctx, 34);
+    font_info.subrs.data = (unsigned char *)duk_require_pointer(ctx, 34);
     font_info.subrs.cursor = duk_to_int(ctx, 35);
     font_info.subrs.size = duk_to_int(ctx, 36);
-    font_info.fontdicts.data = duk_require_pointer(ctx, 37);
+    font_info.fontdicts.data = (unsigned char *)duk_require_pointer(ctx, 37);
     font_info.fontdicts.cursor = duk_to_int(ctx, 38);
     font_info.fontdicts.size = duk_to_int(ctx, 39);
-    font_info.fdselect.data = duk_require_pointer(ctx, 40);
+    font_info.fdselect.data = (unsigned char *)duk_require_pointer(ctx, 40);
     font_info.fdselect.cursor = duk_to_int(ctx, 41);
     font_info.fdselect.size = duk_to_int(ctx, 42);
 
@@ -758,7 +758,8 @@ RAIA_EXPORT duk_ret_t raia_draw_text_rgb(duk_context *ctx) {
     duk_put_prop_string(ctx, obj_idx, "width");
     duk_push_int(ctx, glyph_size.height);
     duk_put_prop_string(ctx, obj_idx, "height");
-};
+    return 1;
+}
 
 static raia_size_t _draw_text_rgba(
         uint8_t *pixels_rgba,
@@ -832,7 +833,7 @@ RAIA_EXPORT duk_ret_t raia_draw_text_rgba(duk_context *ctx) {
     uint8_t *font_buffer = (uint8_t *) duk_require_buffer_data(ctx, 10, &font_buffer_len);
     stbtt_fontinfo font_info;
     font_info.userdata = duk_require_pointer(ctx, 11);
-    font_info.data = duk_require_pointer(ctx, 12);
+    font_info.data = (unsigned char *)duk_require_pointer(ctx, 12);
     font_info.fontstart = duk_to_int(ctx, 13);
     font_info.numGlyphs = duk_to_int(ctx, 14);
     font_info.loca = duk_to_int(ctx, 15);
@@ -845,22 +846,22 @@ RAIA_EXPORT duk_ret_t raia_draw_text_rgba(duk_context *ctx) {
     font_info.svg = duk_to_int(ctx, 22);
     font_info.index_map = duk_to_int(ctx, 23);
     font_info.indexToLocFormat = duk_to_int(ctx, 24);
-    font_info.cff.data = duk_require_pointer(ctx, 25);
+    font_info.cff.data = (unsigned char *)duk_require_pointer(ctx, 25);
     font_info.cff.cursor = duk_to_int(ctx, 26);
     font_info.cff.size = duk_to_int(ctx, 27);
-    font_info.charstrings.data = duk_require_pointer(ctx, 28);
+    font_info.charstrings.data = (unsigned char *)duk_require_pointer(ctx, 28);
     font_info.charstrings.cursor = duk_to_int(ctx, 29);
     font_info.charstrings.size = duk_to_int(ctx, 30);
-    font_info.gsubrs.data = duk_require_pointer(ctx, 31);
+    font_info.gsubrs.data = (unsigned char *)duk_require_pointer(ctx, 31);
     font_info.gsubrs.cursor = duk_to_int(ctx, 32);
     font_info.gsubrs.size = duk_to_int(ctx, 33);
-    font_info.subrs.data = duk_require_pointer(ctx, 34);
+    font_info.subrs.data = (unsigned char *)duk_require_pointer(ctx, 34);
     font_info.subrs.cursor = duk_to_int(ctx, 35);
     font_info.subrs.size = duk_to_int(ctx, 36);
-    font_info.fontdicts.data = duk_require_pointer(ctx, 37);
+    font_info.fontdicts.data = (unsigned char *)duk_require_pointer(ctx, 37);
     font_info.fontdicts.cursor = duk_to_int(ctx, 38);
     font_info.fontdicts.size = duk_to_int(ctx, 39);
-    font_info.fdselect.data = duk_require_pointer(ctx, 40);
+    font_info.fdselect.data = (unsigned char *)duk_require_pointer(ctx, 40);
     font_info.fdselect.cursor = duk_to_int(ctx, 41);
     font_info.fdselect.size = duk_to_int(ctx, 42);
 
@@ -881,7 +882,8 @@ RAIA_EXPORT duk_ret_t raia_draw_text_rgba(duk_context *ctx) {
     duk_put_prop_string(ctx, obj_idx, "width");
     duk_push_int(ctx, glyph_size.height);
     duk_put_prop_string(ctx, obj_idx, "height");
-};
+    return 1;
+}
 
 static raia_size_t _draw_get_text_size(const uint8_t* text, int font_size, stbtt_fontinfo font_info) {
     int bytes = 0;
@@ -913,7 +915,7 @@ RAIA_EXPORT duk_ret_t raia_draw_get_text_size(duk_context *ctx) {
     int font_size = (int)duk_to_number(ctx, 1);
     stbtt_fontinfo font_info;
     font_info.userdata = duk_require_pointer(ctx, 2);
-    font_info.data = duk_require_pointer(ctx, 3);
+    font_info.data = (unsigned char *)duk_require_pointer(ctx, 3);
     font_info.fontstart = duk_to_int(ctx, 4);
     font_info.numGlyphs = duk_to_int(ctx, 5);
     font_info.loca = duk_to_int(ctx, 6);
@@ -926,22 +928,22 @@ RAIA_EXPORT duk_ret_t raia_draw_get_text_size(duk_context *ctx) {
     font_info.svg = duk_to_int(ctx, 13);
     font_info.index_map = duk_to_int(ctx, 14);
     font_info.indexToLocFormat = duk_to_int(ctx, 15);
-    font_info.cff.data = duk_require_pointer(ctx, 16);
+    font_info.cff.data = (unsigned char *)duk_require_pointer(ctx, 16);
     font_info.cff.cursor = duk_to_int(ctx, 17);
     font_info.cff.size = duk_to_int(ctx, 18);
-    font_info.charstrings.data = duk_require_pointer(ctx, 19);
+    font_info.charstrings.data = (unsigned char *)duk_require_pointer(ctx, 19);
     font_info.charstrings.cursor = duk_to_int(ctx, 20);
     font_info.charstrings.size = duk_to_int(ctx, 21);
-    font_info.gsubrs.data = duk_require_pointer(ctx, 22);
+    font_info.gsubrs.data = (unsigned char *)duk_require_pointer(ctx, 22);
     font_info.gsubrs.cursor = duk_to_int(ctx, 23);
     font_info.gsubrs.size = duk_to_int(ctx, 24);
-    font_info.subrs.data = duk_require_pointer(ctx, 25);
+    font_info.subrs.data = (unsigned char *)duk_require_pointer(ctx, 25);
     font_info.subrs.cursor = duk_to_int(ctx, 26);
     font_info.subrs.size = duk_to_int(ctx, 27);
-    font_info.fontdicts.data = duk_require_pointer(ctx, 28);
+    font_info.fontdicts.data = (unsigned char *)duk_require_pointer(ctx, 28);
     font_info.fontdicts.cursor = duk_to_int(ctx, 29);
     font_info.fontdicts.size = duk_to_int(ctx, 30);
-    font_info.fdselect.data = duk_require_pointer(ctx, 31);
+    font_info.fdselect.data = (unsigned char *)duk_require_pointer(ctx, 31);
     font_info.fdselect.cursor = duk_to_int(ctx, 32);
     font_info.fdselect.size = duk_to_int(ctx, 33);
 
@@ -952,7 +954,8 @@ RAIA_EXPORT duk_ret_t raia_draw_get_text_size(duk_context *ctx) {
     duk_put_prop_string(ctx, obj_idx, "width");
     duk_push_int(ctx, glyph_size.height);
     duk_put_prop_string(ctx, obj_idx, "height");
-};
+    return 1;
+}
 
 RAIA_EXPORT duk_ret_t raia_draw_text_rgba_old(duk_context *ctx) {
     duk_size_t len;
@@ -975,7 +978,8 @@ RAIA_EXPORT duk_ret_t raia_draw_text_rgba_old(duk_context *ctx) {
     duk_put_prop_string(ctx, obj_idx, "width");
     duk_push_int(ctx, character_size.height);
     duk_put_prop_string(ctx, obj_idx, "height");
-};
+    return 1;
+}
 
 //---d3m
 

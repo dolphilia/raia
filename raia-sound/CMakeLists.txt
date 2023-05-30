@@ -17,3 +17,5 @@ target_link_libraries(raia_sound
         $<$<PLATFORM_ID:Linux>: >
         $<$<PLATFORM_ID:Windows>: >
         )
+
+set_target_properties(raia_sound PROPERTIES PREFIX "")

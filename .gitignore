@@ -1,6 +1,6 @@
 copy_directory.sh
 raia-core/raia_core
-raia-*/*.dylib
+#raia-*/*.dylib
 my_test
 Testing/
 
