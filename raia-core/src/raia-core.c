@@ -53,9 +53,14 @@ int main(int argc, char *argv[]) {
     char dll_file_name[500];
     SPRINTF(dll_file_name, "%s.%s", runtime, extension);
     void *handle = load_dll_file(dll_file_name);
-    raia_runtime_func_t raia_runtime_run = get_raia_runtime_func(handle, "run");
+    raia_runtime_func_t raia_runtime_run = get_raia_runtime_func(handle, "init");
 
     yyjson_doc_free(doc);
 
-    return raia_runtime_run(argc, argv);
+    char * result = raia_runtime_run(argc, argv);
+    if (result != NULL) {
+        printf("%s \n", result);
+        free((void *)result);
+    }
+    return 0;
 }

@@ -7,55 +7,55 @@
 #define RAIA_EXPORT
 #endif
 
-RAIA_EXPORT duk_ret_t raia_draw_context_init(duk_context *ctx) {
-    duk_idx_t surface_idx = duk_push_array(ctx);
-    duk_idx_t obj_idx = duk_push_object(ctx);
-
-    duk_push_int(ctx, 0); // pixels
-    duk_put_prop_string(ctx, obj_idx, "pixels");
-
-    duk_idx_t position_idx = duk_push_object(ctx);
-    duk_push_int(ctx, 0); // x
-    duk_put_prop_string(ctx, position_idx, "x");
-    duk_push_int(ctx, 0); // y
-    duk_put_prop_string(ctx, position_idx, "y");
-    duk_put_prop_string(ctx, obj_idx, "position");
-
-    duk_idx_t size_idx = duk_push_object(ctx);
-    duk_push_int(ctx, 0); // width
-    duk_put_prop_string(ctx, size_idx, "width");
-    duk_push_int(ctx, 0); // height
-    duk_put_prop_string(ctx, size_idx, "height");
-    duk_put_prop_string(ctx, obj_idx, "size");
-
-    duk_put_prop_index(ctx, surface_idx, 0);
-    duk_put_prop_string(ctx, 0, "surface");
-    return 0;
-}
-
-RAIA_EXPORT duk_ret_t raia_draw_surface_init(duk_context *ctx) {
-    int index = (int) duk_to_number(ctx, 1);
-    int width = (int) duk_to_number(ctx, 2);
-    int height = (int) duk_to_number(ctx, 3);
-
-    duk_to_object(ctx, 0);
-    duk_idx_t surface_idx = duk_push_array(ctx);
-    duk_idx_t obj_idx = duk_push_object(ctx);
-
-    duk_push_buffer(ctx, width * height * 3, 0); // pixels
-    duk_put_prop_string(ctx, obj_idx, "pixels");
-
-    duk_idx_t size_idx = duk_push_object(ctx);
-    duk_push_int(ctx, width); // width
-    duk_put_prop_string(ctx, size_idx, "width");
-    duk_push_int(ctx, height); // height
-    duk_put_prop_string(ctx, size_idx, "height");
-    duk_put_prop_string(ctx, obj_idx, "size");
-
-    duk_put_prop_index(ctx, surface_idx, index);
-    duk_put_prop_string(ctx, 0, "surface");
-    return 0;
-}
+//RAIA_EXPORT duk_ret_t raia_draw_context_init(duk_context *ctx) {
+//    duk_idx_t surface_idx = duk_push_array(ctx);
+//    duk_idx_t obj_idx = duk_push_object(ctx);
+//
+//    duk_push_int(ctx, 0); // pixels
+//    duk_put_prop_string(ctx, obj_idx, "pixels");
+//
+//    duk_idx_t position_idx = duk_push_object(ctx);
+//    duk_push_int(ctx, 0); // x
+//    duk_put_prop_string(ctx, position_idx, "x");
+//    duk_push_int(ctx, 0); // y
+//    duk_put_prop_string(ctx, position_idx, "y");
+//    duk_put_prop_string(ctx, obj_idx, "position");
+//
+//    duk_idx_t size_idx = duk_push_object(ctx);
+//    duk_push_int(ctx, 0); // width
+//    duk_put_prop_string(ctx, size_idx, "width");
+//    duk_push_int(ctx, 0); // height
+//    duk_put_prop_string(ctx, size_idx, "height");
+//    duk_put_prop_string(ctx, obj_idx, "size");
+//
+//    duk_put_prop_index(ctx, surface_idx, 0);
+//    duk_put_prop_string(ctx, 0, "surface");
+//    return 0;
+//}
+//
+//RAIA_EXPORT duk_ret_t raia_draw_surface_init(duk_context *ctx) {
+//    int index = (int) duk_to_number(ctx, 1);
+//    int width = (int) duk_to_number(ctx, 2);
+//    int height = (int) duk_to_number(ctx, 3);
+//
+//    duk_to_object(ctx, 0);
+//    duk_idx_t surface_idx = duk_push_array(ctx);
+//    duk_idx_t obj_idx = duk_push_object(ctx);
+//
+//    duk_push_buffer(ctx, width * height * 3, 0); // pixels
+//    duk_put_prop_string(ctx, obj_idx, "pixels");
+//
+//    duk_idx_t size_idx = duk_push_object(ctx);
+//    duk_push_int(ctx, width); // width
+//    duk_put_prop_string(ctx, size_idx, "width");
+//    duk_push_int(ctx, height); // height
+//    duk_put_prop_string(ctx, size_idx, "height");
+//    duk_put_prop_string(ctx, obj_idx, "size");
+//
+//    duk_put_prop_index(ctx, surface_idx, index);
+//    duk_put_prop_string(ctx, 0, "surface");
+//    return 0;
+//}
 
 static void _draw_noise(uint8_t *pixels, int width, int height) {
     for (int i = 0; i < width * height * 3; i++) {
@@ -63,446 +63,675 @@ static void _draw_noise(uint8_t *pixels, int width, int height) {
     }
 }
 
-RAIA_EXPORT duk_ret_t raia_draw_noise(duk_context *ctx) {
-    duk_size_t len;
-    uint8_t *pixels = (uint8_t *)duk_require_buffer_data(ctx, 0, &len);
-    int width = (int)duk_to_number(ctx, 1);
-    int height = (int)duk_to_number(ctx, 2);
+RAIA_EXPORT void *raia_draw_noise(const char *s, void *p, int n) {
+    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
+    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+    uint8_t *pixels = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "pixels"));
+    int width = yyjson_get_int(yyjson_obj_get(arg_root, "width"));
+    int height = yyjson_get_int(yyjson_obj_get(arg_root, "height"));
+
     _draw_noise(pixels, width, height);
-    return 0;
+
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_bool(ret_doc, ret_root, "result", true);
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    yyjson_doc_free(arg_doc);
+    return (void *)result;
 }
 
-RAIA_EXPORT duk_ret_t raia_draw_point(duk_context *ctx) {
-    duk_size_t len;
-    uint8_t *pixels = (uint8_t *)duk_require_buffer_data(ctx, 0, &len);
+RAIA_EXPORT void *raia_draw_point(const char *s, void *p, int n) {
+    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
+    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+    uint8_t *pixels = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "pixels"));
     raia_point_t point = {
-        .x = (int)duk_to_number(ctx, 1),
-        .y = (int)duk_to_number(ctx, 2),
+        .x = yyjson_get_int(yyjson_obj_get(arg_root, "point_x")),
+        .y = yyjson_get_int(yyjson_obj_get(arg_root, "point_y")),
     };
     raia_color_t color = {
-        .red = (int)duk_to_number(ctx, 3),
-        .green = (int)duk_to_number(ctx, 4),
-        .blue = (int)duk_to_number(ctx, 5),
+        .red = yyjson_get_int(yyjson_obj_get(arg_root, "color_red")),
+        .green = yyjson_get_int(yyjson_obj_get(arg_root, "color_green")),
+        .blue = yyjson_get_int(yyjson_obj_get(arg_root, "color_blue")),
     };
     raia_size_t canvas = {
-        .width = (int)duk_to_number(ctx, 6),
-        .height = (int)duk_to_number(ctx, 7),
+        .width = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_width")),
+        .height = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_height")),
     };
+
     set_pixel_rgb(pixels, point, color, canvas, 3);
-    return 0;
+
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_bool(ret_doc, ret_root, "result", true);
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    yyjson_doc_free(arg_doc);
+    return (void *)result;
 }
 
-RAIA_EXPORT duk_ret_t raia_draw_point_alpha(duk_context *ctx) {
-    duk_size_t len;
-    uint8_t *pixels = (uint8_t *)duk_require_buffer_data(ctx, 0, &len);
+RAIA_EXPORT void *raia_draw_point_alpha(const char *s, void *p, int n) {
+    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
+    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+    uint8_t *pixels = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "pixels"));
     raia_point_t point = {
-            .x = (int)duk_to_number(ctx, 1),
-            .y = (int)duk_to_number(ctx, 2),
+            .x = yyjson_get_int(yyjson_obj_get(arg_root, "point_x")),
+            .y = yyjson_get_int(yyjson_obj_get(arg_root, "point_y")),
     };
     raia_color_t color = {
-            .red = (int)duk_to_number(ctx, 3),
-            .green = (int)duk_to_number(ctx, 4),
-            .blue = (int)duk_to_number(ctx, 5),
-            .alpha = (int)duk_to_number(ctx, 6),
+            .red = yyjson_get_int(yyjson_obj_get(arg_root, "color_red")),
+            .green = yyjson_get_int(yyjson_obj_get(arg_root, "color_green")),
+            .blue = yyjson_get_int(yyjson_obj_get(arg_root, "color_blue")),
+            .alpha = yyjson_get_int(yyjson_obj_get(arg_root, "color_alpha")),
     };
     raia_size_t canvas = {
-            .width = (int)duk_to_number(ctx, 7),
-            .height = (int)duk_to_number(ctx, 8),
+            .width = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_width")),
+            .height = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_height")),
     };
+
     set_pixel_rgb_alpha(pixels, point, color, color.alpha, canvas, 3);
-    return 0;
+
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_bool(ret_doc, ret_root, "result", true);
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    yyjson_doc_free(arg_doc);
+    return (void *)result;
 }
 
-RAIA_EXPORT duk_ret_t raia_draw_point_rgba(duk_context *ctx) {
-    duk_size_t len;
-    uint8_t *pixels = (uint8_t *)duk_require_buffer_data(ctx, 0, &len);
+RAIA_EXPORT void *raia_draw_point_rgba(const char *s, void *p, int n) {
+    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
+    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+    uint8_t *pixels = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "pixels"));
     raia_point_t point = {
-            .x = (int)duk_to_number(ctx, 1),
-            .y = (int)duk_to_number(ctx, 2),
+            .x = yyjson_get_int(yyjson_obj_get(arg_root, "point_x")),
+            .y = yyjson_get_int(yyjson_obj_get(arg_root, "point_y")),
     };
     raia_color_t color = {
-            .red = (int)duk_to_number(ctx, 3),
-            .green = (int)duk_to_number(ctx, 4),
-            .blue = (int)duk_to_number(ctx, 5),
-            .alpha = (int)duk_to_number(ctx, 6),
+            .red = yyjson_get_int(yyjson_obj_get(arg_root, "color_red")),
+            .green = yyjson_get_int(yyjson_obj_get(arg_root, "color_green")),
+            .blue = yyjson_get_int(yyjson_obj_get(arg_root, "color_blue")),
+            .alpha = yyjson_get_int(yyjson_obj_get(arg_root, "color_alpha")),
     };
     raia_size_t canvas = {
-            .width = (int)duk_to_number(ctx, 7),
-            .height = (int)duk_to_number(ctx, 8),
+            .width = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_width")),
+            .height = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_height")),
     };
+
     set_pixel_rgba(pixels, point, color, canvas, 4);
-    return 0;
+
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_bool(ret_doc, ret_root, "result", true);
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    yyjson_doc_free(arg_doc);
+    return (void *)result;
 }
 
-RAIA_EXPORT duk_ret_t raia_draw_line(duk_context *ctx) {
-    duk_size_t len;
-    uint8_t *pixels = (uint8_t *)duk_require_buffer_data(ctx, 0, &len);
+RAIA_EXPORT void *raia_draw_line(const char *s, void *p, int n) {
+    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
+    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+    uint8_t *pixels = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "pixels"));
     raia_segment_t segment = {
-        .start.x = (int)duk_to_number(ctx, 1),
-        .start.y = (int)duk_to_number(ctx, 2),
-        .end.x = (int)duk_to_number(ctx, 3),
-        .end.y = (int)duk_to_number(ctx, 4),
+            .start.x = yyjson_get_int(yyjson_obj_get(arg_root, "start_x")),
+            .start.y = yyjson_get_int(yyjson_obj_get(arg_root, "start_y")),
+            .end.x = yyjson_get_int(yyjson_obj_get(arg_root, "end_x")),
+            .end.y = yyjson_get_int(yyjson_obj_get(arg_root, "end_y")),
     };
     raia_color_t color = {
-        .red = (int)duk_to_number(ctx, 5),
-        .green = (int)duk_to_number(ctx, 6),
-        .blue = (int)duk_to_number(ctx, 7),
+            .red = yyjson_get_int(yyjson_obj_get(arg_root, "color_red")),
+            .green = yyjson_get_int(yyjson_obj_get(arg_root, "color_green")),
+            .blue = yyjson_get_int(yyjson_obj_get(arg_root, "color_blue")),
     };
     raia_size_t canvas = {
-        .width = (int)duk_to_number(ctx, 8),
-        .height = (int)duk_to_number(ctx, 9),
+            .width = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_width")),
+            .height = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_height")),
     };
+
     set_line_rgb(pixels, segment, color, canvas, 3);
-    return 0;
+
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_bool(ret_doc, ret_root, "result", true);
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    yyjson_doc_free(arg_doc);
+    return (void *)result;
 }
 
-RAIA_EXPORT duk_ret_t raia_draw_line_rgba(duk_context *ctx) {
-    duk_size_t len;
-    uint8_t *pixels = (uint8_t *)duk_require_buffer_data(ctx, 0, &len);
+RAIA_EXPORT void *raia_draw_line_rgba(const char *s, void *p, int n) {
+    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
+    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+    uint8_t *pixels = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "pixels"));
     raia_segment_t segment = {
-            .start.x = (int)duk_to_number(ctx, 1),
-            .start.y = (int)duk_to_number(ctx, 2),
-            .end.x = (int)duk_to_number(ctx, 3),
-            .end.y = (int)duk_to_number(ctx, 4),
+            .start.x = yyjson_get_int(yyjson_obj_get(arg_root, "start_x")),
+            .start.y = yyjson_get_int(yyjson_obj_get(arg_root, "start_y")),
+            .end.x = yyjson_get_int(yyjson_obj_get(arg_root, "end_x")),
+            .end.y = yyjson_get_int(yyjson_obj_get(arg_root, "end_y")),
     };
     raia_color_t color = {
-            .red = (int)duk_to_number(ctx, 5),
-            .green = (int)duk_to_number(ctx, 6),
-            .blue = (int)duk_to_number(ctx, 7),
-            .alpha = (int)duk_to_number(ctx, 8),
+            .red = yyjson_get_int(yyjson_obj_get(arg_root, "color_red")),
+            .green = yyjson_get_int(yyjson_obj_get(arg_root, "color_green")),
+            .blue = yyjson_get_int(yyjson_obj_get(arg_root, "color_blue")),
+            .alpha = yyjson_get_int(yyjson_obj_get(arg_root, "color_alpha")),
     };
     raia_size_t canvas = {
-            .width = (int)duk_to_number(ctx, 9),
-            .height = (int)duk_to_number(ctx, 10),
+            .width = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_width")),
+            .height = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_height")),
     };
+
     set_line_rgba(pixels, segment, color, canvas, 4);
-    return 0;
+
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_bool(ret_doc, ret_root, "result", true);
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    yyjson_doc_free(arg_doc);
+    return (void *)result;
 }
 
-RAIA_EXPORT duk_ret_t raia_draw_fill_rect_fast(duk_context *ctx) {
-    duk_size_t len;
-    uint8_t *pixels = (uint8_t *)duk_require_buffer_data(ctx, 0, &len);
+RAIA_EXPORT void *raia_draw_fill_rect_fast(const char *s, void *p, int n) {
+    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
+    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+    uint8_t *pixels = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "pixels"));
     raia_segment_t segment = {
-            .start.x = (int)duk_to_number(ctx, 1),
-            .start.y = (int)duk_to_number(ctx, 2),
-            .end.x = (int)duk_to_number(ctx, 3),
-            .end.y = (int)duk_to_number(ctx, 4),
+            .start.x = yyjson_get_int(yyjson_obj_get(arg_root, "start_x")),
+            .start.y = yyjson_get_int(yyjson_obj_get(arg_root, "start_y")),
+            .end.x = yyjson_get_int(yyjson_obj_get(arg_root, "end_x")),
+            .end.y = yyjson_get_int(yyjson_obj_get(arg_root, "end_y")),
     };
     raia_color_t color = {
-            .red = (int)duk_to_number(ctx, 5),
-            .green = (int)duk_to_number(ctx, 6),
-            .blue = (int)duk_to_number(ctx, 7),
+            .red = yyjson_get_int(yyjson_obj_get(arg_root, "color_red")),
+            .green = yyjson_get_int(yyjson_obj_get(arg_root, "color_green")),
+            .blue = yyjson_get_int(yyjson_obj_get(arg_root, "color_blue")),
     };
     raia_size_t canvas = {
-            .width = (int)duk_to_number(ctx, 8),
-            .height = (int)duk_to_number(ctx, 9),
+            .width = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_width")),
+            .height = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_height")),
     };
+
     fill_rect_rgb_fast(pixels, segment, color, canvas, 3);
-    return 0;
+
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_bool(ret_doc, ret_root, "result", true);
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    yyjson_doc_free(arg_doc);
+    return (void *)result;
 }
 
-RAIA_EXPORT duk_ret_t raia_draw_fill_rect(duk_context *ctx) {
-    duk_size_t len;
-    uint8_t *pixels = (uint8_t *)duk_require_buffer_data(ctx, 0, &len);
+RAIA_EXPORT void *raia_draw_fill_rect(const char *s, void *p, int n) {
+    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
+    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+    uint8_t *pixels = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "pixels"));
     raia_segment_t segment = {
-        .start.x = (int)duk_to_number(ctx, 1),
-        .start.y = (int)duk_to_number(ctx, 2),
-        .end.x = (int)duk_to_number(ctx, 3),
-        .end.y = (int)duk_to_number(ctx, 4),
+            .start.x = yyjson_get_int(yyjson_obj_get(arg_root, "start_x")),
+            .start.y = yyjson_get_int(yyjson_obj_get(arg_root, "start_y")),
+            .end.x = yyjson_get_int(yyjson_obj_get(arg_root, "end_x")),
+            .end.y = yyjson_get_int(yyjson_obj_get(arg_root, "end_y")),
     };
     raia_color_t color = {
-        .red = (int)duk_to_number(ctx, 5),
-        .green = (int)duk_to_number(ctx, 6),
-        .blue = (int)duk_to_number(ctx, 7),
+            .red = yyjson_get_int(yyjson_obj_get(arg_root, "color_red")),
+            .green = yyjson_get_int(yyjson_obj_get(arg_root, "color_green")),
+            .blue = yyjson_get_int(yyjson_obj_get(arg_root, "color_blue")),
     };
     raia_size_t canvas = {
-        .width = (int)duk_to_number(ctx, 8),
-        .height = (int)duk_to_number(ctx, 9),
+            .width = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_width")),
+            .height = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_height")),
     };
+
     fill_rect_rgb(pixels, segment, color, canvas, 3);
-    return 0;
+
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_bool(ret_doc, ret_root, "result", true);
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    yyjson_doc_free(arg_doc);
+    return (void *)result;
 }
 
-RAIA_EXPORT duk_ret_t raia_draw_fill_rect_rgba(duk_context *ctx) {
-    duk_size_t len;
-    uint8_t *pixels = (uint8_t *)duk_require_buffer_data(ctx, 0, &len);
+RAIA_EXPORT void *raia_draw_fill_rect_rgba(const char *s, void *p, int n) {
+    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
+    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+    uint8_t *pixels = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "pixels"));
     raia_segment_t segment = {
-            .start.x = (int)duk_to_number(ctx, 1),
-            .start.y = (int)duk_to_number(ctx, 2),
-            .end.x = (int)duk_to_number(ctx, 3),
-            .end.y = (int)duk_to_number(ctx, 4),
+            .start.x = yyjson_get_int(yyjson_obj_get(arg_root, "start_x")),
+            .start.y = yyjson_get_int(yyjson_obj_get(arg_root, "start_y")),
+            .end.x = yyjson_get_int(yyjson_obj_get(arg_root, "end_x")),
+            .end.y = yyjson_get_int(yyjson_obj_get(arg_root, "end_y")),
     };
     raia_color_t color = {
-            .red = (int)duk_to_number(ctx, 5),
-            .green = (int)duk_to_number(ctx, 6),
-            .blue = (int)duk_to_number(ctx, 7),
-            .alpha = (int)duk_to_number(ctx, 8),
+            .red = yyjson_get_int(yyjson_obj_get(arg_root, "color_red")),
+            .green = yyjson_get_int(yyjson_obj_get(arg_root, "color_green")),
+            .blue = yyjson_get_int(yyjson_obj_get(arg_root, "color_blue")),
+            .alpha = yyjson_get_int(yyjson_obj_get(arg_root, "color_alpha")),
     };
     raia_size_t canvas = {
-            .width = (int)duk_to_number(ctx, 9),
-            .height = (int)duk_to_number(ctx, 10),
+            .width = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_width")),
+            .height = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_height")),
     };
+
     fill_rect_rgba(pixels, segment, color, canvas, 4);
-    return 0;
+
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_bool(ret_doc, ret_root, "result", true);
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    yyjson_doc_free(arg_doc);
+    return (void *)result;
 }
 
-RAIA_EXPORT duk_ret_t raia_draw_fill_rect_alpha(duk_context *ctx) {
-    duk_size_t len;
-    uint8_t *pixels = (uint8_t *)duk_require_buffer_data(ctx, 0, &len);
+RAIA_EXPORT void *raia_draw_fill_rect_alpha(const char *s, void *p, int n) {
+    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
+    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+    uint8_t *pixels = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "pixels"));
     raia_segment_t segment = {
-            .start.x = (int)duk_to_number(ctx, 1),
-            .start.y = (int)duk_to_number(ctx, 2),
-            .end.x = (int)duk_to_number(ctx, 3),
-            .end.y = (int)duk_to_number(ctx, 4),
+            .start.x = yyjson_get_int(yyjson_obj_get(arg_root, "start_x")),
+            .start.y = yyjson_get_int(yyjson_obj_get(arg_root, "start_y")),
+            .end.x = yyjson_get_int(yyjson_obj_get(arg_root, "end_x")),
+            .end.y = yyjson_get_int(yyjson_obj_get(arg_root, "end_y")),
     };
     raia_color_t color = {
-            .red = (int)duk_to_number(ctx, 5),
-            .green = (int)duk_to_number(ctx, 6),
-            .blue = (int)duk_to_number(ctx, 7),
+            .red = yyjson_get_int(yyjson_obj_get(arg_root, "color_red")),
+            .green = yyjson_get_int(yyjson_obj_get(arg_root, "color_green")),
+            .blue = yyjson_get_int(yyjson_obj_get(arg_root, "color_blue")),
+            .alpha = yyjson_get_int(yyjson_obj_get(arg_root, "color_alpha")),
     };
-    uint8_t alpha = (uint8_t)duk_to_number(ctx, 8);
     raia_size_t canvas = {
-            .width = (int)duk_to_number(ctx, 9),
-            .height = (int)duk_to_number(ctx, 10),
+            .width = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_width")),
+            .height = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_height")),
     };
-    fill_rect_rgb_alpha(pixels, segment, color, alpha, canvas, 4);
-    return 0;
+
+    fill_rect_rgb_alpha(pixels, segment, color, color.alpha, canvas, 4);
+
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_bool(ret_doc, ret_root, "result", true);
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    yyjson_doc_free(arg_doc);
+    return (void *)result;
 }
 
-RAIA_EXPORT duk_ret_t raia_draw_ellipse(duk_context *ctx) {
-    duk_size_t len;
-    uint8_t *pixels = (uint8_t *)duk_require_buffer_data(ctx, 0, &len);
+RAIA_EXPORT void *raia_draw_ellipse(const char *s, void *p, int n) {
+    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
+    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+    uint8_t *pixels = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "pixels"));
     raia_segment_t segment = {
-            .start.x = (int)duk_to_number(ctx, 1),
-            .start.y = (int)duk_to_number(ctx, 2),
-            .end.x = (int)duk_to_number(ctx, 3),
-            .end.y = (int)duk_to_number(ctx, 4),
+            .start.x = yyjson_get_int(yyjson_obj_get(arg_root, "start_x")),
+            .start.y = yyjson_get_int(yyjson_obj_get(arg_root, "start_y")),
+            .end.x = yyjson_get_int(yyjson_obj_get(arg_root, "end_x")),
+            .end.y = yyjson_get_int(yyjson_obj_get(arg_root, "end_y")),
     };
     raia_color_t color = {
-            .red = (int)duk_to_number(ctx, 5),
-            .green = (int)duk_to_number(ctx, 6),
-            .blue = (int)duk_to_number(ctx, 7),
+            .red = yyjson_get_int(yyjson_obj_get(arg_root, "color_red")),
+            .green = yyjson_get_int(yyjson_obj_get(arg_root, "color_green")),
+            .blue = yyjson_get_int(yyjson_obj_get(arg_root, "color_blue")),
     };
     raia_size_t canvas = {
-            .width = (int)duk_to_number(ctx, 8),
-            .height = (int)duk_to_number(ctx, 9),
+            .width = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_width")),
+            .height = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_height")),
     };
+
     draw_ellipse(pixels, segment, color, canvas, 3);
-    return 0;
+
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_bool(ret_doc, ret_root, "result", true);
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    yyjson_doc_free(arg_doc);
+    return (void *)result;
 }
 
-RAIA_EXPORT duk_ret_t raia_draw_ellipse_rgba(duk_context *ctx) {
-    duk_size_t len;
-    uint8_t *pixels = (uint8_t *)duk_require_buffer_data(ctx, 0, &len);
+RAIA_EXPORT void *raia_draw_ellipse_rgba(const char *s, void *p, int n) {
+    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
+    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+    uint8_t *pixels = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "pixels"));
     raia_segment_t segment = {
-            .start.x = (int)duk_to_number(ctx, 1),
-            .start.y = (int)duk_to_number(ctx, 2),
-            .end.x = (int)duk_to_number(ctx, 3),
-            .end.y = (int)duk_to_number(ctx, 4),
+            .start.x = yyjson_get_int(yyjson_obj_get(arg_root, "start_x")),
+            .start.y = yyjson_get_int(yyjson_obj_get(arg_root, "start_y")),
+            .end.x = yyjson_get_int(yyjson_obj_get(arg_root, "end_x")),
+            .end.y = yyjson_get_int(yyjson_obj_get(arg_root, "end_y")),
     };
     raia_color_t color = {
-            .red = (int)duk_to_number(ctx, 5),
-            .green = (int)duk_to_number(ctx, 6),
-            .blue = (int)duk_to_number(ctx, 7),
-            .alpha = (int)duk_to_number(ctx, 8),
+            .red = yyjson_get_int(yyjson_obj_get(arg_root, "color_red")),
+            .green = yyjson_get_int(yyjson_obj_get(arg_root, "color_green")),
+            .blue = yyjson_get_int(yyjson_obj_get(arg_root, "color_blue")),
+            .alpha = yyjson_get_int(yyjson_obj_get(arg_root, "color_alpha")),
     };
     raia_size_t canvas = {
-            .width = (int)duk_to_number(ctx, 9),
-            .height = (int)duk_to_number(ctx, 10),
+            .width = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_width")),
+            .height = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_height")),
     };
+
     draw_ellipse_rgba(pixels, segment, color, canvas, 4);
-    return 0;
+
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_bool(ret_doc, ret_root, "result", true);
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    yyjson_doc_free(arg_doc);
+    return (void *)result;
 }
 
-RAIA_EXPORT duk_ret_t raia_draw_filled_ellipse(duk_context *ctx) {
-    duk_size_t len;
-    uint8_t *pixels = (uint8_t *)duk_require_buffer_data(ctx, 0, &len);
+RAIA_EXPORT void *raia_draw_filled_ellipse(const char *s, void *p, int n) {
+    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
+    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+    uint8_t *pixels = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "pixels"));
     raia_segment_t segment = {
-            .start.x = (int)duk_to_number(ctx, 1),
-            .start.y = (int)duk_to_number(ctx, 2),
-            .end.x = (int)duk_to_number(ctx, 3),
-            .end.y = (int)duk_to_number(ctx, 4),
+            .start.x = yyjson_get_int(yyjson_obj_get(arg_root, "start_x")),
+            .start.y = yyjson_get_int(yyjson_obj_get(arg_root, "start_y")),
+            .end.x = yyjson_get_int(yyjson_obj_get(arg_root, "end_x")),
+            .end.y = yyjson_get_int(yyjson_obj_get(arg_root, "end_y")),
     };
     raia_color_t color = {
-            .red = (int)duk_to_number(ctx, 5),
-            .green = (int)duk_to_number(ctx, 6),
-            .blue = (int)duk_to_number(ctx, 7),
+            .red = yyjson_get_int(yyjson_obj_get(arg_root, "color_red")),
+            .green = yyjson_get_int(yyjson_obj_get(arg_root, "color_green")),
+            .blue = yyjson_get_int(yyjson_obj_get(arg_root, "color_blue")),
     };
     raia_size_t canvas = {
-            .width = (int)duk_to_number(ctx, 8),
-            .height = (int)duk_to_number(ctx, 9),
+            .width = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_width")),
+            .height = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_height")),
     };
+
     draw_filled_ellipse(pixels, segment, color, canvas, 3);
-    return 0;
+
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_bool(ret_doc, ret_root, "result", true);
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    yyjson_doc_free(arg_doc);
+    return (void *)result;
 }
 
-RAIA_EXPORT duk_ret_t raia_draw_filled_ellipse_rgba(duk_context *ctx) {
-    duk_size_t len;
-    uint8_t *pixels = (uint8_t *)duk_require_buffer_data(ctx, 0, &len);
+RAIA_EXPORT void *raia_draw_filled_ellipse_rgba(const char *s, void *p, int n) {
+    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
+    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+    uint8_t *pixels = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "pixels"));
     raia_segment_t segment = {
-            .start.x = (int)duk_to_number(ctx, 1),
-            .start.y = (int)duk_to_number(ctx, 2),
-            .end.x = (int)duk_to_number(ctx, 3),
-            .end.y = (int)duk_to_number(ctx, 4),
+            .start.x = yyjson_get_int(yyjson_obj_get(arg_root, "start_x")),
+            .start.y = yyjson_get_int(yyjson_obj_get(arg_root, "start_y")),
+            .end.x = yyjson_get_int(yyjson_obj_get(arg_root, "end_x")),
+            .end.y = yyjson_get_int(yyjson_obj_get(arg_root, "end_y")),
     };
     raia_color_t color = {
-            .red = (int)duk_to_number(ctx, 5),
-            .green = (int)duk_to_number(ctx, 6),
-            .blue = (int)duk_to_number(ctx, 7),
-            .alpha = (int)duk_to_number(ctx, 8),
+            .red = yyjson_get_int(yyjson_obj_get(arg_root, "color_red")),
+            .green = yyjson_get_int(yyjson_obj_get(arg_root, "color_green")),
+            .blue = yyjson_get_int(yyjson_obj_get(arg_root, "color_blue")),
+            .alpha = yyjson_get_int(yyjson_obj_get(arg_root, "color_alpha")),
     };
     raia_size_t canvas = {
-            .width = (int)duk_to_number(ctx, 9),
-            .height = (int)duk_to_number(ctx, 10),
+            .width = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_width")),
+            .height = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_height")),
     };
+
     draw_filled_ellipse_rgba(pixels, segment, color, canvas, 4);
-    return 0;
+
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_bool(ret_doc, ret_root, "result", true);
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    yyjson_doc_free(arg_doc);
+    return (void *)result;
 }
 
-RAIA_EXPORT duk_ret_t raia_draw_filled_ellipse_smooth(duk_context *ctx) {
-    duk_size_t len;
-    uint8_t *pixels = (uint8_t *)duk_require_buffer_data(ctx, 0, &len);
+RAIA_EXPORT void *raia_draw_filled_ellipse_smooth(const char *s, void *p, int n) {
+    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
+    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+    uint8_t *pixels = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "pixels"));
     raia_segment_t segment = {
-            .start.x = (int)duk_to_number(ctx, 1),
-            .start.y = (int)duk_to_number(ctx, 2),
-            .end.x = (int)duk_to_number(ctx, 3),
-            .end.y = (int)duk_to_number(ctx, 4),
+            .start.x = yyjson_get_int(yyjson_obj_get(arg_root, "start_x")),
+            .start.y = yyjson_get_int(yyjson_obj_get(arg_root, "start_y")),
+            .end.x = yyjson_get_int(yyjson_obj_get(arg_root, "end_x")),
+            .end.y = yyjson_get_int(yyjson_obj_get(arg_root, "end_y")),
     };
     raia_color_t color = {
-            .red = (int)duk_to_number(ctx, 5),
-            .green = (int)duk_to_number(ctx, 6),
-            .blue = (int)duk_to_number(ctx, 7),
+            .red = yyjson_get_int(yyjson_obj_get(arg_root, "color_red")),
+            .green = yyjson_get_int(yyjson_obj_get(arg_root, "color_green")),
+            .blue = yyjson_get_int(yyjson_obj_get(arg_root, "color_blue")),
     };
     raia_size_t canvas = {
-            .width = (int)duk_to_number(ctx, 8),
-            .height = (int)duk_to_number(ctx, 9),
+            .width = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_width")),
+            .height = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_height")),
     };
+
     draw_filled_ellipse_smooth(pixels, segment, color, canvas, 3);
-    return 0;
+
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_bool(ret_doc, ret_root, "result", true);
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    yyjson_doc_free(arg_doc);
+    return (void *)result;
 }
 
-RAIA_EXPORT duk_ret_t raia_draw_fill_circle(duk_context *ctx) {
-    duk_size_t len;
-    uint8_t *pixels = (uint8_t *)duk_require_buffer_data(ctx, 0, &len);
+RAIA_EXPORT void *raia_draw_fill_circle(const char *s, void *p, int n) {
+    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
+    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+    uint8_t *pixels = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "pixels"));
     raia_segment_t segment = {
-        .start.x = (int)duk_to_number(ctx, 1),
-        .start.y = (int)duk_to_number(ctx, 2),
-        .end.x = (int)duk_to_number(ctx, 3),
-        .end.y = (int)duk_to_number(ctx, 4),
+            .start.x = yyjson_get_int(yyjson_obj_get(arg_root, "start_x")),
+            .start.y = yyjson_get_int(yyjson_obj_get(arg_root, "start_y")),
+            .end.x = yyjson_get_int(yyjson_obj_get(arg_root, "end_x")),
+            .end.y = yyjson_get_int(yyjson_obj_get(arg_root, "end_y")),
     };
     raia_color_t color = {
-        .red = (int)duk_to_number(ctx, 5),
-        .green = (int)duk_to_number(ctx, 6),
-        .blue = (int)duk_to_number(ctx, 7),
+            .red = yyjson_get_int(yyjson_obj_get(arg_root, "color_red")),
+            .green = yyjson_get_int(yyjson_obj_get(arg_root, "color_green")),
+            .blue = yyjson_get_int(yyjson_obj_get(arg_root, "color_blue")),
     };
     raia_size_t canvas = {
-        .width = (int)duk_to_number(ctx, 8),
-        .height = (int)duk_to_number(ctx, 9),
+            .width = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_width")),
+            .height = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_height")),
     };
+
     fill_circle_rgb(pixels, segment, color, canvas, 3);
-    return 0;
+
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_bool(ret_doc, ret_root, "result", true);
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    yyjson_doc_free(arg_doc);
+    return (void *)result;
 }
 
-RAIA_EXPORT duk_ret_t raia_draw_blend_pixels_rgba_to_rgb(duk_context *ctx) {
-    duk_size_t pixels_rgb_len;
-    uint8_t *pixels_rgb = (uint8_t *)duk_require_buffer_data(ctx, 0, &pixels_rgb_len);
-    int pixels_rgb_width = (int)duk_to_number(ctx, 1);
-    int pixels_rgb_height = (int)duk_to_number(ctx, 2);
-    duk_size_t pixels_rgba_len;
-    uint8_t *pixels_rgba = (uint8_t *)duk_require_buffer_data(ctx, 3, &pixels_rgba_len);
-    int pixels_rgba_width = (int)duk_to_number(ctx, 4);
-    int pixels_rgba_height = (int)duk_to_number(ctx, 5);
-    int position_x = (int)duk_to_number(ctx, 6);
-    int position_y = (int)duk_to_number(ctx, 7);
-    int trimming_x1 = (int)duk_to_number(ctx, 8);
-    int trimming_y1 = (int)duk_to_number(ctx, 9);
-    int trimming_x2 = (int)duk_to_number(ctx, 10);
-    int trimming_y2 = (int)duk_to_number(ctx, 11);
+RAIA_EXPORT void *raia_draw_blend_pixels_rgba_to_rgb(const char *s, void *p, int n) {
+    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
+    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+    uint8_t *pixels_rgb = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "pixels_rgb"));
+    int pixels_rgb_width = yyjson_get_int(yyjson_obj_get(arg_root, "pixels_rgb_width"));
+    int pixels_rgb_height = yyjson_get_int(yyjson_obj_get(arg_root, "pixels_rgb_height"));
+    uint8_t *pixels_rgba = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "pixels_rgba"));
+    int pixels_rgba_width = yyjson_get_int(yyjson_obj_get(arg_root, "pixels_rgba_width"));
+    int pixels_rgba_height = yyjson_get_int(yyjson_obj_get(arg_root, "pixels_rgba_height"));
+    int position_x = yyjson_get_int(yyjson_obj_get(arg_root, "position_x"));
+    int position_y = yyjson_get_int(yyjson_obj_get(arg_root, "position_y"));
+    int trimming_x1 = yyjson_get_int(yyjson_obj_get(arg_root, "trimming_x1"));
+    int trimming_y1 = yyjson_get_int(yyjson_obj_get(arg_root, "trimming_y1"));
+    int trimming_x2 = yyjson_get_int(yyjson_obj_get(arg_root, "trimming_x2"));
+    int trimming_y2 = yyjson_get_int(yyjson_obj_get(arg_root, "trimming_y2"));
+
     blend_pixels_rgba_to_rgb(
             pixels_rgb, pixels_rgb_width, pixels_rgb_height,
             pixels_rgba, pixels_rgba_width, pixels_rgba_height,
             position_x, position_y,
             trimming_x1, trimming_y1, trimming_x2, trimming_y2);
-    return 0;
+
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_bool(ret_doc, ret_root, "result", true);
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    yyjson_doc_free(arg_doc);
+    return (void *)result;
 }
 
-RAIA_EXPORT duk_ret_t raia_draw_blend_pixels_rgba_to_rgba(duk_context *ctx) {
-    duk_size_t pixels_rgba_a_len;
-    uint8_t *pixels_rgba_a = (uint8_t *)duk_require_buffer_data(ctx, 0, &pixels_rgba_a_len);
-    int pixels_rgba_a_width = (int)duk_to_number(ctx, 1);
-    int pixels_rgba_a_height = (int)duk_to_number(ctx, 2);
-    duk_size_t pixels_rgba_b_len;
-    uint8_t *pixels_rgba_b = (uint8_t *)duk_require_buffer_data(ctx, 3, &pixels_rgba_b_len);
-    int pixels_rgba_b_width = (int)duk_to_number(ctx, 4);
-    int pixels_rgba_b_height = (int)duk_to_number(ctx, 5);
-    int position_x = (int)duk_to_number(ctx, 6);
-    int position_y = (int)duk_to_number(ctx, 7);
-    int trimming_x1 = (int)duk_to_number(ctx, 8);
-    int trimming_y1 = (int)duk_to_number(ctx, 9);
-    int trimming_x2 = (int)duk_to_number(ctx, 10);
-    int trimming_y2 = (int)duk_to_number(ctx, 11);
+RAIA_EXPORT void *raia_draw_blend_pixels_rgba_to_rgba(const char *s, void *p, int n) {
+    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
+    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+    uint8_t *pixels_rgba_a = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "pixels_rgba_a"));
+    int pixels_rgba_a_width = yyjson_get_int(yyjson_obj_get(arg_root, "pixels_rgba_a_width"));
+    int pixels_rgba_a_height = yyjson_get_int(yyjson_obj_get(arg_root, "pixels_rgba_a_height"));
+    uint8_t *pixels_rgba_b = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "pixels_rgba_b"));
+    int pixels_rgba_b_width = yyjson_get_int(yyjson_obj_get(arg_root, "pixels_rgba_b_width"));
+    int pixels_rgba_b_height = yyjson_get_int(yyjson_obj_get(arg_root, "pixels_rgba_b_height"));
+    int position_x = yyjson_get_int(yyjson_obj_get(arg_root, "position_x"));
+    int position_y = yyjson_get_int(yyjson_obj_get(arg_root, "position_y"));
+    int trimming_x1 = yyjson_get_int(yyjson_obj_get(arg_root, "trimming_x1"));
+    int trimming_y1 = yyjson_get_int(yyjson_obj_get(arg_root, "trimming_y1"));
+    int trimming_x2 = yyjson_get_int(yyjson_obj_get(arg_root, "trimming_x2"));
+    int trimming_y2 = yyjson_get_int(yyjson_obj_get(arg_root, "trimming_y2"));
+
     blend_pixels_rgba_to_rgba(
             pixels_rgba_a, pixels_rgba_a_width, pixels_rgba_a_height,
             pixels_rgba_b, pixels_rgba_b_width, pixels_rgba_b_height,
             position_x, position_y,
             trimming_x1, trimming_y1, trimming_x2, trimming_y2);
-    return 0;
+
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_bool(ret_doc, ret_root, "result", true);
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    yyjson_doc_free(arg_doc);
+    return (void *)result;
 }
 
-RAIA_EXPORT duk_ret_t raia_draw_load_image(duk_context *ctx) {
-    duk_size_t len;
-    uint8_t *pixels = (uint8_t *)duk_require_buffer_data(ctx, 0, &len);
+RAIA_EXPORT void *raia_draw_load_image(const char *s, void *p, int n) {
+    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
+    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+    uint8_t *pixels = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "pixels"));
     raia_point_t point = {
-            .x = (int)duk_to_number(ctx, 1),
-            .y = (int)duk_to_number(ctx, 2),
+            .x = yyjson_get_int(yyjson_obj_get(arg_root, "point_x")),
+            .y = yyjson_get_int(yyjson_obj_get(arg_root, "point_y")),
     };
     raia_size_t canvas = {
-            .width = (int)duk_to_number(ctx, 3),
-            .height = (int)duk_to_number(ctx, 4),
+            .width = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_width")),
+            .height = yyjson_get_int(yyjson_obj_get(arg_root, "canvas_height")),
     };
-    const char* filename = duk_to_string(ctx, 5);
+    const char* filename = yyjson_get_str(yyjson_obj_get(arg_root, "filename"));
+
     load_image(filename, pixels, point, canvas);
-    return 0;  /* no return value (= undefined) */
+
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_bool(ret_doc, ret_root, "result", true);
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    yyjson_doc_free(arg_doc);
+    return (void *)result;
 }
 
-RAIA_EXPORT duk_ret_t raia_draw_load_and_blend_image_rgb(duk_context *ctx) {
-    duk_size_t len;
-    uint8_t *pixels_rgba = (uint8_t *) duk_require_buffer_data(ctx, 0, &len);
-    int pixels_rgba_width = (int) duk_to_number(ctx, 1);
-    int pixels_rgba_height = (int) duk_to_number(ctx, 2);
-    const char *filename = duk_to_string(ctx, 3);
-    int position_x = (int) duk_to_number(ctx, 4);
-    int position_y = (int) duk_to_number(ctx, 5);
-    int trimming_x1 = (int) duk_to_number(ctx, 6);
-    int trimming_y1 = (int) duk_to_number(ctx, 7);
-    int trimming_x2 = (int) duk_to_number(ctx, 8);
-    int trimming_y2 = (int) duk_to_number(ctx, 9);
+RAIA_EXPORT void *raia_draw_load_and_blend_image_rgb(const char *s, void *p, int n) {
+    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
+    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+    uint8_t *pixels_rgba = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "pixels_rgba"));
+    int pixels_rgba_width = yyjson_get_int(yyjson_obj_get(arg_root, "pixels_rgba_width"));
+    int pixels_rgba_height = yyjson_get_int(yyjson_obj_get(arg_root, "pixels_rgba_height"));
+    const char* filename = yyjson_get_str(yyjson_obj_get(arg_root, "filename"));
+    int position_x = yyjson_get_int(yyjson_obj_get(arg_root, "position_x"));
+    int position_y = yyjson_get_int(yyjson_obj_get(arg_root, "position_y"));
+    int trimming_x1 = yyjson_get_int(yyjson_obj_get(arg_root, "trimming_x1"));
+    int trimming_y1 = yyjson_get_int(yyjson_obj_get(arg_root, "trimming_y1"));
+    int trimming_x2 = yyjson_get_int(yyjson_obj_get(arg_root, "trimming_x2"));
+    int trimming_y2 = yyjson_get_int(yyjson_obj_get(arg_root, "trimming_y2"));
+
     load_and_blend_image_rgb(
             pixels_rgba, pixels_rgba_width, pixels_rgba_height,
             filename,
             position_x, position_y,
             trimming_x1, trimming_y1, trimming_x2, trimming_y2);
-    return 0;  /* no return value (= undefined) */
+
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_bool(ret_doc, ret_root, "result", true);
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    yyjson_doc_free(arg_doc);
+    return (void *)result;
 }
 
-RAIA_EXPORT duk_ret_t raia_draw_load_and_blend_image_rgba(duk_context *ctx) {
-    duk_size_t len;
-    uint8_t *pixels_rgba = (uint8_t *) duk_require_buffer_data(ctx, 0, &len);
-    int pixels_rgba_width = (int) duk_to_number(ctx, 1);
-    int pixels_rgba_height = (int) duk_to_number(ctx, 2);
-    const char *filename = duk_to_string(ctx, 3);
-    int position_x = (int) duk_to_number(ctx, 4);
-    int position_y = (int) duk_to_number(ctx, 5);
-    int trimming_x1 = (int) duk_to_number(ctx, 6);
-    int trimming_y1 = (int) duk_to_number(ctx, 7);
-    int trimming_x2 = (int) duk_to_number(ctx, 8);
-    int trimming_y2 = (int) duk_to_number(ctx, 9);
+RAIA_EXPORT void *raia_draw_load_and_blend_image_rgba(const char *s, void *p, int n) {
+    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
+    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+    uint8_t *pixels_rgba = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "pixels_rgba"));
+    int pixels_rgba_width = yyjson_get_int(yyjson_obj_get(arg_root, "pixels_rgba_width"));
+    int pixels_rgba_height = yyjson_get_int(yyjson_obj_get(arg_root, "pixels_rgba_height"));
+    const char* filename = yyjson_get_str(yyjson_obj_get(arg_root, "filename"));
+    int position_x = yyjson_get_int(yyjson_obj_get(arg_root, "position_x"));
+    int position_y = yyjson_get_int(yyjson_obj_get(arg_root, "position_y"));
+    int trimming_x1 = yyjson_get_int(yyjson_obj_get(arg_root, "trimming_x1"));
+    int trimming_y1 = yyjson_get_int(yyjson_obj_get(arg_root, "trimming_y1"));
+    int trimming_x2 = yyjson_get_int(yyjson_obj_get(arg_root, "trimming_x2"));
+    int trimming_y2 = yyjson_get_int(yyjson_obj_get(arg_root, "trimming_y2"));
+
     load_and_blend_image_rgba(
             pixels_rgba, pixels_rgba_width, pixels_rgba_height,
             filename,
             position_x, position_y,
             trimming_x1, trimming_y1, trimming_x2, trimming_y2);
-    return 0;  /* no return value (= undefined) */
+
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_bool(ret_doc, ret_root, "result", true);
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    yyjson_doc_free(arg_doc);
+    return (void *)result;
 }
 
 static int _draw_font_open(const char* font_path) {
@@ -523,11 +752,22 @@ static int _draw_font_open(const char* font_path) {
     return (int)font_size_in_bytes;
 }
 
-RAIA_EXPORT duk_ret_t raia_draw_font_open(duk_context *ctx) {
-    const char* font_path = duk_to_string(ctx, 0);
+RAIA_EXPORT void *raia_draw_font_open(const char *s, void *p, int n) {
+    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
+    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+    const char* font_path = yyjson_get_str(yyjson_obj_get(arg_root, "font_path"));
+
     int font_size_in_bytes = _draw_font_open(font_path);
-    duk_push_int(ctx, font_size_in_bytes);
-    return 1;
+
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "result", font_size_in_bytes);
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    yyjson_doc_free(arg_doc);
+    return (void *)result;
 }
 
 static raia_font_t _draw_font_init_buffer(const char *font_path, uint8_t *font_buffer) {
@@ -562,79 +802,55 @@ static raia_font_t _draw_font_init_buffer(const char *font_path, uint8_t *font_b
     return font;
 }
 
-RAIA_EXPORT duk_ret_t raia_draw_font_init_buffer(duk_context *ctx) {
-    const char *font_path = duk_to_string(ctx, 0);
-    duk_size_t len;
-    uint8_t *font_buffer = (uint8_t *) duk_require_buffer_data(ctx, 1, &len);
+RAIA_EXPORT void *raia_draw_font_init_buffer(const char *s, void *p, int n) {
+    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
+    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+    const char *font_path = yyjson_get_str(yyjson_obj_get(arg_root, "font_path"));
+    uint8_t *font_buffer = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "font_buffer"));
 
     raia_font_t font = _draw_font_init_buffer(font_path, font_buffer);
 
-    duk_idx_t obj_idx = duk_push_object(ctx);
-    duk_push_pointer(ctx, font.font_info.userdata);
-    duk_put_prop_string(ctx, obj_idx, "userdata");
-    duk_push_pointer(ctx, font.font_info.data);
-    duk_put_prop_string(ctx, obj_idx, "data");
-    duk_push_int(ctx, font.font_info.fontstart);
-    duk_put_prop_string(ctx, obj_idx, "fontstart");
-    duk_push_int(ctx, font.font_info.numGlyphs);
-    duk_put_prop_string(ctx, obj_idx, "numGlyphs");
-    duk_push_int(ctx, font.font_info.loca);
-    duk_put_prop_string(ctx, obj_idx, "loca");
-    duk_push_int(ctx, font.font_info.head);
-    duk_put_prop_string(ctx, obj_idx, "head");
-    duk_push_int(ctx, font.font_info.glyf);
-    duk_put_prop_string(ctx, obj_idx, "glyf");
-    duk_push_int(ctx, font.font_info.hhea);
-    duk_put_prop_string(ctx, obj_idx, "hhea");
-    duk_push_int(ctx, font.font_info.hmtx);
-    duk_put_prop_string(ctx, obj_idx, "hmtx");
-    duk_push_int(ctx, font.font_info.kern);
-    duk_put_prop_string(ctx, obj_idx, "kern");
-    duk_push_int(ctx, font.font_info.gpos);
-    duk_put_prop_string(ctx, obj_idx, "gpos");
-    duk_push_int(ctx, font.font_info.svg);
-    duk_put_prop_string(ctx, obj_idx, "svg");
-    duk_push_int(ctx, font.font_info.index_map);
-    duk_put_prop_string(ctx, obj_idx, "index_map");
-    duk_push_int(ctx, font.font_info.indexToLocFormat);
-    duk_put_prop_string(ctx, obj_idx, "indexToLocFormat");
-    duk_push_pointer(ctx, font.font_info.cff.data);
-    duk_put_prop_string(ctx, obj_idx, "cff_data");
-    duk_push_int(ctx, font.font_info.cff.cursor);
-    duk_put_prop_string(ctx, obj_idx, "cff_cursor");
-    duk_push_int(ctx, font.font_info.cff.size);
-    duk_put_prop_string(ctx, obj_idx, "cff_size");
-    duk_push_pointer(ctx, font.font_info.charstrings.data);
-    duk_put_prop_string(ctx, obj_idx, "charstrings_data");
-    duk_push_int(ctx, font.font_info.charstrings.cursor);
-    duk_put_prop_string(ctx, obj_idx, "charstrings_cursor");
-    duk_push_int(ctx, font.font_info.charstrings.size);
-    duk_put_prop_string(ctx, obj_idx, "charstrings_size");
-    duk_push_pointer(ctx, font.font_info.gsubrs.data);
-    duk_put_prop_string(ctx, obj_idx, "gsubrs_data");
-    duk_push_int(ctx, font.font_info.gsubrs.cursor);
-    duk_put_prop_string(ctx, obj_idx, "gsubrs_cursor");
-    duk_push_int(ctx, font.font_info.gsubrs.size);
-    duk_put_prop_string(ctx, obj_idx, "gsubrs_size");
-    duk_push_pointer(ctx, font.font_info.subrs.data);
-    duk_put_prop_string(ctx, obj_idx, "subrs_data");
-    duk_push_int(ctx, font.font_info.subrs.cursor);
-    duk_put_prop_string(ctx, obj_idx, "subrs_cursor");
-    duk_push_int(ctx, font.font_info.subrs.size);
-    duk_put_prop_string(ctx, obj_idx, "subrs_size");
-    duk_push_pointer(ctx, font.font_info.fontdicts.data);
-    duk_put_prop_string(ctx, obj_idx, "fontdicts_data");
-    duk_push_int(ctx, font.font_info.fontdicts.cursor);
-    duk_put_prop_string(ctx, obj_idx, "fontdicts_cursor");
-    duk_push_int(ctx, font.font_info.fontdicts.size);
-    duk_put_prop_string(ctx, obj_idx, "fontdicts_size");
-    duk_push_pointer(ctx, font.font_info.fdselect.data);
-    duk_put_prop_string(ctx, obj_idx, "fdselect_data");
-    duk_push_int(ctx, font.font_info.fdselect.cursor);
-    duk_put_prop_string(ctx, obj_idx, "fdselect_cursor");
-    duk_push_int(ctx, font.font_info.fdselect.size);
-    duk_put_prop_string(ctx, obj_idx, "fdselect_size");
-    return 1;
+
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_uint(ret_doc, ret_root, "userdata", (uint64_t)(uintptr_t)font.font_info.userdata);
+    yyjson_mut_obj_add_uint(ret_doc, ret_root, "data", (uint64_t)(uintptr_t)font.font_info.data);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "fontstart", font.font_info.fontstart);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "numGlyphs", font.font_info.numGlyphs);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "loca", font.font_info.loca);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "head", font.font_info.head);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "glyf", font.font_info.glyf);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "hhea", font.font_info.hhea);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "hmtx", font.font_info.hmtx);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "kern", font.font_info.kern);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "gpos", font.font_info.gpos);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "svg", font.font_info.svg);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "index_map", font.font_info.index_map);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "indexToLocFormat", font.font_info.indexToLocFormat);
+    yyjson_mut_obj_add_uint(ret_doc, ret_root, "cff_data", (uint64_t)(uintptr_t)font.font_info.cff.data);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "cff_cursor", font.font_info.cff.cursor);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "cff_size", font.font_info.cff.size);
+    yyjson_mut_obj_add_uint(ret_doc, ret_root, "charstrings_data", (uint64_t)(uintptr_t)font.font_info.charstrings.data);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "charstrings_cursor", font.font_info.charstrings.cursor);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "charstrings_size", font.font_info.charstrings.size);
+    yyjson_mut_obj_add_uint(ret_doc, ret_root, "gsubrs_data", (uint64_t)(uintptr_t)font.font_info.gsubrs.data);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "gsubrs_cursor", font.font_info.gsubrs.cursor);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "gsubrs_size", font.font_info.gsubrs.size);
+    yyjson_mut_obj_add_uint(ret_doc, ret_root, "subrs_data", (uint64_t)(uintptr_t)font.font_info.subrs.data);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "subrs_cursor", font.font_info.subrs.cursor);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "subrs_size", font.font_info.subrs.size);
+    yyjson_mut_obj_add_uint(ret_doc, ret_root, "fontdicts_data", (uint64_t)(uintptr_t)font.font_info.fontdicts.data);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "fontdicts_cursor", font.font_info.fontdicts.cursor);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "fontdicts_size", font.font_info.fontdicts.size);
+    yyjson_mut_obj_add_uint(ret_doc, ret_root, "fdselect_data", (uint64_t)(uintptr_t)font.font_info.fdselect.data);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "fdselect_cursor", font.font_info.fdselect.cursor);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "fdselect_size", font.font_info.fdselect.size);
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    yyjson_doc_free(arg_doc);
+    return (void *)result;
 }
 
 static raia_size_t _draw_text_rgb(
@@ -692,54 +908,54 @@ static raia_size_t _draw_text_rgb(
     return glyph_size;
 }
 
-RAIA_EXPORT duk_ret_t raia_draw_text_rgb(duk_context *ctx) {
-    duk_size_t pixels_len;
-    uint8_t *pixels_rgba = (uint8_t *)duk_require_buffer_data(ctx, 0, &pixels_len);
-    int pixels_rgba_width = (int)duk_to_number(ctx, 1);
-    int pixels_rgba_height = (int)duk_to_number(ctx, 2);
-    const uint8_t* text = (uint8_t *)duk_to_string(ctx, 3);
-    int font_size = (int)duk_to_number(ctx, 4);
+RAIA_EXPORT void *raia_draw_text_rgb(const char *s, void *p, int n) {
+    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
+    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+    uint8_t *pixels_rgba = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "pixels_rgba"));
+    int pixels_rgba_width = yyjson_get_int(yyjson_obj_get(arg_root, "pixels_rgba_width"));
+    int pixels_rgba_height = yyjson_get_int(yyjson_obj_get(arg_root, "pixels_rgba_height"));
+    const uint8_t *text = (const uint8_t *)yyjson_get_str(yyjson_obj_get(arg_root, "text"));
+    int font_size = yyjson_get_int(yyjson_obj_get(arg_root, "font_size"));
     raia_color_t color;
-    color.red = (int)duk_to_number(ctx, 5);
-    color.green = (int)duk_to_number(ctx, 6);
-    color.blue = (int)duk_to_number(ctx, 7);
-    int position_x = (int)duk_to_number(ctx, 8);
-    int position_y = (int)duk_to_number(ctx, 9);
-    duk_size_t font_buffer_len;
-    uint8_t *font_buffer = (uint8_t *) duk_require_buffer_data(ctx, 10, &font_buffer_len);
+    color.red = yyjson_get_int(yyjson_obj_get(arg_root, "color_red"));
+    color.green = yyjson_get_int(yyjson_obj_get(arg_root, "color_green"));
+    color.blue = yyjson_get_int(yyjson_obj_get(arg_root, "color_blue"));
+    int position_x = yyjson_get_int(yyjson_obj_get(arg_root, "position_x"));
+    int position_y = yyjson_get_int(yyjson_obj_get(arg_root, "position_y"));
+    uint8_t *font_buffer = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "font_buffer"));
     stbtt_fontinfo font_info;
-    font_info.userdata = duk_require_pointer(ctx, 11);
-    font_info.data = (unsigned char *)duk_require_pointer(ctx, 12);
-    font_info.fontstart = duk_to_int(ctx, 13);
-    font_info.numGlyphs = duk_to_int(ctx, 14);
-    font_info.loca = duk_to_int(ctx, 15);
-    font_info.head = duk_to_int(ctx, 16);
-    font_info.glyf = duk_to_int(ctx, 17);
-    font_info.hhea = duk_to_int(ctx, 18);
-    font_info.hmtx = duk_to_int(ctx, 19);
-    font_info.kern = duk_to_int(ctx, 20);
-    font_info.gpos = duk_to_int(ctx, 21);
-    font_info.svg = duk_to_int(ctx, 22);
-    font_info.index_map = duk_to_int(ctx, 23);
-    font_info.indexToLocFormat = duk_to_int(ctx, 24);
-    font_info.cff.data = (unsigned char *)duk_require_pointer(ctx, 25);
-    font_info.cff.cursor = duk_to_int(ctx, 26);
-    font_info.cff.size = duk_to_int(ctx, 27);
-    font_info.charstrings.data = (unsigned char *)duk_require_pointer(ctx, 28);
-    font_info.charstrings.cursor = duk_to_int(ctx, 29);
-    font_info.charstrings.size = duk_to_int(ctx, 30);
-    font_info.gsubrs.data = (unsigned char *)duk_require_pointer(ctx, 31);
-    font_info.gsubrs.cursor = duk_to_int(ctx, 32);
-    font_info.gsubrs.size = duk_to_int(ctx, 33);
-    font_info.subrs.data = (unsigned char *)duk_require_pointer(ctx, 34);
-    font_info.subrs.cursor = duk_to_int(ctx, 35);
-    font_info.subrs.size = duk_to_int(ctx, 36);
-    font_info.fontdicts.data = (unsigned char *)duk_require_pointer(ctx, 37);
-    font_info.fontdicts.cursor = duk_to_int(ctx, 38);
-    font_info.fontdicts.size = duk_to_int(ctx, 39);
-    font_info.fdselect.data = (unsigned char *)duk_require_pointer(ctx, 40);
-    font_info.fdselect.cursor = duk_to_int(ctx, 41);
-    font_info.fdselect.size = duk_to_int(ctx, 42);
+    font_info.userdata = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "userdata"));
+    font_info.data = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "data"));
+    font_info.fontstart = yyjson_get_int(yyjson_obj_get(arg_root, "fontstart"));
+    font_info.numGlyphs = yyjson_get_int(yyjson_obj_get(arg_root, "numGlyphs"));
+    font_info.loca = yyjson_get_int(yyjson_obj_get(arg_root, "loca"));
+    font_info.head = yyjson_get_int(yyjson_obj_get(arg_root, "head"));
+    font_info.glyf = yyjson_get_int(yyjson_obj_get(arg_root, "glyf"));
+    font_info.hhea = yyjson_get_int(yyjson_obj_get(arg_root, "hhea"));
+    font_info.hmtx = yyjson_get_int(yyjson_obj_get(arg_root, "hmtx"));
+    font_info.kern = yyjson_get_int(yyjson_obj_get(arg_root, "kern"));
+    font_info.gpos = yyjson_get_int(yyjson_obj_get(arg_root, "gpos"));
+    font_info.svg = yyjson_get_int(yyjson_obj_get(arg_root, "svg"));
+    font_info.index_map = yyjson_get_int(yyjson_obj_get(arg_root, "index_map"));
+    font_info.indexToLocFormat = yyjson_get_int(yyjson_obj_get(arg_root, "indexToLocFormat"));
+    font_info.cff.data = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "cff_data"));
+    font_info.cff.cursor = yyjson_get_int(yyjson_obj_get(arg_root, "cff_cursor"));
+    font_info.cff.size = yyjson_get_int(yyjson_obj_get(arg_root, "cff_size"));
+    font_info.charstrings.data = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "charstrings_data"));
+    font_info.charstrings.cursor = yyjson_get_int(yyjson_obj_get(arg_root, "charstrings_cursor"));
+    font_info.charstrings.size = yyjson_get_int(yyjson_obj_get(arg_root, "charstrings_size"));
+    font_info.gsubrs.data = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "gsubrs_data"));
+    font_info.gsubrs.cursor = yyjson_get_int(yyjson_obj_get(arg_root, "gsubrs_cursor"));
+    font_info.gsubrs.size = yyjson_get_int(yyjson_obj_get(arg_root, "gsubrs_data"));
+    font_info.subrs.data = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "subrs_data"));
+    font_info.subrs.cursor = yyjson_get_int(yyjson_obj_get(arg_root, "subrs_cursor"));
+    font_info.subrs.size = yyjson_get_int(yyjson_obj_get(arg_root, "subrs_size"));
+    font_info.fontdicts.data = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "fontdicts_data"));
+    font_info.fontdicts.cursor = yyjson_get_int(yyjson_obj_get(arg_root, "fontdicts_cursor"));
+    font_info.fontdicts.size = yyjson_get_int(yyjson_obj_get(arg_root, "fontdicts_size"));
+    font_info.fdselect.data = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "fdselect_data"));
+    font_info.fdselect.cursor = yyjson_get_int(yyjson_obj_get(arg_root, "fdselect_cursor"));
+    font_info.fdselect.size = yyjson_get_int(yyjson_obj_get(arg_root, "fdselect_size"));
 
     raia_size_t glyph_size = _draw_text_rgb(
             pixels_rgba,
@@ -753,12 +969,16 @@ RAIA_EXPORT duk_ret_t raia_draw_text_rgb(duk_context *ctx) {
             font_buffer,
             font_info);
 
-    duk_idx_t obj_idx = duk_push_object(ctx);
-    duk_push_int(ctx, glyph_size.width);
-    duk_put_prop_string(ctx, obj_idx, "width");
-    duk_push_int(ctx, glyph_size.height);
-    duk_put_prop_string(ctx, obj_idx, "height");
-    return 1;
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "width", glyph_size.width);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "height", glyph_size.height);
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    yyjson_doc_free(arg_doc);
+    return (void *)result;
 }
 
 static raia_size_t _draw_text_rgba(
@@ -816,54 +1036,54 @@ static raia_size_t _draw_text_rgba(
     return glyph_size;
 }
 
-RAIA_EXPORT duk_ret_t raia_draw_text_rgba(duk_context *ctx) {
-    duk_size_t pixels_len;
-    uint8_t *pixels_rgba = (uint8_t *)duk_require_buffer_data(ctx, 0, &pixels_len);
-    int pixels_rgba_width = (int)duk_to_number(ctx, 1);
-    int pixels_rgba_height = (int)duk_to_number(ctx, 2);
-    const uint8_t* text = (uint8_t *)duk_to_string(ctx, 3);
-    int font_size = (int)duk_to_number(ctx, 4);
+RAIA_EXPORT void *raia_draw_text_rgba(const char *s, void *p, int n) {
+    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
+    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+    uint8_t *pixels_rgba = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "pixels_rgba"));
+    int pixels_rgba_width = yyjson_get_int(yyjson_obj_get(arg_root, "pixels_rgba_width"));
+    int pixels_rgba_height = yyjson_get_int(yyjson_obj_get(arg_root, "pixels_rgba_height"));
+    const uint8_t *text = (const uint8_t *)yyjson_get_str(yyjson_obj_get(arg_root, "text"));
+    int font_size = yyjson_get_int(yyjson_obj_get(arg_root, "font_size"));
     raia_color_t color;
-    color.red = (int)duk_to_number(ctx, 5);
-    color.green = (int)duk_to_number(ctx, 6);
-    color.blue = (int)duk_to_number(ctx, 7);
-    int position_x = (int)duk_to_number(ctx, 8);
-    int position_y = (int)duk_to_number(ctx, 9);
-    duk_size_t font_buffer_len;
-    uint8_t *font_buffer = (uint8_t *) duk_require_buffer_data(ctx, 10, &font_buffer_len);
+    color.red = yyjson_get_int(yyjson_obj_get(arg_root, "color_red"));
+    color.green = yyjson_get_int(yyjson_obj_get(arg_root, "color_green"));
+    color.blue = yyjson_get_int(yyjson_obj_get(arg_root, "color_blue"));
+    int position_x = yyjson_get_int(yyjson_obj_get(arg_root, "position_x"));
+    int position_y = yyjson_get_int(yyjson_obj_get(arg_root, "position_y"));
+    uint8_t *font_buffer = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "font_buffer"));
     stbtt_fontinfo font_info;
-    font_info.userdata = duk_require_pointer(ctx, 11);
-    font_info.data = (unsigned char *)duk_require_pointer(ctx, 12);
-    font_info.fontstart = duk_to_int(ctx, 13);
-    font_info.numGlyphs = duk_to_int(ctx, 14);
-    font_info.loca = duk_to_int(ctx, 15);
-    font_info.head = duk_to_int(ctx, 16);
-    font_info.glyf = duk_to_int(ctx, 17);
-    font_info.hhea = duk_to_int(ctx, 18);
-    font_info.hmtx = duk_to_int(ctx, 19);
-    font_info.kern = duk_to_int(ctx, 20);
-    font_info.gpos = duk_to_int(ctx, 21);
-    font_info.svg = duk_to_int(ctx, 22);
-    font_info.index_map = duk_to_int(ctx, 23);
-    font_info.indexToLocFormat = duk_to_int(ctx, 24);
-    font_info.cff.data = (unsigned char *)duk_require_pointer(ctx, 25);
-    font_info.cff.cursor = duk_to_int(ctx, 26);
-    font_info.cff.size = duk_to_int(ctx, 27);
-    font_info.charstrings.data = (unsigned char *)duk_require_pointer(ctx, 28);
-    font_info.charstrings.cursor = duk_to_int(ctx, 29);
-    font_info.charstrings.size = duk_to_int(ctx, 30);
-    font_info.gsubrs.data = (unsigned char *)duk_require_pointer(ctx, 31);
-    font_info.gsubrs.cursor = duk_to_int(ctx, 32);
-    font_info.gsubrs.size = duk_to_int(ctx, 33);
-    font_info.subrs.data = (unsigned char *)duk_require_pointer(ctx, 34);
-    font_info.subrs.cursor = duk_to_int(ctx, 35);
-    font_info.subrs.size = duk_to_int(ctx, 36);
-    font_info.fontdicts.data = (unsigned char *)duk_require_pointer(ctx, 37);
-    font_info.fontdicts.cursor = duk_to_int(ctx, 38);
-    font_info.fontdicts.size = duk_to_int(ctx, 39);
-    font_info.fdselect.data = (unsigned char *)duk_require_pointer(ctx, 40);
-    font_info.fdselect.cursor = duk_to_int(ctx, 41);
-    font_info.fdselect.size = duk_to_int(ctx, 42);
+    font_info.userdata = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "userdata"));
+    font_info.data = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "data"));
+    font_info.fontstart = yyjson_get_int(yyjson_obj_get(arg_root, "fontstart"));
+    font_info.numGlyphs = yyjson_get_int(yyjson_obj_get(arg_root, "numGlyphs"));
+    font_info.loca = yyjson_get_int(yyjson_obj_get(arg_root, "loca"));
+    font_info.head = yyjson_get_int(yyjson_obj_get(arg_root, "head"));
+    font_info.glyf = yyjson_get_int(yyjson_obj_get(arg_root, "glyf"));
+    font_info.hhea = yyjson_get_int(yyjson_obj_get(arg_root, "hhea"));
+    font_info.hmtx = yyjson_get_int(yyjson_obj_get(arg_root, "hmtx"));
+    font_info.kern = yyjson_get_int(yyjson_obj_get(arg_root, "kern"));
+    font_info.gpos = yyjson_get_int(yyjson_obj_get(arg_root, "gpos"));
+    font_info.svg = yyjson_get_int(yyjson_obj_get(arg_root, "svg"));
+    font_info.index_map = yyjson_get_int(yyjson_obj_get(arg_root, "index_map"));
+    font_info.indexToLocFormat = yyjson_get_int(yyjson_obj_get(arg_root, "indexToLocFormat"));
+    font_info.cff.data = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "cff_data"));
+    font_info.cff.cursor = yyjson_get_int(yyjson_obj_get(arg_root, "cff_cursor"));
+    font_info.cff.size = yyjson_get_int(yyjson_obj_get(arg_root, "cff_size"));
+    font_info.charstrings.data = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "charstrings_data"));
+    font_info.charstrings.cursor = yyjson_get_int(yyjson_obj_get(arg_root, "charstrings_cursor"));
+    font_info.charstrings.size = yyjson_get_int(yyjson_obj_get(arg_root, "charstrings_size"));
+    font_info.gsubrs.data = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "gsubrs_data"));
+    font_info.gsubrs.cursor = yyjson_get_int(yyjson_obj_get(arg_root, "gsubrs_cursor"));
+    font_info.gsubrs.size = yyjson_get_int(yyjson_obj_get(arg_root, "gsubrs_data"));
+    font_info.subrs.data = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "subrs_data"));
+    font_info.subrs.cursor = yyjson_get_int(yyjson_obj_get(arg_root, "subrs_cursor"));
+    font_info.subrs.size = yyjson_get_int(yyjson_obj_get(arg_root, "subrs_size"));
+    font_info.fontdicts.data = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "fontdicts_data"));
+    font_info.fontdicts.cursor = yyjson_get_int(yyjson_obj_get(arg_root, "fontdicts_cursor"));
+    font_info.fontdicts.size = yyjson_get_int(yyjson_obj_get(arg_root, "fontdicts_size"));
+    font_info.fdselect.data = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "fdselect_data"));
+    font_info.fdselect.cursor = yyjson_get_int(yyjson_obj_get(arg_root, "fdselect_cursor"));
+    font_info.fdselect.size = yyjson_get_int(yyjson_obj_get(arg_root, "fdselect_size"));
 
     raia_size_t glyph_size = _draw_text_rgba(
             pixels_rgba,
@@ -877,12 +1097,16 @@ RAIA_EXPORT duk_ret_t raia_draw_text_rgba(duk_context *ctx) {
             font_buffer,
             font_info);
 
-    duk_idx_t obj_idx = duk_push_object(ctx);
-    duk_push_int(ctx, glyph_size.width);
-    duk_put_prop_string(ctx, obj_idx, "width");
-    duk_push_int(ctx, glyph_size.height);
-    duk_put_prop_string(ctx, obj_idx, "height");
-    return 1;
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "width", glyph_size.width);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "height", glyph_size.height);
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    yyjson_doc_free(arg_doc);
+    return (void *)result;
 }
 
 static raia_size_t _draw_get_text_size(const uint8_t* text, int font_size, stbtt_fontinfo font_info) {
@@ -910,106 +1134,147 @@ static raia_size_t _draw_get_text_size(const uint8_t* text, int font_size, stbtt
     return glyph_size;
 }
 
-RAIA_EXPORT duk_ret_t raia_draw_get_text_size(duk_context *ctx) {
-    const uint8_t* text = (uint8_t *)duk_to_string(ctx, 0);
-    int font_size = (int)duk_to_number(ctx, 1);
+RAIA_EXPORT void *raia_draw_get_text_size(const char *s, void *p, int n) {
+    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
+    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+    const uint8_t *text = (const uint8_t *)yyjson_get_str(yyjson_obj_get(arg_root, "text"));
+    int font_size = yyjson_get_int(yyjson_obj_get(arg_root, "font_size"));
     stbtt_fontinfo font_info;
-    font_info.userdata = duk_require_pointer(ctx, 2);
-    font_info.data = (unsigned char *)duk_require_pointer(ctx, 3);
-    font_info.fontstart = duk_to_int(ctx, 4);
-    font_info.numGlyphs = duk_to_int(ctx, 5);
-    font_info.loca = duk_to_int(ctx, 6);
-    font_info.head = duk_to_int(ctx, 7);
-    font_info.glyf = duk_to_int(ctx, 8);
-    font_info.hhea = duk_to_int(ctx, 9);
-    font_info.hmtx = duk_to_int(ctx, 10);
-    font_info.kern = duk_to_int(ctx, 11);
-    font_info.gpos = duk_to_int(ctx, 12);
-    font_info.svg = duk_to_int(ctx, 13);
-    font_info.index_map = duk_to_int(ctx, 14);
-    font_info.indexToLocFormat = duk_to_int(ctx, 15);
-    font_info.cff.data = (unsigned char *)duk_require_pointer(ctx, 16);
-    font_info.cff.cursor = duk_to_int(ctx, 17);
-    font_info.cff.size = duk_to_int(ctx, 18);
-    font_info.charstrings.data = (unsigned char *)duk_require_pointer(ctx, 19);
-    font_info.charstrings.cursor = duk_to_int(ctx, 20);
-    font_info.charstrings.size = duk_to_int(ctx, 21);
-    font_info.gsubrs.data = (unsigned char *)duk_require_pointer(ctx, 22);
-    font_info.gsubrs.cursor = duk_to_int(ctx, 23);
-    font_info.gsubrs.size = duk_to_int(ctx, 24);
-    font_info.subrs.data = (unsigned char *)duk_require_pointer(ctx, 25);
-    font_info.subrs.cursor = duk_to_int(ctx, 26);
-    font_info.subrs.size = duk_to_int(ctx, 27);
-    font_info.fontdicts.data = (unsigned char *)duk_require_pointer(ctx, 28);
-    font_info.fontdicts.cursor = duk_to_int(ctx, 29);
-    font_info.fontdicts.size = duk_to_int(ctx, 30);
-    font_info.fdselect.data = (unsigned char *)duk_require_pointer(ctx, 31);
-    font_info.fdselect.cursor = duk_to_int(ctx, 32);
-    font_info.fdselect.size = duk_to_int(ctx, 33);
+    font_info.userdata = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "userdata"));
+    font_info.data = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "data"));
+    font_info.fontstart = yyjson_get_int(yyjson_obj_get(arg_root, "fontstart"));
+    font_info.numGlyphs = yyjson_get_int(yyjson_obj_get(arg_root, "numGlyphs"));
+    font_info.loca = yyjson_get_int(yyjson_obj_get(arg_root, "loca"));
+    font_info.head = yyjson_get_int(yyjson_obj_get(arg_root, "head"));
+    font_info.glyf = yyjson_get_int(yyjson_obj_get(arg_root, "glyf"));
+    font_info.hhea = yyjson_get_int(yyjson_obj_get(arg_root, "hhea"));
+    font_info.hmtx = yyjson_get_int(yyjson_obj_get(arg_root, "hmtx"));
+    font_info.kern = yyjson_get_int(yyjson_obj_get(arg_root, "kern"));
+    font_info.gpos = yyjson_get_int(yyjson_obj_get(arg_root, "gpos"));
+    font_info.svg = yyjson_get_int(yyjson_obj_get(arg_root, "svg"));
+    font_info.index_map = yyjson_get_int(yyjson_obj_get(arg_root, "index_map"));
+    font_info.indexToLocFormat = yyjson_get_int(yyjson_obj_get(arg_root, "indexToLocFormat"));
+    font_info.cff.data = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "cff_data"));
+    font_info.cff.cursor = yyjson_get_int(yyjson_obj_get(arg_root, "cff_cursor"));
+    font_info.cff.size = yyjson_get_int(yyjson_obj_get(arg_root, "cff_size"));
+    font_info.charstrings.data = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "charstrings_data"));
+    font_info.charstrings.cursor = yyjson_get_int(yyjson_obj_get(arg_root, "charstrings_cursor"));
+    font_info.charstrings.size = yyjson_get_int(yyjson_obj_get(arg_root, "charstrings_size"));
+    font_info.gsubrs.data = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "gsubrs_data"));
+    font_info.gsubrs.cursor = yyjson_get_int(yyjson_obj_get(arg_root, "gsubrs_cursor"));
+    font_info.gsubrs.size = yyjson_get_int(yyjson_obj_get(arg_root, "gsubrs_data"));
+    font_info.subrs.data = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "subrs_data"));
+    font_info.subrs.cursor = yyjson_get_int(yyjson_obj_get(arg_root, "subrs_cursor"));
+    font_info.subrs.size = yyjson_get_int(yyjson_obj_get(arg_root, "subrs_size"));
+    font_info.fontdicts.data = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "fontdicts_data"));
+    font_info.fontdicts.cursor = yyjson_get_int(yyjson_obj_get(arg_root, "fontdicts_cursor"));
+    font_info.fontdicts.size = yyjson_get_int(yyjson_obj_get(arg_root, "fontdicts_size"));
+    font_info.fdselect.data = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "fdselect_data"));
+    font_info.fdselect.cursor = yyjson_get_int(yyjson_obj_get(arg_root, "fdselect_cursor"));
+    font_info.fdselect.size = yyjson_get_int(yyjson_obj_get(arg_root, "fdselect_size"));
 
     raia_size_t glyph_size = _draw_get_text_size(text, font_size, font_info);
 
-    duk_idx_t obj_idx = duk_push_object(ctx);
-    duk_push_int(ctx, glyph_size.width);
-    duk_put_prop_string(ctx, obj_idx, "width");
-    duk_push_int(ctx, glyph_size.height);
-    duk_put_prop_string(ctx, obj_idx, "height");
-    return 1;
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "width", glyph_size.width);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "height", glyph_size.height);
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    yyjson_doc_free(arg_doc);
+    return (void *)result;
 }
 
-RAIA_EXPORT duk_ret_t raia_draw_text_rgba_old(duk_context *ctx) {
-    duk_size_t len;
-    uint8_t *pixels_rgba = (uint8_t *)duk_require_buffer_data(ctx, 0, &len);
-    int pixels_rgba_width = (int)duk_to_number(ctx, 1);
-    int pixels_rgba_height = (int)duk_to_number(ctx, 2);
-    const uint8_t* text = (uint8_t *)duk_to_string(ctx, 3);
-    const char* font_path = duk_to_string(ctx, 4);
-    int font_size = (int)duk_to_number(ctx, 5);
-    int position_x = (int)duk_to_number(ctx, 6);
-    int position_y = (int)duk_to_number(ctx, 7);
+RAIA_EXPORT void *raia_draw_text_rgba_old(const char *s, void *p, int n) {
+    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
+    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+    uint8_t *pixels_rgba = (uint8_t *)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "pixels_rgba"));
+    int pixels_rgba_width = yyjson_get_int(yyjson_obj_get(arg_root, "pixels_rgba_width"));
+    int pixels_rgba_height = yyjson_get_int(yyjson_obj_get(arg_root, "pixels_rgba_height"));
+    const uint8_t *text = (const uint8_t *)yyjson_get_str(yyjson_obj_get(arg_root, "text"));
+    const char *font_path = (const char *)yyjson_get_str(yyjson_obj_get(arg_root, "font_path"));
+    int font_size = yyjson_get_int(yyjson_obj_get(arg_root, "font_size"));
+    int position_x = yyjson_get_int(yyjson_obj_get(arg_root, "position_x"));
+    int position_y = yyjson_get_int(yyjson_obj_get(arg_root, "position_y"));
 
     int bytes = 0;
     uint32_t unicode_codepoint = utf8_to_codepoint(text,&bytes);
-
     CharacterSize character_size = render_character(pixels_rgba, pixels_rgba_width, pixels_rgba_height, position_x, position_y, font_path, font_size, unicode_codepoint);
 
-    duk_idx_t obj_idx = duk_push_object(ctx);
-    duk_push_int(ctx, character_size.width);
-    duk_put_prop_string(ctx, obj_idx, "width");
-    duk_push_int(ctx, character_size.height);
-    duk_put_prop_string(ctx, obj_idx, "height");
-    return 1;
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "width", character_size.width);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "height", character_size.height);
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    yyjson_doc_free(arg_doc);
+    return (void *)result;
 }
 
 //---d3m
 
-RAIA_EXPORT duk_ret_t raia_draw_d3m_init(duk_context *ctx) {
-    double width = (double)duk_to_number(ctx, 0);
-    double height = (double)duk_to_number(ctx, 1);
+RAIA_EXPORT void *raia_draw_d3m_init(const char *s, void *p, int n) {
+    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
+    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+    double width = yyjson_get_real(yyjson_obj_get(arg_root, "width"));
+    double height = yyjson_get_real(yyjson_obj_get(arg_root, "height"));
+
     d3set_winx(width);
     d3set_winy(height);
-    return 0;
+
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_bool(ret_doc, ret_root, "result", true);
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    yyjson_doc_free(arg_doc);
+    return (void *)result;
 }
-RAIA_EXPORT duk_ret_t raia_draw_d3m_set_camera(duk_context *ctx) {
-    double pos_x = (double)duk_to_number(ctx, 0);
-    double pos_y = (double)duk_to_number(ctx, 1);
-    double pos_z = (double)duk_to_number(ctx, 2);
-    double target_x = (double)duk_to_number(ctx, 3);
-    double target_y = (double)duk_to_number(ctx, 4);
-    double target_z = (double)duk_to_number(ctx, 5);
+RAIA_EXPORT void *raia_draw_d3m_set_camera(const char *s, void *p, int n) {
+    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
+    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+    double pos_x = yyjson_get_real(yyjson_obj_get(arg_root, "pos_x"));
+    double pos_y = yyjson_get_real(yyjson_obj_get(arg_root, "pos_y"));
+    double pos_z = yyjson_get_real(yyjson_obj_get(arg_root, "pos_z"));
+    double target_x = yyjson_get_real(yyjson_obj_get(arg_root, "target_x"));
+    double target_y = yyjson_get_real(yyjson_obj_get(arg_root, "target_y"));
+    double target_z = yyjson_get_real(yyjson_obj_get(arg_root, "target_z"));
+
     d3setcam_2(pos_x, pos_y, pos_z, target_x, target_y, target_z);
-    return 0;
+
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_bool(ret_doc, ret_root, "result", true);
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    yyjson_doc_free(arg_doc);
+    return (void *)result;
 }
-RAIA_EXPORT duk_ret_t raia_draw_d3m_calc_position(duk_context *ctx) {
-    double pos_x = (double)duk_to_number(ctx, 0);
-    double pos_y = (double)duk_to_number(ctx, 1);
-    double pos_z = (double)duk_to_number(ctx, 2);
+RAIA_EXPORT void *raia_draw_d3m_calc_position(const char *s, void *p, int n) {
+    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
+    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+    double pos_x = yyjson_get_real(yyjson_obj_get(arg_root, "pos_x"));
+    double pos_y = yyjson_get_real(yyjson_obj_get(arg_root, "pos_y"));
+    double pos_z = yyjson_get_real(yyjson_obj_get(arg_root, "pos_z"));
+
     d3vpos(pos_x, pos_y, pos_z);
 
-    duk_idx_t obj_idx = duk_push_object(ctx);
-    duk_push_int(ctx, d3getdx()); // dx
-    duk_put_prop_string(ctx, obj_idx, "x");
-    duk_push_int(ctx, d3getdy()); // dx
-    duk_put_prop_string(ctx, obj_idx, "y");
-    return 1;
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "x", (int)d3getdx());
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "y", (int)d3getdy());
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    yyjson_doc_free(arg_doc);
+    return (void *)result;
 }

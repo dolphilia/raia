@@ -234,11 +234,11 @@ extern "C" {
   #if !defined(GLFW_INCLUDE_GLEXT)
    #define GL_GLEXT_LEGACY
   #endif
-  #include <OpenGL/gl.h>
+  //#include <OpenGL/gl.h>
 
  #else /*__APPLE__*/
 
-  #include <GL/gl.h>
+  //#include <GL/gl.h>
   #if defined(GLFW_INCLUDE_GLEXT)
    #include <GL/glext.h>
   #endif

@@ -15,6 +15,6 @@ add_library(raia_duktape SHARED
         src/duktape/duktape.c
         src/duktape-module/duk_module_duktape.c
         src/static/static_func_hash.c
-        src/static/static_plugin_loader.c src/yyjson/yyjson.c)
+        src/static/static_plugin_loader.c src/yyjson/yyjson.c src/static/static_entrust.c src/static/static_entrust.h)
 
 set_target_properties(raia_duktape PROPERTIES PREFIX "")

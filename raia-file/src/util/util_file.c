@@ -1,7 +1,7 @@
 //
 // Created by dolphilia on 2022/12/10.
 //
-
+#define _POSIX_C_SOURCE 200809L
 #include "util_file.h"
 
 void get_directories_recursive(const char *path, char ***directories, size_t *count) {
@@ -26,6 +26,15 @@ void get_directories_recursive(const char *path, char ***directories, size_t *co
     free(current_directories);
 }
 
+char* my_strdup(const char* str) {
+    size_t len = strlen(str) + 1;
+    char* copy = malloc(len);
+    if (copy) {
+        memcpy(copy, str, len);
+    }
+    return copy;
+}
+
 #ifdef __WINDOWS__
 void get_directories(const char *path, char ***directories, size_t *count) {
     WIN32_FIND_DATA find_data;
@@ -44,10 +53,10 @@ void get_directories(const char *path, char ***directories, size_t *count) {
                 (*count)++;
                 *directories = realloc(*directories, *count * sizeof(char *));
 #ifndef __WINDOWS__
-                (*directories)[*count - 1] = strdup(find_data.cFileName);
+                (*directories)[*count - 1] = my_strdup(find_data.cFileName);
 #endif
 #ifdef __WINDOWS__
-                (*directories)[*count - 1] = _strdup(find_data.cFileName);
+                (*directories)[*count - 1] = my_strdup(find_data.cFileName);
 #endif
             }
         }
@@ -77,7 +86,7 @@ void get_directories(const char *path, char ***directories, size_t *count) {
         if (stat(full_path, &st) == 0 && S_ISDIR(st.st_mode)) {
             (*count)++;
             *directories = realloc(*directories, *count * sizeof(char *));
-            (*directories)[*count - 1] = strdup(entry->d_name);
+            (*directories)[*count - 1] = my_strdup(entry->d_name);
         }
     }
 

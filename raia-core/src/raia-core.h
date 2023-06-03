@@ -50,6 +50,6 @@
 #define SPRINTF(dest, format, ...) sprintf(dest, format, __VA_ARGS__)
 #endif
 
-typedef int(*raia_runtime_func_t)(int argc, char *argv[]);
+typedef char *(*raia_runtime_func_t)(int argc, char *argv[]);
 
 #endif //RAIA_CORE_RAIA_CORE_H

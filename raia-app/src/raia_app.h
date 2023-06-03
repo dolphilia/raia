@@ -4,12 +4,11 @@
 #include <time.h>
 #include <stdio.h>
 #define GLFW_INCLUDE_ES2
-#include "GLES2/gl2.h"
-//#define GL_GLEXT_PROTOTYPES
+#define GL_GLEXT_PROTOTYPES
 #include "GLFW/glfw3.h"
+#include "GLES2/gl2.h"
 #include "EGL/egl.h"
 #include "platforms.h"
-#include "GLES2/gl2.h"
 #include "static/static_callback.h"
 #include "yyjson/yyjson.h"
 

@@ -7,6 +7,7 @@
 #include "yyjson/yyjson.h"
 #include "static/static_plugin_loader.h"
 #include "static/static_func_hash.h"
+#include "static/static_entrust.h"
 #include "util/util_file.h"
 #include "platform.h"
 
@@ -26,6 +27,6 @@
 #define RAIA_EXPORT
 #endif
 
-RAIA_EXPORT int run(int argc, char *argv[]);
+RAIA_EXPORT char *init(int argc, char *argv[]);
 
 #endif //RAIA_DUKTAPE_RAIA_DUKTAPE_H
