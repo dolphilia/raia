@@ -23,7 +23,7 @@ jobs:
 
       - name: Install dependencies on Ubuntu
         if: startsWith(runner.os, 'Linux')
-        run: sudo apt-get install -y cmake zip xserver-xorg libxxf86vm-dev lxrandr x11-xserver-utils libxinerama-dev libxcursor-dev libxi-dev
+        run: sudo apt-get install -y cmake zip xserver-xorg libxxf86vm-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev
 
       - name: Install dependencies on Windows
         if: startsWith(runner.os, 'Windows')
