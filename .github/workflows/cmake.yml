@@ -23,7 +23,7 @@ jobs:
 
       - name: Install dependencies on Ubuntu
         if: startsWith(runner.os, 'Linux')
-        run: sudo apt-get install -y cmake zip xserver-xorg xorg-apps
+        run: sudo apt-get install -y cmake zip xserver-xorg
 
       - name: Install dependencies on Windows
         if: startsWith(runner.os, 'Windows')
