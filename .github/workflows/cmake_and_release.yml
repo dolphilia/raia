@@ -46,7 +46,15 @@ jobs:
           cmake -S . -B build-windows
           cmake --build build-windows --config Release
           cd build-windows
-          zip -r ../${{ runner.os }}-raia-engine.zip .
+          mkdir result
+          move raia-core/Release/raia_core.exe result
+          move raia-app/Release/raia_app.dll result
+          move raia-draw/Release/raia_draw.dll result
+          move raia-duktape/Release/raia_duktape.dll result
+          move raia-file/Release/raia_file.dll result
+          move raia-lua/Release/raia_lua.dll result
+          cd result
+          zip -r ../../${{ runner.os }}-raia-engine.zip .
 
       - name: Create Release
         id: create_release
