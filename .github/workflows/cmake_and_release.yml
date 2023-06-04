@@ -13,7 +13,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [windows-latest] # ,ubuntu-latest
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -28,7 +28,15 @@ jobs:
           cmake -S . -B build-linux
           cmake --build build-linux --config Release
           cd build-linux
-          7z a ../${{ runner.os }}-raia-engine.zip *
+          mkdir result
+          cp raia-core/raia_core result
+          cp raia-app/raia_app.so result
+          cp raia-draw/raia_draw.so result
+          cp raia-duktape/raia_duktape.so result
+          cp raia-file/raia_file.so result
+          cp raia-lua/raia_lua.so result
+          cd result
+          7z a ../../${{ runner.os }}-raia-engine.zip *
 
       - name: Build on Windows
         if: startsWith(runner.os, 'Windows')
