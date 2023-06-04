@@ -1,6 +1,7 @@
 #include "raia_mruby.h"
 
 #include <stdio.h>
+
 #include "mruby.h"
 #include "mruby/compile.h"
 
