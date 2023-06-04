@@ -5,6 +5,8 @@
 #ifndef RAIA_CORE_UTIL_FILE_H
 #define RAIA_CORE_UTIL_FILE_H
 
+#include "../platform.h"
+
 #ifdef __WINDOWS__
 #define _CRT_SECURE_NO_WARNINGS
 #define _CRT_INTERNAL_NONSTDC_NAMES 1
