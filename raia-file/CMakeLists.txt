@@ -11,6 +11,10 @@ add_library(raia_file SHARED
         src/util/util_file.c
         src/yyjson/yyjson.c)
 
-target_link_libraries(raia_file m)
+target_link_libraries(raia_file
+        $<$<PLATFORM_ID:Darwin>: m>
+        $<$<PLATFORM_ID:Linux>: m>
+        #$<$<PLATFORM_ID:Windows>: >
+        )
 
 set_target_properties(raia_file PROPERTIES PREFIX "")
