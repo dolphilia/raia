@@ -1,7 +1,7 @@
 #ifndef RAIA_LUA_RAIA_LUA_H
 #define RAIA_LUA_RAIA_LUA_H
 
-#include "parson/parson.h"
+#include "yyjson/yyjson.h"
 #include "static/static_plugin_loader.h"
 #include "static/static_func_hash.h"
 #include "util/util_file.h"

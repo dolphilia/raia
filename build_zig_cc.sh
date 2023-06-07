@@ -24,16 +24,19 @@ for os in windows linux macos ; do
         out_dir="../build/x86_64-windows-gnu"
         lib_ext=".dll"
         exe_ext=".exe"
+        library_path="-L ./lib -L ./lib/windows"
     elif [ $os = linux ] ; then
         target="x86_64-linux-gnu"
         out_dir="../build/x86_64-linux-gnu"
         lib_ext=".so"
         exe_ext=""
+        library_path="-L ./lib -L ./lib/linux"
     elif [ $os = macos ] ; then
         target="aarch64-macos-none"
         out_dir="../build/aarch64-macos-none"
         lib_ext=".dylib"
         exe_ext=""
+        library_path="-L ./lib -L /lib/macos"
     fi
 
     for project in ${projects[@]} ; do
@@ -61,7 +64,7 @@ for os in windows linux macos ; do
                 "src/yyjson/yyjson.c"
             )
             if [ $os = windows ] ; then
-                links=("-llibEGL.dll" "-lglfw3" "-llibGLESv2.dll" "-lgdi32")
+                links=("-lEGL" "-lglfw3" "-lGLESv2")
             elif [ $os = linux ] ; then
                 links=("-lm" "-ldl" "-lEGL" "-lglfw" "-lGLESv2" "-lX11" "-lXxf86vm" "-lXrandr" "-lXinerama" "-lXcursor" "-lpthread" "-lXi")
             elif [ $os = macos ] ; then

@@ -54,11 +54,6 @@ static duk_ret_t raia_core_array_buffer_to_number(duk_context *ctx) {
     return 1;
 }
 
-//static duk_ret_t raia_core_entrust(duk_context *ctx) {
-//    const char *json_string = duk_to_string(ctx, 0);
-//    //duk_s
-//}
-
 // lib
 static duk_ret_t raia_lib_open(duk_context *ctx) {
     const char *dll_file = duk_to_string(ctx, 0);
@@ -73,31 +68,26 @@ static duk_ret_t raia_lib_open(duk_context *ctx) {
 #endif
     char dll_file_extension[500];
     SPRINTF(dll_file_extension, "%s.%s", dll_file, extension);
-    open_plugin(dll_file_extension);
-    return 0;
+    void *handle = add_plugin_hash(dll_file_extension);
+    duk_push_pointer(ctx, handle);
+    return 1;
 }
 
 static duk_ret_t raia_lib_close(duk_context *ctx) {
-    close_plugin();
+    const char *name = duk_to_string(ctx, 0);
+    delete_plugin_hash(name);
     return 0;
 }
 
 static duk_ret_t raia_lib_close_all(duk_context *ctx) {
-    close_all_plugin();
+    free_plugin_hash();
     return 0;
 }
 
-static duk_ret_t raia_lib_func(duk_context *ctx) {
-    const char *dll_func_name = duk_to_string(ctx, 0);
-    int nargs = (int) duk_to_number(ctx, 1);
-    duk_ret_t (*p_func)(duk_context *ctx) = add_plugin_func(ctx, dll_func_name);
-    duk_push_c_function(ctx, p_func, nargs);
-    return 1;
-}
-
 static duk_ret_t raia_lib_add(duk_context *ctx) { // func_hash
-    const char *dll_func_name = duk_to_string(ctx, 0);
-    add_plugin_func_hash(dll_func_name);
+    void *handle = duk_to_pointer(ctx, 0);
+    const char *dll_func_name = duk_to_string(ctx, 1);
+    add_plugin_func_hash(handle, dll_func_name);
     return 0;
 }
 
@@ -204,19 +194,15 @@ static raia_config_t raia_set_functions(duk_context *ctx) {
 
     duk_idx_t lib_idx = duk_push_object(ctx);
     register_function(ctx, "open", raia_lib_open, 1);
-    register_function(ctx, "close", raia_lib_close, 0);
+    register_function(ctx, "close", raia_lib_close, 1);
     register_function(ctx, "closeAll", raia_lib_close_all, 0);
-    register_function(ctx, "func", raia_lib_func, 2);
-    // func_hash
-    register_function(ctx, "add", raia_lib_add, 1);
+    register_function(ctx, "add", raia_lib_add, 2);
     register_function(ctx, "call", raia_lib_call, 4);
-
     duk_put_prop_string(ctx, core_idx, "Lib");
 
     register_function(ctx, "print", raia_core_print, 1);
     register_function(ctx, "exit", raia_core_exit, 1);
     register_function(ctx, "entrust", raia_core_entrust, 1);
-
     register_function(ctx, "pointerToNumber", raia_core_pointer_to_number, 1);
     register_function(ctx, "numberToPointer", raia_core_number_to_pointer, 1);
     register_function(ctx, "arrayBufferToPointer", raia_core_array_buffer_to_pointer, 1);
@@ -237,7 +223,7 @@ static raia_config_t raia_set_functions(duk_context *ctx) {
 // init
 RAIA_EXPORT char *init(int argc, char *argv[]) {
     init_entrust();
-    init_plugin_loader();
+    init_plugin_hash();
     init_func_hash();
     duk_context *ctx = duk_create_heap_default();
     duk_module_duktape_init(ctx);

@@ -5,7 +5,7 @@
 #include <string.h>
 #include "duktape-module/duk_module_duktape.h"
 #include "yyjson/yyjson.h"
-#include "static/static_plugin_loader.h"
+#include "static/static_plugin_hash.h"
 #include "static/static_func_hash.h"
 #include "static/static_entrust.h"
 #include "util/util_file.h"

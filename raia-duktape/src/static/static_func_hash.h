@@ -6,7 +6,7 @@
 #define RAIA_CORE_STATIC_FUNC_HASH_H
 
 #include "../uthash/uthash.h"
-#include "static_plugin_loader.h"
+#include "static_plugin_hash.h"
 
 /**
  * @param json C string written in json format.
@@ -27,7 +27,7 @@ void free_func_hash();
 void add_func_hash(const char *name, raia_func_t func);
 raia_func_t find_func_hash(const char *name);
 void delete_func_hash(const char *name);
-void add_plugin_func_hash(const char *name);
+void add_plugin_func_hash(void *handle, const char *name);
 void *call_func_hash(const char *name, const char *s, void *p, int n);
 
 #endif //RAIA_CORE_STATIC_FUNC_HASH_H

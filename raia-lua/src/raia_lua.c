@@ -60,49 +60,6 @@ int raia_lib_add(lua_State* L) { // func_hash
     return 0;
 }
 
-//static duk_ret_t raia_lib_call(duk_context *ctx) { // func_hash
-//    const char *dll_func_name = duk_to_string(ctx, 0);
-//    char *src; //json string
-//    void *data;
-//    duk_size_t size;
-//    if (duk_is_string(ctx, 1)) {
-//        src = (char *)duk_require_string(ctx, 1);
-//    } else {
-//        src = NULL;
-//    }
-//    if (duk_is_buffer(ctx, 2)) {
-//        data = (void *)duk_require_buffer_data(ctx, 2, &size);
-//    } else if(duk_is_pointer(ctx, 2)) {
-//        data = (void *)duk_require_pointer(ctx, 2);
-//    } else {
-//        data = NULL;
-//        size = 0;
-//    }
-//    if (duk_is_number(ctx, 3)) {
-//        size = (duk_size_t)duk_require_number(ctx, 3);
-//    }
-//    JSON_Value *root_value = json_parse_string(src);
-//    if (root_value == ((void *) 0)) {
-//        fprintf(__stderrp, "Error: Unable to parse JSON string.\n");
-//        return 0;
-//    }
-//    if (src != NULL) {
-//        JSON_Object *root_object = json_value_get_object(root_value);
-//        const char *return_type = json_object_get_string(root_object, "@return");
-//        if (strcmp(return_type, "pointer") == 0 && return_type != NULL) {
-//            void *dest = call_func_hash(dll_func_name, src, data, (int)size);
-//            duk_push_pointer(ctx, dest);
-//            return 1;
-//        }
-//    }
-//    char *dest = (char *)call_func_hash(dll_func_name, src, data, (int)size);
-//    duk_push_string(ctx, dest);
-//    if(dest != NULL) {
-//        free(dest);
-//    }
-//    return 1;
-//}
-
 // Luaから呼び出される関数
 static int raia_lib_call(lua_State *L) {
     // func_hash
@@ -129,20 +86,18 @@ static int raia_lib_call(lua_State *L) {
         size = 0;
     }
 
-    JSON_Value *root_value = json_parse_string(src);
-    if (root_value == NULL) {
-        fprintf(stderr, "Error: Unable to parse JSON string.\n");
-        return 0;
-    }
-
     if (src != NULL) {
-        JSON_Object *root_object = json_value_get_object(root_value);
-        const char *return_type = json_object_get_string(root_object, "@return");
+        yyjson_doc *arg_doc = yyjson_read(src, strlen(src), 0);
+        yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
+        yyjson_val *arg_val = yyjson_obj_get(arg_root, "@return");
+        const char *return_type = yyjson_get_str(arg_val);
         if (return_type != NULL && strcmp(return_type, "pointer") == 0) {
             void *dest = call_func_hash(dll_func_name, src, data, (int)size);
             lua_pushlightuserdata(L, dest);
+            yyjson_doc_free(arg_doc);
             return 1;
         }
+        yyjson_doc_free(arg_doc);
     }
 
     char *dest = (char *)call_func_hash(dll_func_name, src, data, (int)size);
@@ -180,16 +135,8 @@ RAIA_EXPORT int run(int argc, char *argv[]) {
     lua_pushcfunction(L, my_c_function);
     lua_setfield(L, -2, "my_func");
 
-
     lua_setfield(L, -2, "Lib"); // Lib テーブルを __Raia__ テーブルに登録
     lua_setglobal(L, "__Raia__"); // __Raia__ テーブルをグローバル変数として登録
-
-    //lua_register(L, "my_func", my_c_function);
-    //lua_register(L, "raia_lib_open", raia_lib_open);
-    //lua_register(L, "raia_lib_close", raia_lib_close);
-    //lua_register(L, "raia_lib_close_all", raia_lib_close_all);
-    //lua_register(L, "raia_lib_add", raia_lib_add);
-    //lua_register(L, "raia_lib_call", raia_lib_call);
 
     // Luaスクリプトをロード・実行
     if (luaL_dofile(L, "startup.lua") != LUA_OK) {
