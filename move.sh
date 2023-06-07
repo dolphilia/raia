@@ -44,9 +44,6 @@ done
 if [ "$(uname)" = "Darwin" ]; then
     echo "macOS:"
     third_libs=(
-        "libabsl"
-        "libc++_chrome"
-        "libchrome_zlib"
         "libEGL"
         "libGLESv2"
         "libglfw.3.3"
