@@ -31,6 +31,15 @@ static duk_ret_t raia_core_entrust(duk_context *ctx) {
 }
 
 // run
+static duk_ret_t raia_core_is_pointer(duk_context *ctx) {
+    duk_push_boolean(ctx, duk_is_pointer(ctx, 0));
+    return 1;
+}
+
+static duk_ret_t raia_core_is_buffer(duk_context *ctx) {
+    duk_push_boolean(ctx, duk_is_buffer(ctx, 0));
+    return 1;
+}
 
 static duk_ret_t raia_core_pointer_to_number(duk_context *ctx) {
     duk_push_number(ctx, (double)(uintptr_t)duk_to_pointer(ctx, 0));
@@ -93,44 +102,25 @@ static duk_ret_t raia_lib_add(duk_context *ctx) { // func_hash
 
 static duk_ret_t raia_lib_call(duk_context *ctx) { // func_hash
     const char *dll_func_name = duk_to_string(ctx, 0);
-    char *src; //json string
-    void *data;
-    duk_size_t size;
+    char *src = NULL; //json string
     if (duk_is_string(ctx, 1)) {
         src = (char *)duk_require_string(ctx, 1);
-    } else {
-        src = NULL;
-    }
-    if (duk_is_buffer(ctx, 2)) {
-        data = (void *)duk_require_buffer_data(ctx, 2, &size);
-    } else if(duk_is_pointer(ctx, 2)) {
-        data = (void *)duk_require_pointer(ctx, 2);
-    } else {
-        data = NULL;
-        size = 0;
-    }
-    if (duk_is_number(ctx, 3)) {
-        size = (duk_size_t)duk_require_number(ctx, 3);
-    }
-
-    if (src != NULL) {
-        yyjson_doc *arg_doc = yyjson_read(src, strlen(src), 0);
-        yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
-        yyjson_val *arg_val = yyjson_obj_get(arg_root, "@return");
-        const char *return_type = yyjson_get_str(arg_val);
-        if (strcmp(return_type, "pointer") == 0 && return_type != NULL) {
-            void *dest = call_func_hash(dll_func_name, src, data, (int)size);
-            duk_push_pointer(ctx, dest);
-            yyjson_doc_free(arg_doc);
-            return 1;
+        joint_t *joint = joint_init_in_with_str(src);
+        if (joint_in_exist(joint, "@return")) {
+            const char *return_type = joint_get_in_str(joint, "@return");
+            joint_free(joint);
+            if (strcmp(return_type, "pointer") == 0 && return_type != NULL) {
+                const char *dest = call_func_hash(dll_func_name, src);
+                duk_push_pointer(ctx, (void *)dest);
+                return 1;
+            }
         }
-        yyjson_doc_free(arg_doc);
+        joint_free(joint);
     }
-
-    char *dest = (char *)call_func_hash(dll_func_name, src, data, (int)size);
+    const char *dest = call_func_hash(dll_func_name, src);
     duk_push_string(ctx, dest);
     if(dest != NULL) {
-        free(dest);
+        free((void *)dest);
     }
     return 1;
 }
@@ -155,34 +145,24 @@ static void register_string(duk_context *ctx, const char *name, const char *str)
     duk_put_prop_string(ctx, -2, name);
 }
 
-typedef struct {
-    int debug_mode;
-    int typescript_mode;
-    int es2015_mode;
-    char startup_script[512];
-    int preprocess;
-    char preprocess_script[512];
-} raia_config_t;
-
 static raia_config_t raia_load_config(const char *json_file_name) {
-    yyjson_doc *doc = yyjson_read_file(json_file_name, 0, NULL, NULL);
-    yyjson_val *root = yyjson_doc_get_root(doc);
+    joint_t *joint = joint_init_in_with_file(json_file_name);
 
     raia_config_t config;
-    config.debug_mode = yyjson_get_bool(yyjson_obj_get(root, "debug_mode"));
-    config.typescript_mode = yyjson_get_bool(yyjson_obj_get(root, "typescript_mode"));
-    config.es2015_mode = yyjson_get_bool(yyjson_obj_get(root, "es2015_mode"));
-    config.preprocess = yyjson_get_bool(yyjson_obj_get(root, "preprocess"));
+    config.debug_mode = joint_get_in_bool(joint, "debug_mode");
+    config.typescript_mode = joint_get_in_bool(joint, "typescript_mode");
+    config.es2015_mode = joint_get_in_bool(joint, "es2015_mode");
+    config.preprocess = joint_get_in_bool(joint, "preprocess");
 
-    const char *startup_script = yyjson_get_str(yyjson_obj_get(root, "startup_script"));
+    const char *startup_script = joint_get_in_str(joint, "startup_script");
     STRNCPY(config.startup_script, startup_script, sizeof(config.startup_script) - 1);
     config.startup_script[sizeof(config.startup_script) - 1] = '\0';
 
-    const char *preprocess_script = yyjson_get_str(yyjson_obj_get(root, "preprocess_script"));
+    const char *preprocess_script = joint_get_in_str(joint, "preprocess_script");
     STRNCPY(config.preprocess_script, preprocess_script, sizeof(config.preprocess_script) - 1);
     config.preprocess_script[sizeof(config.preprocess_script) - 1] = '\0';
 
-    yyjson_doc_free(doc);
+    joint_free(joint);
     return config;
 }
 
@@ -197,12 +177,15 @@ static raia_config_t raia_set_functions(duk_context *ctx) {
     register_function(ctx, "close", raia_lib_close, 1);
     register_function(ctx, "closeAll", raia_lib_close_all, 0);
     register_function(ctx, "add", raia_lib_add, 2);
-    register_function(ctx, "call", raia_lib_call, 4);
+    register_function(ctx, "call", raia_lib_call, 2);
     duk_put_prop_string(ctx, core_idx, "Lib");
 
     register_function(ctx, "print", raia_core_print, 1);
     register_function(ctx, "exit", raia_core_exit, 1);
     register_function(ctx, "entrust", raia_core_entrust, 1);
+
+    register_function(ctx, "isPointer", raia_core_is_pointer, 1);
+    register_function(ctx, "isBuffer", raia_core_is_buffer, 1);
     register_function(ctx, "pointerToNumber", raia_core_pointer_to_number, 1);
     register_function(ctx, "numberToPointer", raia_core_number_to_pointer, 1);
     register_function(ctx, "arrayBufferToPointer", raia_core_array_buffer_to_pointer, 1);
@@ -241,13 +224,10 @@ RAIA_EXPORT char *init(int argc, char *argv[]) {
     //     "entrust": "true" or false
     // }
     if (get_is_entrust()) {
-        yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-        yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-        yyjson_mut_doc_set_root(ret_doc, ret_root);
-        yyjson_mut_obj_add_str(ret_doc, ret_root, "script", (const char *)get_entrust_script());
-        yyjson_mut_obj_add_bool(ret_doc, ret_root, "entrust", true);
-        char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-        yyjson_mut_doc_free(ret_doc);
+        joint_t *joint = joint_init_out();
+        joint_add_out_str(joint, "script", (const char *)get_entrust_script());
+        joint_add_out_bool(joint, "entrust", true);
+        char *result = (char *)joint_out_write(joint);
         free_entrust();
         return result;
     }

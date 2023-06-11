@@ -9,7 +9,7 @@ set(CMAKE_C_STANDARD 11)
 add_library(raia_file SHARED
         src/raia_file.c
         src/util/util_file.c
-        src/yyjson/yyjson.c)
+        src/yyjson/yyjson.c src/wrapper/wrapper_yyjson.c)
 
 target_link_libraries(raia_file
         $<$<PLATFORM_ID:Darwin>: m>

@@ -45,10 +45,10 @@ void add_plugin_func_hash(void *handle, const char *name) {
     add_func_hash(name, func);
 }
 
-void *call_func_hash(const char *name, const char *s, void *p, int n) {
+const char *call_func_hash(const char *name, const char *s) {
     raia_func_t func = find_func_hash(name);
     if (func) {
-        return func(s, p, n);
+        return func(s);
     }
     return NULL;
 }

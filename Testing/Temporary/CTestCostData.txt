@@ -1,3 +1,3 @@
-MyTest 17 6.82231e-05
-TestProgram 16 9.42422e-05
+MyTest 21 0.0164587
+TestProgram 20 0.000889475
 ---

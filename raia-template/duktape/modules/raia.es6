@@ -8,28 +8,28 @@ __Raia__.File = require('raia_file');
 class File {
     constructor() {}
     exist(path) {
-        return JSON.parse(__Raia__.File.exist(JSON.stringify({"path": path, "@return": "string"}))).result;
+        return __Raia__.File.exist(path);
     }
     loadString(path) {
-        return JSON.parse(__Raia__.File.loadString(JSON.stringify({"path": path, "@return": "string"}))).result;
+        return __Raia__.File.loadString(path);
     }
     saveString(path, data) {
-        return JSON.parse(__Raia__.File.saveString(JSON.stringify({"path": path, "data": data, "@return": "string"}))).result;
+        return __Raia__.File.saveString(path, data)
     }
     loadBinary(path) {
-        return __Raia__.File.loadBinary(JSON.stringify({"path": path, "@return": "pointer"}));
+        return __Raia__.File.loadBinary(path);
     }
     saveBinary(path, data, size = null) {
-        return JSON.parse(__Raia__.File.saveBinary(JSON.stringify({"path": path, "@return": "string"}), data, size)).result;
+        return __Raia__.File.saveBinary(path, data, size);
     }
     getCurPath() {
-        return JSON.parse(__Raia__.File.getCurPath(JSON.stringify({"@return": "string"}))).result;
+        return __Raia__.File.getCurPath();
     }
     getDirs(path) {
-        return JSON.parse(__Raia__.File.getDirs(JSON.stringify({"path": path, "@return": "string"}))).result;
+        return __Raia__.File.getDirs(path);
     }
     getDirsAll(path) {
-        return JSON.parse(__Raia__.File.getDirsAll(JSON.stringify({"path": path, "@return": "string"}))).result;
+        return __Raia__.File.getDirsAll(path);
     }
 }
 

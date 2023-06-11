@@ -28,96 +28,93 @@ static const char* raia_not_use_s(const char *s) {
     return s;
 }
 
-static void* raia_not_use_p(void *p) {
-    return p;
-}
-
-static int raia_not_use_n(int n) {
-    return n;
-}
-
-static void raia_not_use_spn(const char*s, void* p, int n) {
+RAIA_EXPORT const char * raia_app_get_error(const char *s) {
     raia_not_use_s(s);
-    raia_not_use_p(p);
-    raia_not_use_n(n);
-}
-
-static void raia_not_use_pn(void* p, int n) {
-    raia_not_use_p(p);
-    raia_not_use_n(n);
-}
-
-RAIA_EXPORT void *raia_app_get_error(const char *s, void *p, int n) {
     return get_error_callback_t();
 }
 
-RAIA_EXPORT void *raia_app_get_framebuffer_size(const char *s, void *p, int n) {
+RAIA_EXPORT const char * raia_app_get_framebuffer_size(const char *s) {
+    raia_not_use_s(s);
     return get_framebuffer_size_callback_t();
 }
 
-RAIA_EXPORT void *raia_app_get_key(const char *s, void *p, int n) {
+RAIA_EXPORT const char * raia_app_get_key(const char *s) {
+    raia_not_use_s(s);
     return get_key_callback_t();
 }
 
-RAIA_EXPORT void *raia_app_get_joystick(const char *s, void *p, int n) {
+RAIA_EXPORT const char * raia_app_get_joystick(const char *s) {
+    raia_not_use_s(s);
     return get_joystick_callback_t();
 }
 
-RAIA_EXPORT void *raia_app_get_window_pos(const char *s, void *p, int n) {
+RAIA_EXPORT const char * raia_app_get_window_pos(const char *s) {
+    raia_not_use_s(s);
     return get_window_pos_callback_t();
 }
 
-RAIA_EXPORT void *raia_app_get_window_size(const char *s, void *p, int n) {
+RAIA_EXPORT const char * raia_app_get_window_size(const char *s) {
+    raia_not_use_s(s);
     return get_window_size_callback_t();
 }
 
-RAIA_EXPORT void *raia_app_get_window_close(const char *s, void *p, int n) {
+RAIA_EXPORT const char * raia_app_get_window_close(const char *s) {
+    raia_not_use_s(s);
     return get_window_close_callback_t();
 }
 
-RAIA_EXPORT void *raia_app_get_window_refresh(const char *s, void *p, int n) {
+RAIA_EXPORT const char * raia_app_get_window_refresh(const char *s) {
+    raia_not_use_s(s);
     return get_window_refresh_callback_t();
 }
 
-RAIA_EXPORT void *raia_app_get_window_focus(const char *s, void *p, int n) {
+RAIA_EXPORT const char * raia_app_get_window_focus(const char *s) {
+    raia_not_use_s(s);
     return get_window_focus_callback_t();
 }
 
-RAIA_EXPORT void *raia_app_get_window_iconify(const char *s, void *p, int n) {
+RAIA_EXPORT const char * raia_app_get_window_iconify(const char *s) {
+    raia_not_use_s(s);
     return get_window_iconify_callback_t();
 }
 
-RAIA_EXPORT void *raia_app_get_cursor_position(const char *s, void *p, int n) {
+RAIA_EXPORT const char * raia_app_get_cursor_position(const char *s) {
+    raia_not_use_s(s);
     return get_cursor_position_callback_t();
 }
 
-RAIA_EXPORT void *raia_app_get_mouse_button(const char *s, void *p, int n) {
+RAIA_EXPORT const char * raia_app_get_mouse_button(const char *s) {
+    raia_not_use_s(s);
     return get_mouse_button_callback_t();
 }
 
-RAIA_EXPORT void *raia_app_get_character(const char *s, void *p, int n) {
+RAIA_EXPORT const char * raia_app_get_character(const char *s) {
+    raia_not_use_s(s);
     return get_character_callback_t();
 }
 
-RAIA_EXPORT void *raia_app_get_character_mods(const char *s, void *p, int n) {
+RAIA_EXPORT const char * raia_app_get_character_mods(const char *s) {
+    raia_not_use_s(s);
     return get_character_mods_callback_t();
 }
 
-RAIA_EXPORT void *raia_app_get_cursor_enter(const char *s, void *p, int n) {
+RAIA_EXPORT const char * raia_app_get_cursor_enter(const char *s) {
+    raia_not_use_s(s);
     return get_cursor_enter_callback_t();
 }
 
-RAIA_EXPORT void *raia_app_get_scroll(const char *s, void *p, int n) {
+RAIA_EXPORT const char * raia_app_get_scroll(const char *s) {
+    raia_not_use_s(s);
     return get_scroll_callback_t();
 }
 
-RAIA_EXPORT void *raia_app_get_drop(const char *s, void *p, int n) {
+RAIA_EXPORT const char * raia_app_get_drop(const char *s) {
+    raia_not_use_s(s);
     return get_drop_callback_t();
 }
 
-//--
-
-RAIA_EXPORT void *raia_app_init(const char *s, void *p, int n) {
+RAIA_EXPORT const char * raia_app_init(const char *s) {
+    raia_not_use_s(s);
     if (glfwInit() != GL_TRUE) {
         fprintf(stderr, "Initialization of GLFW failed.\n");
         exit(EXIT_FAILURE);
@@ -132,22 +129,16 @@ RAIA_EXPORT void *raia_app_init(const char *s, void *p, int n) {
     glfwSetErrorCallback(event_error_callback);
     glfwSetJoystickCallback(event_joystick_callback);
 
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_bool(ret_doc, ret_root, "result", true);
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    return (void *)result;
+    joint_t *joint = joint_init_out();
+    joint_add_out_bool(joint, "result", true);
+    return joint_out_write(joint);
 }
 
-RAIA_EXPORT void *raia_app_window_create(const char *s, void *p, int n) {
-    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
-    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
-    int width = yyjson_get_int(yyjson_obj_get(arg_root, "width"));
-    int height = yyjson_get_int(yyjson_obj_get(arg_root, "height"));
-    const char *title = yyjson_get_str(yyjson_obj_get(arg_root, "title"));
+RAIA_EXPORT const char * raia_app_window_create(const char *s) {
+    joint_t *joint = joint_init_with_str(s);
+    int width = joint_get_in_int(joint, "width");
+    int height = joint_get_in_int(joint, "height");
+    const char *title = joint_get_in_str(joint, "title");
     int res_width = width;
     int res_height = height;
 
@@ -187,250 +178,135 @@ RAIA_EXPORT void *raia_app_window_create(const char *s, void *p, int n) {
     glfwSetScrollCallback(window, event_scroll_callback);
     glfwSetDropCallback(window, event_drop_callback);
 
-
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_uint(ret_doc, ret_root, "id", (uint64_t)(uintptr_t)window);
-    yyjson_mut_obj_add_str(ret_doc, ret_root, "title", title);
-    yyjson_mut_obj_add_int(ret_doc, ret_root, "width", width);
-    yyjson_mut_obj_add_int(ret_doc, ret_root, "height", height);
-    yyjson_mut_obj_add_int(ret_doc, ret_root, "resolution_width", res_width);
-    yyjson_mut_obj_add_uint(ret_doc, ret_root, "resolution_height", res_height);
-
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    yyjson_doc_free(arg_doc);
-    return (void *)result;
+    joint_add_out_uint(joint, "id", (uint64_t)(uintptr_t)window);
+    joint_add_out_str(joint, "title", title);
+    joint_add_out_int(joint, "width", width);
+    joint_add_out_int(joint, "height", height);
+    joint_add_out_int(joint, "resolution_width", res_width);
+    joint_add_out_int(joint, "resolution_height", res_height);
+    return joint_out_write(joint);
 }
 
 
-RAIA_EXPORT void *raia_app_time_get_current_time(const char *s, void *p, int n) {
-    raia_not_use_spn(s, p, n);
-
+RAIA_EXPORT const char * raia_app_time_get_current_time(const char *s) {
+    raia_not_use_s(s);
     double time = get_current_time();
 
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_real(ret_doc, ret_root, "result", time);
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    return (void *)result;
+    joint_t *joint = joint_init_out();
+    joint_add_out_real(joint, "result", time);
+    return joint_out_write(joint);
 }
 
-RAIA_EXPORT void *raia_app_glfw_get_timer_value(const char *s, void *p, int n) {
-    raia_not_use_spn(s, p, n);
-
+RAIA_EXPORT const char * raia_app_glfw_get_timer_value(const char *s) {
+    raia_not_use_s(s);
     uint64_t val = glfwGetTimerValue();
 
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_uint(ret_doc, ret_root, "result", val);
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    return (void *)result;
+    joint_t *joint = joint_init_out();
+    joint_add_out_uint(joint, "result", val);
+    return joint_out_write(joint);
 }
 
-RAIA_EXPORT void *raia_app_glfw_get_timer_frequency(const char *s, void *p, int n) {
-    raia_not_use_spn(s, p, n);
-
+RAIA_EXPORT const char * raia_app_glfw_get_timer_frequency(const char *s) {
+    raia_not_use_s(s);
     uint64_t val = glfwGetTimerFrequency();
 
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_uint(ret_doc, ret_root, "result", val);
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    return (void *)result;
+    joint_t *joint = joint_init_out();
+    joint_add_out_uint(joint, "result", val);
+    return joint_out_write(joint);
 }
 
-RAIA_EXPORT void *raia_app_glfw_get_time(const char *s, void *p, int n) {
-    raia_not_use_spn(s, p, n);
-
+RAIA_EXPORT const char * raia_app_glfw_get_time(const char *s) {
+    raia_not_use_s(s);
     double time = glfwGetTime();
 
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_real(ret_doc, ret_root, "result", time);
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    return (void *)result;
+    joint_t *joint = joint_init_out();
+    joint_add_out_real(joint, "result", time);
+    return joint_out_write(joint);
 }
 
-RAIA_EXPORT void *raia_app_glfw_set_time(const char *s, void *p, int n) {
-    raia_not_use_pn(p, n);
-
-    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
-    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
-    yyjson_val *arg_val = yyjson_obj_get(arg_root, "time");
-    double time = yyjson_get_real(arg_val);
+RAIA_EXPORT const char * raia_app_glfw_set_time(const char *s) {
+    joint_t *joint = joint_init_with_str(s);
+    double time = joint_get_in_real(joint, "time");
 
     glfwSetTime(time);
 
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_bool(ret_doc, ret_root, "result", true);
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    yyjson_doc_free(arg_doc);
-    return (void *)result;
+    joint_add_out_bool(joint, "result", true);
+    return joint_out_write(joint);
 }
 
-RAIA_EXPORT void *raia_app_glfw_wait_event_timeout(const char *s, void *p, int n) {
-    raia_not_use_pn(p, n);
-
-    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
-    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
-    yyjson_val *arg_val = yyjson_obj_get(arg_root, "time");
-    double time = yyjson_get_real(arg_val);
+RAIA_EXPORT const char * raia_app_glfw_wait_event_timeout(const char *s) {
+    joint_t *joint = joint_init_with_str(s);
+    double time = joint_get_in_real(joint, "time");
 
     glfwWaitEventsTimeout(time);
 
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_bool(ret_doc, ret_root, "result", true);
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    yyjson_doc_free(arg_doc);
-    return (void *)result;
+    joint_add_out_bool(joint, "result", true);
+    return joint_out_write(joint);
 }
 
-RAIA_EXPORT void *raia_app_glfw_joystick_present(const char *s, void *p, int n) {
-    raia_not_use_pn(p, n);
-
-    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
-    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
-    yyjson_val *arg_val = yyjson_obj_get(arg_root, "jid");
-    int jid = yyjson_get_int(arg_val);
+RAIA_EXPORT const char *raia_app_glfw_joystick_present(const char *s) {
+    joint_t *joint = joint_init_with_str(s);
+    int jid = joint_get_in_int(joint, "jid");
 
     int val = glfwJoystickPresent(jid);
 
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_int(ret_doc, ret_root, "result", val);
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    yyjson_doc_free(arg_doc);
-    return (void *)result;
+    joint_add_out_int(joint, "result", val);
+    return joint_out_write(joint);
 }
 
-RAIA_EXPORT void *raia_app_glfw_get_joystick_axes(const char *s, void *p, int n) {
-    raia_not_use_pn(p, n);
-
-    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
-    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
-    yyjson_val *arg_val = yyjson_obj_get(arg_root, "jid");
-    int jid = yyjson_get_int(arg_val);
+RAIA_EXPORT const char * raia_app_glfw_get_joystick_axes(const char *s) {
+    joint_t *joint = joint_init_with_str(s);
+    int jid = joint_get_in_int(joint, "jid");
 
     int count = 0;
     const float *axes = glfwGetJoystickAxes(jid, &count); // 返された配列は，GLFWによって確保・解放される
 
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_val *ret_vals = yyjson_mut_arr_with_real(ret_doc, (const double *)axes, count);
-    yyjson_mut_obj_add_val(ret_doc, ret_root, "result", ret_vals);
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    yyjson_doc_free(arg_doc);
-    return (void *)result;
+    joint_add_out_arr_real(joint, "result", (double *)axes, count);
+    return joint_out_write(joint);
 }
 
-RAIA_EXPORT void *raia_app_glfw_get_joystick_buttons(const char *s, void *p, int n) {
-    raia_not_use_pn(p, n);
-
-    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
-    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
-    yyjson_val *arg_val = yyjson_obj_get(arg_root, "jid");
-    int jid = yyjson_get_int(arg_val);
+RAIA_EXPORT const char * raia_app_glfw_get_joystick_buttons(const char *s) {
+    joint_t *joint = joint_init_with_str(s);
+    int jid = joint_get_in_int(joint, "jid");
 
     int count = 0;
     const unsigned char *buttons = glfwGetJoystickButtons(jid, &count); // 返された配列は、GLFWによって割り当てられ、解放される。
 
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_val *ret_vals = yyjson_mut_arr_with_uint8(ret_doc, (const uint8_t *)buttons, count);
-    yyjson_mut_obj_add_val(ret_doc, ret_root, "result", ret_vals);
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    yyjson_doc_free(arg_doc);
-    return (void *)result;
+    joint_add_out_arr_uint8(joint, "result", (uint8_t *)buttons, count);
+    return joint_out_write(joint);
 }
 
-RAIA_EXPORT void *raia_app_glfw_get_joystick_name(const char *s, void *p, int n) {
-    raia_not_use_pn(p, n);
-
-    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
-    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
-    yyjson_val *arg_val = yyjson_obj_get(arg_root, "jid");
-    int jid = yyjson_get_int(arg_val);
+RAIA_EXPORT const char * raia_app_glfw_get_joystick_name(const char *s) {
+    joint_t *joint = joint_init_with_str(s);
+    int jid = joint_get_in_int(joint, "jid");
 
     const char *name = glfwGetJoystickName(jid);
 
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_str(ret_doc, ret_root, "result", name);
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    yyjson_doc_free(arg_doc);
-    return (void *)result;
+    joint_add_out_str(joint, "result", name);
+    return joint_out_write(joint);
 }
 
 #ifdef __WINDOWS__
 #define GL_TEXTURE0 0x84C0
 #endif
 
-RAIA_EXPORT void *raia_app_screen_redraw(const char *s, void *p, int n) {
-    raia_not_use_n(n);
-
-    //duk_size_t length;
+RAIA_EXPORT const char * raia_app_screen_redraw(const char *s) {
+    joint_t *joint = joint_init_with_str(s);
     GLfloat vertices[20];
+    joint_get_in_arr_int_to_float(joint, vertices, "vertices");
     GLushort indices[6];
-    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
-    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
-    yyjson_val *arg_arr = yyjson_obj_get(arg_root, "vertices");
-    size_t idx, max;
-    yyjson_val *hit;
-    yyjson_arr_foreach(arg_arr, idx, max, hit) {
-        vertices[idx] = (GLfloat)yyjson_get_int(hit);
-    }
-    yyjson_val *arg_arr2 = yyjson_obj_get(arg_root, "indices");
-    size_t idx2, max2;
-    yyjson_val *hit2;
-    yyjson_arr_foreach(arg_arr2, idx2, max2, hit2) {
-        indices[idx2] = (GLushort)yyjson_get_uint(hit2);
-    }
-    GLuint program = (GLuint)yyjson_get_uint(yyjson_obj_get(arg_root, "program"));
-    GLint pos_location= (GLint)yyjson_get_int(yyjson_obj_get(arg_root, "pos_location"));
-    GLint tex_location = (GLint)yyjson_get_int(yyjson_obj_get(arg_root, "tex_location"));
-    GLint sampler_location = (GLint)yyjson_get_int(yyjson_obj_get(arg_root, "sampler_location"));
-    GLuint texture = (GLuint)yyjson_get_uint(yyjson_obj_get(arg_root, "texture"));
-    int32_t window_width = (int32_t)yyjson_get_int(yyjson_obj_get(arg_root, "window_width"));
-    int32_t window_height = (int32_t)yyjson_get_int(yyjson_obj_get(arg_root, "window_height"));
-    int resolution_width = yyjson_get_int(yyjson_obj_get(arg_root, "resolution_width"));
-    int resolution_height = yyjson_get_int(yyjson_obj_get(arg_root, "resolution_height"));
-    GLFWwindow* glfw_window = (GLFWwindow*)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "window_id"));
-    uint8_t *pixels = (uint8_t *)p;
+    joint_get_in_arr_uint16(joint, indices, "indices");
+    GLuint program = (GLuint)joint_get_in_uint(joint, "program");
+    GLint pos_location= (GLint)joint_get_in_int(joint, "pos_location");
+    GLint tex_location = (GLint)joint_get_in_int(joint, "tex_location");
+    GLint sampler_location = (GLint)joint_get_in_int(joint, "sampler_location");
+    GLuint texture = (GLuint)joint_get_in_int(joint, "texture");
+    int32_t window_width = (int32_t)joint_get_in_int(joint, "window_width");
+    int32_t window_height = (int32_t)joint_get_in_int(joint, "window_height");
+    int resolution_width = joint_get_in_int(joint, "resolution_width");
+    int resolution_height = joint_get_in_int(joint, "resolution_height");
+    GLFWwindow* glfw_window = (GLFWwindow*)(uintptr_t)joint_get_in_uint(joint, "window_id");
+    uint8_t *pixels = (uint8_t *)(uintptr_t)joint_get_in_uint(joint, "pixels");
 
     glViewport(0, 0, resolution_width, resolution_height); // Set the viewport
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -448,69 +324,38 @@ RAIA_EXPORT void *raia_app_screen_redraw(const char *s, void *p, int n) {
     glfwMakeContextCurrent(glfw_window);
     glfwSwapBuffers(glfw_window);
 
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_bool(ret_doc, ret_root, "result", true);
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    yyjson_doc_free(arg_doc);
-    return (void *)result;
+    joint_add_out_bool(joint, "result", true);
+    return joint_out_write(joint);
 }
 
-RAIA_EXPORT void *raia_app_window_poll_events(const char *s, void *p, int n) {
-    raia_not_use_spn(s, p, n);
-
+RAIA_EXPORT const char * raia_app_window_poll_events(const char *s) {
+    raia_not_use_s(s);
     glfwPollEvents();
 
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_bool(ret_doc, ret_root, "result", true);
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    return (void *)result;
+    joint_t *joint = joint_init_out();
+    joint_add_out_bool(joint, "result", true);
+    return joint_out_write(joint);
 }
 
-RAIA_EXPORT void *raia_app_window_should_close(const char *s, void *p, int n) {
-    raia_not_use_pn(p, n);
-
-    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
-    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
-    GLFWwindow* window_id = (GLFWwindow*)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "window_id"));
+RAIA_EXPORT const char * raia_app_window_should_close(const char *s) {
+    joint_t *joint = joint_init_with_str(s);
+    GLFWwindow* window_id = (GLFWwindow*)(uintptr_t)joint_get_in_uint(joint, "window_id");
 
     int ret = glfwWindowShouldClose(window_id);
 
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_int(ret_doc, ret_root, "result", ret);
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    yyjson_doc_free(arg_doc);
-    return (void *)result;
+    joint_add_out_int(joint, "result", ret);
+    return joint_out_write(joint);
 }
 
-RAIA_EXPORT void *raia_app_window_set_title(const char *s, void *p, int n) {
-    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
-    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
-    GLFWwindow* window_id = (GLFWwindow*)(uintptr_t)yyjson_get_uint(yyjson_obj_get(arg_root, "window_id"));
-    const char *title = yyjson_get_str(yyjson_obj_get(arg_root, "title"));
+RAIA_EXPORT const char * raia_app_window_set_title(const char *s) {
+    joint_t *joint = joint_init_with_str(s);
+    GLFWwindow* window_id = (GLFWwindow*)(uintptr_t)joint_get_in_uint(joint, "window_id");
+    const char *title = joint_get_in_str(joint, "title");
 
     glfwSetWindowTitle(window_id, title);
 
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_bool(ret_doc, ret_root, "result", true);
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    yyjson_doc_free(arg_doc);
-    return (void *)result;
+    joint_add_out_bool(joint, "result", true);
+    return joint_out_write(joint);
 }
 
 GLuint create_shader(GLenum type, const char *shader_src) {
@@ -560,11 +405,10 @@ GLuint create_texture(GLubyte* pixels, int width, int height) {
     return texture;
 }
 
-RAIA_EXPORT void *raia_app_shader_init(const char* s, void *p, int n) {
-    yyjson_doc *arg_doc = yyjson_read(s, strlen(s), 0);
-    yyjson_val *arg_root = yyjson_doc_get_root(arg_doc);
-    int window_width = yyjson_get_int(yyjson_obj_get(arg_root, "window_width"));
-    int window_height = yyjson_get_int(yyjson_obj_get(arg_root, "window_height"));
+RAIA_EXPORT const char * raia_app_shader_init(const char* s) {
+    joint_t *joint = joint_init_with_str(s);
+    int window_width = joint_get_in_int(joint, "window_width");
+    int window_height = joint_get_in_int(joint, "window_height");
 
     GLuint program;
     GLint pos_location;
@@ -595,23 +439,12 @@ RAIA_EXPORT void *raia_app_shader_init(const char* s, void *p, int n) {
     uint8_t* pixel_data = NULL;
     texture = create_texture(pixel_data, window_width, window_height);
 
-    //----
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_val *vertices_val = yyjson_mut_arr_with_real(ret_doc, vertices, vertices_count);
-    yyjson_mut_obj_add_val(ret_doc, ret_root, "vertices", vertices_val);
-    yyjson_mut_val *indices_val = yyjson_mut_arr_with_sint32(ret_doc, indices, indices_count);
-    yyjson_mut_obj_add_val(ret_doc, ret_root, "indices", indices_val);
-    yyjson_mut_obj_add_uint(ret_doc, ret_root, "program", program);
-    yyjson_mut_obj_add_int(ret_doc, ret_root, "pos_location", pos_location);
-    yyjson_mut_obj_add_int(ret_doc, ret_root, "tex_location", tex_location);
-    yyjson_mut_obj_add_int(ret_doc, ret_root, "sampler_location", sampler_location);
-    yyjson_mut_obj_add_uint(ret_doc, ret_root, "texture", texture);
-
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    yyjson_doc_free(arg_doc);
-    return (void *)result;
+    joint_add_out_arr_real(joint, "vertices", vertices, vertices_count);
+    joint_add_out_arr_sint32(joint, "indices", indices, indices_count);
+    joint_add_out_uint(joint, "program", program);
+    joint_add_out_int(joint, "pos_location", pos_location);
+    joint_add_out_int(joint, "tex_location", tex_location);
+    joint_add_out_int(joint, "sampler_location", sampler_location);
+    joint_add_out_uint(joint, "texture", texture);
+    return joint_out_write(joint);
 }

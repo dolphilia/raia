@@ -15,7 +15,7 @@ __Raia__.babel = undefined; // babelオブジェクト
 
 (function () {
     var getDirs = function(path) {
-        return JSON.parse(__Raia__.Core.Lib.call("raia_file_get_dirs", JSON.stringify({"path": path, "@return": "string"}), null, null)).result;
+        return JSON.parse(__Raia__.Core.Lib.call("raia_file_get_dirs", JSON.stringify({"path": path, "@return": "string"}))).result;
     };
     var getAllDirs = function(path) {
         var allDirs = [];
@@ -29,7 +29,7 @@ __Raia__.babel = undefined; // babelオブジェクト
         return allDirs;
     };
     var getCurPath = function() {
-        return JSON.parse(__Raia__.Core.Lib.call("raia_file_get_cur_path", JSON.stringify({"@return": "string"}), null, null)).result;
+        return JSON.parse(__Raia__.Core.Lib.call("raia_file_get_cur_path", JSON.stringify({"@return": "string"}))).result;
     };
     __Raia__.allDirs = getAllDirs(getCurPath());
     __Raia__.allDirs.unshift('.');
@@ -45,13 +45,13 @@ Duktape.modSearch = function (path, require, exports, module) {
         return str.slice(0, lastIndex) + replacement + str.slice(lastIndex + search.length);
     }
     var exist = function(path) {
-        return JSON.parse(__Raia__.Core.Lib.call("raia_file_exist", JSON.stringify({"path": path, "@return": "string"}), null, null)).result;
+        return JSON.parse(__Raia__.Core.Lib.call("raia_file_exist", JSON.stringify({"path": path, "@return": "string"}))).result;
     };
     var loadString = function(path) {
-        return JSON.parse(__Raia__.Core.Lib.call("raia_file_load_string", JSON.stringify({"path": path, "@return": "string"}), null, null)).result;
+        return JSON.parse(__Raia__.Core.Lib.call("raia_file_load_string", JSON.stringify({"path": path, "@return": "string"}))).result;
     };
     var saveString = function(path, data) {
-        return JSON.parse(__Raia__.Core.Lib.call("raia_file_save_string", JSON.stringify({"path": path, "data": data, "@return": "string"}), null, null)).result;
+        return JSON.parse(__Raia__.Core.Lib.call("raia_file_save_string", JSON.stringify({"path": path, "data": data, "@return": "string"}))).result;
     };
     // var exist = function(path) {
     //     return __Raia__.Core.File.exist(path);
@@ -123,13 +123,13 @@ Duktape.modSearch = function (path, require, exports, module) {
 
 (function () {
     var getCurPath = function() {
-        return JSON.parse(__Raia__.Core.Lib.call("raia_file_get_cur_path", JSON.stringify({"@return": "string"}), null, null)).result;
+        return JSON.parse(__Raia__.Core.Lib.call("raia_file_get_cur_path", JSON.stringify({"@return": "string"}))).result;
     };
     var loadString = function(path) {
-        return JSON.parse(__Raia__.Core.Lib.call("raia_file_load_string", JSON.stringify({"path": path, "@return": "string"}), null, null)).result;
+        return JSON.parse(__Raia__.Core.Lib.call("raia_file_load_string", JSON.stringify({"path": path, "@return": "string"}))).result;
     };
     var saveString = function(path, data) {
-        return JSON.parse(__Raia__.Core.Lib.call("raia_file_save_string", JSON.stringify({"path": path, "data": data, "@return": "string"}), null, null)).result;
+        return JSON.parse(__Raia__.Core.Lib.call("raia_file_save_string", JSON.stringify({"path": path, "data": data, "@return": "string"}))).result;
     };
     var startup_script = __Raia__.startup_script.split('.').slice(0, -1).join('.');
     if (__Raia__.typescript_mode === true) {

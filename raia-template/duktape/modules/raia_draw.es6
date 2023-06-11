@@ -36,7 +36,7 @@ module.exports = {
                 "height": height,
                 "@return": "string"
             });
-            var ret = __Raia__.Core.Lib.call("raia_draw_noise", json_str, null, null); // (window, title)
+            var ret = __Raia__.Core.Lib.call("raia_draw_noise", json_str); // (window, title)
             return JSON.parse(ret).result;
         },
         blendPixelsRGBAtoRGB: (pixels_rgb, pixels_rgb_width, pixels_rgb_height,
@@ -58,7 +58,7 @@ module.exports = {
                 "trimming_y2": trimming_y2,
                 "@return": "string"
             });
-            var ret = __Raia__.Core.Lib.call("raia_draw_blend_pixels_rgba_to_rgb", json_str, null, null); // (window, title)
+            var ret = __Raia__.Core.Lib.call("raia_draw_blend_pixels_rgba_to_rgb", json_str); // (window, title)
             return JSON.parse(ret).result;
         },
         blendPixelsRGBAtoRGBA: (pixels_rgba_a, pixels_rgba_a_width, pixels_rgba_a_height,
@@ -80,7 +80,7 @@ module.exports = {
                 "trimming_y2": trimming_y2,
                 "@return": "string"
             });
-            var ret = __Raia__.Core.Lib.call("raia_draw_blend_pixels_rgba_to_rgba", json_str, null, null); // (window, title)
+            var ret = __Raia__.Core.Lib.call("raia_draw_blend_pixels_rgba_to_rgba", json_str); // (window, title)
             return JSON.parse(ret).result;
         },
     },
@@ -100,7 +100,7 @@ module.exports = {
                 "canvas_height": canvas_height,
                 "@return": "string"
             });
-            var ret = __Raia__.Core.Lib.call("raia_draw_point", json_str, null, null); // (window, title)
+            var ret = __Raia__.Core.Lib.call("raia_draw_point", json_str); // (window, title)
             return JSON.parse(ret).result;
         },
         pointRGBA: (pixels,
@@ -119,7 +119,7 @@ module.exports = {
                 "canvas_height": canvas_height,
                 "@return": "string"
             });
-            var ret = __Raia__.Core.Lib.call("raia_draw_point_rgba", json_str, null, null); // (window, title)
+            var ret = __Raia__.Core.Lib.call("raia_draw_point_rgba", json_str); // (window, title)
             return JSON.parse(ret).result;
         },
         pointRGBAtoRGB: (pixels,
@@ -138,7 +138,7 @@ module.exports = {
                 "canvas_height": canvas_height,
                 "@return": "string"
             });
-            var ret = __Raia__.Core.Lib.call("raia_draw_point_alpha", json_str, null, null); // (window, title)
+            var ret = __Raia__.Core.Lib.call("raia_draw_point_alpha", json_str); // (window, title)
             return JSON.parse(ret).result;
         },
         lineRGB: (pixels,
@@ -158,7 +158,7 @@ module.exports = {
                 "canvas_height": canvas_height,
                 "@return": "string"
             });
-            var ret = __Raia__.Core.Lib.call("raia_draw_line", json_str, null, null); // (window, title)
+            var ret = __Raia__.Core.Lib.call("raia_draw_line", json_str); // (window, title)
             return JSON.parse(ret).result;
         },
         lineRGBA: (pixels,
@@ -179,7 +179,7 @@ module.exports = {
                 "canvas_height": canvas_height,
                 "@return": "string"
             });
-            var ret = __Raia__.Core.Lib.call("raia_draw_line_rgba", json_str, null, null); // (window, title)
+            var ret = __Raia__.Core.Lib.call("raia_draw_line_rgba", json_str); // (window, title)
             return JSON.parse(ret).result;
         },
         fillRectRGB: (pixels,
@@ -199,7 +199,7 @@ module.exports = {
                 "canvas_height": canvas_height,
                 "@return": "string"
             });
-            var ret = __Raia__.Core.Lib.call("raia_draw_fill_rect", json_str, null, null); // (window, title)
+            var ret = __Raia__.Core.Lib.call("raia_draw_fill_rect", json_str); // (window, title)
             return JSON.parse(ret).result;
         },
         fillRectFastRGB: (pixels,
@@ -219,7 +219,7 @@ module.exports = {
                 "canvas_height": canvas_height,
                 "@return": "string"
             });
-            var ret = __Raia__.Core.Lib.call("raia_draw_fill_rect_fast", json_str, null, null); // (window, title)
+            var ret = __Raia__.Core.Lib.call("raia_draw_fill_rect_fast", json_str); // (window, title)
             return JSON.parse(ret).result;
         },
         fillRectRGBA: (pixels,
@@ -240,7 +240,7 @@ module.exports = {
                 "canvas_height": canvas_height,
                 "@return": "string"
             });
-            var ret = __Raia__.Core.Lib.call("raia_draw_fill_rect_rgba", json_str, null, null); // (window, title)
+            var ret = __Raia__.Core.Lib.call("raia_draw_fill_rect_rgba", json_str); // (window, title)
             return JSON.parse(ret).result;
         },
         fillRectRGBAtoRGB: (pixels,
@@ -261,7 +261,7 @@ module.exports = {
                 "canvas_height": canvas_height,
                 "@return": "string"
             });
-            var ret = __Raia__.Core.Lib.call("raia_draw_fill_rect_alpha", json_str, null, null); // (window, title)
+            var ret = __Raia__.Core.Lib.call("raia_draw_fill_rect_alpha", json_str); // (window, title)
             return JSON.parse(ret).result;
         },
         drawEllipseRGB: (pixels,
@@ -281,7 +281,7 @@ module.exports = {
                 "canvas_height": canvas_height,
                 "@return": "string"
             });
-            var ret = __Raia__.Core.Lib.call("raia_draw_ellipse", json_str, null, null); // (window, title)
+            var ret = __Raia__.Core.Lib.call("raia_draw_ellipse", json_str); // (window, title)
             return JSON.parse(ret).result;
         },
         drawEllipseRGBA: (pixels,
@@ -302,7 +302,7 @@ module.exports = {
                 "canvas_height": canvas_height,
                 "@return": "string"
             });
-            var ret = __Raia__.Core.Lib.call("raia_draw_ellipse_rgba", json_str, null, null); // (window, title)
+            var ret = __Raia__.Core.Lib.call("raia_draw_ellipse_rgba", json_str); // (window, title)
             return JSON.parse(ret).result;
         },
         drawFilledEllipseRGB: (pixels,
@@ -322,7 +322,7 @@ module.exports = {
                 "canvas_height": canvas_height,
                 "@return": "string"
             });
-            var ret = __Raia__.Core.Lib.call("raia_draw_filled_ellipse", json_str, null, null); // (window, title)
+            var ret = __Raia__.Core.Lib.call("raia_draw_filled_ellipse", json_str); // (window, title)
             return JSON.parse(ret).result;
         },
         drawFilledEllipseRGBA: (pixels,
@@ -343,7 +343,7 @@ module.exports = {
                 "canvas_height": canvas_height,
                 "@return": "string"
             });
-            var ret = __Raia__.Core.Lib.call("raia_draw_filled_ellipse_rgba", json_str, null, null); // (window, title)
+            var ret = __Raia__.Core.Lib.call("raia_draw_filled_ellipse_rgba", json_str); // (window, title)
             return JSON.parse(ret).result;
         },
         drawFilledEllipseSmooth: (pixels,
@@ -363,7 +363,7 @@ module.exports = {
                 "canvas_height": canvas_height,
                 "@return": "string"
             });
-            var ret = __Raia__.Core.Lib.call("raia_draw_filled_ellipse_smooth", json_str, null, null); // (window, title)
+            var ret = __Raia__.Core.Lib.call("raia_draw_filled_ellipse_smooth", json_str); // (window, title)
             return JSON.parse(ret).result;
         },
     },
@@ -373,7 +373,7 @@ module.exports = {
                 "font_path": font_path,
                 "@return": "string"
             });
-            var ret = __Raia__.Core.Lib.call("raia_draw_font_open", json_str, null, null); // (window, title)
+            var ret = __Raia__.Core.Lib.call("raia_draw_font_open", json_str); // (window, title)
             return JSON.parse(ret).result;
         },
         initFontBuffer: (font_path, font_buffer) => {
@@ -382,7 +382,7 @@ module.exports = {
                 "font_buffer": __Raia__.Core.arrayBufferToNumber(font_buffer),
                 "@return": "string"
             });
-            var ret = __Raia__.Core.Lib.call("raia_draw_font_init_buffer", json_str, null, null); // (window, title)
+            var ret = __Raia__.Core.Lib.call("raia_draw_font_init_buffer", json_str); // (window, title)
             return JSON.parse(ret);
         },
         getTextSize: (text, font_size,
@@ -432,7 +432,7 @@ module.exports = {
                 "fdselect_size": fdselect_size,
                 "@return": "string"
             });
-            var ret = __Raia__.Core.Lib.call("raia_draw_get_text_size", json_str, null, null); // (window, title)
+            var ret = __Raia__.Core.Lib.call("raia_draw_get_text_size", json_str); // (window, title)
             return JSON.parse(ret);
         },
         drawTextRGB: (pixels_rgba, pixels_rgba_width, pixels_rgba_height,
@@ -495,7 +495,7 @@ module.exports = {
                 "fdselect_size": fdselect_size,
                 "@return": "string"
             });
-            var ret = __Raia__.Core.Lib.call("raia_draw_text_rgb", json_str, null, null); // (window, title)
+            var ret = __Raia__.Core.Lib.call("raia_draw_text_rgb", json_str); // (window, title)
             return JSON.parse(ret);
         },
         drawTextRGBA: (pixels_rgba, pixels_rgba_width, pixels_rgba_height,
@@ -558,7 +558,7 @@ module.exports = {
                 "fdselect_size": fdselect_size,
                 "@return": "string"
             });
-            var ret = __Raia__.Core.Lib.call("raia_draw_text_rgba", json_str, null, null); // (window, title)
+            var ret = __Raia__.Core.Lib.call("raia_draw_text_rgba", json_str); // (window, title)
             return JSON.parse(ret);
         },
     },
@@ -580,7 +580,7 @@ module.exports = {
                 "trimming_y2": trimming_y2,
                 "@return": "string"
             });
-            var ret = __Raia__.Core.Lib.call("raia_draw_load_and_blend_image_rgb", json_str, null, null); // (window, title)
+            var ret = __Raia__.Core.Lib.call("raia_draw_load_and_blend_image_rgb", json_str); // (window, title)
             return JSON.parse(ret).result;
         },
         loadImageRGBA: (pixels_rgba, pixels_rgba_width, pixels_rgba_height,
@@ -600,7 +600,7 @@ module.exports = {
                 "trimming_y2": trimming_y2,
                 "@return": "string"
             });
-            var ret = __Raia__.Core.Lib.call("raia_draw_load_and_blend_image_rgba", json_str, null, null); // (window, title)
+            var ret = __Raia__.Core.Lib.call("raia_draw_load_and_blend_image_rgba", json_str); // (window, title)
             return JSON.parse(ret).result;
         },
     },
@@ -611,7 +611,7 @@ module.exports = {
                 "height": height,
                 "@return": "string"
             });
-            var ret = __Raia__.Core.Lib.call("raia_draw_d3m_init", json_str, null, null); // (window, title)
+            var ret = __Raia__.Core.Lib.call("raia_draw_d3m_init", json_str); // (window, title)
             return JSON.parse(ret).result;
         },
         d3mSetCamera: (pos_x, pos_y, pos_z, target_x, target_y, target_z) => {
@@ -624,7 +624,7 @@ module.exports = {
                 "target_z": target_z,
                 "@return": "string"
             });
-            var ret = __Raia__.Core.Lib.call("raia_draw_d3m_set_camera", json_str, null, null); // (window, title)
+            var ret = __Raia__.Core.Lib.call("raia_draw_d3m_set_camera", json_str); // (window, title)
             return JSON.parse(ret).result;
         },
         d3mTransform3Dto2D: (pos_x, pos_y, pos_z) => {
@@ -634,7 +634,7 @@ module.exports = {
                 "pos_z": pos_z,
                 "@return": "string"
             });
-            var ret = __Raia__.Core.Lib.call("raia_draw_d3m_calc_position", json_str, null, null); // (window, title)
+            var ret = __Raia__.Core.Lib.call("raia_draw_d3m_calc_position", json_str); // (window, title)
             return JSON.parse(ret);
         },
     }

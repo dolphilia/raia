@@ -19,6 +19,6 @@ add_library(raia_draw SHARED
         src/wrapper/wrapper_stb_truetype.c
         src/wrapper/wrapper_stb_truetype.h
         src/util/util_utf8.c
-        src/util/util_utf8.h src/stb/stb_truetype.h src/raia_draw.h src/yyjson/yyjson.c)
+        src/util/util_utf8.h src/stb/stb_truetype.h src/raia_draw.h src/yyjson/yyjson.c src/wrapper/wrapper_yyjson.c)
 
 set_target_properties(raia_draw PROPERTIES PREFIX "")

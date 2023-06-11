@@ -5,6 +5,7 @@
 #include <string.h>
 #include "duktape-module/duk_module_duktape.h"
 #include "yyjson/yyjson.h"
+#include "wrapper/wrapper_yyjson.h"
 #include "static/static_plugin_hash.h"
 #include "static/static_func_hash.h"
 #include "static/static_entrust.h"
@@ -26,6 +27,15 @@
 #else
 #define RAIA_EXPORT
 #endif
+
+typedef struct {
+    int debug_mode;
+    int typescript_mode;
+    int es2015_mode;
+    char startup_script[512];
+    int preprocess;
+    char preprocess_script[512];
+} raia_config_t;
 
 RAIA_EXPORT char *init(int argc, char *argv[]);
 

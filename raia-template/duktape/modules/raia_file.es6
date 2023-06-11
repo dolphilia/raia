@@ -9,28 +9,75 @@ __Raia__.Core.Lib.add(raia_file_handle, "raia_file_get_dirs");
 __Raia__.Core.Lib.add(raia_file_handle, "raia_file_get_dirs_all");
 
 module.exports = {
-    exist: (json_str) => {
-        return __Raia__.Core.Lib.call("raia_file_exist", json_str, null, null);
+    exist: (path) => {
+        var json_str = JSON.stringify({
+            "path": path, 
+            "@return": "string"
+        });
+        var ret = __Raia__.Core.Lib.call("raia_file_exist", json_str);
+        return JSON.parse(ret).result;
     },
-    loadString: (json_str) => {
-        return __Raia__.Core.Lib.call("raia_file_load_string", json_str, null, null)
+    loadString: (path) => {
+        var json_str = JSON.stringify({
+            "path": path,
+             "@return": "string"
+        });
+        var ret = __Raia__.Core.Lib.call("raia_file_load_string", json_str);
+        return JSON.parse(ret).result;
     },
-    saveString: (json_str) => {
-        return __Raia__.Core.Lib.call("raia_file_save_string", json_str, null, null)
+    saveString: (path, data) => {
+        var json_str = JSON.stringify({
+            "path": path,
+            "data": data, 
+            "@return": "string"
+        });
+        var ret = __Raia__.Core.Lib.call("raia_file_save_string", json_str);
+        return JSON.parse(ret).result;
     },
-    loadBinary: (json_str) => {
-        return __Raia__.Core.Lib.call("raia_file_load_binary", json_str, null, null)
+    loadBinary: (path) => {
+        var json_str = JSON.stringify({
+            "path": path,
+            "@return": "pointer"
+        });
+        return __Raia__.Core.Lib.call("raia_file_load_binary", json_str);
     },
-    saveBinary: (json_str, data, size = null) => {
-        return __Raia__.Core.Lib.call("raia_file_save_binary", json_str, data, size)
+    saveBinary: (path, data, size = null) => {
+        var raw_data;
+        if (__Raia__.Core.isPointer(data)) {
+            raw_data = __Raia__.Core.pointerToNumber(data);
+        } else if (__Raia__.Core.isBuffer(data)) {
+            raw_data = __Raia__.Core.arrayBufferToNumber(data);
+        }
+        var json_str = JSON.stringify({
+            "path": path, 
+            "data": raw_data,
+            "size": size,
+            "@return": "string"
+        });
+        var ret = __Raia__.Core.Lib.call("raia_file_save_binary", json_str);
+        return JSON.parse(ret).result;
     },
-    getCurPath: (json_str) => {
-        return __Raia__.Core.Lib.call("raia_file_get_cur_path", json_str, null, null);
+    getCurPath: () => {
+        var json_str = JSON.stringify({
+            "@return": "string"
+        });
+        var ret = __Raia__.Core.Lib.call("raia_file_get_cur_path", json_str);
+        return JSON.parse(ret).result;
     },
-    getDirs: (json_str) => {
-        return __Raia__.Core.Lib.call("raia_file_get_dirs", json_str, null, null);
+    getDirs: (path) => {
+        var json_str = JSON.stringify({
+            "path": path,
+             "@return": "string"
+        });
+        var ret = __Raia__.Core.Lib.call("raia_file_get_dirs", json_str)
+        return JSON.parse(ret).result;
     },
-    getDirsAll: (json_str) => {
-        return __Raia__.Core.Lib.call("raia_file_get_dirs_all", json_str, null, null);
+    getDirsAll: (path) => {
+        var json_str = JSON.stringify({
+            "path": path,
+            "@return": "string"
+        });
+        var ret = __Raia__.Core.Lib.call("raia_file_get_dirs_all", json_str);
+        return JSON.parse(ret).result;
     },
 }

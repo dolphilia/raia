@@ -14,7 +14,7 @@ add_library(raia_app SHARED
         src/raia_app.c
         src/static/static_callback.c
         src/static/static_callback.h
-        src/yyjson/yyjson.c)
+        src/yyjson/yyjson.c src/wrapper/wrapper_yyjson.c)
 
 target_link_libraries(raia_app
         $<$<PLATFORM_ID:Darwin>: egl glfw GLESv2>
