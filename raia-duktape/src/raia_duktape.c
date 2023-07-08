@@ -102,9 +102,14 @@ static duk_ret_t raia_lib_add(duk_context *ctx) { // func_hash
 
 static duk_ret_t raia_lib_call(duk_context *ctx) { // func_hash
     const char *dll_func_name = duk_to_string(ctx, 0);
-    char *src = NULL; //json string
+    char *src; //json string
     if (duk_is_string(ctx, 1)) {
         src = (char *)duk_require_string(ctx, 1);
+    } else {
+        src = NULL;
+    }
+
+    if (src != NULL) {
         joint_t *joint = joint_init_in_with_str(src);
         if (joint_in_exist(joint, "@return")) {
             const char *return_type = joint_get_in_str(joint, "@return");
@@ -114,9 +119,11 @@ static duk_ret_t raia_lib_call(duk_context *ctx) { // func_hash
                 duk_push_pointer(ctx, (void *)dest);
                 return 1;
             }
+        } else {
+            joint_free(joint);
         }
-        joint_free(joint);
     }
+
     const char *dest = call_func_hash(dll_func_name, src);
     duk_push_string(ctx, dest);
     if(dest != NULL) {
@@ -183,7 +190,6 @@ static raia_config_t raia_set_functions(duk_context *ctx) {
     register_function(ctx, "print", raia_core_print, 1);
     register_function(ctx, "exit", raia_core_exit, 1);
     register_function(ctx, "entrust", raia_core_entrust, 1);
-
     register_function(ctx, "isPointer", raia_core_is_pointer, 1);
     register_function(ctx, "isBuffer", raia_core_is_buffer, 1);
     register_function(ctx, "pointerToNumber", raia_core_pointer_to_number, 1);

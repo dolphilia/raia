@@ -47,8 +47,8 @@ add_library(raia_lua SHARED
         src/list/list_node.c
         src/static/static_func_hash.c
         src/util/util_file.c
-        src/static/static_plugin_loader.c
+        src/static/static_plugin_hash.c
         src/yyjson/yyjson.c
-        )
+        src/wrapper/wrapper_yyjson.c)
 
 set_target_properties(raia_lua PROPERTIES PREFIX "")

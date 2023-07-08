@@ -40,23 +40,26 @@ int raia_lib_open(lua_State* L) {
 #endif
     char dll_file_extension[500];
     SPRINTF(dll_file_extension, "%s.%s", dll_file, extension);
-    open_plugin(dll_file_extension);
-    return 0;
+    void *handle = add_plugin_hash(dll_file_extension);
+    lua_pushlightuserdata(L, handle);
+    return 1;
 }
 
 int raia_lib_close(lua_State* L) {
-    close_plugin();
+    const char *name = luaL_checkstring(L, 1);
+    delete_plugin_hash(name);
     return 0;
 }
 
 int raia_lib_close_all(lua_State* L) {
-    close_all_plugin();
+    free_plugin_hash();
     return 0;
 }
 
 int raia_lib_add(lua_State* L) { // func_hash
-    const char *dll_func_name = luaL_checkstring(L, 1);
-    add_plugin_func_hash(dll_func_name);
+    void *handle = lua_touserdata(L, 1);
+    const char *dll_func_name = luaL_checkstring(L, 2);
+    add_plugin_func_hash(handle, dll_func_name);
     return 0;
 }
 
@@ -65,25 +68,11 @@ static int raia_lib_call(lua_State *L) {
     // func_hash
     const char *dll_func_name = luaL_checkstring(L, 1);
     const char *src; // json string
-    void *data;
-    size_t size;
 
     if (lua_isstring(L, 2)) {
         src = lua_tostring(L, 2);
     } else {
         src = NULL;
-    }
-
-    if (lua_islightuserdata(L, 3)) {
-        data = lua_touserdata(L, 3);
-    } else {
-        data = NULL;
-    }
-
-    if (lua_isnumber(L, 4)) {
-        size = (size_t)lua_tonumber(L, 4);
-    } else {
-        size = 0;
     }
 
     if (src != NULL) {
@@ -92,24 +81,24 @@ static int raia_lib_call(lua_State *L) {
         yyjson_val *arg_val = yyjson_obj_get(arg_root, "@return");
         const char *return_type = yyjson_get_str(arg_val);
         if (return_type != NULL && strcmp(return_type, "pointer") == 0) {
-            void *dest = call_func_hash(dll_func_name, src, data, (int)size);
-            lua_pushlightuserdata(L, dest);
+            const char *dest = call_func_hash(dll_func_name, src);
+            lua_pushlightuserdata(L, (void *)dest);
             yyjson_doc_free(arg_doc);
             return 1;
         }
         yyjson_doc_free(arg_doc);
     }
 
-    char *dest = (char *)call_func_hash(dll_func_name, src, data, (int)size);
+    const char *dest = call_func_hash(dll_func_name, src);
     lua_pushstring(L, dest);
     if (dest != NULL) {
-        free(dest);
+        free((void *)dest);
     }
     return 1;
 }
 
-RAIA_EXPORT int run(int argc, char *argv[]) {
-    init_plugin_loader();
+RAIA_EXPORT const char *init(int argc, char *argv[]) {
+    init_plugin_hash();
     init_func_hash();
 
     // 新しいLua環境を作成

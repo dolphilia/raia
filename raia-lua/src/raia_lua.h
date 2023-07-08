@@ -2,7 +2,7 @@
 #define RAIA_LUA_RAIA_LUA_H
 
 #include "yyjson/yyjson.h"
-#include "static/static_plugin_loader.h"
+#include "static/static_plugin_hash.h"
 #include "static/static_func_hash.h"
 #include "util/util_file.h"
 #include "platform.h"
@@ -23,6 +23,6 @@
 #define RAIA_EXPORT
 #endif
 
-RAIA_EXPORT int run(int argc, char *argv[]);
+RAIA_EXPORT const char *init(int argc, char *argv[]);
 
 #endif //RAIA_LUA_RAIA_LUA_H

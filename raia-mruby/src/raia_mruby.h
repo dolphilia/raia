@@ -9,6 +9,6 @@
 #define RAIA_EXPORT
 #endif
 
-RAIA_EXPORT int run(int argc, char *argv[]);
+RAIA_EXPORT const char *init(int argc, char *argv[]);
 
 #endif //RAIA_MRUBY_RAIA_MRUBY_H

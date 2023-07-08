@@ -286,10 +286,6 @@ RAIA_EXPORT const char * raia_app_glfw_get_joystick_name(const char *s) {
     return joint_out_write(joint);
 }
 
-#ifdef __WINDOWS__
-#define GL_TEXTURE0 0x84C0
-#endif
-
 RAIA_EXPORT const char * raia_app_screen_redraw(const char *s) {
     joint_t *joint = joint_init_with_str(s);
     GLfloat vertices[20];

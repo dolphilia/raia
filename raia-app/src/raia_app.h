@@ -21,6 +21,10 @@
 #define RAIA_EXPORT
 #endif
 
+#ifdef __WINDOWS__
+#define GL_TEXTURE0 0x84C0
+#endif
+
 RAIA_EXPORT const char * raia_app_init(const char *s);
 RAIA_EXPORT const char * raia_app_window_create(const char *s);
 RAIA_EXPORT const char * raia_app_get_error(const char *s);

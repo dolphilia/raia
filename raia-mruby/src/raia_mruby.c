@@ -22,12 +22,23 @@ mrb_value my_c_function(mrb_state *mrb, mrb_value self) {
     return mrb_nil_value();
 }
 
-RAIA_EXPORT int run(int argc, char *argv[]) {
+RAIA_EXPORT const char *init(int argc, char *argv[]) {
     mrb_state *mrb = mrb_open();
-    if (!mrb) { /* handle error */ }
+    if (!mrb) { /* handle error */
+    }
+
+    const char *filename = "main.mrb";
+    FILE *file = fopen(filename, "r");
+    if(file == NULL) {
+        printf("%s file not open!\n", filename);
+        return NULL;
+    }
+    mrb_load_file(mrb, file);
+    fclose(file);
+
     // mrb_load_string(mrb, str) to load from NULL terminated strings
     // mrb_load_nstring(mrb, str, len) for strings without null terminator or with known length
-    mrb_load_string(mrb, "puts 'hello world'");
+    //mrb_load_string(mrb, "puts 'hello world'");
     mrb_close(mrb);
     return 0;
 }
