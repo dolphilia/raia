@@ -1,0 +1,11 @@
+[script]
+startup = "main.js"
+preprocess = "preprocess.js"
+modules_dir = "v8/modules"
+script_dir = "v8"
+
+[mode]
+debug = false
+typescript = false
+es2015 = false
+preprocess = true

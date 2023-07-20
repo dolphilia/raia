@@ -3,10 +3,10 @@
 
 #include <time.h>
 #include <stdio.h>
-#define GLFW_INCLUDE_ES2
+#define GLFW_INCLUDE_ES3
 #define GL_GLEXT_PROTOTYPES
 #include "GLFW/glfw3.h"
-#include "GLES2/gl2.h"
+#include "GLES3/gl32.h"
 #include "EGL/egl.h"
 #include "platforms.h"
 #include "static/static_callback.h"

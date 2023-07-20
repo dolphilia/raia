@@ -35,7 +35,8 @@ static raia_runtime_func_t get_raia_runtime_func(void *handle, const char *func_
 }
 
 int main(int argc, char *argv[]) {
-    yyjson_doc *doc = yyjson_read_file("raia_config.json", 0, NULL, NULL);
+
+    yyjson_doc *doc = yyjson_read_file("config.json", 0, NULL, NULL);
     const char *runtime = get_runtime_from_json(doc);
 
     const char *extension;

@@ -26,7 +26,7 @@
 
 // Version number for shader translation API.
 // It is incremented every time the API changes.
-#define ANGLE_SH_VERSION 333
+#define ANGLE_SH_VERSION 337
 
 enum ShShaderSpec
 {
@@ -147,9 +147,8 @@ struct ShCompileOptions
     // calling sh::GetObjectCode().
     uint64_t objectCode : 1;
 
-    // Unused.  Kept to avoid unnecessarily changing the layout of this structure and tripping up
-    // the fuzzer's hash->bug map.
-    uint64_t unused2 : 1;
+    // Whether debug info should be output in the shader.
+    uint64_t outputDebugInfo : 1;
 
     // Tracks the source path for shaders.  Can be queried with getSourcePath().
     uint64_t sourcePath : 1;
@@ -979,34 +978,26 @@ enum NonSemanticInstruction
     kNonSemanticTransformFeedbackEmulation,
 };
 
-enum OverviewFlags
-{
-    kOverviewHasSampleRateShading,
-};
+// The non-semantic instruction id has many bits available.  With kNonSemanticOverview, they are
+// used to provide additional overview details.  Providing this information in the instruction's
+// payload require OpConstants and recovering those, which is unnecessary complexity.
+constexpr uint32_t kNonSemanticInstructionBits       = 4;
+constexpr uint32_t kNonSemanticInstructionMask       = 0xF;
+constexpr uint32_t kOverviewHasSampleRateShadingMask = 0x10;
+constexpr uint32_t kOverviewHasSampleIDMask          = 0x20;
+constexpr uint32_t kOverviewHasOutputPerVertexMask   = 0x40;
 
 enum ReservedIds
 {
     kIdInvalid = 0,
 
-    // Ids that may or may not be declared in the shader.  A bitmask of these ids is returned in the
-    // kNonSemanticOverview instruction for the information of the SPIR-V transformer.
-
-    // Per-vertex
-    kIdInputPerVertexBlock,
-    kIdOutputPerVertexBlock,
-    kIdOutputPerVertexVar,
-
-    // Multisampling support
-    kIdSampleID,
-
+    // =============================================================================================
     // Ids that are fixed and are always present in the SPIR-V where applicable.  The SPIR-V
     // transformer can thus reliably use these ids.
 
     // Global information
     kIdNonSemanticInstructionSet,
     kIdEntryPoint,
-    kIdDeclaredIdsConstant,
-    kIdOverviewFlagsConstant,
 
     // Basic types
     kIdVoid,
@@ -1031,34 +1022,53 @@ enum ReservedIds
     kIdIntInputTypePointer,
     kIdVec4OutputTypePointer,
     kIdIVec4FunctionTypePointer,
+    kIdOutputPerVertexTypePointer,
 
     // Pre-rotation and Z-correction support
     kIdTransformPositionFunction,
+    kIdInputPerVertexBlockArray,
+    kIdOutputPerVertexBlockArray,
+    kIdOutputPerVertexVar,
 
     // Transform feedback support
-    kIdXfbExtensionPosition,
     kIdXfbEmulationGetOffsetsFunction,
     kIdXfbEmulationCaptureFunction,
-    kIdXfbEmulationBufferZero,
-    kIdXfbEmulationBufferOne,
-    kIdXfbEmulationBufferTwo,
-    kIdXfbEmulationBufferThree,
+    kIdXfbEmulationBufferVarZero,
+    kIdXfbEmulationBufferVarOne,
+    kIdXfbEmulationBufferVarTwo,
+    kIdXfbEmulationBufferVarThree,
+
+    // Multisampling support
+    kIdSampleID,
+
+    // =============================================================================================
+    // ANGLE internal shader variables, which are not produced as ShaderVariables.
+    // kIdShaderVariablesBegin marks the beginning of these ids.  variableId -> info maps in the
+    // backend can use |variableId - kIdShaderVariablesBegin| as key into a flat array.
+    //
+    // Note that for blocks, only the block id is in this section as that is the id used in the
+    // variableId -> info maps.
+    kIdShaderVariablesBegin,
+
+    // gl_PerVertex
+    kIdInputPerVertexBlock = kIdShaderVariablesBegin,
+    kIdOutputPerVertexBlock,
+    // The driver and default uniform blocks
+    kIdDriverUniformsBlock,
+    kIdDefaultUniformsBlock,
+    // The atomic counter block
+    kIdAtomicCounterBlock,
+    // Buffer block used for transform feedback emulation
+    kIdXfbEmulationBufferBlockZero,
+    kIdXfbEmulationBufferBlockOne,
+    kIdXfbEmulationBufferBlockTwo,
+    kIdXfbEmulationBufferBlockThree,
+    // Additional varying added to hold untransformed gl_Position for transform feedback capture
+    kIdXfbExtensionPosition,
 
     kIdFirstUnreserved,
 };
 }  // namespace spirv
-
-// Interface block name containing the aggregate default uniforms
-extern const char kDefaultUniformsNameVS[];
-extern const char kDefaultUniformsNameTCS[];
-extern const char kDefaultUniformsNameTES[];
-extern const char kDefaultUniformsNameGS[];
-extern const char kDefaultUniformsNameFS[];
-extern const char kDefaultUniformsNameCS[];
-
-// Interface block and variable names containing driver uniforms
-extern const char kDriverUniformsBlockName[];
-extern const char kDriverUniformsVarName[];
 
 // Packing information for driver uniform's misc field:
 // - 1 bit for whether surface rotation results in swapped axes
@@ -1079,21 +1089,6 @@ constexpr uint32_t kDriverUniformsMiscTransformDepthOffset        = 20;
 constexpr uint32_t kDriverUniformsMiscTransformDepthMask          = 0x1;
 constexpr uint32_t kDriverUniformsMiscAlphaToCoverageOffset       = 21;
 constexpr uint32_t kDriverUniformsMiscAlphaToCoverageMask         = 0x1;
-
-// Interface block array name used for atomic counter emulation
-extern const char kAtomicCountersBlockName[];
-
-// Transform feedback emulation support
-extern const char kXfbEmulationBufferBlockName[];
-extern const char kXfbEmulationBufferName[];
-extern const char kXfbEmulationBufferFieldName[];
-
-// Transform feedback extension support
-extern const char kXfbExtensionPositionOutName[];
-
-// EXT_shader_framebuffer_fetch and EXT_shader_framebuffer_fetch_non_coherent
-extern const char kInputAttachmentName[];
-
 }  // namespace vk
 
 namespace mtl

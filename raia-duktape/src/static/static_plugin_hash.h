@@ -8,7 +8,6 @@
 #include <stdio.h>
 #include "../uthash/uthash.h"
 #include "../platform.h"
-#include "../duktape/duktape.h"
 
 #ifdef __WINDOWS__
 #define _CRT_SECURE_NO_WARNINGS

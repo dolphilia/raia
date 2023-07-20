@@ -44,6 +44,7 @@ copy_directory "/Users/dolphilia/Documents/github/raia-draw" "/Users/dolphilia/D
 copy_directory "/Users/dolphilia/Documents/github/raia-file" "/Users/dolphilia/Documents/github/raia-engine/raia-file"
 copy_directory "/Users/dolphilia/Documents/github/raia-sound" "/Users/dolphilia/Documents/github/raia-engine/raia-sound"
 
+copy_directory "/Users/dolphilia/Documents/github/raia-v8" "/Users/dolphilia/Documents/github/raia-engine/raia-v8"
 copy_directory "/Users/dolphilia/Documents/github/raia-duktape" "/Users/dolphilia/Documents/github/raia-engine/raia-duktape"
 copy_directory "/Users/dolphilia/Documents/github/raia-lua" "/Users/dolphilia/Documents/github/raia-engine/raia-lua"
 copy_directory "/Users/dolphilia/Documents/github/raia-mruby" "/Users/dolphilia/Documents/github/raia-engine/raia-mruby"

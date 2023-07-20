@@ -3,7 +3,7 @@
 libs=(
     "app"
     "draw"
-    "file"
+    "v8"
     "duktape"
     "lua"
     "mruby"
@@ -44,9 +44,12 @@ done
 if [ "$(uname)" = "Darwin" ]; then
     echo "macOS:"
     third_libs=(
+        "libc++_chrome"
         "libEGL"
         "libGLESv2"
         "libglfw.3.3"
+        "libthird_party_abseil-cpp_absl"
+
     )
 elif [ "$(uname)" = "Linux" ]; then
     echo "Linux:"
@@ -61,6 +64,8 @@ for third_lib in ${third_libs[@]} ; do
     cp -f ./raia-template/lib/${os}/${third_lib}${lib_ext} ./build/${out_dir}/
 done
 
+cp -f ./raia-template/config.json ./build/${out_dir}
 cp -f ./raia-template/raia_config.json ./build/${out_dir}
+cp -R ./raia-template/v8 ./build/${out_dir}
 cp -R ./raia-template/duktape ./build/${out_dir}
 cp -R ./raia-template/material ./build/${out_dir}

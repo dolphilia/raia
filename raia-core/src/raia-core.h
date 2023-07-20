@@ -8,7 +8,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
 #include "yyjson/yyjson.h"
+#include "tomlc99/toml.h"
 
 #ifdef _WIN32
 #define __WINDOWS__
