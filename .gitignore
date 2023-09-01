@@ -58,7 +58,7 @@ libv8_monolith.a
 #*.dll
 #*.so
 #*.so.*
-#*.dylib
+*.dylib
 
 # Executables
 #*.exe

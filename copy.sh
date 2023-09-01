@@ -43,11 +43,15 @@ copy_directory "/Users/dolphilia/Documents/github/raia-app" "/Users/dolphilia/Do
 copy_directory "/Users/dolphilia/Documents/github/raia-draw" "/Users/dolphilia/Documents/github/raia-engine/raia-draw"
 copy_directory "/Users/dolphilia/Documents/github/raia-file" "/Users/dolphilia/Documents/github/raia-engine/raia-file"
 copy_directory "/Users/dolphilia/Documents/github/raia-sound" "/Users/dolphilia/Documents/github/raia-engine/raia-sound"
+copy_directory "/Users/dolphilia/Documents/github/raia-glfw" "/Users/dolphilia/Documents/github/raia-engine/raia-glfw"
+copy_directory "/Users/dolphilia/Documents/github/raia-gles" "/Users/dolphilia/Documents/github/raia-engine/raia-gles"
+copy_directory "/Users/dolphilia/Documents/github/raia-imgui" "/Users/dolphilia/Documents/github/raia-engine/raia-imgui"
 
 copy_directory "/Users/dolphilia/Documents/github/raia-v8" "/Users/dolphilia/Documents/github/raia-engine/raia-v8"
 copy_directory "/Users/dolphilia/Documents/github/raia-duktape" "/Users/dolphilia/Documents/github/raia-engine/raia-duktape"
 copy_directory "/Users/dolphilia/Documents/github/raia-lua" "/Users/dolphilia/Documents/github/raia-engine/raia-lua"
 copy_directory "/Users/dolphilia/Documents/github/raia-mruby" "/Users/dolphilia/Documents/github/raia-engine/raia-mruby"
+copy_directory "/Users/dolphilia/Documents/github/raia-rag" "/Users/dolphilia/Documents/github/raia-engine/raia-rag"
 
 copy_directory "/Users/dolphilia/Documents/github/raia-sdk" "/Users/dolphilia/Documents/github/raia-engine/raia-sdk"
 copy_directory "/Users/dolphilia/Documents/github/raia-example" "/Users/dolphilia/Documents/github/raia-engine/raia-example"

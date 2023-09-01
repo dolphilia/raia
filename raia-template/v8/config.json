@@ -1,9 +1,11 @@
 {
-  "startup_script": "v8/main.js",
-  "preprocess_script": "preprocess.js",
-  "modules_directory": "v8/modules",
+  "runtime": "raia_v8",
+  "root_dir": "./",
+  "startup_script": "main",
+  "preprocess_script": "preprocess",
+  "modules_dir": "modules",
   "debug_mode": false,
-  "typescript_mode": false,
+  "ts_mode": false,
   "es2015_mode": false,
   "preprocess": true
 }

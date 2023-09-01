@@ -1,6 +1,6 @@
 // from https://v8.dev/features/modules
 
-import {val} from 'lib2.js';
+import {val} from './lib2.js';
 
 print(val);
 

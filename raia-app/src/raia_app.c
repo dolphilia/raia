@@ -142,6 +142,7 @@ RAIA_EXPORT const char * raia_app_window_create(const char *s) {
     int res_width = width;
     int res_height = height;
 
+
     GLFWwindow* window = glfwCreateWindow(width, height, title, NULL, NULL);
 
     if (!window) {
@@ -344,8 +345,10 @@ RAIA_EXPORT const char * raia_app_window_should_close(const char *s) {
 }
 
 RAIA_EXPORT const char * raia_app_window_set_title(const char *s) {
+
     joint_t *joint = joint_init_with_str(s);
     GLFWwindow* window_id = (GLFWwindow*)(uintptr_t)joint_get_in_uint(joint, "window_id");
+
     const char *title = joint_get_in_str(joint, "title");
 
     glfwSetWindowTitle(window_id, title);

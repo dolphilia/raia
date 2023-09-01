@@ -51,13 +51,15 @@ else
     exit 1
 fi
 
-copy_directory "../raia-template" "./raia-template"
+#copy_directory "../raia-template" "./raia-template"
 
-cp -f ./raia-template/config.json ./build/${out_dir}
-cp -f ./raia-template/raia_config.json ./build/${out_dir}
-cp -R ./raia-template/v8 ./build/${out_dir}
-cp -R ./raia-template/duktape ./build/${out_dir}
-cp -R ./raia-template/material ./build/${out_dir}
+#cp -f ../raia-template/config.json ./build/${out_dir}
+#cp -f ../raia-template/raia_config.json ./build/${out_dir}
+#cp -R ../raia-template/v8 ./build/${out_dir}
+#cp -R ../raia-template/duktape ./build/${out_dir}
+#cp -R ../raia-template/material ./build/${out_dir}
+
+cp -R ../raia-template/v8/* ./build/${out_dir}/
 
 cd build/${out_dir}
 

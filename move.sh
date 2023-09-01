@@ -9,6 +9,9 @@ libs=(
     "mruby"
     "sound"
     "sdk"
+    "glfw"
+    "gles"
+    "imgui"
 )
 
 if [ "$(uname)" = "Darwin" ]; then
@@ -35,6 +38,7 @@ else
 fi
 
 mv -f ./raia-core/raia_core${exe_ext} ./build/${out_dir}/
+# mv -f ./raia-core/raia_core${exe_ext} ./build/${out_dir}/
 
 for lib in ${libs[@]} ; do
     mv -f ./raia-${lib}/raia_${lib}${lib_ext} ./build/${out_dir}/
@@ -45,11 +49,11 @@ if [ "$(uname)" = "Darwin" ]; then
     echo "macOS:"
     third_libs=(
         "libc++_chrome"
+        "libchrome_zlib"
         "libEGL"
         "libGLESv2"
         "libglfw.3.3"
         "libthird_party_abseil-cpp_absl"
-
     )
 elif [ "$(uname)" = "Linux" ]; then
     echo "Linux:"
@@ -64,8 +68,10 @@ for third_lib in ${third_libs[@]} ; do
     cp -f ./raia-template/lib/${os}/${third_lib}${lib_ext} ./build/${out_dir}/
 done
 
-cp -f ./raia-template/config.json ./build/${out_dir}
-cp -f ./raia-template/raia_config.json ./build/${out_dir}
-cp -R ./raia-template/v8 ./build/${out_dir}
-cp -R ./raia-template/duktape ./build/${out_dir}
-cp -R ./raia-template/material ./build/${out_dir}
+cp -R ./raia-template/v8/* ./build/${out_dir}/
+
+#cp -f ./raia-template/config.json ./build/${out_dir}
+#cp -f ./raia-template/raia_config.json ./build/${out_dir}
+#cp -R ./raia-template/v8 ./build/${out_dir}
+#cp -R ./raia-template/duktape ./build/${out_dir}
+#cp -R ./raia-template/material ./build/${out_dir}

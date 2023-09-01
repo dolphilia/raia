@@ -7,11 +7,15 @@
 
 #include "yyjson/yyjson.h"
 #include "wrapper/wrapper_yyjson.h"
+#include "static/static_raia_config.h"
 #include "static/static_plugin_hash.h"
 #include "static/static_func_hash.h"
 #include "static/static_entrust.h"
 #include "util/util_file.h"
 #include "platform.h"
+#include "typescript/typescript.h"
+
+
 
 #ifdef _WIN32
 #include <stdlib.h>
@@ -30,49 +34,36 @@
 #define RAIA_EXPORT
 #endif
 
-typedef struct {
-    int debug_mode;
-    int typescript_mode;
-    int es2015_mode;
-    char startup_script[512];
-    int preprocess;
-    char preprocess_script[512];
-} raia_config_t;
 
-// Reads a file to char array; line #140
-char* load_module_script(char filename[]);
-
-// Simple print function binding to JavaScript VM; line #169
-void print(const v8::FunctionCallbackInfo<v8::Value>& args);
 
 // Loads a module; line #187
-v8::MaybeLocal<v8::Module> loadModule(char code[],
-                                      char name[],
-                                      v8::Local<v8::Context> cx);
+v8::MaybeLocal<v8::Module> import_load(char code[],
+                                       char name[],
+                                       v8::Local<v8::Context> cx);
 
 // Check, if module isn't empty (or pointer to it); line #221
-v8::Local<v8::Module> checkModule(v8::MaybeLocal<v8::Module> maybeModule,
-                                  v8::Local<v8::Context> cx);
+v8::Local<v8::Module> import_check(v8::MaybeLocal<v8::Module> maybeModule,
+                                   v8::Local<v8::Context> cx);
 
 // Executes module; line #247
-v8::Local<v8::Value> execModule(v8::Local<v8::Module> mod,
-                                v8::Local<v8::Context> cx,
-                                bool nsObject = false);
+v8::Local<v8::Value> import_exec(v8::Local<v8::Module> mod,
+                                 v8::Local<v8::Context> cx,
+                                 bool nsObject = false);
 
 // Callback for static import; line #270
-v8::MaybeLocal<v8::Module> callResolve(v8::Local<v8::Context> context,
-                                       v8::Local<v8::String> specifier,
-                                       v8::Local<v8::Module> referrer);
+v8::MaybeLocal<v8::Module> import_static_callback(v8::Local<v8::Context> context,
+                                                  v8::Local<v8::String> specifier,
+                                                  v8::Local<v8::Module> referrer);
 
 // Callback for dynamic import; line #285
-v8::MaybeLocal<v8::Promise> callDynamic(v8::Local<v8::Context> context,
-                                        v8::Local<v8::ScriptOrModule> referrer,
-                                        v8::Local<v8::String> specifier);
+v8::MaybeLocal<v8::Promise> import_dynamic_callback(v8::Local<v8::Context> context,
+                                                    v8::Local<v8::ScriptOrModule> referrer,
+                                                    v8::Local<v8::String> specifier);
 
 // Callback for module metadata; line #310
-void callMeta(v8::Local<v8::Context> context,
-              v8::Local<v8::Module> module,
-              v8::Local<v8::Object> meta);
+void import_meta(v8::Local<v8::Context> context,
+                 v8::Local<v8::Module> module,
+                 v8::Local<v8::Object> meta);
 
 extern "C" RAIA_EXPORT char *init(int argc, char *argv[]);
 
