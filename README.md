@@ -1,3 +1,5 @@
 # RaiaEngine
 
-RaiaEngineは個人ゲーム開発者向けのゲームエンジンです。現在、開発中です。
+RaiaEngineはインディーゲーム開発者向けのゲームエンジンです。
+
+開発自体は[RaiaEngineのOrganisationリポジトリ](https://github.com/raia-engine)で行っています。
