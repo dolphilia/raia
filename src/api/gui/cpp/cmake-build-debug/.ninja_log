@@ -1,0 +1,18 @@
+# ninja log v5
+269	1100	1696017930873236780	CMakeFiles/raia_gui.dir/Users/dolphilia/Documents/github/raia-engine/src/thirdparty/c/ibireme/yyjson.c.o	bea54196e0a812e1
+16	297	1696017930068965345	CMakeFiles/raia_gui.dir/src/imgui/imgui_demo.cpp.o	50fd852c2bd0dfb
+1135	1202	1692858984007510772	raia_gui.dylib	84ec3db3092d07bb
+284	394	1696017930168631529	CMakeFiles/raia_gui.dir/Users/dolphilia/Documents/github/raia-engine/src/share/c/wrapper/wrapper_yyjson.c.o	1a57054847db2295
+15	434	1696017930207319747	CMakeFiles/raia_gui.dir/src/imgui/imgui_widgets.cpp.o	ef5e5f54b08c8fb
+15	1214	1696018033393750646	CMakeFiles/raia_gui.dir/src/raia_gui.cpp.o	18d340b77812c956
+15	458	1696017930231437341	CMakeFiles/raia_gui.dir/src/imgui/imgui_impl_glfw.cpp.o	2c7b9acaa8b22dd8
+16	244	1696017930016567259	CMakeFiles/raia_gui.dir/src/imgui/imgui_tables.cpp.o	3340e9cfb27b7e9
+15	318	1696017930090744383	CMakeFiles/raia_gui.dir/src/imgui/imgui_draw.cpp.o	160048fa4414659c
+15	115	1696017929888973167	CMakeFiles/raia_gui.dir/src/imgui/imgui_impl_opengl3.cpp.o	dd0e3d0672f835a
+5	64	1696030593639816743	build.ninja	8b1bf8dce34460da
+244	283	1696017930055417061	CMakeFiles/raia_gui.dir/src/util/util_math.c.o	940ed7b2e84d78aa
+243	269	1696017930041630108	CMakeFiles/raia_gui.dir/src/util/util.cpp.o	16eb40928ca8cbbd
+15	695	1696017930466934789	CMakeFiles/raia_gui.dir/src/imgui/imgui.cpp.o	8cb327fda24d2d76
+115	243	1696017930017237346	CMakeFiles/raia_gui.dir/src/static/static_callback.c.o	cdbfd15b97105e41
+1120	1165	1695955302682719066	raia_gui	73fa72974f6d4499
+1214	1261	1696018033442919964	/Users/dolphilia/Documents/github/raia-engine/build/macos/arm64/debug/raia_gui	503fe3ac6b289f17

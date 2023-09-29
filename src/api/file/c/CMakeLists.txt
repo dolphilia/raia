@@ -1,0 +1,22 @@
+cmake_minimum_required(VERSION 3.25)
+project(raia_file C)
+
+include(../../../setting.cmake)
+
+set(CMAKE_C_STANDARD 11)
+
+add_library(raia_file SHARED
+        src/raia_file.c
+        src/util/util_file.c
+        ../../../thirdparty/c/ibireme/yyjson.c
+        ../../../share/c/wrapper/wrapper_yyjson.c)
+
+target_link_libraries(raia_file
+        $<$<PLATFORM_ID:Darwin>: m>
+        $<$<PLATFORM_ID:Linux>: m>
+        #$<$<PLATFORM_ID:Windows>: >
+        )
+
+set_target_properties(raia_file PROPERTIES
+        PREFIX "")
+

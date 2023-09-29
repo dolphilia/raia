@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ソース ファイル\duktape">
+      <UniqueIdentifier>{a5dd2c25-08fa-4c33-92ae-141b8a7337c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\static">
+      <UniqueIdentifier>{b2a8a6ef-c629-4885-9639-7c95b15fb758}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\util">
+      <UniqueIdentifier>{0313c6cb-9a1c-4cf7-8f98-bfa5d90eae33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\wrapper">
+      <UniqueIdentifier>{1292cd69-411c-4981-8879-161be8c186b6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\duktape\duk_config.h">
+      <Filter>ソース ファイル\duktape</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\duktape\duktape.h">
+      <Filter>ソース ファイル\duktape</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\static\static_ctx.h">
+      <Filter>ソース ファイル\static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\static\static_header.h">
+      <Filter>ソース ファイル\static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\static\static_pixel_data.h">
+      <Filter>ソース ファイル\static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\static\static_shader.h">
+      <Filter>ソース ファイル\static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\static\static_window.h">
+      <Filter>ソース ファイル\static</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\util\util_math.h">
+      <Filter>ソース ファイル\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\util\util_string.h">
+      <Filter>ソース ファイル\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\wrapper\wrapper_gles.h">
+      <Filter>ソース ファイル\wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\wrapper\wrapper_glfw.h">
+      <Filter>ソース ファイル\wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\platforms.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\raia_app.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="sample.c">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\duktape\duktape.c">
+      <Filter>ソース ファイル\duktape</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\static\static_ctx.c">
+      <Filter>ソース ファイル\static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\static\static_header.c">
+      <Filter>ソース ファイル\static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\static\static_pixel_data.c">
+      <Filter>ソース ファイル\static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\static\static_shader.c">
+      <Filter>ソース ファイル\static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\static\static_window.c">
+      <Filter>ソース ファイル\static</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\util\util_math.c">
+      <Filter>ソース ファイル\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\util\util_string.c">
+      <Filter>ソース ファイル\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\wrapper\wrapper_gles.c">
+      <Filter>ソース ファイル\wrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\wrapper\wrapper_glfw.c">
+      <Filter>ソース ファイル\wrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\raia_app.c">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\src\duktape\duk_source_meta.json">
+      <Filter>ソース ファイル\duktape</Filter>
+    </None>
+  </ItemGroup>
+</Project>

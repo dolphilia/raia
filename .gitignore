@@ -1,3 +1,6 @@
+*.jsa
+*.class
+*.code-workspace
 
 *.cmake
 CMakeCache.txt
@@ -22,8 +25,7 @@ Makefile
 /dataSources/
 /dataSources.local.xml
 # ビルド用ディレクトリ
-/cmake-build-debug/
-/cmake-build-release/
+cmake-build-*/
 
 #======================================
 # C Template
@@ -48,20 +50,20 @@ Makefile
 *.pch
 
 # Libraries
-libv8_monolith.a
-#*.lib
-#*.a
-#*.la
-#*.lo
+#libv8_monolith.a
+*.lib
+*.a
+*.la
+*.lo
 
 # Shared objects (inc. Windows DLLs)
-#*.dll
-#*.so
-#*.so.*
+*.dll
+*.so
+*.so.*
 *.dylib
 
 # Executables
-#*.exe
+*.exe
 *.out
 *.app
 *.i*86
