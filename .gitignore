@@ -2,10 +2,8 @@
 *.class
 *.code-workspace
 
-*.cmake
 CMakeCache.txt
 CMakeFiles/
-Makefile
 
 #======================================
 # macOS
