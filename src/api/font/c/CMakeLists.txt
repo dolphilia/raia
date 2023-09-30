@@ -8,7 +8,7 @@ set(CMAKE_C_STANDARD 11)
 add_library(raia_font SHARED src/raia_font.c
         src/util/util_pixel.c
         src/util/util_utf8.c
-        ../../../thirdparty/c/ibireme/yyjson.c
+        ../../../thirdparty/c/ibireme/yyjson/yyjson.c
         ../../../share/c/wrapper/wrapper_yyjson.c
         )
 

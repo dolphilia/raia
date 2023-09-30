@@ -36,7 +36,7 @@ add_library(raia_v8 SHARED
         src/typescript/typescript.cpp
         src/wrapper/wrapper_v8.cpp
         src/static/static_raia_config.cpp
-        ../../../thirdparty/c/ibireme/yyjson.c
+        ../../../thirdparty/c/ibireme/yyjson/yyjson.c
         ../../../share/c/wrapper/wrapper_yyjson.c
 )
 

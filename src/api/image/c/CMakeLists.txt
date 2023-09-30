@@ -7,12 +7,12 @@ set(CMAKE_C_STANDARD 11)
 
 add_library(raia_image SHARED
         src/raia_image.c
-        src/lodepng/lodepng.c
-        src/stb/stb_image.c
         src/wrapper/wrapper_stb_image.c
         src/wrapper/wrapper_lodepng.c
         src/wrapper/wrapper_lodepng.h
-        ../../../thirdparty/c/ibireme/yyjson.c
+        ../../../thirdparty/c/lvandeve/lodepng/lodepng.c
+        ../../../thirdparty/c/nothings/stb/stb_image.c
+        ../../../thirdparty/c/ibireme/yyjson/yyjson.c
         ../../../share/c/wrapper/wrapper_yyjson.c
 )
 

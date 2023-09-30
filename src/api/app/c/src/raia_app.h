@@ -12,7 +12,7 @@
 #include "../../../../share/c/utility/export_api.h"
 #include "../../../../share/c/utility/platform.h"
 #include "../../../../share/c/wrapper/wrapper_yyjson.h"
-#include "../../../../thirdparty/c/ibireme/yyjson.h"
+#include "../../../../thirdparty/c/ibireme/yyjson/yyjson.h"
 
 #ifdef __WINDOWS__
 #define GL_TEXTURE0 0x84C0

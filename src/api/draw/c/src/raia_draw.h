@@ -10,8 +10,5 @@
 #include "util/util_pixel.h"
 #include "util/util_utf8.h"
 #include "util/util_primitive3d.h"
-#define STB_TRUETYPE_IMPLEMENTATION
-#include "wrapper/wrapper_stb_truetype.h"
-#include "wrapper/wrapper_stb_image.h"
 
 #endif //RAIA_DRAW_RAIA_DRAW_H

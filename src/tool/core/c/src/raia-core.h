@@ -10,7 +10,7 @@
 #include <string.h>
 #include <errno.h>
 #include <unistd.h>
-#include "../../../../thirdparty/c/ibireme/yyjson.h"
+#include "../../../../thirdparty/c/ibireme/yyjson/yyjson.h"
 #include "tomlc99/toml.h"
 
 #ifdef _WIN32

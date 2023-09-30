@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <fstream>
-#include "../../../../thirdparty/cpp/nlohmann/json.hpp"
+#include "../../../../thirdparty/cpp/nlohmann/json/json.hpp"
 using json = nlohmann::json;
 
 extern "C" {

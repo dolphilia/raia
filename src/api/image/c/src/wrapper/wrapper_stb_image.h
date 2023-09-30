@@ -14,9 +14,9 @@
 #include <stdint.h>
 #include <math.h>
 #include <stdbool.h>
-#include "../stb/stb_image.h"
-#include "../stb/stb_image_write.h"
-#include "../lodepng/lodepng.h"
+#include "../../../../../thirdparty/c/nothings/stb/stb_image.h"
+#include "../../../../../thirdparty/c/nothings/stb/stb_image_write.h"
+#include "../../../../../thirdparty/c/lvandeve/lodepng/lodepng.h"
 
 typedef struct {
     uint8_t red;

@@ -17,7 +17,7 @@ add_library(raia_glfw SHARED
 #add_executable(raia_glfw
         src/raia_glfw.c
         src/static/static_callback.c
-        ../../../thirdparty/c/ibireme/yyjson.c
+        ../../../thirdparty/c/ibireme/yyjson/yyjson.c
         ../../../share/c/wrapper/wrapper_yyjson.c
 )
 

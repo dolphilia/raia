@@ -26,20 +26,10 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fopenmp")
 add_library(raia_draw SHARED
         src/raia_draw.c
         src/util/util_math.c
-        src/util/util_pixel.h
         src/util/util_pixel.c
-        src/stb/stb_image.c
-        src/wrapper/wrapper_stb_image.c
-        src/lodepng/lodepng.c
         src/util/util_primitive3d.c
-        src/util/util_primitive3d.h
-        src/wrapper/wrapper_stb_truetype.c
-        src/wrapper/wrapper_stb_truetype.h
         src/util/util_utf8.c
-        src/util/util_utf8.h
-        src/stb/stb_truetype.h
-        src/raia_draw.h
-        ../../../thirdparty/c/ibireme/yyjson.c
+        ../../../thirdparty/c/ibireme/yyjson/yyjson.c
         ../../../share/c/wrapper/wrapper_yyjson.c)
 
 set_target_properties(raia_draw PROPERTIES PREFIX "")

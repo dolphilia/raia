@@ -5,9 +5,9 @@
 #ifndef RAIA_GUI_RAIA_GUI_H
 #define RAIA_GUI_RAIA_GUI_H
 
-#include "imgui/imgui.h"
-#include "imgui/imgui_impl_glfw.h"
-#include "imgui/imgui_impl_opengl3.h"
+#include "../../../../thirdparty/cpp/ocornut/imgui/imgui.h"
+#include "../../../../thirdparty/cpp/ocornut/imgui/imgui_impl_glfw.h"
+#include "../../../../thirdparty/cpp/ocornut/imgui/imgui_impl_opengl3.h"
 
 extern "C" {
 #include <time.h>
@@ -17,7 +17,7 @@ extern "C" {
 #include "static/static_callback.h"
 #include "GLFW/glfw3.h" // Will drag system OpenGL headers
 #define STB_IMAGE_IMPLEMENTATION
-#include "stb/stb_image.h"
+#include "../../../../thirdparty/c/nothings/stb/stb_image.h"
 #include "util/util_math.h"
 
 #ifdef __WINDOWS__

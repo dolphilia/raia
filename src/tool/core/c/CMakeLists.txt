@@ -9,7 +9,7 @@ set(CMAKE_C_STANDARD 11)
 
 add_executable(raia_core
         src/raia-core.c
-        ../../../thirdparty/c/ibireme/yyjson.c
+        ../../../thirdparty/c/ibireme/yyjson/yyjson.c
 )
 
 # ctest

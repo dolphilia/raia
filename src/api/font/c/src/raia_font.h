@@ -8,7 +8,7 @@
 #include "util/util_pixel.h"
 #include "util/util_utf8.h"
 #define STB_TRUETYPE_IMPLEMENTATION
-#include "stb/stb_truetype.h"
+#include "../../../../thirdparty/c/nothings/stb/stb_truetype.h"
 
 typedef struct {
     stbtt_fontinfo font_info;

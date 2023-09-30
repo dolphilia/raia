@@ -5,9 +5,9 @@
 #ifndef RAIA_GUI_RAIA_IMGUI_H
 #define RAIA_GUI_RAIA_IMGUI_H
 
-#include "imgui/imgui.h"
-#include "imgui/imgui_impl_glfw.h"
-#include "imgui/imgui_impl_opengl3.h"
+#include "../../../../thirdparty/cpp/ocornut/imgui/imgui.h"
+#include "../../../../thirdparty/cpp/ocornut/imgui/imgui_impl_glfw.h"
+#include "../../../../thirdparty/cpp/ocornut/imgui/imgui_impl_opengl3.h"
 
 extern "C" {
 #include <time.h>

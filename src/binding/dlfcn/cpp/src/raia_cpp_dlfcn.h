@@ -4,7 +4,7 @@
 #include <iostream>
 #include "../../../../share/c/utility/export_api.h"
 #include "../../../../share/c/utility/platform.h"
-#include "../../../../thirdparty/cpp/nlohmann/json.hpp"
+#include "../../../../thirdparty/cpp/nlohmann/json/json.hpp"
 
 
 #ifdef __WINDOWS__

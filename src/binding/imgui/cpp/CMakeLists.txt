@@ -8,14 +8,14 @@ set(CMAKE_CXX_STANDARD 17)
 add_library(raia_imgui SHARED
 #add_executable(raia_imgui
         src/raia_imgui.cpp
-        src/imgui/imgui.cpp
-        src/imgui/imgui_impl_glfw.cpp
-        src/imgui/imgui_impl_opengl3.cpp
-        src/imgui/imgui_draw.cpp
-        src/imgui/imgui_widgets.cpp
-        src/imgui/imgui_tables.cpp
-        src/imgui/imgui_demo.cpp
-        ../../../thirdparty/c/ibireme/yyjson.c
+        ../../../thirdparty/cpp/ocornut/imgui/imgui.cpp
+        ../../../thirdparty/cpp/ocornut/imgui/imgui_impl_glfw.cpp
+        ../../../thirdparty/cpp/ocornut/imgui/imgui_impl_opengl3.cpp
+        ../../../thirdparty/cpp/ocornut/imgui/imgui_draw.cpp
+        ../../../thirdparty/cpp/ocornut/imgui/imgui_widgets.cpp
+        ../../../thirdparty/cpp/ocornut/imgui/imgui_tables.cpp
+        ../../../thirdparty/cpp/ocornut/imgui/imgui_demo.cpp
+        ../../../thirdparty/c/ibireme/yyjson/yyjson.c
         ../../../share/c/wrapper/wrapper_yyjson.c)
 
 # 現在のRPATH設定を取得（もしあれば）
