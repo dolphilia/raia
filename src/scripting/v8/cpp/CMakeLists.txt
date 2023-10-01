@@ -32,7 +32,6 @@ add_library(raia_v8 SHARED
         src/static/static_func_hash.c
         src/static/static_plugin_hash.c
         src/static/static_entrust.c
-        src/tomlc99/toml.c
         src/typescript/typescript.cpp
         src/wrapper/wrapper_v8.cpp
         src/static/static_raia_config.cpp

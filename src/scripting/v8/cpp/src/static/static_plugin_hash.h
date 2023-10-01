@@ -6,8 +6,8 @@
 #define RAIA_CORE_STATIC_PLUGIN_LOADER_H
 
 #include <stdio.h>
-#include "../uthash/uthash.h"
-#include "../../../../common/c/utility/platform.h"
+#include "../../../../../third_party/c/troydhanson/uthash/uthash.h"
+#include "../../../../../common/c/utility/platform.h"
 
 #ifdef __WINDOWS__
 #define _CRT_SECURE_NO_WARNINGS

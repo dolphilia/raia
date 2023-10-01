@@ -9,7 +9,7 @@ extern "C" {
 #include "../../../../common/c/utility/export_api.h"
 #include "../../../../common/c/utility/platform.h"
 #include "../../../../common/c/wrapper/wrapper_yyjson.h"
-};
+}
 #include "static/static_raia_config.h"
 #include "static/static_plugin_hash.h"
 #include "static/static_func_hash.h"

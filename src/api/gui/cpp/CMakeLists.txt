@@ -9,9 +9,6 @@ set(CMAKE_CXX_STANDARD 17)
 add_executable(raia_gui
         src/raia_gui.cpp
         src/static/static_callback.c
-        src/raia_gui.h
-        src/util/util.cpp
-        src/util/util.h
         src/util/util_math.c
         ../../../third_party/cpp/ocornut/imgui/imgui.cpp
         ../../../third_party/cpp/ocornut/imgui/imgui_impl_glfw.cpp
