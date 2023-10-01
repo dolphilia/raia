@@ -9,10 +9,10 @@
 #include "GLES3/gl32.h"
 #include "EGL/egl.h"
 #include "static/static_callback.h"
-#include "../../../../share/c/utility/export_api.h"
-#include "../../../../share/c/utility/platform.h"
-#include "../../../../share/c/wrapper/wrapper_yyjson.h"
-#include "../../../../thirdparty/c/ibireme/yyjson/yyjson.h"
+#include "../../../../common/c/utility/export_api.h"
+#include "../../../../common/c/utility/platform.h"
+#include "../../../../common/c/wrapper/wrapper_yyjson.h"
+#include "../../../../third_party/c/ibireme/yyjson/yyjson.h"
 
 #ifdef __WINDOWS__
 #define GL_TEXTURE0 0x84C0

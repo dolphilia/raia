@@ -2,9 +2,9 @@
 #define RAIA_CPP_DLFCN_RAIA_CPP_DLFCN_H
 
 #include <iostream>
-#include "../../../../share/c/utility/export_api.h"
-#include "../../../../share/c/utility/platform.h"
-#include "../../../../thirdparty/cpp/nlohmann/json/json.hpp"
+#include "../../../../common/c/utility/export_api.h"
+#include "../../../../common/c/utility/platform.h"
+#include "../../../../third_party/cpp/nlohmann/json/json.hpp"
 
 
 #ifdef __WINDOWS__

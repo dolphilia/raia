@@ -6,9 +6,9 @@
 #define RAIA_V8_RAIA_V8_H
 
 extern "C" {
-#include "../../../../share/c/utility/export_api.h"
-#include "../../../../share/c/utility/platform.h"
-#include "../../../../share/c/wrapper/wrapper_yyjson.h"
+#include "../../../../common/c/utility/export_api.h"
+#include "../../../../common/c/utility/platform.h"
+#include "../../../../common/c/wrapper/wrapper_yyjson.h"
 };
 #include "static/static_raia_config.h"
 #include "static/static_plugin_hash.h"

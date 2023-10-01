@@ -5,7 +5,7 @@
 #ifndef RAIA_CORE_UTIL_FILE_H
 #define RAIA_CORE_UTIL_FILE_H
 
-#include "../../../../../share/c/utility/platform.h"
+#include "../../../../../common/c/utility/platform.h"
 
 #ifdef __WINDOWS__
 #define _CRT_SECURE_NO_WARNINGS

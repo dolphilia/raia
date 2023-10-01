@@ -5,7 +5,7 @@
 #ifndef YYJSON_MACROS_WRAPPER_YYJSON_H
 #define YYJSON_MACROS_WRAPPER_YYJSON_H
 
-#include "../../../thirdparty/c/ibireme/yyjson/yyjson.h"
+#include "../../../third_party/c/ibireme/yyjson/yyjson.h"
 
 typedef struct jsons_t {
     yyjson_doc *in_doc;

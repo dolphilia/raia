@@ -16,7 +16,7 @@
 #include <stdint.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include "../platform.h"
+#include "../../../../common/c/utility/platform.h"
 
 #ifdef __WINDOWS__
 #include "limits.h"

@@ -10,10 +10,10 @@ add_library(raia_image SHARED
         src/wrapper/wrapper_stb_image.c
         src/wrapper/wrapper_lodepng.c
         src/wrapper/wrapper_lodepng.h
-        ../../../thirdparty/c/lvandeve/lodepng/lodepng.c
-        ../../../thirdparty/c/nothings/stb/stb_image.c
-        ../../../thirdparty/c/ibireme/yyjson/yyjson.c
-        ../../../share/c/wrapper/wrapper_yyjson.c
+        ../../../third_party/c/lvandeve/lodepng/lodepng.c
+        ../../../third_party/c/nothings/stb/stb_image.c
+        ../../../third_party/c/ibireme/yyjson/yyjson.c
+        ../../../common/c/wrapper/wrapper_yyjson.c
 )
 
 set_target_properties(raia_image PROPERTIES PREFIX "")

@@ -1,12 +1,12 @@
 #ifndef RAIA_LUA_RAIA_LUA_H
 #define RAIA_LUA_RAIA_LUA_H
 
-#include "../../../../share/c/wrapper/wrapper_yyjson.h"
 #include "static/static_plugin_hash.h"
 #include "static/static_func_hash.h"
 #include "util/util_file.h"
-#include "../../../../share/c/utility/export_api.h"
-#include "../../../../share/c/utility/platform.h"
+#include "../../../../common/c/utility/export_api.h"
+#include "../../../../common/c/utility/platform.h"
+#include "../../../../common/c/wrapper/wrapper_yyjson.h"
 
 #ifdef _WIN32
 #include <stdlib.h>

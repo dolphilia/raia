@@ -47,8 +47,8 @@ add_library(raia_lua SHARED
         src/static/static_func_hash.c
         src/util/util_file.c
         src/static/static_plugin_hash.c
-        ../../../thirdparty/c/ibireme/yyjson/yyjson.c
-        ../../../share/c/wrapper/wrapper_yyjson.c
+        ../../../third_party/c/ibireme/yyjson/yyjson.c
+        ../../../common/c/wrapper/wrapper_yyjson.c
 )
 
 set_target_properties(raia_lua PROPERTIES PREFIX "")

@@ -14,8 +14,8 @@ add_library(raia_duktape SHARED
         src/static/static_plugin_hash.c
         src/static/static_entrust.c
         src/static/static_entrust.h
-        ../../../thirdparty/c/ibireme/yyjson/yyjson.c
-        ../../../share/c/wrapper/wrapper_yyjson.c
+        ../../../third_party/c/ibireme/yyjson/yyjson.c
+        ../../../common/c/wrapper/wrapper_yyjson.c
 )
 
 set_target_properties(raia_duktape PROPERTIES PREFIX "")

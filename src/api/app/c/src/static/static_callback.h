@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 #include "GLFW/glfw3.h"
-#include "../../../../../thirdparty/c/ibireme/yyjson/yyjson.h"
+#include "../../../../../third_party/c/ibireme/yyjson/yyjson.h"
 
 typedef struct raia_callback_t{
     //error_callback

@@ -8,7 +8,7 @@
 #ifndef util_string_h
 #define util_string_h
 
-#include "../../../../../share/c/utility/platform.h"
+#include "../../../../../common/c/utility/platform.h"
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>

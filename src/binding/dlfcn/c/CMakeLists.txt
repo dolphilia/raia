@@ -11,8 +11,8 @@ set(CMAKE_C_STANDARD 11)
 
 add_library(raia_c_dlfcn SHARED
         src/raia_c_dlfcn.c
-        ../../../thirdparty/c/ibireme/yyjson/yyjson.c
-        ../../../share/c/wrapper/wrapper_yyjson.c
+        ../../../third_party/c/ibireme/yyjson/yyjson.c
+        ../../../common/c/wrapper/wrapper_yyjson.c
 )
 
 set_target_properties(raia_c_dlfcn PROPERTIES PREFIX "")

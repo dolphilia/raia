@@ -17,8 +17,8 @@ add_library(raia_glfw SHARED
 #add_executable(raia_glfw
         src/raia_glfw.c
         src/static/static_callback.c
-        ../../../thirdparty/c/ibireme/yyjson/yyjson.c
-        ../../../share/c/wrapper/wrapper_yyjson.c
+        ../../../third_party/c/ibireme/yyjson/yyjson.c
+        ../../../common/c/wrapper/wrapper_yyjson.c
 )
 
 # 現在のRPATH設定を取得（もしあれば）

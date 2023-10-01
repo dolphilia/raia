@@ -8,15 +8,15 @@ set(CMAKE_CXX_STANDARD 17)
 add_library(raia_imgui SHARED
 #add_executable(raia_imgui
         src/raia_imgui.cpp
-        ../../../thirdparty/cpp/ocornut/imgui/imgui.cpp
-        ../../../thirdparty/cpp/ocornut/imgui/imgui_impl_glfw.cpp
-        ../../../thirdparty/cpp/ocornut/imgui/imgui_impl_opengl3.cpp
-        ../../../thirdparty/cpp/ocornut/imgui/imgui_draw.cpp
-        ../../../thirdparty/cpp/ocornut/imgui/imgui_widgets.cpp
-        ../../../thirdparty/cpp/ocornut/imgui/imgui_tables.cpp
-        ../../../thirdparty/cpp/ocornut/imgui/imgui_demo.cpp
-        ../../../thirdparty/c/ibireme/yyjson/yyjson.c
-        ../../../share/c/wrapper/wrapper_yyjson.c)
+        ../../../third_party/cpp/ocornut/imgui/imgui.cpp
+        ../../../third_party/cpp/ocornut/imgui/imgui_impl_glfw.cpp
+        ../../../third_party/cpp/ocornut/imgui/imgui_impl_opengl3.cpp
+        ../../../third_party/cpp/ocornut/imgui/imgui_draw.cpp
+        ../../../third_party/cpp/ocornut/imgui/imgui_widgets.cpp
+        ../../../third_party/cpp/ocornut/imgui/imgui_tables.cpp
+        ../../../third_party/cpp/ocornut/imgui/imgui_demo.cpp
+        ../../../third_party/c/ibireme/yyjson/yyjson.c
+        ../../../common/c/wrapper/wrapper_yyjson.c)
 
 # 現在のRPATH設定を取得（もしあれば）
 get_property(CURRENT_RPATH TARGET raia_imgui PROPERTY INSTALL_RPATH)

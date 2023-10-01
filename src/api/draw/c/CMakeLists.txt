@@ -29,7 +29,8 @@ add_library(raia_draw SHARED
         src/util/util_pixel.c
         src/util/util_primitive3d.c
         src/util/util_utf8.c
-        ../../../thirdparty/c/ibireme/yyjson/yyjson.c
-        ../../../share/c/wrapper/wrapper_yyjson.c)
+        ../../../third_party/c/ibireme/yyjson/yyjson.c
+        ../../../common/c/wrapper/wrapper_yyjson.c
+)
 
 set_target_properties(raia_draw PROPERTIES PREFIX "")

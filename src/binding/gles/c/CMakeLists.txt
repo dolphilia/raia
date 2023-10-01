@@ -8,8 +8,8 @@ set(CMAKE_C_STANDARD 11)
 add_library(raia_gles SHARED
 #add_executable(raia_gles
         src/raia_gles.c
-        ../../../thirdparty/c/ibireme/yyjson/yyjson.c
-        ../../../share/c/wrapper/wrapper_yyjson.c)
+        ../../../third_party/c/ibireme/yyjson/yyjson.c
+        ../../../common/c/wrapper/wrapper_yyjson.c)
 
 target_link_libraries(raia_gles
         $<$<PLATFORM_ID:Darwin>: egl GLESv2>

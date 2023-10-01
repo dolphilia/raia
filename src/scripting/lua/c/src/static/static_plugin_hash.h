@@ -7,8 +7,7 @@
 
 #include <stdio.h>
 #include "../uthash/uthash.h"
-#include "../../../../../share/c/utility/platform.h"
-//#include "../duktape/duktape.h"
+#include "../../../../../common/c/utility/platform.h"
 
 #ifdef __WINDOWS__
 #define _CRT_SECURE_NO_WARNINGS

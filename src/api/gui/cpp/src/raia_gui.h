@@ -5,20 +5,20 @@
 #ifndef RAIA_GUI_RAIA_GUI_H
 #define RAIA_GUI_RAIA_GUI_H
 
-#include "../../../../thirdparty/cpp/ocornut/imgui/imgui.h"
-#include "../../../../thirdparty/cpp/ocornut/imgui/imgui_impl_glfw.h"
-#include "../../../../thirdparty/cpp/ocornut/imgui/imgui_impl_opengl3.h"
+#include "../../../../third_party/cpp/ocornut/imgui/imgui.h"
+#include "../../../../third_party/cpp/ocornut/imgui/imgui_impl_glfw.h"
+#include "../../../../third_party/cpp/ocornut/imgui/imgui_impl_opengl3.h"
 
 extern "C" {
 #include <time.h>
-#include "../../../../share/c/utility/export_api.h"
-#include "../../../../share/c/utility/platform.h"
-#include "../../../../share/c/wrapper/wrapper_yyjson.h"
+#include "../../../../common/c/utility/export_api.h"
+#include "../../../../common/c/utility/platform.h"
+#include "../../../../common/c/wrapper/wrapper_yyjson.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include "../../../../third_party/c/nothings/stb/stb_image.h"
+#include "util/util_math.h"
 #include "static/static_callback.h"
 #include "GLFW/glfw3.h" // Will drag system OpenGL headers
-#define STB_IMAGE_IMPLEMENTATION
-#include "../../../../thirdparty/c/nothings/stb/stb_image.h"
-#include "util/util_math.h"
 
 #ifdef __WINDOWS__
 #define GL_TEXTURE0 0x84C0

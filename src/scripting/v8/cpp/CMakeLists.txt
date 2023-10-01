@@ -36,8 +36,8 @@ add_library(raia_v8 SHARED
         src/typescript/typescript.cpp
         src/wrapper/wrapper_v8.cpp
         src/static/static_raia_config.cpp
-        ../../../thirdparty/c/ibireme/yyjson/yyjson.c
-        ../../../share/c/wrapper/wrapper_yyjson.c
+        ../../../third_party/c/ibireme/yyjson/yyjson.c
+        ../../../common/c/wrapper/wrapper_yyjson.c
 )
 
 add_compile_options(-pthread -fno-rtti)

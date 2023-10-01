@@ -1,9 +1,9 @@
 #ifndef RAIA_C_DLFCN_RAIA_C_DLFCN_H
 #define RAIA_C_DLFCN_RAIA_C_DLFCN_H
 
-#include "../../../../share/c/utility/export_api.h"
-#include "../../../../share/c/utility/platform.h"
-#include "../../../../share/c/wrapper/wrapper_yyjson.h"
+#include "../../../../common/c/utility/export_api.h"
+#include "../../../../common/c/utility/platform.h"
+#include "../../../../common/c/wrapper/wrapper_yyjson.h"
 
 #ifdef __WINDOWS__
 #define _CRT_SECURE_NO_WARNINGS
