@@ -7,7 +7,10 @@
 #include <assert.h>
 #include "../../../../third_party/c/ibireme/yyjson/yyjson.h"
 #include "../src/raia-startup.h"
+#include "../../../../third_party/c/sharedom/utest_h/utest.h"
 
-int main() {
-    //get_runtime_from_json()
-}
+//UTEST(a, b) {
+//
+//}
+
+UTEST_MAIN()

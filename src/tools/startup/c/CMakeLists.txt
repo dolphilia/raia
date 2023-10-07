@@ -10,9 +10,11 @@ add_executable(raia_startup
         ../../../third_party/c/ibireme/yyjson/yyjson.c
 )
 
+set_target_properties(raia_startup PROPERTIES PREFIX "")
+
+#-- test
+
 enable_testing()
 
-add_executable(raia_test test/test.c)
-add_test(NAME MyTest COMMAND raia_test)
-
-set_target_properties(raia_startup PROPERTIES PREFIX "")
+add_executable(test_raia_startup test/test.c)
+add_test(NAME MyTest COMMAND test_raia_startup)
