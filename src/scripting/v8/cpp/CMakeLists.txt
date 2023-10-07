@@ -28,13 +28,13 @@ endif()
 add_library(raia_v8 SHARED
 #add_executable(raia_v8
         src/raia_v8.cpp
-        src/util/util_file.c
-        src/static/static_func_hash.c
-        src/static/static_plugin_hash.c
-        src/static/static_entrust.c
         src/typescript/typescript.cpp
         src/wrapper/wrapper_v8.cpp
         src/static/static_raia_config.cpp
+        ../../../common/c/utility/util_file.c
+        ../../../common/c/static/static_func_hash.c
+        ../../../common/c/static/static_plugin_hash.c
+        ../../../common/c/static/static_entrust.c
         ../../../third_party/c/ibireme/yyjson/yyjson.c
         ../../../common/c/wrapper/wrapper_yyjson.c
 )

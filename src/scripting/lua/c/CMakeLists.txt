@@ -44,11 +44,11 @@ add_library(raia_lua SHARED
         src/list/list.c
         src/list/list_iterator.c
         src/list/list_node.c
-        src/static/static_func_hash.c
-        src/util/util_file.c
-        src/static/static_plugin_hash.c
-        ../../../third_party/c/ibireme/yyjson/yyjson.c
+        ../../../common/c/utility/util_file.c
+        ../../../common/c/static/static_func_hash.c
+        ../../../common/c/static/static_plugin_hash.c
         ../../../common/c/wrapper/wrapper_yyjson.c
+        ../../../third_party/c/ibireme/yyjson/yyjson.c
 )
 
 set_target_properties(raia_lua PROPERTIES PREFIX "")

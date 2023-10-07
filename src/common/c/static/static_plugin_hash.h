@@ -6,8 +6,8 @@
 #define RAIA_CORE_STATIC_PLUGIN_LOADER_H
 
 #include <stdio.h>
-#include "../../../../../third_party/c/troydhanson/uthash/uthash.h"
-#include "../../../../../common/c/utility/platform.h"
+#include "../../../third_party/c/troydhanson/uthash/uthash.h"
+#include "../utility/platform.h"
 
 #ifdef __WINDOWS__
 #define _CRT_SECURE_NO_WARNINGS
@@ -34,10 +34,18 @@ typedef struct raia_plugin_hash_t {
     UT_hash_handle hh;
 } raia_plugin_hash_t;
 
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
 void init_plugin_hash(void);
 void free_plugin_hash();
 void *add_plugin_hash(const char *name);
 void *find_plugin_hash(const char *name);
 void delete_plugin_hash(const char *name);
+
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
 
 #endif //RAIA_CORE_STATIC_PLUGIN_LOADER_H

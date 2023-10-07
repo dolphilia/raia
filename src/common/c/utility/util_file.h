@@ -5,8 +5,6 @@
 #ifndef RAIA_CORE_UTIL_FILE_H
 #define RAIA_CORE_UTIL_FILE_H
 
-#include "../../../../../common/c/utility/platform.h"
-
 #ifdef __WINDOWS__
 #define _CRT_SECURE_NO_WARNINGS
 #define _CRT_INTERNAL_NONSTDC_NAMES 1
@@ -18,6 +16,7 @@
 #include <stdint.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include "platform.h"
 
 #ifdef __WINDOWS__
 #include "limits.h"
@@ -49,6 +48,10 @@
 #define WCSNCPY(dest, src, count) wcsncpy(dest, src, count)
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
 void get_directories_recursive(const char *path, char ***directories, size_t *count);
 void get_directories(const char *path, char ***directories, size_t *count);
 char *get_current_path();
@@ -58,5 +61,9 @@ char *file_load_string(const char *filename);
 int file_save_string(const char *filename, const char *content);
 uint8_t *file_load_binary(const char *filename, size_t *file_size);
 int file_save_binary(const char *filename, uint8_t *data, size_t data_size);
+
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
 
 #endif //RAIA_CORE_UTIL_FILE_H

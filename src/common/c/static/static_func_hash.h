@@ -5,7 +5,7 @@
 #ifndef RAIA_CORE_STATIC_FUNC_HASH_H
 #define RAIA_CORE_STATIC_FUNC_HASH_H
 
-#include "../../../../../third_party/c/troydhanson/uthash/uthash.h"
+#include "../../../third_party/c/troydhanson/uthash/uthash.h"
 #include "static_plugin_hash.h"
 
 /**

@@ -9,12 +9,12 @@ extern "C" {
 #include "../../../../common/c/utility/export_api.h"
 #include "../../../../common/c/utility/platform.h"
 #include "../../../../common/c/wrapper/wrapper_yyjson.h"
+#include "../../../../common/c/static/static_plugin_hash.h"
+#include "../../../../common/c/static/static_func_hash.h"
+#include "../../../../common/c/static/static_entrust.h"
+#include "../../../../common/c/utility/util_file.h"
 }
 #include "static/static_raia_config.h"
-#include "static/static_plugin_hash.h"
-#include "static/static_func_hash.h"
-#include "static/static_entrust.h"
-#include "util/util_file.h"
 #include "typescript/typescript.h"
 
 

@@ -11,27 +11,7 @@
 #include <errno.h>
 #include <unistd.h>
 #include "../../../../third_party/c/ibireme/yyjson/yyjson.h"
-
-#ifdef _WIN32
-#define __WINDOWS__
-#endif
-
-#ifdef _WIN64
-#define __WINDOWS__
-#endif
-
-#ifdef __APPLE__
-
-#include "TargetConditionals.h"
-
-#ifdef TARGET_OS_MAC
-#define __MACOS__
-#endif
-#endif
-
-#ifdef __linux__
-#define __LINUX__
-#endif
+#include "../../../../common/c/utility/platform.h"
 
 #ifdef __WINDOWS__
 #define _CRT_SECURE_NO_WARNINGS
@@ -42,9 +22,7 @@
 #define raia_dlclose(handle) FreeLibrary(handle)
 #define SPRINTF(dest, format, ...) { size_t size = sizeof(dest) / sizeof(dest[0]); sprintf_s(dest, size, format, __VA_ARGS__); }
 #else
-
 #include <dlfcn.h>
-
 #define raia_handle_t void *
 #define raia_dlopen(file) dlopen(file, RTLD_LAZY)
 #define raia_dlsym(handle, name) dlsym(handle,name)
