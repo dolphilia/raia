@@ -2,16 +2,15 @@
 // Created by dolphilia on 2022/12/10.
 //
 
-#ifndef RAIA_CORE_RAIA_CORE_H
-#define RAIA_CORE_RAIA_CORE_H
+#ifndef RAIA_CORE_RAIA_STARTUP_H
+#define RAIA_CORE_RAIA_STARTUP_H
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
 #include <unistd.h>
-#include "../../../../thirdparty/c/ibireme/yyjson/yyjson.h"
-#include "tomlc99/toml.h"
+#include "../../../../third_party/c/ibireme/yyjson/yyjson.h"
 
 #ifdef _WIN32
 #define __WINDOWS__
@@ -55,4 +54,4 @@
 
 typedef char *(*raia_runtime_func_t)(int argc, char *argv[]);
 
-#endif //RAIA_CORE_RAIA_CORE_H
+#endif //RAIA_CORE_RAIA_STARTUP_H

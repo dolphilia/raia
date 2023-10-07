@@ -2,7 +2,7 @@
 // Created by dolphilia on 2022/12/10.
 //
 
-#include "raia-core.h"
+#include "raia-startup.h"
 
 void report_error(const char *msg, const char *file, int line, const char *func) {
     fprintf(stderr, "Error in function '%s' at %s:%d: %s\n", func, file, line, msg);
@@ -49,7 +49,6 @@ static void raia_alert_exec(const char *caption, const char *text) {
 }
 
 int main(int argc, char *argv[]) {
-
     yyjson_doc *doc = yyjson_read_file("config.json", 0, NULL, NULL);
     if (doc == NULL) {
         yyjson_doc_free(doc);

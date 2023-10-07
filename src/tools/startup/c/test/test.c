@@ -5,8 +5,8 @@
 #include "test.h"
 
 #include <assert.h>
-#include "../src/yyjson/yyjson.h"
-#include "../src/raia-core.h"
+#include "../../../../third_party/c/ibireme/yyjson/yyjson.h"
+#include "../src/raia-startup.h"
 
 int main() {
     //get_runtime_from_json()
