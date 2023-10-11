@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.26)
 project(raia_font C)
 
-include(../../../setting.cmake)
+include(${PROJECT_SOURCE_DIR}/../../../setting.cmake)
 
 set(CMAKE_C_STANDARD 11)
 

@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 3.26.4)
 project(raia_draw C)
 #set(CMAKE_C_COMPILER "gcc")
 
-include(../../../setting.cmake)
+include(${PROJECT_SOURCE_DIR}/../../../setting.cmake)
 
 set(CMAKE_C_STANDARD 11)
 

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.25)
 project(raia_mruby C)
 
-include(../../../setting.cmake)
+include(${PROJECT_SOURCE_DIR}/../../../setting.cmake)
 
 include_directories(${PROJECT_SOURCE_DIR}/include)
 link_directories(${PROJECT_SOURCE_DIR}/lib/
@@ -18,8 +18,8 @@ add_library(raia_mruby SHARED
 
 target_link_libraries(raia_mruby
         $<$<PLATFORM_ID:Darwin>: mruby>
-        $<$<PLATFORM_ID:Linux>: "-lmruby">
-        $<$<PLATFORM_ID:Windows>: "-lmruby" "-lwsock32" "-lws2_32">
+        $<$<PLATFORM_ID:Linux>: mruby>
+        $<$<PLATFORM_ID:Windows>: mruby wsock32 ws2_32>
         )
 
 set_target_properties(raia_mruby PROPERTIES PREFIX "")

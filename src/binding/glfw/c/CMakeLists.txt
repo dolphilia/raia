@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.25)
 project(raia_glfw C)
 
-include(../../../setting.cmake)
+include(${PROJECT_SOURCE_DIR}/../../../setting.cmake)
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)

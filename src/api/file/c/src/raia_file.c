@@ -1,5 +1,13 @@
 #include "raia_file.h"
 
+/*
+ * ファイルの存在を確認する
+ *
+ * - args
+ *   - path (string): ファイルのパス
+ * - rets
+ *   - result (int): ファイルの有無。存在する 1 、存在しない 0
+ */
 RAIA_API const char *raia_file_exist(const char *s) {
     joint_t *joint = joint_init_with_str(s);
     const char *path = joint_get_in_str(joint, "path");
@@ -10,6 +18,14 @@ RAIA_API const char *raia_file_exist(const char *s) {
     return joint_out_write(joint);
 }
 
+/*
+ * ファイルから文字列を読み込む
+ *
+ * - args
+ *   - path (string): ファイルのパス
+ * - rets
+ *   - result (string): 読み込んだ文字列
+ */
 RAIA_API const char *raia_file_load_string(const char *s) {
     joint_t *joint = joint_init_with_str(s);
     const char *path = joint_get_in_str(joint, "path");
@@ -20,6 +36,15 @@ RAIA_API const char *raia_file_load_string(const char *s) {
     return joint_out_write(joint);
 }
 
+/*
+ * ファイルに文字列を保存する
+ *
+ * - args
+ *   - path (string): ファイルのパス
+ *   - data (string): 保存する文字列
+ * - rets
+ *   - result (boolean): 成功 or 失敗
+ */
 RAIA_API const char *raia_file_save_string(const char *s) {
     joint_t *joint = joint_init_with_str(s);
     const char *path = joint_get_in_str(joint, "path");
@@ -31,6 +56,14 @@ RAIA_API const char *raia_file_save_string(const char *s) {
     return joint_out_write(joint);
 }
 
+/*
+ * ファイルからバイナリを読み込む
+ *
+ * - args
+ *   - path (string): ファイルのパス
+ * - rets
+ *   - none
+ */
 RAIA_API const char *raia_file_load_binary(const char *s) {
     joint_t *joint = joint_init_in_with_str(s);
     const char *path = joint_get_in_str(joint, "path");

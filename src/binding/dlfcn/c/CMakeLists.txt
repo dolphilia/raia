@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.26)
 project(raia_c_dlfcn C)
 
-include(../../../setting.cmake)
+include(${PROJECT_SOURCE_DIR}/../../../setting.cmake)
 
 #include_directories(${PROJECT_SOURCE_DIR}/../../../thirdparty/c)
 #include_directories(${PROJECT_SOURCE_DIR}/../../../share/c)

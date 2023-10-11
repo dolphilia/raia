@@ -1,5 +1,9 @@
-raia_core
-raia_gui
+
+build/**/*
+cmake/**/*
+third_party/**/*
+
+!dummy.txt
 
 #===
 
@@ -577,3 +581,4 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+build/macos/arm64/debug/test_raia_file

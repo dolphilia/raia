@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.25)
 project(raia_v8)
 
-include(../../../setting.cmake)
+include(${PROJECT_SOURCE_DIR}/../../../setting.cmake)
 
 include_directories(${PROJECT_SOURCE_DIR}/include)
 link_directories(${PROJECT_SOURCE_DIR}/lib)

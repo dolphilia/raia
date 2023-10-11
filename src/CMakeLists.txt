@@ -1,0 +1,17 @@
+enable_testing()
+cmake_minimum_required(VERSION 3.10)
+
+project(Raia)
+
+add_subdirectory(api/draw/c)
+add_subdirectory(api/file/c)
+add_subdirectory(api/font/c)
+add_subdirectory(api/image/c)
+add_subdirectory(binding/dlfcn/c)
+add_subdirectory(binding/gles/c)
+add_subdirectory(binding/glfw/c)
+add_subdirectory(binding/imgui/cpp)
+add_subdirectory(scripting/duktape/c)
+add_subdirectory(scripting/lua/c)
+add_subdirectory(scripting/mruby/c)
+add_subdirectory(scripting/v8/cpp)

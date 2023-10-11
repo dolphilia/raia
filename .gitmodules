@@ -1,0 +1,6 @@
+[submodule "src/third_party/cpp/google/extern/googletest"]
+	path = src/third_party/cpp/google/extern/googletest
+	url = https://github.com/google/googletest.git
+[submodule "src/third_party/cpp/google/googletest"]
+	path = src/third_party/cpp/google/googletest
+	url = https://github.com/google/googletest.git
