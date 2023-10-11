@@ -5,6 +5,9 @@ third_party/**/*
 
 !dummy.txt
 
+# ビルド用ディレクトリ
+/**/cmake-build-*/
+
 #===
 
 *.jsa
@@ -31,8 +34,6 @@ CMakeFiles/
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
-# ビルド用ディレクトリ
-cmake-build-*/
 
 #======================================
 # C Template
