@@ -15,59 +15,99 @@
 
 export class File {
     constructor (){}
+
+    /**
+     * ファイルの存在を確認する
+     * 
+     * @param {string} path - ファイルのパス
+     * @returns {int} exist - 0:存在しない 1:ファイルが存在 2:ディレクトリが存在 
+     */
     exist(path) {
-        var json_str = JSON.stringify({
+        var args = JSON.stringify({
             "path": path
         });
-        var ret = __Raia__.Lib.call("raia_file_exist", json_str);
-        return JSON.parse(ret).result;
+        var rets = __Raia__.Lib.call("raia_file_exist", args);
+        return JSON.parse(rets)["exist"];
     }
+
+    /**
+     * ファイルから文字列を読み込む
+     * 
+     * @param {string} path - ファイルのパス
+     * @returns {string} str - 読み込んだ文字列
+     */
     loadString(path) {
-        var json_str = JSON.stringify({
+        var args = JSON.stringify({
             "path": path
         });
-        var ret = __Raia__.Lib.call("raia_file_load_string", json_str);
-        return JSON.parse(ret).result;
+        var rets = __Raia__.Lib.call("raia_file_load_string", args);
+        return JSON.parse(rets)["str"];
     }
+
+    /**
+     * ファイルに文字列を保存する
+     * 
+     * @param {string} path - ファイルのパス
+     * @param {string} str - 保存する文字列
+     * @returns {boolean} is_success - 成功:true 失敗:false
+     */
     saveString(path, data) {
-        var json_str = JSON.stringify({
+        var args = JSON.stringify({
             "path": path,
-            "data": data
+            "str": data
         });
-        var ret = __Raia__.Lib.call("raia_file_save_string", json_str);
-        return JSON.parse(ret).result;
+        var rets = __Raia__.Lib.call("raia_file_save_string", args);
+        return JSON.parse(rets)["is_success"];
     }
+
+    /**
+     * ファイルからバイナリデータを読み込む
+     * 
+     * @param {string} path - ファイルのパス
+     * @returns {uintptr} binary - バイナリデータのポインタ整数
+     */
     loadBinary(path) {
-        var json_str = JSON.stringify({
+        var args = JSON.stringify({
             "path": path
         });
-        return __Raia__.Lib.call("raia_file_load_binary", json_str);
+        var rets = __Raia__.Lib.call("raia_file_load_binary", args);
+        return JSON.parse(rets)["binary"];
     }
-    saveBinary(path, data, size = null) {
-        var json_str = JSON.stringify({
+
+    /**
+     * ファイルにバイナリデータを保存する
+     * 
+     * @param {string} path - ファイルのパス
+     * @param {ArrayBuffer} binary - バイナリデータ
+     * @param {int} size - データのサイズ
+     * @returns {boolean} is_success - 成功:true 失敗:false
+     */
+    saveBinary(path, binary, size = null) {
+        var args = JSON.stringify({
             "path": path, 
-            "data": __Raia__.Core.arrayBufferToPointer(data),
+            "binary": __Raia__.Core.arrayBufferToPointer(binary),
             "size": size
         });
-        var ret = __Raia__.Lib.call("raia_file_save_binary", json_str);
-        return JSON.parse(ret).result;
+        var ret = __Raia__.Lib.call("raia_file_save_binary", args);
+        return JSON.parse(ret)["is_success"];
     }
+
     getCurPath() {
         var ret = __Raia__.Lib.call("raia_file_get_cur_path", "");
         return JSON.parse(ret).result;
     }
     getDirs(path) {
-        var json_str = JSON.stringify({
+        var args = JSON.stringify({
             "path": path
         });
-        var ret = __Raia__.Lib.call("raia_file_get_dirs", json_str)
+        var ret = __Raia__.Lib.call("raia_file_get_dirs", args)
         return JSON.parse(ret).result;
     }
     getDirsAll(path) {
-        var json_str = JSON.stringify({
+        var args = JSON.stringify({
             "path": path
         });
-        var ret = __Raia__.Lib.call("raia_file_get_dirs_all", json_str);
+        var ret = __Raia__.Lib.call("raia_file_get_dirs_all", args);
         return JSON.parse(ret).result;
     }
 }
