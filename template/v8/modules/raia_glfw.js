@@ -141,6 +141,9 @@ export class GLFW {
         var ret = lib.call("raia_glfw_init");
         return JSON.parse(ret).result;
     }
+    /**
+     * 
+     */
     terminate() {
         lib.call("raia_glfw_terminate");
     }

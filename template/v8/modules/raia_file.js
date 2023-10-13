@@ -23,10 +23,10 @@ export class File {
      * @returns {int} exist - 0:存在しない 1:ファイルが存在 2:ディレクトリが存在 
      */
     exist(path) {
-        var args = JSON.stringify({
+        const args = JSON.stringify({
             "path": path
         });
-        var rets = __Raia__.Lib.call("raia_file_exist", args);
+        const rets = __Raia__.Lib.call("raia_file_exist", args);
         return JSON.parse(rets)["exist"];
     }
 
@@ -37,10 +37,10 @@ export class File {
      * @returns {string} str - 読み込んだ文字列
      */
     loadString(path) {
-        var args = JSON.stringify({
+        const args = JSON.stringify({
             "path": path
         });
-        var rets = __Raia__.Lib.call("raia_file_load_string", args);
+        const rets = __Raia__.Lib.call("raia_file_load_string", args);
         return JSON.parse(rets)["str"];
     }
 
@@ -52,11 +52,11 @@ export class File {
      * @returns {boolean} is_success - 成功:true 失敗:false
      */
     saveString(path, data) {
-        var args = JSON.stringify({
+        const args = JSON.stringify({
             "path": path,
             "str": data
         });
-        var rets = __Raia__.Lib.call("raia_file_save_string", args);
+        const rets = __Raia__.Lib.call("raia_file_save_string", args);
         return JSON.parse(rets)["is_success"];
     }
 
@@ -67,10 +67,10 @@ export class File {
      * @returns {uintptr} binary - バイナリデータのポインタ整数
      */
     loadBinary(path) {
-        var args = JSON.stringify({
+        const args = JSON.stringify({
             "path": path
         });
-        var rets = __Raia__.Lib.call("raia_file_load_binary", args);
+        const rets = __Raia__.Lib.call("raia_file_load_binary", args);
         return JSON.parse(rets)["binary"];
     }
 
@@ -83,31 +83,33 @@ export class File {
      * @returns {boolean} is_success - 成功:true 失敗:false
      */
     saveBinary(path, binary, size = null) {
-        var args = JSON.stringify({
+        const args = JSON.stringify({
             "path": path, 
             "binary": __Raia__.Core.arrayBufferToPointer(binary),
             "size": size
         });
-        var ret = __Raia__.Lib.call("raia_file_save_binary", args);
+        const ret = __Raia__.Lib.call("raia_file_save_binary", args);
         return JSON.parse(ret)["is_success"];
     }
 
     getCurPath() {
-        var ret = __Raia__.Lib.call("raia_file_get_cur_path", "");
-        return JSON.parse(ret).result;
+        const rets = __Raia__.Lib.call("raia_file_get_cur_path", "");
+        return JSON.parse(rets).result;
     }
+
     getDirs(path) {
-        var args = JSON.stringify({
+        const args = JSON.stringify({
             "path": path
         });
-        var ret = __Raia__.Lib.call("raia_file_get_dirs", args)
-        return JSON.parse(ret).result;
+        const rets = __Raia__.Lib.call("raia_file_get_dirs", args)
+        return JSON.parse(rets).result;
     }
+    
     getDirsAll(path) {
-        var args = JSON.stringify({
+        const args = JSON.stringify({
             "path": path
         });
-        var ret = __Raia__.Lib.call("raia_file_get_dirs_all", args);
-        return JSON.parse(ret).result;
+        const rets = __Raia__.Lib.call("raia_file_get_dirs_all", args);
+        return JSON.parse(rets).result;
     }
 }

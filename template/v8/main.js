@@ -9,8 +9,10 @@ import {Std} from "raia_std";
 // vector dx, dy
 // 
 
+
 let std = new Std();
 std.print("@:"+std.rand(-100.11, 100.323));
+
 
 import {Image} from 'raia_image';
 import {Font} from 'raia_font';
@@ -21,7 +23,7 @@ import {Texture} from 'raia_texture';
 import {Draw} from 'raia_draw';
 
 var draw = new Draw();
-var window = new Window("RaiaEngine v0.4", 800, 600);
+var window = new Window("Raia v0.5", 800, 600);
 var frame = new Frame(window.id);
 var texture = new Texture(240, 240);
 
