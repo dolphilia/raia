@@ -42,7 +42,7 @@ set_target_properties(raia_glfw PROPERTIES
         INSTALL_RPATH "${CURRENT_RPATH}")
 
 target_link_libraries(raia_glfw
-        $<$<PLATFORM_ID:Darwin>: glfw>
+        $<$<PLATFORM_ID:Darwin>: glfw.3.4>
         $<$<PLATFORM_ID:Linux>: m dl EGL glfw GLESv2 X11 Xxf86vm Xrandr Xinerama Xcursor pthread Xi>
         $<$<PLATFORM_ID:Windows>: EGL glfw3 GLESv2>
         )

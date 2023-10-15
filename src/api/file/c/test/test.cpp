@@ -4,7 +4,6 @@
 
 #include "test.h"
 #include <iostream>
-#include <fmt/core.h>
 
 using json_t = nlohmann::json;
 

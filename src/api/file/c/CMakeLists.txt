@@ -35,6 +35,6 @@ add_executable(test_raia_file
         ../../../third_party/c/ibireme/yyjson/yyjson.c
         ../../../common/c/wrapper/wrapper_yyjson.c)
 
-target_link_libraries(test_raia_file fmt)
+#target_link_libraries(test_raia_file fmt)
 
 add_test(NAME UnitTest COMMAND test_raia_file)

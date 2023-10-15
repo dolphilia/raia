@@ -3,9 +3,6 @@ project(raia_v8)
 
 include(${PROJECT_SOURCE_DIR}/../../../setting.cmake)
 
-include_directories(${PROJECT_SOURCE_DIR}/include)
-link_directories(${PROJECT_SOURCE_DIR}/lib)
-
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "")
 
@@ -44,7 +41,7 @@ add_compile_options(-pthread -fno-rtti)
 #clang++ -I. -Iinclude samples/hello-world.cc -o hello_world -Lout.gn/arm64.release.sample/obj/  -std=c++17
 
 target_link_libraries(raia_v8
-        $<$<PLATFORM_ID:Darwin>: "-fno-rtti" "-lv8_monolith" "-lv8_libbase" "-lv8_libplatform" "-ldl" > #"-luv"
+        $<$<PLATFORM_ID:Darwin>: v8_monolith v8_libbase v8_libplatform dl> #"-luv"
         $<$<PLATFORM_ID:Linux>: >
         $<$<PLATFORM_ID:Windows>: v8_monolith winmm dbghelp >
         )
