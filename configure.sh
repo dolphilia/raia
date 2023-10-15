@@ -18,6 +18,7 @@ mkdir v8
 cd v8
 fetch v8
 cd v8
+
 git checkout refs/tags/11.7.115
 gclient sync -D
 python3 tools/dev/v8gen.py arm64.release
