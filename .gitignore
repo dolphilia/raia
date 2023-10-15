@@ -1,6 +1,7 @@
 
 build/**/*
 cmake/**/*
+sdk/**/*
 third_party/**/*
 
 !dummy.txt
