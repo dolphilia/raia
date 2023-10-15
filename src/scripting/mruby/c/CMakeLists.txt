@@ -3,12 +3,12 @@ project(raia_mruby C)
 
 include(${PROJECT_SOURCE_DIR}/../../../setting.cmake)
 
-include_directories(${PROJECT_SOURCE_DIR}/include)
-link_directories(${PROJECT_SOURCE_DIR}/lib/
-        $<$<PLATFORM_ID:Darwin>: ${PROJECT_SOURCE_DIR}/lib/macos>
-        $<$<PLATFORM_ID:Linux>: ${PROJECT_SOURCE_DIR}/lib/linux>
-        $<$<PLATFORM_ID:Windows>: ${PROJECT_SOURCE_DIR}/lib/windows>
-        )
+#include_directories(${PROJECT_SOURCE_DIR}/include)
+#link_directories(${PROJECT_SOURCE_DIR}/lib/
+#        $<$<PLATFORM_ID:Darwin>: ${PROJECT_SOURCE_DIR}/lib/macos>
+#        $<$<PLATFORM_ID:Linux>: ${PROJECT_SOURCE_DIR}/lib/linux>
+#        $<$<PLATFORM_ID:Windows>: ${PROJECT_SOURCE_DIR}/lib/windows>
+#        )
 
 set(CMAKE_C_STANDARD 11)
 

@@ -7,23 +7,6 @@
 
 using json_t = nlohmann::json;
 
-int test_file_exist(const char *path) {
-    const char *format = R"(
-        {
-            "path": "%s"
-        }
-    )";
-    char args[512];
-    snprintf(args, sizeof(args), format, path);
-    args[sizeof(args) - 1] = '\0';
-
-    const char *ret = raia_file_exist(args);
-
-    json_t json = json_t::parse(ret);
-    auto result = json["result"].get<int>();
-    return result;
-}
-
 UTEST(raia_file, raia_file_exist) {
     {
         // ファイルが存在しないパターン
@@ -34,7 +17,7 @@ UTEST(raia_file, raia_file_exist) {
         )";
         const char *ret = raia_file_exist(args);
         json_t json = json_t::parse(ret);
-        auto result = json["result"].get<int>();
+        auto result = json["exist"].get<int>();
         ASSERT_EQ(result, 0);
         free((void *) ret);
     }
@@ -47,13 +30,11 @@ UTEST(raia_file, raia_file_exist) {
         )";
         const char *ret = raia_file_exist(args);
         json_t json = json_t::parse(ret);
-        auto result = json["result"].get<int>();
+        auto result = json["exist"].get<int>();
         ASSERT_EQ(result, 1);
         free((void *) ret);
     }
 }
-
-//UTEST_MAIN();
 
 UTEST_STATE();
 
@@ -65,3 +46,5 @@ int main(int argc, const char *const argv[]) {
 
     return utest_main(argc, argv);
 }
+
+//UTEST_MAIN();
