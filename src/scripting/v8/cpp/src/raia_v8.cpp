@@ -323,6 +323,8 @@ int raia_v8_main(int argc, char* argv[]) {
     isolate->SetHostImportModuleDynamicallyCallback(reinterpret_cast<v8::HostImportModuleDynamicallyCallback>(import_dynamic_callback));
     isolate->SetHostInitializeImportMetaObjectCallback(import_meta);
 
+
+
     {
         auto isolate_scope = v8::Isolate::Scope(isolate);
         auto handle_scope = v8::HandleScope(isolate);
@@ -346,12 +348,12 @@ int raia_v8_main(int argc, char* argv[]) {
         set_local_fn(isolate, IO, "loadScript", raia_io_load_script);
         set_local_fn(isolate, IO, "saveScript", raia_io_save_script);
 
-        {
-            auto source = typescript();
-            auto source_str = local_str(isolate, source.c_str());
-            auto script = local_script(context, source_str);
-            script->Run(context).ToLocalChecked();
-        }
+//        {
+//            auto source = typescript();
+//            auto source_str = local_str(isolate, source.c_str());
+//            auto script = local_script(context, source_str);
+//            script->Run(context).ToLocalChecked();
+//        }
 
         init_raia_config("config.json");
         auto startup = get_raia_config().startup_script;
@@ -379,13 +381,11 @@ int raia_v8_main(int argc, char* argv[]) {
             new_filename = get_raia_config().startup_script;
             code = load_script((char *)get_raia_config().startup_script.c_str(), get_raia_config().root_dir, true);
         }
-
         auto ml_mod = import_load(code, (char *)new_filename.c_str(), context);
         auto mod = import_check(ml_mod, context);
         auto ret = import_exec(mod, context);
         auto ret_val = v8::String::Utf8Value(isolate, ret);
     }
-
     v8::V8::Dispose();
     v8::V8::DisposePlatform();
     delete create_params.array_buffer_allocator;
@@ -408,7 +408,7 @@ extern "C" RAIA_EXPORT char *init(int argc, char *argv[]) {
     return nullptr;
 }
 
-int _main(int argc, char* argv[]) {
+int main(int argc, char* argv[]) {
     init(argc, argv);
     return 0;
 }

@@ -37,17 +37,17 @@ RAIA_API const char *init(int argc, char *argv[]) {
     mrb_define_class_method(mrb, cls, "open", raia_lib_open, MRB_ARGS_REQ(1));
     mrb_define_class_method(mrb, cls, "add", raia_lib_add, MRB_ARGS_REQ(2));
 
-//    const char *filename = "main.mrb";
-//    FILE *file = fopen(filename, "r");
-//    if(file == NULL) {
-//        printf("%s file not open!\n", filename);
-//        return NULL;
-//    }
-//    mrb_load_file(mrb, file);
-//    fclose(file);
+    const char *filename = "main.mrb";
+    FILE *file = fopen(filename, "r");
+    if(file == NULL) {
+        printf("%s file not open!\n", filename);
+        return NULL;
+    }
+    mrb_load_file(mrb, file);
+    fclose(file);
 
-    const char *mruby_code = "MyClass.c_function('Hello from mruby!')";
-    mrb_value result = mrb_load_string(mrb, mruby_code);
+    //const char *mruby_code = "MyClass.c_function('Hello from mruby!')";
+    //mrb_value result = mrb_load_string(mrb, mruby_code);
     if (mrb->exc) {
         mrb_print_error(mrb);
         mrb_close(mrb);

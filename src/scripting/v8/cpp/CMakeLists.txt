@@ -22,8 +22,8 @@ endif()
 # -DV8_COMPRESS_POINTERS
 # -DV8_ENABLE_SANDBOX
 
-add_library(raia_v8 SHARED
-#add_executable(raia_v8
+#add_library(raia_v8 SHARED
+add_executable(raia_v8
         src/raia_v8.cpp
         src/typescript/typescript.cpp
         src/wrapper/wrapper_v8.cpp

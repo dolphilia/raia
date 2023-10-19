@@ -56,7 +56,6 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
     const char *runtime = get_runtime_from_json(doc);
-
     const char *extension;
 #ifdef __WINDOWS__
     extension = "dll";
@@ -73,7 +72,6 @@ int main(int argc, char *argv[]) {
     void *handle = load_dll_file(dll_file_name);
     raia_runtime_func_t raia_runtime_run = get_raia_runtime_func(handle, "init");
     yyjson_doc_free(doc);
-
     char * result = raia_runtime_run(argc, argv);
     if (result != NULL) {
         printf("%s \n", result);

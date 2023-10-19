@@ -1,7 +1,12 @@
 #!/bin/bash
+#
 cd third_party
+#
+# depot_tool のセットアップ
 git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
 export PATH=$PWD/depot_tools:$PATH
+#
+# ANGLE のセットアップ
 mkdir angle
 cd angle
 fetch angle
@@ -14,6 +19,8 @@ cp angle/out/Release/libEGL.dylib ../sdk/macos/arm64/lib
 cp angle/out/Release/libGLESv2.dylib ../sdk/macos/arm64/lib
 cp angle/out/Release/libthird_party_abseil-cpp_absl.dylib ../sdk/macos/arm64/lib
 rsync -av angle/include/ ../sdk/macos/arm64/include/
+#
+# V8 のセットアップ
 mkdir v8
 cd v8
 fetch v8
@@ -33,14 +40,14 @@ v8_use_external_startup_data = false
 v8_enable_pointer_compression = false
 v8_enable_31bit_smis_on_64bit_arch = false
 EOF
-
 ninja -C out.gn/arm64.release v8_monolith
-
 cd ../../
 cp v8/v8/out.gn/arm64.release/obj/libv8_monolith.a ../sdk/macos/arm64/lib
 cp v8/v8/out.gn/arm64.release/obj/libv8_libbase.a ../sdk/macos/arm64/lib
 cp v8/v8/out.gn/arm64.release/obj/libv8_libplatform.a ../sdk/macos/arm64/lib
 rsync -av v8/v8/include/ ../sdk/macos/arm64/include/
+#
+# GLFW のセットアップ
 git clone https://github.com/glfw/glfw.git
 cd glfw
 mkdir build
@@ -50,6 +57,8 @@ cmake --build .
 cd ../../
 cp glfw/build/src/libglfw.3.4.dylib ../sdk/macos/arm64/lib
 rsync -av glfw/include/ ../sdk/macos/arm64/include/
+#
+# mruby のセットアップ
 git clone https://github.com/mruby/mruby.git
 cd mruby
 make
@@ -57,3 +66,22 @@ cd ../
 cp mruby/build/host/lib/libmruby_core.a ../sdk/macos/arm64/lib
 cp mruby/build/host/lib/libmruby.a ../sdk/macos/arm64/lib
 rsync -av mruby/build/host/include/ ../sdk/macos/arm64/include/
+#
+# 共有ライブラリをsdkからbuildにコピーする
+# cd ../
+# (debugにも)
+cp sdk/macos/arm64/lib/libc++_chrome.dylib build/macos/arm64/debug
+cp sdk/macos/arm64/lib/libchrome_zlib.dylib build/macos/arm64/debug
+cp sdk/macos/arm64/lib/libEGL.dylib build/macos/arm64/debug
+cp sdk/macos/arm64/lib/libGLESv2.dylib build/macos/arm64/debug
+cp sdk/macos/arm64/lib/libglfw.3.4.dylib build/macos/arm64/debug
+cp sdk/macos/arm64/lib/libthird_party_abseil-cpp_absl.dylib build/macos/arm64/debug
+# (releaseにも)
+cp sdk/macos/arm64/lib/libc++_chrome.dylib build/macos/arm64/release
+cp sdk/macos/arm64/lib/libchrome_zlib.dylib build/macos/arm64/release
+cp sdk/macos/arm64/lib/libEGL.dylib build/macos/arm64/release
+cp sdk/macos/arm64/lib/libGLESv2.dylib build/macos/arm64/release
+cp sdk/macos/arm64/lib/libglfw.3.4.dylib build/macos/arm64/release
+cp sdk/macos/arm64/lib/libthird_party_abseil-cpp_absl.dylib build/macos/arm64/release
+#
+sh create_alias.sh
