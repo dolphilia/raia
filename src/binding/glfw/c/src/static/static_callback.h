@@ -89,7 +89,7 @@ typedef struct raia_callback_t{
     const char** drop_callback_paths;
 } raia_callback_t;
 
-void init_callback(void);
+void init_static_callback(void);
 
 void event_error_callback(int error, const char *message);
 void event_window_pos_callback(GLFWwindow *window, int x, int y);

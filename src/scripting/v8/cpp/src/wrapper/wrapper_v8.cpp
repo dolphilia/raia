@@ -4,64 +4,6 @@
 
 #include "wrapper_v8.h"
 
-//-- util function
-
-l_str_t local_str(isol_t *isolate, const char *data) {
-    return v8::String::NewFromUtf8(isolate, data, v8::NewStringType::kNormal).ToLocalChecked();
-}
-
-l_script_t local_script(l_ctx_t context, l_str_t str) {
-    return v8::Script::Compile(context, str).ToLocalChecked();
-}
-
-std::string get_str_v8_fn_args(const fci_val_t &args, int num) {
-    auto str = v8::String::Utf8Value(args.GetIsolate(), args[num]);
-    auto cppStr = std::string(*str);
-    return cppStr;
-}
-
-void set_int_v8_fn_ret(const fci_val_t &args, int result) {
-    args.GetReturnValue().Set(v8::Integer::New(args.GetIsolate(), result));
-}
-
-void set_local_obj(isol_t *isolate, l_obj_t obj, const char *key, l_val_t value) {
-    obj->Set(isolate->GetCurrentContext(), local_str(isolate, key), value).FromJust();
-}
-
-l_obj_t set_new_local_obj(isol_t *isolate, l_obj_t obj, const char *key) {
-    auto local_obj = v8::Object::New(isolate);
-    set_local_obj(isolate, obj, key, local_obj);
-    return local_obj;
-}
-
-l_str_t new_local_str(isol_t *isolate, const char *data) {
-    return v8::String::NewFromUtf8(isolate, "exports").ToLocalChecked();
-}
-
-l_fn_tmp_t new_fn_tmp(isol_t *isolate, fc_t callback = nullptr) {
-    return v8::FunctionTemplate::New(isolate, callback);
-}
-
-l_fn_t new_local_fn(isol_t *isolate, fc_t callback = nullptr) {
-    return v8::FunctionTemplate::New(isolate, callback)->GetFunction(isolate->GetCurrentContext()).ToLocalChecked();
-}
-
-ml_fn_t new_maybe_local_fn(l_ctx_t context, fc_t callback = nullptr) {
-    auto ret = v8::FunctionTemplate::New(context->GetIsolate(), callback)->GetFunction(context);
-    return ret;
-}
-
-void set_local_fn(isol_t *isolate, l_obj_t obj, const char *key, fc_t callback = nullptr) {
-    auto fn = new_local_fn(isolate, callback);
-    set_local_obj(isolate, obj, key, fn);
-}
-
-string_t new_str_from_val(isol_t *isolate, l_val_t val) {
-    auto v8_str = v8::String::Utf8Value(isolate, val);
-    auto cpp_str = std::string (*v8_str);
-    return cpp_str;
-}
-
 vec_str_t get_directories(const string_t &s) {
     vec_str_t r;
     r.push_back(s);
@@ -85,32 +27,6 @@ string_t file_exists_in_directories(const string_t &filename, const vec_str_t &d
     exit(EXIT_FAILURE);
 }
 
-std::string find_file_in_directories(const std::string& filename, const std::vector<std::string>& dirs) {
-    for(const auto& dir : dirs) {
-        for(const auto& p : std::filesystem::directory_iterator(dir)) {
-            if(!std::filesystem::is_directory(p) && p.path().filename() == filename) {
-                return p.path().string();
-            }
-        }
-    }
-    return "";
-}
-
-string_t append_extension(const char* filename, bool ts_mode) {
-    auto str = std::string(filename);
-    auto pos = str.rfind(".");
-    if (ts_mode) {
-        if (pos == std::string::npos || pos == 0 || str.substr(pos) != ".ts") {
-            str += ".ts";
-        }
-    } else {
-        if (pos == std::string::npos || pos == 0 || str.substr(pos) != ".js") {
-            str += ".js";
-        }
-    }
-    return str;
-}
-
 char* load_script(char filename[], const string_t& root_dir , bool is_startup) {
     ifstream_t file;
     file.open(filename, std::ifstream::ate);
@@ -128,38 +44,90 @@ char* load_script(char filename[], const string_t& root_dir , bool is_startup) {
     return contents;
 }
 
-bool write_script(const std::string& filename, const std::string& code) {
-    std::ofstream outFile(filename);
-    if (!outFile) {
-        return false;
-    }
-    outFile << code;
-    outFile.close();
-    return true;
+ml_mod_t import_load(char code[], char name[], l_ctx_t context) {
+    auto isolate = context->GetIsolate();
+    auto v8code = v8::String::NewFromUtf8(isolate, code).ToLocalChecked();
+    auto options = v8::PrimitiveArray::New(isolate, HostDefinedOptions::kLength);
+    options->Set(isolate, HostDefinedOptions::kType, v8::Number::New(isolate, ScriptType::kModule));
+    v8::ScriptOrigin origin(isolate, v8::String::NewFromUtf8(isolate, name).ToLocalChecked(), 0, 0, false, -1,
+                            v8::Local<v8::Value>(), false, false, true, options);
+    auto context_scope = v8::Context::Scope(context);
+    auto source = v8::ScriptCompiler::Source(v8code, origin);
+    auto mod = v8::ScriptCompiler::CompileModule(isolate, &source);
+    return mod;
 }
 
-std::string replace_extension(const std::string& filepath, const std::string& new_extension) {
-    std::string::size_type i = filepath.rfind('.', filepath.length());
-    if (i != std::string::npos) {
-        return(filepath.substr(0, i) + new_extension);
+l_mod_t import_check(ml_mod_t maybeModule, l_ctx_t context) {
+    l_mod_t mod;
+    if (!maybeModule.ToLocal(&mod)) {
+        printf("Error loading module!\n");
+        exit(EXIT_FAILURE);
     }
-    return filepath;
+    auto result = mod->InstantiateModule(context,  reinterpret_cast<v8::Module::ResolveModuleCallback>(import_static_callback));
+    if (result.IsNothing()) {
+        printf("\nCan't instantiate module.\n");
+        exit(EXIT_FAILURE);
+    }
+    return mod;
 }
 
-char* load_module_script(char filename[], const string_t& root_dir, bool is_startup, bool ts_mode) {
-    auto filename_extension = append_extension(filename, ts_mode);
-    auto directories = get_directories(root_dir);
+l_val_t import_exec(l_mod_t mod, l_ctx_t context, bool nsObject) {
+    auto isolate = context->GetIsolate();
+    auto try_catch = v8::TryCatch(isolate);
+    auto maybe_result = mod->Evaluate(context);
+    auto retValue = v8::Local<v8::Value>();
+    if (maybe_result.IsEmpty()) {
+        auto error = v8::String::Utf8Value(isolate, try_catch.Exception());
+        auto message = try_catch.Message();
+        if (!message.IsEmpty()) {
+            auto filename = v8::String::Utf8Value(isolate, message->GetScriptOrigin().ResourceName());
+            auto msg = v8::String::Utf8Value(isolate, message->Get());
+            fprintf(stderr, "%s:%d: %s\n", *filename, message->GetLineNumber(context).FromJust(), *msg);
+        } else {
+            fprintf(stderr, "%s\n", *error);
+        }
+    } else {
+        retValue = maybe_result.ToLocalChecked();
+    }
+    if (nsObject) {
+        return mod->GetModuleNamespace();
+    } else {
+        return retValue;
+    }
+}
+
+ml_mod_t import_static_callback(l_ctx_t context, l_str_t specifier, l_mod_t referrer) {
+    auto str = v8::String::Utf8Value(context->GetIsolate(), specifier);
+    auto filename_extension = std::string(*str) + ".js";
+    auto directories = get_directories(get_raia_config().root_dir);
     auto path = file_exists_in_directories(filename_extension, directories);
-    return load_script((char *) path.c_str(),root_dir, is_startup);
+    auto filepath = (char *) path.c_str();
+    auto filename = (char *) path.c_str();
+    auto new_filename = filename;
+    auto code = load_script(filename, filepath, false);
+    return import_load(code, (char *) new_filename, context);
 }
 
-void set_module_fn(l_ctx_t context, l_obj_t obj, const char *name, fc_t callback = nullptr) {
-    auto local_fn = new_maybe_local_fn(context, callback).ToLocalChecked();
-    obj->Set(context, local_str(context->GetIsolate(), name), local_fn).FromJust();
+ml_promise_t import_dynamic_callback(l_ctx_t context, l_som_t referrer, l_str_t specifier) {
+    auto resolver = v8::Promise::Resolver::New(context).ToLocalChecked();
+    auto promise = v8::MaybeLocal<v8::Promise>(resolver->GetPromise());
+    auto name = v8::String::Utf8Value(context->GetIsolate(), specifier);
+    auto filename_extension = std::string(*name) + ".js";
+    auto directories = get_directories(get_raia_config().root_dir);
+    auto path = file_exists_in_directories(filename_extension, directories);
+    auto filepath = (char *) path.c_str();
+    auto filename = (char *) path.c_str();
+    char *code = load_script(filename, filepath, false);
+    auto ml_mod = import_load(code, *name, context);
+    auto mod = import_check(ml_mod, context);
+    auto retValue = import_exec(mod, context, true);
+    resolver->Resolve(context, retValue);
+    return promise;
 }
 
-l_obj_t set_module_obj(l_ctx_t context, l_obj_tmp_t obj_tmp, l_obj_t obj, const char *name) {
-    auto Core = obj_tmp->NewInstance(context).ToLocalChecked();
-    obj->Set(context, local_str(context->GetIsolate(), name), Core).FromJust();
-    return Core;
+void import_meta(v8::Local<v8::Context> context, v8::Local<v8::Module> module, v8::Local<v8::Object> meta) {
+    auto isolate = context->GetIsolate();
+    auto key = v8::String::NewFromUtf8(isolate, "").ToLocalChecked();
+    auto val = v8::String::NewFromUtf8(isolate, "").ToLocalChecked();
+    meta->Set(context, key, val);
 }

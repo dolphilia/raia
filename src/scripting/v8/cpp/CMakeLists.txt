@@ -22,18 +22,20 @@ endif()
 # -DV8_COMPRESS_POINTERS
 # -DV8_ENABLE_SANDBOX
 
-#add_library(raia_v8 SHARED
-add_executable(raia_v8
+add_library(raia_v8 SHARED
+#add_executable(raia_v8
         src/raia_v8.cpp
-        src/typescript/typescript.cpp
         src/wrapper/wrapper_v8.cpp
         src/static/static_raia_config.cpp
         ../../../common/c/utility/util_file.c
         ../../../common/c/static/static_func_hash.c
         ../../../common/c/static/static_plugin_hash.c
-        ../../../common/c/static/static_entrust.c
         ../../../third_party/c/ibireme/yyjson/yyjson.c
         ../../../common/c/wrapper/wrapper_yyjson.c
+        ../../../common/c/static/static_args_hash.c
+        ../../../common/c/static/static_args_hash.h
+        src/wrapper/wrapper_ffi.cpp
+        src/wrapper/wrapper_ffi.h
 )
 
 add_compile_options(-pthread -fno-rtti)
@@ -41,7 +43,7 @@ add_compile_options(-pthread -fno-rtti)
 #clang++ -I. -Iinclude samples/hello-world.cc -o hello_world -Lout.gn/arm64.release.sample/obj/  -std=c++17
 
 target_link_libraries(raia_v8
-        $<$<PLATFORM_ID:Darwin>: v8_monolith v8_libbase v8_libplatform dl> #"-luv"
+        $<$<PLATFORM_ID:Darwin>: v8_monolith v8_libbase v8_libplatform dl ffi> #"-luv"
         $<$<PLATFORM_ID:Linux>: >
         $<$<PLATFORM_ID:Windows>: v8_monolith winmm dbghelp >
         )

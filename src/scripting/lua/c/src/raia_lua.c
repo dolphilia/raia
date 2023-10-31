@@ -7,8 +7,8 @@
 
 int my_c_function(lua_State* L) {
     // 関数の引数を取得
-    int arg1 = luaL_checkinteger(L, 1);
-    int arg2 = luaL_checkinteger(L, 2);
+    int arg1 = (int)luaL_checkinteger(L, 1);
+    int arg2 = (int)luaL_checkinteger(L, 2);
 
     // 何かしらの計算
     int result = arg1 + arg2;

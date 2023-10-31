@@ -6,7 +6,7 @@
 
 static raia_callback_t *raia_callback;
 
-void init_callback(void) {
+void init_static_callback(void) {
     raia_callback = (raia_callback_t *)malloc(sizeof(raia_callback_t));
 }
 

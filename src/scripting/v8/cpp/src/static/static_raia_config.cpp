@@ -4,8 +4,6 @@
 
 #include "static_raia_config.h"
 
-#include <utility>
-
 static raia_config_t raia_config;
 
 void init_raia_config(const char *json_file_name) {

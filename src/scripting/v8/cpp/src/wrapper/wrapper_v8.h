@@ -11,6 +11,7 @@
 #include <vector>
 #include <unordered_map>
 #include "v8.h"
+#include "../static/static_raia_config.h"
 
 //-- define
 
@@ -83,12 +84,40 @@ string_t new_str_from_val(isol_t *isolate, l_val_t val);
 vec_str_t get_directories(const std::string& s);
 string_t file_exists_in_directories(const std::string& filename, const vec_str_t& directories);
 string_t find_file_in_directories(const std::string& filename, const vec_str_t& dirs);
-string_t append_extension(const char* filename, bool ts_mode);
 char* load_script(char filename[], const string_t& root_dir, bool is_startup);
-bool write_script(const std::string& filename, const std::string& code);
-std::string replace_extension(const std::string& filepath, const std::string& new_extension);
-char* load_module_script(char filename[], const string_t& root_dir, bool is_startup, bool ts_mode);
-void set_module_fn(l_ctx_t context, l_obj_t obj, const char *name, fc_t callback);
-l_obj_t set_module_obj(l_ctx_t context, l_obj_tmp_t obj_tmp, l_obj_t obj, const char *name);
+//bool write_script(const std::string& filename, const std::string& code);
+//std::string replace_extension(const std::string& filepath, const std::string& new_extension);
+//char* load_module_script(char filename[], const string_t& root_dir, bool is_startup, bool ts_mode);
+//void set_module_fn(l_ctx_t context, l_obj_t obj, const char *name, fc_t callback);
+//l_obj_t set_module_obj(l_ctx_t context, l_obj_tmp_t obj_tmp, l_obj_t obj, const char *name);
+
+// Loads a module; line #187
+v8::MaybeLocal<v8::Module> import_load(char code[],
+                                       char name[],
+                                       v8::Local<v8::Context> cx);
+
+// Check, if module isn't empty (or pointer to it); line #221
+v8::Local<v8::Module> import_check(v8::MaybeLocal<v8::Module> maybeModule,
+                                   v8::Local<v8::Context> cx);
+
+// Executes module; line #247
+v8::Local<v8::Value> import_exec(v8::Local<v8::Module> mod,
+                                 v8::Local<v8::Context> cx,
+                                 bool nsObject = false);
+
+// Callback for static import; line #270
+v8::MaybeLocal<v8::Module> import_static_callback(v8::Local<v8::Context> context,
+                                                  v8::Local<v8::String> specifier,
+                                                  v8::Local<v8::Module> referrer);
+
+// Callback for dynamic import; line #285
+v8::MaybeLocal<v8::Promise> import_dynamic_callback(v8::Local<v8::Context> context,
+                                                    v8::Local<v8::ScriptOrModule> referrer,
+                                                    v8::Local<v8::String> specifier);
+
+// Callback for module metadata; line #310
+void import_meta(v8::Local<v8::Context> context,
+                 v8::Local<v8::Module> module,
+                 v8::Local<v8::Object> meta);
 
 #endif //RAIA_V8_WRAPPER_V8_H

@@ -7,7 +7,7 @@
 
 #include "../../../third_party/c/ibireme/yyjson/yyjson.h"
 
-typedef struct jsons_t {
+typedef struct json_t {
     yyjson_doc *in_doc;
     yyjson_val *in_root;
     yyjson_mut_doc *out_doc;

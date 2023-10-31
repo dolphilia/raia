@@ -1,6 +1,120 @@
 import {Std} from "raia_std";
 
+// ffi(
+//     "func_name", 
+//     inout, type, value,
+//     ...
+// )
+//
+/*
+ffi(
+    "add",
+    false, "int", 5,
+    false, "int", 10
+)
+*/
+let std = new Std();
 
+var handle = __Raia__.Lib.open("libminilib");
+__Raia__.Lib.add(handle, "plus");
+__Raia__.Lib.add(handle, "minus");
+__Raia__.Lib.add(handle, "hello");
+__Raia__.Lib.add(handle, "put");
+__Raia__.Lib.add(handle, "int_array");
+__Raia__.Lib.add(handle, "add_struct");
+
+var num_struct = __Raia__.Core.makeStruct(
+    "sint", 1000,
+    "sint", 2000
+);
+
+var result_value =  __Raia__.Lib.ffi(
+    "add_struct", // 関数名
+    "sint", // 戻り値の型
+    "struct", "point", num_struct
+);
+
+std.print("result::::"+result_value);
+
+__Raia__.Core.deleteStruct(num_struct);
+
+
+
+// var structTypes = __Raia__.Core.makeStructTypes(
+//     "sint", "100",
+//     "double", "123.456",
+//     "string", "HelloStruct!"
+// );
+
+//    for(var i=0; i<100; i++) {
+
+// var struct = __Raia__.Core.makeStruct(
+//     "sint", "100",
+//     "double", "123.456"
+// );
+
+// std.print("struct.types: "+struct.types);
+// std.print("struct.binary: "+struct.binary);
+
+// __Raia__.Core.deleteStruct(struct);
+
+
+
+//    struct=null;
+//    }
+
+
+
+// std.print("struct.types: "+struct.types);
+// std.print("struct.binary: "+struct.binary);
+
+
+
+
+let int32Array = new Int32Array([1, 2, 3, 4, 5]);
+let int32pointer = __Raia__.Core.arrayBufferToPointer(int32Array.buffer);
+
+__Raia__.Lib.ffi(
+    "int_array", // 関数名
+    "void", // 戻り値の型
+    "pointer", "num", int32pointer, // 型, 引数名, 値
+    "sint", "size", 5
+);
+
+var ret;
+
+ret = __Raia__.Lib.ffi(
+    "plus", // 関数名
+    "sint", // 戻り値の型
+    "sint", "x", 100, // 型, 引数名, 値
+    "sint", "y", 200
+);
+
+std.print("return value:" + ret);
+
+ret = __Raia__.Lib.ffi(
+    "minus", // 関数名
+    "sint", // 戻り値の型
+    "sint", "x", 100, // 型, 引数名, 値
+    "sint", "y", 200 // ...
+);
+
+std.print("return value:" + ret);
+
+ret = __Raia__.Lib.ffi(
+    "hello", // 関数名
+    "void" // 戻り値の型
+);
+
+std.print("return value:" + ret);
+
+ret = __Raia__.Lib.ffi(
+    "put", // 関数名
+    "void", // 戻り値の型
+    "string", "str", "PutFunction"
+);
+
+std.print("return value:" + ret);
 
 // segment start_x, start_y, end_x, end_y
 // point x, y
@@ -10,7 +124,8 @@ import {Std} from "raia_std";
 // 
 
 
-let std = new Std();
+
+std.print("NEW");
 std.print("@:"+std.rand(-100.11, 100.323));
 
 
@@ -46,23 +161,15 @@ window.onUpdate(()=>{
     window.clear(0.45, 0.55, 0.6, 1.0);
     window.draw();
 
-    //draw.noiseRGB_CPU(window.pixels, 800, 600);
-
-    //window.glfw.setWindowTitle(window.id, "FPS:"+frame.imgui.getFramerate());
-    frame.start();
-    frame.imgui.setNextWindowBgAlpha(0.35);
-    var flags = 0;
-        flags |= frame.imgui.WindowFlags.NoTitleBar;
-        flags |= frame.imgui.WindowFlags.NoResize;
-    frame.imgui.begin("日本語", null, flags);
-    //frame.show("日本語", ()=>{
-        //frame.imgui.pushStyleColorVec4(0, 1, 1, 1, 1.0);
-        frame.text("フレームレート");
-        frame.imgui.separator();
-        frame.text(""+frame.imgui.getFramerate());
-        //frame.imgui.popStyleColor();
-        //frame.drawImage(texture);
-    //});
-    frame.imgui.end();
-    frame.render();
+    // frame.start();
+    // frame.imgui.setNextWindowBgAlpha(0.35);
+    // var flags = 0;
+    //     flags |= frame.imgui.WindowFlags.NoTitleBar;
+    //     flags |= frame.imgui.WindowFlags.NoResize;
+    // frame.imgui.begin("日本語", null, flags);
+    // frame.text("フレームレート");
+    // frame.imgui.separator();
+    // frame.text(""+frame.imgui.getFramerate());
+    // frame.imgui.end();
+    // frame.render();
 });
