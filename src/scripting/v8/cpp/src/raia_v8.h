@@ -15,6 +15,7 @@ extern "C" {
 #include "../../../../common/c/utility/util_file.h"
 #include "../../../../common/c/static/static_args_hash.h"
 #include "ffi.h"
+#include "../../../../common/c/wrapper/wrapper_ffi.h"
 }
 #include <iostream>
 #include <fstream>
@@ -23,7 +24,6 @@ extern "C" {
 #include "libplatform/libplatform.h"
 #include "v8.h"
 #include "wrapper/wrapper_v8.h"
-#include "wrapper/wrapper_ffi.h"
 #include "static/static_raia_config.h"
 
 #ifdef _WIN32

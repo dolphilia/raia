@@ -156,27 +156,17 @@ void raia_lib_ffi(const v8_args_t &args) {
             ffi_args_values[count] = add_args_hash_to_pointer(name.c_str(), value);
             ffi_args_type[count] = &ffi_type_pointer;
         } else if (arg_type == "struct") {
-
             auto name = v8_args_to_str(args, i + 1);
-            //v8::Local<v8::Array> inputArray = v8::Local<v8::Array>::Cast(args[i + 2]);
-            //ffi_type **struct_types = (ffi_type **)(uintptr_t)inputArray->Get(args.GetIsolate()->GetCurrentContext(), 0).ToLocalChecked()->NumberValue(args.GetIsolate()->GetCurrentContext()).FromJust();
-            //void *struct_binary = (void *)(uintptr_t)inputArray->Get(args.GetIsolate()->GetCurrentContext(), 1).ToLocalChecked()->NumberValue(args.GetIsolate()->GetCurrentContext()).FromJust();
-
             v8::Local<v8::Object> obj = args[i + 2]->ToObject(args.GetIsolate()->GetCurrentContext()).ToLocalChecked();
             ffi_type **struct_types = (ffi_type **)(uintptr_t)obj->Get(args.GetIsolate()->GetCurrentContext(), v8::String::NewFromUtf8(args.GetIsolate(), "types", v8::NewStringType::kNormal).ToLocalChecked()).ToLocalChecked()->NumberValue(args.GetIsolate()->GetCurrentContext()).FromJust();
             void *struct_binary = (void *)(uintptr_t)obj->Get(args.GetIsolate()->GetCurrentContext(), v8::String::NewFromUtf8(args.GetIsolate(), "binary", v8::NewStringType::kNormal).ToLocalChecked()).ToLocalChecked()->NumberValue(args.GetIsolate()->GetCurrentContext()).FromJust();
-
-
-
             ffi_type st_type;
             st_type.size = 0;
             st_type.alignment = 0;
             st_type.type = FFI_TYPE_STRUCT;
             st_type.elements = struct_types;
-            ffi_args_values[count] = add_args_hash_to_pointer(name.c_str(), struct_binary); //TODO ここでデータが破損する
+            ffi_args_values[count] = add_args_hash_to_struct(name.c_str(), struct_binary); //TODO ここでデータが破損する
             ffi_args_type[count] = &st_type;
-
-
         } else {
             fprintf(stderr, "Unknown type: %s\n", arg_type.c_str());
             exit(1);
@@ -506,6 +496,11 @@ void raia_core_ptr_to_buf(const v8_args_t &args) {
     v8_rets_to_buf(args, buf);
 }
 
+void raia_gc_free(const v8_args_t &args) {
+    args.GetIsolate()->LowMemoryNotification(); // メモリ不足時にガベージコレクションを強制的に実行する
+    v8_rets_to_null(args);
+}
+
 int raia_v8_main(int argc, char *argv[]) {
     v8_init();
     v8_isolate_init(isolate, isolate_params);
@@ -518,15 +513,18 @@ int raia_v8_main(int argc, char *argv[]) {
     v8_set_func(isolate, Core, "pointerToArrayBuffer", raia_core_ptr_to_buf); // ptrToBuf
     v8_set_func(isolate, Core, "arrayBufferToPointer", raia_core_buf_to_ptr); // bufToPtr
     v8_set_func(isolate, Core, "makeStruct", raia_core_make_struct);
-    v8_set_func(isolate, Core, "deleteStruct", raia_core_delete_struct);
-    v8_set_func(isolate, Core, "deletePointer", raia_core_delete_pointer);
+    v8_set_func(isolate, Core, "deleteStruct", raia_core_delete_struct);   // delStruct
+    v8_set_func(isolate, Core, "deletePointer", raia_core_delete_pointer); // delPtr
     v8_set_obj(isolate, Lib, Raia, "Lib");
     v8_set_func(isolate, Lib, "open", raia_lib_open);
     v8_set_func(isolate, Lib, "close", raia_lib_close);
     v8_set_func(isolate, Lib, "closeAll", raia_lib_close_all);
     v8_set_func(isolate, Lib, "add", raia_lib_add);
     v8_set_func(isolate, Lib, "call", raia_lib_call);
+    v8_set_func(isolate, Lib, "callWithJSON", raia_lib_call);
     v8_set_func(isolate, Lib, "ffi", raia_lib_ffi);
+    v8_set_obj(isolate, GC, Raia, "GC");
+    v8_set_func(isolate, GC, "free", raia_gc_free);
     v8_start();
     v8_destroy(isolate_params);
     return 0;

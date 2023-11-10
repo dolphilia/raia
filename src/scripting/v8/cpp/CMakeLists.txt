@@ -34,8 +34,8 @@ add_library(raia_v8 SHARED
         ../../../common/c/wrapper/wrapper_yyjson.c
         ../../../common/c/static/static_args_hash.c
         ../../../common/c/static/static_args_hash.h
-        src/wrapper/wrapper_ffi.cpp
-        src/wrapper/wrapper_ffi.h
+        ../../../common/c/wrapper/wrapper_ffi.c
+        ../../../common/c/wrapper/wrapper_ffi.h
 )
 
 add_compile_options(-pthread -fno-rtti)

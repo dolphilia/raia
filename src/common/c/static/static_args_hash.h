@@ -109,6 +109,7 @@ void *add_args_hash_to_slong(const char *name, long value);
 void *add_args_hash_to_longdouble(const char *name, long double value);
 void *add_args_hash_to_string(const char *name, const char * value);
 void *add_args_hash_to_pointer(const char *name, void *value);
+void *add_args_hash_to_struct(const char *name, void * value);
 //void *add_args_hash_to_complex_float(const char *name, _Complex float value);
 //void *add_args_hash_to_complex_double(const char *name, _Complex double value);
 //void *add_args_hash_to_complex_longdouble(const char *name, _Complex long double value);

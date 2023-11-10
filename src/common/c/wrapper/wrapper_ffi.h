@@ -5,7 +5,7 @@
 #ifndef RAIA_V8_WRAPPER_FFI_H
 #define RAIA_V8_WRAPPER_FFI_H
 
-extern "C" {
+//extern "C" {
 #include <stdio.h>
 #include <stdlib.h>
 #include "ffi.h"
@@ -18,6 +18,6 @@ do {                                                               \
 } while(0)
 
 void ffi_prep_cif_ext(ffi_cif *cif, ffi_abi abi, unsigned int nargs, ffi_type *rtype, ffi_type **atypes);
-}
+//}
 
 #endif //RAIA_V8_WRAPPER_FFI_H

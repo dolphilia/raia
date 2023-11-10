@@ -231,6 +231,13 @@ void *add_args_hash_to_pointer(const char *name, void * value) {
     args_key_t key = {.type = TYPE_POINTER, .data = {.value_pointer = value}};
     add_args_name_hash(key, name);
     args_name_hash_t *hash = find_args_name_hash(name);
+    return &hash->key.data.value_pointer;
+}
+
+void *add_args_hash_to_struct(const char *name, void * value) {
+    args_key_t key = {.type = TYPE_POINTER, .data = {.value_pointer = value}};
+    add_args_name_hash(key, name);
+    args_name_hash_t *hash = find_args_name_hash(name);
     return hash->key.data.value_pointer;
 }
 

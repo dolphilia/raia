@@ -34,39 +34,9 @@ var result_value =  __Raia__.Lib.ffi(
     "struct", "point", num_struct
 );
 
-std.print("result::::"+result_value);
+std.print("result:"+result_value);
 
 __Raia__.Core.deleteStruct(num_struct);
-
-
-
-// var structTypes = __Raia__.Core.makeStructTypes(
-//     "sint", "100",
-//     "double", "123.456",
-//     "string", "HelloStruct!"
-// );
-
-//    for(var i=0; i<100; i++) {
-
-// var struct = __Raia__.Core.makeStruct(
-//     "sint", "100",
-//     "double", "123.456"
-// );
-
-// std.print("struct.types: "+struct.types);
-// std.print("struct.binary: "+struct.binary);
-
-// __Raia__.Core.deleteStruct(struct);
-
-
-
-//    struct=null;
-//    }
-
-
-
-// std.print("struct.types: "+struct.types);
-// std.print("struct.binary: "+struct.binary);
 
 
 
@@ -81,6 +51,8 @@ __Raia__.Lib.ffi(
     "sint", "size", 5
 );
 
+std.print("---");
+
 var ret;
 
 ret = __Raia__.Lib.ffi(
@@ -89,6 +61,8 @@ ret = __Raia__.Lib.ffi(
     "sint", "x", 100, // 型, 引数名, 値
     "sint", "y", 200
 );
+
+
 
 std.print("return value:" + ret);
 
@@ -172,4 +146,5 @@ window.onUpdate(()=>{
     // frame.text(""+frame.imgui.getFramerate());
     // frame.imgui.end();
     // frame.render();
+    __Raia__.GC.free();
 });
