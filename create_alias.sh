@@ -15,3 +15,7 @@ create_alias "${PWD}/build/macos/arm64/debug/libglfw.3.4.dylib" "${PWD}/build/ma
 create_alias "${PWD}/build/macos/arm64/debug/libglfw.3.4.dylib" "${PWD}/build/macos/arm64/debug" "libglfw.dylib"
 create_alias "${PWD}/build/macos/arm64/release/libglfw.3.4.dylib" "${PWD}/build/macos/arm64/release" "libglfw.3.dylib"
 create_alias "${PWD}/build/macos/arm64/release/libglfw.3.4.dylib" "${PWD}/build/macos/arm64/release" "libglfw.dylib"
+#
+create_alias "${PWD}/sdk/macos/arm64/lib/libglfw.3.4.dylib" "${PWD}/sdk/macos/arm64/lib" "libglfw.3.dylib"
+create_alias "${PWD}/sdk/macos/arm64/lib/libassimp.5.3.0.dylib" "${PWD}/sdk/macos/arm64/lib" "libassimp.5.dylib"
+create_alias "${PWD}/sdk/macos/arm64/lib/libassimp.5.3.0.dylib" "${PWD}/sdk/macos/arm64/lib" "libassimp.dylib"

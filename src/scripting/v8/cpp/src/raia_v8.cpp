@@ -39,139 +39,125 @@ void raia_lib_call(const v8_args_t &args) {
 void raia_lib_ffi(const v8_args_t &args) {
     auto func_name = v8_args_to_str(args, 0);
     auto ret_type = v8_args_to_str(args, 1);
-    int args_offset = 2; // 引数の始まる位置（0: 関数名, 1: 戻り値, 2から引数）
-    int args_group = 3; // 1つの引数の含まれる情報の数(1: 型, 2: 引数名, 3: 値)
-    int args_len = (args.Length() - args_offset) / args_group;
     ffi_type *ffi_args_type[512];
     void *ffi_args_values[512];
     args_key_t ffi_rets;
     // 引数の設定
-    for(int i = args_offset, count = 0; i < args.Length(); i += args_group, count++) {
-        auto arg_type = v8_args_to_str(args, i);
-        if (arg_type == "uint8") {
-            auto name = v8_args_to_str(args, i + 1);
-            uint8_t value = v8_args_to_uint8(args, i + 2);
-            ffi_args_values[count] = add_args_hash_to_uint8(name.c_str(), value);
-            ffi_args_type[count] = &ffi_type_uint8;
-        } else if (arg_type == "sint8") {
-            auto name = v8_args_to_str(args, i + 1);
-            int8_t value = v8_args_to_sint8(args, i + 2);
-            ffi_args_values[count] = add_args_hash_to_sint8(name.c_str(), value);
-            ffi_args_type[count] = &ffi_type_sint8;
-        } else if (arg_type == "uint16") {
-            auto name = v8_args_to_str(args, i + 1);
-            uint16_t value = v8_args_to_uint16(args, i + 2);
-            ffi_args_values[count] = add_args_hash_to_uint16(name.c_str(), value);
-            ffi_args_type[count] = &ffi_type_uint16;
-        } else if (arg_type == "sint16") {
-            auto name = v8_args_to_str(args, i + 1);
-            int16_t value = v8_args_to_sint16(args, i + 2);
-            ffi_args_values[count] = add_args_hash_to_sint16(name.c_str(), value);
-            ffi_args_type[count] = &ffi_type_sint16;
-        } else if (arg_type == "uint32") {
-            auto name = v8_args_to_str(args, i + 1);
-            uint32_t value = v8_args_to_uint32(args, i + 2);
-            ffi_args_values[count] = add_args_hash_to_uint32(name.c_str(), value);
-            ffi_args_type[count] = &ffi_type_uint32;
-        } else if (arg_type == "sint32") {
-            auto name = v8_args_to_str(args, i + 1);
-            int32_t value = v8_args_to_sint32(args, i + 2);
-            ffi_args_values[count] = add_args_hash_to_sint32(name.c_str(), value);
-            ffi_args_type[count] = &ffi_type_sint32;
-        } else if (arg_type == "uint64") {
-            auto name = v8_args_to_str(args, i + 1);
-            uint64_t value = v8_args_to_uint64(args, i + 2);
-            ffi_args_values[count] = add_args_hash_to_uint64(name.c_str(), value);
-            ffi_args_type[count] = &ffi_type_uint64;
-        } else if (arg_type == "sint64") {
-            auto name = v8_args_to_str(args, i + 1);
-            int64_t value = v8_args_to_sint64(args, i + 2);
-            ffi_args_values[count] = add_args_hash_to_sint64(name.c_str(), value);
-            ffi_args_type[count] = &ffi_type_sint64;
-        } else if (arg_type == "float") {
-            auto name = v8_args_to_str(args, i + 1);
-            float value = v8_args_to_float(args, i + 2);
-            ffi_args_values[count] = add_args_hash_to_float(name.c_str(), value);
-            ffi_args_type[count] = &ffi_type_float;
-        } else if (arg_type == "double") {
-            auto name = v8_args_to_str(args, i + 1);
-            double value = v8_args_to_double(args, i + 2);
-            ffi_args_values[count] = add_args_hash_to_double(name.c_str(), value);
-            ffi_args_type[count] = &ffi_type_double;
-        } else if (arg_type == "uchar") {
-            auto name = v8_args_to_str(args, i + 1);
-            unsigned char value = v8_args_to_uchar(args, i + 2);
-            ffi_args_values[count] = add_args_hash_to_uchar(name.c_str(), value);
-            ffi_args_type[count] = &ffi_type_uchar;
-        } else if (arg_type == "schar") {
-            auto name = v8_args_to_str(args, i + 1);
-            char value = v8_args_to_schar(args, i + 2);
-            ffi_args_values[count] = add_args_hash_to_schar(name.c_str(), value);
-            ffi_args_type[count] = &ffi_type_schar;
-        } else if (arg_type == "ushort") {
-            auto name = v8_args_to_str(args, i + 1);
-            unsigned short value = v8_args_to_ushort(args, i + 2);
-            ffi_args_values[count] = add_args_hash_to_ushort(name.c_str(), value);
-            ffi_args_type[count] = &ffi_type_ushort;
-        } else if (arg_type == "sshort") {
-            auto name = v8_args_to_str(args, i + 1);
-            short value = v8_args_to_sshort(args, i + 2);
-            ffi_args_values[count] = add_args_hash_to_sshort(name.c_str(), value);
-            ffi_args_type[count] = &ffi_type_sshort;
-        } else if (arg_type == "uint") {
-            auto name = v8_args_to_str(args, i + 1);
-            unsigned int value = v8_args_to_uint(args, i + 2);
-            ffi_args_values[count] = add_args_hash_to_uint(name.c_str(), value);
-            ffi_args_type[count] = &ffi_type_uint;
-        } else if (arg_type == "sint") {
-            auto name = v8_args_to_str(args, i + 1);
-            int value = v8_args_to_sint(args, i + 2);
-            ffi_args_values[count] = add_args_hash_to_sint(name.c_str(), value);
-            ffi_args_type[count] = &ffi_type_sint;
-        } else if (arg_type == "ulong") {
-            auto name = v8_args_to_str(args, i + 1);
-            unsigned long value = v8_args_to_ulong(args, i + 2);
-            ffi_args_values[count] = add_args_hash_to_ulong(name.c_str(), value);
-            ffi_args_type[count] = &ffi_type_ulong;
-        } else if (arg_type == "slong") {
-            auto name = v8_args_to_str(args, i + 1);
-            long value = v8_args_to_slong(args, i + 2);
-            ffi_args_values[count] = add_args_hash_to_slong(name.c_str(), value);
-            ffi_args_type[count] = &ffi_type_slong;
-        } else if (arg_type == "longdouble") {
-            auto name = v8_args_to_str(args, i + 1);
-            long double value = v8_args_to_longdouble(args, i + 2);
-            ffi_args_values[count] = add_args_hash_to_longdouble(name.c_str(), value);
-            ffi_args_type[count] = &ffi_type_longdouble;
-        } else if (arg_type == "string") {
-            auto name = v8_args_to_str(args, i + 1);
-            auto src = v8_args_to_str(args, i + 2);
-            char* dst = new char[src.length() + 1];
-            std::strcpy(dst, src.c_str());
-            ffi_args_values[count] = add_args_hash_to_string(name.c_str(), dst);
-            ffi_args_type[count] = &ffi_type_pointer;
-        } else if (arg_type == "pointer") {
-            auto name = v8_args_to_str(args, i + 1);
-            void *value = v8_args_to_ptr(args, i + 2);
-            ffi_args_values[count] = add_args_hash_to_pointer(name.c_str(), value);
-            ffi_args_type[count] = &ffi_type_pointer;
-        } else if (arg_type == "struct") {
-            auto name = v8_args_to_str(args, i + 1);
-            v8::Local<v8::Object> obj = args[i + 2]->ToObject(args.GetIsolate()->GetCurrentContext()).ToLocalChecked();
-            ffi_type **struct_types = (ffi_type **)(uintptr_t)obj->Get(args.GetIsolate()->GetCurrentContext(), v8::String::NewFromUtf8(args.GetIsolate(), "types", v8::NewStringType::kNormal).ToLocalChecked()).ToLocalChecked()->NumberValue(args.GetIsolate()->GetCurrentContext()).FromJust();
-            void *struct_binary = (void *)(uintptr_t)obj->Get(args.GetIsolate()->GetCurrentContext(), v8::String::NewFromUtf8(args.GetIsolate(), "binary", v8::NewStringType::kNormal).ToLocalChecked()).ToLocalChecked()->NumberValue(args.GetIsolate()->GetCurrentContext()).FromJust();
-            ffi_type st_type;
-            st_type.size = 0;
-            st_type.alignment = 0;
-            st_type.type = FFI_TYPE_STRUCT;
-            st_type.elements = struct_types;
-            ffi_args_values[count] = add_args_hash_to_struct(name.c_str(), struct_binary); //TODO ここでデータが破損する
-            ffi_args_type[count] = &st_type;
-        } else {
-            fprintf(stderr, "Unknown type: %s\n", arg_type.c_str());
-            exit(1);
+    int args_len = 0;
+    v8::Local<v8::Array> args_list;
+    if(!args[2]->IsNull()) {
+        args_list = v8_args_to_array(args, 2);
+        args_len = args_list->Length();
+        auto isolate = args.GetIsolate();
+        for (int i = 0; i < args_list->Length(); i++) {
+            auto arg_list = v8_array_to_array(args_list, i);
+            auto arg_type = v8_array_to_str(isolate, arg_list, 0);
+            auto arg_name = v8_array_to_str(isolate, arg_list, 1);
+            if (arg_type == "uint8") {
+                uint8_t value = v8_array_to_uint8(isolate, arg_list, 2);
+                ffi_args_values[i] = add_args_hash_to_uint8(arg_name.c_str(), value);
+                ffi_args_type[i] = &ffi_type_uint8;
+            } else if (arg_type == "sint8") {
+                int8_t value = v8_array_to_sint8(isolate, arg_list, 2);
+                ffi_args_values[i] = add_args_hash_to_sint8(arg_name.c_str(), value);
+                ffi_args_type[i] = &ffi_type_sint8;
+            } else if (arg_type == "uint16") {
+                uint16_t value = v8_array_to_uint16(isolate, arg_list, 2);
+                ffi_args_values[i] = add_args_hash_to_uint16(arg_name.c_str(), value);
+                ffi_args_type[i] = &ffi_type_uint16;
+            } else if (arg_type == "sint16") {
+                int16_t value = v8_array_to_sint16(isolate, arg_list, 2);
+                ffi_args_values[i] = add_args_hash_to_sint16(arg_name.c_str(), value);
+                ffi_args_type[i] = &ffi_type_sint16;
+            } else if (arg_type == "uint32") {
+                uint32_t value = v8_array_to_uint32(isolate, arg_list, 2);
+                ffi_args_values[i] = add_args_hash_to_uint32(arg_name.c_str(), value);
+                ffi_args_type[i] = &ffi_type_uint32;
+            } else if (arg_type == "sint32") {
+                int32_t value = v8_array_to_sint32(isolate, arg_list, 2);
+                ffi_args_values[i] = add_args_hash_to_sint32(arg_name.c_str(), value);
+                ffi_args_type[i] = &ffi_type_sint32;
+            } else if (arg_type == "uint64") {
+                uint64_t value = v8_array_to_uint64(isolate, arg_list, 2);
+                ffi_args_values[i] = add_args_hash_to_uint64(arg_name.c_str(), value);
+                ffi_args_type[i] = &ffi_type_uint64;
+            } else if (arg_type == "sint64") {
+                int64_t value = v8_array_to_sint64(isolate, arg_list, 2);
+                ffi_args_values[i] = add_args_hash_to_sint64(arg_name.c_str(), value);
+                ffi_args_type[i] = &ffi_type_sint64;
+            } else if (arg_type == "float") {
+                float value = v8_array_to_float(isolate, arg_list, 2);
+                ffi_args_values[i] = add_args_hash_to_float(arg_name.c_str(), value);
+                ffi_args_type[i] = &ffi_type_float;
+            } else if (arg_type == "double") {
+                double value = v8_array_to_double(isolate, arg_list, 2);
+                ffi_args_values[i] = add_args_hash_to_double(arg_name.c_str(), value);
+                ffi_args_type[i] = &ffi_type_double;
+            } else if (arg_type == "uchar") {
+                unsigned char value = v8_array_to_uchar(isolate, arg_list, 2);
+                ffi_args_values[i] = add_args_hash_to_uchar(arg_name.c_str(), value);
+                ffi_args_type[i] = &ffi_type_uchar;
+            } else if (arg_type == "schar") {
+                char value = v8_array_to_schar(isolate, arg_list, 2);
+                ffi_args_values[i] = add_args_hash_to_schar(arg_name.c_str(), value);
+                ffi_args_type[i] = &ffi_type_schar;
+            } else if (arg_type == "ushort") {
+                unsigned short value = v8_array_to_ushort(isolate, arg_list, 2);
+                ffi_args_values[i] = add_args_hash_to_ushort(arg_name.c_str(), value);
+                ffi_args_type[i] = &ffi_type_ushort;
+            } else if (arg_type == "sshort") {
+                short value = v8_array_to_sshort(isolate, arg_list, 2);
+                ffi_args_values[i] = add_args_hash_to_sshort(arg_name.c_str(), value);
+                ffi_args_type[i] = &ffi_type_sshort;
+            } else if (arg_type == "uint") {
+                unsigned int value = v8_array_to_uint(isolate, arg_list, 2);
+                ffi_args_values[i] = add_args_hash_to_uint(arg_name.c_str(), value);
+                ffi_args_type[i] = &ffi_type_uint;
+            } else if (arg_type == "sint") {
+                int value = v8_array_to_sint(isolate, arg_list, 2);
+                ffi_args_values[i] = add_args_hash_to_sint(arg_name.c_str(), value);
+                ffi_args_type[i] = &ffi_type_sint;
+            } else if (arg_type == "ulong") {
+                unsigned long value = v8_array_to_ulong(isolate, arg_list, 2);
+                ffi_args_values[i] = add_args_hash_to_ulong(arg_name.c_str(), value);
+                ffi_args_type[i] = &ffi_type_ulong;
+            } else if (arg_type == "slong") {
+                long value = v8_array_to_slong(isolate, arg_list, 2);
+                ffi_args_values[i] = add_args_hash_to_slong(arg_name.c_str(), value);
+                ffi_args_type[i] = &ffi_type_slong;
+            } else if (arg_type == "longdouble") {
+                long double value = v8_array_to_longdouble(isolate, arg_list, 2);
+                ffi_args_values[i] = add_args_hash_to_longdouble(arg_name.c_str(), value);
+                ffi_args_type[i] = &ffi_type_longdouble;
+            } else if (arg_type == "string") {
+                auto src = v8_array_to_str(isolate, arg_list, 2);
+                char *dst = new char[src.length() + 1];
+                std::strcpy(dst, src.c_str());
+                ffi_args_values[i] = add_args_hash_to_string(arg_name.c_str(), dst);
+                ffi_args_type[i] = &ffi_type_pointer;
+            } else if (arg_type == "pointer") {
+                void *value = v8_array_to_ptr(isolate, arg_list, 2);
+                ffi_args_values[i] = add_args_hash_to_pointer(arg_name.c_str(), value);
+                ffi_args_type[i] = &ffi_type_pointer;
+            } else if (arg_type == "struct") {
+                auto obj = v8_array_to_obj(isolate, arg_list, 2);
+                ffi_type **struct_types = (ffi_type **)(uintptr_t)v8_obj_to_ptr(isolate, obj, "types");
+                void *struct_binary = (void *)(uintptr_t)v8_obj_to_ptr(isolate, obj, "binary");
+                ffi_type st_type = {
+                        .size = 0,
+                        .alignment = 0,
+                        .type = FFI_TYPE_STRUCT,
+                        .elements = struct_types
+                };
+                ffi_args_values[i] = add_args_hash_to_struct(arg_name.c_str(), struct_binary);
+                ffi_args_type[i] = &st_type;
+            } else {
+                fprintf(stderr, "Unknown type: %s\n", arg_type.c_str());
+                exit(1);
+            }
         }
     }
+    // 戻り値の設定
     if (ret_type == "void") {
         ffi_call_ext(find_func_hash(func_name.c_str()), args_len, &ffi_type_void, ffi_args_type, nullptr, ffi_args_values);
         v8_rets_to_null(args);
@@ -255,53 +241,25 @@ void raia_core_exit(const v8_args_t &args) {
 }
 
 void raia_core_make_struct(const v8_args_t &args) {
-    int args_offset = 0; // 引数の始まる位置（0から引数）
-    int args_group = 2; // 1つの引数の含まれる情報の数(1: 型, 2: 値)
-    int args_len = (args.Length() - args_offset) / args_group;
+    auto isolate = args.GetIsolate();
+    auto args_list = v8_args_to_array(args, 0);
     // バイナリの合計サイズを計算する
     int binary_size = 0;
-    for(int i = args_offset, count = 0; i < args.Length(); i += args_group, count++) {
-        auto arg_type = v8_args_to_str(args, i);
-        if (arg_type == "uint8") {
+    for (int i = 0; i < args_list->Length(); i++) {
+        auto arg_list = v8_array_to_array(args_list, i);
+        auto arg_type = v8_array_to_str(isolate, arg_list, 0);
+        if (arg_type == "uint8" || arg_type == "sint8" || arg_type == "uchar" || arg_type == "schar") {
             binary_size += 1;
-        } else if (arg_type == "sint8") {
-            binary_size += 1;
-        } else if (arg_type == "uint16") {
+        } else if (arg_type == "uint16" || arg_type == "sint16" || arg_type == "ushort" || arg_type == "sshort") {
             binary_size += 2;
-        } else if (arg_type == "sint16") {
-            binary_size += 2;
-        } else if (arg_type == "uint32") {
+        } else if (arg_type == "uint32" || arg_type == "sint32" || arg_type == "float" || arg_type == "uint" || arg_type == "sint" || arg_type == "ulong" || arg_type == "slong") {
             binary_size += 4;
-        } else if (arg_type == "sint32") {
-            binary_size += 4;
-        } else if (arg_type == "uint64") {
+        } else if (arg_type == "uint64" || arg_type == "sint64" || arg_type == "double") {
             binary_size += 8;
-        } else if (arg_type == "sint64") {
-            binary_size += 8;
-        } else if (arg_type == "float") {
-            binary_size += 4;
-        } else if (arg_type == "double") {
-            binary_size += 8;
-        } else if (arg_type == "uchar") {
-            binary_size += 1;
-        } else if (arg_type == "schar") {
-            binary_size += 1;
-        } else if (arg_type == "ushort") {
-            binary_size += 2;
-        } else if (arg_type == "sshort") {
-            binary_size += 2;
-        } else if (arg_type == "uint") {
-            binary_size += 4;
-        } else if (arg_type == "sint") {
-            binary_size += 4;
-        } else if (arg_type == "ulong") {
-            binary_size += 4;
-        } else if (arg_type == "slong") {
-            binary_size += 4;
         } else if (arg_type == "longdouble") {
             binary_size += 16;
         } else if (arg_type == "string") {
-            auto str = v8_args_to_str(args, i + 1);
+            auto str = v8_array_to_str(isolate, arg_list, 1);
             binary_size += (int)str.length() + 1;
         } else if (arg_type == "pointer") {
             binary_size += sizeof(void*);
@@ -310,96 +268,120 @@ void raia_core_make_struct(const v8_args_t &args) {
             exit(1);
         }
     }
-    // バイナリデータを初期化する
+    // タイプ情報とバイナリデータを初期化・取得する
+    ffi_type **type_elements = (ffi_type **)malloc((args_list->Length() + 1) * sizeof(ffi_type *));
+    type_elements[args_list->Length() + 1] = nullptr;
     uint8_t *binary = (uint8_t *)malloc(binary_size);
     int binary_offset = 0;
-    for(int i = args_offset, count = 0; i < args.Length(); i += args_group, count++) {
-        auto arg_type = v8_args_to_str(args, i);
+    for(int i = 0; i < args_list->Length(); i ++) {
+        auto arg_list = v8_array_to_array(args_list, i);
+        auto arg_type = v8_array_to_str(isolate, arg_list, 0);
         if (arg_type == "uint8") {
-            uint8_t value = v8_args_to_uint8(args, i + 1);
+            type_elements[i] = &ffi_type_uint8;
+            uint8_t value = v8_array_to_uint8(isolate, arg_list, 1);
             memcpy(binary + binary_offset, &value, 1);
             binary_offset += 1;
         } else if (arg_type == "sint8") {
-            int8_t value = v8_args_to_sint8(args, i + 1);
+            type_elements[i] = &ffi_type_sint8;
+            int8_t value = v8_array_to_sint8(isolate, arg_list, 1);
             memcpy(binary + binary_offset, &value, 1);
             binary_offset += 1;
         } else if (arg_type == "uint16") {
-            uint16_t value = v8_args_to_uint16(args, i + 1);
+            type_elements[i] = &ffi_type_uint16;
+            uint16_t value = v8_array_to_uint16(isolate, arg_list, 1);
             memcpy(binary + binary_offset, &value, 2);
             binary_offset += 2;
         } else if (arg_type == "sint16") {
-            int16_t value = v8_args_to_sint16(args, i + 1);
+            type_elements[i] = &ffi_type_sint16;
+            int16_t value = v8_array_to_sint16(isolate, arg_list, 1);
             memcpy(binary + binary_offset, &value, 2);
             binary_offset += 2;
         } else if (arg_type == "uint32") {
-            uint32_t value = v8_args_to_uint32(args, i + 1);
+            type_elements[i] = &ffi_type_uint32;
+            uint32_t value = v8_array_to_uint32(isolate, arg_list, 1);
             memcpy(binary + binary_offset, &value, 4);
             binary_offset += 4;
         } else if (arg_type == "sint32") {
-            int32_t value = v8_args_to_sint32(args, i + 1);
+            type_elements[i] = &ffi_type_sint32;
+            int32_t value = v8_array_to_sint32(isolate, arg_list, 1);
             memcpy(binary + binary_offset, &value, 4);
             binary_offset += 4;
         } else if (arg_type == "uint64") {
-            uint64_t value = v8_args_to_uint64(args, i + 1);
+            type_elements[i] = &ffi_type_uint64;
+            uint64_t value = v8_array_to_uint64(isolate, arg_list, 1);
             memcpy(binary + binary_offset, &value, 8);
             binary_offset += 8;
         } else if (arg_type == "sint64") {
-            int64_t value = v8_args_to_sint64(args, i + 1);
+            type_elements[i] = &ffi_type_sint64;
+            int64_t value = v8_array_to_sint64(isolate, arg_list, 1);
             memcpy(binary + binary_offset, &value, 8);
             binary_offset += 8;
         } else if (arg_type == "float") {
-            float value = v8_args_to_float(args, i + 1);
+            type_elements[i] = &ffi_type_float;
+            float value = v8_array_to_float(isolate, arg_list, 1);
             memcpy(binary + binary_offset, &value, 4);
             binary_offset += 4;
         } else if (arg_type == "double") {
-            double value = v8_args_to_double(args, i + 1);
+            type_elements[i] = &ffi_type_double;
+            double value = v8_array_to_double(isolate, arg_list, 1);
             memcpy(binary + binary_offset, &value, 8);
             binary_offset += 8;
         } else if (arg_type == "uchar") {
-            unsigned char value = v8_args_to_uchar(args, i + 1);
+            type_elements[i] = &ffi_type_uchar;
+            unsigned char value = v8_array_to_uchar(isolate, arg_list, 1);
             memcpy(binary + binary_offset, &value, 1);
             binary_offset += 1;
         } else if (arg_type == "schar") {
-            char value = v8_args_to_schar(args, i + 1);
+            type_elements[i] = &ffi_type_schar;
+            char value = v8_array_to_schar(isolate, arg_list, 1);
             memcpy(binary + binary_offset, &value, 1);
             binary_offset += 1;
         } else if (arg_type == "ushort") {
-            unsigned short value = v8_args_to_ushort(args, i + 1);
+            type_elements[i] = &ffi_type_ushort;
+            unsigned short value = v8_array_to_ushort(isolate, arg_list, 1);
             memcpy(binary + binary_offset, &value, 2);
             binary_offset += 2;
         } else if (arg_type == "sshort") {
-            short value = v8_args_to_sshort(args, i + 1);
+            type_elements[i] = &ffi_type_ushort;
+            short value = v8_array_to_sshort(isolate, arg_list, 1);
             memcpy(binary + binary_offset, &value, 2);
             binary_offset += 2;
         } else if (arg_type == "uint") {
-            unsigned int value = v8_args_to_uint(args, i + 1);
+            type_elements[i] = &ffi_type_uint;
+            unsigned int value = v8_array_to_uint(isolate, arg_list, 1);
             memcpy(binary + binary_offset, &value, 4);
             binary_offset += 4;
         } else if (arg_type == "sint") {
-            int value = v8_args_to_sint(args, i + 1);
+            type_elements[i] = &ffi_type_sint;
+            int value = v8_array_to_sint(isolate, arg_list, 1);
             memcpy(binary + binary_offset, &value, 4);
             binary_offset += 4;
         } else if (arg_type == "ulong") {
-            unsigned long value = v8_args_to_ulong(args, i + 1);
+            type_elements[i] = &ffi_type_ulong;
+            unsigned long value = v8_array_to_ulong(isolate, arg_list, 1);
             memcpy(binary + binary_offset, &value, 4);
             binary_offset += 4;
         } else if (arg_type == "slong") {
-            long value = v8_args_to_slong(args, i + 1);
+            type_elements[i] = &ffi_type_slong;
+            long value = v8_array_to_slong(isolate, arg_list, 1);
             memcpy(binary + binary_offset, &value, 4);
             binary_offset += 4;
         } else if (arg_type == "longdouble") {
-            long double value = v8_args_to_longdouble(args, i + 1);
+            type_elements[i] = &ffi_type_longdouble;
+            long double value = v8_array_to_longdouble(isolate, arg_list, 1);
             memcpy(binary + binary_offset, &value, 16);
             binary_offset += 16;
         } else if (arg_type == "string") {
-            auto src = v8_args_to_str(args, i + 1);
+            type_elements[i] = &ffi_type_pointer;
+            auto src = v8_array_to_str(isolate, arg_list, 1);
             char* dst = new char[src.length() + 1];
             std::strcpy(dst, src.c_str());
             memcpy(binary + binary_offset, dst, (int)src.length() + 1);
             free(dst);
             binary_offset += (int)src.length() + 1;
         } else if (arg_type == "pointer") {
-            void *value = v8_args_to_ptr(args, i + 1);
+            type_elements[i] = &ffi_type_pointer;
+            void *value = v8_array_to_ptr(isolate, arg_list, 1);
             memcpy(binary + binary_offset, &value, sizeof(void*));
             binary_offset += sizeof(void*);
         } else {
@@ -407,70 +389,16 @@ void raia_core_make_struct(const v8_args_t &args) {
             exit(1);
         }
     }
-
-    // タイプ情報を得る
-    ffi_type **type_elements = (ffi_type **)malloc((args_len + 1) * sizeof(ffi_type *));
-    int count = 0;
-    for(int i = args_offset; i < args.Length(); i += args_group, count++) {
-        auto arg_type = v8_args_to_str(args, i);
-        if (arg_type == "uint8") {
-            type_elements[count] = &ffi_type_uint8;
-        } else if (arg_type == "sint8") {
-            type_elements[count] = &ffi_type_sint8;
-        } else if (arg_type == "uint16") {
-            type_elements[count] = &ffi_type_uint16;
-        } else if (arg_type == "sint16") {
-            type_elements[count] = &ffi_type_sint16;
-        } else if (arg_type == "uint32") {
-            type_elements[count] = &ffi_type_uint32;
-        } else if (arg_type == "sint32") {
-            type_elements[count] = &ffi_type_sint32;
-        } else if (arg_type == "uint64") {
-            type_elements[count] = &ffi_type_uint64;
-        } else if (arg_type == "sint64") {
-            type_elements[count] = &ffi_type_sint64;
-        } else if (arg_type == "float") {
-            type_elements[count] = &ffi_type_float;
-        } else if (arg_type == "double") {
-            type_elements[count] = &ffi_type_double;
-        } else if (arg_type == "uchar") {
-            type_elements[count] = &ffi_type_uchar;
-        } else if (arg_type == "schar") {
-            type_elements[count] = &ffi_type_schar;
-        } else if (arg_type == "ushort") {
-            type_elements[count] = &ffi_type_ushort;
-        } else if (arg_type == "sshort") {
-            type_elements[count] = &ffi_type_ushort;
-        } else if (arg_type == "uint") {
-            type_elements[count] = &ffi_type_uint;
-        } else if (arg_type == "sint") {
-            type_elements[count] = &ffi_type_sint;
-        } else if (arg_type == "ulong") {
-            type_elements[count] = &ffi_type_ulong;
-        } else if (arg_type == "slong") {
-            type_elements[count] = &ffi_type_slong;
-        } else if (arg_type == "longdouble") {
-            type_elements[count] = &ffi_type_longdouble;
-        } else if (arg_type == "string") {
-            type_elements[count] = &ffi_type_pointer;
-        } else if (arg_type == "pointer") {
-            type_elements[count] = &ffi_type_pointer;
-        } else {
-            fprintf(stderr, "Unknown type: %s\n", arg_type.c_str());
-            exit(1);
-        }
-    }
-    type_elements[count] = nullptr;
-    v8::Local<v8::Object> obj = v8::Object::New(args.GetIsolate());
-    obj->Set(args.GetIsolate()->GetCurrentContext(), v8::String::NewFromUtf8(args.GetIsolate(), "binary", v8::NewStringType::kNormal).ToLocalChecked(), v8::Number::New(args.GetIsolate(), (double)(uintptr_t)binary)).FromJust();
-    obj->Set(args.GetIsolate()->GetCurrentContext(), v8::String::NewFromUtf8(args.GetIsolate(), "types", v8::NewStringType::kNormal).ToLocalChecked(), v8::Number::New(args.GetIsolate(), (double)(uintptr_t)type_elements)).FromJust();
+    auto obj = v8::Object::New(args.GetIsolate());
+    v8_obj_add(args.GetIsolate(), obj, "types", (double)(uintptr_t)type_elements);
+    v8_obj_add(args.GetIsolate(), obj, "binary", (double)(uintptr_t)binary);
     args.GetReturnValue().Set(obj);
 }
 
 void raia_core_delete_struct(const v8_args_t &args) {
-    v8::Local<v8::Object> obj = args[0]->ToObject(args.GetIsolate()->GetCurrentContext()).ToLocalChecked();
-    ffi_type **struct_types = (ffi_type **)(uintptr_t)obj->Get(args.GetIsolate()->GetCurrentContext(), v8::String::NewFromUtf8(args.GetIsolate(), "types", v8::NewStringType::kNormal).ToLocalChecked()).ToLocalChecked()->NumberValue(args.GetIsolate()->GetCurrentContext()).FromJust();
-    void *struct_binary = (void *)(uintptr_t)obj->Get(args.GetIsolate()->GetCurrentContext(), v8::String::NewFromUtf8(args.GetIsolate(), "binary", v8::NewStringType::kNormal).ToLocalChecked()).ToLocalChecked()->NumberValue(args.GetIsolate()->GetCurrentContext()).FromJust();
+    auto obj = v8_args_to_obj(args, 0);
+    ffi_type **struct_types = (ffi_type **)(uintptr_t)v8_obj_to_ptr(args.GetIsolate(), obj, "types");
+    void *struct_binary = (void *)(uintptr_t)v8_obj_to_ptr(args.GetIsolate(), obj, "binary");
     free((void *)struct_types);
     free((void *)struct_binary);
     v8_rets_to_null(args);
@@ -521,7 +449,6 @@ int raia_v8_main(int argc, char *argv[]) {
     v8_set_func(isolate, Lib, "closeAll", raia_lib_close_all);
     v8_set_func(isolate, Lib, "add", raia_lib_add);
     v8_set_func(isolate, Lib, "call", raia_lib_call);
-    v8_set_func(isolate, Lib, "callWithJSON", raia_lib_call);
     v8_set_func(isolate, Lib, "ffi", raia_lib_ffi);
     v8_set_obj(isolate, GC, Raia, "GC");
     v8_set_func(isolate, GC, "free", raia_gc_free);

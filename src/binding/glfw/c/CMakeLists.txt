@@ -24,8 +24,6 @@ add_library(raia_glfw SHARED
 # 現在のRPATH設定を取得（もしあれば）
 get_property(CURRENT_RPATH TARGET raia_glfw PROPERTY INSTALL_RPATH)
 
-
-
 # 特定のディレクトリ（この場合は作成されたライブラリがあるディレクトリ）を最優先にする
 list(PREPEND CURRENT_RPATH "${SPECIAL_RPATH_KEYWORD}")
 

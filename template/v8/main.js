@@ -15,6 +15,7 @@ ffi(
 */
 let std = new Std();
 
+
 var handle = __Raia__.Lib.open("libminilib");
 __Raia__.Lib.add(handle, "plus");
 __Raia__.Lib.add(handle, "minus");
@@ -23,15 +24,32 @@ __Raia__.Lib.add(handle, "put");
 __Raia__.Lib.add(handle, "int_array");
 __Raia__.Lib.add(handle, "add_struct");
 
+var ret;
+
+ret = __Raia__.Lib.ffi(
+    "plus", // 関数名
+    "sint", // 戻り値の型
+    [
+        ["sint", "x", 100], // 型, 引数名, 値
+        ["sint", "y", 200]
+    ]
+);
+
+std.print("return value:" + ret);
+
 var num_struct = __Raia__.Core.makeStruct(
-    "sint", 1000,
-    "sint", 2000
+    [
+        ["sint", 1000],
+        ["sint", 2000]
+    ]
 );
 
 var result_value =  __Raia__.Lib.ffi(
     "add_struct", // 関数名
     "sint", // 戻り値の型
-    "struct", "point", num_struct
+    [
+        ["struct", "point", num_struct]
+    ]
 );
 
 std.print("result:"+result_value);
@@ -47,37 +65,31 @@ let int32pointer = __Raia__.Core.arrayBufferToPointer(int32Array.buffer);
 __Raia__.Lib.ffi(
     "int_array", // 関数名
     "void", // 戻り値の型
-    "pointer", "num", int32pointer, // 型, 引数名, 値
-    "sint", "size", 5
+    [
+        ["pointer", "num", int32pointer], // 型, 引数名, 値
+        ["sint", "size", 5]
+    ]
 );
 
 std.print("---");
 
-var ret;
 
-ret = __Raia__.Lib.ffi(
-    "plus", // 関数名
-    "sint", // 戻り値の型
-    "sint", "x", 100, // 型, 引数名, 値
-    "sint", "y", 200
-);
-
-
-
-std.print("return value:" + ret);
 
 ret = __Raia__.Lib.ffi(
     "minus", // 関数名
     "sint", // 戻り値の型
-    "sint", "x", 100, // 型, 引数名, 値
-    "sint", "y", 200 // ...
+    [
+        ["sint", "x", 100], // 型, 引数名, 値
+        ["sint", "y", 200] // ...
+    ]
 );
 
 std.print("return value:" + ret);
 
 ret = __Raia__.Lib.ffi(
     "hello", // 関数名
-    "void" // 戻り値の型
+    "void", // 戻り値の型
+    null
 );
 
 std.print("return value:" + ret);
@@ -85,10 +97,14 @@ std.print("return value:" + ret);
 ret = __Raia__.Lib.ffi(
     "put", // 関数名
     "void", // 戻り値の型
-    "string", "str", "PutFunction"
+    [
+        ["string", "str", "PutFunction"]
+    ]
 );
 
 std.print("return value:" + ret);
+
+
 
 // segment start_x, start_y, end_x, end_y
 // point x, y
@@ -135,16 +151,16 @@ window.onUpdate(()=>{
     window.clear(0.45, 0.55, 0.6, 1.0);
     window.draw();
 
-    // frame.start();
-    // frame.imgui.setNextWindowBgAlpha(0.35);
-    // var flags = 0;
-    //     flags |= frame.imgui.WindowFlags.NoTitleBar;
-    //     flags |= frame.imgui.WindowFlags.NoResize;
-    // frame.imgui.begin("日本語", null, flags);
-    // frame.text("フレームレート");
-    // frame.imgui.separator();
-    // frame.text(""+frame.imgui.getFramerate());
-    // frame.imgui.end();
-    // frame.render();
-    __Raia__.GC.free();
+    frame.start();
+    frame.imgui.setNextWindowBgAlpha(0.35);
+    var flags = 0;
+    flags |= frame.imgui.WindowFlags.NoTitleBar;
+    flags |= frame.imgui.WindowFlags.NoResize;
+    frame.imgui.begin("日本語", null, flags);
+    frame.text("フレームレート");
+    frame.imgui.separator();
+    frame.text(""+frame.imgui.getFramerate());
+    frame.imgui.end();
+    frame.render();
+    //__Raia__.GC.free();
 });

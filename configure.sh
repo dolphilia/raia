@@ -67,8 +67,60 @@ cp mruby/build/host/lib/libmruby_core.a ../sdk/macos/arm64/lib
 cp mruby/build/host/lib/libmruby.a ../sdk/macos/arm64/lib
 rsync -av mruby/build/host/include/ ../sdk/macos/arm64/include/
 #
+# Skia のセットアップ
+brew install jpeg
+brew install harfbuzz
+brew install icu4c
+git clone https://skia.googlesource.com/skia.git
+cd skia
+python3 tools/git-sync-deps
+bin/gn gen out/Shared --args='
+is_official_build = true
+is_component_build = true
+skia_use_angle = true
+skia_enable_skottie = false
+cc = "clang"
+cxx = "clang++"
+target_os = "mac"
+target_cpu = "arm64"
+extra_cflags = [ "-frtti", "-I/opt/homebrew/include", "-I/opt/homebrew/include/harfbuzz", "-I/opt/homebrew/opt/icu4c/include" ]
+extra_ldflags = [ "-L/opt/homebrew/lib", "-L/opt/homebrew/opt/icu4c/lib" ]
+'
+ninja -C out/Shared
+cd ../
+cp skia/out/Shared/libbentleyottmann.dylib ../sdk/macos/arm64/lib
+cp skia/out/Shared/libskia.dylib ../sdk/macos/arm64/lib
+cp skia/out/Shared/libskparagraph.dylib ../sdk/macos/arm64/lib
+cp skia/out/Shared/libsksg.dylib ../sdk/macos/arm64/lib
+cp skia/out/Shared/libskshaper.dylib ../sdk/macos/arm64/lib
+cp skia/out/Shared/libskunicode.dylib ../sdk/macos/arm64/lib
+cp skia/out/Shared/libcompression_utils_portable.a ../sdk/macos/arm64/lib
+cp skia/out/Shared/libdng_sdk.a ../sdk/macos/arm64/lib
+cp skia/out/Shared/libexpat.a ../sdk/macos/arm64/lib
+cp skia/out/Shared/libpathkit.a ../sdk/macos/arm64/lib
+cp skia/out/Shared/libpiex.a ../sdk/macos/arm64/lib
+cp skia/out/Shared/libpng.a ../sdk/macos/arm64/lib
+cp skia/out/Shared/libskcms.a ../sdk/macos/arm64/lib
+cp skia/out/Shared/libskresources.a ../sdk/macos/arm64/lib
+cp skia/out/Shared/libwuffs.a ../sdk/macos/arm64/lib
+cp skia/out/Shared/libzlib.a ../sdk/macos/arm64/lib
+mkdir ../sdk/macos/arm64/include/skia
+mkdir ../sdk/macos/arm64/include/skia/include
+rsync -av skia/include/ ../sdk/macos/arm64/include/skia/include/
+#
+# assimp のセットアップ
+git clone https://github.com/assimp/assimp.git
+cd assimp
+mkdir build
+cd build
+cmake -G "Unix Makefiles" -DBUILD_SHARED_LIBS=ON ..
+make
+cd ../../
+cp assimp/build/bin/libassimp.5.3.0.dylib ../sdk/macos/arm64/lib
+rsync -av assimp/include/ ../sdk/macos/arm64/include/
+#
 # 共有ライブラリをsdkからbuildにコピーする
-# cd ../
+cd ../
 # (debugにも)
 cp sdk/macos/arm64/lib/libc++_chrome.dylib build/macos/arm64/debug
 cp sdk/macos/arm64/lib/libchrome_zlib.dylib build/macos/arm64/debug

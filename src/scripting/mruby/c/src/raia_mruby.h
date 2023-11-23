@@ -23,4 +23,14 @@
 #define STRNCPY(dest, src, count) strncpy(dest, src, count)
 #endif
 
+#ifdef __WINDOWS__
+#define DYNAMIC_LIB_EXT "dll"
+#endif
+#ifdef __MACOS__
+#define DYNAMIC_LIB_EXT "dylib"
+#endif
+#ifdef __LINUX__
+#define DYNAMIC_LIB_EXT "so"
+#endif
+
 #endif //RAIA_MRUBY_RAIA_MRUBY_H

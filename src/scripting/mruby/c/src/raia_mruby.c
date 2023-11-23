@@ -3,17 +3,8 @@
 mrb_value raia_lib_open(mrb_state *mrb, mrb_value self) {
     char *dll_file = NULL;
     mrb_get_args(mrb, "z", &dll_file);
-#ifdef __WINDOWS__
-    const char *extension = "dll";
-#endif
-#ifdef __MACOS__
-    const char *extension = "dylib";
-#endif
-#ifdef __LINUX__
-    const char *extension = "so";
-#endif
     char dll_file_extension[500];
-    SPRINTF(dll_file_extension, "%s.%s", dll_file, extension);
+    SPRINTF(dll_file_extension, "%s.%s", dll_file, DYNAMIC_LIB_EXT);
     void *handle = add_plugin_hash(dll_file_extension);
     return mrb_fixnum_value((int64_t)(uintptr_t)handle);
 }
@@ -29,7 +20,7 @@ mrb_value raia_lib_add(mrb_state *mrb, mrb_value self) {
 
 RAIA_API const char *init(int argc, char *argv[]) {
     mrb_state *mrb = mrb_open();
-    if (!mrb) { /* handle error */
+    if (!mrb) {
         return NULL;
     }
     struct RClass *cls;
@@ -46,18 +37,11 @@ RAIA_API const char *init(int argc, char *argv[]) {
     mrb_load_file(mrb, file);
     fclose(file);
 
-    //const char *mruby_code = "MyClass.c_function('Hello from mruby!')";
-    //mrb_value result = mrb_load_string(mrb, mruby_code);
     if (mrb->exc) {
         mrb_print_error(mrb);
         mrb_close(mrb);
         return NULL;
     }
-
-
-    // mrb_load_string(mrb, str) to load from NULL terminated strings
-    // mrb_load_nstring(mrb, str, len) for strings without null terminator or with known length
-    //mrb_load_string(mrb, "puts 'hello world'");
     mrb_close(mrb);
     return 0;
 }
