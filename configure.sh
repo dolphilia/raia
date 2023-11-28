@@ -117,6 +117,7 @@ cmake -G "Unix Makefiles" -DBUILD_SHARED_LIBS=ON ..
 make
 cd ../../
 cp assimp/build/bin/libassimp.5.3.0.dylib ../sdk/macos/arm64/lib
+cp assimp/build/include/assimp/config.h ../sdk/macos/arm64/include/assimp
 rsync -av assimp/include/ ../sdk/macos/arm64/include/
 #
 # 共有ライブラリをsdkからbuildにコピーする

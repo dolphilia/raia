@@ -43,4 +43,14 @@ export class Lib {
         // @ts-ignore
         return __Raia__.Lib.call(func_name, args);
     }
+    /**
+     * @param {string} func_name
+     * @param {string} ret_type
+     * @param {Array | null} args
+     * @returns {Any} 
+     */
+    ffi(func_name, ret_type, args = null) {
+        // @ts-ignore
+        return __Raia__.Lib.ffi(func_name, ret_type, args);
+    }
 }

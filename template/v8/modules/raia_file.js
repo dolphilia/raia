@@ -85,7 +85,7 @@ export class File {
     saveBinary(path, binary, size = null) {
         const args = JSON.stringify({
             "path": path, 
-            "binary": __Raia__.Core.arrayBufferToPointer(binary),
+            "binary": __Raia__.Core.bufToPtr(binary),
             "size": size
         });
         const ret = __Raia__.Lib.call("raia_file_save_binary", args);

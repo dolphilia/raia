@@ -337,3 +337,59 @@ char *get_drop_callback_t(void) {
     yyjson_mut_doc_free(ret_doc);
     return result;
 }
+
+void event_window_maximize_callback(GLFWwindow* window, int maximized) {
+    raia_callback->window_maximize_callback_window = window;
+    raia_callback->window_maximize_callback_maximized = maximized;
+}
+
+char *get_window_maximize_callback_t(void) {
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_uint(ret_doc, ret_root, "window", (uint64_t)(uintptr_t)raia_callback->window_maximize_callback_window);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "maximized", raia_callback->window_maximize_callback_maximized);
+
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    return result;
+}
+
+void event_window_content_scale_callback(GLFWwindow* window, float xscale, float yscale) {
+    raia_callback->window_content_scale_callback_window = window;
+    raia_callback->window_content_scale_callback_xscale = xscale;
+    raia_callback->window_content_scale_callback_yscale = yscale;
+}
+
+char *get_window_content_scale_callback_t(void) {
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_uint(ret_doc, ret_root, "window", (uint64_t)(uintptr_t)raia_callback->window_content_scale_callback_window);
+    yyjson_mut_obj_add_real(ret_doc, ret_root, "xscale", raia_callback->window_content_scale_callback_xscale);
+    yyjson_mut_obj_add_real(ret_doc, ret_root, "yscale", raia_callback->window_content_scale_callback_yscale);
+
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    return result;
+}
+
+void event_monitor_callback(GLFWmonitor* monitor, int event) {
+    raia_callback->monitor_callback_monitor = monitor;
+    raia_callback->monitor_callback_event = event;
+}
+
+char *get_event_monitor_callback_t(void) {
+    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
+    yyjson_mut_doc_set_root(ret_doc, ret_root);
+    yyjson_mut_obj_add_uint(ret_doc, ret_root, "monitor", (uint64_t)(uintptr_t)raia_callback->monitor_callback_monitor);
+    yyjson_mut_obj_add_int(ret_doc, ret_root, "event", raia_callback->monitor_callback_event);
+
+    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+
+    yyjson_mut_doc_free(ret_doc);
+    return result;
+}

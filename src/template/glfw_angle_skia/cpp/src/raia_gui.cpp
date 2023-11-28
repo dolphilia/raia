@@ -152,7 +152,7 @@ int main(int argc, char* argv[]) {
     SkPaint paint;
     paint.setBlendMode(SkBlendMode::kOverlay);
     paint.setColor(SK_ColorBLUE); // 赤色を選択
-    SkRect rect = SkRect::MakeXYWH(100, 100, 200, 200); // 四角形の位置とサイズ
+    SkRect rect = SkRect::MakeXYWH(20, 20, 400, 600 - 40); // 四角形の位置とサイズ
     canvas.drawRect(rect, paint); // 四角形を描画
 
     // パスを描画する
@@ -170,7 +170,7 @@ int main(int argc, char* argv[]) {
     p.setAntiAlias(true);
     //canvas.clear(SK_ColorWHITE);
     //canvas.translate(0.5f * scale, 0.5f * scale);
-    canvas.drawPath(path, p);
+    //canvas.drawPath(path, p);
 
     // ピクセルデータを書き込む
     //skBitmap.setPixels(image_pixels);

@@ -15,8 +15,8 @@ import {ImGuiEx} from 'raia_imgui_ex';
         glfw.windowHint(glfw.CONTEXT_VERSION_MINOR, 0);
         glfw.windowHint(glfw.OPENGL_PROFILE, glfw.OPENGL_CORE_PROFILE);
         glfw.windowHint(glfw.CONTEXT_CREATION_API, glfw.EGL_CONTEXT_API);
-        glfw.setErrorCallback();
-        glfw.setJoystickCallback();
+        glfw.setErrorCallbackDefault();
+        glfw.setJoystickCallbackDefault();
         globalThis.__RAIA_GUI__ = {};
     }
 })();

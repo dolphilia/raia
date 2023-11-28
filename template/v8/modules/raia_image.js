@@ -31,7 +31,7 @@ export class Image {
      */
     loadImage(pixels, width, height, filename, pos_x = 0, pos_y = 0) {
         var json_str = JSON.stringify({
-            "pixels": std.arrayBufferToPointer(pixels),
+            "pixels": std.bufToPtr(pixels),
             "width": width,
             "height": height,
             "filename": filename,
@@ -58,7 +58,7 @@ export class Image {
     loadJpgBlendRGB(pixels, width, height, filename, pos_x = 0, pos_y = 0,
         trim_x1 = 0, trim_y1 = 0, trim_x2 = -1, trim_y2 = -1) {
         var json_str = JSON.stringify({
-            "pixels": std.arrayBufferToPointer(pixels),
+            "pixels": std.bufToPtr(pixels),
             "width": width,
             "height": height,
             "filename": filename,
@@ -91,7 +91,7 @@ export class Image {
         pos_x = 0, pos_y = 0,
         trim_x1 = 0, trim_y1 = 0, trim_x2 = -1, trim_y2 = -1) {
         var json_str = JSON.stringify({
-            "pixels": std.arrayBufferToPointer(pixels),
+            "pixels": std.bufToPtr(pixels),
             "width": width,
             "height": height,
             "filename": filename,
@@ -122,7 +122,7 @@ export class Image {
     loadPngBlendRGB(pixels, width, height, filename, pos_x = 0, pos_y = 0,
         trim_x1 = 0, trim_y1 = 0, trim_x2 = -1, trim_y2 = -1) {
         var json_str = JSON.stringify({
-            "pixels": std.arrayBufferToPointer(pixels),
+            "pixels": std.bufToPtr(pixels),
             "width": width,
             "height": height,
             "filename": filename,
@@ -153,7 +153,7 @@ export class Image {
     loadPngBlendRGBA(pixels, width, height, filename, pos_x = 0, pos_y = 0,
         trim_x1 = 0, trim_y1 = 0, trim_x2 = -1, trim_y2 = -1) {
         var json_str = JSON.stringify({
-            "pixels": std.arrayBufferToPointer(pixels),
+            "pixels": std.bufToPtr(pixels),
             "width": width,
             "height": height,
             "filename": filename,

@@ -1,18 +1,4 @@
 import {Std} from "raia_std";
-
-// ffi(
-//     "func_name", 
-//     inout, type, value,
-//     ...
-// )
-//
-/*
-ffi(
-    "add",
-    false, "int", 5,
-    false, "int", 10
-)
-*/
 let std = new Std();
 
 
@@ -37,7 +23,7 @@ ret = __Raia__.Lib.ffi(
 
 std.print("return value:" + ret);
 
-var num_struct = __Raia__.Core.makeStruct(
+var num_struct = std.makeStruct(
     [
         ["sint", 1000],
         ["sint", 2000]
@@ -54,13 +40,11 @@ var result_value =  __Raia__.Lib.ffi(
 
 std.print("result:"+result_value);
 
-__Raia__.Core.deleteStruct(num_struct);
-
-
+std.delStruct(num_struct);
 
 
 let int32Array = new Int32Array([1, 2, 3, 4, 5]);
-let int32pointer = __Raia__.Core.arrayBufferToPointer(int32Array.buffer);
+let int32pointer = __Raia__.Core.bufToPtr(int32Array.buffer);
 
 __Raia__.Lib.ffi(
     "int_array", // 関数名
@@ -121,9 +105,11 @@ std.print("@:"+std.rand(-100.11, 100.323));
 
 import {Image} from 'raia_image';
 import {Font} from 'raia_font';
+
 import 'raia_gui';
+
 import {Window} from 'raia_window';
-import {Frame} from 'raia_frame'
+import {Frame} from 'raia_frame';
 import {Texture} from 'raia_texture';
 import {Draw} from 'raia_draw';
 
@@ -145,22 +131,32 @@ var font = new Font("Mplus1-Regular.ttf", 24);
 var font_size = font.drawCharRGBA(texture.pixels, 240, 240, "A", 40, 255, 255, 255, 0, 0);
 std.print(font_size.width + ":" + font_size.height);
 
+var version = window.glfw.getVersionString();
+std.print("GLFW Version: " + version);
 
+std.print("VulkanSupported: " + window.glfw.vulkanSupported());
+
+// std.print(window.glfw.windowShouldClose(window.id));
+// while(window.glfw.windowShouldClose(window.id) === 0) {
+//     window.glfw.swapBuffers(window.id);
+//     window.glfw.pollEvents();
+// }
 
 window.onUpdate(()=>{
     window.clear(0.45, 0.55, 0.6, 1.0);
     window.draw();
-
-    frame.start();
-    frame.imgui.setNextWindowBgAlpha(0.35);
-    var flags = 0;
-    flags |= frame.imgui.WindowFlags.NoTitleBar;
-    flags |= frame.imgui.WindowFlags.NoResize;
-    frame.imgui.begin("日本語", null, flags);
-    frame.text("フレームレート");
-    frame.imgui.separator();
-    frame.text(""+frame.imgui.getFramerate());
-    frame.imgui.end();
-    frame.render();
+    //frame.start();
+    //frame.imgui.setNextWindowBgAlpha(0.35);
+    //var flags = 0;
+    //flags |= frame.imgui.WindowFlags.NoTitleBar;
+    //flags |= frame.imgui.WindowFlags.NoResize;
+    //frame.imgui.begin("日本語", null, flags);
+    //frame.text("フレームレート");
+    //frame.imgui.separator();
+    //frame.text(""+frame.imgui.getFramerate());
+    //frame.imgui.end();
+    //frame.render();
     //__Raia__.GC.free();
 });
+
+

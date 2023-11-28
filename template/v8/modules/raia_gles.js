@@ -169,7 +169,7 @@ export class GLES {
             "border": border,
             "format": format,
             "type": type,
-            "pixels": std.arrayBufferToPointer(pixels)
+            "pixels": std.bufToPtr(pixels)
         });
         lib.call("raia_gl_tex_image_2d", args);
     }
@@ -437,7 +437,7 @@ export class GLES {
         var args = JSON.stringify({
             "target": target,
             "size": size,
-            "data": std.arrayBufferToPointer(data),
+            "data": std.bufToPtr(data),
             "usage": usage
         });
         lib.call("raia_gl_buffer_data", args);

@@ -151,6 +151,7 @@ extern "C" {
 #define v8_array_to_ptr(isolate, array, value) (void *)(uintptr_t)(array->Get(isolate->GetCurrentContext(), value).ToLocalChecked().As<v8::Number>()->Value())
 #define v8_array_to_buf(isolate, array, value) array->Get(isolate->GetCurrentContext(), num).ToLocalChecked().As<v8::ArrayBuffer>()
 #define v8_array_to_obj(isolate, array, value) array->Get(isolate->GetCurrentContext(), value).ToLocalChecked()->ToObject(isolate->GetCurrentContext()).ToLocalChecked()
+#define v8_array_to_value(isolate, array, value) array->Get(isolate->GetCurrentContext(), value).ToLocalChecked()
 
 #define v8_array_get(array, value) array->Get(args.GetIsolate()->GetCurrentContext(), value).ToLocalChecked()
 #define v8_array_to_array(array, value) array->Get(args.GetIsolate()->GetCurrentContext(), value).ToLocalChecked().As<v8::Array>()

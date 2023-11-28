@@ -50,7 +50,7 @@ export class Font {
     initFontBuffer(font_path, font_buffer) {
         var args = JSON.stringify({
             "font_path": font_path,
-            "font_buffer": std.arrayBufferToPointer(font_buffer)
+            "font_buffer": std.bufToPtr(font_buffer)
         });
         var ret = lib.call("raia_font_init_buffer", args);
         return JSON.parse(ret);
@@ -87,7 +87,7 @@ export class Font {
                 color_red, color_green, color_blue,
                 pos_x, pos_y) {
         var args = this.font_info;
-        args["pixels"] = std.arrayBufferToPointer(pixels);
+        args["pixels"] = std.bufToPtr(pixels);
         args["width"] = width;
         args["height"] = height;
         args["text"] = text;
@@ -119,7 +119,7 @@ export class Font {
                  color_red, color_green, color_blue,
                  pos_x, pos_y) {
         var args = this.font_info;
-        args["pixels"] = std.arrayBufferToPointer(pixels);
+        args["pixels"] = std.bufToPtr(pixels);
         args["width"] = width;
         args["height"] = height;
         args["text"] = text;

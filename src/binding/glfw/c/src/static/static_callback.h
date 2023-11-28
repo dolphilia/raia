@@ -18,6 +18,10 @@ typedef struct raia_callback_t{
     int joystick_callback_jid;
     int joystick_callback_event;
 
+    // monitor_callback
+    GLFWmonitor* monitor_callback_monitor;
+    int monitor_callback_event;
+
     // window_pos_callback
     GLFWwindow *window_pos_callback_window;
     int window_pos_callback_x;
@@ -46,6 +50,15 @@ typedef struct raia_callback_t{
     GLFWwindow *framebuffer_size_callback_window;
     int framebuffer_size_callback_width;
     int framebuffer_size_callback_height;
+
+    // window_maximize_callback
+    GLFWwindow *window_maximize_callback_window;
+    int window_maximize_callback_maximized;
+
+    // window_content_scale_callback
+    GLFWwindow* window_content_scale_callback_window;
+    float window_content_scale_callback_xscale;
+    float window_content_scale_callback_yscale;
 
     // key_callback
     GLFWwindow* key_callback_window;
@@ -108,6 +121,9 @@ void event_cursor_enter_callback(GLFWwindow* window, int entered);
 void event_scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void event_joystick_callback(int jid, int event);
 void event_drop_callback(GLFWwindow* window, int count, const char** paths);
+void event_window_maximize_callback(GLFWwindow* window, int maximized);
+void event_window_content_scale_callback(GLFWwindow* window, float xscale, float yscale);
+void event_monitor_callback(GLFWmonitor* monitor, int event);
 
 char *get_error_callback_t(void);
 char *get_joystick_callback_t(void);
@@ -126,5 +142,8 @@ char *get_char_mods_callback_t(void);
 char *get_cursor_enter_callback_t(void);
 char *get_scroll_callback_t(void);
 char *get_drop_callback_t(void);
+char *get_window_maximize_callback_t(void);
+char *get_window_content_scale_callback_t(void);
+char *get_event_monitor_callback_t(void);
 
 #endif //RAIA_APP_STATIC_CALLBACK_H

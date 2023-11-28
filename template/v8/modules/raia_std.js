@@ -21,20 +21,36 @@ export class Std {
         __Raia__.Core.exit(status);
     }
     /**
-     * @param {ArrayBuffer} buffer 
-     * @returns {uintptr}
-     */
-    arrayBufferToPointer(buffer) {
-        // @ts-ignore
-        return __Raia__.Core.arrayBufferToPointer(buffer);
-    }
-    /**
      * @param {uintptr} pointer 
      * @returns {ArrayBuffer}
      */
-    pointerToArrayBuffer(pointer) {
+    ptrToBuf(pointer) {
         // @ts-ignore
-        return __Raia__.Core.pointerToArrayBuffer(pointer);
+        return __Raia__.Core.ptrToBuf(pointer);
+    }
+    /**
+     * @param {ArrayBuffer} buffer 
+     * @returns {uintptr}
+     */
+    bufToPtr(buffer) {
+        // @ts-ignore
+        return __Raia__.Core.bufToPtr(buffer);
+    }
+    makeStruct(args_list) {
+        // @ts-ignore
+        return __Raia__.Core.makeStruct(args_list);
+    }
+    delStruct(obj) {
+        __Raia__.Core.delStruct(obj);
+    }
+    newPtr(size) {
+        return __Raia__.Core.newPtr(size);
+    }
+    delPtr(ptr) {
+        __Raia__.Core.delPtr(ptr);
+    }
+    ptrToInt(ptr) {
+        return __Raia__.Core.ptrToInt(ptr);
     }
     /**
      * @param {int} min 

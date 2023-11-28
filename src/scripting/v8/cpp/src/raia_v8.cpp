@@ -136,7 +136,13 @@ void raia_lib_ffi(const v8_args_t &args) {
                 ffi_args_values[i] = add_args_hash_to_string(arg_name.c_str(), dst);
                 ffi_args_type[i] = &ffi_type_pointer;
             } else if (arg_type == "pointer") {
-                void *value = v8_array_to_ptr(isolate, arg_list, 2);
+                auto local_value = v8_array_to_value(isolate, arg_list, 2);
+                void *value;
+                if (local_value->IsNull()) {
+                    value = nullptr;
+                } else {
+                    value = v8_array_to_ptr(isolate, arg_list, 2);
+                }
                 ffi_args_values[i] = add_args_hash_to_pointer(arg_name.c_str(), value);
                 ffi_args_type[i] = &ffi_type_pointer;
             } else if (arg_type == "struct") {
@@ -395,7 +401,7 @@ void raia_core_make_struct(const v8_args_t &args) {
     args.GetReturnValue().Set(obj);
 }
 
-void raia_core_delete_struct(const v8_args_t &args) {
+void raia_core_del_struct(const v8_args_t &args) {
     auto obj = v8_args_to_obj(args, 0);
     ffi_type **struct_types = (ffi_type **)(uintptr_t)v8_obj_to_ptr(args.GetIsolate(), obj, "types");
     void *struct_binary = (void *)(uintptr_t)v8_obj_to_ptr(args.GetIsolate(), obj, "binary");
@@ -404,7 +410,13 @@ void raia_core_delete_struct(const v8_args_t &args) {
     v8_rets_to_null(args);
 }
 
-void raia_core_delete_pointer(const v8_args_t &args) {
+void raia_core_new_ptr(const v8_args_t &args) {
+    auto size = v8_args_to_sint(args, 0);
+    void *ptr = (void *)malloc(size);
+    v8_rets_to_ptr(args, ptr);
+}
+
+void raia_core_del_ptr(const v8_args_t &args) {
     auto ptr = v8_args_to_ptr(args, 0);
     free(ptr);
     v8_rets_to_null(args);
@@ -424,6 +436,11 @@ void raia_core_ptr_to_buf(const v8_args_t &args) {
     v8_rets_to_buf(args, buf);
 }
 
+void raia_core_ptr_to_sint(const v8_args_t &args) {
+    auto ptr = v8_args_to_ptr(args, 0);
+    v8_rets_to_sint(args, *(int *)ptr);
+}
+
 void raia_gc_free(const v8_args_t &args) {
     args.GetIsolate()->LowMemoryNotification(); // メモリ不足時にガベージコレクションを強制的に実行する
     v8_rets_to_null(args);
@@ -438,11 +455,13 @@ int raia_v8_main(int argc, char *argv[]) {
     v8_set_obj(isolate, Core, Raia, "Core");
     v8_set_func(isolate, Core, "print", raia_core_print);
     v8_set_func(isolate, Core, "exit", raia_core_exit);
-    v8_set_func(isolate, Core, "pointerToArrayBuffer", raia_core_ptr_to_buf); // ptrToBuf
-    v8_set_func(isolate, Core, "arrayBufferToPointer", raia_core_buf_to_ptr); // bufToPtr
+    v8_set_func(isolate, Core, "ptrToBuf", raia_core_ptr_to_buf); // ptrToBuf
+    v8_set_func(isolate, Core, "bufToPtr", raia_core_buf_to_ptr); // bufToPtr
     v8_set_func(isolate, Core, "makeStruct", raia_core_make_struct);
-    v8_set_func(isolate, Core, "deleteStruct", raia_core_delete_struct);   // delStruct
-    v8_set_func(isolate, Core, "deletePointer", raia_core_delete_pointer); // delPtr
+    v8_set_func(isolate, Core, "delStruct", raia_core_del_struct);   // delStruct
+    v8_set_func(isolate, Core, "newPtr", raia_core_new_ptr); // delPtr
+    v8_set_func(isolate, Core, "delPtr", raia_core_del_ptr); // delPtr
+    v8_set_func(isolate, Core, "ptrToInt", raia_core_ptr_to_sint); // delPtr
     v8_set_obj(isolate, Lib, Raia, "Lib");
     v8_set_func(isolate, Lib, "open", raia_lib_open);
     v8_set_func(isolate, Lib, "close", raia_lib_close);

@@ -46,7 +46,7 @@ export class Draw {
      */
     noiseRGB_CPU(pixels, width, height) {
         var args = JSON.stringify({
-            "pixels": std.arrayBufferToPointer(pixels),
+            "pixels": std.bufToPtr(pixels),
             "width": width,
             "height": height
         });
@@ -54,7 +54,7 @@ export class Draw {
     }
     noiseRGB_GPU(pixels, width, height) {
         var args = JSON.stringify({
-            "pixels": std.arrayBufferToPointer(pixels),
+            "pixels": std.bufToPtr(pixels),
             "width": width,
             "height": height
         });
@@ -79,10 +79,10 @@ export class Draw {
                          position_x, position_y,
                          trimming_x1, trimming_y1, trimming_x2, trimming_y2) {
         var args = JSON.stringify({
-            "pixels_rgb": std.arrayBufferToPointer(pixels_rgb),
+            "pixels_rgb": std.bufToPtr(pixels_rgb),
             "pixels_rgb_width": pixels_rgb_width,
             "pixels_rgb_height": pixels_rgb_height,
-            "pixels_rgba": std.arrayBufferToPointer(pixels_rgba),
+            "pixels_rgba": std.bufToPtr(pixels_rgba),
             "pixels_rgba_width": pixels_rgba_width,
             "pixels_rgba_height": pixels_rgba_height,
             "position_x": position_x,
@@ -114,10 +114,10 @@ export class Draw {
                            position_x, position_y,
                            trimming_x1, trimming_y1, trimming_x2, trimming_y2) {
         var args = JSON.stringify({
-            "pixels_rgba_a": std.arrayBufferToPointer(pixels_rgba_a),
+            "pixels_rgba_a": std.bufToPtr(pixels_rgba_a),
             "pixels_rgba_a_width": pixels_rgba_a_width,
             "pixels_rgba_a_height": pixels_rgba_a_height,
-            "pixels_rgba_b": std.arrayBufferToPointer(pixels_rgba_b),
+            "pixels_rgba_b": std.bufToPtr(pixels_rgba_b),
             "pixels_rgba_b_width": pixels_rgba_b_width,
             "pixels_rgba_b_height": pixels_rgba_b_height,
             "position_x": position_x,
@@ -145,7 +145,7 @@ export class Draw {
              color_red, color_green, color_blue,
              canvas_width, canvas_height) {
         var args = JSON.stringify({
-            "pixels": std.arrayBufferToPointer(pixels),
+            "pixels": std.bufToPtr(pixels),
             "point_x": point_x,
             "point_y": point_y,
             "color_red": color_red,
@@ -172,7 +172,7 @@ export class Draw {
               point_x, point_y,
               color_red, color_green, color_blue, color_alpha) {
         var args = JSON.stringify({
-            "pixels": std.arrayBufferToPointer(pixels),
+            "pixels": std.bufToPtr(pixels),
             "canvas_width": canvas_width,
             "canvas_height": canvas_height,
             "point_x": point_x,
@@ -200,7 +200,7 @@ export class Draw {
                    point_x, point_y,
                    color_red, color_green, color_blue, color_alpha) {
         var args = JSON.stringify({
-            "pixels": std.arrayBufferToPointer(pixels),
+            "pixels": std.bufToPtr(pixels),
             "canvas_width": canvas_width,
             "canvas_height": canvas_height,
             "point_x": point_x,
@@ -229,7 +229,7 @@ export class Draw {
             start_x, start_y, end_x, end_y,
             color_red, color_green, color_blue) {
         var args = JSON.stringify({
-            "pixels": std.arrayBufferToPointer(pixels),
+            "pixels": std.bufToPtr(pixels),
             "canvas_width": canvas_width,
             "canvas_height": canvas_height,
             "start_x": start_x,
@@ -260,7 +260,7 @@ export class Draw {
              start_x, start_y, end_x, end_y,
              color_red, color_green, color_blue, color_alpha) {
         var args = JSON.stringify({
-            "pixels": std.arrayBufferToPointer(pixels),
+            "pixels": std.bufToPtr(pixels),
             "canvas_width": canvas_width,
             "canvas_height": canvas_height,
             "start_x": start_x,
@@ -291,7 +291,7 @@ export class Draw {
                 start_x, start_y, end_x, end_y,
                 color_red, color_green, color_blue) {
         var args = JSON.stringify({
-            "pixels": std.arrayBufferToPointer(pixels),
+            "pixels": std.bufToPtr(pixels),
             "canvas_width": canvas_width,
             "canvas_height": canvas_height,
             "start_x": start_x,
@@ -321,7 +321,7 @@ export class Draw {
                     start_x, start_y, end_x, end_y,
                     color_red, color_green, color_blue) {
         var args = JSON.stringify({
-            "pixels": std.arrayBufferToPointer(pixels),
+            "pixels": std.bufToPtr(pixels),
             "canvas_width": canvas_width,
             "canvas_height": canvas_height,
             "start_x": start_x,
@@ -352,7 +352,7 @@ export class Draw {
                  start_x, start_y, end_x, end_y,
                  color_red, color_green, color_blue, color_alpha) {
         var args = JSON.stringify({
-            "pixels": std.arrayBufferToPointer(pixels),
+            "pixels": std.bufToPtr(pixels),
             "canvas_width": canvas_width,
             "canvas_height": canvas_height,
             "start_x": start_x,
@@ -384,7 +384,7 @@ export class Draw {
                       start_x, start_y, end_x, end_y,
                       color_red, color_green, color_blue, color_alpha) {
         var args = JSON.stringify({
-            "pixels": std.arrayBufferToPointer(pixels),
+            "pixels": std.bufToPtr(pixels),
             "canvas_width": canvas_width,
             "canvas_height": canvas_height,
             "start_x": start_x,
@@ -415,7 +415,7 @@ export class Draw {
                    start_x, start_y, end_x, end_y,
                    color_red, color_green, color_blue) {
         var args = JSON.stringify({
-            "pixels": std.arrayBufferToPointer(pixels),
+            "pixels": std.bufToPtr(pixels),
             "canvas_width": canvas_width,
             "canvas_height": canvas_height,
             "start_x": start_x,
@@ -446,7 +446,7 @@ export class Draw {
                     start_x, start_y, end_x, end_y,
                     color_red, color_green, color_blue, color_alpha) {
         var args = JSON.stringify({
-            "pixels": std.arrayBufferToPointer(pixels),
+            "pixels": std.bufToPtr(pixels),
             "canvas_width": canvas_width,
             "canvas_height": canvas_height,
             "start_x": start_x,
@@ -477,7 +477,7 @@ export class Draw {
                          start_x, start_y, end_x, end_y,
                          color_red, color_green, color_blue) {
         var args = JSON.stringify({
-            "pixels": std.arrayBufferToPointer(pixels),
+            "pixels": std.bufToPtr(pixels),
             "canvas_width": canvas_width,
             "canvas_height": canvas_height,
             "start_x": start_x,
@@ -508,7 +508,7 @@ export class Draw {
                           start_x, start_y, end_x, end_y,
                           color_red, color_green, color_blue, color_alpha) {
         var args = JSON.stringify({
-            "pixels": std.arrayBufferToPointer(pixels),
+            "pixels": std.bufToPtr(pixels),
             "canvas_width": canvas_width,
             "canvas_height": canvas_height,
             "start_x": start_x,
@@ -539,7 +539,7 @@ export class Draw {
                             start_x, start_y, end_x, end_y,
                             color_red, color_green, color_blue) {
         var args = JSON.stringify({
-            "pixels": std.arrayBufferToPointer(pixels),
+            "pixels": std.bufToPtr(pixels),
             "canvas_width": canvas_width,
             "canvas_height": canvas_height,
             "start_x": start_x,

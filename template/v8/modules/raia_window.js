@@ -1,6 +1,8 @@
 import {GlfwEx} from 'raia_glfw_ex';
 import {GlesEx} from 'raia_gles_ex';
 import {ImGuiEx} from 'raia_imgui_ex';
+import {Std} from "raia_std";
+let std = new Std();
 
 export class Window {
     /**
@@ -21,7 +23,6 @@ export class Window {
         this.glfw.makeContextCurrent(this.id);
         this.glfw.swapInterval(1);
         this.glfw.setCallback(this.id);
-        //
         this.initShader();
     }
     /**
@@ -66,15 +67,17 @@ export class Window {
      * @param {real} alpha 0.0 ~ 1.0
      */
     clear(red, green, blue, alpha) {
-        const size = this.glfw.getFramebufferSize(this.id);
-        //if (size.width > this.width) {
-        //    this.gles.viewport(0, 0, size.width * 2, size.height * 2);
-        //} else {
-        this.gles.viewport(0, 0, size.width, size.height);
-        //}
+        var w_ptr = std.newPtr(4);
+        var h_ptr = std.newPtr(4);
+        this.glfw.getFramebufferSize(this.id, w_ptr, h_ptr);
+        var w = std.ptrToInt(w_ptr);
+        var h = std.ptrToInt(h_ptr);
+        std.delPtr(w_ptr);
+        std.delPtr(h_ptr);
+        // 
+        this.gles.viewport(0, 0, w, h);
         this.gles.clearColor(red, green, blue, alpha);
         this.gles.clear(this.gles.COLOR_BUFFER_BIT);
-        //this.gles.clearViewportColor(size.width, size.height, red, green, blue, alpha);
     }
     draw() {
         this.gles.setTextureRGB(this.texture, this.width, this.height, this.pixels);
