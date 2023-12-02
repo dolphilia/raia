@@ -134,7 +134,7 @@ std.print(font_size.width + ":" + font_size.height);
 var version = window.glfw.getVersionString();
 std.print("GLFW Version: " + version);
 
-std.print("VulkanSupported: " + window.glfw.vulkanSupported());
+//std.print("VulkanSupported: " + window.glfw.vulkanSupported());
 
 // std.print(window.glfw.windowShouldClose(window.id));
 // while(window.glfw.windowShouldClose(window.id) === 0) {
@@ -145,18 +145,16 @@ std.print("VulkanSupported: " + window.glfw.vulkanSupported());
 window.onUpdate(()=>{
     window.clear(0.45, 0.55, 0.6, 1.0);
     window.draw();
-    //frame.start();
-    //frame.imgui.setNextWindowBgAlpha(0.35);
-    //var flags = 0;
-    //flags |= frame.imgui.WindowFlags.NoTitleBar;
-    //flags |= frame.imgui.WindowFlags.NoResize;
-    //frame.imgui.begin("日本語", null, flags);
-    //frame.text("フレームレート");
-    //frame.imgui.separator();
-    //frame.text(""+frame.imgui.getFramerate());
-    //frame.imgui.end();
-    //frame.render();
+    frame.start();
+    frame.imgui.setNextWindowBgAlpha(0.35);
+    var flags = 0;
+    flags |= frame.imgui.WindowFlags.NoTitleBar;
+    flags |= frame.imgui.WindowFlags.NoResize;
+    frame.imgui.begin("日本語", null, flags);
+    frame.text("フレームレート");
+    frame.imgui.separator();
+    frame.text(""+frame.imgui.getFramerate());
+    frame.imgui.end();
+    frame.render();
     //__Raia__.GC.free();
 });
-
-

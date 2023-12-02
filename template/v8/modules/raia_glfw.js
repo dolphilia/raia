@@ -1,56 +1,26 @@
-//
-
 // sample code
 /*
-var glfw = new GLFW();
-glfw.init();
-glfw.windowHint(GLFW.CLIENT_API, GLFW.OPENGL_ES_API);
-glfw.windowHint(GLFW.CONTEXT_VERSION_MAJOR, 3);
-glfw.windowHint(GLFW.CONTEXT_VERSION_MINOR, 0);
-glfw.windowHint(GLFW.OPENGL_PROFILE, GLFW.OPENGL_CORE_PROFILE);
-glfw.windowHint(GLFW.CONTEXT_CREATION_API, GLFW.EGL_CONTEXT_API);
-glfw.setErrorCallbackDefault();
-glfw.setJoystickCallbackDefault();
-var window = glfw.createWindow(800, 600, "title");
-if(window === null) {
-    print("Window creation failed.");
-    glfw.terminate();
-    exit(1);
-}
-glfw.makeContextCurrent(window);
-glfw.swapInterval(1);
-var res_size = glfw.getFrameBufferSize(window);
-var res_width = res_size.width;
-var res_height = res_size.height;
+    import {GLFW} from 'raia_glfw';
 
-glfw.setKeyCallbackDefault(window);
-glfw.setFramebufferSizeCallbackDefault(window);
-glfw.setWindowPosCallbackDefault(window);
-glfw.setWindowSizeCallbackDefault(window);
-glfw.setWindowCloseCallbackDefault(window);
-glfw.setWindowRefreshCallbackDefault(window);
-glfw.setWindowFocusCallbackDefault(window);
-glfw.setWindowIconifyCallbackDefault(window);
-glfw.setCursorPosCallbackDefault(window);
-glfw.setMouseButtonCallbackDefault(window);
-glfw.setCharCallbackDefault(window);
-glfw.setCharModsCallbackDefault(window);
-glfw.setCorsorEnterCallbackDefault(window);
-glfw.setScrollCallbackDefault(window);
-glfw.setDropCallbackDefault(window);
+    const glfw = new GLFW();
 
-glfw.setWindowTitle(window, "f");
+    glfw.init();
+    glfw.windowHint(GLFW.CLIENT_API, GLFW.OPENGL_ES_API);
+    glfw.windowHint(GLFW.CONTEXT_VERSION_MAJOR, 3);
+    glfw.windowHint(GLFW.CONTEXT_VERSION_MINOR, 0);
+    glfw.windowHint(GLFW.OPENGL_PROFILE, GLFW.OPENGL_CORE_PROFILE);
+    glfw.windowHint(GLFW.CONTEXT_CREATION_API, GLFW.EGL_CONTEXT_API);
+    glfw.setErrorCallbackDefault();
+    glfw.setJoystickCallbackDefault();
 
-while(glfw.windowShouldClose(window) === 0) {
-    print("getTimerValue: " + glfw.getTimerValue());
-    print("getTimerFrequency: " + glfw.getTimerFrequency());
-    print("getTime: " + glfw.getTime());
-    print("joystickPresent: " + glfw.joystickPresent(0));
-    glfw.setWindowTitle(window, "" + glfw.getCursorPosCallback().xpos + ":" + glfw.getCursorPosCallback().ypos);
-    glfw.swapBuffers(window);
-    glfw.pollEvents();
-}
+    const window = glfw.createWindow(800, 600, "title");
+
+    while(glfw.windowShouldClose(window) === 0) {
+        glfw.swapBuffers(window);
+        glfw.pollEvents();
+    }
 */
+
 import {Lib} from "raia_lib";
 const lib = new Lib();
 
@@ -71,7 +41,7 @@ const lib = new Lib();
         lib.add(handle, "raia_glfw_get_version_string");
         lib.add(handle, "raia_glfw_get_error");
         lib.add(handle, "raia_glfw_set_error_callback");
-        lib.add(handle, "raia_glfw_get_error_default"); // 代替
+        lib.add(handle, "raia_glfw_get_error_default");          // 代替
         lib.add(handle, "raia_glfw_set_error_callback_default"); // 代替
         // 入力
         lib.add(handle, "raia_glfw_get_input_mode");
@@ -114,24 +84,24 @@ const lib = new Lib();
         lib.add(handle, "raia_glfw_set_time");
         lib.add(handle, "raia_glfw_get_timer_value");
         lib.add(handle, "raia_glfw_get_timer_frequency");
-        lib.add(handle, "raia_glfw_get_key_default"); // 代替
-        lib.add(handle, "raia_glfw_set_key_callback_default"); // 代替
-        lib.add(handle, "raia_glfw_get_char_default"); // 代替
-        lib.add(handle, "raia_glfw_set_char_callback_default"); // 代替
-        lib.add(handle, "raia_glfw_get_char_mods_default"); // 代替
-        lib.add(handle, "raia_glfw_set_char_mods_callback_default"); // 代替
-        lib.add(handle, "raia_glfw_get_mouse_button_default"); // 代替
+        lib.add(handle, "raia_glfw_get_key_default");                   // 代替
+        lib.add(handle, "raia_glfw_set_key_callback_default");          // 代替
+        lib.add(handle, "raia_glfw_get_char_default");                  // 代替
+        lib.add(handle, "raia_glfw_set_char_callback_default");         // 代替
+        lib.add(handle, "raia_glfw_get_char_mods_default");             // 代替
+        lib.add(handle, "raia_glfw_set_char_mods_callback_default");    // 代替
+        lib.add(handle, "raia_glfw_get_mouse_button_default");          // 代替
         lib.add(handle, "raia_glfw_set_mouse_button_callback_default"); // 代替
-        lib.add(handle, "raia_glfw_get_cursor_pos_default"); // 代替
-        lib.add(handle, "raia_glfw_set_cursor_pos_callback_default"); // 代替
-        lib.add(handle, "raia_glfw_get_cursor_enter_default"); // 代替
+        lib.add(handle, "raia_glfw_get_cursor_pos_default");            // 代替
+        lib.add(handle, "raia_glfw_set_cursor_pos_callback_default");   // 代替
+        lib.add(handle, "raia_glfw_get_cursor_enter_default");          // 代替
         lib.add(handle, "raia_glfw_set_cursor_enter_callback_default"); // 代替
-        lib.add(handle, "raia_glfw_get_scroll_default"); // 代替
-        lib.add(handle, "raia_glfw_set_scroll_callback_default"); // 代替
-        lib.add(handle, "raia_glfw_get_drop_default"); // 代替
-        lib.add(handle, "raia_glfw_set_drop_callback_default"); // 代替
-        lib.add(handle, "raia_glfw_get_joystick_default"); // 代替
-        lib.add(handle, "raia_glfw_set_joystick_callback_default"); // 代替
+        lib.add(handle, "raia_glfw_get_scroll_default");                // 代替
+        lib.add(handle, "raia_glfw_set_scroll_callback_default");       // 代替
+        lib.add(handle, "raia_glfw_get_drop_default");                  // 代替
+        lib.add(handle, "raia_glfw_set_drop_callback_default");         // 代替
+        lib.add(handle, "raia_glfw_get_joystick_default");              // 代替
+        lib.add(handle, "raia_glfw_set_joystick_callback_default");     // 代替
         // モニター
         lib.add(handle, "raia_glfw_get_monitors");
         lib.add(handle, "raia_glfw_get_primary_monitor");
@@ -148,7 +118,7 @@ const lib = new Lib();
         lib.add(handle, "raia_glfw_set_gamma");
         lib.add(handle, "raia_glfw_get_gamma_ramp");
         lib.add(handle, "raia_glfw_set_gamma_ramp");
-        lib.add(handle, "raia_glfw_get_monitor_default"); // 代替
+        lib.add(handle, "raia_glfw_get_monitor_default");          // 代替
         lib.add(handle, "raia_glfw_set_monitor_callback_default"); // 代替
         // ネイティブアクセス
         // Vulkanサポート
@@ -201,38 +171,362 @@ const lib = new Lib();
         lib.add(handle, "raia_glfw_wait_event_timeout");
         lib.add(handle, "raia_glfw_post_empty_event");
         lib.add(handle, "raia_glfw_swap_buffers");
-        lib.add(handle, "raia_glfw_get_window_pos_default"); // 代替
-        lib.add(handle, "raia_glfw_set_window_pos_callback_default"); // 代替
-        lib.add(handle, "raia_glfw_get_window_size_default"); // 代替
-        lib.add(handle, "raia_glfw_set_window_size_callback_default"); // 代替
-        lib.add(handle, "raia_glfw_get_window_close_default"); // 代替
-        lib.add(handle, "raia_glfw_set_window_close_callback_default"); // 代替
-        lib.add(handle, "raia_glfw_get_window_refresh_default"); // 代替
-        lib.add(handle, "raia_glfw_set_window_refresh_callback_default"); // 代替
-        lib.add(handle, "raia_glfw_get_window_focus_default"); // 代替
-        lib.add(handle, "raia_glfw_set_window_focus_callback_default"); // 代替
-        lib.add(handle, "raia_glfw_get_window_iconify_default"); // 代替
-        lib.add(handle, "raia_glfw_set_window_iconify_callback_default"); // 代替
-        lib.add(handle, "raia_glfw_get_window_maximize_default"); // 代替
-        lib.add(handle, "raia_glfw_set_window_maximize_callback_default"); // 代替
-        lib.add(handle, "raia_glfw_get_framebuffer_size_default"); // 代替
-        lib.add(handle, "raia_glfw_set_framebuffer_size_callback_default"); // 代替
-        lib.add(handle, "raia_glfw_get_window_content_scale_default"); // 代替
+        lib.add(handle, "raia_glfw_get_window_pos_default");                    // 代替
+        lib.add(handle, "raia_glfw_set_window_pos_callback_default");           // 代替
+        lib.add(handle, "raia_glfw_get_window_size_default");                   // 代替
+        lib.add(handle, "raia_glfw_set_window_size_callback_default");          // 代替
+        lib.add(handle, "raia_glfw_get_window_close_default");                  // 代替
+        lib.add(handle, "raia_glfw_set_window_close_callback_default");         // 代替
+        lib.add(handle, "raia_glfw_get_window_refresh_default");                // 代替
+        lib.add(handle, "raia_glfw_set_window_refresh_callback_default");       // 代替
+        lib.add(handle, "raia_glfw_get_window_focus_default");                  // 代替
+        lib.add(handle, "raia_glfw_set_window_focus_callback_default");         // 代替
+        lib.add(handle, "raia_glfw_get_window_iconify_default");                // 代替
+        lib.add(handle, "raia_glfw_set_window_iconify_callback_default");       // 代替
+        lib.add(handle, "raia_glfw_get_window_maximize_default");               // 代替
+        lib.add(handle, "raia_glfw_set_window_maximize_callback_default");      // 代替
+        lib.add(handle, "raia_glfw_get_framebuffer_size_default");              // 代替
+        lib.add(handle, "raia_glfw_set_framebuffer_size_callback_default");     // 代替
+        lib.add(handle, "raia_glfw_get_window_content_scale_default");          // 代替
         lib.add(handle, "raia_glfw_set_window_content_scale_callback_default"); // 代替
         globalThis.__RAIA_GLFW__ = {};
     }
 })();
 
 export class GLFW {
+
+    static VERSION_MAJOR                   = 3;
+    static VERSION_MINOR                   = 4;
+    static VERSION_REVISION                = 0;
+    static TRUE                            = 1;
+    static FALSE                           = 0;
+    static RELEASE                         = 0;
+    static PRESS                           = 1;
+    static REPEAT                          = 2;
+    static HAT_CENTERED                    = 0;
+    static HAT_UP                          = 1;
+    static HAT_RIGHT                       = 2;
+    static HAT_DOWN                        = 4;
+    static HAT_LEFT                        = 8;
+    static HAT_RIGHT_UP                    = (this.HAT_RIGHT | this.HAT_UP);
+    static HAT_RIGHT_DOWN                  = (this.HAT_RIGHT | this.HAT_DOWN);
+    static HAT_LEFT_UP                     = (this.HAT_LEFT  | this.HAT_UP);
+    static HAT_LEFT_DOWN                   = (this.HAT_LEFT  | this.HAT_DOWN);
+    static KEY_UNKNOWN                     = -1;
+    static KEY_SPACE                       = 32;
+    static KEY_APOSTROPHE                  = 39  /* ' */;
+    static KEY_COMMA                       = 44  /* , */;
+    static KEY_MINUS                       = 45  /* - */;
+    static KEY_PERIOD                      = 46  /* . */;
+    static KEY_SLASH                       = 47  /* / */;
+    static KEY_0                           = 48;
+    static KEY_1                           = 49;
+    static KEY_2                           = 50;
+    static KEY_3                           = 51;
+    static KEY_4                           = 52;
+    static KEY_5                           = 53;
+    static KEY_6                           = 54;
+    static KEY_7                           = 55;
+    static KEY_8                           = 56;
+    static KEY_9                           = 57;
+    static KEY_SEMICOLON                   = 59  /* ; */;
+    static KEY_EQUAL                       = 61  /* = */;
+    static KEY_A                           = 65;
+    static KEY_B                           = 66;
+    static KEY_C                           = 67;
+    static KEY_D                           = 68;
+    static KEY_E                           = 69;
+    static KEY_F                           = 70;
+    static KEY_G                           = 71;
+    static KEY_H                           = 72;
+    static KEY_I                           = 73;
+    static KEY_J                           = 74;
+    static KEY_K                           = 75;
+    static KEY_L                           = 76;
+    static KEY_M                           = 77;
+    static KEY_N                           = 78;
+    static KEY_O                           = 79;
+    static KEY_P                           = 80;
+    static KEY_Q                           = 81;
+    static KEY_R                           = 82;
+    static KEY_S                           = 83;
+    static KEY_T                           = 84;
+    static KEY_U                           = 85;
+    static KEY_V                           = 86;
+    static KEY_W                           = 87;
+    static KEY_X                           = 88;
+    static KEY_Y                           = 89;
+    static KEY_Z                           = 90;
+    static KEY_LEFT_BRACKET                = 91  /* [ */;
+    static KEY_BACKSLASH                   = 92  /* \ */;
+    static KEY_RIGHT_BRACKET               = 93  /* ] */;
+    static KEY_GRAVE_ACCENT                = 96  /* ` */;
+    static KEY_WORLD_1                     = 161 /* non-US #1 */;
+    static KEY_WORLD_2                     = 162 /* non-US #2 */;
+    static KEY_ESCAPE                      = 256;
+    static KEY_ENTER                       = 257;
+    static KEY_TAB                         = 258;
+    static KEY_BACKSPACE                   = 259;
+    static KEY_INSERT                      = 260;
+    static KEY_DELETE                      = 261;
+    static KEY_RIGHT                       = 262;
+    static KEY_LEFT                        = 263;
+    static KEY_DOWN                        = 264;
+    static KEY_UP                          = 265;
+    static KEY_PAGE_UP                     = 266;
+    static KEY_PAGE_DOWN                   = 267;
+    static KEY_HOME                        = 268;
+    static KEY_END                         = 269;
+    static KEY_CAPS_LOCK                   = 280;
+    static KEY_SCROLL_LOCK                 = 281;
+    static KEY_NUM_LOCK                    = 282;
+    static KEY_PRINT_SCREEN                = 283;
+    static KEY_PAUSE                       = 284;
+    static KEY_F1                          = 290;
+    static KEY_F2                          = 291;
+    static KEY_F3                          = 292;
+    static KEY_F4                          = 293;
+    static KEY_F5                          = 294;
+    static KEY_F6                          = 295;
+    static KEY_F7                          = 296;
+    static KEY_F8                          = 297;
+    static KEY_F9                          = 298;
+    static KEY_F10                         = 299;
+    static KEY_F11                         = 300;
+    static KEY_F12                         = 301;
+    static KEY_F13                         = 302;
+    static KEY_F14                         = 303;
+    static KEY_F15                         = 304;
+    static KEY_F16                         = 305;
+    static KEY_F17                         = 306;
+    static KEY_F18                         = 307;
+    static KEY_F19                         = 308;
+    static KEY_F20                         = 309;
+    static KEY_F21                         = 310;
+    static KEY_F22                         = 311;
+    static KEY_F23                         = 312;
+    static KEY_F24                         = 313;
+    static KEY_F25                         = 314;
+    static KEY_KP_0                        = 320;
+    static KEY_KP_1                        = 321;
+    static KEY_KP_2                        = 322;
+    static KEY_KP_3                        = 323;
+    static KEY_KP_4                        = 324;
+    static KEY_KP_5                        = 325;
+    static KEY_KP_6                        = 326;
+    static KEY_KP_7                        = 327;
+    static KEY_KP_8                        = 328;
+    static KEY_KP_9                        = 329;
+    static KEY_KP_DECIMAL                  = 330;
+    static KEY_KP_DIVIDE                   = 331;
+    static KEY_KP_MULTIPLY                 = 332;
+    static KEY_KP_SUBTRACT                 = 333;
+    static KEY_KP_ADD                      = 334;
+    static KEY_KP_ENTER                    = 335;
+    static KEY_KP_EQUAL                    = 336;
+    static KEY_LEFT_SHIFT                  = 340;
+    static KEY_LEFT_CONTROL                = 341;
+    static KEY_LEFT_ALT                    = 342;
+    static KEY_LEFT_SUPER                  = 343;
+    static KEY_RIGHT_SHIFT                 = 344;
+    static KEY_RIGHT_CONTROL               = 345;
+    static KEY_RIGHT_ALT                   = 346;
+    static KEY_RIGHT_SUPER                 = 347;
+    static KEY_MENU                        = 348;
+    static KEY_LAST                        = this.KEY_MENU;
+    static MOD_SHIFT                       = 0x0001;
+    static MOD_CONTROL                     = 0x0002;
+    static MOD_ALT                         = 0x0004;
+    static MOD_SUPER                       = 0x0008;
+    static MOD_CAPS_LOCK                   = 0x0010;
+    static MOD_NUM_LOCK                    = 0x0020;
+    static MOUSE_BUTTON_1                  = 0;
+    static MOUSE_BUTTON_2                  = 1;
+    static MOUSE_BUTTON_3                  = 2;
+    static MOUSE_BUTTON_4                  = 3;
+    static MOUSE_BUTTON_5                  = 4;
+    static MOUSE_BUTTON_6                  = 5;
+    static MOUSE_BUTTON_7                  = 6;
+    static MOUSE_BUTTON_8                  = 7;
+    static MOUSE_BUTTON_LAST               = this.MOUSE_BUTTON_8;
+    static MOUSE_BUTTON_LEFT               = this.MOUSE_BUTTON_1;
+    static MOUSE_BUTTON_RIGHT              = this.MOUSE_BUTTON_2;
+    static MOUSE_BUTTON_MIDDLE             = this.MOUSE_BUTTON_3;
+    static JOYSTICK_1                      = 0;
+    static JOYSTICK_2                      = 1;
+    static JOYSTICK_3                      = 2;
+    static JOYSTICK_4                      = 3;
+    static JOYSTICK_5                      = 4;
+    static JOYSTICK_6                      = 5;
+    static JOYSTICK_7                      = 6;
+    static JOYSTICK_8                      = 7;
+    static JOYSTICK_9                      = 8;
+    static JOYSTICK_10                     = 9;
+    static JOYSTICK_11                     = 10;
+    static JOYSTICK_12                     = 11;
+    static JOYSTICK_13                     = 12;
+    static JOYSTICK_14                     = 13;
+    static JOYSTICK_15                     = 14;
+    static JOYSTICK_16                     = 15;
+    static JOYSTICK_LAST                   = this.JOYSTICK_16;
+    static GAMEPAD_BUTTON_A                = 0;
+    static GAMEPAD_BUTTON_B                = 1;
+    static GAMEPAD_BUTTON_X                = 2;
+    static GAMEPAD_BUTTON_Y                = 3;
+    static GAMEPAD_BUTTON_LEFT_BUMPER      = 4;
+    static GAMEPAD_BUTTON_RIGHT_BUMPER     = 5;
+    static GAMEPAD_BUTTON_BACK             = 6;
+    static GAMEPAD_BUTTON_START            = 7;
+    static GAMEPAD_BUTTON_GUIDE            = 8;
+    static GAMEPAD_BUTTON_LEFT_THUMB       = 9;
+    static GAMEPAD_BUTTON_RIGHT_THUMB      = 10;
+    static GAMEPAD_BUTTON_DPAD_UP          = 11;
+    static GAMEPAD_BUTTON_DPAD_RIGHT       = 12;
+    static GAMEPAD_BUTTON_DPAD_DOWN        = 13;
+    static GAMEPAD_BUTTON_DPAD_LEFT        = 14;
+    static GAMEPAD_BUTTON_LAST             = this.GAMEPAD_BUTTON_DPAD_LEFT;
+    static GAMEPAD_BUTTON_CROSS            = this.GAMEPAD_BUTTON_A;
+    static GAMEPAD_BUTTON_CIRCLE           = this.GAMEPAD_BUTTON_B;
+    static GAMEPAD_BUTTON_SQUARE           = this.GAMEPAD_BUTTON_X;
+    static GAMEPAD_BUTTON_TRIANGLE         = this.GAMEPAD_BUTTON_Y;
+    static GAMEPAD_AXIS_LEFT_X             = 0;
+    static GAMEPAD_AXIS_LEFT_Y             = 1;
+    static GAMEPAD_AXIS_RIGHT_X            = 2;
+    static GAMEPAD_AXIS_RIGHT_Y            = 3;
+    static GAMEPAD_AXIS_LEFT_TRIGGER       = 4;
+    static GAMEPAD_AXIS_RIGHT_TRIGGER      = 5;
+    static GAMEPAD_AXIS_LAST               = this.GAMEPAD_AXIS_RIGHT_TRIGGER;
+    static NO_ERROR                        = 0;
+    static NOT_INITIALIZED                 = 0x00010001;
+    static NO_CURRENT_CONTEXT              = 0x00010002;
+    static INVALID_ENUM                    = 0x00010003;
+    static INVALID_VALUE                   = 0x00010004;
+    static OUT_OF_MEMORY                   = 0x00010005;
+    static API_UNAVAILABLE                 = 0x00010006;
+    static VERSION_UNAVAILABLE             = 0x00010007;
+    static PLATFORM_ERROR                  = 0x00010008;
+    static FORMAT_UNAVAILABLE              = 0x00010009;
+    static NO_WINDOW_CONTEXT               = 0x0001000A;
+    static CURSOR_UNAVAILABLE              = 0x0001000B;
+    static FEATURE_UNAVAILABLE             = 0x0001000C;
+    static FEATURE_UNIMPLEMENTED           = 0x0001000D;
+    static PLATFORM_UNAVAILABLE            = 0x0001000E;
+    static FOCUSED                         = 0x00020001;
+    static ICONIFIED                       = 0x00020002;
+    static RESIZABLE                       = 0x00020003;
+    static VISIBLE                         = 0x00020004;
+    static DECORATED                       = 0x00020005;
+    static AUTO_ICONIFY                    = 0x00020006;
+    static FLOATING                        = 0x00020007;
+    static MAXIMIZED                       = 0x00020008;
+    static CENTER_CURSOR                   = 0x00020009;
+    static TRANSPARENT_FRAMEBUFFER         = 0x0002000A;
+    static HOVERED                         = 0x0002000B;
+    static FOCUS_ON_SHOW                   = 0x0002000C;
+    static MOUSE_PASSTHROUGH               = 0x0002000D;
+    static POSITION_X                      = 0x0002000E;
+    static POSITION_Y                      = 0x0002000F;
+    static RED_BITS                        = 0x00021001;
+    static GREEN_BITS                      = 0x00021002;
+    static BLUE_BITS                       = 0x00021003;
+    static ALPHA_BITS                      = 0x00021004;
+    static DEPTH_BITS                      = 0x00021005;
+    static STENCIL_BITS                    = 0x00021006;
+    static ACCUM_RED_BITS                  = 0x00021007;
+    static ACCUM_GREEN_BITS                = 0x00021008;
+    static ACCUM_BLUE_BITS                 = 0x00021009;
+    static ACCUM_ALPHA_BITS                = 0x0002100A;
+    static AUX_BUFFERS                     = 0x0002100B;
+    static STEREO                          = 0x0002100C;
+    static SAMPLES                         = 0x0002100D;
+    static SRGB_CAPABLE                    = 0x0002100E;
+    static REFRESH_RATE                    = 0x0002100F;
+    static DOUBLEBUFFER                    = 0x00021010;
+    static CLIENT_API                      = 0x00022001;
+    static CONTEXT_VERSION_MAJOR           = 0x00022002;
+    static CONTEXT_VERSION_MINOR           = 0x00022003;
+    static CONTEXT_REVISION                = 0x00022004;
+    static CONTEXT_ROBUSTNESS              = 0x00022005;
+    static OPENGL_FORWARD_COMPAT           = 0x00022006;
+    static CONTEXT_DEBUG                   = 0x00022007;
+    static OPENGL_DEBUG_CONTEXT            = this.CONTEXT_DEBUG;
+    static OPENGL_PROFILE                  = 0x00022008;
+    static CONTEXT_RELEASE_BEHAVIOR        = 0x00022009;
+    static CONTEXT_NO_ERROR                = 0x0002200A;
+    static CONTEXT_CREATION_API            = 0x0002200B;
+    static SCALE_TO_MONITOR                = 0x0002200C;
+    static COCOA_RETINA_FRAMEBUFFER        = 0x00023001;
+    static COCOA_FRAME_NAME                = 0x00023002;
+    static COCOA_GRAPHICS_SWITCHING        = 0x00023003;
+    static X11_CLASS_NAME                  = 0x00024001;
+    static X11_INSTANCE_NAME               = 0x00024002;
+    static WIN32_KEYBOARD_MENU             = 0x00025001;
+    static WAYLAND_APP_ID                  = 0x00026001;
+    static NO_API                          = 0;
+    static OPENGL_API                      = 0x00030001;
+    static OPENGL_ES_API                   = 0x00030002;
+    static NO_ROBUSTNESS                   = 0;
+    static NO_RESET_NOTIFICATION           = 0x00031001;
+    static LOSE_CONTEXT_ON_RESET           = 0x00031002;
+    static OPENGL_ANY_PROFILE              = 0;
+    static OPENGL_CORE_PROFILE             = 0x00032001;
+    static OPENGL_COMPAT_PROFILE           = 0x00032002;
+    static CURSOR                          = 0x00033001;
+    static STICKY_KEYS                     = 0x00033002;
+    static STICKY_MOUSE_BUTTONS            = 0x00033003;
+    static LOCK_KEY_MODS                   = 0x00033004;
+    static RAW_MOUSE_MOTION                = 0x00033005;
+    static CURSOR_NORMAL                   = 0x00034001;
+    static CURSOR_HIDDEN                   = 0x00034002;
+    static CURSOR_DISABLED                 = 0x00034003;
+    static CURSOR_CAPTURED                 = 0x00034004;
+    static ANY_RELEASE_BEHAVIOR            = 0;
+    static RELEASE_BEHAVIOR_FLUSH          = 0x00035001;
+    static RELEASE_BEHAVIOR_NONE           = 0x00035002;
+    static NATIVE_CONTEXT_API              = 0x00036001;
+    static EGL_CONTEXT_API                 = 0x00036002;
+    static OSMESA_CONTEXT_API              = 0x00036003;
+    static ANGLE_PLATFORM_TYPE_NONE        = 0x00037001;
+    static ANGLE_PLATFORM_TYPE_OPENGL      = 0x00037002;
+    static ANGLE_PLATFORM_TYPE_OPENGLES    = 0x00037003;
+    static ANGLE_PLATFORM_TYPE_D3D9        = 0x00037004;
+    static ANGLE_PLATFORM_TYPE_D3D11       = 0x00037005;
+    static ANGLE_PLATFORM_TYPE_VULKAN      = 0x00037007;
+    static ANGLE_PLATFORM_TYPE_METAL       = 0x00037008;
+    static WAYLAND_PREFER_LIBDECOR         = 0x00038001;
+    static WAYLAND_DISABLE_LIBDECOR        = 0x00038002;
+    static ANY_POSITION                    = 0x80000000;
+    static ARROW_CURSOR                    = 0x00036001;
+    static IBEAM_CURSOR                    = 0x00036002;
+    static CROSSHAIR_CURSOR                = 0x00036003;
+    static POINTING_HAND_CURSOR            = 0x00036004;
+    static RESIZE_EW_CURSOR                = 0x00036005;
+    static RESIZE_NS_CURSOR                = 0x00036006;
+    static RESIZE_NWSE_CURSOR              = 0x00036007;
+    static RESIZE_NESW_CURSOR              = 0x00036008;
+    static RESIZE_ALL_CURSOR               = 0x00036009;
+    static NOT_ALLOWED_CURSOR              = 0x0003600A;
+    static HRESIZE_CURSOR                  = this.RESIZE_EW_CURSOR;
+    static VRESIZE_CURSOR                  = this.RESIZE_NS_CURSOR;
+    static HAND_CURSOR                     = this.POINTING_HAND_CURSOR;
+    static CONNECTED                       = 0x00040001;
+    static DISCONNECTED                    = 0x00040002;
+    static JOYSTICK_HAT_BUTTONS            = 0x00050001;
+    static ANGLE_PLATFORM_TYPE             = 0x00050002;
+    static PLATFORM                        = 0x00050003;
+    static COCOA_CHDIR_RESOURCES           = 0x00051001;
+    static COCOA_MENUBAR                   = 0x00051002;
+    static X11_XCB_VULKAN_SURFACE          = 0x00052001;
+    static WAYLAND_LIBDECOR                = 0x00053001;
+    static ANY_PLATFORM                    = 0x00060000;
+    static PLATFORM_WIN32                  = 0x00060001;
+    static PLATFORM_COCOA                  = 0x00060002;
+    static PLATFORM_WAYLAND                = 0x00060003;
+    static PLATFORM_X11                    = 0x00060004;
+    static PLATFORM_NULL                   = 0x00060005;
+    static DONT_CARE                       = -1;
+
     constructor() {
-        this.CLIENT_API = 0x00022001;
-        this.CONTEXT_VERSION_MAJOR = 0x00022002;
-        this.CONTEXT_VERSION_MINOR = 0x00022003;
-        this.OPENGL_PROFILE = 0x00022008;
-        this.CONTEXT_CREATION_API = 0x0002200B;
-        this.OPENGL_ES_API = 0x00030002;
-        this.OPENGL_CORE_PROFILE = 0x00032001;
-        this.EGL_CONTEXT_API = 0x00036002;
     }
 
 //

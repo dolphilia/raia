@@ -10,11 +10,11 @@ import {ImGuiEx} from 'raia_imgui_ex';
     if (globalThis.__RAIA_GUI__ === undefined) {
         const glfw = new GLFW();
         glfw.init();
-        glfw.windowHint(glfw.CLIENT_API, glfw.OPENGL_ES_API);
-        glfw.windowHint(glfw.CONTEXT_VERSION_MAJOR, 3);
-        glfw.windowHint(glfw.CONTEXT_VERSION_MINOR, 0);
-        glfw.windowHint(glfw.OPENGL_PROFILE, glfw.OPENGL_CORE_PROFILE);
-        glfw.windowHint(glfw.CONTEXT_CREATION_API, glfw.EGL_CONTEXT_API);
+        glfw.windowHint(GLFW.CLIENT_API, GLFW.OPENGL_ES_API);
+        glfw.windowHint(GLFW.CONTEXT_VERSION_MAJOR, 3);
+        glfw.windowHint(GLFW.CONTEXT_VERSION_MINOR, 0);
+        glfw.windowHint(GLFW.OPENGL_PROFILE, GLFW.OPENGL_CORE_PROFILE);
+        glfw.windowHint(GLFW.CONTEXT_CREATION_API, GLFW.EGL_CONTEXT_API);
         glfw.setErrorCallbackDefault();
         glfw.setJoystickCallbackDefault();
         globalThis.__RAIA_GUI__ = {};

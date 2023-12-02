@@ -7,9 +7,9 @@ export class GlesEx extends GLES {
      * @returns {uint}
      */
     createVertexShader(source) {
-        var vs = super.createShader(this.VERTEX_SHADER);
-        super.shaderSource(vs, 1, source, null);
-        super.compileShader(vs);
+        var vs = super.createShaderAlt(GLES.VERTEX_SHADER);
+        super.shaderSourceAlt(vs, 1, source, null);
+        super.compileShaderAlt(vs);
         return vs;
     }
     /**
@@ -18,9 +18,9 @@ export class GlesEx extends GLES {
      * @returns {uint}
      */
     createFragmentShader(source) {
-        var fs = super.createShader(this.FRAGMENT_SHADER);
-        super.shaderSource(fs, 1, source, null);
-        super.compileShader(fs);
+        var fs = super.createShaderAlt(GLES.FRAGMENT_SHADER);
+        super.shaderSourceAlt(fs, 1, source, null);
+        super.compileShaderAlt(fs);
         return fs;
     }
     /**
@@ -32,12 +32,12 @@ export class GlesEx extends GLES {
     createShaderProgram(vs_src, fs_src) {
         var vs = this.createVertexShader(vs_src);
         var fs = this.createFragmentShader(fs_src);
-        var program = super.createProgram();
-        super.attachShader(program, vs);
-        super.attachShader(program, fs);
-        super.deleteShader(vs);
-        super.deleteShader(fs);
-        super.linkProgram(program);
+        var program = super.createProgramAlt();
+        super.attachShaderAlt(program, vs);
+        super.attachShaderAlt(program, fs);
+        super.deleteShaderAlt(vs);
+        super.deleteShaderAlt(fs);
+        super.linkProgramAlt(program);
         return program;
     }
     /**
@@ -74,9 +74,9 @@ export class GlesEx extends GLES {
      * @param {real} alpha 
      */
     clearViewportColor(width, height, red, green, blue, alpha) {
-        super.viewport(0, 0, width, height);
-        super.clearColor(red, green, blue, alpha);
-        super.clear(this.COLOR_BUFFER_BIT);
+        super.viewportAlt(0, 0, width, height);
+        super.clearColorAlt(red, green, blue, alpha);
+        super.clearAlt(GLES.COLOR_BUFFER_BIT);
     }
     /**
      * 
@@ -87,11 +87,11 @@ export class GlesEx extends GLES {
      * @param {int} color_type 
      */
     setTexture(texture, width, height, pixels, color_type) {
-        super.pixelStorei(this.UNPACK_ALIGNMENT, 1);
-        super.bindTexture(this.TEXTURE_2D, texture);
-        super.texImage2D(this.TEXTURE_2D, 0, color_type, width, height, 0, color_type, this.UNSIGNED_BYTE, pixels);
-        super.texParameteri(this.TEXTURE_2D, this.TEXTURE_MIN_FILTER, this.LINEAR);
-        super.texParameteri(this.TEXTURE_2D, this.TEXTURE_MAG_FILTER, this.LINEAR);
+        super.pixelStoreiAlt(GLES.UNPACK_ALIGNMENT, 1);
+        super.bindTextureAlt(GLES.TEXTURE_2D, texture);
+        super.texImage2DAlt(GLES.TEXTURE_2D, 0, color_type, width, height, 0, color_type, GLES.UNSIGNED_BYTE, pixels);
+        super.texParameteriAlt(GLES.TEXTURE_2D, GLES.TEXTURE_MIN_FILTER, GLES.LINEAR);
+        super.texParameteriAlt(GLES.TEXTURE_2D, GLES.TEXTURE_MAG_FILTER, GLES.LINEAR);
     }
     /**
      * 
@@ -101,7 +101,7 @@ export class GlesEx extends GLES {
      * @param {ArrayBuffer} pixels 
      */
     setTextureRGB(texture, width, height, pixels) {
-        this.setTexture(texture, width, height, pixels, this.RGB);
+        this.setTexture(texture, width, height, pixels, GLES.RGB);
     }
     /**
      * 
@@ -111,7 +111,7 @@ export class GlesEx extends GLES {
      * @param {ArrayBuffer} pixels 
      */
     setTextureRGBA(texture, width, height, pixels) {
-        this.setTexture(texture, width, height, pixels, this.RGBA);
+        this.setTexture(texture, width, height, pixels, GLES.RGBA);
     }
     /**
      * 
@@ -131,29 +131,29 @@ export class GlesEx extends GLES {
             1.0,  0.0          // TexCoord 3
         ]);
         var indices = new Uint32Array([0, 1, 2, 0, 2, 3]);
-        super.bindVertexArray(vao);
-        super.bindBuffer(this.ARRAY_BUFFER, vbo);
-        super.bufferData(this.ARRAY_BUFFER, 20 * 4, vertices.buffer, this.STATIC_DRAW);
-        super.bindBuffer(this.ELEMENT_ARRAY_BUFFER, ebo);
-        super.bufferData(this.ELEMENT_ARRAY_BUFFER, 6 * 4, indices.buffer, this.STATIC_DRAW);
-        super.vertexAttribPointer(0, 3, this.FLOAT, this.FALSE, 5 * 4, 0); // x
-        super.enableVertexAttribArray(0);
-        super.vertexAttribPointer(1, 2, this.FLOAT, this.FALSE, 5 * 4, 12); // x
-        super.enableVertexAttribArray(1);
-        super.bindVertexArray(0);
+        super.bindVertexArrayAlt(vao);
+        super.bindBufferAlt(GLES.ARRAY_BUFFER, vbo);
+        super.bufferDataAlt(GLES.ARRAY_BUFFER, 20 * 4, vertices.buffer, GLES.STATIC_DRAW);
+        super.bindBufferAlt(GLES.ELEMENT_ARRAY_BUFFER, ebo);
+        super.bufferDataAlt(GLES.ELEMENT_ARRAY_BUFFER, 6 * 4, indices.buffer, GLES.STATIC_DRAW);
+        super.vertexAttribPointerAlt(0, 3, GLES.FLOAT, GLES.FALSE, 5 * 4, 0); // x
+        super.enableVertexAttribArrayAlt(0);
+        super.vertexAttribPointerAlt(1, 2, GLES.FLOAT, GLES.FALSE, 5 * 4, 12); // x
+        super.enableVertexAttribArrayAlt(1);
+        super.bindVertexArrayAlt(0);
     }
     /**
      * 
      * @returns {uint} textures
      */
     genTexture() {
-        return super.genTextures(1);
+        return super.genTexturesAlt(1);
     }
     /**
      * 
      * @param {uint} texture 
      */
     bindTexture2D(texture) {
-        super.bindTexture(this.TEXTURE_2D, texture);
+        super.bindTextureAlt(GLES.TEXTURE_2D, texture);
     }
 }

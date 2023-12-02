@@ -1,4 +1,5 @@
 import {GlfwEx} from 'raia_glfw_ex';
+import {GLES} from 'raia_gles'
 import {GlesEx} from 'raia_gles_ex';
 import {ImGuiEx} from 'raia_imgui_ex';
 import {Std} from "raia_std";
@@ -32,14 +33,14 @@ export class Window {
         this.glfw.destroy(this.id);
     }
     initShader() {
-        var vbo = this.gles.genBuffers(1);
-        var ebo = this.gles.genBuffers(1);
-        var vao = this.gles.genVertexArrays(1);
+        var vbo = this.gles.genBuffersAlt(1);
+        var ebo = this.gles.genBuffersAlt(1);
+        var vao = this.gles.genVertexArraysAlt(1);
         this.gles.setVertexArray2D(vao, vbo, ebo);
         var program = this.gles.createShaderProgram2D();
         this.vao = vao;
         this.program = program;
-        this.texture = this.gles.genTextures(1);
+        this.texture = this.gles.genTexturesAlt(1);
         this.gles.bindTexture2D(this.texture);
     }
     onUpdate(f) {
@@ -75,15 +76,15 @@ export class Window {
         std.delPtr(w_ptr);
         std.delPtr(h_ptr);
         // 
-        this.gles.viewport(0, 0, w, h);
-        this.gles.clearColor(red, green, blue, alpha);
-        this.gles.clear(this.gles.COLOR_BUFFER_BIT);
+        this.gles.viewportAlt(0, 0, w, h);
+        this.gles.clearColorAlt(red, green, blue, alpha);
+        this.gles.clearAlt(GLES.COLOR_BUFFER_BIT);
     }
     draw() {
         this.gles.setTextureRGB(this.texture, this.width, this.height, this.pixels);
-        this.gles.useProgram(this.program);
-        this.gles.bindVertexArray(this.vao);
-        this.gles.drawElements(this.gles.TRIANGLES, 6, this.gles.UNSIGNED_INT, null);
+        this.gles.useProgramAlt(this.program);
+        this.gles.bindVertexArrayAlt(this.vao);
+        this.gles.drawElementsAlt(GLES.TRIANGLES, 6, GLES.UNSIGNED_INT, null);
     }
 }
 
