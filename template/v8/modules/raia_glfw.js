@@ -10,8 +10,8 @@
     glfw.windowHint(GLFW.CONTEXT_VERSION_MINOR, 0);
     glfw.windowHint(GLFW.OPENGL_PROFILE, GLFW.OPENGL_CORE_PROFILE);
     glfw.windowHint(GLFW.CONTEXT_CREATION_API, GLFW.EGL_CONTEXT_API);
-    glfw.setErrorCallbackDefault();
-    glfw.setJoystickCallbackDefault();
+    glfw.setErrorCallbackAlt();
+    glfw.setJoystickCallbackAlt();
 
     const window = glfw.createWindow(800, 600, "title");
 
@@ -41,8 +41,8 @@ const lib = new Lib();
         lib.add(handle, "raia_glfw_get_version_string");
         lib.add(handle, "raia_glfw_get_error");
         lib.add(handle, "raia_glfw_set_error_callback");
-        lib.add(handle, "raia_glfw_get_error_default");          // 代替
-        lib.add(handle, "raia_glfw_set_error_callback_default"); // 代替
+        lib.add(handle, "raia_glfw_get_error_alt");          // 代替
+        lib.add(handle, "raia_glfw_set_error_callback_alt"); // 代替
         // 入力
         lib.add(handle, "raia_glfw_get_input_mode");
         lib.add(handle, "raia_glfw_set_input_mode");
@@ -84,24 +84,24 @@ const lib = new Lib();
         lib.add(handle, "raia_glfw_set_time");
         lib.add(handle, "raia_glfw_get_timer_value");
         lib.add(handle, "raia_glfw_get_timer_frequency");
-        lib.add(handle, "raia_glfw_get_key_default");                   // 代替
-        lib.add(handle, "raia_glfw_set_key_callback_default");          // 代替
-        lib.add(handle, "raia_glfw_get_char_default");                  // 代替
-        lib.add(handle, "raia_glfw_set_char_callback_default");         // 代替
-        lib.add(handle, "raia_glfw_get_char_mods_default");             // 代替
-        lib.add(handle, "raia_glfw_set_char_mods_callback_default");    // 代替
-        lib.add(handle, "raia_glfw_get_mouse_button_default");          // 代替
-        lib.add(handle, "raia_glfw_set_mouse_button_callback_default"); // 代替
-        lib.add(handle, "raia_glfw_get_cursor_pos_default");            // 代替
-        lib.add(handle, "raia_glfw_set_cursor_pos_callback_default");   // 代替
-        lib.add(handle, "raia_glfw_get_cursor_enter_default");          // 代替
-        lib.add(handle, "raia_glfw_set_cursor_enter_callback_default"); // 代替
-        lib.add(handle, "raia_glfw_get_scroll_default");                // 代替
-        lib.add(handle, "raia_glfw_set_scroll_callback_default");       // 代替
-        lib.add(handle, "raia_glfw_get_drop_default");                  // 代替
-        lib.add(handle, "raia_glfw_set_drop_callback_default");         // 代替
-        lib.add(handle, "raia_glfw_get_joystick_default");              // 代替
-        lib.add(handle, "raia_glfw_set_joystick_callback_default");     // 代替
+        lib.add(handle, "raia_glfw_get_key_alt");                   // 代替
+        lib.add(handle, "raia_glfw_set_key_callback_alt");          // 代替
+        lib.add(handle, "raia_glfw_get_char_alt");                  // 代替
+        lib.add(handle, "raia_glfw_set_char_callback_alt");         // 代替
+        lib.add(handle, "raia_glfw_get_char_mods_alt");             // 代替
+        lib.add(handle, "raia_glfw_set_char_mods_callback_alt");    // 代替
+        lib.add(handle, "raia_glfw_get_mouse_button_alt");          // 代替
+        lib.add(handle, "raia_glfw_set_mouse_button_callback_alt"); // 代替
+        lib.add(handle, "raia_glfw_get_cursor_pos_alt");            // 代替
+        lib.add(handle, "raia_glfw_set_cursor_pos_callback_alt");   // 代替
+        lib.add(handle, "raia_glfw_get_cursor_enter_alt");          // 代替
+        lib.add(handle, "raia_glfw_set_cursor_enter_callback_alt"); // 代替
+        lib.add(handle, "raia_glfw_get_scroll_alt");                // 代替
+        lib.add(handle, "raia_glfw_set_scroll_callback_alt");       // 代替
+        lib.add(handle, "raia_glfw_get_drop_alt");                  // 代替
+        lib.add(handle, "raia_glfw_set_drop_callback_alt");         // 代替
+        lib.add(handle, "raia_glfw_get_joystick_alt");              // 代替
+        lib.add(handle, "raia_glfw_set_joystick_callback_alt");     // 代替
         // モニター
         lib.add(handle, "raia_glfw_get_monitors");
         lib.add(handle, "raia_glfw_get_primary_monitor");
@@ -118,8 +118,8 @@ const lib = new Lib();
         lib.add(handle, "raia_glfw_set_gamma");
         lib.add(handle, "raia_glfw_get_gamma_ramp");
         lib.add(handle, "raia_glfw_set_gamma_ramp");
-        lib.add(handle, "raia_glfw_get_monitor_default");          // 代替
-        lib.add(handle, "raia_glfw_set_monitor_callback_default"); // 代替
+        lib.add(handle, "raia_glfw_get_monitor_alt");          // 代替
+        lib.add(handle, "raia_glfw_set_monitor_callback_alt"); // 代替
         // ネイティブアクセス
         // Vulkanサポート
         lib.add(handle, "raia_glfw_vulkan_supported");
@@ -171,24 +171,24 @@ const lib = new Lib();
         lib.add(handle, "raia_glfw_wait_event_timeout");
         lib.add(handle, "raia_glfw_post_empty_event");
         lib.add(handle, "raia_glfw_swap_buffers");
-        lib.add(handle, "raia_glfw_get_window_pos_default");                    // 代替
-        lib.add(handle, "raia_glfw_set_window_pos_callback_default");           // 代替
-        lib.add(handle, "raia_glfw_get_window_size_default");                   // 代替
-        lib.add(handle, "raia_glfw_set_window_size_callback_default");          // 代替
-        lib.add(handle, "raia_glfw_get_window_close_default");                  // 代替
-        lib.add(handle, "raia_glfw_set_window_close_callback_default");         // 代替
-        lib.add(handle, "raia_glfw_get_window_refresh_default");                // 代替
-        lib.add(handle, "raia_glfw_set_window_refresh_callback_default");       // 代替
-        lib.add(handle, "raia_glfw_get_window_focus_default");                  // 代替
-        lib.add(handle, "raia_glfw_set_window_focus_callback_default");         // 代替
-        lib.add(handle, "raia_glfw_get_window_iconify_default");                // 代替
-        lib.add(handle, "raia_glfw_set_window_iconify_callback_default");       // 代替
-        lib.add(handle, "raia_glfw_get_window_maximize_default");               // 代替
-        lib.add(handle, "raia_glfw_set_window_maximize_callback_default");      // 代替
-        lib.add(handle, "raia_glfw_get_framebuffer_size_default");              // 代替
-        lib.add(handle, "raia_glfw_set_framebuffer_size_callback_default");     // 代替
-        lib.add(handle, "raia_glfw_get_window_content_scale_default");          // 代替
-        lib.add(handle, "raia_glfw_set_window_content_scale_callback_default"); // 代替
+        lib.add(handle, "raia_glfw_get_window_pos_alt");                    // 代替
+        lib.add(handle, "raia_glfw_set_window_pos_callback_alt");           // 代替
+        lib.add(handle, "raia_glfw_get_window_size_alt");                   // 代替
+        lib.add(handle, "raia_glfw_set_window_size_callback_alt");          // 代替
+        lib.add(handle, "raia_glfw_get_window_close_alt");                  // 代替
+        lib.add(handle, "raia_glfw_set_window_close_callback_alt");         // 代替
+        lib.add(handle, "raia_glfw_get_window_refresh_alt");                // 代替
+        lib.add(handle, "raia_glfw_set_window_refresh_callback_alt");       // 代替
+        lib.add(handle, "raia_glfw_get_window_focus_alt");                  // 代替
+        lib.add(handle, "raia_glfw_set_window_focus_callback_alt");         // 代替
+        lib.add(handle, "raia_glfw_get_window_iconify_alt");                // 代替
+        lib.add(handle, "raia_glfw_set_window_iconify_callback_alt");       // 代替
+        lib.add(handle, "raia_glfw_get_window_maximize_alt");               // 代替
+        lib.add(handle, "raia_glfw_set_window_maximize_callback_alt");      // 代替
+        lib.add(handle, "raia_glfw_get_framebuffer_size_alt");              // 代替
+        lib.add(handle, "raia_glfw_set_framebuffer_size_callback_alt");     // 代替
+        lib.add(handle, "raia_glfw_get_window_content_scale_alt");          // 代替
+        lib.add(handle, "raia_glfw_set_window_content_scale_callback_alt"); // 代替
         globalThis.__RAIA_GLFW__ = {};
     }
 })();
@@ -667,17 +667,17 @@ export class GLFW {
     /**
      * @returns {{error: int, message: string}}
      */
-    getErrorDefault() {
+    getErrorAlt() {
         const rets = lib.ffi(
-            "raia_glfw_get_error_callback_default",
+            "raia_glfw_get_error_callback_alt",
             "string",
             null
         );
         return JSON.parse(rets);
     }
-    setErrorCallbackDefault() {
+    setErrorCallbackAlt() {
         lib.ffi(
-            "raia_glfw_set_error_callback_default",
+            "raia_glfw_set_error_callback_alt",
             "void",
             null
         );
@@ -736,7 +736,7 @@ export class GLFW {
             "sint",
             [
                 ["pointer", "window", window],
-                ["sint", "button", button]
+                ["sint", "key", key]
             ]
         );
     }
@@ -910,7 +910,7 @@ export class GLFW {
      * @returns {pointer}
      */
     getJoystickAxes(jid, count) {
-        return lib.call(
+        return lib.ffi(
             "raia_glfw_get_joystick_axes",
             "pointer",
             [
@@ -1088,9 +1088,9 @@ export class GLFW {
     /**
      * @returns {{window: uintptr, key: int, scancode: int, action: int, mods: int}}
      */
-    getKeyCallbackDefault() {
+    getKeyCallbackAlt() {
         const rets = lib.ffi(
-            "raia_glfw_get_key_callback_default",
+            "raia_glfw_get_key_callback_alt",
             "string",
             null
         );
@@ -1099,9 +1099,9 @@ export class GLFW {
     /**
      * @param {uintptr} window
      */
-    setKeyCallbackDefault(window) {
+    setKeyCallbackAlt(window) {
         lib.ffi(
-            "raia_glfw_set_key_callback_default",
+            "raia_glfw_set_key_callback_alt",
             "void",
             [
                 ["pointer", "window", window]
@@ -1111,9 +1111,9 @@ export class GLFW {
     /**
      * @returns {{window: uintptr, codepoint: uint}}
      */
-    getCharCallbackDefault() {
+    getCharCallbackAlt() {
         const rets = lib.ffi(
-            "raia_glfw_get_char_callback_default",
+            "raia_glfw_get_char_callback_alt",
             "string",
             null
         );
@@ -1122,9 +1122,9 @@ export class GLFW {
     /**
      * @param {uintptr} window
      */
-    setCharCallbackDefault(window) {
+    setCharCallbackAlt(window) {
         lib.ffi(
-            "raia_glfw_set_char_callback_default",
+            "raia_glfw_set_char_callback_alt",
             "void",
             [
                 ["pointer", "window", window]
@@ -1134,9 +1134,9 @@ export class GLFW {
     /**
      * @returns {{window: uintptr, codepoint: uint, mods: int}}
      */
-    getCharModsCallbackDefault() {
+    getCharModsCallbackAlt() {
         const rets = lib.ffi(
-            "raia_glfw_get_char_mods_callback_default",
+            "raia_glfw_get_char_mods_callback_alt",
             "string",
             null
         );
@@ -1145,9 +1145,9 @@ export class GLFW {
     /**
      * @param {uintptr} window
      */
-    setCharModsCallbackDefault(window) {
+    setCharModsCallbackAlt(window) {
         lib.ffi(
-            "raia_glfw_set_char_mods_callback_default",
+            "raia_glfw_set_char_mods_callback_alt",
             "void",
             [
                 ["pointer", "window", window]
@@ -1157,9 +1157,9 @@ export class GLFW {
     /**
      * @returns {{window: uintptr, button: int, action: int, mods: int}}
      */
-    getMouseButtonCallbackDefault() {
+    getMouseButtonCallbackAlt() {
         const rets = lib.ffi(
-            "raia_glfw_get_mouse_button_callback_default",
+            "raia_glfw_get_mouse_button_callback_alt",
             "string",
             null
         );
@@ -1168,9 +1168,9 @@ export class GLFW {
     /**
      * @param {uintptr} window
      */
-    setMouseButtonCallbackDefault(window) {
+    setMouseButtonCallbackAlt(window) {
         lib.ffi(
-            "raia_glfw_set_mouse_button_callback_default",
+            "raia_glfw_set_mouse_button_callback_alt",
             "void",
             [
                 ["pointer", "window", window]
@@ -1180,9 +1180,9 @@ export class GLFW {
     /**
      * @returns {{window: uintptr, xpos: real, ypos: real}}
      */
-    getCursorPosCallbackDefault() {
+    getCursorPosCallbackAlt() {
         const rets = lib.ffi(
-            "raia_glfw_get_cursor_pos_callback_default",
+            "raia_glfw_get_cursor_pos_callback_alt",
             "string",
             null
         );
@@ -1191,9 +1191,9 @@ export class GLFW {
     /**
      * @param {uintptr} window
      */
-    setCursorPosCallbackDefault(window) {
+    setCursorPosCallbackAlt(window) {
         lib.ffi(
-            "raia_glfw_set_cursor_pos_callback_default",
+            "raia_glfw_set_cursor_pos_callback_alt",
             "void",
             [
                 ["pointer", "window", window]
@@ -1214,9 +1214,9 @@ export class GLFW {
     /**
      * @param {uintptr} window
      */
-    setCorsorEnterCallbackDefault(window) {
+    setCorsorEnterCallbackAlt(window) {
         lib.ffi(
-            "raia_glfw_set_cursor_enter_callback_default",
+            "raia_glfw_set_cursor_enter_callback_alt",
             "void",
             [
                 ["pointer", "window", window]
@@ -1226,7 +1226,7 @@ export class GLFW {
     /**
      * @returns {{window: uintptr, xoffset: real, yoffset: real}}
      */
-    getScrollCallbackDefault() {
+    getScrollCallbackAlt() {
         const rets = lib.ffi(
             "raia_glfw_get_scroll_callback",
             "string",
@@ -1237,9 +1237,9 @@ export class GLFW {
     /**
      * @param {uintptr} window
      */
-    setScrollCallbackDefault(window) {
+    setScrollCallbackAlt(window) {
         lib.ffi(
-            "raia_glfw_set_scroll_callback_default",
+            "raia_glfw_set_scroll_callback_alt",
             "void",
             [
                 ["pointer", "window", window]
@@ -1249,7 +1249,7 @@ export class GLFW {
     /**
      * @returns {{window: uintptr, count: int, paths:string[]}}
      */
-    getDropCallbackDefault() {
+    getDropCallbackAlt() {
         const rets = lib.ffi(
             "raia_glfw_get_drop_callback",
             "string",
@@ -1260,9 +1260,9 @@ export class GLFW {
     /**
      * @param {uintptr} window
      */
-    setDropCallbackDefault(window) {
+    setDropCallbackAlt(window) {
         lib.ffi(
-            "raia_glfw_set_drop_callback_default",
+            "raia_glfw_set_drop_callback_alt",
             "void",
             [
                 ["pointer", "window", window]
@@ -1272,17 +1272,17 @@ export class GLFW {
     /**
      * @returns {{jid: int, event: int}}
      */
-    getJoystickCallbackDefault() {
+    getJoystickCallbackAlt() {
         const rets = lib.ffi(
-            "raia_glfw_get_joystick_callback_default",
+            "raia_glfw_get_joystick_callback_alt",
             "string",
             null
         );
         return JSON.parse(rets);
     }
-    setJoystickCallbackDefault() {
+    setJoystickCallbackAlt() {
         lib.ffi(
-            "raia_glfw_set_joystick_callback_default",
+            "raia_glfw_set_joystick_callback_alt",
             "void",
             null
         );
@@ -1442,16 +1442,16 @@ export class GLFW {
 
     // (代替関数)
 
-    getMonitorDefault() {
+    getMonitorAlt() {
         return lib.ffi(
-            "raia_glfw_get_monitor_default",
+            "raia_glfw_get_monitor_alt",
             "string",
             null
         );
     }
-    setMonitorCallbackDefault() {
+    setMonitorCallbackAlt() {
         lib.ffi(
-            "raia_glfw_set_monitor_callback_default",
+            "raia_glfw_set_monitor_callback_alt",
             "void",
             null
         )
@@ -1540,7 +1540,7 @@ export class GLFW {
         );
     }
     /**
-     * @param {int} width1
+     * @param {int} width
      * @param {int} height
      * @param {string} title
      * @returns {uintptr} window
@@ -1594,7 +1594,7 @@ export class GLFW {
         );
     }
     /**
-     * @param {uintptr} window_id 
+     * @param {uintptr} window
      * @param {string} title 
      */
     setWindowTitle(window, title) {
@@ -1641,8 +1641,7 @@ export class GLFW {
         );
     }
     /**
-     * @param {uintptr} window_id 
-     * @returns {{width: int, height: int}}
+     * @param {uintptr} window
      */
     getWindowSize(window, width, height) {
         lib.ffi(
@@ -1692,7 +1691,6 @@ export class GLFW {
     }
     /**
      * @param {uintptr} window
-     * @returns {{width: int, height: int}}
      */
     getFramebufferSize(window, width, height) {
         lib.ffi(
@@ -1999,7 +1997,7 @@ export class GLFW {
         );
     }
     /**
-     * @param {uintptr} window_id 
+     * @param {uintptr} window
      */
     swapBuffers(window) {
         lib.ffi(
@@ -2016,9 +2014,9 @@ export class GLFW {
     /**
      * @returns {{window: uintptr, x: int, y: int}}
      */
-    getWindowPosDefault() {
+    getWindowPosAlt() {
         var rets = lib.ffi(
-            "raia_glfw_get_window_pos_default",
+            "raia_glfw_get_window_pos_alt",
             "string",
             null
         );
@@ -2027,9 +2025,9 @@ export class GLFW {
     /**
      * @param {uintptr} window
      */
-    setWindowPosCallbackDefault(window) {
+    setWindowPosCallbackAlt(window) {
         lib.ffi(
-            "raia_glfw_set_window_pos_callback_default",
+            "raia_glfw_set_window_pos_callback_alt",
             "void",
             [
                 ["pointer", "window", window]
@@ -2039,9 +2037,9 @@ export class GLFW {
     /**
      * @returns {{window: uintptr, width: int, height: int}}
      */
-    getWindowSizeDefault() {
+    getWindowSizeAlt() {
         var rets = lib.ffi(
-            "raia_glfw_get_window_size_default",
+            "raia_glfw_get_window_size_alt",
             "string",
             null
         );
@@ -2050,9 +2048,9 @@ export class GLFW {
     /**
      * @param {uintptr} window
      */
-    setWindowSizeCallbackDefault(window) {
+    setWindowSizeCallbackAlt(window) {
         lib.ffi(
-            "raia_glfw_set_window_size_callback_default",
+            "raia_glfw_set_window_size_callback_alt",
             "void",
             [
                 ["pointer", "window", window]
@@ -2062,9 +2060,9 @@ export class GLFW {
     /**
      * @returns {{window: uintptr}}
      */
-    getWindowCloseDefault() {
+    getWindowCloseAlt() {
         var rets = lib.ffi(
-            "raia_glfw_get_window_close_default",
+            "raia_glfw_get_window_close_alt",
             "string",
             null
         );
@@ -2073,9 +2071,9 @@ export class GLFW {
     /**
      * @param {uintptr} window
      */
-    setWindowCloseCallbackDefault(window) {
+    setWindowCloseCallbackAlt(window) {
         lib.ffi(
-            "raia_glfw_set_window_close_callback_default",
+            "raia_glfw_set_window_close_callback_alt",
             "void",
             [
                 ["pointer", "window", window]
@@ -2085,9 +2083,9 @@ export class GLFW {
     /**
      * @returns {{window: uintptr}}
      */
-    getWindowRefreshDefault() {
+    getWindowRefreshAlt() {
         var rets = lib.ffi(
-            "raia_glfw_get_window_refresh_default",
+            "raia_glfw_get_window_refresh_alt",
             "string",
             null
         );
@@ -2096,9 +2094,9 @@ export class GLFW {
     /**
      * @param {uintptr} window
      */
-    setWindowRefreshCallbackDefault(window) {
+    setWindowRefreshCallbackAlt(window) {
         lib.ffi(
-            "raia_glfw_set_window_refresh_callback_default",
+            "raia_glfw_set_window_refresh_callback_alt",
             "void",
             [
                 ["pointer", "window", window]
@@ -2108,9 +2106,9 @@ export class GLFW {
     /**
      * @returns {{window: uintptr, focused: int}}
      */
-    getWindowFocusDefault() {
+    getWindowFocusAlt() {
         var rets = lib.ffi(
-            "raia_glfw_get_window_focus_default",
+            "raia_glfw_get_window_focus_alt",
             "string",
             null
         );
@@ -2119,9 +2117,9 @@ export class GLFW {
     /**
      * @param {uintptr} window
      */
-    setWindowFocusCallbackDefault(window) {
+    setWindowFocusCallbackAlt(window) {
         lib.ffi(
-            "raia_glfw_set_window_focus_callback_default",
+            "raia_glfw_set_window_focus_callback_alt",
             "void",
             [
                 ["pointer", "window", window]
@@ -2131,9 +2129,9 @@ export class GLFW {
     /**
      * @returns {{window: uintptr, iconified: int}}
      */
-    getWindowIconifyDefault() {
+    getWindowIconifyAlt() {
         var rets = lib.ffi(
-            "raia_glfw_get_window_iconify_default",
+            "raia_glfw_get_window_iconify_alt",
             "string",
             null
         );
@@ -2142,26 +2140,26 @@ export class GLFW {
     /**
      * @param {uintptr} window
      */
-    setWindowIconifyCallbackDefault(window) {
+    setWindowIconifyCallbackAlt(window) {
         lib.ffi(
-            "raia_glfw_set_window_iconify_callback_default",
+            "raia_glfw_set_window_iconify_callback_alt",
             "void",
             [
                 ["pointer", "window", window]
             ]
         );
     }
-    getWindowMaximizeDefault() {
+    getWindowMaximizeAlt() {
         var rets = lib.ffi(
-            "raia_glfw_get_window_maximize_default",
+            "raia_glfw_get_window_maximize_alt",
             "string",
             null
         );
         return JSON.parse(rets);
     }
-    setWindowMaximizeCallbackDefault(window) {
+    setWindowMaximizeCallbackAlt(window) {
         lib.ffi(
-            "raia_glfw_set_window_maximize_callback_default",
+            "raia_glfw_set_window_maximize_callback_alt",
             "void",
             [
                 ["pointer", "window", window]
@@ -2171,37 +2169,37 @@ export class GLFW {
     /**
      * @returns {{window: uintptr, width: int, height: int}}
      */
-    getFramebufferSizeDefault() {
+    getFramebufferSizeAlt() {
         var rets = lib.ffi(
-            "raia_glfw_get_framebuffer_size_default",
+            "raia_glfw_get_framebuffer_size_alt",
             "string",
             null
         );
         return JSON.parse(rets);
     }
     /**
-     * @param {uintptr} window_id 
+     * @param {uintptr} window
      */
-    setFramebufferSizeCallbackDefault(window) {
+    setFramebufferSizeCallbackAlt(window) {
         lib.ffi(
-            "raia_glfw_set_framebuffer_size_callback_default",
+            "raia_glfw_set_framebuffer_size_callback_alt",
             "void",
             [
                 ["pointer", "window", window]
             ]
         );
     }
-    getWindowContentScaleDefault() {
+    getWindowContentScaleAlt() {
         var rets = lib.ffi(
-            "raia_glfw_get_window_content_scale_default",
+            "raia_glfw_get_window_content_scale_alt",
             "string",
             null
         );
         return JSON.parse(rets);
     }
-    setWindowContentScaleCallbackDefault(window) {
+    setWindowContentScaleCallbackAlt(window) {
         lib.ffi(
-            "raia_glfw_set_window_content_scale_callback_default",
+            "raia_glfw_set_window_content_scale_callback_alt",
             "void",
             [
                 ["pointer", "window", window]
