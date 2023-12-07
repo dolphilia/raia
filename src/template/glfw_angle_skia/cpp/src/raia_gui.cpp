@@ -11,6 +11,28 @@
 #include "include/core/SkData.h"
 #include "include/core/SkPath.h"
 
+// static std::unique_ptr<SkStream> stream;
+
+extern "C" {
+
+SkBitmap *SkBitmap_new(void) {
+    return new SkBitmap();
+}
+
+void SkBitmap_allocN32Pixels(SkBitmap* bitmap, int width, int height, bool isOpaque = false) {
+    bitmap->allocN32Pixels(width, height, isOpaque);
+}
+
+SkCanvas *SkCanvas_new(SkBitmap *bitmap) {
+    return new SkCanvas(*bitmap);
+}
+
+void SkCanvas_drawImage(SkCanvas *canvas, const SkImage *image, SkScalar left, SkScalar top) {
+    canvas->drawImage(image, left, top);
+}
+
+}
+
 int main(int argc, char* argv[]) {
     // GLFWを初期化する
     {
@@ -136,24 +158,25 @@ int main(int argc, char* argv[]) {
     }
 
     // SkBitmapとSkCanvasを初期化する
-    SkBitmap skBitmap;
-    skBitmap.allocN32Pixels(image_width, image_height);
-    SkCanvas canvas(skBitmap);
+    SkBitmap* skBitmap = SkBitmap_new();
+    SkBitmap_allocN32Pixels(skBitmap, image_width, image_height);
+    SkCanvas* canvas = SkCanvas_new(skBitmap);
 
     // PNG画像を読み込む
     std::unique_ptr<SkStream> stream = SkStream::MakeFromFile("adv_sample_image.png");
     auto data = SkData::MakeFromStream(stream.get(), stream->getLength());
     sk_sp<SkImage> image = SkImages::DeferredFromEncodedData(data);
 
+
     // 画像をキャンバスに描画
-    canvas.drawImage(image.get(), 0, 0);
+    SkCanvas_drawImage(canvas, image.get(), 0, 0);
 
     // 図形を描画する
-    SkPaint paint;
-    paint.setBlendMode(SkBlendMode::kOverlay);
-    paint.setColor(SK_ColorBLUE); // 赤色を選択
+    SkPaint* paint = new SkPaint();
+    paint->setBlendMode(SkBlendMode::kOverlay);
+    paint->setColor(SK_ColorBLUE); // 赤色を選択
     SkRect rect = SkRect::MakeXYWH(20, 20, 400, 600 - 40); // 四角形の位置とサイズ
-    canvas.drawRect(rect, paint); // 四角形を描画
+    canvas->drawRect(rect, *paint); // 四角形を描画
 
     // パスを描画する
     const SkScalar scale = 256.0f;
@@ -167,16 +190,17 @@ int main(int argc, char* argv[]) {
     }
     path.close();
     SkPaint p;
+    p.setARGB(255,255,0,0);
     p.setAntiAlias(true);
-    //canvas.clear(SK_ColorWHITE);
+    //canvas->clear(SK_ColorWHITE);
     //canvas.translate(0.5f * scale, 0.5f * scale);
-    //canvas.drawPath(path, p);
+    canvas->drawPath(path, p);
 
     // ピクセルデータを書き込む
     //skBitmap.setPixels(image_pixels);
 
     // Skiaのビットマップからピクセルデータを取得
-    GLubyte* skia_pixels = (GLubyte*)skBitmap.getPixels();
+    GLubyte* skia_pixels = (GLubyte*)skBitmap->getPixels();
 
 
     // メインループ
@@ -191,7 +215,7 @@ int main(int argc, char* argv[]) {
 
         glUseProgram(shader_program);
         glBindVertexArray(vertex_array_object);
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
         glBindTexture(GL_TEXTURE_2D, 2);
         glfwSwapBuffers(window);
         glfwPollEvents();
