@@ -12,14 +12,14 @@ export class GlfwEx extends GLFW {
      * @param {uintptr} window 
      */
     setCallback(window) {
-        super.setKeyCallbackDefault(window);
-        super.setCursorPosCallbackDefault(window);
-        super.setMouseButtonCallbackDefault(window);
-        super.setCharCallbackDefault(window);
-        super.setCharModsCallbackDefault(window);
-        super.setCorsorEnterCallbackDefault(window);
-        super.setScrollCallbackDefault(window);
-        super.setDropCallbackDefault(window);
+        super.setKeyCallbackAlt(window);
+        super.setCursorPosCallbackAlt(window);
+        super.setMouseButtonCallbackAlt(window);
+        super.setCharCallbackAlt(window);
+        super.setCharModsCallbackAlt(window);
+        super.setCorsorEnterCallbackAlt(window);
+        super.setScrollCallbackAlt(window);
+        super.setDropCallbackAlt(window);
         //
         super.setFramebufferSizeCallback(window);
         super.setWindowPosCallback(window);
