@@ -5,7 +5,6 @@ include(${PROJECT_SOURCE_DIR}/../../../setting.cmake)
 include_directories(${PROJECT_SOURCE_DIR}/../../../../sdk/macos/arm64/include/skia)
 #include_directories(${PROJECT_SOURCE_DIR}/../../../../third_party/skia/)
 #include_directories(${PROJECT_SOURCE_DIR}/skia)
-
 #include_directories(/opt/homebrew/opt)
 #link_directories(/opt/homebrew/opt)
 
