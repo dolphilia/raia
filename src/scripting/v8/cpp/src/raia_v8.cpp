@@ -442,7 +442,7 @@ void raia_core_ptr_to_sint(const v8_args_t &args) {
 }
 
 void raia_gc_free(const v8_args_t &args) {
-    args.GetIsolate()->LowMemoryNotification(); // メモリ不足時にガベージコレクションを強制的に実行する
+    args.GetIsolate()->LowMemoryNotification();
     v8_rets_to_null(args);
 }
 
