@@ -1,6 +1,7 @@
 #include "raia_skia.h"
 
 // Skiaヘッダのインクルード
+#include "include/core/SkBBHFactory.h"
 #include "include/core/SkBitmap.h"
 #include "include/core/SkCanvas.h"
 #include "include/core/SkPaint.h"
@@ -12,6 +13,13 @@
 #include "include/core/SkPath.h"
 #include "include/core/SkShader.h"
 #include "include/core/SkPixelRef.h"
+#include "include/core/SkBlender.h"
+#include "include/core/SkPicture.h"
+#include "include/core/SkTextBlob.h"
+#include "include/core/SkVertices.h"
+#include "include/core/SkSurface.h"
+#include "include/gpu/graphite/Recorder.h"
+
 #include <map>
 
 //
@@ -19,11 +27,19 @@
 //
 
 static std::map<std::string, std::unique_ptr<SkStream>> static_sk_stream;
+static std::map<std::string, std::unique_ptr<SkCanvas>> static_sk_canvas;
 static std::map<std::string, sk_sp<SkData>> static_sk_data;
 static std::map<std::string, sk_sp<SkImage>> static_sk_image;
 static std::map<std::string, sk_sp<SkShader>> static_sk_shader;
 static std::map<std::string, sk_sp<SkColorSpace>> static_sk_color_space;
 static std::map<std::string, sk_sp<SkPixelRef>> static_sk_pixel_ref;
+static std::map<std::string, sk_sp<SkBlender>> static_sk_blender;
+static std::map<std::string, sk_sp<SkPicture>> static_sk_picture;
+static std::map<std::string, sk_sp<SkTextBlob>> static_sk_text_blob;
+static std::map<std::string, sk_sp<SkVertices>> static_sk_vertices;
+static std::map<std::string, sk_sp<SkSurface>> static_sk_surface;
+
+// static std::map<std::string, sk_sp<SkDevice>> static_sk_device;
 static std::map<std::string, SkRect> static_sk_rect;
 
 extern "C" {
@@ -424,32 +440,561 @@ bool SkBitmap_writePixels_2(SkBitmap *bitmap, const SkPixmap *src, int dstX, int
 }
 
 //
-// SkBlendMode
-//
-
-//
 // SkCanvas
 //
 
-SkCanvas *SkCanvas_new(SkBitmap *bitmap) {
+SkCanvas *SkCanvas_new() {
+    return new SkCanvas();
+}
+
+SkCanvas *SkCanvas_new_2(int width, int height, const SkSurfaceProps * props) {
+    return new SkCanvas(width, height, props);
+}
+
+// SkCanvas *SkCanvas_new_3() { // private
+//    return new SkCanvas(static_sk_device);
+//}
+
+SkCanvas *SkCanvas_new_4(SkBitmap *bitmap) {
     return new SkCanvas(*bitmap);
 }
 
-void SkCanvas_drawImage(SkCanvas *canvas, const SkImage *image, SkScalar left, SkScalar top) {
+SkCanvas *SkCanvas_new_5(const SkBitmap *bitmap, const SkSurfaceProps *props) {
+    return new SkCanvas(*bitmap, *props);
+}
+
+// SkCanvas *SkCanvas_new_6(const SkIRect *bounds) { // protected
+//    return new SkCanvas(*bounds);
+//}
+
+void SkCanvas_delete(SkCanvas *canvas) {
+    delete canvas;
+}
+
+void *SkCanvas_accessTopLayerPixels(SkCanvas *canvas, SkImageInfo *info, size_t * rowBytes, SkIPoint * origin) {
+    return canvas->accessTopLayerPixels(info, rowBytes, origin);
+}
+
+SkRasterHandleAllocator::Handle SkCanvas_accessTopRasterHandle(SkCanvas *canvas) {
+    return canvas->accessTopRasterHandle();
+}
+
+void SkCanvas_androidFramework_setDeviceClipRestriction(SkCanvas *canvas, const SkIRect *rect) {
+    canvas->androidFramework_setDeviceClipRestriction(*rect);
+}
+
+void SkCanvas_clear(SkCanvas *canvas, const SkColor4f * color) {
+    canvas->clear(*color);
+}
+
+void SkCanvas_clear_2(SkCanvas *canvas, SkColor color) {
+    canvas->clear(color);
+}
+
+void SkCanvas_clipIRect(SkCanvas *canvas, const SkIRect * irect, SkClipOp op) {
+    canvas->clipIRect(*irect, op);
+}
+
+void SkCanvas_clipPath(SkCanvas *canvas, const SkPath * path, bool doAntiAlias) {
+    canvas->clipPath(*path, doAntiAlias);
+}
+
+void SkCanvas_clipPath_2(SkCanvas *canvas, const SkPath * path, SkClipOp op) {
+    canvas->clipPath(*path, op);
+}
+
+void SkCanvas_clipPath_3(SkCanvas *canvas, const SkPath * path, SkClipOp op, bool doAntiAlias) {
+    canvas->clipPath(*path, op, doAntiAlias);
+}
+
+void SkCanvas_clipRect(SkCanvas *canvas, const SkRect * rect, bool doAntiAlias) {
+    canvas->clipRect(*rect, doAntiAlias);
+}
+
+void SkCanvas_clipRect_2(SkCanvas *canvas, const SkRect * rect, SkClipOp op) {
+    canvas->clipRect(*rect, op);
+}
+
+void SkCanvas_clipRect_3(SkCanvas *canvas, const SkRect * rect, SkClipOp op, bool doAntiAlias) {
+    canvas->clipRect(*rect, op, doAntiAlias);
+}
+
+void SkCanvas_clipRegion(SkCanvas *canvas, const SkRegion * deviceRgn, SkClipOp op) {
+    canvas->clipRegion(*deviceRgn, op);
+}
+
+void SkCanvas_clipRRect(SkCanvas *canvas, const SkRRect * rrect, bool doAntiAlias) {
+    canvas->clipRRect(*rrect, doAntiAlias);
+}
+
+void SkCanvas_clipRRect_2(SkCanvas *canvas, const SkRRect * rrect, SkClipOp op) {
+    canvas->clipRRect(*rrect, op);
+}
+
+void SkCanvas_clipRRect_3(SkCanvas *canvas, const SkRRect * rrect, SkClipOp op, bool doAntiAlias) {
+    canvas->clipRRect(*rrect, op, doAntiAlias);
+}
+
+void SkCanvas_clipShader(const char *key, SkCanvas *canvas, SkClipOp op) {
+    canvas->clipShader(static_sk_shader[key], op);
+}
+
+void SkCanvas_concat(SkCanvas *canvas, const SkM44 * m44) {
+    canvas->concat(*m44);
+}
+
+void SkCanvas_concat_2(SkCanvas *canvas, const SkMatrix * matrix) {
+    canvas->concat(*matrix);
+}
+
+// virtual void SkCanvas_didConcat44(SkCanvas *canvas, const SkM44 *) {} // protected
+// virtual void SkCanvas_didRestore(SkCanvas *canvas) {} // protected
+// virtual void SkCanvas_didScale(SkCanvas *canvas, SkScalar SkScalar) {} // protected
+// virtual void SkCanvas_didTranslate(SkCanvas *canvas, SkScalar SkScalar) {} // protected
+
+void SkCanvas_discard(SkCanvas *canvas) {
+    canvas->discard();
+}
+
+void SkCanvas_drawAnnotation(const char *data_key, SkCanvas *canvas, const SkRect * rect, const char key[]) {
+    canvas->drawAnnotation(*rect, key, static_sk_data[data_key]);
+}
+
+void SkCanvas_drawAnnotation_2(SkCanvas *canvas, const SkRect * rect, const char key[], SkData * value) {
+    canvas->drawAnnotation(*rect, key, value);
+}
+
+void SkCanvas_drawArc(SkCanvas *canvas, const SkRect * oval, SkScalar startAngle, SkScalar sweepAngle, bool useCenter, const SkPaint * paint) {
+    canvas->drawArc(*oval, startAngle, sweepAngle, useCenter, *paint);
+}
+
+void SkCanvas_drawAtlas(SkCanvas *canvas, const SkImage * atlas, const SkRSXform xform[], const SkRect tex[], const SkColor colors[], int count, SkBlendMode mode, const SkSamplingOptions * sampling, const SkRect * cullRect, const SkPaint * paint) {
+    canvas->drawAtlas(atlas, xform, tex, colors, count, mode, *sampling, cullRect, paint);
+}
+
+void SkCanvas_drawCircle(SkCanvas *canvas, SkPoint center, SkScalar radius, const SkPaint * paint) {
+    canvas->drawCircle(center, radius, *paint);
+}
+
+void SkCanvas_drawCircle_2(SkCanvas *canvas, SkScalar cx, SkScalar cy, SkScalar radius, const SkPaint * paint) {
+    canvas->drawCircle(cx, cy, radius, *paint);
+}
+
+void SkCanvas_drawColor(SkCanvas *canvas, const SkColor4f * color, SkBlendMode mode) {
+    canvas->drawColor(*color, mode);
+}
+
+void SkCanvas_drawColor_2(SkCanvas *canvas, SkColor color, SkBlendMode mode) {
+    canvas->drawColor(color, mode);
+}
+
+void SkCanvas_drawDrawable(SkCanvas *canvas, SkDrawable * drawable, const SkMatrix * matrix) {
+    canvas->drawDrawable(drawable, matrix);
+}
+
+void SkCanvas_drawDrawable_2(SkCanvas *canvas, SkDrawable * drawable, SkScalar x, SkScalar y) {
+    canvas->drawDrawable(drawable, x, y);
+}
+
+void SkCanvas_drawDRRect(SkCanvas *canvas, const SkRRect * outer, const SkRRect * inner, const SkPaint * paint) {
+    canvas->drawDRRect(*outer, *inner, *paint);
+}
+
+void SkCanvas_drawGlyphs(SkCanvas *canvas, int count, const SkGlyphID glyphs[], const SkPoint positions[], const uint32_t clusters[], int textByteCount, const char utf8text[], SkPoint origin, const SkFont * font, const SkPaint * paint) {
+    canvas->drawGlyphs(count, glyphs, positions, clusters, textByteCount, utf8text, origin, *font, *paint);
+}
+
+void SkCanvas_drawGlyphs_2(SkCanvas *canvas, int count, const SkGlyphID glyphs[], const SkPoint positions[], SkPoint origin, const SkFont * font, const SkPaint * paint) {
+    canvas->drawGlyphs(count, glyphs, positions, origin, *font, *paint);
+}
+
+void SkCanvas_drawGlyphs_3(SkCanvas *canvas, int count, const SkGlyphID glyphs[], const SkRSXform xforms[], SkPoint origin, const SkFont * font, const SkPaint * paint) {
+    canvas->drawGlyphs(count, glyphs, xforms, origin, *font, *paint);
+}
+
+void SkCanvas_drawImage(const char *key, SkCanvas *canvas, SkScalar left, SkScalar top) {
+    canvas->drawImage(static_sk_image[key], left, top);
+}
+
+void SkCanvas_drawImage_2(const char *key, SkCanvas *canvas, SkScalar x, SkScalar y, const SkSamplingOptions * sampling, const SkPaint * paint) {
+    canvas->drawImage(static_sk_image[key], x, y, *sampling, paint);
+}
+
+void SkCanvas_drawImage_3(SkCanvas *canvas, const SkImage * image, SkScalar x, SkScalar y, const SkSamplingOptions * sampling, const SkPaint * paint) {
+        canvas->drawImage(image, x, y, *sampling, paint);
+}
+
+void SkCanvas_drawImage_4(SkCanvas *canvas, const SkImage *image, SkScalar left, SkScalar top) {
     canvas->drawImage(image, left, top);
+}
+
+void SkCanvas_drawImageLattice(SkCanvas *canvas, const SkImage * image, const SkCanvas::Lattice * lattice, const SkRect * dst ) {
+    canvas->drawImageLattice(image, *lattice, *dst);
+}
+
+void SkCanvas_drawImageLattice_2(SkCanvas *canvas, const SkImage * image, const SkCanvas::Lattice * lattice, const SkRect * dst, SkFilterMode filter, const SkPaint * paint) {
+    canvas->drawImageLattice(image, *lattice, *dst, filter, paint);
+}
+
+void SkCanvas_drawImageNine(SkCanvas *canvas, const SkImage * image, const SkIRect * center, const SkRect * dst, SkFilterMode filter, const SkPaint * paint) {
+    canvas->drawImageNine(image, *center, *dst, filter, paint);
+}
+
+void SkCanvas_drawImageRect(const char *key, SkCanvas *canvas, const SkRect * dst, const SkSamplingOptions * sampling, const SkPaint * paint) {
+    canvas->drawImageRect(static_sk_image[key], *dst, *sampling, paint);
+}
+
+void SkCanvas_drawImageRect_2(const char *key, SkCanvas *canvas, const SkRect * src, const SkRect * dst, const SkSamplingOptions * sampling,const SkPaint * paint, SkCanvas::SrcRectConstraint constraint ) {
+    canvas->drawImageRect(static_sk_image[key], *src, *dst, *sampling, paint, constraint);
+}
+
+void SkCanvas_drawImageRect_3(SkCanvas *canvas, const SkImage * image, const SkRect * dst, const SkSamplingOptions * sampling, const SkPaint * paint) {
+    canvas->drawImageRect(image, *dst, *sampling, paint);
+}
+
+void SkCanvas_drawImageRect_4(SkCanvas *canvas, const SkImage * image, const SkRect * src, const SkRect * dst, const SkSamplingOptions * sampling, const SkPaint * paint, SkCanvas::SrcRectConstraint constraint) {
+    canvas->drawImageRect(image, *src, *dst, *sampling, paint, constraint);
+}
+
+void SkCanvas_drawIRect(SkCanvas *canvas, const SkIRect * rect, const SkPaint * paint) {
+    canvas->drawIRect(*rect, *paint);
+}
+
+void SkCanvas_drawLine(SkCanvas *canvas, SkPoint p0, SkPoint p1, const SkPaint * paint) {
+    canvas->drawLine(p0, p1, *paint);
+}
+
+void SkCanvas_drawLine_2(SkCanvas *canvas, SkScalar x0, SkScalar y0, SkScalar x1, SkScalar y1, const SkPaint * paint) {
+    canvas->drawLine(x0, y0, x1, y1, *paint);
+}
+
+void SkCanvas_drawMesh(const char *key, SkCanvas *canvas, const SkMesh * mesh, const SkPaint * paint) {
+    canvas->drawMesh(*mesh, static_sk_blender[key], *paint);
+}
+
+void SkCanvas_drawOval(SkCanvas *canvas, const SkRect * oval, const SkPaint * paint) {
+    canvas->drawOval(*oval, *paint);
+}
+
+void SkCanvas_drawPaint(SkCanvas *canvas, const SkPaint * paint) {
+    canvas->drawPaint(*paint);
+}
+
+void SkCanvas_drawPatch(SkCanvas *canvas, const SkPoint cubics[12], const SkColor colors[4], const SkPoint texCoords[4], SkBlendMode mode, const SkPaint * paint) {
+    canvas->drawPatch(cubics, colors, texCoords, mode, *paint);
 }
 
 void SkCanvas_drawPath(SkCanvas *canvas, const SkPath *path, const SkPaint *paint) {
     canvas->drawPath(*path, *paint);
 }
 
+void SkCanvas_drawPicture(const char *key, SkCanvas *canvas) {
+    canvas->drawPicture(static_sk_picture[key]);
+}
+
+void SkCanvas_drawPicture_2(const char *key, SkCanvas *canvas, const SkMatrix * matrix, const SkPaint * paint) {
+    canvas->drawPicture(static_sk_picture[key], matrix, paint);
+}
+
+void SkCanvas_drawPicture_3(SkCanvas *canvas, const SkPicture * picture) {
+    canvas->drawPicture(picture);
+}
+
+void SkCanvas_drawPicture_4(SkCanvas *canvas, const SkPicture * picture, const SkMatrix * matrix, const SkPaint * paint) {
+    canvas->drawPicture(picture, matrix, paint);
+}
+
+void SkCanvas_drawPoint(SkCanvas *canvas, SkPoint p, const SkPaint * paint) {
+    canvas->drawPoint(p, *paint);
+}
+
+void SkCanvas_drawPoint_2(SkCanvas *canvas, SkScalar x, SkScalar y, const SkPaint * paint) {
+    canvas->drawPoint(x, y, *paint);
+}
+
+void SkCanvas_drawPoints(SkCanvas *canvas, SkCanvas::PointMode mode, size_t count, const SkPoint pts[], const SkPaint * paint) {
+    canvas->drawPoints(mode, count, pts, *paint);
+}
+
 void SkCanvas_drawRect(SkCanvas *canvas, const char *rect_key, const SkPaint *paint) {
     canvas->drawRect(static_sk_rect[rect_key], *paint);
+}
+
+void SkCanvas_drawRegion(SkCanvas *canvas, const SkRegion * region, const SkPaint * paint) {
+    canvas->drawRegion(*region, *paint);
+}
+
+void SkCanvas_drawRoundRect(SkCanvas *canvas, const SkRect * rect, SkScalar rx, SkScalar ry, const SkPaint * paint) {
+    canvas->drawRoundRect(*rect, rx, ry, *paint);
+}
+
+void SkCanvas_drawRRect(SkCanvas *canvas, const SkRRect * rrect, const SkPaint * paint) {
+    canvas->drawRRect(*rrect, *paint);
+}
+
+void SkCanvas_drawSimpleText(SkCanvas *canvas, const void * text, size_t byteLength, SkTextEncoding encoding, SkScalar x, SkScalar y, const SkFont * font, const SkPaint * paint) {
+    canvas->drawSimpleText(text, byteLength, encoding, x, y, *font, *paint);
+}
+
+void SkCanvas_drawString(SkCanvas *canvas, const char str[], SkScalar x, SkScalar y, const SkFont * font, const SkPaint * paint) {
+    canvas->drawString(str, x, y, *font, *paint);
+}
+
+void SkCanvas_drawString_2(SkCanvas *canvas, const SkString * str, SkScalar x, SkScalar y, const SkFont * font, const SkPaint * paint) {
+    canvas->drawString(*str, x, y, *font, *paint);
+}
+
+void SkCanvas_drawTextBlob(const char *key, SkCanvas *canvas, SkScalar x, SkScalar y, const SkPaint * paint) {
+    canvas->drawTextBlob(static_sk_text_blob[key], x, y, *paint);
+}
+
+void SkCanvas_drawTextBlob_2(SkCanvas *canvas, const SkTextBlob * blob, SkScalar x, SkScalar y, const SkPaint * paint) {
+    canvas->drawTextBlob(blob, x, y, *paint);
+}
+
+void SkCanvas_drawVertices(const char *key, SkCanvas *canvas, SkBlendMode mode, const SkPaint * paint) {
+    canvas->drawVertices(static_sk_vertices[key], mode, *paint);
+}
+
+void SkCanvas_drawVertices_2(SkCanvas *canvas, const SkVertices * vertices, SkBlendMode mode, const SkPaint * paint) {
+    canvas->drawVertices(vertices, mode, *paint);
+}
+
+void SkCanvas_experimental_DrawEdgeAAImageSet(SkCanvas *canvas, const SkCanvas::ImageSetEntry imageSet[], int cnt, const SkPoint dstClips[], const SkMatrix preViewMatrices[], const SkSamplingOptions * sampling, const SkPaint * paint, SkCanvas::SrcRectConstraint constraint) {
+    canvas->experimental_DrawEdgeAAImageSet(imageSet, cnt, dstClips, preViewMatrices, *sampling, paint, constraint);
+}
+
+void SkCanvas_experimental_DrawEdgeAAQuad(SkCanvas *canvas, const SkRect * rect, const SkPoint clip[4], SkCanvas::QuadAAFlags aaFlags, const SkColor4f * color, SkBlendMode mode) {
+    canvas->experimental_DrawEdgeAAQuad(*rect, clip, aaFlags, *color, mode);
+}
+
+void SkCanvas_experimental_DrawEdgeAAQuad_2(SkCanvas *canvas, const SkRect * rect, const SkPoint clip[4], SkCanvas::QuadAAFlags aaFlags, SkColor color, SkBlendMode mode) {
+    canvas->experimental_DrawEdgeAAQuad(*rect, clip, aaFlags, color, mode);
+}
+
+SkISize SkCanvas_getBaseLayerSize(SkCanvas *canvas) { // virtual
+    return canvas->getBaseLayerSize();
+}
+
+SkSurfaceProps SkCanvas_getBaseProps(SkCanvas *canvas) {
+    return canvas->getBaseProps();
+}
+
+SkIRect SkCanvas_getDeviceClipBounds(SkCanvas *canvas) {
+    return canvas->getDeviceClipBounds();
+}
+
+bool SkCanvas_getDeviceClipBounds_2(SkCanvas *canvas, SkIRect * bounds) {
+    return canvas->getDeviceClipBounds(bounds);
+}
+
+SkRect SkCanvas_getLocalClipBounds(SkCanvas *canvas) {
+    return canvas->getLocalClipBounds();
+}
+
+bool SkCanvas_getLocalClipBounds_2(SkCanvas *canvas, SkRect * bounds) {
+    return canvas->getLocalClipBounds(bounds);
+}
+
+SkM44 SkCanvas_getLocalToDevice(SkCanvas *canvas) {
+    return canvas->getLocalToDevice();
+}
+
+SkMatrix SkCanvas_getLocalToDeviceAs3x3(SkCanvas *canvas) {
+    return canvas->getLocalToDeviceAs3x3();
+}
+
+bool SkCanvas_getProps(SkCanvas *canvas, SkSurfaceProps * props) {
+    return canvas->getProps(props);
+}
+
+int SkCanvas_getSaveCount(SkCanvas *canvas) {
+    return canvas->getSaveCount();
+}
+
+SkSurface* SkCanvas_getSurface(SkCanvas *canvas) {
+    return canvas->getSurface();
+}
+
+SkSurfaceProps SkCanvas_getTopProps(SkCanvas *canvas) {
+    return canvas->getTopProps();
+}
+
+SkMatrix SkCanvas_getTotalMatrix(SkCanvas *canvas) {
+    return canvas->getTotalMatrix();
+}
+
+SkImageInfo SkCanvas_imageInfo(SkCanvas *canvas) {
+    return canvas->imageInfo();
+}
+
+bool SkCanvas_isClipEmpty(SkCanvas *canvas) {
+    return canvas->isClipEmpty();
+}
+
+bool SkCanvas_isClipRect(SkCanvas *canvas) {
+    return canvas->isClipRect();
+}
+
+void SkCanvas_MakeRasterDirect(const char *key, const SkImageInfo * info, void * pixels, size_t rowBytes, const SkSurfaceProps * props) {
+    static_sk_canvas[key] = SkCanvas::MakeRasterDirect(*info, pixels, rowBytes, props);
+}
+
+void SkCanvas_MakeRasterDirectN32(const char *key, int width, int height, SkPMColor * pixels, size_t rowBytes) {
+    static_sk_canvas[key] = SkCanvas::MakeRasterDirectN32(width, height, pixels, rowBytes);
+}
+
+void SkCanvas_makeSurface(const char *key, SkCanvas *canvas, const SkImageInfo * info, const SkSurfaceProps * props) {
+    static_sk_surface[key] = canvas->makeSurface(*info, props);
+}
+
+bool SkCanvas_peekPixels(SkCanvas *canvas, SkPixmap * pixmap) {
+    return canvas->peekPixels(pixmap);
+}
+
+void SkCanvas_private_draw_shadow_rec(SkCanvas *canvas, const SkPath * path, const SkDrawShadowRec * rec) {
+    canvas->private_draw_shadow_rec(*path, *rec);
+}
+
+bool SkCanvas_quickReject(SkCanvas *canvas, const SkPath * path) {
+    return canvas->quickReject(*path);
+}
+
+bool SkCanvas_quickReject_2(SkCanvas *canvas, const SkRect * rect) {
+    return canvas->quickReject(*rect);
+}
+
+bool SkCanvas_readPixels(SkCanvas *canvas, const SkBitmap * bitmap, int srcX, int srcY) {
+    return canvas->readPixels(*bitmap, srcX, srcY);
+}
+
+bool SkCanvas_readPixels_2(SkCanvas *canvas, const SkImageInfo * dstInfo, void * dstPixels, size_t dstRowBytes, int srcX, int srcY) {
+    return canvas->readPixels(*dstInfo, dstPixels, dstRowBytes, srcX, srcY);
+}
+
+bool SkCanvas_readPixels_3(SkCanvas *canvas, const SkPixmap * pixmap, int srcX, int srcY) {
+    return canvas->readPixels(*pixmap, srcX, srcY);
+}
+
+skgpu::graphite::Recorder* SkCanvas_recorder(SkCanvas *canvas) {
+    return canvas->recorder();
+}
+
+GrRecordingContext* SkCanvas_recordingContext(SkCanvas *canvas) {
+    return canvas->recordingContext();
+}
+
+void SkCanvas_resetMatrix(SkCanvas *canvas) {
+    canvas->resetMatrix();
+}
+
+void SkCanvas_restore(SkCanvas *canvas) {
+    canvas->restore();
+}
+
+void SkCanvas_restoreToCount(SkCanvas *canvas, int saveCount) {
+    canvas->restoreToCount(saveCount);
+}
+
+void SkCanvas_rotate(SkCanvas *canvas, SkScalar degrees) {
+    canvas->rotate(degrees);
+}
+
+void SkCanvas_rotate_2(SkCanvas *canvas, SkScalar degrees, SkScalar px, SkScalar py) {
+    canvas->rotate(degrees, px, py);
+}
+
+int SkCanvas_save(SkCanvas *canvas) {
+    return canvas->save();
+}
+
+int SkCanvas_saveLayer(SkCanvas *canvas, const SkCanvas::SaveLayerRec * layerRec) {
+    return canvas->saveLayer(*layerRec);
+}
+
+int SkCanvas_saveLayer_2(SkCanvas *canvas, const SkRect * bounds, const SkPaint * paint) {
+    return canvas->saveLayer(*bounds, paint);
+}
+
+int SkCanvas_saveLayer_3(SkCanvas *canvas, const SkRect * bounds, const SkPaint * paint) {
+    return canvas->saveLayer(bounds, paint);
+}
+
+int SkCanvas_saveLayerAlpha(SkCanvas *canvas, const SkRect * bounds, U8CPU alpha) {
+    return canvas->saveLayerAlpha(bounds, alpha);
+}
+
+int SkCanvas_saveLayerAlphaf(SkCanvas *canvas, const SkRect * bounds, float alpha) {
+    return canvas->saveLayerAlphaf(bounds, alpha);
+}
+
+void SkCanvas_scale(SkCanvas *canvas, SkScalar sx, SkScalar sy) {
+    canvas->scale(sx, sy);
+}
+
+void SkCanvas_setMatrix(SkCanvas *canvas, const SkM44 * matrix) {
+    canvas->setMatrix(*matrix);
+}
+
+void SkCanvas_setMatrix_2(SkCanvas *canvas, const SkMatrix * matrix) {
+    canvas->setMatrix(*matrix);
+}
+
+void SkCanvas_skew(SkCanvas *canvas, SkScalar sx, SkScalar sy) {
+    canvas->skew(sx, sy);
+}
+
+void SkCanvas_temporary_internal_getRgnClip(SkCanvas *canvas, SkRegion * region) {
+    canvas->temporary_internal_getRgnClip(region);
+}
+
+void SkCanvas_translate(SkCanvas *canvas, SkScalar dx, SkScalar dy) {
+    canvas->translate(dx, dy);
+}
+
+bool SkCanvas_writePixels(SkCanvas *canvas, const SkBitmap * bitmap, int x, int y) {
+    return canvas->writePixels(*bitmap, x, y);
+}
+
+bool SkCanvas_writePixels_2(SkCanvas *canvas, const SkImageInfo * info, const void * pixels, size_t rowBytes, int x, int y) {
+    return canvas->writePixels(*info, pixels, rowBytes, x, y);
 }
 
 //
 // SkColor
 //
+
+SkColor SkColor_SkColorSetA(SkColor c, U8CPU a) {
+    return SkColorSetA(c, a);
+}
+
+SkColor SkColor_SkColorSetARGB(U8CPU a, U8CPU r, U8CPU g, U8CPU b) {
+    return SkColorSetARGB(a, r, g, b);
+}
+
+void SkColor_SkColorToHSV(SkColor color, SkScalar hsv[3]) {
+    SkColorToHSV(color, hsv);
+}
+
+SkColor SkColor_SkHSVToColor(const SkScalar hsv[3]) {
+    return SkHSVToColor(hsv);
+}
+
+SkColor SkColor_SkHSVToColor_2(U8CPU alpha, const SkScalar hsv[3]) {
+    return SkHSVToColor(alpha, hsv);
+}
+
+SkPMColor SkColor_SkPreMultiplyARGB(U8CPU a, U8CPU r, U8CPU g, U8CPU b) {
+    return SkPreMultiplyARGB(a, r, g, b);
+}
+
+SkPMColor SkColor_SkPreMultiplyColor(SkColor c) {
+    return SkPreMultiplyColor(c);
+}
+
+void SkColor_SkRGBToHSV(U8CPU red, U8CPU green, U8CPU blue, SkScalar hsv[3]) {
+    SkRGBToHSV(red, green, blue, hsv);
+}
 
 //
 // SkData
@@ -707,7 +1252,7 @@ int main(int argc, char* argv[]) {
     SkBitmap* skBitmap = SkBitmap_new();
     {
         SkBitmap_allocN32Pixels(skBitmap, image_width, image_height);
-        SkCanvas *canvas = SkCanvas_new(skBitmap);
+        SkCanvas *canvas = SkCanvas_new_4(skBitmap);
 
         {
             // PNG画像を読み込む
@@ -718,7 +1263,7 @@ int main(int argc, char* argv[]) {
 
         {
             // 画像をキャンバスに描画
-            SkCanvas_drawImage(canvas, static_sk_image_get("sample_image"), 0, 0);
+            SkCanvas_drawImage_4(canvas, static_sk_image_get("sample_image"), 0, 0);
         }
 
         {
