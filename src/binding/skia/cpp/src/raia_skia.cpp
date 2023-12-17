@@ -18,7 +18,11 @@
 #include "include/core/SkTextBlob.h"
 #include "include/core/SkVertices.h"
 #include "include/core/SkSurface.h"
+#include "include/core/SkColorFilter.h"
+#include "include/core/SkColorPriv.h"
 #include "include/gpu/graphite/Recorder.h"
+#include "include/core/SkAnnotation.h"
+#include "include/core/SkCapabilities.h"
 
 #include <map>
 
@@ -38,6 +42,9 @@ static std::map<std::string, sk_sp<SkPicture>> static_sk_picture;
 static std::map<std::string, sk_sp<SkTextBlob>> static_sk_text_blob;
 static std::map<std::string, sk_sp<SkVertices>> static_sk_vertices;
 static std::map<std::string, sk_sp<SkSurface>> static_sk_surface;
+static std::map<std::string, sk_sp<const SkCapabilities>> static_sk_capabilities;
+static std::map<std::string, sk_sp<SkColorFilter>> static_sk_color_filter;
+static std::map<std::string, sk_sp<SkFlattenable>> static_sk_flattenable;
 
 // static std::map<std::string, sk_sp<SkDevice>> static_sk_device;
 static std::map<std::string, SkRect> static_sk_rect;
@@ -78,6 +85,30 @@ void static_sk_image_delete(const char *key) {
 void static_sk_shader_delete(const char *key) {
     static_sk_shader[key].reset();
     static_sk_shader.erase(key);
+}
+
+//
+// SkAlphaType
+//
+
+bool SkAlphaType_SkAlphaTypeIsOpaque(SkAlphaType at) {
+    return SkAlphaTypeIsOpaque(at);
+}
+
+//
+// SkAnnotation
+//
+
+void SkAnnotation_SkAnnotateLinkToDestination(SkCanvas * canvas, const SkRect * rect, SkData * data) {
+    SkAnnotateLinkToDestination(canvas, *rect, data);
+}
+
+void SkAnnotation_SkAnnotateNamedDestination(SkCanvas * canvas, const SkPoint * point, SkData * data) {
+    SkAnnotateNamedDestination(canvas, *point, data);
+}
+
+void SkAnnotation_SkAnnotateRectWithURL(SkCanvas * canvas, const SkRect * rect, SkData * data) {
+    SkAnnotateRectWithURL(canvas, *rect, data);
 }
 
 //
@@ -437,6 +468,22 @@ bool SkBitmap_writePixels(SkBitmap *bitmap, const SkPixmap *src) { // inline
 
 bool SkBitmap_writePixels_2(SkBitmap *bitmap, const SkPixmap *src, int dstX, int dstY) {
     return bitmap->writePixels(*src, dstX, dstY);
+}
+
+//
+// SkBlender
+//
+
+//
+// SkBlendMode
+//
+
+bool SkBlendMode_SkBlendMode_AsCoeff(SkBlendMode mode, SkBlendModeCoeff * src, SkBlendModeCoeff * dst) {
+    return SkBlendMode_AsCoeff(mode, src, dst);
+}
+
+const char* SkBlendMode_SkBlendMode_Name(SkBlendMode blendMode) {
+    return SkBlendMode_Name(blendMode);
 }
 
 //
@@ -961,6 +1008,30 @@ bool SkCanvas_writePixels_2(SkCanvas *canvas, const SkImageInfo * info, const vo
 }
 
 //
+// SkCapabilities
+//
+
+void SkCapabilities_RasterBackend(const char *key) {
+    static_sk_capabilities[key] = SkCapabilities::RasterBackend();
+}
+
+void SkCapabilities_ref(SkCapabilities *capabilities) {
+    capabilities->ref();
+}
+
+SkSL::Version SkCapabilities_skslVersion(SkCapabilities *capabilities) {
+    return capabilities->skslVersion();
+}
+
+bool SkCapabilities_unique(SkCapabilities *capabilities) {
+    return capabilities->unique();
+}
+
+void SkCapabilities_unref(SkCapabilities *capabilities) {
+    capabilities->unref();
+}
+
+//
 // SkColor
 //
 
@@ -994,6 +1065,88 @@ SkPMColor SkColor_SkPreMultiplyColor(SkColor c) {
 
 void SkColor_SkRGBToHSV(U8CPU red, U8CPU green, U8CPU blue, SkScalar hsv[3]) {
     SkRGBToHSV(red, green, blue, hsv);
+}
+
+//
+// SkColorFilter
+//
+
+bool SkColorFilter_asAColorMatrix(SkColorFilter *color_filter, float matrix[20]) {
+    return color_filter->asAColorMatrix(matrix);
+}
+
+bool SkColorFilter_asAColorMode(SkColorFilter *color_filter, SkColor * color, SkBlendMode * mode) {
+    return color_filter->asAColorMode(color, mode);
+}
+
+void SkColorFilter_Deserialize(const char *key, const void * data, size_t size, const SkDeserialProcs * procs) {
+    static_sk_color_filter[key] = SkColorFilter::Deserialize(data, size, procs);
+}
+
+SkColor SkColorFilter_filterColor(SkColorFilter *color_filter, SkColor color) {
+    return color_filter->filterColor(color);
+}
+
+SkColor4f SkColorFilter_filterColor4f(SkColorFilter *color_filter, const SkColor4f * srcColor, SkColorSpace * srcCS, SkColorSpace * dstCS) {
+    return color_filter->filterColor4f(*srcColor, srcCS, dstCS);
+}
+
+bool SkColorFilter_isAlphaUnchanged(SkColorFilter *color_filter) {
+    return color_filter->isAlphaUnchanged();
+}
+
+void SkColorFilter_makeComposed(const char *key, SkColorFilter *color_filter) {
+    static_sk_color_filter[key] = color_filter->makeComposed(static_sk_color_filter[key]);
+}
+
+void SkColorFilter_makeWithWorkingColorSpace(const char *color_filter_key, const char * color_space_key, SkColorFilter *color_filter) {
+    static_sk_color_filter[color_filter_key] = color_filter->makeWithWorkingColorSpace(static_sk_color_space[color_space_key]);
+}
+
+//
+// SkColorFilters
+//
+
+void SkColorFilters_Blend(const char *color_filter_key, const char * color_space_key, const SkColor4f * c, SkBlendMode mode) {
+    static_sk_color_filter[color_filter_key] = SkColorFilters::Blend(*c, static_sk_color_space[color_space_key], mode);
+}
+
+void SkColorFilters_Blend_2(const char *color_filter_key, SkColor c, SkBlendMode mode) {
+    static_sk_color_filter[color_filter_key] = SkColorFilters::Blend(c, mode);
+}
+
+
+
+//
+// SkColorPriv
+//
+
+unsigned SkColorPriv_SkAlpha255To256(U8CPU alpha) {
+    return SkAlpha255To256(alpha);
+}
+
+uint32_t SkColorPriv_SkAlphaMulQ(uint32_t c, unsigned scale) {
+    return SkAlphaMulQ(c, scale);
+}
+
+SkPMColor SkColorPriv_SkPackARGB32(U8CPU a, U8CPU r, U8CPU g, U8CPU b) {
+    return SkPackARGB32(a, r, g, b);
+}
+
+SkPMColor SkColorPriv_SkPackARGB32NoCheck(U8CPU a, U8CPU r, U8CPU g, U8CPU b) {
+    return SkPackARGB32NoCheck(a, r, g, b);
+}
+
+SkPMColor SkColorPriv_SkPMSrcOver(SkPMColor src, SkPMColor dst) {
+    return SkPMSrcOver(src, dst);
+}
+
+SkPMColor SkColorPriv_SkPremultiplyARGBInline(U8CPU a, U8CPU r, U8CPU g, U8CPU b) {
+    return SkPremultiplyARGBInline(a, r, g, b);
+}
+
+U8CPU SkColorPriv_SkUnitScalarClampToByte(SkScalar x) {
+    return SkUnitScalarClampToByte(x);
 }
 
 //
