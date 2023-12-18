@@ -1,28 +1,36 @@
 #include "raia_skia.h"
 
 // Skiaヘッダのインクルード
+#include "include/codec/SkPngDecoder.h"
+#include "include/core/SkAnnotation.h"
 #include "include/core/SkBBHFactory.h"
 #include "include/core/SkBitmap.h"
-#include "include/core/SkCanvas.h"
-#include "include/core/SkPaint.h"
-#include "include/core/SkRect.h"
-#include "include/core/SkImage.h"
-#include "include/codec/SkPngDecoder.h"
-#include "include/core/SkStream.h"
-#include "include/core/SkData.h"
-#include "include/core/SkPath.h"
-#include "include/core/SkShader.h"
-#include "include/core/SkPixelRef.h"
 #include "include/core/SkBlender.h"
-#include "include/core/SkPicture.h"
-#include "include/core/SkTextBlob.h"
-#include "include/core/SkVertices.h"
-#include "include/core/SkSurface.h"
+#include "include/core/SkCanvas.h"
+#include "include/core/SkCapabilities.h"
 #include "include/core/SkColorFilter.h"
 #include "include/core/SkColorPriv.h"
+#include "include/core/SkColorTable.h"
+#include "include/core/SkContourMeasure.h"
+#include "include/core/SkCubicMap.h"
+#include "include/core/SkData.h"
+#include "include/core/SkDataTable.h"
+#include "include/core/SkImage.h"
+#include "include/core/SkPaint.h"
+#include "include/core/SkPath.h"
+#include "include/core/SkPathEffect.h"
+#include "include/core/SkPicture.h"
+#include "include/core/SkPixelRef.h"
+#include "include/core/SkRect.h"
+#include "include/core/SkShader.h"
+#include "include/core/SkStream.h"
+#include "include/core/SkSurface.h"
+#include "include/core/SkTextBlob.h"
+#include "include/core/SkVertices.h"
+#include "include/effects/SkColorMatrix.h"
+#include "include/effects/SkCornerPathEffect.h"
+#include "include/effects/SkDashPathEffect.h"
 #include "include/gpu/graphite/Recorder.h"
-#include "include/core/SkAnnotation.h"
-#include "include/core/SkCapabilities.h"
 
 #include <map>
 
@@ -45,6 +53,11 @@ static std::map<std::string, sk_sp<SkSurface>> static_sk_surface;
 static std::map<std::string, sk_sp<const SkCapabilities>> static_sk_capabilities;
 static std::map<std::string, sk_sp<SkColorFilter>> static_sk_color_filter;
 static std::map<std::string, sk_sp<SkFlattenable>> static_sk_flattenable;
+static std::map<std::string, sk_sp<SkColorTable>> static_sk_color_table;
+static std::map<std::string, sk_sp<SkContourMeasure>> static_sk_contour_measure;
+static std::map<std::string, sk_sp<SkPathEffect>> static_sk_path_effect;
+static std::map<std::string, sk_sp<SkDataTable>> static_sk_data_table;
+//static std::map<std::string, sk_sp<SkColorMatrix>> static_sk_color_matrix;
 
 // static std::map<std::string, sk_sp<SkDevice>> static_sk_device;
 static std::map<std::string, SkRect> static_sk_rect;
@@ -55,41 +68,43 @@ extern "C" {
 // static
 //
 
-SkStream *static_sk_stream_get(const char *key){
-    return static_sk_stream[key].get();
+SkStream *static_sk_stream_get(const char *sk_stream_key){
+    return static_sk_stream[sk_stream_key].get();
 }
 
-SkImage *static_sk_image_get(const char *key){
-    return static_sk_image[key].get();
+SkImage *static_sk_image_get(const char *sk_image_key){
+    return static_sk_image[sk_image_key].get();
 }
 
-void static_sk_rect_delete(const char *key) {
-    static_sk_rect.erase(key);
+void static_sk_rect_delete(const char *sk_rect_key) {
+    static_sk_rect.erase(sk_rect_key);
 }
 
-void static_sk_data_delete(const char *key) {
-    static_sk_data[key].reset();
-    static_sk_data.erase(key);
+void static_sk_data_delete(const char *sk_data_key) {
+    static_sk_data[sk_data_key].reset();
+    static_sk_data.erase(sk_data_key);
 }
 
-void static_sk_stream_delete(const char *key) {
-    static_sk_stream[key].reset();
-    static_sk_stream.erase(key);
+void static_sk_stream_delete(const char *sk_stream_key) {
+    static_sk_stream[sk_stream_key].reset();
+    static_sk_stream.erase(sk_stream_key);
 }
 
-void static_sk_image_delete(const char *key) {
-    static_sk_image[key].reset(); // スマートポインタを明示的に解放する
-    static_sk_image.erase(key);
+void static_sk_image_delete(const char *sk_image_key) {
+    static_sk_image[sk_image_key].reset(); // スマートポインタを明示的に解放する
+    static_sk_image.erase(sk_image_key);
 }
 
-void static_sk_shader_delete(const char *key) {
-    static_sk_shader[key].reset();
-    static_sk_shader.erase(key);
+void static_sk_shader_delete(const char *sk_shader_key) {
+    static_sk_shader[sk_shader_key].reset();
+    static_sk_shader.erase(sk_shader_key);
 }
 
 //
 // SkAlphaType
 //
+
+// static
 
 bool SkAlphaType_SkAlphaTypeIsOpaque(SkAlphaType at) {
     return SkAlphaTypeIsOpaque(at);
@@ -98,6 +113,8 @@ bool SkAlphaType_SkAlphaTypeIsOpaque(SkAlphaType at) {
 //
 // SkAnnotation
 //
+
+// SK_API
 
 void SkAnnotation_SkAnnotateLinkToDestination(SkCanvas * canvas, const SkRect * rect, SkData * data) {
     SkAnnotateLinkToDestination(canvas, *rect, data);
@@ -171,8 +188,8 @@ SkAlphaType SkBitmap_alphaType(SkBitmap *bitmap) { // inline
     return bitmap->alphaType();
 }
 
-void SkBitmap_asImage(const char *key, SkBitmap *bitmap) {
-    static_sk_image[key] = bitmap->asImage();
+void SkBitmap_asImage(const char *sk_image_key, SkBitmap *bitmap) {
+    static_sk_image[sk_image_key] = bitmap->asImage();
 }
 
 SkIRect SkBitmap_bounds(SkBitmap *bitmap) { // inline
@@ -335,20 +352,20 @@ bool SkBitmap_isOpaque(SkBitmap *bitmap) {
     return bitmap->isOpaque();
 }
 
-void SkBitmap_makeShader(const char *key, SkBitmap *bitmap, const SkSamplingOptions *sampling, const SkMatrix *lm) {
-    static_sk_shader[key] = bitmap->makeShader(*sampling, *lm);
+void SkBitmap_makeShader(const char *sk_shader_key, SkBitmap *bitmap, const SkSamplingOptions *sampling, const SkMatrix *lm) {
+    static_sk_shader[sk_shader_key] = bitmap->makeShader(*sampling, *lm);
 }
 
-void SkBitmap_makeShader_2(const char *key, SkBitmap *bitmap, const SkSamplingOptions *sampling, const SkMatrix *lm) {
-    static_sk_shader[key] = bitmap->makeShader(*sampling, lm);
+void SkBitmap_makeShader_2(const char *sk_shader_key, SkBitmap *bitmap, const SkSamplingOptions *sampling, const SkMatrix *lm) {
+    static_sk_shader[sk_shader_key] = bitmap->makeShader(*sampling, lm);
 }
 
-void SkBitmap_makeShader_3(const char *key, SkBitmap *bitmap, SkTileMode tmx, SkTileMode tmy, const SkSamplingOptions * sampling, const SkMatrix * localMatrix) {
-    static_sk_shader[key] = bitmap->makeShader(tmx, tmy, *sampling, localMatrix);
+void SkBitmap_makeShader_3(const char *sk_shader_key, SkBitmap *bitmap, SkTileMode tmx, SkTileMode tmy, const SkSamplingOptions * sampling, const SkMatrix * localMatrix) {
+    static_sk_shader[sk_shader_key] = bitmap->makeShader(tmx, tmy, *sampling, localMatrix);
 }
 
-void SkBitmap_makeShader_4(const char *key, SkBitmap *bitmap, SkTileMode tmx, SkTileMode tmy, const SkSamplingOptions * sampling, const SkMatrix * lm) {
-    static_sk_shader[key] = bitmap->makeShader(tmx, tmy, *sampling, *lm);
+void SkBitmap_makeShader_4(const char *sk_shader_key, SkBitmap *bitmap, SkTileMode tmx, SkTileMode tmy, const SkSamplingOptions * sampling, const SkMatrix * lm) {
+    static_sk_shader[sk_shader_key] = bitmap->makeShader(tmx, tmy, *sampling, *lm);
 }
 
 void SkBitmap_notifyPixelsChanged(SkBitmap *bitmap) {
@@ -390,8 +407,8 @@ bool SkBitmap_readyToDraw(SkBitmap *bitmap) { // inline
     return bitmap->readyToDraw();
 }
 
-void SkBitmap_refColorSpace(const char *key, SkBitmap *bitmap) {
-    static_sk_color_space[key] = bitmap->refColorSpace();
+void SkBitmap_refColorSpace(const char *sk_color_space_key, SkBitmap *bitmap) {
+    static_sk_color_space[sk_color_space_key] = bitmap->refColorSpace();
 }
 
 void SkBitmap_reset(SkBitmap *bitmap) {
@@ -418,8 +435,8 @@ bool SkBitmap_setInfo(SkBitmap *bitmap, const SkImageInfo *imageInfo, size_t row
     return bitmap->setInfo(*imageInfo, rowBytes);
 }
 
-void SkBitmap_setPixelRef(SkBitmap *bitmap, const char *pixelRef_key, int dx, int dy) {
-    bitmap->setPixelRef(static_sk_pixel_ref[pixelRef_key], dx, dy);
+void SkBitmap_setPixelRef(const char *sk_pixel_ref_key, SkBitmap *bitmap, int dx, int dy) {
+    bitmap->setPixelRef(static_sk_pixel_ref[sk_pixel_ref_key], dx, dy);
 }
 
 void SkBitmap_setPixels(SkBitmap *bitmap, void *pixels) {
@@ -582,8 +599,8 @@ void SkCanvas_clipRRect_3(SkCanvas *canvas, const SkRRect * rrect, SkClipOp op, 
     canvas->clipRRect(*rrect, op, doAntiAlias);
 }
 
-void SkCanvas_clipShader(const char *key, SkCanvas *canvas, SkClipOp op) {
-    canvas->clipShader(static_sk_shader[key], op);
+void SkCanvas_clipShader(const char *sk_shader_key, SkCanvas *canvas, SkClipOp op) {
+    canvas->clipShader(static_sk_shader[sk_shader_key], op);
 }
 
 void SkCanvas_concat(SkCanvas *canvas, const SkM44 * m44) {
@@ -603,8 +620,8 @@ void SkCanvas_discard(SkCanvas *canvas) {
     canvas->discard();
 }
 
-void SkCanvas_drawAnnotation(const char *data_key, SkCanvas *canvas, const SkRect * rect, const char key[]) {
-    canvas->drawAnnotation(*rect, key, static_sk_data[data_key]);
+void SkCanvas_drawAnnotation(const char *sk_data_key, SkCanvas *canvas, const SkRect * rect, const char key[]) {
+    canvas->drawAnnotation(*rect, key, static_sk_data[sk_data_key]);
 }
 
 void SkCanvas_drawAnnotation_2(SkCanvas *canvas, const SkRect * rect, const char key[], SkData * value) {
@@ -659,16 +676,16 @@ void SkCanvas_drawGlyphs_3(SkCanvas *canvas, int count, const SkGlyphID glyphs[]
     canvas->drawGlyphs(count, glyphs, xforms, origin, *font, *paint);
 }
 
-void SkCanvas_drawImage(const char *key, SkCanvas *canvas, SkScalar left, SkScalar top) {
-    canvas->drawImage(static_sk_image[key], left, top);
+void SkCanvas_drawImage(const char *sk_image_key, SkCanvas *canvas, SkScalar left, SkScalar top) {
+    canvas->drawImage(static_sk_image[sk_image_key], left, top);
 }
 
-void SkCanvas_drawImage_2(const char *key, SkCanvas *canvas, SkScalar x, SkScalar y, const SkSamplingOptions * sampling, const SkPaint * paint) {
-    canvas->drawImage(static_sk_image[key], x, y, *sampling, paint);
+void SkCanvas_drawImage_2(const char *sk_image_key, SkCanvas *canvas, SkScalar x, SkScalar y, const SkSamplingOptions * sampling, const SkPaint * paint) {
+    canvas->drawImage(static_sk_image[sk_image_key], x, y, *sampling, paint);
 }
 
 void SkCanvas_drawImage_3(SkCanvas *canvas, const SkImage * image, SkScalar x, SkScalar y, const SkSamplingOptions * sampling, const SkPaint * paint) {
-        canvas->drawImage(image, x, y, *sampling, paint);
+    canvas->drawImage(image, x, y, *sampling, paint);
 }
 
 void SkCanvas_drawImage_4(SkCanvas *canvas, const SkImage *image, SkScalar left, SkScalar top) {
@@ -687,12 +704,12 @@ void SkCanvas_drawImageNine(SkCanvas *canvas, const SkImage * image, const SkIRe
     canvas->drawImageNine(image, *center, *dst, filter, paint);
 }
 
-void SkCanvas_drawImageRect(const char *key, SkCanvas *canvas, const SkRect * dst, const SkSamplingOptions * sampling, const SkPaint * paint) {
-    canvas->drawImageRect(static_sk_image[key], *dst, *sampling, paint);
+void SkCanvas_drawImageRect(const char *sk_image_key, SkCanvas *canvas, const SkRect * dst, const SkSamplingOptions * sampling, const SkPaint * paint) {
+    canvas->drawImageRect(static_sk_image[sk_image_key], *dst, *sampling, paint);
 }
 
-void SkCanvas_drawImageRect_2(const char *key, SkCanvas *canvas, const SkRect * src, const SkRect * dst, const SkSamplingOptions * sampling,const SkPaint * paint, SkCanvas::SrcRectConstraint constraint ) {
-    canvas->drawImageRect(static_sk_image[key], *src, *dst, *sampling, paint, constraint);
+void SkCanvas_drawImageRect_2(const char *sk_image_key, SkCanvas *canvas, const SkRect * src, const SkRect * dst, const SkSamplingOptions * sampling,const SkPaint * paint, SkCanvas::SrcRectConstraint constraint ) {
+    canvas->drawImageRect(static_sk_image[sk_image_key], *src, *dst, *sampling, paint, constraint);
 }
 
 void SkCanvas_drawImageRect_3(SkCanvas *canvas, const SkImage * image, const SkRect * dst, const SkSamplingOptions * sampling, const SkPaint * paint) {
@@ -715,8 +732,8 @@ void SkCanvas_drawLine_2(SkCanvas *canvas, SkScalar x0, SkScalar y0, SkScalar x1
     canvas->drawLine(x0, y0, x1, y1, *paint);
 }
 
-void SkCanvas_drawMesh(const char *key, SkCanvas *canvas, const SkMesh * mesh, const SkPaint * paint) {
-    canvas->drawMesh(*mesh, static_sk_blender[key], *paint);
+void SkCanvas_drawMesh(const char *sk_blender_key, SkCanvas *canvas, const SkMesh * mesh, const SkPaint * paint) {
+    canvas->drawMesh(*mesh, static_sk_blender[sk_blender_key], *paint);
 }
 
 void SkCanvas_drawOval(SkCanvas *canvas, const SkRect * oval, const SkPaint * paint) {
@@ -735,12 +752,12 @@ void SkCanvas_drawPath(SkCanvas *canvas, const SkPath *path, const SkPaint *pain
     canvas->drawPath(*path, *paint);
 }
 
-void SkCanvas_drawPicture(const char *key, SkCanvas *canvas) {
-    canvas->drawPicture(static_sk_picture[key]);
+void SkCanvas_drawPicture(const char *sk_picture_key, SkCanvas *canvas) {
+    canvas->drawPicture(static_sk_picture[sk_picture_key]);
 }
 
-void SkCanvas_drawPicture_2(const char *key, SkCanvas *canvas, const SkMatrix * matrix, const SkPaint * paint) {
-    canvas->drawPicture(static_sk_picture[key], matrix, paint);
+void SkCanvas_drawPicture_2(const char *sk_picture_key, SkCanvas *canvas, const SkMatrix * matrix, const SkPaint * paint) {
+    canvas->drawPicture(static_sk_picture[sk_picture_key], matrix, paint);
 }
 
 void SkCanvas_drawPicture_3(SkCanvas *canvas, const SkPicture * picture) {
@@ -763,8 +780,8 @@ void SkCanvas_drawPoints(SkCanvas *canvas, SkCanvas::PointMode mode, size_t coun
     canvas->drawPoints(mode, count, pts, *paint);
 }
 
-void SkCanvas_drawRect(SkCanvas *canvas, const char *rect_key, const SkPaint *paint) {
-    canvas->drawRect(static_sk_rect[rect_key], *paint);
+void SkCanvas_drawRect(const char *sk_rect_key, SkCanvas *canvas, const SkPaint *paint) {
+    canvas->drawRect(static_sk_rect[sk_rect_key], *paint);
 }
 
 void SkCanvas_drawRegion(SkCanvas *canvas, const SkRegion * region, const SkPaint * paint) {
@@ -791,16 +808,16 @@ void SkCanvas_drawString_2(SkCanvas *canvas, const SkString * str, SkScalar x, S
     canvas->drawString(*str, x, y, *font, *paint);
 }
 
-void SkCanvas_drawTextBlob(const char *key, SkCanvas *canvas, SkScalar x, SkScalar y, const SkPaint * paint) {
-    canvas->drawTextBlob(static_sk_text_blob[key], x, y, *paint);
+void SkCanvas_drawTextBlob(const char *sk_text_blob_key, SkCanvas *canvas, SkScalar x, SkScalar y, const SkPaint * paint) {
+    canvas->drawTextBlob(static_sk_text_blob[sk_text_blob_key], x, y, *paint);
 }
 
 void SkCanvas_drawTextBlob_2(SkCanvas *canvas, const SkTextBlob * blob, SkScalar x, SkScalar y, const SkPaint * paint) {
     canvas->drawTextBlob(blob, x, y, *paint);
 }
 
-void SkCanvas_drawVertices(const char *key, SkCanvas *canvas, SkBlendMode mode, const SkPaint * paint) {
-    canvas->drawVertices(static_sk_vertices[key], mode, *paint);
+void SkCanvas_drawVertices(const char *sk_vertices_key, SkCanvas *canvas, SkBlendMode mode, const SkPaint * paint) {
+    canvas->drawVertices(static_sk_vertices[sk_vertices_key], mode, *paint);
 }
 
 void SkCanvas_drawVertices_2(SkCanvas *canvas, const SkVertices * vertices, SkBlendMode mode, const SkPaint * paint) {
@@ -883,16 +900,8 @@ bool SkCanvas_isClipRect(SkCanvas *canvas) {
     return canvas->isClipRect();
 }
 
-void SkCanvas_MakeRasterDirect(const char *key, const SkImageInfo * info, void * pixels, size_t rowBytes, const SkSurfaceProps * props) {
-    static_sk_canvas[key] = SkCanvas::MakeRasterDirect(*info, pixels, rowBytes, props);
-}
-
-void SkCanvas_MakeRasterDirectN32(const char *key, int width, int height, SkPMColor * pixels, size_t rowBytes) {
-    static_sk_canvas[key] = SkCanvas::MakeRasterDirectN32(width, height, pixels, rowBytes);
-}
-
-void SkCanvas_makeSurface(const char *key, SkCanvas *canvas, const SkImageInfo * info, const SkSurfaceProps * props) {
-    static_sk_surface[key] = canvas->makeSurface(*info, props);
+void SkCanvas_makeSurface(const char *sk_surface_key, SkCanvas *canvas, const SkImageInfo * info, const SkSurfaceProps * props) {
+    static_sk_surface[sk_surface_key] = canvas->makeSurface(*info, props);
 }
 
 bool SkCanvas_peekPixels(SkCanvas *canvas, SkPixmap * pixmap) {
@@ -1007,13 +1016,19 @@ bool SkCanvas_writePixels_2(SkCanvas *canvas, const SkImageInfo * info, const vo
     return canvas->writePixels(*info, pixels, rowBytes, x, y);
 }
 
+// static
+
+void SkCanvas_MakeRasterDirect(const char *sk_canvas_key, const SkImageInfo * info, void * pixels, size_t rowBytes, const SkSurfaceProps * props) {
+    static_sk_canvas[sk_canvas_key] = SkCanvas::MakeRasterDirect(*info, pixels, rowBytes, props);
+}
+
+void SkCanvas_MakeRasterDirectN32(const char *sk_canvas_key, int width, int height, SkPMColor * pixels, size_t rowBytes) {
+    static_sk_canvas[sk_canvas_key] = SkCanvas::MakeRasterDirectN32(width, height, pixels, rowBytes);
+}
+
 //
 // SkCapabilities
 //
-
-void SkCapabilities_RasterBackend(const char *key) {
-    static_sk_capabilities[key] = SkCapabilities::RasterBackend();
-}
 
 void SkCapabilities_ref(SkCapabilities *capabilities) {
     capabilities->ref();
@@ -1031,9 +1046,17 @@ void SkCapabilities_unref(SkCapabilities *capabilities) {
     capabilities->unref();
 }
 
+// static
+
+void SkCapabilities_RasterBackend(const char *sk_capabilities_key) {
+    static_sk_capabilities[sk_capabilities_key] = SkCapabilities::RasterBackend();
+}
+
 //
 // SkColor
 //
+
+// static
 
 SkColor SkColor_SkColorSetA(SkColor c, U8CPU a) {
     return SkColorSetA(c, a);
@@ -1079,10 +1102,6 @@ bool SkColorFilter_asAColorMode(SkColorFilter *color_filter, SkColor * color, Sk
     return color_filter->asAColorMode(color, mode);
 }
 
-void SkColorFilter_Deserialize(const char *key, const void * data, size_t size, const SkDeserialProcs * procs) {
-    static_sk_color_filter[key] = SkColorFilter::Deserialize(data, size, procs);
-}
-
 SkColor SkColorFilter_filterColor(SkColorFilter *color_filter, SkColor color) {
     return color_filter->filterColor(color);
 }
@@ -1095,31 +1114,201 @@ bool SkColorFilter_isAlphaUnchanged(SkColorFilter *color_filter) {
     return color_filter->isAlphaUnchanged();
 }
 
-void SkColorFilter_makeComposed(const char *key, SkColorFilter *color_filter) {
-    static_sk_color_filter[key] = color_filter->makeComposed(static_sk_color_filter[key]);
+void SkColorFilter_makeComposed(const char *sk_color_filter_key, SkColorFilter *color_filter) {
+    static_sk_color_filter[sk_color_filter_key] = color_filter->makeComposed(static_sk_color_filter[sk_color_filter_key]);
 }
 
-void SkColorFilter_makeWithWorkingColorSpace(const char *color_filter_key, const char * color_space_key, SkColorFilter *color_filter) {
-    static_sk_color_filter[color_filter_key] = color_filter->makeWithWorkingColorSpace(static_sk_color_space[color_space_key]);
+void SkColorFilter_makeWithWorkingColorSpace(const char *sk_color_filter_key, const char * sk_color_space_key, SkColorFilter *color_filter) {
+    static_sk_color_filter[sk_color_filter_key] = color_filter->makeWithWorkingColorSpace(static_sk_color_space[sk_color_space_key]);
+}
+
+// static
+
+void SkColorFilter_Deserialize(const char *sk_color_filter_key, const void * data, size_t size, const SkDeserialProcs * procs) {
+    static_sk_color_filter[sk_color_filter_key] = SkColorFilter::Deserialize(data, size, procs);
 }
 
 //
 // SkColorFilters
 //
 
-void SkColorFilters_Blend(const char *color_filter_key, const char * color_space_key, const SkColor4f * c, SkBlendMode mode) {
-    static_sk_color_filter[color_filter_key] = SkColorFilters::Blend(*c, static_sk_color_space[color_space_key], mode);
+// static
+
+void SkColorFilters_Blend(const char *sk_color_filter_key, const char * sk_color_space_key, const SkColor4f * c, SkBlendMode mode) {
+    static_sk_color_filter[sk_color_filter_key] = SkColorFilters::Blend(*c, static_sk_color_space[sk_color_space_key], mode);
 }
 
-void SkColorFilters_Blend_2(const char *color_filter_key, SkColor c, SkBlendMode mode) {
-    static_sk_color_filter[color_filter_key] = SkColorFilters::Blend(c, mode);
+void SkColorFilters_Blend_2(const char *sk_color_filter_key, SkColor c, SkBlendMode mode) {
+    static_sk_color_filter[sk_color_filter_key] = SkColorFilters::Blend(c, mode);
 }
 
+void SkColorFilters_Compose(const char *sk_color_filter_key_1, const char *sk_color_filter_key_2) {
+    static_sk_color_filter[sk_color_filter_key_1] = SkColorFilters::Compose(static_sk_color_filter[sk_color_filter_key_1], static_sk_color_filter[sk_color_filter_key_2]);
+}
 
+void SkColorFilters_HSLAMatrix(const char *sk_color_filter_key, const float rowMajor[20]) {
+    static_sk_color_filter[sk_color_filter_key] = SkColorFilters::HSLAMatrix(rowMajor);
+}
+
+void SkColorFilters_HSLAMatrix_2(const char *sk_color_filter_key, const SkColorMatrix *matrix) {
+    static_sk_color_filter[sk_color_filter_key] = SkColorFilters::HSLAMatrix(*matrix);
+}
+
+void SkColorFilters_Lerp(const char *sk_color_filter_key_1, const char *sk_color_filter_key_2, float t) {
+    static_sk_color_filter[sk_color_filter_key_1] = SkColorFilters::Lerp(t, static_sk_color_filter[sk_color_filter_key_1], static_sk_color_filter[sk_color_filter_key_2]);
+}
+
+void SkColorFilters_Lighting(const char *sk_color_filter_key, SkColor mul, SkColor add) {
+    static_sk_color_filter[sk_color_filter_key] = SkColorFilters::Lighting(mul, add);
+}
+
+void SkColorFilters_LinearToSRGBGamma(const char *sk_color_filter_key) {
+    static_sk_color_filter[sk_color_filter_key] = SkColorFilters::LinearToSRGBGamma();
+}
+
+void SkColorFilters_Matrix(const char *sk_color_filter_key, const float rowMajor[20]) {
+    static_sk_color_filter[sk_color_filter_key] = SkColorFilters::Matrix(rowMajor);
+}
+
+void SkColorFilters_Matrix_2(const char *sk_color_filter_key, const SkColorMatrix *matrix) {
+    static_sk_color_filter[sk_color_filter_key] = SkColorFilters::Matrix(*matrix);
+}
+
+void SkColorFilters_SRGBToLinearGamma(const char *sk_color_filter_key) {
+    static_sk_color_filter[sk_color_filter_key] = SkColorFilters::SRGBToLinearGamma();
+}
+
+void SkColorFilters_Table(const char *sk_color_filter_key, const uint8_t table[256]) {
+    static_sk_color_filter[sk_color_filter_key] = SkColorFilters::Table(table);
+}
+
+void SkColorFilters_Table_2(const char *sk_color_filter_key, const char *sk_color_table_key) {
+    static_sk_color_filter[sk_color_filter_key] = SkColorFilters::Table(static_sk_color_table[sk_color_table_key]);
+}
+
+void SkColorFilters_TableARGB(const char *sk_color_filter_key, const uint8_t tableA[256], const uint8_t tableR[256], const uint8_t tableG[256], const uint8_t tableB[256]) {
+    static_sk_color_filter[sk_color_filter_key] = SkColorFilters::TableARGB(tableA, tableR, tableG, tableB);
+}
+
+//
+// SkColorInfo
+//
+
+SkColorInfo *SkColorInfo_new() {
+    return new SkColorInfo();
+}
+
+SkColorInfo *SkColorInfo_new_2(const char *sk_color_space_key, SkColorType ct, SkAlphaType at) {
+    return new SkColorInfo(ct, at, static_sk_color_space[sk_color_space_key]);
+}
+
+SkColorInfo *SkColorInfo_new_3(const SkColorInfo *color_info) {
+    return new SkColorInfo(*color_info);
+}
+
+// SkColorInfo *SkColorInfo_new_4(SkColorInfo &&color_info) {}
+
+void SkColorInfo_delete(SkColorInfo *color_info) {
+    delete color_info;
+}
+
+SkAlphaType SkColorInfo_alphaType(SkColorInfo *color_info) {
+    return color_info->alphaType();
+}
+
+int SkColorInfo_bytesPerPixel(SkColorInfo *color_info) {
+    return color_info->bytesPerPixel();
+}
+
+SkColorSpace* SkColorInfo_colorSpace(SkColorInfo *color_info) {
+    return color_info->colorSpace();
+}
+
+SkColorType SkColorInfo_colorType(SkColorInfo *color_info) {
+    return color_info->colorType();
+}
+
+bool SkColorInfo_gammaCloseToSRGB(SkColorInfo *color_info) {
+    return color_info->gammaCloseToSRGB();
+}
+
+bool SkColorInfo_isOpaque(SkColorInfo *color_info) {
+    return color_info->isOpaque();
+}
+
+SkColorInfo SkColorInfo_makeAlphaType(SkColorInfo *color_info, SkAlphaType newAlphaType) {
+    return color_info->makeAlphaType(newAlphaType);
+}
+
+SkColorInfo SkColorInfo_makeColorSpace(const char *sk_color_space_key, SkColorInfo *color_info) {
+    return color_info->makeColorSpace(static_sk_color_space[sk_color_space_key]);
+}
+
+SkColorInfo SkColorInfo_makeColorType(SkColorInfo *color_info, SkColorType newColorType) {
+    return color_info->makeColorType(newColorType);
+}
+
+void SkColorInfo_refColorSpace(const char *sk_color_space_key, SkColorInfo *color_info) {
+    static_sk_color_space[sk_color_space_key] = color_info->refColorSpace();
+}
+
+int SkColorInfo_shiftPerPixel(SkColorInfo *color_info) {
+    return color_info->shiftPerPixel();
+}
+
+//
+// SkColorMatrix
+//
+
+SkColorMatrix *SkColorMatrix_new() {
+    return new SkColorMatrix();
+}
+
+SkColorMatrix *SkColorMatrix_new_2(float m00, float m01, float m02, float m03, float m04, float m10, float m11, float m12, float m13, float m14, float m20, float m21, float m22, float m23, float m24, float m30, float m31, float m32, float m33, float m34) {
+    return new SkColorMatrix(m00, m01, m02, m03, m04, m10, m11, m12, m13, m14, m20, m21, m22, m23, m24, m30, m31, m32, m33, m34);
+}
+
+void setIdentity(SkColorMatrix *color_matrix) {
+    color_matrix->setIdentity();
+}
+
+void setScale(SkColorMatrix *color_matrix, float rScale, float gScale, float bScale, float aScale) {
+    color_matrix->setScale(rScale, gScale, bScale, aScale);
+}
+
+void postTranslate(SkColorMatrix *color_matrix, float dr, float dg, float db, float da) {
+    color_matrix->postTranslate(dr, dg, db, da);
+}
+
+void setConcat(SkColorMatrix *color_matrix, const SkColorMatrix *a, const SkColorMatrix *b) {
+    color_matrix->setConcat(*a, *b);
+}
+
+void preConcat(SkColorMatrix *color_matrix, const SkColorMatrix *mat) {
+    color_matrix->preConcat(*mat);
+}
+
+void postConcat(SkColorMatrix *color_matrix, const SkColorMatrix *mat) {
+    color_matrix->postConcat(*mat);
+}
+
+void setSaturation(SkColorMatrix *color_matrix, float sat) {
+    color_matrix->setSaturation(sat);
+}
+
+void setRowMajor(SkColorMatrix *color_matrix, const float src[20]) {
+    color_matrix->setRowMajor(src);
+}
+
+void getRowMajor(SkColorMatrix *color_matrix, float dst[20]) {
+    color_matrix->getRowMajor(dst);
+}
 
 //
 // SkColorPriv
 //
+
+// static
 
 unsigned SkColorPriv_SkAlpha255To256(U8CPU alpha) {
     return SkAlpha255To256(alpha);
@@ -1150,11 +1339,418 @@ U8CPU SkColorPriv_SkUnitScalarClampToByte(SkScalar x) {
 }
 
 //
+// SkColorSpace
+//
+
+void SkColorSpace_toProfile(SkColorSpace *color_space, skcms_ICCProfile *profile) {
+    color_space->toProfile(profile);
+}
+
+bool SkColorSpace_gammaCloseToSRGB(SkColorSpace *color_space) {
+    return color_space->gammaCloseToSRGB();
+}
+
+bool SkColorSpace_gammaIsLinear(SkColorSpace *color_space) {
+    return color_space->gammaIsLinear();
+}
+
+bool SkColorSpace_isNumericalTransferFn(SkColorSpace *color_space, skcms_TransferFunction *fn) {
+    return color_space->isNumericalTransferFn(fn);
+}
+
+bool SkColorSpace_toXYZD50(SkColorSpace *color_space, skcms_Matrix3x3 *toXYZD50) {
+    return color_space->toXYZD50(toXYZD50);
+}
+
+uint32_t SkColorSpace_toXYZD50Hash(SkColorSpace *color_space) {
+    return color_space->toXYZD50Hash();
+}
+
+void SkColorSpace_makeLinearGamma(const char *sk_color_space_key, SkColorSpace *color_space) {
+    static_sk_color_space[sk_color_space_key] = color_space->makeLinearGamma();
+}
+
+void SkColorSpace_makeSRGBGamma(const char *sk_color_space_key, SkColorSpace *color_space) {
+    static_sk_color_space[sk_color_space_key] = color_space->makeSRGBGamma();
+}
+
+void SkColorSpace_makeColorSpin(const char *sk_color_space_key, SkColorSpace *color_space) {
+    static_sk_color_space[sk_color_space_key] = color_space->makeColorSpin();
+}
+
+bool SkColorSpace_isSRGB(SkColorSpace *color_space) {
+    return color_space->isSRGB();
+}
+
+void SkColorSpace_serialize(const char *sk_data_key, SkColorSpace *color_space) {
+    static_sk_data[sk_data_key] = color_space->serialize();
+}
+
+size_t SkColorSpace_writeToMemory(SkColorSpace *color_space, void *memory) {
+    return color_space->writeToMemory(memory);
+}
+
+void SkColorSpace_transferFn(SkColorSpace *color_space, float gabcdef[7]) {
+    color_space->transferFn(gabcdef);
+}
+
+void SkColorSpace_transferFn_2(SkColorSpace *color_space, skcms_TransferFunction *fn) {
+    color_space->transferFn(fn);
+}
+
+void SkColorSpace_invTransferFn(SkColorSpace *color_space, skcms_TransferFunction *fn) {
+    color_space->invTransferFn(fn);
+}
+
+void SkColorSpace_gamutTransformTo(SkColorSpace *color_space, const SkColorSpace *dst, skcms_Matrix3x3 *src_to_dst) {
+    color_space->gamutTransformTo(dst, src_to_dst);
+}
+
+uint32_t SkColorSpace_transferFnHash(SkColorSpace *color_space) {
+    return color_space->transferFnHash();
+}
+
+uint64_t SkColorSpace_hash(SkColorSpace *color_space) {
+    return color_space->hash();
+}
+
+bool SkColorSpace_unique(SkColorSpace *color_space) {
+    return color_space->unique();
+}
+
+void SkColorSpace_ref(SkColorSpace *color_space) {
+    color_space->ref();
+}
+
+void SkColorSpace_unref(SkColorSpace *color_space) {
+    color_space->unref();
+}
+
+void SkColorSpace_deref(SkColorSpace *color_space) {
+    color_space->deref();
+}
+
+bool SkColorSpace_refCntGreaterThan(SkColorSpace *color_space, int32_t threadIsolatedTestCnt) {
+    return color_space->refCntGreaterThan(threadIsolatedTestCnt);
+}
+
+//
+// SkColorTable
+//
+
+const uint8_t * SkColorTable_alphaTable(SkColorTable *color_table) {
+    return color_table->alphaTable();
+}
+
+const uint8_t * SkColorTable_redTable(SkColorTable *color_table) {
+    return color_table->redTable();
+}
+
+const uint8_t * SkColorTable_greenTable(SkColorTable *color_table) {
+    return color_table->greenTable();
+}
+
+const uint8_t * SkColorTable_blueTable(SkColorTable *color_table) {
+    return color_table->blueTable();
+}
+
+void SkColorTable_flatten(SkColorTable *color_table, SkWriteBuffer *buffer) {
+    color_table->flatten(*buffer);
+}
+
+bool SkColorTable_unique(SkColorTable *color_table) {
+    return color_table->unique();
+}
+
+void SkColorTable_ref(SkColorTable *color_table) {
+    return color_table->ref();
+}
+
+void SkColorTable_unref(SkColorTable *color_table) {
+    color_table->unref();
+}
+
+// static
+
+void SkColorTable_Make(const char *sk_color_table_key, const uint8_t table[256]) {
+    static_sk_color_table[sk_color_table_key] = SkColorTable::Make(table);
+}
+
+void SkColorTable_Make_2(const char *sk_color_table_key, const uint8_t tableA[256], const uint8_t tableR[256], const uint8_t tableG[256], const uint8_t tableB[256]) {
+    static_sk_color_table[sk_color_table_key] = SkColorTable::Make(tableA, tableR, tableG, tableB);
+}
+
+void SkColorTable_Deserialize(const char *sk_color_table_key, SkReadBuffer *buffer) {
+    static_sk_color_table[sk_color_table_key] = SkColorTable::Deserialize(*buffer);
+}
+
+//
+// SkContourMeasure
+//
+
+SkScalar SkContourMeasure_length(SkContourMeasure *contour_measure) {
+    return contour_measure->length();
+}
+
+bool SkContourMeasure_getPosTan(SkContourMeasure *contour_measure, SkScalar distance, SkPoint *position, SkVector *tangent) {
+    return contour_measure->getPosTan(distance, position, tangent);
+}
+
+bool SkContourMeasure_getMatrix(SkContourMeasure *contour_measure, SkScalar distance, SkMatrix *matrix, SkContourMeasure::MatrixFlags flags) {
+    return contour_measure->getMatrix(distance, matrix, flags);
+}
+
+bool SkContourMeasure_getSegment(SkContourMeasure *contour_measure, SkScalar startD, SkScalar stopD, SkPath *dst, bool startWithMoveTo) {
+    return contour_measure->getSegment(startD, stopD, dst, startWithMoveTo);
+}
+
+bool SkContourMeasure_isClosed(SkContourMeasure *contour_measure) {
+    return contour_measure->isClosed();
+}
+
+bool SkContourMeasure_unique(SkContourMeasure *contour_measure) {
+    return contour_measure->unique();
+}
+
+void SkContourMeasure_ref(SkContourMeasure *contour_measure) {
+    contour_measure->ref();
+}
+
+void SkContourMeasure_unref(SkContourMeasure *contour_measure) {
+    contour_measure->unref();
+}
+
+//
+// SkContourMeasureIter
+//
+
+SkContourMeasureIter *SkContourMeasureIter_new() {
+    return new SkContourMeasureIter();
+}
+
+SkContourMeasureIter *SkContourMeasureIter_new_2(const SkPath *path, bool forceClosed, SkScalar resScale) {
+    return new SkContourMeasureIter(*path, forceClosed, resScale);
+}
+
+// SkContourMeasureIter *SkContourMeasureIter_new_3(SkContourMeasureIter &&contour_measure_iter) {
+//    return new SkContourMeasureIter(contour_measure_iter);
+//}
+
+void SkContourMeasureIter_delete(SkContourMeasureIter *contour_measure_iter) {
+    delete contour_measure_iter;
+}
+
+void SkContourMeasureIter_reset(SkContourMeasureIter *contour_measure_iter, const SkPath *path, bool forceClosed, SkScalar resScale) {
+    contour_measure_iter->reset(*path, forceClosed, resScale);
+}
+
+void SkContourMeasureIter_next(const char* sk_contour_measure_key, SkContourMeasureIter *contour_measure_iter) {
+    static_sk_contour_measure[sk_contour_measure_key] = contour_measure_iter->next();
+}
+
+//
+// SkCornerPathEffect
+//
+
+// static
+
+void SkCornerPathEffect_Make(const char *sk_path_effect_key, SkScalar radius) {
+    static_sk_path_effect[sk_path_effect_key] = SkCornerPathEffect::Make(radius);
+}
+
+void SkCornerPathEffect_RegisterFlattenables() {
+    SkCornerPathEffect::RegisterFlattenables();
+}
+
+//
+// SkCubicMap
+//
+
+SkCubicMap *SkCubicMap_new(SkPoint p1, SkPoint p2) {
+    return new SkCubicMap(p1, p2);
+}
+
+float SkCubicMap_computeYFromX(SkCubicMap * cubic_map, float x) {
+    return cubic_map->computeYFromX(x);
+}
+
+SkPoint SkCubicMap_computeFromT(SkCubicMap * cubic_map, float t) {
+    return cubic_map->computeFromT(t);
+}
+
+bool SkCubicMap_IsLinear(SkPoint p1, SkPoint p2) {
+    return SkCubicMap::IsLinear(p1, p2);
+}
+
+//
+// SkDashPathEffect
+//
+
+void SkDashPathEffect_Make(const char *sk_path_effect_key, const SkScalar intervals[], int count, SkScalar phase) {
+    static_sk_path_effect[sk_path_effect_key] = SkDashPathEffect::Make(intervals, count, phase);
+}
+
+//
 // SkData
 //
 
-void SkData_MakeFromStream(const char *key, SkStream *stream, size_t size) {
-    static_sk_data[key] = SkData::MakeFromStream(stream, size);
+size_t size(SkData *sk_data) {
+    return sk_data->size();
+}
+
+bool isEmpty(SkData *sk_data) {
+    return sk_data->isEmpty();
+}
+
+const void * data(SkData *sk_data) {
+    return sk_data->data();
+}
+
+const uint8_t * bytes(SkData *sk_data) {
+    return sk_data->bytes();
+}
+
+void * writable_data(SkData *sk_data) {
+    return sk_data->writable_data();
+}
+
+size_t copyRange(SkData *sk_data, size_t offset, size_t length, void *buffer) {
+    return sk_data->copyRange(offset, length, buffer);
+}
+
+bool equals(SkData *sk_data, const SkData *other) {
+    return sk_data->equals(other);
+}
+
+bool unique(SkData *sk_data) {
+    return sk_data->unique();
+}
+
+void ref(SkData *sk_data) {
+    return sk_data->ref();
+}
+
+void unref(SkData *sk_data) {
+    sk_data->unref();
+}
+
+void deref(SkData *sk_data) {
+    sk_data->deref();
+}
+
+bool refCntGreaterThan(SkData *sk_data, int32_t threadIsolatedTestCnt) {
+    return sk_data->refCntGreaterThan(threadIsolatedTestCnt);
+}
+
+// static
+
+void SkData_MakeWithCopy(const char *sk_data_key, const void *data, size_t length) {
+    static_sk_data[sk_data_key] = SkData::MakeWithCopy(data, length);
+}
+
+void SkData_MakeUninitialized(const char *sk_data_key, size_t length) {
+    static_sk_data[sk_data_key] = SkData::MakeUninitialized(length);
+}
+
+void SkData_MakeZeroInitialized(const char *sk_data_key, size_t length) {
+    static_sk_data[sk_data_key] = SkData::MakeZeroInitialized(length);
+}
+
+void SkData_MakeWithCString(const char *sk_data_key, const char cstr[]) {
+    static_sk_data[sk_data_key] = SkData::MakeWithCString(cstr);
+}
+
+void SkData_MakeWithProc(const char *sk_data_key, const void *ptr, size_t length, SkData::ReleaseProc proc, void *ctx) {
+    static_sk_data[sk_data_key] = SkData::MakeWithProc(ptr, length, proc, ctx);
+}
+
+void SkData_MakeWithoutCopy(const char *sk_data_key, const void *data, size_t length) {
+    static_sk_data[sk_data_key] = SkData::MakeWithoutCopy(data, length);
+}
+
+void SkData_MakeFromMalloc(const char *sk_data_key, const void *data, size_t length) {
+    static_sk_data[sk_data_key] = SkData::MakeFromMalloc(data, length);
+}
+
+void SkData_MakeFromFileName(const char *sk_data_key, const char path[]) {
+    static_sk_data[sk_data_key] = SkData::MakeFromFileName(path);
+}
+
+void SkData_MakeFromFILE(const char *sk_data_key, FILE *f) {
+    static_sk_data[sk_data_key] = SkData::MakeFromFILE(f);
+}
+
+void SkData_MakeFromFD(const char *sk_data_key, int fd) {
+    static_sk_data[sk_data_key] = SkData::MakeFromFD(fd);
+}
+
+void SkData_MakeFromStream(const char *sk_data_key, SkStream * stream, size_t size) {
+    static_sk_data[sk_data_key] = SkData::MakeFromStream(stream, size);
+}
+
+void SkData_MakeSubset(const char *sk_data_key, const SkData *src, size_t offset, size_t length) {
+    static_sk_data[sk_data_key] = SkData::MakeSubset(src, offset, length);
+}
+
+void SkData_MakeEmpty(const char *sk_data_key) {
+    static_sk_data[sk_data_key] = SkData::MakeEmpty();
+}
+
+//
+// SkData
+//
+
+bool SkDataTable_isEmpty(SkDataTable *data_table) {
+    return data_table->isEmpty();
+}
+
+int SkDataTable_count(SkDataTable *data_table) {
+    return data_table->count();
+}
+
+size_t SkDataTable_atSize(SkDataTable *data_table, int index) {
+    return data_table->atSize(index);
+}
+
+const void * SkDataTable_at(SkDataTable *data_table, int index, size_t *size) {
+    return data_table->at(index, size);
+}
+
+// template<typename T>
+// const T * SkDataTable_atT(int index, size_t *size=nullptr) const
+
+const char * SkDataTable_atStr(SkDataTable *data_table, int index) {
+    return data_table->atStr(index);
+}
+
+bool SkDataTable_unique(SkDataTable *data_table) {
+    return data_table->unique();
+}
+
+void SkDataTable_ref(SkDataTable *data_table) {
+    data_table->ref();
+}
+
+void SkDataTable_unref(SkDataTable *data_table) {
+    data_table->unref();
+}
+
+// static
+
+void SkDataTable_MakeEmpty(const char *sk_data_table_key) {
+    static_sk_data_table[sk_data_table_key] = SkDataTable::MakeEmpty();
+}
+
+void SkDataTable_MakeCopyArrays(const char *sk_data_table_key, const void *const *ptrs, const size_t sizes[], int count) {
+    static_sk_data_table[sk_data_table_key] = SkDataTable::MakeCopyArrays(ptrs, sizes, count);
+}
+
+void SkDataTable_MakeCopyArray(const char *sk_data_table_key, const void *array, size_t elemSize, int count) {
+    static_sk_data_table[sk_data_table_key] = SkDataTable::MakeCopyArray(array, elemSize, count);
+}
+
+void SkDataTable_MakeArrayProc(const char *sk_data_table_key, const void *array, size_t elemSize, int count, SkDataTable::FreeProc proc, void *context) {
+    static_sk_data_table[sk_data_table_key] = SkDataTable::MakeArrayProc(array, elemSize, count, proc, context);
 }
 
 //
@@ -1165,10 +1761,8 @@ void SkData_MakeFromStream(const char *key, SkStream *stream, size_t size) {
 // SkImage
 //
 
-// SkImages (Namespace)
-
-void SkImages_DeferredFromEncodedData(const char *image_key, const char *data_key) {
-    static_sk_image[image_key] = SkImages::DeferredFromEncodedData(static_sk_data[data_key]);
+void SkImages_DeferredFromEncodedData(const char *sk_image_key, const char *data_key) {
+    static_sk_image[sk_image_key] = SkImages::DeferredFromEncodedData(static_sk_data[data_key]);
 }
 
 //
@@ -1263,20 +1857,20 @@ void SkPaint_setARGB(SkPaint *paint, U8CPU a, U8CPU r, U8CPU g, U8CPU b) {
 // SkRect
 //
 
-void SkRect_MakeXYWH(const char *key, float x, float y, float w, float h) {
-    static_sk_rect[key] = SkRect::MakeXYWH(x, y, w, h);
+void SkRect_MakeXYWH(const char *sk_rect_key, float x, float y, float w, float h) {
+    static_sk_rect[sk_rect_key] = SkRect::MakeXYWH(x, y, w, h);
 }
 
 //
 // SkStream
 //
 
-size_t SkStream_getLength(const char *key) { // inline virtual
-    return static_sk_stream[key]->getLength();
+size_t SkStream_getLength(const char *sk_stream_key) { // inline virtual
+    return static_sk_stream[sk_stream_key]->getLength();
 }
 
-void SkStream_MakeFromFile(const char *key, const char path[]) { // static
-    static_sk_stream[key] = SkStream::MakeFromFile(path);
+void SkStream_MakeFromFile(const char *sk_stream_key, const char path[]) { // static
+    static_sk_stream[sk_stream_key] = SkStream::MakeFromFile(path);
 }
 
 //
@@ -1425,7 +2019,7 @@ int main(int argc, char* argv[]) {
             SkPaint_setBlendMode(paint, SkBlendMode::kOverlay);
             SkPaint_setColor_2(paint, SK_ColorBLUE); // 赤色を選択
             SkRect_MakeXYWH("rect", 20, 20, 400, 600 - 40); // 四角形の位置とサイズ
-            SkCanvas_drawRect(canvas, "rect", paint); // 四角形を描画
+            SkCanvas_drawRect("rect", canvas, paint); // 四角形を描画
             static_sk_rect_delete("rect");
         }
 
