@@ -59,7 +59,6 @@ static std::map<std::string, sk_sp<SkImage>> static_sk_image;
 static std::map<std::string, sk_sp<SkShader>> static_sk_shader;
 static std::map<std::string, sk_sp<SkColorSpace>> static_sk_color_space;
 static std::map<std::string, sk_sp<SkDrawable>> static_sk_drawable;
-//static std::map<std::string, sk_sp<SkDrawLooper>> static_sk_draw_looper;
 static std::map<std::string, sk_sp<SkPixelRef>> static_sk_pixel_ref;
 static std::map<std::string, sk_sp<SkBlender>> static_sk_blender;
 static std::map<std::string, sk_sp<SkPicture>> static_sk_picture;
@@ -73,6 +72,7 @@ static std::map<std::string, sk_sp<SkColorTable>> static_sk_color_table;
 static std::map<std::string, sk_sp<SkContourMeasure>> static_sk_contour_measure;
 static std::map<std::string, sk_sp<SkPathEffect>> static_sk_path_effect;
 static std::map<std::string, sk_sp<SkDataTable>> static_sk_data_table;
+static std::map<std::string, sk_sp<SkTypeface>> static_sk_typeface;
 static std::map<std::string, SkRect> static_sk_rect;
 
 extern "C" {
@@ -2579,8 +2579,352 @@ void SkFILEStream_Make(const char *sk_file_stream_key_out, const char path[]) {
 }
 
 //
+// SkFILEWStream
+//
+
+SkFILEWStream *SkFILEWStream_new(const char path[]) {
+    return new SkFILEWStream(path);
+}
+
+void SkFILEWStream_delete(SkFILEWStream *file_w_stream) {
+    delete file_w_stream;
+}
+
+bool SkFILEWStream_isValid(SkFILEWStream *file_w_stream) {
+    return file_w_stream->isValid();
+}
+
+bool SkFILEWStream_write(SkFILEWStream *file_w_stream, const void *buffer, size_t size) {
+    return file_w_stream->write(buffer, size);
+}
+
+void SkFILEWStream_flush(SkFILEWStream *file_w_stream) {
+    file_w_stream->flush();
+}
+
+void SkFILEWStream_fsync(SkFILEWStream *file_w_stream) {
+    return file_w_stream->fsync();
+}
+
+size_t SkFILEWStream_bytesWritten(SkFILEWStream *file_w_stream) {
+    return file_w_stream->bytesWritten();
+}
+
+bool SkFILEWStream_write8(SkFILEWStream *file_w_stream, U8CPU value) {
+    return file_w_stream->write8(value);
+}
+
+bool SkFILEWStream_write16(SkFILEWStream *file_w_stream, U16CPU value) {
+    return file_w_stream->write16(value);
+}
+
+bool SkFILEWStream_write32(SkFILEWStream *file_w_stream, uint32_t v) {
+    return file_w_stream->write32(v);
+}
+
+bool SkFILEWStream_writeText(SkFILEWStream *file_w_stream, const char text[]) {
+    return file_w_stream->writeText(text);
+}
+
+bool SkFILEWStream_newline(SkFILEWStream *file_w_stream) {
+    return file_w_stream->newline();
+}
+
+bool SkFILEWStream_writeDecAsText(SkFILEWStream *file_w_stream, int32_t v) {
+    return file_w_stream->writeDecAsText(v);
+}
+
+bool SkFILEWStream_writeBigDecAsText(SkFILEWStream *file_w_stream, int64_t v, int minDigits) {
+    return file_w_stream->writeBigDecAsText(v, minDigits);
+}
+
+bool SkFILEWStream_writeHexAsText(SkFILEWStream *file_w_stream, uint32_t v, int minDigits) {
+    return file_w_stream->writeHexAsText(v, minDigits);
+}
+
+bool SkFILEWStream_writeScalarAsText(SkFILEWStream *file_w_stream, SkScalar scalar) {
+    return file_w_stream->writeScalarAsText(scalar);
+}
+
+bool SkFILEWStream_writeBool(SkFILEWStream *file_w_stream, bool v) {
+    return file_w_stream->writeBool(v);
+}
+
+bool SkFILEWStream_writeScalar(SkFILEWStream *file_w_stream, SkScalar scalar) {
+    return file_w_stream->writeScalar(scalar);
+}
+
+bool SkFILEWStream_writePackedUInt(SkFILEWStream *file_w_stream, size_t size) {
+    return file_w_stream->writePackedUInt(size);
+}
+
+bool SkFILEWStream_writeStream(SkFILEWStream *file_w_stream, SkStream *input, size_t length) {
+    return file_w_stream->writeStream(input, length);
+}
+
+// static
+
+int SkFILEWStream_SizeOfPackedUInt(size_t value) {
+    return SkFILEWStream::SizeOfPackedUInt(value);
+}
+
+//
+// SkFlattenable
+//
+
+SkFlattenable::Factory SkFlattenable_getFactory(SkFlattenable *flattenable) {
+    return flattenable->getFactory();
+}
+
+const char * SkFlattenable_getTypeName(SkFlattenable *flattenable) {
+    return flattenable->getTypeName();
+}
+
+void SkFlattenable_flatten(SkFlattenable *flattenable, SkWriteBuffer * write_buffer) {
+    flattenable->flatten(*write_buffer);
+}
+
+SkFlattenable::Type SkFlattenable_getFlattenableType(SkFlattenable *flattenable) {
+    return flattenable->getFlattenableType();
+}
+
+void SkFlattenable_serialize(const char *sk_data_key_out, SkFlattenable *flattenable, const SkSerialProcs * serial_procs) {
+    static_sk_data[sk_data_key_out] = flattenable->serialize(serial_procs);
+}
+
+size_t SkFlattenable_serialize_2(SkFlattenable *flattenable, void *memory, size_t memory_size, const SkSerialProcs * serial_procs) {
+    return flattenable->serialize(memory, memory_size, serial_procs);
+}
+
+bool SkFlattenable_unique(SkFlattenable *flattenable) {
+    return flattenable->unique();
+}
+
+void SkFlattenable_ref(SkFlattenable *flattenable) {
+    flattenable->ref();
+}
+
+void SkFlattenable_unref(SkFlattenable *flattenable) {
+    flattenable->unref();
+}
+
+// static
+
+SkFlattenable::Factory SkFlattenable_NameToFactory(const char name[]) {
+    return SkFlattenable::NameToFactory(name);
+}
+const char * SkFlattenable_FactoryToName(SkFlattenable::Factory factory) {
+    return SkFlattenable::FactoryToName(factory);
+}
+
+void SkFlattenable_Register(const char name[], SkFlattenable::Factory factory) {
+    SkFlattenable::Register(name, factory);
+}
+
+void SkFlattenable_Deserialize(const char* sk_flattenable_key_out, SkFlattenable::Type type, const void *data, size_t length, const SkDeserialProcs *procs) {
+    static_sk_flattenable[sk_flattenable_key_out] = SkFlattenable::Deserialize(type, data, length, procs);
+}
+
+//
 // SkFont
 //
+
+SkFont *SkFont_new() {
+    return new SkFont();
+}
+
+SkFont *SkFont_new_2(const char *sk_typeface_key_in, SkScalar size) {
+    return new SkFont(static_sk_typeface[sk_typeface_key_in], size);
+}
+
+SkFont *SkFont_new_3(const char *sk_typeface_key_in) {
+    return new SkFont(static_sk_typeface[sk_typeface_key_in]);
+}
+
+SkFont *SkFont_new_4(const char *sk_typeface_key_in, SkScalar size, SkScalar scaleX, SkScalar skewX) {
+    return new SkFont(static_sk_typeface[sk_typeface_key_in], size, scaleX, skewX);
+}
+
+bool SkFont_isForceAutoHinting(SkFont *font) {
+    return font->isForceAutoHinting();
+}
+
+bool SkFont_isEmbeddedBitmaps(SkFont *font) {
+    return font->isEmbeddedBitmaps();
+}
+
+bool SkFont_isSubpixel(SkFont *font) {
+    return font->isSubpixel();
+}
+
+bool SkFont_isLinearMetrics(SkFont *font) {
+    return font->isLinearMetrics();
+}
+
+bool SkFont_isEmbolden(SkFont *font) {
+    return font->isEmbolden();
+}
+
+bool SkFont_isBaselineSnap(SkFont *font) {
+    return font->isBaselineSnap();
+}
+
+void SkFont_setForceAutoHinting(SkFont *font, bool forceAutoHinting) {
+    font->setForceAutoHinting(forceAutoHinting);
+}
+
+void SkFont_setEmbeddedBitmaps(SkFont *font, bool embeddedBitmaps) {
+    font->setEmbeddedBitmaps(embeddedBitmaps);
+}
+
+void SkFont_setSubpixel(SkFont *font, bool subpixel) {
+    font->setSubpixel(subpixel);
+}
+
+void SkFont_setLinearMetrics(SkFont *font, bool linearMetrics) {
+    font->setLinearMetrics(linearMetrics);
+}
+
+void SkFont_setEmbolden(SkFont *font, bool embolden) {
+    font->setEmbolden(embolden);
+}
+
+void SkFont_setBaselineSnap(SkFont *font, bool baselineSnap) {
+    font->setBaselineSnap(baselineSnap);
+}
+
+SkFont::Edging SkFont_getEdging(SkFont *font) {
+    return font->getEdging();
+}
+
+void SkFont_setEdging(SkFont *font, SkFont::Edging edging) {
+    font->setEdging(edging);
+}
+
+void SkFont_setHinting(SkFont *font, SkFontHinting hintingLevel) {
+    font->setHinting(hintingLevel);
+}
+
+SkFontHinting SkFont_getHinting(SkFont *font) {
+    return font->getHinting();
+}
+
+SkFont SkFont_makeWithSize(SkFont *font, SkScalar size) {
+    return font->makeWithSize(size);
+}
+
+SkTypeface * SkFont_getTypeface(SkFont *font) {
+    return font->getTypeface();
+}
+
+SkScalar SkFont_getSize(SkFont *font) {
+    return font->getSize();
+}
+
+SkScalar SkFont_getScaleX(SkFont *font) {
+    return font->getScaleX();
+}
+
+SkScalar SkFont_getSkewX(SkFont *font) {
+    return font->getSkewX();
+}
+
+void SkFont_refTypeface(const char *sk_typeface_key_out, SkFont *font) {
+    static_sk_typeface[sk_typeface_key_out] = font->refTypeface();
+}
+
+void SkFont_setTypeface(const char *sk_typeface_key_in, SkFont *font) {
+    font->setTypeface(static_sk_typeface[sk_typeface_key_in]);
+}
+
+void SkFont_setSize(SkFont *font, SkScalar textSize) {
+    font->setSize(textSize);
+}
+
+void SkFont_setScaleX(SkFont *font, SkScalar scaleX) {
+    font->setScaleX(scaleX);
+}
+
+void SkFont_setSkewX(SkFont *font, SkScalar skewX) {
+    font->setSkewX(skewX);
+}
+
+int SkFont_textToGlyphs(SkFont *font, const void *text, size_t byteLength, SkTextEncoding encoding, SkGlyphID glyphs[], int maxGlyphCount) {
+    return font->textToGlyphs(text, byteLength, encoding, glyphs, maxGlyphCount);
+}
+
+SkGlyphID SkFont_unicharToGlyph(SkFont *font, SkUnichar uni) {
+    return font->unicharToGlyph(uni);
+}
+
+void SkFont_unicharsToGlyphs(SkFont *font, const SkUnichar uni[], int count, SkGlyphID glyphs[]) {
+    font->unicharsToGlyphs(uni, count, glyphs);
+}
+
+int SkFont_countText(SkFont *font, const void *text, size_t byteLength, SkTextEncoding encoding) {
+    return font->countText(text, byteLength, encoding);
+}
+
+SkScalar SkFont_measureText(SkFont *font, const void *text, size_t byteLength, SkTextEncoding encoding, SkRect *bounds) {
+    return font->measureText(text, byteLength, encoding, bounds);
+}
+
+SkScalar SkFont_measureText_2(SkFont *font, const void *text, size_t byteLength, SkTextEncoding encoding, SkRect *bounds, const SkPaint *paint) {
+    return font->measureText(text, byteLength, encoding, bounds, paint);
+}
+
+void SkFont_getWidths(SkFont *font, const SkGlyphID glyphs[], int count, SkScalar widths[], SkRect bounds[]) {
+    font->getWidths(glyphs, count, widths, bounds);
+}
+
+void SkFont_getWidths_2(SkFont *font, const SkGlyphID glyphs[], int count, SkScalar widths[], std::nullptr_t ptr) { // @TODO
+    font->getWidths(glyphs, count, widths, ptr);
+}
+
+void SkFont_getWidths_3(SkFont *font, const SkGlyphID glyphs[], int count, SkScalar widths[]) {
+    font->getWidths(glyphs, count, widths);
+}
+
+void SkFont_getWidthsBounds(SkFont *font, const SkGlyphID glyphs[], int count, SkScalar widths[], SkRect bounds[], const SkPaint *paint) {
+    font->getWidthsBounds(glyphs, count, widths, bounds, paint);
+}
+
+void SkFont_getBounds(SkFont *font, const SkGlyphID glyphs[], int count, SkRect bounds[], const SkPaint *paint) {
+    font->getBounds(glyphs, count, bounds, paint);
+}
+
+void SkFont_getPos(SkFont *font, const SkGlyphID glyphs[], int count, SkPoint pos[], SkPoint origin) {
+    font->getPos(glyphs, count, pos, origin);
+}
+
+void SkFont_getXPos(SkFont *font, const SkGlyphID glyphs[], int count, SkScalar xpos[], SkScalar origin) {
+    font->getXPos(glyphs, count, xpos, origin);
+}
+
+std::vector< SkScalar > SkFont_getIntercepts(SkFont *font, const SkGlyphID glyphs[], int count, const SkPoint pos[], SkScalar top, SkScalar bottom, const SkPaint *paint) { // @TODO
+    return font->getIntercepts(glyphs, count, pos, top, bottom, paint);
+}
+
+bool SkFont_getPath(SkFont *font, SkGlyphID glyphID, SkPath *path) {
+    return font->getPath(glyphID, path);
+}
+
+void SkFont_getPaths(SkFont *font, const SkGlyphID glyphIDs[], int count, void(*glyphPathProc)(const SkPath *pathOrNull, const SkMatrix &mx, void *ctx), void *ctx) { // @TODO
+    font->getPaths(glyphIDs, count, glyphPathProc, ctx);
+}
+
+SkScalar SkFont_getMetrics(SkFont *font, SkFontMetrics *metrics) {
+    return font->getMetrics(metrics);
+}
+
+SkScalar SkFont_getSpacing(SkFont *font) {
+    return font->getSpacing();
+}
+
+void SkFont_dump(SkFont *font) {
+    font->dump();
+}
+
 
 
 
