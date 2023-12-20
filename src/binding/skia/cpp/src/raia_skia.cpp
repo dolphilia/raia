@@ -21,6 +21,10 @@
 #include "include/core/SkExecutor.h"
 #include "include/core/SkFlattenable.h"
 #include "include/core/SkFont.h"
+#include "include/core/SkFontArguments.h"
+#include "include/core/SkFontMetrics.h"
+#include "include/core/SkFontMgr.h"
+#include "include/core/SkFontStyle.h"
 #include "include/core/SkPathEffect.h"
 #include "include/core/SkImage.h"
 #include "include/core/SkPaint.h"
@@ -65,7 +69,6 @@ static std::map<std::string, sk_sp<SkPicture>> static_sk_picture;
 static std::map<std::string, sk_sp<SkTextBlob>> static_sk_text_blob;
 static std::map<std::string, sk_sp<SkVertices>> static_sk_vertices;
 static std::map<std::string, sk_sp<SkSurface>> static_sk_surface;
-static std::map<std::string, sk_sp<const SkCapabilities>> static_sk_capabilities;
 static std::map<std::string, sk_sp<SkColorFilter>> static_sk_color_filter;
 static std::map<std::string, sk_sp<SkFlattenable>> static_sk_flattenable;
 static std::map<std::string, sk_sp<SkColorTable>> static_sk_color_table;
@@ -73,6 +76,9 @@ static std::map<std::string, sk_sp<SkContourMeasure>> static_sk_contour_measure;
 static std::map<std::string, sk_sp<SkPathEffect>> static_sk_path_effect;
 static std::map<std::string, sk_sp<SkDataTable>> static_sk_data_table;
 static std::map<std::string, sk_sp<SkTypeface>> static_sk_typeface;
+static std::map<std::string, sk_sp<SkFontMgr>> static_sk_font_mgr;
+static std::map<std::string, sk_sp<SkFontStyleSet>> static_sk_font_style_set;
+static std::map<std::string, sk_sp<const SkCapabilities>> static_sk_capabilities;
 static std::map<std::string, SkRect> static_sk_rect;
 
 extern "C" {
@@ -2901,7 +2907,7 @@ void SkFont_getXPos(SkFont *font, const SkGlyphID glyphs[], int count, SkScalar 
     font->getXPos(glyphs, count, xpos, origin);
 }
 
-std::vector< SkScalar > SkFont_getIntercepts(SkFont *font, const SkGlyphID glyphs[], int count, const SkPoint pos[], SkScalar top, SkScalar bottom, const SkPaint *paint) { // @TODO
+std::vector<SkScalar> SkFont_getIntercepts(SkFont *font, const SkGlyphID glyphs[], int count, const SkPoint pos[], SkScalar top, SkScalar bottom, const SkPaint *paint) { // @TODO
     return font->getIntercepts(glyphs, count, pos, top, bottom, paint);
 }
 
@@ -2925,8 +2931,186 @@ void SkFont_dump(SkFont *font) {
     font->dump();
 }
 
+//
+// SkFontArguments
+//
 
+SkFontArguments *SkFontArguments_new() {
+    return new SkFontArguments();
+}
 
+SkFontArguments SkFontArguments_setCollectionIndex(SkFontArguments *font_argments, int collectionIndex) {
+    return font_argments->setCollectionIndex(collectionIndex);
+}
+
+SkFontArguments SkFontArguments_setVariationDesignPosition(SkFontArguments *font_argments, SkFontArguments::VariationPosition position) {
+    return font_argments->setVariationDesignPosition(position);
+}
+
+int SkFontArguments_getCollectionIndex(SkFontArguments *font_argments) {
+    return font_argments->getCollectionIndex();
+}
+
+SkFontArguments::VariationPosition SkFontArguments_getVariationDesignPosition(SkFontArguments *font_argments) {
+    return font_argments->getVariationDesignPosition();
+}
+
+SkFontArguments SkFontArguments_setPalette(SkFontArguments *font_argments, SkFontArguments::Palette palette) {
+    return font_argments->setPalette(palette);
+}
+
+SkFontArguments::Palette SkFontArguments_getPalette(SkFontArguments *font_argments) {
+    return font_argments->getPalette();
+}
+
+//
+// SkFontMetrics
+//
+
+bool SkFontMetrics_hasUnderlineThickness(SkFontMetrics *font_metrics, SkScalar *thickness) {
+    return font_metrics->hasUnderlineThickness(thickness);
+}
+
+bool SkFontMetrics_hasUnderlinePosition(SkFontMetrics *font_metrics, SkScalar *position) {
+    return font_metrics->hasUnderlinePosition(position);
+}
+
+bool SkFontMetrics_hasStrikeoutThickness(SkFontMetrics *font_metrics, SkScalar *thickness) {
+    return font_metrics->hasStrikeoutThickness(thickness);
+}
+
+bool SkFontMetrics_hasStrikeoutPosition(SkFontMetrics *font_metrics, SkScalar *position) {
+    return font_metrics->hasStrikeoutPosition(position);
+}
+
+bool SkFontMetrics_hasBounds(SkFontMetrics *font_metrics) {
+    return font_metrics->hasBounds();
+}
+
+//
+// SkFontMgr
+//
+
+int SkFontMgr_countFamilies(SkFontMgr *font_mgr) {
+    return font_mgr->countFamilies();
+}
+void SkFontMgr_getFamilyName(SkFontMgr *font_mgr, int index, SkString *familyName) {
+    font_mgr->getFamilyName(index, familyName);
+}
+
+void SkFontMgr_createStyleSet(const char *sk_font_style_set_out, SkFontMgr *font_mgr, int index) {
+    static_sk_font_style_set[sk_font_style_set_out] = font_mgr->createStyleSet(index);
+}
+
+void SkFontMgr_matchFamily(const char *sk_font_style_set_out, SkFontMgr *font_mgr, const char familyName[]) {
+    static_sk_font_style_set[sk_font_style_set_out] = font_mgr->matchFamily(familyName);
+}
+
+void SkFontMgr_matchFamilyStyle(const char *sk_typeface_key_out, SkFontMgr *font_mgr, const char familyName[], const SkFontStyle *font_style) {
+    static_sk_typeface[sk_typeface_key_out] = font_mgr->matchFamilyStyle(familyName, *font_style);
+}
+
+void SkFontMgr_matchFamilyStyleCharacter(const char *sk_typeface_key_out, SkFontMgr *font_mgr, const char familyName[], const SkFontStyle *font_style, const char *bcp47[], int bcp47Count, SkUnichar character) {
+    static_sk_typeface[sk_typeface_key_out] = font_mgr->matchFamilyStyleCharacter(familyName, *font_style, bcp47, bcp47Count, character);
+}
+
+void SkFontMgr_makeFromData(const char *sk_typeface_key_out, const char *sk_data_key_in, SkFontMgr *font_mgr, int ttcIndex) {
+    static_sk_typeface[sk_typeface_key_out] = font_mgr->makeFromData(static_sk_data[sk_data_key_in], ttcIndex);
+}
+
+// @TODO
+
+//void SkFontMgr_makeFromStream(const char *sk_typeface_key_out, const char *sk_stream_asset_key_in, SkFontMgr *font_mgr, int ttcIndex) {
+//    static_sk_typeface[sk_typeface_key_out] = font_mgr->makeFromStream(static_sk_stream_asset[sk_stream_asset_key_in], ttcIndex);
+//}
+
+//void SkFontMgr_makeFromStream_2(const char *sk_typeface_key_out, const char *sk_stream_asset_key_in, SkFontMgr *font_mgr, const SkFontArguments *font_argments) {
+//    static_sk_typeface[sk_typeface_key_out] = font_mgr->makeFromStream(static_sk_stream_asset[sk_stream_asset_key_in], *font_argments);
+//}
+
+void SkFontMgr_makeFromFile(const char *sk_typeface_key_out, SkFontMgr *font_mgr, const char path[], int ttcIndex) {
+    static_sk_typeface[sk_typeface_key_out] = font_mgr->makeFromFile(path, ttcIndex);
+}
+
+void SkFontMgr_legacyMakeTypeface(const char *sk_typeface_key_out, SkFontMgr *font_mgr, const char familyName[], SkFontStyle style) {
+    static_sk_typeface[sk_typeface_key_out] = font_mgr->legacyMakeTypeface(familyName, style);
+}
+
+bool SkFontMgr_unique(SkFontMgr *font_mgr) {
+    return font_mgr->unique();
+}
+
+void SkFontMgr_ref(SkFontMgr *font_mgr) {
+    font_mgr->ref();
+}
+
+void SkFontMgr_unref(SkFontMgr *font_mgr) {
+    font_mgr->unref();
+}
+
+// static
+
+void SkFontMgr_RefDefault(const char *sk_font_mgr_key_out) {
+    static_sk_font_mgr[sk_font_mgr_key_out] = SkFontMgr::RefDefault();
+}
+
+void SkFontMgr_RefEmpty(const char *sk_font_mgr_key_out) {
+    static_sk_font_mgr[sk_font_mgr_key_out] = SkFontMgr::RefEmpty();
+}
+
+//
+// SkFontStyle
+//
+
+int SkFontStyle_weight (SkFontStyle *font_style) {
+    return font_style->weight();
+}
+
+int SkFontStyle_width (SkFontStyle *font_style) {
+    return font_style->width();
+}
+
+SkFontStyle::Slant SkFontStyle_slant (SkFontStyle *font_style) {
+    return font_style->slant();
+}
+
+//
+// SkFontStyleSet
+//
+
+int SkFontStyleSet_count(SkFontStyleSet *font_style_set) {
+    return font_style_set->count();
+}
+
+void SkFontStyleSet_getStyle(SkFontStyleSet *font_style_set, int index, SkFontStyle * font_style, SkString *style) {
+    return font_style_set->getStyle(index, font_style, style);
+}
+
+void SkFontStyleSet_createTypeface(const char *sk_typeface_key_out, SkFontStyleSet *font_style_set, int index) {
+    static_sk_typeface[sk_typeface_key_out] = font_style_set->createTypeface(index);
+}
+
+void SkFontStyleSet_matchStyle(const char *sk_typeface_key_out, SkFontStyleSet *font_style_set, const SkFontStyle *pattern) {
+    static_sk_typeface[sk_typeface_key_out] = font_style_set->matchStyle(*pattern);
+}
+
+bool SkFontStyleSet_unique(SkFontStyleSet *font_style_set) {
+    return font_style_set->unique();
+}
+
+void SkFontStyleSet_ref(SkFontStyleSet *font_style_set) {
+    return font_style_set->ref();
+}
+
+void SkFontStyleSet_unref(SkFontStyleSet *font_style_set) {
+    return font_style_set->unref();
+}
+
+// static
+
+void SkFontStyleSet_CreateEmpty(const char *sk_font_style_set_key_out) {
+    static_sk_font_style_set[sk_font_style_set_key_out] = SkFontStyleSet::CreateEmpty();
+}
 
 //
 // SkImage
