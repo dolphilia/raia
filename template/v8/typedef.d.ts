@@ -66,3 +66,19 @@ declare type vec2_t = {
     dx: number,
     dy: number
 }
+
+declare global {
+    var __Raia__: Raia;
+}
+
+interface Raia {
+    Core: Core;
+    Lib: Lib;
+}
+
+interface Core {
+    print(message: string): void;
+    bufToPtr(ptr: ArrayBuffer): uintptr;
+}
+
+export {};
