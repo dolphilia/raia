@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.25)
 project(raia_gui)
 
-include(${PROJECT_SOURCE_DIR}/../../../setting.cmake)
+include(${PROJECT_SOURCE_DIR}/../../setting.cmake)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
