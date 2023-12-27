@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.25)
 project(raia_glfw C)
 
-include(${PROJECT_SOURCE_DIR}/../../../setting.cmake)
+include(${PROJECT_SOURCE_DIR}/../../setting.cmake)
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
@@ -17,8 +17,8 @@ add_library(raia_glfw SHARED
 #add_executable(raia_glfw
         src/raia_glfw.c
         src/static/static_callback.c
-        ../../../third_party/c/ibireme/yyjson/yyjson.c
-        ../../../common/c/wrapper/wrapper_yyjson.c
+        ../../third_party/c/ibireme/yyjson/yyjson.c
+        ../../common/c/wrapper/wrapper_yyjson.c
 )
 
 # 現在のRPATH設定を取得（もしあれば）
