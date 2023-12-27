@@ -1,10 +1,11 @@
 cmake_minimum_required(VERSION 3.25)
-project(raia_skia)
+project(raia_gui)
 
-include(${PROJECT_SOURCE_DIR}/../../../setting.cmake)
-include_directories(${PROJECT_SOURCE_DIR}/../../../../sdk/macos/arm64/include/skia)
+include(${PROJECT_SOURCE_DIR}/../../setting.cmake)
+include_directories(${PROJECT_SOURCE_DIR}/../../../sdk/macos/arm64/include/skia)
 #include_directories(${PROJECT_SOURCE_DIR}/../../../../third_party/skia/)
 #include_directories(${PROJECT_SOURCE_DIR}/skia)
+
 #include_directories(/opt/homebrew/opt)
 #link_directories(/opt/homebrew/opt)
 
@@ -18,26 +19,26 @@ else()
         set(CMAKE_INSTALL_RPATH "$ORIGIN")
 endif()
 
-#add_library(raia_skia SHARED
-add_executable(raia_skia
-        src/raia_skia.cpp
+#add_library(raia_gui SHARED
+add_executable(raia_gui
+        src/raia_gui.cpp
 )
 
 # 現在のRPATH設定を取得（もしあれば）
-get_property(CURRENT_RPATH TARGET raia_skia PROPERTY INSTALL_RPATH)
+get_property(CURRENT_RPATH TARGET raia_gui PROPERTY INSTALL_RPATH)
 
 # 特定のディレクトリ（この場合は作成されたライブラリがあるディレクトリ）を最優先にする
 list(PREPEND CURRENT_RPATH "${SPECIAL_RPATH_KEYWORD}")
 
 # 更新されたRPATH設定をターゲットに適用
-set_target_properties(raia_skia PROPERTIES
+set_target_properties(raia_gui PROPERTIES
         BUILD_WITH_INSTALL_RPATH TRUE
         INSTALL_RPATH "${CURRENT_RPATH}")
 
-target_link_libraries(raia_skia
-        $<$<PLATFORM_ID:Darwin>: egl glfw.3.4 GLESv2 skia >
+target_link_libraries(raia_gui
+        $<$<PLATFORM_ID:Darwin>: egl glfw.3.4 GLESv2 assimp.5.3.0 >
         $<$<PLATFORM_ID:Linux>: m dl EGL glfw GLESv2 X11 Xxf86vm Xrandr Xinerama Xcursor pthread Xi>
         $<$<PLATFORM_ID:Windows>: EGL glfw3 GLESv2>
         )
 
-set_target_properties(raia_skia PROPERTIES PREFIX "")
+#set_target_properties(raia_gui PROPERTIES PREFIX "")
