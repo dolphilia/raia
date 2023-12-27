@@ -1,16 +1,15 @@
-#ifndef RAIA_LUA_RAIA_LUA_H
-#define RAIA_LUA_RAIA_LUA_H
+#ifndef RAIA_DUKTAPE_RAIA_DUKTAPE_H
+#define RAIA_DUKTAPE_RAIA_DUKTAPE_H
 
 #include <stdio.h>
-#include "lua/lua.h"
-#include "lua/lualib.h"
-#include "lua/lauxlib.h"
-#include "../../../../common/c/wrapper/wrapper_yyjson.h"
-#include "../../../../common/c/static/static_plugin_hash.h"
-#include "../../../../common/c/static/static_func_hash.h"
-#include "../../../../common/c/utility/util_file.h"
-#include "../../../../common/c/utility/export_api.h"
-#include "../../../../common/c/utility/platform.h"
+#include <string.h>
+#include "duktape-module/duk_module_duktape.h"
+#include "../../../common/c/utility/export_api.h"
+#include "../../../common/c/utility/platform.h"
+#include "../../../common/c/wrapper/wrapper_yyjson.h"
+#include "../../../common/c/static/static_plugin_hash.h"
+#include "../../../common/c/static/static_func_hash.h"
+#include "../../../common/c/utility/util_file.h"
 
 #ifdef _WIN32
 #include <stdlib.h>
@@ -33,4 +32,13 @@
 #define DYNAMIC_LIB_EXT "so"
 #endif
 
-#endif //RAIA_LUA_RAIA_LUA_H
+typedef struct {
+    int debug_mode;
+    int typescript_mode;
+    int es2015_mode;
+    char startup_script[512];
+    int preprocess;
+    char preprocess_script[512];
+} raia_config_t;
+
+#endif //RAIA_DUKTAPE_RAIA_DUKTAPE_H
