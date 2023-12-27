@@ -7,7 +7,6 @@ set(CMAKE_C_STANDARD 11)
 
 add_executable(raia_startup
         ../../third_party/c/ibireme/yyjson/yyjson.c
-        src/raia-core.c
         src/raia-startup.c
 )
 
