@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.25)
 project(raia_v8)
 
-include(${PROJECT_SOURCE_DIR}/../../../setting.cmake)
+include(${PROJECT_SOURCE_DIR}/../../setting.cmake)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "")
@@ -27,15 +27,15 @@ add_library(raia_v8 SHARED
         src/raia_v8.cpp
         src/wrapper/wrapper_v8.cpp
         src/static/static_raia_config.cpp
-        ../../../common/c/utility/util_file.c
-        ../../../common/c/static/static_func_hash.c
-        ../../../common/c/static/static_plugin_hash.c
-        ../../../third_party/c/ibireme/yyjson/yyjson.c
-        ../../../common/c/wrapper/wrapper_yyjson.c
-        ../../../common/c/static/static_args_hash.c
-        ../../../common/c/static/static_args_hash.h
-        ../../../common/c/wrapper/wrapper_ffi.c
-        ../../../common/c/wrapper/wrapper_ffi.h
+        ../../common/c/utility/util_file.c
+        ../../common/c/static/static_func_hash.c
+        ../../common/c/static/static_plugin_hash.c
+        ../../third_party/c/ibireme/yyjson/yyjson.c
+        ../../common/c/wrapper/wrapper_yyjson.c
+        ../../common/c/static/static_args_hash.c
+        ../../common/c/static/static_args_hash.h
+        ../../common/c/wrapper/wrapper_ffi.c
+        ../../common/c/wrapper/wrapper_ffi.h
 )
 
 add_compile_options(-pthread -fno-rtti)

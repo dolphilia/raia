@@ -6,16 +6,16 @@
 #define RAIA_V8_RAIA_V8_H
 
 extern "C" {
-#include "../../../../common/c/utility/export_api.h"
-#include "../../../../common/c/utility/platform.h"
-#include "../../../../common/c/wrapper/wrapper_yyjson.h"
-#include "../../../../common/c/static/static_plugin_hash.h"
-#include "../../../../common/c/static/static_func_hash.h"
-#include "../../../../common/c/static/static_entrust.h"
-#include "../../../../common/c/utility/util_file.h"
-#include "../../../../common/c/static/static_args_hash.h"
+#include "../../../common/c/utility/export_api.h"
+#include "../../../common/c/utility/platform.h"
+#include "../../../common/c/wrapper/wrapper_yyjson.h"
+#include "../../../common/c/static/static_plugin_hash.h"
+#include "../../../common/c/static/static_func_hash.h"
+#include "../../../common/c/static/static_entrust.h"
+#include "../../../common/c/utility/util_file.h"
+#include "../../../common/c/static/static_args_hash.h"
 #include "ffi.h"
-#include "../../../../common/c/wrapper/wrapper_ffi.h"
+#include "../../../common/c/wrapper/wrapper_ffi.h"
 }
 #include <iostream>
 #include <fstream>

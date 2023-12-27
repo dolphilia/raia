@@ -8,7 +8,7 @@
 #include <iostream>
 
 extern "C" {
-#include "../../../../../common/c/wrapper/wrapper_yyjson.h"
+#include "../../../../common/c/wrapper/wrapper_yyjson.h"
 };
 
 typedef struct {
