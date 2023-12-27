@@ -1,11 +1,9 @@
-#ifndef RAIA_CPP_DLFCN_RAIA_CPP_DLFCN_H
-#define RAIA_CPP_DLFCN_RAIA_CPP_DLFCN_H
+#ifndef RAIA_C_DLFCN_RAIA_C_DLFCN_H
+#define RAIA_C_DLFCN_RAIA_C_DLFCN_H
 
-#include <iostream>
-#include "../../../../common/c/utility/export_api.h"
-#include "../../../../common/c/utility/platform.h"
-#include "../../../../third_party/cpp/nlohmann/json/json.hpp"
-
+#include "../../../common/c/utility/export_api.h"
+#include "../../../common/c/utility/platform.h"
+#include "../../../common/c/wrapper/wrapper_yyjson.h"
 
 #ifdef __WINDOWS__
 #define _CRT_SECURE_NO_WARNINGS
@@ -26,4 +24,4 @@
 #define raia_dlclose(handle) dlclose(handle)
 #endif
 
-#endif //RAIA_CPP_DLFCN_RAIA_CPP_DLFCN_H
+#endif //RAIA_C_DLFCN_RAIA_C_DLFCN_H
