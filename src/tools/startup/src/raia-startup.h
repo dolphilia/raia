@@ -10,8 +10,8 @@
 #include <string.h>
 #include <errno.h>
 #include <unistd.h>
-#include "../../../../third_party/c/ibireme/yyjson/yyjson.h"
-#include "../../../../common/c/utility/platform.h"
+#include "../../../third_party/c/ibireme/yyjson/yyjson.h"
+#include "../../../common/c/utility/platform.h"
 
 #ifdef __WINDOWS__
 #define _CRT_SECURE_NO_WARNINGS
