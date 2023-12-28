@@ -2,9 +2,9 @@
 #define RAIA_SOUND_RAIA_SOUND_H
 
 #include <stdio.h>
-#include "../../../../common/c/utility/export_api.h"
-#include "../../../../common/c/utility/platform.h"
-#include "../../../../common/c/wrapper/wrapper_yyjson.h"
+#include "../../../common/c/utility/export_api.h"
+#include "../../../common/c/utility/platform.h"
+#include "../../../common/c/wrapper/wrapper_yyjson.h"
 #include <stdio.h>
 #include "AL/al.h"
 #include "AL/alc.h"
