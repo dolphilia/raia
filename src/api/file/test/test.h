@@ -10,7 +10,7 @@ extern "C" {
 }
 
 #include <fstream>
-#include "../../../../third_party/c/sharedom/utest_h/utest.h"
-#include "../../../../third_party/cpp/nlohmann/json/json.hpp"
+#include "../../../third_party/c/sharedom/utest_h/utest.h"
+#include "../../../third_party/cpp/nlohmann/json/json.hpp"
 
 #endif //RAIA_FILE_TEST_H

@@ -5,7 +5,7 @@
 #include "test.h"
 #include <iostream>
 
-using json_t = nlohmann::json;
+using nlohmann_json_t = nlohmann::json;
 
 UTEST(raia_file, raia_file_exist) {
     {
@@ -16,7 +16,7 @@ UTEST(raia_file, raia_file_exist) {
             }
         )";
         const char *ret = raia_file_exist(args);
-        json_t json = json_t::parse(ret);
+        nlohmann_json_t json = nlohmann_json_t::parse(ret);
         auto result = json["exist"].get<int>();
         ASSERT_EQ(result, 0);
         free((void *) ret);
@@ -29,7 +29,7 @@ UTEST(raia_file, raia_file_exist) {
             }
         )";
         const char *ret = raia_file_exist(args);
-        json_t json = json_t::parse(ret);
+        nlohmann_json_t json = nlohmann_json_t::parse(ret);
         auto result = json["exist"].get<int>();
         ASSERT_EQ(result, 1);
         free((void *) ret);

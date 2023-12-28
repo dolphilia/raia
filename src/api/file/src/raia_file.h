@@ -2,10 +2,10 @@
 #define RAIA_FILE_RAIA_FILE_H
 
 #include <stdio.h>
-#include "../../../../common/c/utility/export_api.h"
-#include "../../../../common/c/utility/platform.h"
-#include "../../../../common/c/wrapper/wrapper_yyjson.h"
-#include "../../../../common/c/utility/util_file.h"
+#include "../../../common/c/utility/export_api.h"
+#include "../../../common/c/utility/platform.h"
+#include "../../../common/c/wrapper/wrapper_yyjson.h"
+#include "../../../common/c/utility/util_file.h"
 
 RAIA_API const char *raia_file_exist(const char *s);
 RAIA_API const char *raia_file_load_string(const char *s);
