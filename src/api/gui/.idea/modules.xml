@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/gui.iml" filepath="$PROJECT_DIR$/.idea/gui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/raia-gui.iml" filepath="$PROJECT_DIR$/.idea/raia-gui.iml" />
     </modules>
   </component>
 </project>
