@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 3.26.4)
 project(raia_draw C)
 #set(CMAKE_C_COMPILER "gcc")
 
-include(${PROJECT_SOURCE_DIR}/../../../setting.cmake)
+include(${PROJECT_SOURCE_DIR}/../../setting.cmake)
 
 set(CMAKE_C_STANDARD 11)
 
@@ -29,8 +29,8 @@ add_library(raia_draw SHARED
         src/util/util_pixel.c
         src/util/util_primitive3d.c
         src/util/util_utf8.c
-        ../../../third_party/c/ibireme/yyjson/yyjson.c
-        ../../../common/c/wrapper/wrapper_yyjson.c
+        ../../third_party/c/ibireme/yyjson/yyjson.c
+        ../../common/c/wrapper/wrapper_yyjson.c
 )
 
 set_target_properties(raia_draw PROPERTIES PREFIX "")
