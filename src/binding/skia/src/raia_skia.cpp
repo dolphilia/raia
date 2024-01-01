@@ -43,6 +43,7 @@
 #include "include/core/SkPoint3.h"
 #include "include/core/SkRect.h"
 #include "include/core/SkRefCnt.h"
+#include "include/core/SkRegion.h"
 #include "include/core/SkShader.h"
 #include "include/core/SkStream.h"
 #include "include/core/SkSurface.h"
@@ -2237,6 +2238,479 @@ SkScalar SkPoint3_DotProduct(const SkPoint3 &a, const SkPoint3 &b) {
 
 SkPoint3 SkPoint3_CrossProduct(const SkPoint3 &a, const SkPoint3 &b) {
     return SkPoint3::CrossProduct(a, b);
+}
+
+//
+// SkRasterHandleAllocator
+//
+
+void SkRasterHandleAllocator_delete(SkRasterHandleAllocator *raster_handle_allocator) {
+    delete raster_handle_allocator;
+}
+
+bool SkRasterHandleAllocator_allocHandle(SkRasterHandleAllocator *raster_handle_allocator, const SkImageInfo &info, SkRasterHandleAllocator::Rec *rec) {
+    return raster_handle_allocator->allocHandle(info, rec);
+}
+
+void SkRasterHandleAllocator_updateHandle(SkRasterHandleAllocator *raster_handle_allocator, SkRasterHandleAllocator::Handle handle, const SkMatrix &matrix, const SkIRect &irect) {
+    raster_handle_allocator->updateHandle(handle, matrix, irect);
+}
+
+// static
+
+// @TODO
+//std::unique_ptr<SkCanvas> SkRasterHandleAllocator_MakeCanvas(std::unique_ptr<SkRasterHandleAllocator> allocator, const SkImageInfo &info, const SkRasterHandleAllocator::Rec *rec, const SkSurfaceProps *props) {
+//    return SkRasterHandleAllocator::MakeCanvas(allocator, info, rec, props);
+//}
+
+//
+// SkRect Struct
+//
+
+bool SkRect_isEmpty(SkRect *rect) {
+    return rect->isEmpty();
+}
+
+bool SkRect_isSorted(SkRect *rect) {
+    return rect->isSorted();
+}
+
+bool SkRect_isFinite(SkRect *rect) {
+    return rect->isFinite();
+}
+
+float SkRect_x(SkRect *rect) {
+    return rect->x();
+}
+
+float SkRect_y(SkRect *rect) {
+    return rect->y();
+}
+
+float SkRect_left(SkRect *rect) {
+    return rect->left();
+}
+
+float SkRect_top(SkRect *rect) {
+    return rect->top();
+}
+
+float SkRect_right(SkRect *rect) {
+    return rect->right();
+}
+
+float SkRect_bottom(SkRect *rect) {
+    return rect->bottom();
+}
+
+float SkRect_width(SkRect *rect) {
+    return rect->width();
+}
+
+float SkRect_height(SkRect *rect) {
+    return rect->height();
+}
+
+float SkRect_centerX(SkRect *rect) {
+    return rect->centerX();
+}
+
+float SkRect_centerY(SkRect *rect) {
+    return rect->centerY();
+}
+
+SkPoint SkRect_center(SkRect *rect) {
+    return rect->center();
+}
+
+void SkRect_toQuad(SkRect *rect, SkPoint quad[4]) {
+    rect->toQuad(quad);
+}
+
+void SkRect_setEmpty(SkRect *rect) {
+    rect->setEmpty();
+}
+
+void SkRect_set(SkRect *rect, const SkIRect &src) {
+    rect->set(src);
+}
+
+void SkRect_setLTRB(SkRect *rect, float left, float top, float right, float bottom) {
+    rect->setLTRB(left, top, right, bottom);
+}
+
+void SkRect_setBounds(SkRect *rect, const SkPoint pts[], int count) {
+    rect->setBounds(pts, count);
+}
+
+bool SkRect_setBoundsCheck(SkRect *rect, const SkPoint pts[], int count) {
+    return rect->setBoundsCheck(pts, count);
+}
+
+void SkRect_setBoundsNoCheck(SkRect *rect, const SkPoint pts[], int count) {
+    rect->setBoundsNoCheck(pts, count);
+}
+
+void SkRect_set_2(SkRect *rect, const SkPoint &p0, const SkPoint &p1) {
+    rect->set(p0, p1);
+}
+
+void SkRect_setXYWH(SkRect *rect, float x, float y, float width, float height) {
+    rect->setXYWH(x, y, width, height);
+}
+
+void SkRect_setWH(SkRect *rect, float width, float height) {
+    rect->setWH(width, height);
+}
+
+void SkRect_setIWH(SkRect *rect, int32_t width, int32_t height) {
+    rect->setIWH(width, height);
+}
+
+SkRect SkRect_makeOffset(SkRect *rect, float dx, float dy) {
+    return rect->makeOutset(dx, dy);
+}
+
+SkRect SkRect_makeOffset_2(SkRect *rect, SkVector v) {
+    return rect->makeOffset(v);
+}
+
+SkRect SkRect_makeInset(SkRect *rect, float dx, float dy) {
+    return rect->makeInset(dx, dy);
+}
+
+SkRect SkRect_makeOutset(SkRect *rect, float dx, float dy) {
+    return rect->makeOutset(dx, dy);
+}
+
+void SkRect_offset(SkRect *rect, float dx, float dy) {
+    rect->offset(dx, dy);
+}
+
+void SkRect_offset_2(SkRect *rect, const SkPoint &delta) {
+    rect->offset(delta);
+}
+
+void SkRect_offsetTo(SkRect *rect, float newX, float newY) {
+    rect->offsetTo(newX, newY);
+}
+
+void SkRect_inset(SkRect *rect, float dx, float dy) {
+    rect->inset(dx, dy);
+}
+
+void SkRect_outset(SkRect *rect, float dx, float dy) {
+    rect->outset(dx, dy);
+}
+
+bool SkRect_intersect(SkRect *rect, const SkRect &r) {
+    return rect->intersect(r);
+}
+
+bool SkRect_intersect_2(SkRect *rect, const SkRect &a, const SkRect &b) {
+    return rect->intersect(a, b);
+}
+
+bool SkRect_intersects(SkRect *rect, const SkRect &r) {
+    return rect->intersects(r);
+}
+
+void SkRect_join(SkRect *rect, const SkRect &r) {
+    rect->join(r);
+}
+
+void SkRect_joinNonEmptyArg(SkRect *rect, const SkRect &r) {
+    rect->joinNonEmptyArg(r);
+}
+
+void SkRect_joinPossiblyEmptyRect(SkRect *rect, const SkRect &r) {
+    rect->joinPossiblyEmptyRect(r);
+}
+
+bool SkRect_contains(SkRect *rect, float x, float y) {
+    return rect->contains(x, y);
+}
+
+bool SkRect_contains_2(SkRect *rect, const SkRect &r) {
+    return rect->contains(r);
+}
+
+bool SkRect_contains_3(SkRect *rect, const SkIRect &r) {
+    return rect->contains(r);
+}
+
+void SkRect_round(SkRect *rect, SkIRect *dst) {
+    rect->round(dst);
+}
+
+void SkRect_roundOut(SkRect *rect, SkIRect *dst) {
+    rect->roundOut(dst);
+}
+
+void SkRect_roundOut_2(SkRect *rect, SkRect *dst) {
+    rect->roundOut(dst);
+}
+
+void SkRect_roundIn(SkRect *rect, SkIRect *dst) {
+    rect->roundIn(dst);
+}
+
+SkIRect SkRect_round_2(SkRect *rect) {
+    return rect->round();
+}
+
+SkIRect SkRect_roundOut_3(SkRect *rect) {
+    return rect->roundOut();
+}
+
+SkIRect SkRect_roundIn_2(SkRect *rect) {
+    return rect->roundIn();
+}
+
+void SkRect_sort(SkRect *rect) {
+    rect->sort();
+}
+
+SkRect SkRect_makeSorted(SkRect *rect) {
+    return rect->makeSorted();
+}
+
+const float * SkRect_asScalars(SkRect *rect) {
+    return rect->asScalars();
+}
+
+void SkRect_dump(SkRect *rect, bool asHex) {
+    rect->dump(asHex);
+}
+
+void SkRect_dump_2(SkRect *rect) {
+    rect->dump();
+}
+
+void SkRect_dumpHex(SkRect *rect) {
+    rect->dumpHex();
+}
+
+// static
+
+SkRect SkRect_MakeEmpty() {
+    return SkRect::MakeEmpty();
+}
+
+SkRect SkRect_MakeWH(float w, float h) {
+    return SkRect::MakeWH(w, h);
+}
+
+SkRect SkRect_MakeIWH(int w, int h) {
+    return SkRect::MakeIWH(w, h);
+}
+
+SkRect SkRect_MakeSize(const SkSize &size) {
+    return SkRect::MakeSize(size);
+}
+
+SkRect SkRect_MakeLTRB(float l, float t, float r, float b) {
+    return SkRect::MakeLTRB(l, t, r, b);
+}
+
+SkRect SkRect_MakeXYWH(float x, float y, float w, float h) {
+    return SkRect::MakeXYWH(x, y, w, h);
+}
+
+SkRect SkRect_Make(const SkISize &size) {
+    return SkRect::Make(size);
+}
+
+SkRect SkRect_Make_2(const SkIRect &irect) {
+    return SkRect::Make(irect);
+}
+
+bool SkRect_Intersects(const SkRect &a, const SkRect &b) {
+    return SkRect::Intersects(a, b);
+}
+
+//
+// SkRefCnt
+//
+
+bool SkRefCnt_unique(SkRefCnt* ref_cnt) {
+    return ref_cnt->unique();
+}
+
+void SkRefCnt_ref(SkRefCnt* ref_cnt) {
+    ref_cnt->ref();
+}
+
+void SkRefCnt_unref(SkRefCnt* ref_cnt) {
+    ref_cnt->unref();
+}
+
+//
+// SkRefCntBase
+//
+
+SkRefCntBase *SkRefCntBase_new() {
+    return new SkRefCntBase();
+}
+
+void SkRefCntBase_delete(SkRefCntBase *ref_cnt_base) {
+    delete ref_cnt_base;
+}
+
+bool unique(SkRefCntBase *ref_cnt_base) {
+    return ref_cnt_base->unique();
+}
+
+void ref(SkRefCntBase *ref_cnt_base) {
+    ref_cnt_base->ref();
+}
+
+void unref(SkRefCntBase *ref_cnt_base) {
+    ref_cnt_base->unref();
+}
+
+//
+// SkRegion
+//
+
+//SkRegion & operator=(const SkRegion &region)
+//bool operator==(const SkRegion &other)
+//bool operator!=(const SkRegion &other)
+
+SkRegion *SkRegion_new() {
+    return new SkRegion();
+}
+
+SkRegion *SkRegion_new_2(const SkRegion &region) {
+    return new SkRegion(region);
+}
+
+SkRegion *SkRegion_new_3(const SkIRect &rect) {
+    return new SkRegion(rect);
+}
+
+void SkRegion_delete(SkRegion *region) {
+    delete region;
+}
+
+bool SkRegion_set(SkRegion *region, const SkRegion &src) {
+    return region->set(src);
+}
+
+void SkRegion_swap(SkRegion *region, SkRegion &other) {
+    return region->swap(other);
+}
+
+bool SkRegion_isEmpty(SkRegion *region) {
+    return region->isEmpty();
+}
+
+bool SkRegion_isRect(SkRegion *region) {
+    return region->isRect();
+}
+
+bool SkRegion_isComplex(SkRegion *region) {
+    return region->isComplex();
+}
+
+const SkIRect & SkRegion_getBounds(SkRegion *region) {
+    return region->getBounds();
+}
+
+int SkRegion_computeRegionComplexity(SkRegion *region) {
+    return region->computeRegionComplexity();
+}
+
+bool SkRegion_getBoundaryPath(SkRegion *region, SkPath *path) {
+    return region->getBoundaryPath(path);
+}
+
+bool SkRegion_setEmpty(SkRegion *region) {
+    return region->setEmpty();
+}
+
+bool SkRegion_setRect(SkRegion *region, const SkIRect &rect) {
+    return region->setRect(rect);
+}
+
+bool SkRegion_setRects(SkRegion *region, const SkIRect rects[], int count) {
+    return region->setRects(rects, count);
+}
+
+bool SkRegion_setRegion(SkRegion *region, const SkRegion &region_2) {
+    return region->setRegion(region_2);
+}
+
+bool SkRegion_setPath(SkRegion *region, const SkPath &path, const SkRegion &clip) {
+    return region->setPath(path, clip);
+}
+
+bool SkRegion_intersects(SkRegion *region, const SkIRect &rect) {
+    return region->intersects(rect);
+}
+
+bool SkRegion_intersects_2(SkRegion *region, const SkRegion &other) {
+    return region->intersects(other);
+}
+
+bool SkRegion_contains(SkRegion *region, int32_t x, int32_t y) {
+    return region->contains(x, y);
+}
+
+bool SkRegion_contains_2(SkRegion *region, const SkIRect &other) {
+    return region->contains(other);
+}
+
+bool SkRegion_contains_3(SkRegion *region, const SkRegion &other) {
+    return region->contains(other);
+}
+
+bool SkRegion_quickContains(SkRegion *region, const SkIRect &r) {
+    return region->quickContains(r);
+}
+
+bool SkRegion_quickReject(SkRegion *region, const SkIRect &rect) {
+    return region->quickReject(rect);
+}
+
+bool SkRegion_quickReject_2(SkRegion *region, const SkRegion &rgn) {
+    return region->quickReject(rgn);
+}
+
+void SkRegion_translate(SkRegion *region, int dx, int dy) {
+    region->translate(dx, dy);
+}
+
+void SkRegion_translate_2(SkRegion *region, int dx, int dy, SkRegion *dst) {
+    region->translate(dx, dy, dst);
+}
+
+bool SkRegion_op(SkRegion *region, const SkIRect &rect, SkRegion::Op op) {
+    return region->op(rect, op);
+}
+
+bool SkRegion_op_2(SkRegion *region, const SkRegion &rgn, SkRegion::Op op) {
+    return region->op(rgn, op);
+}
+
+bool SkRegion_op_3(SkRegion *region, const SkIRect &rect, const SkRegion &rgn, SkRegion::Op op) {
+    return region->op(rect, rgn, op);
+}
+
+bool SkRegion_op_4(SkRegion *region, const SkRegion &rgn, const SkIRect &rect, SkRegion::Op op) {
+    return region->op(rgn, rect, op);
+}
+
+bool SkRegion_op_5(SkRegion *region, const SkRegion &rgna, const SkRegion &rgnb, SkRegion::Op op) {
+    return region->op(rgna, rgnb, op);
+}
+
+size_t SkRegion_writeToMemory(SkRegion *region, void *buffer) {
+    return region->writeToMemory(buffer);
+}
+
+size_t SkRegion_readFromMemory(SkRegion *region, const void *buffer, size_t length) {
+    return region->readFromMemory(buffer, length);
 }
 
 
