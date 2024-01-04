@@ -35,7 +35,7 @@ set_target_properties(raia_skia PROPERTIES
         INSTALL_RPATH "${CURRENT_RPATH}")
 
 target_link_libraries(raia_skia
-        $<$<PLATFORM_ID:Darwin>: egl glfw.3.4 GLESv2 skia >
+        $<$<PLATFORM_ID:Darwin>: egl glfw.3.4 GLESv2 skia skshaper>
         $<$<PLATFORM_ID:Linux>: m dl EGL glfw GLESv2 X11 Xxf86vm Xrandr Xinerama Xcursor pthread Xi>
         $<$<PLATFORM_ID:Windows>: EGL glfw3 GLESv2>
         )
