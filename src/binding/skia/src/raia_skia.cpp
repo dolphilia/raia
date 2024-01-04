@@ -44,10 +44,16 @@
 #include "include/core/SkRect.h"
 #include "include/core/SkRefCnt.h"
 #include "include/core/SkRegion.h"
+#include "include/core/SkRRect.h"
+#include "include/core/SkRSXform.h"
+#include "include/core/SkSamplingOptions.h"
 #include "include/core/SkShader.h"
 #include "include/core/SkStream.h"
+#include "include/core/SkStrokeRec.h"
 #include "include/core/SkSurface.h"
 #include "include/core/SkTextBlob.h"
+#include "include/core/SkTraceMemoryDump.h"
+#include "include/core/SkUnPreMultiply.h"
 #include "include/core/SkVertices.h"
 #include "include/effects/Sk1DPathEffect.h"
 #include "include/effects/Sk2DPathEffect.h"
@@ -63,8 +69,13 @@
 //#include "include/effects/SkLayerDrawLooper.h"
 #include "include/effects/SkLumaColorFilter.h"
 #include "include/effects/SkOverdrawColorFilter.h"
+#include "include/effects/SkImageFilters.h"
+#include "include/effects/SkShaderMaskFilter.h"
+#include "include/effects/SkTableMaskFilter.h"
+#include "include/effects/SkTrimPathEffect.h"
 #include "include/gpu/graphite/Recorder.h"
 #include "include/pathops/SkPathOps.h"
+#include "modules/skshaper/include/SkShaper.h"
 
 #include <map>
 #include <utility>
@@ -2713,7 +2724,2193 @@ size_t SkRegion_readFromMemory(SkRegion *region, const void *buffer, size_t leng
     return region->readFromMemory(buffer, length);
 }
 
+//
+// SkRGBA4f<kAT> Struct Template
+//
+/*
+const float * vec()
+float * vec()
+std::array<float, 4> array()
+float operator[](int index)
+float & operator[](int index)
+bool isOpaque()
+bool fitsInBytes()
+SkColor toSkColor()
+SkRGBA4f<kPremul_SkAlphaType> premul()
+SkRGBA4f<kUnpremul_SkAlphaType> unpremul()
+uint32_t toBytes_RGBA()
+SkRGBA4f makeOpaque()
+// static
+SkRGBA4f FromColor(SkColor color)
+SkRGBA4f FromPMColor(SkPMColor)
+SkRGBA4f FromBytes_RGBA(uint32_t color)
+*/
 
+//
+// SkRRect
+//
+
+//SkRRect & operator=(const SkRRect &rrect)
+
+SkRRect *SkRRect_new() {
+    return new SkRRect();
+}
+SkRRect *SkRRect_new_2(const SkRRect &rrect) {
+    return new SkRRect(rrect);
+}
+SkRRect::Type getType(SkRRect *rrect) {
+    return rrect->getType();
+}
+SkRRect::Type type(SkRRect *rrect) {
+    return rrect->type();
+}
+bool SkRRect_isEmpty(SkRRect *rrect) {
+    return rrect->isEmpty();
+}
+bool SkRRect_isRect(SkRRect *rrect) {
+    return rrect->isRect();
+}
+bool SkRRect_isOval(SkRRect *rrect) {
+    return rrect->isOval();
+}
+bool SkRRect_isSimple(SkRRect *rrect) {
+    return rrect->isSimple();
+}
+bool SkRRect_isNinePatch(SkRRect *rrect) {
+    return rrect->isNinePatch();
+}
+bool SkRRect_isComplex(SkRRect *rrect) {
+    return rrect->isComplex();
+}
+SkScalar SkRRect_width(SkRRect *rrect) {
+    return rrect->width();
+}
+SkScalar SkRRect_height(SkRRect *rrect) {
+    return rrect->height();
+}
+SkVector SkRRect_getSimpleRadii(SkRRect *rrect) {
+    return rrect->getSimpleRadii();
+}
+void SkRRect_setEmpty(SkRRect *rrect, SkRRect *rrect_2) {
+    rrect->setEmpty();
+}
+void SkRRect_setRect(SkRRect *rrect, const SkRect &rect) {
+    rrect->setRect(rect);
+}
+void SkRRect_setOval(SkRRect *rrect, const SkRect &oval) {
+    rrect->setOval(oval);
+}
+void SkRRect_setRectXY(SkRRect *rrect, const SkRect &rect, SkScalar xRad, SkScalar yRad) {
+    rrect->setRectXY(rect, xRad, yRad);
+}
+void SkRRect_setNinePatch(SkRRect *rrect, const SkRect &rect, SkScalar leftRad, SkScalar topRad, SkScalar rightRad, SkScalar bottomRad) {
+    rrect->setNinePatch(rect, leftRad, topRad, rightRad, bottomRad);
+}
+void SkRRect_setRectRadii(SkRRect *rrect, const SkRect &rect, const SkVector radii[4]) {
+    rrect->setRectRadii(rect, radii);
+}
+const SkRect & SkRRect_rect(SkRRect *rrect) {
+    return rrect->rect();
+}
+SkVector SkRRect_radii(SkRRect *rrect, SkRRect::Corner corner) {
+    return rrect->radii(corner);
+}
+const SkRect & SkRRect_getBounds(SkRRect *rrect) {
+    return rrect->getBounds();
+}
+void SkRRect_inset(SkRRect *rrect, SkScalar dx, SkScalar dy, SkRRect *dst) {
+    rrect->inset(dx, dy, dst);
+}
+void SkRRect_inset_2(SkRRect *rrect, SkScalar dx, SkScalar dy) {
+    rrect->inset(dx, dy);
+}
+void SkRRect_outset(SkRRect *rrect, SkScalar dx, SkScalar dy, SkRRect *dst) {
+    rrect->outset(dx, dy, dst);
+}
+void SkRRect_outset_2(SkRRect *rrect, SkScalar dx, SkScalar dy) {
+    rrect->outset(dx, dy);
+}
+void SkRRect_offset(SkRRect *rrect, SkScalar dx, SkScalar dy) {
+    rrect->offset(dx, dy);
+}
+SkRRect SkRRect_makeOffset(SkRRect *rrect, SkScalar dx, SkScalar dy) {
+    return rrect->makeOffset(dx, dy);
+}
+bool SkRRect_contains(SkRRect *rrect, const SkRect &rect) {
+    return rrect->contains(rect);
+}
+bool SkRRect_isValid(SkRRect *rrect) {
+    return rrect->isValid();
+}
+size_t SkRRect_writeToMemory(SkRRect *rrect, void *buffer) {
+    return rrect->writeToMemory(buffer);
+}
+size_t SkRRect_readFromMemory(SkRRect *rrect, const void *buffer, size_t length) {
+    return rrect->readFromMemory(buffer, length);
+}
+bool SkRRect_transform(SkRRect *rrect, const SkMatrix &matrix, SkRRect *dst) {
+    return rrect->transform(matrix, dst);
+}
+void SkRRect_dump(SkRRect *rrect, bool asHex) {
+    rrect->dump(asHex);
+}
+SkString SkRRect_dumpToString(SkRRect *rrect, bool asHex) {
+    return rrect->dumpToString(asHex);
+}
+void SkRRect_dump_2(SkRRect *rrect) {
+    rrect->dump();
+}
+void SkRRect_dumpHex(SkRRect *rrect) {
+    rrect->dumpHex();
+}
+// static
+SkRRect SkRRect_MakeEmpty() {
+    return SkRRect::MakeEmpty();
+}
+SkRRect SkRRect_MakeRect(const SkRect &r) {
+    return SkRRect::MakeRect(r);
+}
+SkRRect SkRRect_MakeOval(const SkRect &oval) {
+    return SkRRect::MakeOval(oval);
+}
+SkRRect SkRRect_MakeRectXY(const SkRect &rect, SkScalar xRad, SkScalar yRad) {
+    return SkRRect::MakeRectXY(rect, xRad, yRad);
+}
+
+//
+// SkRSXform
+//
+bool SkRSXform_rectStaysRect(SkRSXform *rsx_form) {
+    return rsx_form->rectStaysRect();
+}
+void SkRSXform_setIdentity(SkRSXform *rsx_form) {
+    rsx_form->setIdentity();
+}
+void SkRSXform_set(SkRSXform *rsx_form, SkScalar scos, SkScalar ssin, SkScalar tx, SkScalar ty) {
+    rsx_form->set(scos, ssin, tx, ty);
+}
+void SkRSXform_toQuad(SkRSXform *rsx_form, SkScalar width, SkScalar height, SkPoint quad[4]) {
+    rsx_form->toQuad(width, height, quad);
+}
+void SkRSXform_toQuad_2(SkRSXform *rsx_form, const SkSize &size, SkPoint quad[4]) {
+    rsx_form->toQuad(size, quad);
+}
+void SkRSXform_toTriStrip(SkRSXform *rsx_form, SkScalar width, SkScalar height, SkPoint strip[4]) {
+    rsx_form->toTriStrip(width, height, strip);
+}
+// static
+SkRSXform SkRSXform_Make(SkRSXform *rsx_form, SkScalar scos, SkScalar ssin, SkScalar tx, SkScalar ty) {
+    return SkRSXform::Make(scos, ssin, tx, ty);
+}
+SkRSXform SkRSXform_MakeFromRadians(SkRSXform *rsx_form, SkScalar scale, SkScalar radians, SkScalar tx, SkScalar ty, SkScalar ax, SkScalar ay) {
+    return SkRSXform::MakeFromRadians(scale, radians, tx, ty, ax, ay);
+}
+
+//
+// SkRTreeFactory
+//
+//sk_sp<SkBBoxHierarchy> operator()() const override
+
+//
+// SkRuntimeBlendBuilder
+//
+
+//SkRuntimeBlendBuilder(const SkRuntimeBlendBuilder &)=delete
+//SkRuntimeBlendBuilder & operator=(const SkRuntimeBlendBuilder &)=delete
+
+SkRuntimeBlendBuilder *SkRuntimeBlendBuilder_new(sk_sp<SkRuntimeEffect> runtime_effect) {
+    return new SkRuntimeBlendBuilder(runtime_effect);
+}
+void SkRuntimeBlendBuilder_delete(SkRuntimeBlendBuilder *runtime_blend_builder) {
+    delete runtime_blend_builder;
+}
+sk_sp<SkBlender> SkRuntimeBlendBuilder_makeBlender(SkRuntimeBlendBuilder *runtime_blend_builder) {
+    return runtime_blend_builder->makeBlender();
+}
+const SkRuntimeEffect * SkRuntimeBlendBuilder_effect(SkRuntimeBlendBuilder *runtime_blend_builder) {
+    return runtime_blend_builder->effect();
+}
+SkRuntimeBlendBuilder::BuilderUniform SkRuntimeBlendBuilder_uniform(SkRuntimeBlendBuilder *runtime_blend_builder, std::string_view name) {
+    return runtime_blend_builder->uniform(name);
+}
+SkRuntimeBlendBuilder::BuilderChild SkRuntimeBlendBuilder_child(SkRuntimeBlendBuilder *runtime_blend_builder, std::string_view name) {
+    return runtime_blend_builder->child(name);
+}
+sk_sp<const SkData> SkRuntimeBlendBuilder_uniforms(SkRuntimeBlendBuilder *runtime_blend_builder) {
+    return runtime_blend_builder->uniforms();
+}
+SkSpan<const SkRuntimeEffect::ChildPtr> SkRuntimeBlendBuilder_children(SkRuntimeBlendBuilder *runtime_blend_builder) {
+    return runtime_blend_builder->children();
+}
+
+//
+// SkRuntimeColorFilterBuilder
+//
+//SkRuntimeColorFilterBuilder(const SkRuntimeColorFilterBuilder &)=delete
+//SkRuntimeColorFilterBuilder & operator=(const SkRuntimeColorFilterBuilder &)=delete
+SkRuntimeColorFilterBuilder *SkRuntimeColorFilterBuilder_new(sk_sp<SkRuntimeEffect> runtime_effect) {
+    return new SkRuntimeColorFilterBuilder(runtime_effect);
+}
+void SkRuntimeColorFilterBuilder_delete(SkRuntimeColorFilterBuilder *runtime_color_filter_builder) {
+    delete runtime_color_filter_builder;
+}
+sk_sp<SkColorFilter> SkRuntimeColorFilterBuilder_makeColorFilter(SkRuntimeColorFilterBuilder *runtime_color_filter_builder) {
+    return runtime_color_filter_builder->makeColorFilter();
+}
+const SkRuntimeEffect * SkRuntimeColorFilterBuilder_effect(SkRuntimeColorFilterBuilder *runtime_color_filter_builder) {
+    return runtime_color_filter_builder->effect();
+}
+SkRuntimeColorFilterBuilder::BuilderUniform SkRuntimeColorFilterBuilder_uniform(SkRuntimeColorFilterBuilder *runtime_color_filter_builder, std::string_view name) {
+    return runtime_color_filter_builder->uniform(name);
+}
+SkRuntimeColorFilterBuilder::BuilderChild SkRuntimeColorFilterBuilder_child(SkRuntimeColorFilterBuilder *runtime_color_filter_builder, std::string_view name) {
+    return runtime_color_filter_builder->child(name);
+}
+sk_sp<const SkData> SkRuntimeColorFilterBuilder_uniforms(SkRuntimeColorFilterBuilder *runtime_color_filter_builder) {
+    return runtime_color_filter_builder->uniforms();
+}
+SkSpan<const SkRuntimeEffect::ChildPtr> SkRuntimeColorFilterBuilder_children(SkRuntimeColorFilterBuilder *runtime_color_filter_builder) {
+    return runtime_color_filter_builder->children();
+}
+
+//
+// SkRuntimeEffect
+//
+void SkRuntimeEffect_delete(SkRuntimeEffect *runtime_effect) {
+    delete runtime_effect;
+}
+sk_sp<SkShader> SkRuntimeEffect_makeShader(SkRuntimeEffect *runtime_effect, sk_sp<const SkData> uniforms, sk_sp<SkShader> children[], size_t childCount, const SkMatrix *localMatrix) {
+    return runtime_effect->makeShader(uniforms, children, childCount, localMatrix);
+}
+sk_sp<SkShader> SkRuntimeEffect_makeShader_2(SkRuntimeEffect *runtime_effect, sk_sp<const SkData> uniforms, SkSpan<const SkRuntimeEffect::ChildPtr> children, const SkMatrix *localMatrix) {
+    return runtime_effect->makeShader(uniforms, children, localMatrix);
+}
+sk_sp<SkColorFilter> SkRuntimeEffect_makeColorFilter(SkRuntimeEffect *runtime_effect, sk_sp<const SkData> uniforms) {
+    return runtime_effect->makeColorFilter(uniforms);
+}
+sk_sp<SkColorFilter> SkRuntimeEffect_makeColorFilter_2(SkRuntimeEffect *runtime_effect, sk_sp<const SkData> uniforms, sk_sp<SkColorFilter> children[], size_t childCount) {
+    return runtime_effect->makeColorFilter(uniforms, children, childCount);
+}
+sk_sp<SkColorFilter> SkRuntimeEffect_makeColorFilter_3(SkRuntimeEffect *runtime_effect, sk_sp<const SkData> uniforms, SkSpan<const SkRuntimeEffect::ChildPtr> children) {
+    return runtime_effect->makeColorFilter(uniforms, children);
+}
+sk_sp<SkBlender> SkRuntimeEffect_makeBlender(SkRuntimeEffect *runtime_effect, sk_sp<const SkData> uniforms, SkSpan<const SkRuntimeEffect::ChildPtr> children) {
+    return runtime_effect->makeBlender(uniforms, children);
+}
+const std::string & SkRuntimeEffect_source(SkRuntimeEffect *runtime_effect) {
+    return runtime_effect->source();
+}
+size_t SkRuntimeEffect_uniformSize(SkRuntimeEffect *runtime_effect) {
+    return runtime_effect->uniformSize();
+}
+SkSpan<const SkRuntimeEffect::Uniform> SkRuntimeEffect_uniforms(SkRuntimeEffect *runtime_effect) {
+    return runtime_effect->uniforms();
+}
+SkSpan<const SkRuntimeEffect::Child> SkRuntimeEffect_children(SkRuntimeEffect *runtime_effect) {
+    return runtime_effect->children();
+}
+const SkRuntimeEffect::Uniform * SkRuntimeEffect_findUniform(SkRuntimeEffect *runtime_effect, std::string_view name) {
+    return runtime_effect->findUniform(name);
+}
+const SkRuntimeEffect::Child * SkRuntimeEffect_findChild(SkRuntimeEffect *runtime_effect, std::string_view name) {
+    return runtime_effect->findChild(name);
+}
+bool SkRuntimeEffect_allowShader(SkRuntimeEffect *runtime_effect) {
+    return runtime_effect->allowShader();
+}
+bool SkRuntimeEffect_allowColorFilter(SkRuntimeEffect *runtime_effect) {
+    return runtime_effect->allowColorFilter();
+}
+bool SkRuntimeEffect_allowBlender(SkRuntimeEffect *runtime_effect) {
+    return runtime_effect->allowBlender();
+}
+bool SkRuntimeEffect_unique(SkRuntimeEffect *runtime_effect) {
+    return runtime_effect->unique();
+}
+void SkRuntimeEffect_ref(SkRuntimeEffect *runtime_effect) {
+    runtime_effect->ref();
+}
+void SkRuntimeEffect_unref(SkRuntimeEffect *runtime_effect) {
+    runtime_effect->unref();
+}
+// static
+SkRuntimeEffect::Result SkRuntimeEffect_MakeForColorFilter(SkString sksl, const SkRuntimeEffect::Options &options) {
+    return SkRuntimeEffect::MakeForColorFilter(sksl, options);
+}
+SkRuntimeEffect::Result SkRuntimeEffect_MakeForColorFilter_2(SkString sksl) {
+    return SkRuntimeEffect::MakeForColorFilter(sksl);
+}
+SkRuntimeEffect::Result SkRuntimeEffect_MakeForShader(SkString sksl, const SkRuntimeEffect::Options &options) {
+    return SkRuntimeEffect::MakeForShader(sksl, options);
+}
+SkRuntimeEffect::Result SkRuntimeEffect_MakeForShader_2(SkString sksl) {
+    return SkRuntimeEffect::MakeForShader(sksl);
+}
+SkRuntimeEffect::Result SkRuntimeEffect_MakeForBlender(SkString sksl, const SkRuntimeEffect::Options &options) {
+    return SkRuntimeEffect::MakeForBlender(sksl, options);
+}
+SkRuntimeEffect::Result SkRuntimeEffect_MakeForBlender_2(SkString sksl) {
+    return SkRuntimeEffect::MakeForBlender(sksl);
+}
+SkRuntimeEffect::TracedShader SkRuntimeEffect_MakeTraced(sk_sp<SkShader> shader, const SkIPoint &traceCoord) {
+    return SkRuntimeEffect::MakeTraced(shader, traceCoord);
+}
+void SkRuntimeEffect_RegisterFlattenables() {
+    SkRuntimeEffect::RegisterFlattenables();
+}
+
+//
+// SkRuntimeEffectBuilder
+//
+const SkRuntimeEffect * SkRuntimeEffectBuilder_effect(SkRuntimeEffectBuilder *runtime_effect_builder) {
+    return runtime_effect_builder->effect();
+}
+SkRuntimeEffectBuilder::BuilderUniform SkRuntimeEffectBuilder_uniform(SkRuntimeEffectBuilder *runtime_effect_builder, std::string_view name) {
+    return runtime_effect_builder->uniform(name);
+}
+SkRuntimeEffectBuilder::BuilderChild SkRuntimeEffectBuilder_child(SkRuntimeEffectBuilder *runtime_effect_builder, std::string_view name) {
+    return runtime_effect_builder->child(name);
+}
+sk_sp<const SkData> SkRuntimeEffectBuilder_uniforms(SkRuntimeEffectBuilder *runtime_effect_builder) {
+    return runtime_effect_builder->uniforms();
+}
+SkSpan<const SkRuntimeEffect::ChildPtr> SkRuntimeEffectBuilder_children(SkRuntimeEffectBuilder *runtime_effect_builder) {
+    return runtime_effect_builder->children();
+}
+// static
+// SkRuntimeEffectBuilder()=delete
+// SkRuntimeEffectBuilder(sk_sp<SkRuntimeEffect> effect)
+// SkRuntimeEffectBuilder(sk_sp<SkRuntimeEffect> effect, sk_sp<SkData> uniforms)
+// SkRuntimeEffectBuilder(SkRuntimeEffectBuilder &&)
+// SkRuntimeEffectBuilder(const SkRuntimeEffectBuilder &)
+// SkRuntimeEffectBuilder & operator=(SkRuntimeEffectBuilder &&)=delete
+// SkRuntimeEffectBuilder & operator=(const SkRuntimeEffectBuilder &)=delete
+
+//
+// SkRuntimeShaderBuilder
+//
+SkRuntimeShaderBuilder *SkRuntimeShaderBuilder_new(sk_sp<SkRuntimeEffect> effect) {
+    return new SkRuntimeShaderBuilder(effect);
+}
+SkRuntimeShaderBuilder *SkRuntimeShaderBuilder_new_2(const SkRuntimeShaderBuilder &builder) {
+    return new SkRuntimeShaderBuilder(builder);
+}
+void SkRuntimeShaderBuilder_delete(SkRuntimeShaderBuilder *runtime_shader_builder) {
+    delete runtime_shader_builder;
+}
+sk_sp<SkShader> SkRuntimeShaderBuilder_makeShader(SkRuntimeShaderBuilder *runtime_shader_builder, const SkMatrix *localMatrix) {
+    return runtime_shader_builder->makeShader(localMatrix);
+}
+const SkRuntimeEffect * SkRuntimeShaderBuilder_effect(SkRuntimeShaderBuilder *runtime_shader_builder) {
+    return runtime_shader_builder->effect();
+}
+SkRuntimeShaderBuilder::BuilderUniform SkRuntimeShaderBuilder_uniform(SkRuntimeShaderBuilder *runtime_shader_builder, std::string_view name) {
+    return runtime_shader_builder->uniform(name);
+}
+SkRuntimeShaderBuilder::BuilderChild SkRuntimeShaderBuilder_child(SkRuntimeShaderBuilder *runtime_shader_builder, std::string_view name) {
+    return runtime_shader_builder->child(name);
+}
+sk_sp<const SkData> SkRuntimeShaderBuilder_uniforms(SkRuntimeShaderBuilder *runtime_shader_builder) {
+    return runtime_shader_builder->uniforms();
+}
+SkSpan<const SkRuntimeEffect::ChildPtr> SkRuntimeShaderBuilder_children(SkRuntimeShaderBuilder *runtime_shader_builder) {
+    return runtime_shader_builder->children();
+}
+
+
+//
+// SkSamplingOptions
+//
+//bool operator==(const SkSamplingOptions &other)
+//bool operator!=(const SkSamplingOptions &other)
+SkSamplingOptions *SkSamplingOptions_new() {
+    return new SkSamplingOptions();
+}
+SkSamplingOptions *SkSamplingOptions_new_2(const SkSamplingOptions &options) {
+    return new SkSamplingOptions(options);
+}
+//SkSamplingOptions *SkSamplingOptions_new_3 & operator=(const SkSamplingOptions &that) {
+//    return new SkSamplingOptions();
+//}
+SkSamplingOptions *SkSamplingOptions_new_4(SkFilterMode fm, SkMipmapMode mm) {
+    return new SkSamplingOptions(fm, mm);
+}
+SkSamplingOptions *SkSamplingOptions_new_5(SkFilterMode fm) {
+    return new SkSamplingOptions(fm);
+}
+SkSamplingOptions *SkSamplingOptions_new_6(const SkCubicResampler &c) {
+    return new SkSamplingOptions(c);
+}
+bool SkSamplingOptions_isAniso(SkSamplingOptions *sampling_options) {
+    return sampling_options->isAniso();
+}
+// static
+SkSamplingOptions SkSamplingOptions_Aniso(int maxAniso) {
+    return SkSamplingOptions::Aniso(maxAniso);
+}
+
+//
+// SkShader
+//
+bool SkShader_isOpaque(SkShader *shader) {
+    return shader->isOpaque();
+}
+SkImage * SkShader_isAImage(SkShader *shader, SkMatrix *localMatrix, SkTileMode xy[2]) {
+    return shader->isAImage(localMatrix, xy);
+}
+bool SkShader_isAImage_2(SkShader *shader) {
+    return shader->isAImage();
+}
+sk_sp<SkShader> SkShader_makeWithLocalMatrix(SkShader *shader, const SkMatrix &matrix) {
+    return shader->makeWithLocalMatrix(matrix);
+}
+sk_sp<SkShader> SkShader_makeWithColorFilter(SkShader *shader, sk_sp<SkColorFilter> filter) {
+    return shader->makeWithColorFilter(filter);
+}
+sk_sp<SkShader> SkShader_makeWithWorkingColorSpace(SkShader *shader, sk_sp<SkColorSpace> space) {
+    return shader->makeWithWorkingColorSpace(space);
+}
+SkShader::Factory SkShader_getFactory(SkShader *shader) {
+    return shader->getFactory();
+}
+const char * SkShader_getTypeName(SkShader *shader) {
+    return shader->getTypeName();
+}
+void SkShader_flatten(SkShader *shader, SkWriteBuffer &buffer) {
+    shader->flatten(buffer);
+}
+SkShader::Type SkShader_getFlattenableType(SkShader *shader) {
+    return shader->getFlattenableType();
+}
+sk_sp<SkData> SkShader_serialize(SkShader *shader, const SkSerialProcs *procs) {
+    return shader->serialize(procs);
+}
+size_t SkShader_serialize_2(SkShader *shader, void *memory, size_t memory_size, const SkSerialProcs *procs) {
+    return shader->serialize(memory, memory_size, procs);
+}
+bool SkShader_unique(SkShader *shader) {
+    return shader->unique();
+}
+void SkShader_ref(SkShader *shader) {
+    shader->ref();
+}
+void SkShader_unref(SkShader *shader) {
+    shader->unref();
+}
+// static
+SkShader::Factory SkShader_NameToFactory(SkShader *shader, const char name[]) {
+    return SkShader::NameToFactory(name);
+}
+const char * SkShader_FactoryToName(SkShader *shader, SkShader::Factory factory) {
+    return SkShader::FactoryToName(factory);
+}
+void SkShader_Register(SkShader *shader, const char name[], SkShader::Factory factory) {
+    SkShader::Register(name, factory);
+}
+sk_sp<SkFlattenable> SkShader_Deserialize(SkShader *shader, SkShader::Type type, const void *data, size_t length, const SkDeserialProcs *procs) {
+    return SkShader::Deserialize(type, data, length, procs);
+}
+
+//
+// SkShaderMaskFilter
+//
+// static
+sk_sp<SkMaskFilter> SkShaderMaskFilter_Make(sk_sp<SkShader> shader) {
+    return SkShaderMaskFilter::Make(shader);
+}
+
+//
+// SkShaper
+//
+//SkShaper *SkShaper_new() {
+//    return new SkShaper();
+//}
+void SkShaper_delete(SkShaper *shaper) {
+    delete shaper;
+}
+void SkShaper_shape(SkShaper *shaper, const char *utf8, size_t utf8Bytes, const SkFont &srcFont, bool leftToRight, SkScalar width, SkShaper::RunHandler *handler) {
+    shaper->shape(utf8, utf8Bytes, srcFont, leftToRight, width, handler);
+}
+void SkShaper_shape_2(SkShaper *shaper, const char *utf8, size_t utf8Bytes, SkShaper::FontRunIterator &font, SkShaper::BiDiRunIterator &bidi, SkShaper::ScriptRunIterator &script, SkShaper::LanguageRunIterator &language, SkScalar width, SkShaper::RunHandler *handler) {
+    shaper->shape(utf8, utf8Bytes, font, bidi, script, language, width, handler);
+}
+void SkShaper_shape_3(SkShaper *shaper, const char *utf8, size_t utf8Bytes, SkShaper::FontRunIterator &font, SkShaper::BiDiRunIterator &bidi, SkShaper::ScriptRunIterator &script, SkShaper::LanguageRunIterator &language, const SkShaper::Feature *features, size_t featuresSize, SkScalar width, SkShaper::RunHandler *handler) {
+    shaper->shape(utf8, utf8Bytes, font, bidi, script, language, features, featuresSize, width, handler);
+}
+// static
+std::unique_ptr<SkShaper> SkShaper_MakePrimitive() {
+    return SkShaper::MakePrimitive();
+}
+std::unique_ptr<SkShaper> SkShaper_Make(sk_sp<SkFontMgr> font_mgr) {
+    return SkShaper::Make(font_mgr);
+}
+void SkShaper_PurgeCaches() {
+    SkShaper::PurgeCaches();
+}
+std::unique_ptr<SkShaper::FontRunIterator> SkShaper_MakeFontMgrRunIterator(const char *utf8, size_t utf8Bytes, const SkFont &font, sk_sp<SkFontMgr> fallback) {
+    return SkShaper::MakeFontMgrRunIterator(utf8, utf8Bytes, font, fallback);
+}
+std::unique_ptr<SkShaper::FontRunIterator> SkShaper_MakeFontMgrRunIterator_2(const char *utf8, size_t utf8Bytes, const SkFont &font, sk_sp<SkFontMgr> fallback, const char *requestName, SkFontStyle requestStyle, const SkShaper::LanguageRunIterator *language_run_iterator) {
+    return SkShaper::MakeFontMgrRunIterator(utf8, utf8Bytes, font, fallback, requestName, requestStyle, language_run_iterator);
+}
+std::unique_ptr<SkShaper::BiDiRunIterator> SkShaper_MakeBiDiRunIterator(const char *utf8, size_t utf8Bytes, uint8_t bidiLevel) {
+    return SkShaper::MakeBiDiRunIterator(utf8, utf8Bytes, bidiLevel);
+}
+std::unique_ptr<SkShaper::ScriptRunIterator> SkShaper_MakeScriptRunIterator(const char *utf8, size_t utf8Bytes, SkFourByteTag script) {
+    return SkShaper::MakeScriptRunIterator(utf8, utf8Bytes, script);
+}
+std::unique_ptr<SkShaper::LanguageRunIterator> SkShaper_MakeStdLanguageRunIterator(const char *utf8, size_t utf8Bytes) {
+    return SkShaper::MakeStdLanguageRunIterator(utf8, utf8Bytes);
+}
+
+//
+// SkSize Struct
+//
+void SkSize_set(SkSize *size, SkScalar w, SkScalar h) {
+    size->set(w, h);
+}
+bool SkSize_isZero(SkSize *size) {
+    return size->isZero();
+}
+bool SkSize_isEmpty(SkSize *size) {
+    return size->isEmpty();
+}
+void SkSize_setEmpty(SkSize *size) {
+    size->setEmpty();
+}
+SkScalar SkSize_width(SkSize *size) {
+    return size->width();
+}
+SkScalar SkSize_height(SkSize *size) {
+    return size->height();
+}
+bool SkSize_equals(SkSize *size, SkScalar w, SkScalar h) {
+    return size->equals(w, h);
+}
+SkISize SkSize_toRound(SkSize *size) {
+    return size->toRound();
+}
+SkISize SkSize_toCeil(SkSize *size) {
+    return size->toCeil();
+}
+SkISize SkSize_toFloor(SkSize *size) {
+    return size->toFloor();
+}
+// static
+SkSize SkSize_Make(SkScalar w, SkScalar h) {
+    return SkSize::Make(w, h);
+}
+SkSize SkSize_Make_2(const SkISize &src) {
+    return SkSize::Make(src);
+}
+SkSize SkSize_MakeEmpty() {
+    return SkSize::MakeEmpty();
+}
+
+//
+// SkStream
+//
+//SkStream *SkStream_new() {
+//    return new SkStream();
+//}
+void SkStream_delete(SkStream *stream) {
+    delete stream;
+}
+size_t SkStream_read(SkStream *stream, void *buffer, size_t size) {
+    return stream->read(buffer, size);
+}
+size_t SkStream_skip(SkStream *stream, size_t size) {
+    return stream->skip(size);
+}
+size_t SkStream_peek(SkStream *stream, void *buffer, size_t size) {
+    return stream->peek(buffer, size);
+}
+bool SkStream_isAtEnd(SkStream *stream) {
+    return stream->isAtEnd();
+}
+bool SkStream_readS8(SkStream *stream, int8_t *i) {
+    return stream->readS8(i);
+}
+bool SkStream_readS16(SkStream *stream, int16_t *i) {
+    return stream->readS16(i);
+}
+bool SkStream_readS32(SkStream *stream, int32_t *i) {
+    return stream->readS32(i);
+}
+bool SkStream_readU8(SkStream *stream, uint8_t *i) {
+    return stream->readU8(i);
+}
+bool SkStream_readU16(SkStream *stream, uint16_t *i) {
+    return stream->readU16(i);
+}
+bool SkStream_readU32(SkStream *stream, uint32_t *i) {
+    return stream->readU32(i);
+}
+bool SkStream_readBool(SkStream *stream, bool *b) {
+    return stream->readBool(b);
+}
+bool SkStream_readScalar(SkStream *stream, SkScalar *v) {
+    return stream->readScalar(v);
+}
+bool SkStream_readPackedUInt(SkStream *stream, size_t *size) {
+    return stream->readPackedUInt(size);
+}
+bool SkStream_rewind(SkStream *stream) {
+    return stream->rewind();
+}
+std::unique_ptr<SkStream> SkStream_duplicate(SkStream *stream) {
+    return stream->duplicate();
+}
+std::unique_ptr<SkStream> SkStream_fork(SkStream *stream) {
+    return stream->fork();
+}
+bool SkStream_hasPosition(SkStream *stream) {
+    return stream->hasPosition();
+}
+size_t SkStream_getPosition(SkStream *stream) {
+    return stream->getPosition();
+}
+bool SkStream_seek(SkStream *stream, size_t size) {
+    return stream->seek(size);
+}
+bool SkStream_move(SkStream *stream, long i) {
+    return stream->move(i);
+}
+bool SkStream_hasLength(SkStream *stream) {
+    return stream->hasLength();
+}
+size_t SkStream_getLength(SkStream *stream) {
+    return stream->getLength();
+}
+const void * SkStream_getMemoryBase(SkStream *stream) {
+    return stream->getMemoryBase();
+}
+// static
+std::unique_ptr<SkStreamAsset> SkStream_MakeFromFile(const char path[]) {
+    return SkStream::MakeFromFile(path);
+}
+
+//
+// SkStreamAsset
+//
+bool SkStreamAsset_hasLength(SkStreamAsset *stream_asset) {
+    return stream_asset->hasLength();
+}
+size_t SkStreamAsset_getLength(SkStreamAsset *stream_asset) {
+    return stream_asset->getLength();
+}
+std::unique_ptr<SkStreamAsset> SkStreamAsset_duplicate(SkStreamAsset *stream_asset) {
+    return stream_asset->duplicate();
+}
+std::unique_ptr<SkStreamAsset> SkStreamAsset_fork(SkStreamAsset *stream_asset) {
+    return stream_asset->fork();
+}
+bool SkStreamAsset_hasPosition(SkStreamAsset *stream_asset) {
+    return stream_asset->hasPosition();
+}
+size_t SkStreamAsset_getPosition(SkStreamAsset *stream_asset) {
+    return stream_asset->getPosition();
+}
+bool SkStreamAsset_seek(SkStreamAsset *stream_asset, size_t position) {
+    return stream_asset->seek(position);
+}
+bool SkStreamAsset_move(SkStreamAsset *stream_asset, long offset) {
+    return stream_asset->move(offset);
+}
+bool SkStreamAsset_rewind(SkStreamAsset *stream_asset) {
+    return stream_asset->rewind();
+}
+size_t SkStreamAsset_read(SkStreamAsset *stream_asset, void *buffer, size_t size) {
+    return stream_asset->read(buffer, size);
+}
+size_t SkStreamAsset_skip(SkStreamAsset *stream_asset, size_t size) {
+    return stream_asset->skip(size);
+}
+size_t SkStreamAsset_peek(SkStreamAsset *stream_asset, void *buffer, size_t size) {
+    return stream_asset->peek(buffer, size);
+}
+bool SkStreamAsset_isAtEnd(SkStreamAsset *stream_asset) {
+    return stream_asset->isAtEnd();
+}
+bool SkStreamAsset_readS8(SkStreamAsset *stream_asset, int8_t *i) {
+    return stream_asset->readS8(i);
+}
+bool SkStreamAsset_readS16(SkStreamAsset *stream_asset, int16_t *i) {
+    return stream_asset->readS16(i);
+}
+bool SkStreamAsset_readS32(SkStreamAsset *stream_asset, int32_t *i) {
+    return stream_asset->readS32(i);
+}
+bool SkStreamAsset_readU8(SkStreamAsset *stream_asset, uint8_t *i) {
+    return stream_asset->readU8(i);
+}
+bool SkStreamAsset_readU16(SkStreamAsset *stream_asset, uint16_t *i) {
+    return stream_asset->readU16(i);
+}
+bool SkStreamAsset_readU32(SkStreamAsset *stream_asset, uint32_t *i) {
+    return stream_asset->readU32(i);
+}
+bool SkStreamAsset_readBool(SkStreamAsset *stream_asset, bool *b) {
+    return stream_asset->readBool(b);
+}
+bool SkStreamAsset_readScalar(SkStreamAsset *stream_asset, SkScalar *v) {
+    return stream_asset->readScalar(v);
+}
+bool SkStreamAsset_readPackedUInt(SkStreamAsset *stream_asset, size_t *size) {
+    return stream_asset->readPackedUInt(size);
+}
+const void * SkStreamAsset_getMemoryBase(SkStreamAsset *stream_asset) {
+    return stream_asset->getMemoryBase();
+}
+// static
+std::unique_ptr<SkStreamAsset> SkStreamAsset_MakeFromFile(const char path[]) {
+    return SkStreamAsset::MakeFromFile(path);
+}
+
+//
+// SkStreamMemory
+//
+const void * SkStreamMemory_getMemoryBase(SkStreamMemory *stream_memory) {
+    return stream_memory->getMemoryBase();
+}
+std::unique_ptr<SkStreamMemory> SkStreamMemory_duplicate(SkStreamMemory *stream_memory) {
+    return stream_memory->duplicate();
+}
+std::unique_ptr<SkStreamMemory> SkStreamMemory_fork(SkStreamMemory *stream_memory) {
+    return stream_memory->fork();
+}
+bool SkStreamMemory_hasLength(SkStreamMemory *stream_memory) {
+    return stream_memory->hasLength();
+}
+size_t SkStreamMemory_getLength(SkStreamMemory *stream_memory) {
+    return stream_memory->getLength();
+}
+bool SkStreamMemory_hasPosition(SkStreamMemory *stream_memory) {
+    return stream_memory->hasPosition();
+}
+size_t SkStreamMemory_getPosition(SkStreamMemory *stream_memory) {
+    return stream_memory->getPosition();
+}
+bool SkStreamMemory_seek(SkStreamMemory *stream_memory, size_t position) {
+    return stream_memory->seek(position);
+}
+bool SkStreamMemory_move(SkStreamMemory *stream_memory, long offset) {
+    return stream_memory->move(offset);
+}
+bool SkStreamMemory_rewind(SkStreamMemory *stream_memory) {
+    return stream_memory->rewind();
+}
+size_t SkStreamMemory_read(SkStreamMemory *stream_memory, void *buffer, size_t size) {
+    return stream_memory->read(buffer, size);
+}
+size_t SkStreamMemory_skip(SkStreamMemory *stream_memory, size_t size) {
+    return stream_memory->skip(size);
+}
+size_t SkStreamMemory_peek(SkStreamMemory *stream_memory, void *buffer, size_t size) {
+    return stream_memory->peek(buffer, size);
+}
+bool SkStreamMemory_isAtEnd(SkStreamMemory *stream_memory) {
+    return stream_memory->isAtEnd();
+}
+bool SkStreamMemory_readS8(SkStreamMemory *stream_memory, int8_t *i) {
+    return stream_memory->readS8(i);
+}
+bool SkStreamMemory_readS16(SkStreamMemory *stream_memory, int16_t *i) {
+    return stream_memory->readS16(i);
+}
+bool SkStreamMemory_readS32(SkStreamMemory *stream_memory, int32_t *i) {
+    return stream_memory->readS32(i);
+}
+bool SkStreamMemory_readU8(SkStreamMemory *stream_memory, uint8_t *i) {
+    return stream_memory->readU8(i);
+}
+bool SkStreamMemory_readU16(SkStreamMemory *stream_memory, uint16_t *i) {
+    return stream_memory->readU16(i);
+}
+bool SkStreamMemory_readU32(SkStreamMemory *stream_memory, uint32_t *i) {
+    return stream_memory->readU32(i);
+}
+bool SkStreamMemory_readBool(SkStreamMemory *stream_memory, bool *b) {
+    return stream_memory->readBool(b);
+}
+bool SkStreamMemory_readScalar(SkStreamMemory *stream_memory, SkScalar *v) {
+    return stream_memory->readScalar(v);
+}
+bool SkStreamMemory_readPackedUInt(SkStreamMemory *stream_memory, size_t *size) {
+    return stream_memory->readPackedUInt(size);
+}
+// static
+std::unique_ptr<SkStreamAsset> SkStreamMemory_MakeFromFile(const char path[]) {
+    return SkStreamMemory::MakeFromFile(path);
+}
+
+
+//
+// SkStreamRewindable
+//
+bool SkStreamRewindable_rewind(SkStreamRewindable *stream_rewindable) {
+    return stream_rewindable->rewind();
+}
+std::unique_ptr<SkStreamRewindable> SkStreamRewindable_duplicate(SkStreamRewindable *stream_rewindable) {
+    return stream_rewindable->duplicate();
+}
+size_t SkStreamRewindable_read(SkStreamRewindable *stream_rewindable, void *buffer, size_t size) {
+    return stream_rewindable->read(buffer, size);
+}
+size_t SkStreamRewindable_skip(SkStreamRewindable *stream_rewindable, size_t size) {
+    return stream_rewindable->skip(size);
+}
+size_t SkStreamRewindable_peek(SkStreamRewindable *stream_rewindable, void *buffer, size_t size) {
+    return stream_rewindable->peek(buffer, size);
+}
+bool SkStreamRewindable_isAtEnd(SkStreamRewindable *stream_rewindable) {
+    return stream_rewindable->isAtEnd();
+}
+bool SkStreamRewindable_readS8(SkStreamRewindable *stream_rewindable, int8_t *i) {
+    return stream_rewindable->readS8(i);
+}
+bool SkStreamRewindable_readS16(SkStreamRewindable *stream_rewindable, int16_t *i) {
+    return stream_rewindable->readS16(i);
+}
+bool SkStreamRewindable_readS32(SkStreamRewindable *stream_rewindable, int32_t *i) {
+    return stream_rewindable->readS32(i);
+}
+bool SkStreamRewindable_readU8(SkStreamRewindable *stream_rewindable, uint8_t *i) {
+    return stream_rewindable->readU8(i);
+}
+bool SkStreamRewindable_readU16(SkStreamRewindable *stream_rewindable, uint16_t *i) {
+    return stream_rewindable->readU16(i);
+}
+bool SkStreamRewindable_readU32(SkStreamRewindable *stream_rewindable, uint32_t *i) {
+    return stream_rewindable->readU32(i);
+}
+bool SkStreamRewindable_readBool(SkStreamRewindable *stream_rewindable, bool *b) {
+    return stream_rewindable->readBool(b);
+}
+bool SkStreamRewindable_readScalar(SkStreamRewindable *stream_rewindable, SkScalar *v) {
+    return stream_rewindable->readScalar(v);
+}
+bool SkStreamRewindable_readPackedUInt(SkStreamRewindable *stream_rewindable, size_t *size) {
+    return stream_rewindable->readPackedUInt(size);
+}
+std::unique_ptr<SkStream> SkStreamRewindable_fork(SkStreamRewindable *stream_rewindable) {
+    return stream_rewindable->fork();
+}
+bool SkStreamRewindable_hasPosition(SkStreamRewindable *stream_rewindable) {
+    return stream_rewindable->hasPosition();
+}
+size_t SkStreamRewindable_getPosition(SkStreamRewindable *stream_rewindable) {
+    return stream_rewindable->getPosition();
+}
+bool SkStreamRewindable_seek(SkStreamRewindable *stream_rewindable, size_t size) {
+    return stream_rewindable->seek(size);
+}
+bool SkStreamRewindable_move(SkStreamRewindable *stream_rewindable, long i) {
+    return stream_rewindable->move(i);
+}
+bool SkStreamRewindable_hasLength(SkStreamRewindable *stream_rewindable) {
+    return stream_rewindable->hasLength();
+}
+size_t SkStreamRewindable_getLength(SkStreamRewindable *stream_rewindable) {
+    return stream_rewindable->getLength();
+}
+const void * SkStreamRewindable_getMemoryBase(SkStreamRewindable *stream_rewindable) {
+    return stream_rewindable->getMemoryBase();
+}
+// static
+std::unique_ptr<SkStreamAsset> SkStreamRewindable_MakeFromFile(const char path[]) {
+    return SkStreamRewindable::MakeFromFile(path);
+}
+
+
+//
+// SkStreamSeekable
+//
+std::unique_ptr<SkStreamSeekable> SkStreamSeekable_duplicate(SkStreamSeekable *stream_seekable) {
+    return stream_seekable->duplicate();
+}
+bool SkStreamSeekable_hasPosition(SkStreamSeekable *stream_seekable) {
+    return stream_seekable->hasPosition();
+}
+size_t SkStreamSeekable_getPosition(SkStreamSeekable *stream_seekable) {
+    return stream_seekable->getPosition();
+}
+bool SkStreamSeekable_seek(SkStreamSeekable *stream_seekable, size_t position) {
+    return stream_seekable->seek(position);
+}
+bool SkStreamSeekable_move(SkStreamSeekable *stream_seekable, long offset) {
+    return stream_seekable->move(offset);
+}
+std::unique_ptr<SkStreamSeekable> SkStreamSeekable_fork(SkStreamSeekable *stream_seekable) {
+    return stream_seekable->fork();
+}
+bool SkStreamSeekable_rewind(SkStreamSeekable *stream_seekable) {
+    return stream_seekable->rewind();
+}
+size_t SkStreamSeekable_read(SkStreamSeekable *stream_seekable, void *buffer, size_t size) {
+    return stream_seekable->read(buffer, size);
+}
+size_t SkStreamSeekable_skip(SkStreamSeekable *stream_seekable, size_t size) {
+    return stream_seekable->skip(size);
+}
+size_t SkStreamSeekable_peek(SkStreamSeekable *stream_seekable, void *buffer, size_t size) {
+    return stream_seekable->peek(buffer, size);
+}
+bool SkStreamSeekable_isAtEnd(SkStreamSeekable *stream_seekable) {
+    return stream_seekable->isAtEnd();
+}
+bool SkStreamSeekable_readS8(SkStreamSeekable *stream_seekable, int8_t *i) {
+    return stream_seekable->readS8(i);
+}
+bool SkStreamSeekable_readS16(SkStreamSeekable *stream_seekable, int16_t *i) {
+    return stream_seekable->readS16(i);
+}
+bool SkStreamSeekable_readS32(SkStreamSeekable *stream_seekable, int32_t *i) {
+    return stream_seekable->readS32(i);
+}
+bool SkStreamSeekable_readU8(SkStreamSeekable *stream_seekable, uint8_t *i) {
+    return stream_seekable->readU8(i);
+}
+bool SkStreamSeekable_readU16(SkStreamSeekable *stream_seekable, uint16_t *i) {
+    return stream_seekable->readU16(i);
+}
+bool SkStreamSeekable_readU32(SkStreamSeekable *stream_seekable, uint32_t *i) {
+    return stream_seekable->readU32(i);
+}
+bool SkStreamSeekable_readBool(SkStreamSeekable *stream_seekable, bool *b) {
+    return stream_seekable->readBool(b);
+}
+bool SkStreamSeekable_readScalar(SkStreamSeekable *stream_seekable, SkScalar *v) {
+    return stream_seekable->readScalar(v);
+}
+bool SkStreamSeekable_readPackedUInt(SkStreamSeekable *stream_seekable, size_t *size) {
+    return stream_seekable->readPackedUInt(size);
+}
+bool SkStreamSeekable_hasLength(SkStreamSeekable *stream_seekable) {
+    return stream_seekable->hasLength();
+}
+size_t SkStreamSeekable_getLength(SkStreamSeekable *stream_seekable) {
+    return stream_seekable->getLength();
+}
+const void * SkStreamSeekable_getMemoryBase(SkStreamSeekable *stream_seekable) {
+    return stream_seekable->getMemoryBase();
+}
+// static
+std::unique_ptr<SkStreamAsset> SkStreamSeekable_MakeFromFile(const char path[]) {
+    return SkStreamSeekable::MakeFromFile(path);
+}
+
+//
+// SkString
+//
+// SkString & operator=(const SkString &)
+// SkString & operator=(SkString &&)
+// SkString & operator=(const char text[])
+// SkString & operator+=(const SkString &s)
+// SkString & operator+=(const char text[])
+// SkString & operator+=(const char c)
+// char operator[](size_t n)
+// char & operator[](size_t n)
+SkString *SkString_new() {
+    return new SkString();
+}
+SkString *SkString_new_2(size_t len) {
+    return new SkString(len);
+}
+SkString *SkString_new_3(const char text[]) {
+    return new SkString(text);
+}
+SkString *SkString_new_4(const char text[], size_t len) {
+    return new SkString(text, len);
+}
+SkString *SkString_new_5(const SkString &str) {
+    return new SkString(str);
+}
+SkString *SkString_new_6(SkString &&str) {
+    return new SkString(str);
+}
+SkString *SkString_new_7(const std::string &str) {
+    return new SkString(str);
+}
+SkString *SkString_new_8(std::string_view view) {
+    return new SkString(view);
+}
+void SkString_delete(SkString *string) {
+    delete string;
+}
+bool SkString_isEmpty(SkString *string) {
+    return string->isEmpty();
+}
+size_t SkString_size(SkString *string) {
+    return string->size();
+}
+const char * SkString_data(SkString *string) {
+    return string->data();
+}
+char * SkString_data_2(SkString *string) {
+    return string->data();
+}
+const char * SkString_c_str(SkString *string) {
+    return string->c_str();
+}
+bool SkString_equals(SkString *string, const SkString &str) {
+    return string->equals(str);
+}
+bool SkString_equals_2(SkString *string, const char text[]) {
+    return string->equals(text);
+}
+bool SkString_equals_3(SkString *string, const char text[], size_t len) {
+    return string->equals(text, len);
+}
+bool SkString_startsWith(SkString *string, const char prefixStr[]) {
+    return string->startsWith(prefixStr);
+}
+bool SkString_startsWith_2(SkString *string, const char prefixChar) {
+    return string->startsWith(prefixChar);
+}
+//bool SkString_endsWith(SkString *string, const char suffixStr[]) {
+//    return string->endsWith(suffixStr);
+//}
+//bool SkString_endsWith_2(SkString *string, const char suffixChar) {
+//    return string->endsWith(suffixChar);
+//}
+bool SkString_contains(SkString *string, const char substring[]) {
+    return string->contains(substring);
+}
+bool SkString_contains_2(SkString *string, const char subchar) {
+    return string->contains(subchar);
+}
+int SkString_find(SkString *string, const char substring[]) {
+    return string->find(substring);
+}
+int SkString_findLastOf(SkString *string, const char subchar) {
+    return string->findLastOf(subchar);
+}
+void SkString_reset(SkString *string) {
+    string->reset();
+}
+void SkString_resize(SkString *string, size_t len) {
+    string->resize(len);
+}
+void SkString_set(SkString *string, const SkString &src) {
+    string->set(src);
+}
+void SkString_set_2(SkString *string, const char text[]) {
+    string->set(text);
+}
+void SkString_set_3(SkString *string, const char text[], size_t len) {
+    string->set(text, len);
+}
+void SkString_set_4(SkString *string, std::string_view str) {
+    string->set(str);
+}
+void SkString_insert(SkString *string, size_t offset, const char text[]) {
+    string->insert(offset, text);
+}
+void SkString_insert_2(SkString *string, size_t offset, const char text[], size_t len) {
+    string->insert(offset, text, len);
+}
+void SkString_insert_3(SkString *string, size_t offset, const SkString &str) {
+    string->insert(offset, str);
+}
+void SkString_insert_4(SkString *string, size_t offset, std::string_view str) {
+    string->insert(offset, str);
+}
+void SkString_insertUnichar(SkString *string, size_t offset, SkUnichar unichar) {
+    string->insertUnichar(offset, unichar);
+}
+void SkString_insertS32(SkString *string, size_t offset, int32_t value) {
+    string->insertS32(offset, value);
+}
+void SkString_insertS64(SkString *string, size_t offset, int64_t value, int minDigits) {
+    string->insertS64(offset, value, minDigits);
+}
+void SkString_insertU32(SkString *string, size_t offset, uint32_t value) {
+    string->insertU32(offset, value);
+}
+void SkString_insertU64(SkString *string, size_t offset, uint64_t value, int minDigits) {
+    string->insertU64(offset, value, minDigits);
+}
+void SkString_insertHex(SkString *string, size_t offset, uint32_t value, int minDigits) {
+    string->insertHex(offset, value, minDigits);
+}
+void SkString_insertScalar(SkString *string, size_t offset, SkScalar v) {
+    string->insertScalar(offset, v);
+}
+void SkString_append(SkString *string, const char text[]) {
+    string->append(text);
+}
+void SkString_append_2(SkString *string, const char text[], size_t len) {
+    string->append(text, len);
+}
+void SkString_append_3(SkString *string, const SkString &str) {
+    string->append(str);
+}
+void SkString_append_4(SkString *string, std::string_view str) {
+    string->append(str);
+}
+void SkString_appendUnichar(SkString *string, SkUnichar uni) {
+    string->appendUnichar(uni);
+}
+void SkString_appendS32(SkString *string, int32_t value) {
+    string->appendS32(value);
+}
+void SkString_appendS64(SkString *string, int64_t value, int minDigits) {
+    string->appendS64(value, minDigits);
+}
+void SkString_appendU32(SkString *string, uint32_t value) {
+    string->appendU32(value);
+}
+void SkString_appendU64(SkString *string, uint64_t value, int minDigits) {
+    string->appendU64(value, minDigits);
+}
+void SkString_appendHex(SkString *string, uint32_t value, int minDigits) {
+    string->appendHex(value, minDigits);
+}
+void SkString_appendScalar(SkString *string, SkScalar value) {
+    string->appendScalar(value);
+}
+void SkString_prepend(SkString *string, const char text[]) {
+    string->prepend(text);
+}
+void SkString_prepend_2(SkString *string, const char text[], size_t len) {
+    string->prepend(text, len);
+}
+void SkString_prepend_3(SkString *string, const SkString &str) {
+    string->prepend(str);
+}
+void SkString_prepend_4(SkString *string, std::string_view str) {
+    string->prepend(str);
+}
+void SkString_prependUnichar(SkString *string, SkUnichar uni) {
+    string->prependUnichar(uni);
+}
+void SkString_prependS32(SkString *string, int32_t value) {
+    string->prependS32(value);
+}
+void SkString_prependS64(SkString *string, int32_t value, int minDigits) {
+    string->prependS64(value, minDigits);
+}
+void SkString_prependHex(SkString *string, uint32_t value, int minDigits) {
+    string->prependHex(value, minDigits);
+}
+void SkString_prependScalar(SkString *string, SkScalar value) {
+    string->prependScalar(value);
+}
+//void SkString_printf(SkString *string, const char format[],...) {
+//    string->
+//}
+//void SkString_printVAList(SkString *string, const char format[], va_list) {
+//    string->
+//}
+//void SkString_appendf(SkString *string, const char format[],...)  {
+//    string->
+//}
+//void SkString_appendVAList(SkString *string, const char format[], va_list) {
+//    string->
+//}
+//void SkString_prependf(SkString *string, const char format[],...) {
+//    string->
+//}
+//void SkString_prependVAList(SkString *string, const char format[], va_list) {
+//    string->
+//}
+void SkString_remove(SkString *string, size_t offset, size_t length) {
+    string->remove(offset, length);
+}
+void SkString_swap(SkString *string, SkString &other) {
+    string->swap(other);
+}
+
+//
+// SkStrokeRec
+//
+class SkStrokeRec SkStrokeRec_static(SkStrokeRec::InitStyle style) {
+    return SkStrokeRec(style);
+}
+SkStrokeRec SkStrokeRec_static_2(const SkPaint &paint, SkPaint::Style style, SkScalar resScale) {
+    return SkStrokeRec(paint, style, resScale);
+}
+SkStrokeRec SkStrokeRec(const SkPaint &paint, SkScalar resScale) {
+    return SkStrokeRec(paint, resScale);
+}
+SkStrokeRec::Style SkStrokeRec_getStyle(class SkStrokeRec *stroke_rec) {
+    return stroke_rec->getStyle();
+}
+SkScalar SkStrokeRec_getWidth(class SkStrokeRec *stroke_rec) {
+    return stroke_rec->getWidth();
+}
+SkScalar SkStrokeRec_getMiter(class SkStrokeRec *stroke_rec) {
+    return stroke_rec->getMiter();
+}
+SkPaint::Cap SkStrokeRec_getCap(class SkStrokeRec *stroke_rec) {
+    return stroke_rec->getCap();
+}
+SkPaint::Join SkStrokeRec_getJoin(class SkStrokeRec *stroke_rec) {
+    return stroke_rec->getJoin();
+}
+bool SkStrokeRec_isHairlineStyle(class SkStrokeRec *stroke_rec) {
+    return stroke_rec->isHairlineStyle();
+}
+bool SkStrokeRec_isFillStyle(class SkStrokeRec *stroke_rec) {
+    return stroke_rec->isFillStyle();
+}
+void SkStrokeRec_setFillStyle(class SkStrokeRec *stroke_rec) {
+    return stroke_rec->setFillStyle();
+}
+void SkStrokeRec_setHairlineStyle(class SkStrokeRec *stroke_rec) {
+    return stroke_rec->setHairlineStyle();
+}
+void SkStrokeRec_setStrokeStyle(class SkStrokeRec *stroke_rec, SkScalar width, bool strokeAndFill) {
+    return stroke_rec->setStrokeStyle(width, strokeAndFill);
+}
+void SkStrokeRec_setStrokeParams(class SkStrokeRec *stroke_rec, SkPaint::Cap cap, SkPaint::Join join, SkScalar miterLimit) {
+    return stroke_rec->setStrokeParams(cap, join, miterLimit);
+}
+SkScalar SkStrokeRec_getResScale(class SkStrokeRec *stroke_rec) {
+    return stroke_rec->getResScale();
+}
+void SkStrokeRec_setResScale(class SkStrokeRec *stroke_rec, SkScalar rs) {
+    return stroke_rec->setResScale(rs);
+}
+bool SkStrokeRec_needToApply(class SkStrokeRec *stroke_rec) {
+    return stroke_rec->needToApply();
+}
+bool SkStrokeRec_applyToPath(class SkStrokeRec *stroke_rec, SkPath *dst, const SkPath &src) {
+    return stroke_rec->applyToPath(dst, src);
+}
+void SkStrokeRec_applyToPaint(class SkStrokeRec *stroke_rec, SkPaint *paint) {
+    return stroke_rec->applyToPaint(paint);
+}
+SkScalar SkStrokeRec_getInflationRadius(class SkStrokeRec *stroke_rec) {
+    return stroke_rec->getInflationRadius();
+}
+bool SkStrokeRec_hasEqualEffect(class SkStrokeRec *stroke_rec, const class SkStrokeRec &other) {
+    return stroke_rec->hasEqualEffect(other);
+}
+// static
+SkScalar SkStrokeRec_GetInflationRadius(const SkPaint &paint, SkPaint::Style style) {
+    return SkStrokeRec::GetInflationRadius(paint, style);
+}
+SkScalar SkStrokeRec_GetInflationRadius_2(SkPaint::Join join, SkScalar miterLimit, SkPaint::Cap cap, SkScalar strokeWidth) {
+    return SkStrokeRec::GetInflationRadius(join, miterLimit, cap, strokeWidth);
+}
+
+//
+// SkSurface
+//
+bool SkSurface_isCompatible(SkSurface *surface, const GrSurfaceCharacterization &characterization) {
+    return surface->isCompatible(characterization);
+}
+int SkSurface_width(SkSurface *surface) {
+    return surface->width();
+}
+int SkSurface_height(SkSurface *surface) {
+    return surface->height();
+}
+SkImageInfo SkSurface_imageInfo(SkSurface *surface) {
+    return surface->imageInfo();
+}
+uint32_t SkSurface_generationID(SkSurface *surface) {
+    return surface->generationID();
+}
+void SkSurface_notifyContentWillChange(SkSurface *surface, SkSurface::ContentChangeMode mode) {
+    surface->notifyContentWillChange(mode);
+}
+GrRecordingContext * SkSurface_recordingContext(SkSurface *surface) {
+    return surface->recordingContext();
+}
+skgpu::graphite::Recorder * SkSurface_recorder(SkSurface *surface) {
+    return surface->recorder();
+}
+bool SkSurface_replaceBackendTexture(SkSurface *surface, const GrBackendTexture &backendTexture, GrSurfaceOrigin origin, SkSurface::ContentChangeMode mode, SkSurface::TextureReleaseProc proc, SkSurface::ReleaseContext context) {
+    return surface->replaceBackendTexture(backendTexture, origin, mode, proc, context);
+}
+SkCanvas * SkSurface_getCanvas(SkSurface *surface) {
+    return surface->getCanvas();
+}
+sk_sp<const SkCapabilities> SkSurface_capabilities(SkSurface *surface) {
+    return surface->capabilities();
+}
+sk_sp<SkSurface> SkSurface_makeSurface(SkSurface *surface, const SkImageInfo &imageInfo) {
+    return surface->makeSurface(imageInfo);
+}
+sk_sp<SkSurface> SkSurface_makeSurface_2(SkSurface *surface, int width, int height) {
+    return surface->makeSurface(width, height);
+}
+sk_sp<SkImage> SkSurface_makeImageSnapshot(SkSurface *surface) {
+    return surface->makeImageSnapshot();
+}
+sk_sp<SkImage> SkSurface_makeImageSnapshot_2(SkSurface *surface, const SkIRect &bounds) {
+    return surface->makeImageSnapshot(bounds);
+}
+void SkSurface_draw(SkSurface *surface, SkCanvas *canvas, SkScalar x, SkScalar y, const SkSamplingOptions &sampling, const SkPaint *paint) {
+    surface->draw(canvas, x, y, sampling, paint);
+}
+void SkSurface_draw_2(SkSurface *surface, SkCanvas *canvas, SkScalar x, SkScalar y, const SkPaint *paint) {
+    surface->draw(canvas, x, y, paint);
+}
+bool SkSurface_peekPixels(SkSurface *surface, SkPixmap *pixmap) {
+    return surface->peekPixels(pixmap);
+}
+bool SkSurface_readPixels(SkSurface *surface, const SkPixmap &dst, int srcX, int srcY) {
+    return surface->readPixels(dst, srcX, srcY);
+}
+bool SkSurface_readPixels_2(SkSurface *surface, const SkImageInfo &dstInfo, void *dstPixels, size_t dstRowBytes, int srcX, int srcY) {
+    return surface->readPixels(dstInfo, dstPixels, dstRowBytes, srcX, srcY);
+}
+bool SkSurface_readPixels_3(SkSurface *surface, const SkBitmap &dst, int srcX, int srcY) {
+    return surface->readPixels(dst, srcX, srcY);
+}
+void SkSurface_asyncRescaleAndReadPixels(SkSurface *surface, const SkImageInfo &info, const SkIRect &srcRect, SkSurface::RescaleGamma rescaleGamma, SkSurface::RescaleMode rescaleMode, SkSurface::ReadPixelsCallback callback, SkSurface::ReadPixelsContext context) {
+    surface->asyncRescaleAndReadPixels(info, srcRect, rescaleGamma, rescaleMode, callback, context);
+}
+void SkSurface_asyncRescaleAndReadPixelsYUV420(SkSurface *surface, SkYUVColorSpace yuvColorSpace, sk_sp<SkColorSpace> dstColorSpace, const SkIRect &srcRect, const SkISize &dstSize, SkSurface::RescaleGamma rescaleGamma, SkSurface::RescaleMode rescaleMode, SkSurface::ReadPixelsCallback callback, SkSurface::ReadPixelsContext context) {
+    surface->asyncRescaleAndReadPixelsYUV420(yuvColorSpace, dstColorSpace, srcRect, dstSize, rescaleGamma, rescaleMode, callback, context);
+}
+void SkSurface_asyncRescaleAndReadPixelsYUVA420(SkSurface *surface, SkYUVColorSpace yuvColorSpace, sk_sp<SkColorSpace> dstColorSpace, const SkIRect &srcRect, const SkISize &dstSize, SkSurface::RescaleGamma rescaleGamma, SkSurface::RescaleMode rescaleMode, SkSurface::ReadPixelsCallback callback, SkSurface::ReadPixelsContext context) {
+    surface->asyncRescaleAndReadPixelsYUVA420(yuvColorSpace, dstColorSpace, srcRect, dstSize, rescaleGamma, rescaleMode, callback, context);
+}
+void SkSurface_writePixels(SkSurface *surface, const SkPixmap &src, int dstX, int dstY) {
+    surface->writePixels(src, dstX, dstY);
+}
+void SkSurface_writePixels_2(SkSurface *surface, const SkBitmap &src, int dstX, int dstY) {
+    surface->writePixels(src, dstX, dstY);
+}
+const SkSurfaceProps & SkSurface_props(SkSurface *surface) {
+    return surface->props();
+}
+bool SkSurface_wait(SkSurface *surface, int numSemaphores, const GrBackendSemaphore *waitSemaphores, bool deleteSemaphoresAfterWait) {
+    return surface->wait(numSemaphores, waitSemaphores, deleteSemaphoresAfterWait);
+}
+bool SkSurface_characterize(SkSurface *surface, GrSurfaceCharacterization *characterization) {
+    return surface->characterize(characterization);
+}
+bool SkSurface_unique(SkSurface *surface) {
+    return surface->unique();
+}
+void SkSurface_ref(SkSurface *surface) {
+    surface->ref();
+}
+void SkSurface_unref(SkSurface *surface) {
+    surface->unref();
+}
+
+//
+// SkSurfaceProps
+//
+// SkSurfaceProps & operator=(const SkSurfaceProps &)
+// bool operator==(const SkSurfaceProps &that)
+// bool operator!=(const SkSurfaceProps &that)
+SkSurfaceProps *SkSurfaceProps_new() {
+    return new SkSurfaceProps();
+}
+SkSurfaceProps *SkSurfaceProps_new_2(uint32_t flags, SkPixelGeometry geometry) {
+    return new SkSurfaceProps(flags, geometry);
+}
+SkSurfaceProps *SkSurfaceProps_new_3(const SkSurfaceProps &props) {
+    return new SkSurfaceProps(props);
+}
+SkSurfaceProps SkSurfaceProps_cloneWithPixelGeometry(SkSurfaceProps *surface_props, SkPixelGeometry newPixelGeometry) {
+    return surface_props->cloneWithPixelGeometry(newPixelGeometry);
+}
+uint32_t SkSurfaceProps_flags(SkSurfaceProps *surface_props) {
+    return surface_props->flags();
+}
+SkPixelGeometry SkSurfaceProps_pixelGeometry(SkSurfaceProps *surface_props) {
+    return surface_props->pixelGeometry();
+}
+bool SkSurfaceProps_isUseDeviceIndependentFonts(SkSurfaceProps *surface_props) {
+    return surface_props->isUseDeviceIndependentFonts();
+}
+bool SkSurfaceProps_isAlwaysDither(SkSurfaceProps *surface_props) {
+    return surface_props->isAlwaysDither();
+}
+
+//
+// SVG ...
+//
+
+//
+// SkTableMaskFilter
+//
+//SkTableMaskFilter *SkTableMaskFilter_new() {
+//    return new SkTableMaskFilter();
+//}
+// static
+void SkTableMaskFilter_MakeGammaTable(uint8_t table[256], SkScalar gamma) {
+    SkTableMaskFilter::MakeGammaTable(table, gamma);
+}
+void SkTableMaskFilter_MakeClipTable(uint8_t table[256], uint8_t min, uint8_t max) {
+    SkTableMaskFilter::MakeClipTable(table, min, max);
+}
+SkMaskFilter * SkTableMaskFilter_Create(const uint8_t table[256]) {
+    return SkTableMaskFilter::Create(table);
+}
+SkMaskFilter * SkTableMaskFilter_CreateGamma(SkScalar gamma) {
+    return SkTableMaskFilter::CreateGamma(gamma);
+}
+SkMaskFilter * SkTableMaskFilter_CreateClip(uint8_t min, uint8_t max) {
+    return SkTableMaskFilter::CreateClip(min, max);
+}
+
+
+//
+// SkTextBlob
+//
+const SkRect & SkTextBlob_bounds(SkTextBlob *text_blob) {
+    return text_blob->bounds();
+}
+uint32_t SkTextBlob_uniqueID(SkTextBlob *text_blob) {
+    return text_blob->uniqueID();
+}
+int SkTextBlob_getIntercepts(SkTextBlob *text_blob, const SkScalar bounds[2], SkScalar intervals[], const SkPaint *paint) {
+    return text_blob->getIntercepts(bounds, intervals, paint);
+}
+size_t SkTextBlob_serialize(SkTextBlob *text_blob, const SkSerialProcs &procs, void *memory, size_t memory_size) {
+    return text_blob->serialize(procs, memory, memory_size);
+}
+sk_sp<SkData> SkTextBlob_serialize_2(SkTextBlob *text_blob, const SkSerialProcs &procs) {
+    return text_blob->serialize(procs);
+}
+bool SkTextBlob_unique(SkTextBlob *text_blob) {
+    return text_blob->unique();
+}
+void SkTextBlob_ref(SkTextBlob *text_blob) {
+    text_blob->ref();
+}
+void SkTextBlob_unref(SkTextBlob *text_blob) {
+    text_blob->unref();
+}
+void SkTextBlob_deref(SkTextBlob *text_blob) {
+    text_blob->deref();
+}
+bool SkTextBlob_refCntGreaterThan(SkTextBlob *text_blob, int32_t threadIsolatedTestCnt) {
+    return text_blob->refCntGreaterThan(threadIsolatedTestCnt);
+}
+// static
+sk_sp<SkTextBlob> SkTextBlob_MakeFromText(const void *text, size_t byteLength, const SkFont &font, SkTextEncoding encoding) {
+    return SkTextBlob::MakeFromText(text, byteLength, font, encoding);
+}
+sk_sp<SkTextBlob> SkTextBlob_MakeFromString(const char *string, const SkFont &font, SkTextEncoding encoding) {
+    return SkTextBlob::MakeFromString(string, font, encoding);
+}
+sk_sp<SkTextBlob> SkTextBlob_MakeFromPosTextH(const void *text, size_t byteLength, const SkScalar xpos[], SkScalar constY, const SkFont &font, SkTextEncoding encoding) {
+    return SkTextBlob::MakeFromPosTextH(text, byteLength, xpos, constY, font, encoding);
+}
+sk_sp<SkTextBlob> SkTextBlob_MakeFromPosText(const void *text, size_t byteLength, const SkPoint pos[], const SkFont &font, SkTextEncoding encoding) {
+    return SkTextBlob::MakeFromPosText(text, byteLength, pos, font, encoding);
+}
+sk_sp<SkTextBlob> SkTextBlob_MakeFromRSXform(const void *text, size_t byteLength, const SkRSXform xform[], const SkFont &font, SkTextEncoding encoding) {
+    return SkTextBlob::MakeFromRSXform(text, byteLength, xform, font, encoding);
+}
+sk_sp<SkTextBlob> SkTextBlob_Deserialize(const void *data, size_t size, const SkDeserialProcs &procs) {
+    return SkTextBlob::Deserialize(data, size, procs);
+}
+
+//
+// SkTextBlobBuilder
+//
+SkTextBlobBuilder *SkTextBlobBuilder_new() {
+    return new SkTextBlobBuilder();
+}
+void SkTextBlobBuilder_delete(SkTextBlobBuilder *text_blob_builder) {
+    delete text_blob_builder;
+}
+sk_sp<SkTextBlob> SkTextBlobBuilder_make(SkTextBlobBuilder *text_blob_builder) {
+    return text_blob_builder->make();
+}
+const SkTextBlobBuilder::RunBuffer & SkTextBlobBuilder_allocRun(SkTextBlobBuilder *text_blob_builder, const SkFont &font, int count, SkScalar x, SkScalar y, const SkRect *bounds) {
+    return text_blob_builder->allocRun(font, count, x, y, bounds);
+}
+const SkTextBlobBuilder::RunBuffer & SkTextBlobBuilder_allocRunPosH(SkTextBlobBuilder *text_blob_builder, const SkFont &font, int count, SkScalar y, const SkRect *bounds) {
+    return text_blob_builder->allocRunPosH(font, count, y, bounds);
+}
+const SkTextBlobBuilder::RunBuffer & SkTextBlobBuilder_allocRunPos(SkTextBlobBuilder *text_blob_builder, const SkFont &font, int count, const SkRect *bounds) {
+    return text_blob_builder->allocRunPos(font, count, bounds);
+}
+const SkTextBlobBuilder::RunBuffer & SkTextBlobBuilder_allocRunRSXform(SkTextBlobBuilder *text_blob_builder, const SkFont &font, int count) {
+    return text_blob_builder->allocRunRSXform(font, count);
+}
+const SkTextBlobBuilder::RunBuffer & SkTextBlobBuilder_allocRunText(SkTextBlobBuilder *text_blob_builder, const SkFont &font, int count, SkScalar x, SkScalar y, int textByteCount, const SkRect *bounds) {
+    return text_blob_builder->allocRunText(font, count, x, y, textByteCount, bounds);
+}
+const SkTextBlobBuilder::RunBuffer & SkTextBlobBuilder_allocRunTextPosH(SkTextBlobBuilder *text_blob_builder, const SkFont &font, int count, SkScalar y, int textByteCount, const SkRect *bounds) {
+    return text_blob_builder->allocRunTextPosH(font, count, y, textByteCount, bounds);
+}
+const SkTextBlobBuilder::RunBuffer & SkTextBlobBuilder_allocRunTextPos(SkTextBlobBuilder *text_blob_builder, const SkFont &font, int count, int textByteCount, const SkRect *bounds) {
+    return text_blob_builder->allocRunTextPos(font, count, textByteCount, bounds);
+}
+const SkTextBlobBuilder::RunBuffer & SkTextBlobBuilder_allocRunTextRSXform(SkTextBlobBuilder *text_blob_builder, const SkFont &font, int count, int textByteCount, const SkRect *bounds) {
+    return text_blob_builder->allocRunTextRSXform(font, count, textByteCount, bounds);
+}
+
+//
+// SkTextBlobBuilderRunHandler
+//
+SkTextBlobBuilderRunHandler *SkTextBlobBuilderRunHandler_new(const char *utf8Text, SkPoint offset) {
+    return new SkTextBlobBuilderRunHandler(utf8Text, offset);
+}
+sk_sp<SkTextBlob> SkTextBlobBuilderRunHandler_makeBlob(SkTextBlobBuilderRunHandler *text_blob_builder_run_handler) {
+    return text_blob_builder_run_handler->makeBlob();
+}
+SkPoint SkTextBlobBuilderRunHandler_endPoint(SkTextBlobBuilderRunHandler *text_blob_builder_run_handler) {
+    return text_blob_builder_run_handler->endPoint();
+}
+void SkTextBlobBuilderRunHandler_beginLine(SkTextBlobBuilderRunHandler *text_blob_builder_run_handler) {
+    text_blob_builder_run_handler->beginLine();
+}
+void SkTextBlobBuilderRunHandler_runInfo(SkTextBlobBuilderRunHandler *text_blob_builder_run_handler, const SkTextBlobBuilderRunHandler::RunInfo &run_info) {
+text_blob_builder_run_handler->runInfo(run_info);
+}
+void SkTextBlobBuilderRunHandler_commitRunInfo(SkTextBlobBuilderRunHandler *text_blob_builder_run_handler) {
+    text_blob_builder_run_handler->commitRunInfo();
+}
+SkTextBlobBuilderRunHandler::Buffer SkTextBlobBuilderRunHandler_runBuffer(SkTextBlobBuilderRunHandler *text_blob_builder_run_handler, const SkTextBlobBuilderRunHandler::RunInfo &run_info) {
+return text_blob_builder_run_handler->runBuffer(run_info);
+}
+void SkTextBlobBuilderRunHandler_commitRunBuffer(SkTextBlobBuilderRunHandler *text_blob_builder_run_handler, const SkTextBlobBuilderRunHandler::RunInfo &run_info) {
+text_blob_builder_run_handler->commitRunBuffer(run_info);
+}
+void SkTextBlobBuilderRunHandler_commitLine(SkTextBlobBuilderRunHandler *text_blob_builder_run_handler) {
+    text_blob_builder_run_handler->commitLine();
+}
+
+//
+// SkTraceMemoryDump
+//
+void SkTraceMemoryDump_dumpNumericValue(SkTraceMemoryDump *trace_memory_dump, const char *dumpName, const char *valueName, const char *units, uint64_t value) {
+    trace_memory_dump->dumpNumericValue(dumpName, valueName, units, value);
+}
+void SkTraceMemoryDump_dumpStringValue(SkTraceMemoryDump *trace_memory_dump, const char *dumpName, const char *str1, const char *str2) {
+    trace_memory_dump->dumpStringValue(dumpName, str1, str2);
+}
+void SkTraceMemoryDump_setMemoryBacking(SkTraceMemoryDump *trace_memory_dump, const char *dumpName, const char *backingType, const char *backingObjectId) {
+    trace_memory_dump->setMemoryBacking(dumpName, backingType, backingObjectId);
+}
+void SkTraceMemoryDump_setDiscardableMemoryBacking(SkTraceMemoryDump *trace_memory_dump, const char *dumpName, const SkDiscardableMemory &discardableMemoryObject) {
+    trace_memory_dump->setDiscardableMemoryBacking(dumpName, discardableMemoryObject);
+}
+SkTraceMemoryDump::LevelOfDetail SkTraceMemoryDump_getRequestedDetails(SkTraceMemoryDump *trace_memory_dump) {
+    return trace_memory_dump->getRequestedDetails();
+}
+bool SkTraceMemoryDump_shouldDumpWrappedObjects(SkTraceMemoryDump *trace_memory_dump) {
+    return trace_memory_dump->shouldDumpWrappedObjects();
+}
+void SkTraceMemoryDump_dumpWrappedState(SkTraceMemoryDump *trace_memory_dump, const char *str, bool b) {
+    trace_memory_dump->dumpWrappedState(str, b);
+}
+bool SkTraceMemoryDump_shouldDumpUnbudgetedObjects(SkTraceMemoryDump *trace_memory_dump) {
+    return trace_memory_dump->shouldDumpUnbudgetedObjects();
+}
+void SkTraceMemoryDump_dumpBudgetedState(SkTraceMemoryDump *trace_memory_dump, const char *str, bool b) {
+    trace_memory_dump->dumpBudgetedState(str, b);
+}
+
+//
+// SkTrimPathEffect
+//
+sk_sp<SkPathEffect> SkTrimPathEffect_Make(SkScalar startT, SkScalar stopT, SkTrimPathEffect::Mode mode) {
+    return SkTrimPathEffect::Make(startT, stopT, mode);
+}
+
+//
+// SkTypeface
+//
+SkFontStyle SkTypeface_fontStyle(SkTypeface *typeface) {
+    return typeface->fontStyle();
+}
+bool SkTypeface_isBold(SkTypeface *typeface) {
+    return typeface->isBold();
+}
+bool SkTypeface_isItalic(SkTypeface *typeface) {
+    return typeface->isItalic();
+}
+bool SkTypeface_isFixedPitch(SkTypeface *typeface) {
+    return typeface->isFixedPitch();
+}
+int SkTypeface_getVariationDesignPosition(SkTypeface *typeface, SkFontArguments::VariationPosition::Coordinate coordinates[], int coordinateCount) {
+    return typeface->getVariationDesignPosition(coordinates, coordinateCount);
+}
+int SkTypeface_getVariationDesignParameters(SkTypeface *typeface, SkFontParameters::Variation::Axis parameters[], int parameterCount) {
+    return typeface->getVariationDesignParameters(parameters, parameterCount);
+}
+SkTypefaceID SkTypeface_uniqueID(SkTypeface *typeface) {
+    return typeface->uniqueID();
+}
+sk_sp<SkTypeface> SkTypeface_makeClone(SkTypeface *typeface, const SkFontArguments &arguments) {
+    return typeface->makeClone(arguments);
+}
+void SkTypeface_serialize(SkTypeface *typeface, SkWStream *stream, SkTypeface::SerializeBehavior behavior) {
+    typeface->serialize(stream, behavior);
+}
+sk_sp<SkData> SkTypeface_serialize_2(SkTypeface *typeface, SkTypeface::SerializeBehavior behavior) {
+    return typeface->serialize(behavior);
+}
+void SkTypeface_unicharsToGlyphs(SkTypeface *typeface, const SkUnichar uni[], int count, SkGlyphID glyphs[]) {
+    typeface->unicharsToGlyphs(uni, count, glyphs);
+}
+int SkTypeface_textToGlyphs(SkTypeface *typeface, const void *text, size_t byteLength, SkTextEncoding encoding, SkGlyphID glyphs[], int maxGlyphCount) {
+    return typeface->textToGlyphs(text, byteLength, encoding, glyphs, maxGlyphCount);
+}
+SkGlyphID SkTypeface_unicharToGlyph(SkTypeface *typeface, SkUnichar unichar) {
+    return typeface->unicharToGlyph(unichar);
+}
+int SkTypeface_countGlyphs(SkTypeface *typeface) {
+    return typeface->countGlyphs();
+}
+int SkTypeface_countTables(SkTypeface *typeface) {
+    return typeface->countTables();
+}
+int SkTypeface_getTableTags(SkTypeface *typeface, SkFontTableTag tags[]) {
+    return typeface->getTableTags(tags);
+}
+size_t SkTypeface_getTableSize(SkTypeface *typeface, SkFontTableTag tag) {
+    return typeface->getTableSize(tag);
+}
+size_t SkTypeface_getTableData(SkTypeface *typeface, SkFontTableTag tag, size_t offset, size_t length, void *data) {
+    return typeface->getTableData(tag, offset, length, data);
+}
+sk_sp<SkData> SkTypeface_copyTableData(SkTypeface *typeface, SkFontTableTag tag) {
+    return typeface->copyTableData(tag);
+}
+int SkTypeface_getUnitsPerEm(SkTypeface *typeface) {
+    return typeface->getUnitsPerEm();
+}
+bool SkTypeface_getKerningPairAdjustments(SkTypeface *typeface, const SkGlyphID glyphs[], int count, int32_t adjustments[]) {
+    return typeface->getKerningPairAdjustments(glyphs, count, adjustments);
+}
+SkTypeface::LocalizedStrings * SkTypeface_createFamilyNameIterator(SkTypeface *typeface) {
+    return typeface->createFamilyNameIterator();
+}
+void SkTypeface_getFamilyName(SkTypeface *typeface, SkString *name) {
+    typeface->getFamilyName(name);
+}
+bool SkTypeface_getPostScriptName(SkTypeface *typeface, SkString *name) {
+    return typeface->getPostScriptName(name);
+}
+std::unique_ptr<SkStreamAsset> SkTypeface_openStream(SkTypeface *typeface, int *ttcIndex) {
+    return typeface->openStream(ttcIndex);
+}
+std::unique_ptr<SkStreamAsset> SkTypeface_openExistingStream(SkTypeface *typeface, int *ttcIndex) {
+    return typeface->openExistingStream(ttcIndex);
+}
+//@TODO
+//std::unique_ptr<SkScalerContext> SkTypeface_createScalerContext(SkTypeface *typeface, const SkScalerContextEffects &effects, const SkDescriptor *descriptor) {
+//    return typeface->createScalerContext(effects, descriptor);
+//}
+SkRect SkTypeface_getBounds(SkTypeface *typeface) {
+    return typeface->getBounds();
+}
+void SkTypeface_filterRec(SkTypeface *typeface, SkScalerContextRec *rec) {
+    typeface->filterRec(rec);
+}
+void SkTypeface_getFontDescriptor(SkTypeface *typeface, SkFontDescriptor *desc, bool *isLocal) {
+    typeface->getFontDescriptor(desc, isLocal);
+}
+void * SkTypeface_internal_private_getCTFontRef(SkTypeface *typeface) {
+    typeface->internal_private_getCTFontRef();
+}
+// static
+bool SkTypeface_Equal(const SkTypeface *facea, const SkTypeface *faceb) {
+    return SkTypeface::Equal(facea, faceb);
+}
+// @TODO
+//sk_sp<SkTypeface> SkTypeface_MakeDefault() {
+//    return SkTypeface::MakeDefault();
+//}
+sk_sp<SkTypeface> SkTypeface_MakeEmpty() {
+    return SkTypeface::MakeEmpty();
+}
+sk_sp<SkTypeface> SkTypeface_MakeFromName(const char familyName[], SkFontStyle fontStyle) {
+    return SkTypeface::MakeFromName(familyName, fontStyle);
+}
+sk_sp<SkTypeface> SkTypeface_MakeFromFile(const char path[], int index) {
+    return SkTypeface::MakeFromFile(path, index);
+}
+// @TODO
+//sk_sp<SkTypeface> SkTypeface_MakeFromStream(std::unique_ptr<SkStreamAsset> stream, int index) {
+//    return SkTypeface::MakeFromStream(stream, index);
+//}
+sk_sp<SkTypeface> SkTypeface_MakeFromData(sk_sp<SkData> data, int index) {
+    return SkTypeface::MakeFromData(data, index);
+}
+sk_sp<SkTypeface> SkTypeface_MakeDeserialize(SkStream *stream) {
+    return SkTypeface::MakeDeserialize(stream);
+}
+sk_sp<SkTypeface> SkTypeface_MakeDeserialize_2(SkStream *stream, sk_sp<SkFontMgr> lastResortMgr) {
+    return SkTypeface::MakeDeserialize(stream, lastResortMgr);
+}
+void SkTypeface_Register(SkTypeface::FactoryId id, sk_sp<SkTypeface>(*make)(std::unique_ptr<SkStreamAsset>, const SkFontArguments &)) {
+    SkTypeface::Register(id, make);
+}
+
+//
+// SkUnPreMultiply
+//
+// static
+const SkUnPreMultiply::Scale * SkUnPreMultiply_GetScaleTable() {
+    return SkUnPreMultiply::GetScaleTable();
+}
+SkUnPreMultiply::Scale SkUnPreMultiply_GetScale(U8CPU alpha) {
+    return SkUnPreMultiply::GetScale(alpha);
+}
+U8CPU SkUnPreMultiply_ApplyScale(SkUnPreMultiply::Scale scale, U8CPU component) {
+    return SkUnPreMultiply::ApplyScale(scale, component);
+}
+SkColor SkUnPreMultiply_PMColorToColor(SkPMColor c) {
+    return SkUnPreMultiply::PMColorToColor(c);
+}
+
+//
+// SkV2 Struct
+//
+// bool operator==(const SkV2 v)
+// bool operator!=(const SkV2 v)
+// SkV2 operator-()
+// SkV2 operator+(SkV2 v)
+// SkV2 operator-(SkV2 v)
+// SkV2 operator*(SkV2 v)
+// void operator+=(SkV2 v)
+// void operator-=(SkV2 v)
+// void operator*=(SkV2 v)
+// void operator*=(SkScalar s)
+// void operator/=(SkScalar s)
+SkScalar SkV2_lengthSquared(SkV2 *v2) {
+    return v2->lengthSquared();
+}
+SkScalar SkV2_length(SkV2 *v2) {
+    return v2->length();
+}
+SkScalar SkV2_dot(SkV2 *v2, SkV2 v) {
+    return v2->dot(v);
+}
+SkScalar SkV2_cross(SkV2 *v2, SkV2 v) {
+    return v2->cross(v);
+}
+SkV2 SkV2_normalize(SkV2 *v2) {
+    return v2->normalize();
+}
+const float * SkV2_ptr(SkV2 *v2) {
+    return v2->ptr();
+}
+float * SkV2_ptr_2(SkV2 *v2) {
+    return v2->ptr();
+}
+// static
+SkScalar SkV2_Dot(SkV2 a, SkV2 b) {
+    return SkV2::Dot(a, b);
+}
+SkScalar SkV2_Cross(SkV2 a, SkV2 b) {
+    return SkV2::Cross(a, b);
+}
+SkV2 SkV2_Normalize(SkV2 v) {
+    return SkV2::Normalize(v);
+}
+
+
+//
+// SkV3 Struct
+//
+// bool operator==(const SkV3 &v)
+// bool operator!=(const SkV3 &v)
+// SkV3 operator-()
+// SkV3 operator+(const SkV3 &v)
+// SkV3 operator-(const SkV3 &v)
+// SkV3 operator*(const SkV3 &v)
+// void operator+=(SkV3 v)
+// void operator-=(SkV3 v)
+// void operator*=(SkV3 v)
+// void operator*=(SkScalar s)
+SkScalar SkV3_lengthSquared(SkV3 *v3) {
+    return v3->lengthSquared();
+}
+SkScalar SkV3_length(SkV3 *v3) {
+    return v3->length();
+}
+SkScalar SkV3_dot(SkV3 *v3, const SkV3 &v) {
+    return v3->dot(v);
+}
+SkV3 SkV3_cross(SkV3 *v3, const SkV3 &v) {
+    return v3->cross(v);
+}
+SkV3 SkV3_normalize(SkV3 *v3) {
+    return v3->normalize();
+}
+const float * SkV3_ptr(SkV3 *v3) {
+    return v3->ptr();
+}
+float * SkV3_ptr_2(SkV3 *v3) {
+    return v3->ptr();
+}
+// static
+SkScalar SkV3_Dot(const SkV3 &a, const SkV3 &b) {
+    return SkV3::Dot(a, b);
+}
+SkV3 SkV3_Cross(const SkV3 &a, const SkV3 &b) {
+    return SkV3::Cross(a, b);
+}
+SkV3 SkV3_Normalize(const SkV3 &v) {
+    return SkV3::Normalize(v);
+}
+
+//
+// SkV4 Struct
+//
+// bool operator==(const SkV4 &v)
+// bool operator!=(const SkV4 &v)
+// SkV4 operator-()
+// SkV4 operator+(const SkV4 &v)
+// SkV4 operator-(const SkV4 &v)
+// SkV4 operator*(const SkV4 &v)
+// float operator[](int i)
+// float & operator[](int i)
+SkScalar SkV4_lengthSquared(SkV4 *v4) {
+    return v4->lengthSquared();
+}
+SkScalar SkV4_length(SkV4 *v4) {
+    return v4->length();
+}
+SkScalar SkV4_dot(SkV4 *v4, const SkV4 &v) {
+    return v4->dot(v);
+}
+SkV4 SkV4_normalize(SkV4 *v4) {
+    return v4->normalize();
+}
+const float * SkV4_ptr(SkV4 *v4) {
+    return v4->ptr();
+}
+float * SkV4_ptr_2(SkV4 *v4) {
+    return v4->ptr();
+}
+// static
+SkScalar SkV4_Dot(const SkV4 &a, const SkV4 &b) {
+    return SkV4::Dot(a, b);
+}
+SkV4 SkV4_Normalize(const SkV4 &v) {
+    return SkV4::Normalize(v);
+}
+
+//
+// SkVertices
+//
+uint32_t SkVertices_uniqueID(SkVertices *vertices) {
+    return vertices->uniqueID();
+}
+const SkRect & SkVertices_bounds(SkVertices *vertices) {
+    return vertices->bounds();
+}
+size_t SkVertices_approximateSize(SkVertices *vertices) {
+    return vertices->approximateSize();
+}
+//SkVerticesPriv SkVertices_priv(SkVertices *vertices) {
+//    return vertices->priv();
+//}
+//const SkVerticesPriv SkVertices_priv_2(SkVertices *vertices) {
+//    return vertices->priv();
+//}
+bool SkVertices_unique(SkVertices *vertices) {
+    return vertices->unique();
+}
+void SkVertices_ref(SkVertices *vertices) {
+    vertices->ref();
+}
+void SkVertices_unref(SkVertices *vertices) {
+    vertices->unref();
+}
+void SkVertices_deref(SkVertices *vertices) {
+    vertices->deref();
+}
+bool SkVertices_refCntGreaterThan(SkVertices *vertices, int32_t threadIsolatedTestCnt) {
+    return vertices->refCntGreaterThan(threadIsolatedTestCnt);
+}
+// static
+sk_sp<SkVertices> SkVertices_MakeCopy(SkVertices::VertexMode mode, int vertexCount, const SkPoint positions[], const SkPoint texs[], const SkColor colors[], int indexCount, const uint16_t indices[]) {
+    return SkVertices::MakeCopy(mode, vertexCount, positions, texs, colors, indexCount, indices);
+}
+sk_sp<SkVertices> SkVertices_MakeCopy_2(SkVertices::VertexMode mode, int vertexCount, const SkPoint positions[], const SkPoint texs[], const SkColor colors[]) {
+    return SkVertices::MakeCopy(mode, vertexCount, positions, texs, colors);
+}
+
+//
+// SkWStream
+//
+//SkWStream *SkWStream_new() {
+//    return new SkWStream();
+//}
+void SkWStream_delete(SkWStream *w_stream) {
+    delete w_stream;
+}
+bool SkWStream_write(SkWStream *w_stream, const void *buffer, size_t size) {
+    return w_stream->write(buffer, size);
+}
+void SkWStream_flush(SkWStream *w_stream) {
+    return w_stream->flush();
+}
+size_t SkWStream_bytesWritten(SkWStream *w_stream) {
+    return w_stream->bytesWritten();
+}
+bool SkWStream_write8(SkWStream *w_stream, U8CPU value) {
+    return w_stream->write8(value);
+}
+bool SkWStream_write16(SkWStream *w_stream, U16CPU value) {
+    return w_stream->write16(value);
+}
+bool SkWStream_write32(SkWStream *w_stream, uint32_t v) {
+    return w_stream->write32(v);
+}
+bool SkWStream_writeText(SkWStream *w_stream, const char text[]) {
+    return w_stream->writeText(text);
+}
+bool SkWStream_newline(SkWStream *w_stream) {
+    return w_stream->newline();
+}
+bool SkWStream_writeDecAsText(SkWStream *w_stream, int32_t i) {
+    return w_stream->writeDecAsText(i);
+}
+bool SkWStream_writeBigDecAsText(SkWStream *w_stream, int64_t i, int minDigits) {
+    return w_stream->writeBigDecAsText(i, minDigits);
+}
+bool SkWStream_writeHexAsText(SkWStream *w_stream, uint32_t i, int minDigits) {
+    return w_stream->writeHexAsText(i, minDigits);
+}
+bool SkWStream_writeScalarAsText(SkWStream *w_stream, SkScalar v) {
+    return w_stream->writeScalarAsText(v);
+}
+bool SkWStream_writeBool(SkWStream *w_stream, bool v) {
+    return w_stream->writeBool(v);
+}
+bool SkWStream_writeScalar(SkWStream *w_stream, SkScalar v) {
+    return w_stream->writeScalar(v);
+}
+bool SkWStream_writePackedUInt(SkWStream *w_stream, size_t size) {
+    return w_stream->writePackedUInt(size);
+}
+bool SkWStream_writeStream(SkWStream *w_stream, SkStream *input, size_t length) {
+    return w_stream->writeStream(input, length);
+}
+// static
+int SkWStream_SizeOfPackedUInt(size_t value) {
+    return SkWStream::SizeOfPackedUInt(value);
+}
+
+//
+// SkYUVAInfo
+//
+// SkYUVAInfo & operator=(const SkYUVAInfo &that)
+// bool operator==(const SkYUVAInfo &that)
+// bool operator!=(const SkYUVAInfo &that)
+SkYUVAInfo *SkYUVAInfo_new() {
+    return new SkYUVAInfo();
+}
+SkYUVAInfo *SkYUVAInfo_new_2(const SkYUVAInfo &info) {
+    return new SkYUVAInfo(info);
+}
+SkYUVAInfo *SkYUVAInfo_new_3(SkISize dimensions, SkYUVAInfo::PlaneConfig config, SkYUVAInfo::Subsampling subsampling, SkYUVColorSpace space, SkEncodedOrigin origin, SkYUVAInfo::Siting sitingX, SkYUVAInfo::Siting sitingY) {
+    return new SkYUVAInfo(dimensions, config, subsampling, space, origin, sitingX, sitingY);
+}
+SkYUVAInfo::PlaneConfig SkYUVAInfo_planeConfig(SkYUVAInfo * yuva_info) {
+    return yuva_info->planeConfig();
+}
+SkYUVAInfo::Subsampling SkYUVAInfo_subsampling(SkYUVAInfo * yuva_info) {
+    return yuva_info->subsampling();
+}
+std::tuple<int, int> SkYUVAInfo_planeSubsamplingFactors(SkYUVAInfo * yuva_info, int planeIdx) {
+    return yuva_info->planeSubsamplingFactors(planeIdx);
+}
+SkISize SkYUVAInfo_dimensions(SkYUVAInfo * yuva_info) {
+    return yuva_info->dimensions();
+}
+int SkYUVAInfo_width(SkYUVAInfo * yuva_info) {
+    return yuva_info->width();
+}
+int SkYUVAInfo_height(SkYUVAInfo * yuva_info) {
+    return yuva_info->height();
+}
+SkYUVColorSpace SkYUVAInfo_yuvColorSpace(SkYUVAInfo * yuva_info) {
+    return yuva_info->yuvColorSpace();
+}
+SkYUVAInfo::Siting SkYUVAInfo_sitingX(SkYUVAInfo * yuva_info) {
+    return yuva_info->sitingX();
+}
+SkYUVAInfo::Siting SkYUVAInfo_sitingY(SkYUVAInfo * yuva_info) {
+    return yuva_info->sitingY();
+}
+SkEncodedOrigin SkYUVAInfo_origin(SkYUVAInfo * yuva_info) {
+    return yuva_info->origin();
+}
+SkMatrix SkYUVAInfo_originMatrix(SkYUVAInfo * yuva_info) {
+    return yuva_info->originMatrix();
+}
+bool SkYUVAInfo_hasAlpha(SkYUVAInfo * yuva_info) {
+    return yuva_info->hasAlpha();
+}
+int SkYUVAInfo_planeDimensions(SkYUVAInfo * yuva_info, SkISize planeDimensions[SkYUVAInfo::kMaxPlanes]) {
+    return yuva_info->planeDimensions(planeDimensions);
+}
+size_t SkYUVAInfo_computeTotalBytes(SkYUVAInfo * yuva_info, const size_t rowBytes[SkYUVAInfo::kMaxPlanes], size_t planeSizes[SkYUVAInfo::kMaxPlanes]) {
+    return yuva_info->computeTotalBytes(rowBytes, planeSizes);
+}
+int SkYUVAInfo_numPlanes(SkYUVAInfo * yuva_info) {
+    return yuva_info->numPlanes();
+}
+int SkYUVAInfo_numChannelsInPlane(SkYUVAInfo * yuva_info, int i) {
+    return yuva_info->numChannelsInPlane(i);
+}
+//SkYUVAInfo::YUVALocations SkYUVAInfo_toYUVALocations(SkYUVAInfo * yuva_info, const uint32_t *channelFlags) {
+//    return yuva_info->toYUVALocations(channelFlags);
+//}
+SkYUVAInfo SkYUVAInfo_makeSubsampling(SkYUVAInfo * yuva_info, SkYUVAInfo::Subsampling subsampling) {
+    return yuva_info->makeSubsampling(subsampling);
+}
+SkYUVAInfo SkYUVAInfo_makeDimensions(SkYUVAInfo * yuva_info, SkISize size) {
+    return yuva_info->makeDimensions(size);
+}
+bool SkYUVAInfo_isValid(SkYUVAInfo * yuva_info) {
+    return yuva_info->isValid();
+}
+// static
+std::tuple<int, int> SkYUVAInfo_SubsamplingFactors(SkYUVAInfo::Subsampling subsampling) {
+    return SkYUVAInfo::SubsamplingFactors(subsampling);
+}
+std::tuple<int, int> SkYUVAInfo_PlaneSubsamplingFactors(SkYUVAInfo::PlaneConfig config, SkYUVAInfo::Subsampling subsampling, int planeIdx) {
+    return SkYUVAInfo::PlaneSubsamplingFactors(config, subsampling, planeIdx);
+}
+int SkYUVAInfo_PlaneDimensions(SkISize imageDimensions, SkYUVAInfo::PlaneConfig plane, SkYUVAInfo::Subsampling subsampling, SkEncodedOrigin origin, SkISize planeDimensions[SkYUVAInfo::kMaxPlanes]) {
+    return SkYUVAInfo::PlaneDimensions(imageDimensions, plane, subsampling, origin, planeDimensions);
+}
+int SkYUVAInfo_NumPlanes(SkYUVAInfo::PlaneConfig config) {
+    return SkYUVAInfo::NumPlanes(config);
+}
+int SkYUVAInfo_NumChannelsInPlane(SkYUVAInfo::PlaneConfig config, int i) {
+    return SkYUVAInfo::NumChannelsInPlane(config, i);
+}
+//SkYUVAInfo::YUVALocations SkYUVAInfo_GetYUVALocations(SkYUVAInfo::PlaneConfig config, const uint32_t *planeChannelFlags) {
+//    return SkYUVAInfo::GetYUVALocations(config, planeChannelFlags);
+//}
+bool SkYUVAInfo_HasAlpha(SkYUVAInfo::PlaneConfig config) {
+    return SkYUVAInfo::HasAlpha(config);
+}
+
+//
+// SkYUVAPixmapInfo
+//
+// SkYUVAPixmapInfo & operator=(const SkYUVAPixmapInfo &)
+// bool operator==(const SkYUVAPixmapInfo &)
+// bool operator!=(const SkYUVAPixmapInfo &that)
+SkYUVAPixmapInfo *SkYUVAPixmapInfo_new(SkYUVAPixmapInfo *yuva_pixmap_info) {
+    return new SkYUVAPixmapInfo();
+}
+SkYUVAPixmapInfo *SkYUVAPixmapInfo_new_2(SkYUVAPixmapInfo *yuva_pixmap_info, const SkYUVAInfo &info, const SkColorType[SkYUVAPixmapInfo::kMaxPlanes], const size_t rowBytes[SkYUVAPixmapInfo::kMaxPlanes]) {
+    return new SkYUVAPixmapInfo();
+}
+SkYUVAPixmapInfo *SkYUVAPixmapInfo_new_3(SkYUVAPixmapInfo *yuva_pixmap_info, const SkYUVAInfo &info, SkYUVAPixmapInfo::DataType type, const size_t rowBytes[SkYUVAPixmapInfo::kMaxPlanes]) {
+    return new SkYUVAPixmapInfo();
+}
+SkYUVAPixmapInfo *SkYUVAPixmapInfo_new_4(SkYUVAPixmapInfo *yuva_pixmap_info, const SkYUVAPixmapInfo &info) {
+    return new SkYUVAPixmapInfo();
+}
+const SkYUVAInfo & SkYUVAPixmapInfo_yuvaInfo(SkYUVAPixmapInfo *yuva_pixmap_info) {
+    return yuva_pixmap_info->yuvaInfo();
+}
+SkYUVColorSpace SkYUVAPixmapInfo_yuvColorSpace(SkYUVAPixmapInfo *yuva_pixmap_info) {
+    return yuva_pixmap_info->yuvColorSpace();
+}
+int SkYUVAPixmapInfo_numPlanes(SkYUVAPixmapInfo *yuva_pixmap_info) {
+    return yuva_pixmap_info->numPlanes();
+}
+SkYUVAPixmapInfo::DataType SkYUVAPixmapInfo_dataType(SkYUVAPixmapInfo *yuva_pixmap_info) {
+    return yuva_pixmap_info->dataType();
+}
+size_t SkYUVAPixmapInfo_rowBytes(SkYUVAPixmapInfo *yuva_pixmap_info, int i) {
+    return yuva_pixmap_info->rowBytes(i);
+}
+const SkImageInfo & SkYUVAPixmapInfo_planeInfo(SkYUVAPixmapInfo *yuva_pixmap_info, int i) {
+    return yuva_pixmap_info->planeInfo(i);
+}
+size_t SkYUVAPixmapInfo_computeTotalBytes(SkYUVAPixmapInfo *yuva_pixmap_info, size_t planeSizes[SkYUVAPixmapInfo::kMaxPlanes]) {
+    return yuva_pixmap_info->computeTotalBytes(planeSizes);
+}
+bool SkYUVAPixmapInfo_initPixmapsFromSingleAllocation(SkYUVAPixmapInfo *yuva_pixmap_info, void *memory, SkPixmap pixmaps[SkYUVAPixmapInfo::kMaxPlanes]) {
+    return yuva_pixmap_info->initPixmapsFromSingleAllocation(memory, pixmaps);
+}
+bool SkYUVAPixmapInfo_isValid(SkYUVAPixmapInfo *yuva_pixmap_info) {
+    return yuva_pixmap_info->isValid();
+}
+bool SkYUVAPixmapInfo_isSupported(SkYUVAPixmapInfo *yuva_pixmap_info, const SkYUVAPixmapInfo::SupportedDataTypes &type) {
+    return yuva_pixmap_info->isSupported(type);
+}
+// static
+SkColorType SkYUVAPixmapInfo_DefaultColorTypeForDataType(SkYUVAPixmapInfo *yuva_pixmap_info, SkYUVAPixmapInfo::DataType dataType, int numChannels) {
+    return SkYUVAPixmapInfo::DefaultColorTypeForDataType(dataType, numChannels);
+}
+std::tuple<int, SkYUVAPixmapInfo::DataType> SkYUVAPixmapInfo_NumChannelsAndDataType(SkYUVAPixmapInfo *yuva_pixmap_info, SkColorType type) {
+    return SkYUVAPixmapInfo::NumChannelsAndDataType(type);
+}
+
+//
+// SkYUVAPixmaps
+//
+// SkYUVAPixmaps & operator=(SkYUVAPixmaps &&that)
+// SkYUVAPixmaps & operator=(const SkYUVAPixmaps &that)
+SkYUVAPixmaps *SkYUVAPixmaps_new() {
+    return new SkYUVAPixmaps();
+}
+SkYUVAPixmaps *SkYUVAPixmaps_new_2(SkYUVAPixmaps &&that) {
+    return new SkYUVAPixmaps(that);
+}
+SkYUVAPixmaps *SkYUVAPixmaps_new_3(const SkYUVAPixmaps &pixmaps) {
+    return new SkYUVAPixmaps(pixmaps);
+}
+void SkYUVAPixmaps_delete(SkYUVAPixmaps *yuva_pixmaps) {
+    delete yuva_pixmaps;
+}
+bool SkYUVAPixmaps_isValid(SkYUVAPixmaps *yuva_pixmaps) {
+    return yuva_pixmaps->isValid();
+}
+const SkYUVAInfo & SkYUVAPixmaps_yuvaInfo(SkYUVAPixmaps *yuva_pixmaps) {
+    return yuva_pixmaps->yuvaInfo();
+}
+SkYUVAPixmaps::DataType SkYUVAPixmaps_dataType(SkYUVAPixmaps *yuva_pixmaps) {
+    return yuva_pixmaps->dataType();
+}
+SkYUVAPixmapInfo SkYUVAPixmaps_pixmapsInfo(SkYUVAPixmaps *yuva_pixmaps) {
+    return yuva_pixmaps->pixmapsInfo();
+}
+int SkYUVAPixmaps_numPlanes(SkYUVAPixmaps *yuva_pixmaps) {
+    return yuva_pixmaps->numPlanes();
+}
+const std::array<SkPixmap, SkYUVAPixmaps::kMaxPlanes> & SkYUVAPixmaps_planes(SkYUVAPixmaps *yuva_pixmaps) {
+    return yuva_pixmaps->planes();
+}
+const SkPixmap & SkYUVAPixmaps_plane(SkYUVAPixmaps *yuva_pixmaps, int i) {
+    return yuva_pixmaps->plane(i);
+}
+//SkYUVAInfo::YUVALocations SkYUVAPixmaps_toYUVALocations(SkYUVAPixmaps *yuva_pixmaps) {
+//    return yuva_pixmaps->toYUVALocations();
+//}
+bool SkYUVAPixmaps_ownsStorage(SkYUVAPixmaps *yuva_pixmaps) {
+    return yuva_pixmaps->ownsStorage();
+}
+// static
+SkColorType SkYUVAPixmaps_RecommendedRGBAColorType(SkYUVAPixmaps::DataType type) {
+    return SkYUVAPixmaps::RecommendedRGBAColorType(type);
+}
+SkYUVAPixmaps SkYUVAPixmaps_Allocate(const SkYUVAPixmapInfo &yuvaPixmapInfo) {
+    return SkYUVAPixmaps::Allocate(yuvaPixmapInfo);
+}
+SkYUVAPixmaps SkYUVAPixmaps_FromData(const SkYUVAPixmapInfo &yuvaPixmapInfo, sk_sp<SkData> data) {
+    return SkYUVAPixmaps::FromData(yuvaPixmapInfo, data);
+}
+SkYUVAPixmaps SkYUVAPixmaps_MakeCopy(const SkYUVAPixmaps &src) {
+    return SkYUVAPixmaps::MakeCopy(src);
+}
+SkYUVAPixmaps SkYUVAPixmaps_FromExternalMemory(const SkYUVAPixmapInfo &yuvaPixmapInfo, void *memory) {
+    return SkYUVAPixmaps::FromExternalMemory(yuvaPixmapInfo, memory);
+}
+SkYUVAPixmaps SkYUVAPixmaps_FromExternalPixmaps(const SkYUVAInfo &yuvaInfo, const SkPixmap pixmaps[SkYUVAPixmaps::kMaxPlanes]) {
+    return SkYUVAPixmaps::FromExternalPixmaps(yuvaInfo, pixmaps);
+}
 
 }
 
