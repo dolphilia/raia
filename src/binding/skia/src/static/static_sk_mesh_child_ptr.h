@@ -1,0 +1,8 @@
+//
+// Created by dolphilia on 2024/01/05.
+//
+
+#ifndef RAIA_SKIA_STATIC_SK_MESH_CHILD_PTR_H
+#define RAIA_SKIA_STATIC_SK_MESH_CHILD_PTR_H
+
+#endif //RAIA_SKIA_STATIC_SK_MESH_CHILD_PTR_H
