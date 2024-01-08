@@ -38,6 +38,10 @@
 #include "static/static_sk_file_stream.h"
 #include "static/static_sk_memory_stream.h"
 #include "static/static_sk_stream_asset.h"
+//
+
+
+#include "binding/sk_bitmap.h"
 
 extern "C" {
 #include <time.h>
