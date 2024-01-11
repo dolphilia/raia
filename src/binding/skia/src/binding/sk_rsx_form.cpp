@@ -1,0 +1,43 @@
+//
+// Created by dolphilia on 2024/01/10.
+//
+
+#include "sk_rsx_form.h"
+
+extern "C" {
+
+bool SkRSXform_rectStaysRect(SkRSXform *rsx_form) {
+    return rsx_form->rectStaysRect();
+}
+
+void SkRSXform_setIdentity(SkRSXform *rsx_form) {
+    rsx_form->setIdentity();
+}
+
+void SkRSXform_set(SkRSXform *rsx_form, SkScalar scos, SkScalar ssin, SkScalar tx, SkScalar ty) {
+    rsx_form->set(scos, ssin, tx, ty);
+}
+
+void SkRSXform_toQuad(SkRSXform *rsx_form, SkScalar width, SkScalar height, SkPoint quad[4]) {
+    rsx_form->toQuad(width, height, quad);
+}
+
+void SkRSXform_toQuad_2(SkRSXform *rsx_form, const SkSize &size, SkPoint quad[4]) {
+    rsx_form->toQuad(size, quad);
+}
+
+void SkRSXform_toTriStrip(SkRSXform *rsx_form, SkScalar width, SkScalar height, SkPoint strip[4]) {
+    rsx_form->toTriStrip(width, height, strip);
+}
+
+// static
+
+SkRSXform SkRSXform_Make(SkRSXform *rsx_form, SkScalar scos, SkScalar ssin, SkScalar tx, SkScalar ty) {
+    return SkRSXform::Make(scos, ssin, tx, ty);
+}
+
+SkRSXform SkRSXform_MakeFromRadians(SkRSXform *rsx_form, SkScalar scale, SkScalar radians, SkScalar tx, SkScalar ty, SkScalar ax, SkScalar ay) {
+    return SkRSXform::MakeFromRadians(scale, radians, tx, ty, ax, ay);
+}
+
+}
