@@ -42,6 +42,7 @@
 
 
 #include "binding/sk_bitmap.h"
+#include "binding/sk_images.h"
 
 extern "C" {
 #include <time.h>

@@ -2,7 +2,7 @@
 // Created by dolphilia on 2024/01/06.
 //
 
-#ifndef RAIA_SKIA_SK_BLEND_MODE_H
+#ifndef RAIA_SKIA_STATIC_SK_BLEND_MODE_H
 #define RAIA_SKIA_SK_BLEND_MODE_H
 
 #include "include/core/SkBlendMode.h"
@@ -12,4 +12,4 @@ bool SkBlendMode_SkBlendMode_AsCoeff(SkBlendMode mode, SkBlendModeCoeff *src, Sk
 const char *SkBlendMode_SkBlendMode_Name(SkBlendMode blendMode);
 }
 
-#endif //RAIA_SKIA_SK_BLEND_MODE_H
+#endif //RAIA_SKIA_STATIC_SK_BLEND_MODE_H
