@@ -84,8 +84,11 @@
 
 #include <utility>
 
-
 extern "C" {
+
+//
+
+
 
 //
 // SkBBHFactory - abstract
@@ -388,6 +391,7 @@ SkMeshSpecification::Result SkMeshSpecification_Make_3(SkSpan<const SkMeshSpecif
 // SkNullWStream
 //
 
+
 /*
 SkNullWStream *SkNullWStream_new(SkNullWStream *null_w_stream) {
     return new SkNullWStream();
@@ -562,11 +566,11 @@ int main(int argc, char* argv[]) {
         glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_EGL_CONTEXT_API);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     }
-    int width = 800;
-    int height = 600;
+    int width = 1920;
+    int height = 1080;
     GLFWwindow *window;
     {
-        window = glfwCreateWindow(width, height, "GUI", NULL, NULL);
+        window = glfwCreateWindow(width, height, "RaiaEngine", NULL, NULL);
         if (!window) {
             fprintf(stderr, "Window creation failed.\n");
             glfwTerminate();
@@ -648,7 +652,7 @@ int main(int argc, char* argv[]) {
     int image_channels = 0;
     GLuint window_texture;
     {
-        image_pixels = stbi_load("adv_sample_image.png", &image_width, &image_height, &image_channels, 0);
+        image_pixels = stbi_load("adv_sample_image2.png", &image_width, &image_height, &image_channels, 0);
         glGenTextures(1, &window_texture);
     }
 
@@ -661,7 +665,7 @@ int main(int argc, char* argv[]) {
 
         {
             // PNG画像を読み込む
-            SkStream_MakeFromFile("image_file", "adv_sample_image.png");
+            SkStream_MakeFromFile("image_file", "adv_sample_image2.png");
             SkData_MakeFromStream("image_data", static_sk_stream_get("image_file"), SkStream_getLength(static_sk_stream_get("image_file")));
             SkImages_DeferredFromEncodedData("sample_image", "image_data");
         }
@@ -677,7 +681,7 @@ int main(int argc, char* argv[]) {
             SkPaint_setBlendMode(paint, SkBlendMode::kOverlay);
             SkPaint_setColor(paint, SK_ColorBLUE); // 赤色を選択
             SkRect_MakeXYWH("rect", 20, 20, 400, 600 - 40); // 四角形の位置とサイズ
-            SkCanvas_drawRect("rect", canvas, paint); // 四角形を描画
+            //SkCanvas_drawRect("rect", canvas, paint); // 四角形を描画
             static_sk_rect_delete("rect");
         }
 
@@ -696,9 +700,7 @@ int main(int argc, char* argv[]) {
             SkPaint *paint = SkPaint_new();
             SkPaint_setARGB(paint, 255, 255, 0, 0);
             SkPaint_setAntiAlias(paint, true);
-            //canvas->clear(SK_ColorWHITE);
-            //canvas.translate(0.5f * scale, 0.5f * scale);
-            SkCanvas_drawPath(canvas, path, paint);
+            //SkCanvas_drawPath(canvas, path, paint);
         }
 
         // ピクセルデータを書き込む
