@@ -408,6 +408,14 @@ add_executable(raia_skia
         src/static/static_std_vector_sk_scalar.h
         src/binding/sk_shaders.cpp
         src/binding/sk_shaders.h
+        src/binding/sk_surfaces.cpp
+        src/binding/sk_surfaces.h
+        src/binding/sk_malloc_pixel_ref.cpp
+        src/binding/sk_malloc_pixel_ref.h
+        src/binding/sk_meshes.cpp
+        src/binding/sk_meshes.h
+        src/binding/sk_tiled_image_utils.cpp
+        src/binding/sk_tiled_image_utils.h
 )
 
 # 現在のRPATH設定を取得（もしあれば）
