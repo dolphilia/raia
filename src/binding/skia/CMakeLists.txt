@@ -406,6 +406,8 @@ add_executable(raia_skia
         src/static/static_std_tuple_int_sk_yuva_pixmap_info_data_type.h
         src/static/static_std_vector_sk_scalar.cpp
         src/static/static_std_vector_sk_scalar.h
+        src/binding/sk_shaders.cpp
+        src/binding/sk_shaders.h
 )
 
 # 現在のRPATH設定を取得（もしあれば）
