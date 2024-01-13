@@ -17,12 +17,12 @@ SkPathBuilder *SkPathBuilder_new_2(SkPathFillType type) {
     return new SkPathBuilder(type);
 }
 
-SkPathBuilder *SkPathBuilder_new_3(const SkPath &path) {
-    return new SkPathBuilder(path);
+SkPathBuilder *SkPathBuilder_new_3(const SkPath *path) {
+    return new SkPathBuilder(*path);
 }
 
-SkPathBuilder *SkPathBuilder_new_4(const SkPathBuilder &builder) {
-    return new SkPathBuilder(builder);
+SkPathBuilder *SkPathBuilder_new_4(const SkPathBuilder *builder) {
+    return new SkPathBuilder(*builder);
 }
 
 void SkPathBuilder_delete(SkPathBuilder *path_builder) {
@@ -117,8 +117,8 @@ SkPathBuilder * SkPathBuilder_polylineTo(SkPathBuilder *path_builder, const SkPo
     return &path_builder->polylineTo(pts, count);
 }
 
-SkPathBuilder * SkPathBuilder_polylineTo_2(SkPathBuilder *path_builder, const std::initializer_list<SkPoint> &list) {
-    return &path_builder->polylineTo(list);
+SkPathBuilder * SkPathBuilder_polylineTo_2(SkPathBuilder *path_builder, const std::initializer_list<SkPoint> *list) {
+    return &path_builder->polylineTo(*list);
 }
 
 SkPathBuilder * SkPathBuilder_rLineTo(SkPathBuilder *path_builder, SkPoint pt) {
@@ -153,8 +153,8 @@ SkPathBuilder * SkPathBuilder_rCubicTo_2(SkPathBuilder *path_builder, SkScalar x
     return &path_builder->rCubicTo(x1, y1, x2, y2, x3, y3);
 }
 
-SkPathBuilder * SkPathBuilder_arcTo(SkPathBuilder *path_builder, const SkRect &oval, SkScalar startAngleDeg, SkScalar sweepAngleDeg, bool forceMoveTo) {
-    return &path_builder->arcTo(oval, startAngleDeg, sweepAngleDeg, forceMoveTo);
+SkPathBuilder * SkPathBuilder_arcTo(SkPathBuilder *path_builder, const SkRect *oval, SkScalar startAngleDeg, SkScalar sweepAngleDeg, bool forceMoveTo) {
+    return &path_builder->arcTo(*oval, startAngleDeg, sweepAngleDeg, forceMoveTo);
 }
 
 SkPathBuilder * SkPathBuilder_arcTo_2(SkPathBuilder *path_builder, SkPoint p1, SkPoint p2, SkScalar radius) {
@@ -165,32 +165,32 @@ SkPathBuilder * SkPathBuilder_arcTo_3(SkPathBuilder *path_builder, SkPoint r, Sk
     return &path_builder->arcTo(r, xAxisRotate, largeArc, sweep, xy);
 }
 
-SkPathBuilder * SkPathBuilder_addArc(SkPathBuilder *path_builder, const SkRect &oval, SkScalar startAngleDeg, SkScalar sweepAngleDeg) {
-    return &path_builder->addArc(oval, startAngleDeg, sweepAngleDeg);
+SkPathBuilder * SkPathBuilder_addArc(SkPathBuilder *path_builder, const SkRect *oval, SkScalar startAngleDeg, SkScalar sweepAngleDeg) {
+    return &path_builder->addArc(*oval, startAngleDeg, sweepAngleDeg);
 }
 
-SkPathBuilder * SkPathBuilder_addRect(SkPathBuilder *path_builder, const SkRect &rect, SkPathDirection dir, unsigned startIndex) {
-    return &path_builder->addRect(rect, dir, startIndex);
+SkPathBuilder * SkPathBuilder_addRect(SkPathBuilder *path_builder, const SkRect *rect, SkPathDirection dir, unsigned startIndex) {
+    return &path_builder->addRect(*rect, dir, startIndex);
 }
 
-SkPathBuilder * SkPathBuilder_addRect_2(SkPathBuilder *path_builder, const SkRect &rect, SkPathDirection dir) {
-    return &path_builder->addRect(rect, dir);
+SkPathBuilder * SkPathBuilder_addRect_2(SkPathBuilder *path_builder, const SkRect *rect, SkPathDirection dir) {
+    return &path_builder->addRect(*rect, dir);
 }
 
-SkPathBuilder * SkPathBuilder_addOval(SkPathBuilder *path_builder, const SkRect &rect, SkPathDirection dir, unsigned startIndex) {
-    return &path_builder->addOval(rect, dir, startIndex);
+SkPathBuilder * SkPathBuilder_addOval(SkPathBuilder *path_builder, const SkRect *rect, SkPathDirection dir, unsigned startIndex) {
+    return &path_builder->addOval(*rect, dir, startIndex);
 }
 
-SkPathBuilder * SkPathBuilder_addOval_2(SkPathBuilder *path_builder, const SkRect &rect, SkPathDirection dir) {
-    return &path_builder->addOval(rect, dir);
+SkPathBuilder * SkPathBuilder_addOval_2(SkPathBuilder *path_builder, const SkRect *rect, SkPathDirection dir) {
+    return &path_builder->addOval(*rect, dir);
 }
 
-SkPathBuilder * SkPathBuilder_addRRect(SkPathBuilder *path_builder, const SkRRect &rect, SkPathDirection dir, unsigned startIndex) {
-    return &path_builder->addRRect(rect, dir, startIndex);
+SkPathBuilder * SkPathBuilder_addRRect(SkPathBuilder *path_builder, const SkRRect *rect, SkPathDirection dir, unsigned startIndex) {
+    return &path_builder->addRRect(*rect, dir, startIndex);
 }
 
-SkPathBuilder * SkPathBuilder_addRRect_2(SkPathBuilder *path_builder, const SkRRect &rrect, SkPathDirection dir) {
-    return &path_builder->addRRect(rrect, dir);
+SkPathBuilder * SkPathBuilder_addRRect_2(SkPathBuilder *path_builder, const SkRRect *rrect, SkPathDirection dir) {
+    return &path_builder->addRRect(*rrect, dir);
 }
 
 SkPathBuilder * SkPathBuilder_addCircle(SkPathBuilder *path_builder, SkScalar center_x, SkScalar center_y, SkScalar radius, SkPathDirection dir) {
@@ -201,12 +201,12 @@ SkPathBuilder * SkPathBuilder_addPolygon(SkPathBuilder *path_builder, const SkPo
     return &path_builder->addPolygon(pts, count, isClosed);
 }
 
-SkPathBuilder * SkPathBuilder_addPolygon_2(SkPathBuilder *path_builder, const std::initializer_list<SkPoint> &list, bool isClosed) {
-    return &path_builder->addPolygon(list, isClosed);
+SkPathBuilder * SkPathBuilder_addPolygon_2(SkPathBuilder *path_builder, const std::initializer_list<SkPoint> *list, bool isClosed) {
+    return &path_builder->addPolygon(*list, isClosed);
 }
 
-SkPathBuilder * SkPathBuilder_addPath(SkPathBuilder *path_builder, const SkPath &path) {
-    return &path_builder->addPath(path);
+SkPathBuilder * SkPathBuilder_addPath(SkPathBuilder *path_builder, const SkPath *path) {
+    return &path_builder->addPath(*path);
 }
 
 void SkPathBuilder_incReserve(SkPathBuilder *path_builder, int extraPtCount, int extraVerbCount) {

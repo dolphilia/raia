@@ -12,8 +12,8 @@ SkPathMeasure *SkPathMeasure_new() {
     return new SkPathMeasure();
 }
 
-SkPathMeasure *SkPathMeasure_new_2(const SkPath &path, bool forceClosed, SkScalar resScale) {
-    return new SkPathMeasure(path, forceClosed, resScale);
+SkPathMeasure *SkPathMeasure_new_2(const SkPath *path, bool forceClosed, SkScalar resScale) {
+    return new SkPathMeasure(*path, forceClosed, resScale);
 }
 
 void SkPathMeasure_delete(SkPathMeasure *path_measure) {

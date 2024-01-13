@@ -10,7 +10,7 @@
 
 extern "C" {
 // static
-void SkPath2DPathEffect_Make(const char *sk_path_effect_key_out, const SkMatrix &matrix, const SkPath &path);
+void SkPath2DPathEffect_Make(const char *sk_path_effect_key_out, const SkMatrix *matrix, const SkPath *path);
 void SkPath2DPathEffect_RegisterFlattenables();
 }
 

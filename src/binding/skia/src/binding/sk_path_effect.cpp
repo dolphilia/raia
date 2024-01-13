@@ -4,20 +4,18 @@
 
 #include "sk_path_effect.h"
 
-
-
 extern "C" {
 
 SkPathEffect::DashType SkPathEffect_asADash(SkPathEffect *path_effect, SkPathEffect::DashInfo *info) {
     return path_effect->asADash(info);
 }
 
-bool SkPathEffect_filterPath(SkPathEffect *path_effect, SkPath *dst, const SkPath &src, SkStrokeRec *rec, const SkRect *cullR) {
-    return path_effect->filterPath(dst, src, rec, cullR);
+bool SkPathEffect_filterPath(SkPathEffect *path_effect, SkPath *dst, const SkPath *src, SkStrokeRec *rec, const SkRect *cullR) {
+    return path_effect->filterPath(dst, *src, rec, cullR);
 }
 
-bool SkPathEffect_filterPath_2(SkPathEffect *path_effect, SkPath *dst, const SkPath &src, SkStrokeRec *rec, const SkRect *cullR, const SkMatrix &ctm) {
-    return path_effect->filterPath(dst, src, rec, cullR, ctm);
+bool SkPathEffect_filterPath_2(SkPathEffect *path_effect, SkPath *dst, const SkPath *src, SkStrokeRec *rec, const SkRect *cullR, const SkMatrix *ctm) {
+    return path_effect->filterPath(dst, *src, rec, cullR, *ctm);
 }
 
 bool SkPathEffect_needsCTM(SkPathEffect *path_effect) {
@@ -32,8 +30,8 @@ const char * SkPathEffect_getTypeName(SkPathEffect *path_effect) {
     return path_effect->getTypeName();
 }
 
-void SkPathEffect_flatten(SkPathEffect *path_effect, SkWriteBuffer &buffer) {
-    path_effect->flatten(buffer);
+void SkPathEffect_flatten(SkPathEffect *path_effect, SkWriteBuffer *buffer) {
+    path_effect->flatten(*buffer);
 }
 
 SkPathEffect::Type SkPathEffect_getFlattenableType(SkPathEffect *path_effect) {
@@ -62,12 +60,12 @@ void SkPathEffect_unref(SkPathEffect *path_effect) {
 
 // static
 
-void SkPathEffect_MakeSum(const char *sk_path_effect_key_out, sk_sp<SkPathEffect> first, sk_sp<SkPathEffect> second) {
-    static_sk_path_effect_set(sk_path_effect_key_out, SkPathEffect::MakeSum(std::move(first), std::move(second)));
+void SkPathEffect_MakeSum(const char *sk_path_effect_key_out, const char *sk_path_effect_key_in, const char *sk_path_effect_key_in_2) {
+    static_sk_path_effect_set(sk_path_effect_key_out, SkPathEffect::MakeSum(static_sk_path_effect_move(sk_path_effect_key_in), static_sk_path_effect_move(sk_path_effect_key_in_2)));
 }
 
-void SkPathEffect_MakeCompose(const char *sk_path_effect_key_out, sk_sp<SkPathEffect> outer, sk_sp<SkPathEffect> inner) {
-    static_sk_path_effect_set(sk_path_effect_key_out, SkPathEffect::MakeCompose(std::move(outer), std::move(inner)));
+void SkPathEffect_MakeCompose(const char *sk_path_effect_key_out, const char *sk_path_effect_key_in, const char *sk_path_effect_key_in_2) {
+    static_sk_path_effect_set(sk_path_effect_key_out, SkPathEffect::MakeCompose(static_sk_path_effect_move(sk_path_effect_key_in), static_sk_path_effect_move(sk_path_effect_key_in_2)));
 }
 
 SkFlattenable::Type SkPathEffect_GetFlattenableType() {
