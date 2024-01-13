@@ -21,43 +21,28 @@ endif()
 #add_library(raia_skia SHARED
 add_executable(raia_skia
         src/raia_skia.cpp
-        src/static/static_sk_rect.cpp
-        src/static/static_sk_i_rect.cpp
-        src/static/static_sk_image_info.cpp
-        src/static/static_sk_stream.cpp
-        src/static/static_sk_image.cpp
-        src/static/static_sk_data.cpp
-        src/static/static_sk_shader.cpp
-        src/static/static_sk_image_generator.cpp
-        src/static/static_sk_mesh_child_ptr.cpp
-        src/static/static_sk_blender.cpp
-        src/static/static_sk_color_filter.cpp
-        src/static/static_sk_color_space.cpp
-        src/static/static_sk_color_table.cpp
-        src/static/static_sk_image_filter.cpp
-        src/static/static_sk_picture.cpp
-        src/static/static_sk_pixel_ref.cpp
-        src/static/static_sk_text_blob.cpp
-        src/static/static_sk_typeface.cpp
-        src/static/static_sk_vertices.cpp
-        src/static/static_sk_capabilities.cpp
-        src/static/static_sk_contour_measure.cpp
-        src/static/static_sk_data_table.cpp
-        src/static/static_sk_drawable.cpp
-        src/static/static_sk_flattenable.cpp
-        src/static/static_sk_font_mgr.cpp
-        src/static/static_sk_font_style_set.cpp
-        src/static/static_sk_mask_filter.cpp
-        src/static/static_sk_mesh_index_buffer.cpp
-        src/static/static_sk_mesh_vertex_buffer.cpp
-        src/static/static_sk_path_effect.cpp
-        src/static/static_sk_surface.cpp
-        src/static/static_sk_canvas.cpp
-        src/static/static_sk_drawable_gpu_draw_handler.cpp
-        src/static/static_sk_executor.cpp
-        src/static/static_sk_file_stream.cpp
-        src/static/static_sk_memory_stream.cpp
-        src/static/static_sk_stream_asset.cpp
+        src/binding/gr_backend_drawable_info.cpp
+        src/binding/gr_backend_drawable_info.h
+        src/binding/gr_backend_format.cpp
+        src/binding/gr_backend_format.h
+        src/binding/gr_backend_render_target.cpp
+        src/binding/gr_backend_render_target.h
+        src/binding/gr_backend_semaphore.cpp
+        src/binding/gr_backend_semaphore.h
+        src/binding/gr_backend_texture.cpp
+        src/binding/gr_backend_texture.h
+        src/binding/gr_context_thread_safe_proxy.cpp
+        src/binding/gr_context_thread_safe_proxy.h
+        src/binding/gr_direct_context.cpp
+        src/binding/gr_direct_context.h
+        src/binding/gr_driver_bug_workarounds.cpp
+        src/binding/gr_driver_bug_workarounds.h
+        src/binding/gr_recording_context.cpp
+        src/binding/gr_recording_context.h
+        src/binding/gr_yuva_backend_texture_info.cpp
+        src/binding/gr_yuva_backend_texture_info.h
+        src/binding/gr_yuva_backend_textures.cpp
+        src/binding/gr_yuva_backend_textures.h
         src/binding/sk_alpha_type.cpp
         src/binding/sk_alpha_type.h
         src/binding/sk_annotation.cpp
@@ -68,52 +53,40 @@ add_executable(raia_skia
         src/binding/sk_b_box_hierarchy.h
         src/binding/sk_bitmap.cpp
         src/binding/sk_bitmap.h
-        src/static/static_sk_pixmap.cpp
-        src/static/static_sk_pixmap.h
+        src/binding/sk_blend_mode.cpp
+        src/binding/sk_blend_mode.h
         src/binding/sk_blender.cpp
         src/binding/sk_blender.h
         src/binding/sk_blenders.cpp
         src/binding/sk_blenders.h
-        src/binding/sk_blend_mode.cpp
-        src/binding/sk_blend_mode.h
         src/binding/sk_canvas.cpp
         src/binding/sk_canvas.h
-        src/static/static_sk_surface_props.cpp
-        src/static/static_sk_surface_props.h
-        src/static/static_sk_m_44.cpp
-        src/static/static_sk_m_44.h
-        src/static/static_sk_matrix.cpp
-        src/static/static_sk_matrix.h
         src/binding/sk_capabilities.cpp
         src/binding/sk_capabilities.h
-        src/binding/sk_color.cpp
-        src/binding/sk_color.h
         src/binding/sk_color_filter.cpp
         src/binding/sk_color_filter.h
         src/binding/sk_color_filters.cpp
         src/binding/sk_color_filters.h
         src/binding/sk_color_info.cpp
         src/binding/sk_color_info.h
-        src/static/static_sk_color_info.cpp
-        src/static/static_sk_color_info.h
-        src/binding/sk_color_matrix.cpp
-        src/binding/sk_color_matrix.h
-        src/static/static_sk_color_matrix.cpp
-        src/static/static_sk_color_matrix.h
         src/binding/sk_color_matrix_filter.cpp
         src/binding/sk_color_matrix_filter.h
+        src/binding/sk_color_matrix.cpp
+        src/binding/sk_color_matrix.h
         src/binding/sk_color_priv.cpp
         src/binding/sk_color_priv.h
-        src/binding/sk_color_space.cpp
-        src/binding/sk_color_space.h
         src/binding/sk_color_space_primaries.cpp
         src/binding/sk_color_space_primaries.h
+        src/binding/sk_color_space.cpp
+        src/binding/sk_color_space.h
         src/binding/sk_color_table.cpp
         src/binding/sk_color_table.h
-        src/binding/sk_contour_measure.cpp
-        src/binding/sk_contour_measure.h
+        src/binding/sk_color.cpp
+        src/binding/sk_color.h
         src/binding/sk_contour_measure_iter.cpp
         src/binding/sk_contour_measure_iter.h
+        src/binding/sk_contour_measure.cpp
+        src/binding/sk_contour_measure.h
         src/binding/sk_corner_path_effect.cpp
         src/binding/sk_corner_path_effect.h
         src/binding/sk_cubic_map.cpp
@@ -122,10 +95,10 @@ add_executable(raia_skia
         src/binding/sk_cubic_resampler.h
         src/binding/sk_dash_path_effect.cpp
         src/binding/sk_dash_path_effect.h
-        src/binding/sk_data.cpp
-        src/binding/sk_data.h
         src/binding/sk_data_table.cpp
         src/binding/sk_data_table.h
+        src/binding/sk_data.cpp
+        src/binding/sk_data.h
         src/binding/sk_discrete_path_effect.cpp
         src/binding/sk_discrete_path_effect.h
         src/binding/sk_document.cpp
@@ -142,24 +115,18 @@ add_executable(raia_skia
         src/binding/sk_file_w_stream.h
         src/binding/sk_flattenable.cpp
         src/binding/sk_flattenable.h
-        src/binding/sk_font.cpp
-        src/binding/sk_font.h
-        src/static/static_vector_sk_scalar.cpp
-        src/static/static_vector_sk_scalar.h
-        src/static/static_sk_font.cpp
-        src/static/static_sk_font.h
         src/binding/sk_font_arguments.cpp
         src/binding/sk_font_arguments.h
-        src/static/static_sk_font_arguments.cpp
-        src/static/static_sk_font_arguments.h
         src/binding/sk_font_metrics.cpp
         src/binding/sk_font_metrics.h
         src/binding/sk_font_mgr.cpp
         src/binding/sk_font_mgr.h
-        src/binding/sk_font_style.cpp
-        src/binding/sk_font_style.h
         src/binding/sk_font_style_set.cpp
         src/binding/sk_font_style_set.h
+        src/binding/sk_font_style.cpp
+        src/binding/sk_font_style.h
+        src/binding/sk_font.cpp
+        src/binding/sk_font.h
         src/binding/sk_gradient_shader.cpp
         src/binding/sk_gradient_shader.h
         src/binding/sk_graphics.cpp
@@ -168,10 +135,10 @@ add_executable(raia_skia
         src/binding/sk_high_contrast_config.h
         src/binding/sk_high_contrast_filter.cpp
         src/binding/sk_high_contrast_filter.h
-        src/binding/sk_image.cpp
-        src/binding/sk_image.h
-        src/binding/sk_images.cpp
-        src/binding/sk_images.h
+        src/binding/sk_i_rect.cpp
+        src/binding/sk_i_rect.h
+        src/binding/sk_i_size.cpp
+        src/binding/sk_i_size.h
         src/binding/sk_image_filter.cpp
         src/binding/sk_image_filter.h
         src/binding/sk_image_filters.cpp
@@ -180,10 +147,10 @@ add_executable(raia_skia
         src/binding/sk_image_generator.h
         src/binding/sk_image_info.cpp
         src/binding/sk_image_info.h
-        src/binding/sk_i_rect.cpp
-        src/binding/sk_i_rect.h
-        src/binding/sk_i_size.cpp
-        src/binding/sk_i_size.h
+        src/binding/sk_image.cpp
+        src/binding/sk_image.h
+        src/binding/sk_images.cpp
+        src/binding/sk_images.h
         src/binding/sk_line_2d_path_effect.cpp
         src/binding/sk_line_2d_path_effect.h
         src/binding/sk_luma_color_filter.cpp
@@ -206,12 +173,6 @@ add_executable(raia_skia
         src/binding/sk_overdraw_color_filter.h
         src/binding/sk_paint.cpp
         src/binding/sk_paint.h
-        src/static/static_sk_blend_mode.cpp
-        src/static/static_sk_blend_mode.h
-        src/binding/sk_path.cpp
-        src/binding/sk_path.h
-        src/static/static_sk_path.cpp
-        src/static/static_sk_path.h
         src/binding/sk_path_1d_path_effect.cpp
         src/binding/sk_path_1d_path_effect.h
         src/binding/sk_path_2d_path_effect.cpp
@@ -222,118 +183,84 @@ add_executable(raia_skia
         src/binding/sk_path_effect.h
         src/binding/sk_path_measure.cpp
         src/binding/sk_path_measure.h
-        src/binding/sk_picture.cpp
-        src/binding/sk_picture.h
+        src/binding/sk_path.cpp
+        src/binding/sk_path.h
         src/binding/sk_picture_recorder.cpp
         src/binding/sk_picture_recorder.h
+        src/binding/sk_picture.cpp
+        src/binding/sk_picture.h
         src/binding/sk_pixel_ref.cpp
         src/binding/sk_pixel_ref.h
         src/binding/sk_pixmap.cpp
         src/binding/sk_pixmap.h
         src/binding/sk_point_3.cpp
         src/binding/sk_point_3.h
+        src/binding/sk_r_rect.cpp
+        src/binding/sk_r_rect.h
         src/binding/sk_raster_handle_allocator.cpp
         src/binding/sk_raster_handle_allocator.h
         src/binding/sk_rect.cpp
         src/binding/sk_rect.h
-        src/binding/sk_ref_cnt.cpp
-        src/binding/sk_ref_cnt.h
         src/binding/sk_ref_cnt_base.cpp
         src/binding/sk_ref_cnt_base.h
+        src/binding/sk_ref_cnt.cpp
+        src/binding/sk_ref_cnt.h
         src/binding/sk_region.cpp
         src/binding/sk_region.h
-        src/binding/sk_r_rect.cpp
-        src/binding/sk_r_rect.h
-        src/static/static_sk_string.cpp
-        src/static/static_sk_string.h
-        src/static/static_sk_r_rect.cpp
-        src/static/static_sk_r_rect.h
         src/binding/sk_rsx_form.cpp
         src/binding/sk_rsx_form.h
         src/binding/sk_runtime_blend_builder.cpp
         src/binding/sk_runtime_blend_builder.h
-        src/static/static_sk_runtime_effect_child_ptr.cpp
-        src/static/static_sk_runtime_effect_child_ptr.h
         src/binding/sk_runtime_color_filter_builder.cpp
         src/binding/sk_runtime_color_filter_builder.h
-        src/binding/sk_runtime_effect.cpp
-        src/binding/sk_runtime_effect.h
-        src/static/static_sk_runtime_effect_uniform.cpp
-        src/static/static_sk_runtime_effect_uniform.h
-        src/static/static_sk_runtime_effect_child.cpp
-        src/static/static_sk_runtime_effect_child.h
-        src/static/static_sk_runtime_effect_result.cpp
-        src/static/static_sk_runtime_effect_result.h
-        src/static/static_sk_runtime_effect_traced_shader.cpp
-        src/static/static_sk_runtime_effect_traced_shader.h
         src/binding/sk_runtime_effect_builder.cpp
         src/binding/sk_runtime_effect_builder.h
+        src/binding/sk_runtime_effect.cpp
+        src/binding/sk_runtime_effect.h
         src/binding/sk_runtime_shader_builder.cpp
         src/binding/sk_runtime_shader_builder.h
         src/binding/sk_sampling_options.cpp
         src/binding/sk_sampling_options.h
-        src/static/static_sk_sampling_options.cpp
-        src/static/static_sk_sampling_options.h
-        src/binding/sk_shader.cpp
-        src/binding/sk_shader.h
         src/binding/sk_shader_mask_filter.cpp
         src/binding/sk_shader_mask_filter.h
+        src/binding/sk_shader.cpp
+        src/binding/sk_shader.h
         src/binding/sk_shaper.cpp
         src/binding/sk_shaper.h
-        src/static/static_sk_shaper.cpp
-        src/static/static_sk_shaper.h
-        src/static/static_sk_shaper_font_run_iterator.cpp
-        src/static/static_sk_shaper_font_run_iterator.h
-        src/static/static_sk_shaper_bi_di_run_iterator.cpp
-        src/static/static_sk_shaper_bi_di_run_iterator.h
-        src/static/static_sk_shaper_script_run_iterator.cpp
-        src/static/static_sk_shaper_script_run_iterator.h
-        src/static/static_sk_shaper_language_run_iterator.cpp
-        src/static/static_sk_shaper_language_run_iterator.h
         src/binding/sk_size.cpp
         src/binding/sk_size.h
-        src/binding/sk_stream.cpp
-        src/binding/sk_stream.h
         src/binding/sk_stream_asset.cpp
         src/binding/sk_stream_asset.h
         src/binding/sk_stream_memory.cpp
         src/binding/sk_stream_memory.h
-        src/static/static_sk_stream_memory.cpp
-        src/static/static_sk_stream_memory.h
         src/binding/sk_stream_rewindable.cpp
         src/binding/sk_stream_rewindable.h
-        src/static/static_sk_stream_rewindable.cpp
-        src/static/static_sk_stream_rewindable.h
         src/binding/sk_stream_seekable.cpp
         src/binding/sk_stream_seekable.h
-        src/static/static_sk_stream_seekable.cpp
-        src/static/static_sk_stream_seekable.h
+        src/binding/sk_stream.cpp
+        src/binding/sk_stream.h
         src/binding/sk_string.cpp
         src/binding/sk_string.h
         src/binding/sk_stroke_rec.cpp
         src/binding/sk_stroke_rec.h
-        src/static/static_sk_stroke_rec.cpp
-        src/static/static_sk_stroke_rec.h
-        src/binding/sk_surface.cpp
-        src/binding/sk_surface.h
         src/binding/sk_surface_props.cpp
         src/binding/sk_surface_props.h
+        src/binding/sk_surface.cpp
+        src/binding/sk_surface.h
         src/binding/sk_table_mask_filter.cpp
         src/binding/sk_table_mask_filter.h
-        src/binding/sk_text_blob.cpp
-        src/binding/sk_text_blob.h
-        src/binding/sk_text_blob_builder.cpp
-        src/binding/sk_text_blob_builder.h
         src/binding/sk_text_blob_builder_run_handler.cpp
         src/binding/sk_text_blob_builder_run_handler.h
+        src/binding/sk_text_blob_builder.cpp
+        src/binding/sk_text_blob_builder.h
+        src/binding/sk_text_blob.cpp
+        src/binding/sk_text_blob.h
         src/binding/sk_trace_memory_dump.cpp
         src/binding/sk_trace_memory_dump.h
         src/binding/sk_trim_path_effect.cpp
         src/binding/sk_trim_path_effect.h
         src/binding/sk_typeface.cpp
         src/binding/sk_typeface.h
-        src/static/static_sk_font_style.cpp
-        src/static/static_sk_font_style.h
         src/binding/sk_un_pre_multiply.cpp
         src/binding/sk_un_pre_multiply.h
         src/binding/sk_v2.cpp
@@ -348,20 +275,137 @@ add_executable(raia_skia
         src/binding/sk_w_stream.h
         src/binding/sk_yuva_info.cpp
         src/binding/sk_yuva_info.h
-        src/static/static_tuple_int_int.cpp
-        src/static/static_tuple_int_int.h
-        src/static/static_sk_yuva_info.cpp
-        src/static/static_sk_yuva_info.h
         src/binding/sk_yuva_pixmap_info.cpp
         src/binding/sk_yuva_pixmap_info.h
-        src/static/static_tuple_int_sk_yuva_pixmap_info_data_type.cpp
-        src/static/static_tuple_int_sk_yuva_pixmap_info_data_type.h
         src/binding/sk_yuva_pixmaps.cpp
         src/binding/sk_yuva_pixmaps.h
+        src/static/static_gr_backend_format.cpp
+        src/static/static_gr_backend_format.h
+        src/static/static_gr_backend_texture.cpp
+        src/static/static_gr_backend_texture.h
+        src/static/static_gr_color_format_desc.cpp
+        src/static/static_gr_color_format_desc.h
+        src/static/static_gr_context_thread_safe_proxy.cpp
+        src/static/static_gr_context_thread_safe_proxy.h
+        src/static/static_gr_direct_context_direct_context_id.cpp
+        src/static/static_gr_direct_context_direct_context_id.h
+        src/static/static_sk_b_box_hierarchy.cpp
+        src/static/static_sk_b_box_hierarchy.h
+        src/static/static_sk_blend_mode.cpp
+        src/static/static_sk_blend_mode.h
+        src/static/static_sk_blender.cpp
+        src/static/static_sk_canvas.cpp
+        src/static/static_sk_capabilities.cpp
+        src/static/static_sk_color_filter.cpp
+        src/static/static_sk_color_info.cpp
+        src/static/static_sk_color_info.h
+        src/static/static_sk_color_matrix.cpp
+        src/static/static_sk_color_matrix.h
+        src/static/static_sk_color_space.cpp
+        src/static/static_sk_color_table.cpp
+        src/static/static_sk_color.cpp
+        src/static/static_sk_color.h
+        src/static/static_sk_contour_measure.cpp
+        src/static/static_sk_data_table.cpp
+        src/static/static_sk_data.cpp
+        src/static/static_sk_drawable_gpu_draw_handler.cpp
+        src/static/static_sk_drawable.cpp
+        src/static/static_sk_executor.cpp
+        src/static/static_sk_file_stream.cpp
+        src/static/static_sk_flattenable.cpp
+        src/static/static_sk_font_arguments.cpp
+        src/static/static_sk_font_arguments.h
+        src/static/static_sk_font_mgr.cpp
+        src/static/static_sk_font_style_set.cpp
+        src/static/static_sk_font_style.cpp
+        src/static/static_sk_font_style.h
+        src/static/static_sk_font.cpp
+        src/static/static_sk_font.h
+        src/static/static_sk_i_rect.cpp
+        src/static/static_sk_id_change_listener.cpp
+        src/static/static_sk_id_change_listener.h
+        src/static/static_sk_image_filter.cpp
+        src/static/static_sk_image_generator.cpp
+        src/static/static_sk_image_info.cpp
+        src/static/static_sk_image.cpp
+        src/static/static_sk_m_44.cpp
+        src/static/static_sk_m_44.h
+        src/static/static_sk_mask_filter.cpp
+        src/static/static_sk_matrix.cpp
+        src/static/static_sk_matrix.h
+        src/static/static_sk_memory_stream.cpp
+        src/static/static_sk_mesh_child_ptr.cpp
+        src/static/static_sk_mesh_index_buffer.cpp
+        src/static/static_sk_mesh_vertex_buffer.cpp
+        src/static/static_sk_path_effect.cpp
+        src/static/static_sk_path.cpp
+        src/static/static_sk_path.h
+        src/static/static_sk_picture.cpp
+        src/static/static_sk_pixel_ref.cpp
+        src/static/static_sk_pixmap.cpp
+        src/static/static_sk_pixmap.h
+        src/static/static_sk_r_rect.cpp
+        src/static/static_sk_r_rect.h
+        src/static/static_sk_rect.cpp
+        src/static/static_sk_runtime_effect_child_ptr.cpp
+        src/static/static_sk_runtime_effect_child_ptr.h
+        src/static/static_sk_runtime_effect_child.cpp
+        src/static/static_sk_runtime_effect_child.h
+        src/static/static_sk_runtime_effect_result.cpp
+        src/static/static_sk_runtime_effect_result.h
+        src/static/static_sk_runtime_effect_traced_shader.cpp
+        src/static/static_sk_runtime_effect_traced_shader.h
+        src/static/static_sk_runtime_effect_uniform.cpp
+        src/static/static_sk_runtime_effect_uniform.h
+        src/static/static_sk_runtime_effect.cpp
+        src/static/static_sk_runtime_effect.h
+        src/static/static_sk_sampling_options.cpp
+        src/static/static_sk_sampling_options.h
+        src/static/static_sk_shader.cpp
+        src/static/static_sk_shaper_bi_di_run_iterator.cpp
+        src/static/static_sk_shaper_bi_di_run_iterator.h
+        src/static/static_sk_shaper_font_run_iterator.cpp
+        src/static/static_sk_shaper_font_run_iterator.h
+        src/static/static_sk_shaper_language_run_iterator.cpp
+        src/static/static_sk_shaper_language_run_iterator.h
+        src/static/static_sk_shaper_script_run_iterator.cpp
+        src/static/static_sk_shaper_script_run_iterator.h
+        src/static/static_sk_shaper.cpp
+        src/static/static_sk_shaper.h
+        src/static/static_sk_stream_asset.cpp
+        src/static/static_sk_stream_memory.cpp
+        src/static/static_sk_stream_memory.h
+        src/static/static_sk_stream_rewindable.cpp
+        src/static/static_sk_stream_rewindable.h
+        src/static/static_sk_stream_seekable.cpp
+        src/static/static_sk_stream_seekable.h
+        src/static/static_sk_stream.cpp
+        src/static/static_sk_string.cpp
+        src/static/static_sk_string.h
+        src/static/static_sk_stroke_rec.cpp
+        src/static/static_sk_stroke_rec.h
+        src/static/static_sk_surface_props.cpp
+        src/static/static_sk_surface_props.h
+        src/static/static_sk_surface.cpp
+        src/static/static_sk_text_blob.cpp
+        src/static/static_sk_typeface.cpp
+        src/static/static_sk_vertices.cpp
+        src/static/static_sk_yuva_info.cpp
+        src/static/static_sk_yuva_info.h
         src/static/static_sk_yuva_pixmap_info.cpp
         src/static/static_sk_yuva_pixmap_info.h
         src/static/static_sk_yuva_pixmaps.cpp
         src/static/static_sk_yuva_pixmaps.h
+        src/static/static_std_function_void_void.cpp
+        src/static/static_std_function_void_void.h
+        src/static/static_std_string_view.cpp
+        src/static/static_std_string_view.h
+        src/static/static_std_tuple_int_int.cpp
+        src/static/static_std_tuple_int_int.h
+        src/static/static_std_tuple_int_sk_yuva_pixmap_info_data_type.cpp
+        src/static/static_std_tuple_int_sk_yuva_pixmap_info_data_type.h
+        src/static/static_std_vector_sk_scalar.cpp
+        src/static/static_std_vector_sk_scalar.h
 )
 
 # 現在のRPATH設定を取得（もしあれば）
