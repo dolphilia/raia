@@ -2,8 +2,8 @@
 // Created by dolphilia on 2024/01/08.
 //
 
-#ifndef RAIA_SKIA_STATIC_VECTOR_SK_SCALAR_H
-#define RAIA_SKIA_STATIC_VECTOR_SK_SCALAR_H
+#ifndef RAIA_SKIA_STATIC_STD_VECTOR_SK_SCALAR_H
+#define RAIA_SKIA_STATIC_STD_VECTOR_SK_SCALAR_H
 
 #include <string>
 #include <map>
@@ -18,4 +18,4 @@ void static_vector_sk_scalar_insert(const char *key, int index, SkScalar value);
 void static_vector_sk_scalar_pop_back(const char *key);
 void static_vector_sk_scalar_erase(const char *key, int index);
 
-#endif //RAIA_SKIA_STATIC_VECTOR_SK_SCALAR_H
+#endif //RAIA_SKIA_STATIC_STD_VECTOR_SK_SCALAR_H

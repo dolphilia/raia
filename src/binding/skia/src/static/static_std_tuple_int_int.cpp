@@ -2,7 +2,7 @@
 // Created by dolphilia on 2024/01/11.
 //
 
-#include "static_tuple_int_int.h"
+#include "static_std_tuple_int_int.h"
 
 static std::map<std::string, std::tuple<int, int>> static_tuple_int_int;
 
@@ -10,7 +10,7 @@ void static_tuple_int_int_delete(const char *key) {
     static_tuple_int_int.erase(key);
 }
 
-std::tuple<int, int> static_tuple_int_int_get(const char *key, int index) {
+std::tuple<int, int> static_tuple_int_int_get(const char *key) {
     return static_tuple_int_int[key];
 }
 

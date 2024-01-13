@@ -2,7 +2,7 @@
 // Created by dolphilia on 2024/01/11.
 //
 
-#include "static_tuple_int_sk_yuva_pixmap_info_data_type.h"
+#include "static_std_tuple_int_sk_yuva_pixmap_info_data_type.h"
 
 static std::map<std::string, std::tuple<int, SkYUVAPixmapInfo::DataType>> static_tuple_int_sk_yuva_pixmap_info_data_type;
 
