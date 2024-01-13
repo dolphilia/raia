@@ -18,16 +18,17 @@ bool SkShader_isAImage_2(SkShader *shader) {
     return shader->isAImage();
 }
 
-void SkShader_makeWithLocalMatrix(const char *sk_shader_key_out, SkShader *shader, const SkMatrix &matrix) {
-    static_sk_shader_set(sk_shader_key_out, shader->makeWithLocalMatrix(matrix));
+void SkShader_makeWithLocalMatrix(const char *sk_shader_key_out, SkShader *shader, const SkMatrix *matrix) {
+    static_sk_shader_set(sk_shader_key_out, shader->makeWithLocalMatrix(*matrix));
 }
 
-void SkShader_makeWithColorFilter(const char *sk_shader_key_out, SkShader *shader, sk_sp<SkColorFilter> filter) {
-    static_sk_shader_set(sk_shader_key_out, shader->makeWithColorFilter(std::move(filter)));
+void SkShader_makeWithColorFilter(const char *sk_shader_key_out, const char *sk_color_filter_key_in, SkShader *shader) {
+    static_sk_shader_set(sk_shader_key_out, shader->makeWithColorFilter(static_sk_color_filter_move(sk_color_filter_key_in)));
 }
 
-void SkShader_makeWithWorkingColorSpace(const char *sk_shader_key_out, SkShader *shader, sk_sp<SkColorSpace> space) {
-    static_sk_shader_set(sk_shader_key_out, shader->makeWithWorkingColorSpace(std::move(space)));
+void
+SkShader_makeWithWorkingColorSpace(const char *sk_shader_key_out, const char *sk_color_space_key_in, SkShader *shader) {
+    static_sk_shader_set(sk_shader_key_out, shader->makeWithWorkingColorSpace(static_sk_color_space_move(sk_color_space_key_in)));
 }
 
 SkShader::Factory SkShader_getFactory(SkShader *shader) {
@@ -38,8 +39,8 @@ const char * SkShader_getTypeName(SkShader *shader) {
     return shader->getTypeName();
 }
 
-void SkShader_flatten(SkShader *shader, SkWriteBuffer &buffer) {
-    shader->flatten(buffer);
+void SkShader_flatten(SkShader *shader, SkWriteBuffer *buffer) {
+    shader->flatten(*buffer);
 }
 
 SkShader::Type SkShader_getFlattenableType(SkShader *shader) {

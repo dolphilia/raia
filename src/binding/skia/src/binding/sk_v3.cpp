@@ -25,12 +25,12 @@ SkScalar SkV3_length(SkV3 *v3) {
     return v3->length();
 }
 
-SkScalar SkV3_dot(SkV3 *v3, const SkV3 &v) {
-    return v3->dot(v);
+SkScalar SkV3_dot(SkV3 *v3, const SkV3 *v) {
+    return v3->dot(*v);
 }
 
-SkV3 SkV3_cross(SkV3 *v3, const SkV3 &v) {
-    return v3->cross(v);
+SkV3 SkV3_cross(SkV3 *v3, const SkV3 *v) {
+    return v3->cross(*v);
 }
 
 SkV3 SkV3_normalize(SkV3 *v3) {
@@ -47,16 +47,16 @@ float * SkV3_ptr_2(SkV3 *v3) {
 
 // static
 
-SkScalar SkV3_Dot(const SkV3 &a, const SkV3 &b) {
-    return SkV3::Dot(a, b);
+SkScalar SkV3_Dot(const SkV3 *a, const SkV3 *b) {
+    return SkV3::Dot(*a, *b);
 }
 
-SkV3 SkV3_Cross(const SkV3 &a, const SkV3 &b) {
-    return SkV3::Cross(a, b);
+SkV3 SkV3_Cross(const SkV3 *a, const SkV3 *b) {
+    return SkV3::Cross(*a, *b);
 }
 
-SkV3 SkV3_Normalize(const SkV3 &v) {
-    return SkV3::Normalize(v);
+SkV3 SkV3_Normalize(const SkV3 *v) {
+    return SkV3::Normalize(*v);
 }
 
 }

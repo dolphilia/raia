@@ -18,8 +18,8 @@ SkSurfaceProps *SkSurfaceProps_new_2(uint32_t flags, SkPixelGeometry geometry) {
     return new SkSurfaceProps(flags, geometry);
 }
 
-SkSurfaceProps *SkSurfaceProps_new_3(const SkSurfaceProps &props) {
-    return new SkSurfaceProps(props);
+SkSurfaceProps *SkSurfaceProps_new_3(const SkSurfaceProps *props) {
+    return new SkSurfaceProps(*props);
 }
 
 void SkSurfaceProps_cloneWithPixelGeometry(const char *sk_surface_props_key_out, SkSurfaceProps *surface_props, SkPixelGeometry newPixelGeometry) {

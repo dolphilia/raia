@@ -22,7 +22,7 @@ bool SkTypeface_isFixedPitch(SkTypeface *typeface);
 int SkTypeface_getVariationDesignPosition(SkTypeface *typeface, SkFontArguments::VariationPosition::Coordinate coordinates[], int coordinateCount);
 int SkTypeface_getVariationDesignParameters(SkTypeface *typeface, SkFontParameters::Variation::Axis parameters[], int parameterCount);
 SkTypefaceID SkTypeface_uniqueID(SkTypeface *typeface);
-void SkTypeface_makeClone(const char *sk_typeface_key_out, SkTypeface *typeface, const SkFontArguments &arguments);
+void SkTypeface_makeClone(const char *sk_typeface_key_out, SkTypeface *typeface, const SkFontArguments *arguments);
 void SkTypeface_serialize(SkTypeface *typeface, SkWStream *stream, SkTypeface::SerializeBehavior behavior);
 void SkTypeface_serialize_2(const char *sk_data_key_out, SkTypeface *typeface, SkTypeface::SerializeBehavior behavior);
 void SkTypeface_unicharsToGlyphs(SkTypeface *typeface, const SkUnichar uni[], int count, SkGlyphID glyphs[]);
@@ -54,10 +54,10 @@ bool SkTypeface_Equal(const SkTypeface *facea, const SkTypeface *faceb);
 void SkTypeface_MakeEmpty(const char *sk_typeface_key_out);
 void SkTypeface_MakeFromName(const char *sk_typeface_key_out, const char familyName[], SkFontStyle fontStyle);
 void SkTypeface_MakeFromFile(const char *sk_typeface_key_out, const char path[], int index);
-void SkTypeface_MakeFromStream(const char *sk_typeface_key_out, std::unique_ptr<SkStreamAsset> stream, int index);
-void SkTypeface_MakeFromData(const char *sk_typeface_key_out, sk_sp<SkData> data, int index);
+void SkTypeface_MakeFromStream(const char *sk_typeface_key_out, const char *sk_stream_asset_key_in, int index);
+void SkTypeface_MakeFromData(const char *sk_typeface_key_out, const char *sk_data_key_in, int index);
 void SkTypeface_MakeDeserialize(const char *sk_typeface_key_out, SkStream *stream);
-void SkTypeface_MakeDeserialize_2(const char *sk_typeface_key_out, SkStream *stream, sk_sp<SkFontMgr> lastResortMgr);
+void SkTypeface_MakeDeserialize_2(const char *sk_typeface_key_out, const char *sk_font_mgr_key_in, SkStream *stream);
 void SkTypeface_Register(SkTypeface::FactoryId id, sk_sp<SkTypeface>(*make)(std::unique_ptr<SkStreamAsset>, const SkFontArguments &));
 }
 

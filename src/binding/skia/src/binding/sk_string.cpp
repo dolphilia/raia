@@ -31,19 +31,15 @@ SkString *SkString_new_4(const char text[], size_t len) {
     return new SkString(text, len);
 }
 
-SkString *SkString_new_5(const SkString &str) {
-    return new SkString(str);
+SkString *SkString_new_5(const SkString *str) {
+    return new SkString(*str);
 }
 
-SkString *SkString_new_6(SkString &&str) {
-    return new SkString(str);
+SkString *SkString_new_6(const std::string *str) {
+    return new SkString(*str);
 }
 
-SkString *SkString_new_7(const std::string &str) {
-    return new SkString(str);
-}
-
-SkString *SkString_new_8(std::string_view view) {
+SkString *SkString_new_7(std::string_view view) {
     return new SkString(view);
 }
 
@@ -70,8 +66,8 @@ const char * SkString_c_str(SkString *string) {
     return string->c_str();
 }
 
-bool SkString_equals(SkString *string, const SkString &str) {
-    return string->equals(str);
+bool SkString_equals(SkString *string, const SkString *str) {
+    return string->equals(*str);
 }
 
 bool SkString_equals_2(SkString *string, const char text[]) {
@@ -122,8 +118,8 @@ void SkString_resize(SkString *string, size_t len) {
     string->resize(len);
 }
 
-void SkString_set(SkString *string, const SkString &src) {
-    string->set(src);
+void SkString_set(SkString *string, const SkString *src) {
+    string->set(*src);
 }
 
 void SkString_set_2(SkString *string, const char text[]) {
@@ -146,8 +142,8 @@ void SkString_insert_2(SkString *string, size_t offset, const char text[], size_
     string->insert(offset, text, len);
 }
 
-void SkString_insert_3(SkString *string, size_t offset, const SkString &str) {
-    string->insert(offset, str);
+void SkString_insert_3(SkString *string, size_t offset, const SkString *str) {
+    string->insert(offset, *str);
 }
 
 void SkString_insert_4(SkString *string, size_t offset, std::string_view str) {
@@ -190,8 +186,8 @@ void SkString_append_2(SkString *string, const char text[], size_t len) {
     string->append(text, len);
 }
 
-void SkString_append_3(SkString *string, const SkString &str) {
-    string->append(str);
+void SkString_append_3(SkString *string, const SkString *str) {
+    string->append(*str);
 }
 
 void SkString_append_4(SkString *string, std::string_view str) {
@@ -234,8 +230,8 @@ void SkString_prepend_2(SkString *string, const char text[], size_t len) {
     string->prepend(text, len);
 }
 
-void SkString_prepend_3(SkString *string, const SkString &str) {
-    string->prepend(str);
+void SkString_prepend_3(SkString *string, const SkString *str) {
+    string->prepend(*str);
 }
 
 void SkString_prepend_4(SkString *string, std::string_view str) {
@@ -261,6 +257,8 @@ void SkString_prependHex(SkString *string, uint32_t value, int minDigits) {
 void SkString_prependScalar(SkString *string, SkScalar value) {
     string->prependScalar(value);
 }
+
+// @TODO
 
 //void SkString_printf(SkString *string, const char format[],...) {
 //    string->
@@ -290,8 +288,8 @@ void SkString_remove(SkString *string, size_t offset, size_t length) {
     string->remove(offset, length);
 }
 
-void SkString_swap(SkString *string, SkString &other) {
-    string->swap(other);
+void SkString_swap(SkString *string, SkString *other) {
+    string->swap(*other);
 }
 
 }

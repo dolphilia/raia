@@ -6,7 +6,7 @@
 #define RAIA_SKIA_SK_YUVA_INFO_H
 
 #include "include/core/SkYUVAInfo.h"
-#include "../static/static_tuple_int_int.h"
+#include "../static/static_std_tuple_int_int.h"
 #include "../static/static_sk_matrix.h"
 #include "../static/static_sk_yuva_info.h"
 
@@ -15,7 +15,7 @@ extern "C" {
 // bool operator==(const SkYUVAInfo &that)
 // bool operator!=(const SkYUVAInfo &that)
 SkYUVAInfo *SkYUVAInfo_new();
-SkYUVAInfo *SkYUVAInfo_new_2(const SkYUVAInfo &info);
+SkYUVAInfo *SkYUVAInfo_new_2(const SkYUVAInfo *info);
 SkYUVAInfo *SkYUVAInfo_new_3(SkISize dimensions, SkYUVAInfo::PlaneConfig config, SkYUVAInfo::Subsampling subsampling, SkYUVColorSpace space, SkEncodedOrigin origin, SkYUVAInfo::Siting sitingX, SkYUVAInfo::Siting sitingY);
 SkYUVAInfo::PlaneConfig SkYUVAInfo_planeConfig(SkYUVAInfo * yuva_info);
 SkYUVAInfo::Subsampling SkYUVAInfo_subsampling(SkYUVAInfo * yuva_info);

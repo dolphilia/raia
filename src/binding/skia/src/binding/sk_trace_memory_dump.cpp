@@ -18,8 +18,8 @@ void SkTraceMemoryDump_setMemoryBacking(SkTraceMemoryDump *trace_memory_dump, co
     trace_memory_dump->setMemoryBacking(dumpName, backingType, backingObjectId);
 }
 
-void SkTraceMemoryDump_setDiscardableMemoryBacking(SkTraceMemoryDump *trace_memory_dump, const char *dumpName, const SkDiscardableMemory &discardableMemoryObject) {
-    trace_memory_dump->setDiscardableMemoryBacking(dumpName, discardableMemoryObject);
+void SkTraceMemoryDump_setDiscardableMemoryBacking(SkTraceMemoryDump *trace_memory_dump, const char *dumpName, const SkDiscardableMemory *discardableMemoryObject) {
+    trace_memory_dump->setDiscardableMemoryBacking(dumpName, *discardableMemoryObject);
 }
 
 SkTraceMemoryDump::LevelOfDetail SkTraceMemoryDump_getRequestedDetails(SkTraceMemoryDump *trace_memory_dump) {

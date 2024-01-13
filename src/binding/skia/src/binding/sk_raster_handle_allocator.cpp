@@ -10,12 +10,12 @@ void SkRasterHandleAllocator_delete(SkRasterHandleAllocator *raster_handle_alloc
     delete raster_handle_allocator;
 }
 
-bool SkRasterHandleAllocator_allocHandle(SkRasterHandleAllocator *raster_handle_allocator, const SkImageInfo &info, SkRasterHandleAllocator::Rec *rec) {
-    return raster_handle_allocator->allocHandle(info, rec);
+bool SkRasterHandleAllocator_allocHandle(SkRasterHandleAllocator *raster_handle_allocator, const SkImageInfo *info, SkRasterHandleAllocator::Rec *rec) {
+    return raster_handle_allocator->allocHandle(*info, rec);
 }
 
-void SkRasterHandleAllocator_updateHandle(SkRasterHandleAllocator *raster_handle_allocator, SkRasterHandleAllocator::Handle handle, const SkMatrix &matrix, const SkIRect &irect) {
-    raster_handle_allocator->updateHandle(handle, matrix, irect);
+void SkRasterHandleAllocator_updateHandle(SkRasterHandleAllocator *raster_handle_allocator, SkRasterHandleAllocator::Handle handle, const SkMatrix *matrix, const SkIRect *irect) {
+    raster_handle_allocator->updateHandle(handle, *matrix, *irect);
 }
 
 // static

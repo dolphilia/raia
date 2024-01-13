@@ -6,12 +6,12 @@
 
 extern "C" {
 
-SkRuntimeShaderBuilder *SkRuntimeShaderBuilder_new(sk_sp<SkRuntimeEffect> effect) {
-    return new SkRuntimeShaderBuilder(std::move(effect));
+SkRuntimeShaderBuilder *SkRuntimeShaderBuilder_new(const char *sk_runtime_effect_key_in) {
+    return new SkRuntimeShaderBuilder(static_sk_runtime_effect_move(sk_runtime_effect_key_in));
 }
 
-SkRuntimeShaderBuilder *SkRuntimeShaderBuilder_new_2(const SkRuntimeShaderBuilder &builder) {
-    return new SkRuntimeShaderBuilder(builder);
+SkRuntimeShaderBuilder *SkRuntimeShaderBuilder_new_2(const SkRuntimeShaderBuilder *builder) {
+    return new SkRuntimeShaderBuilder(*builder);
 }
 
 void SkRuntimeShaderBuilder_delete(SkRuntimeShaderBuilder *runtime_shader_builder) {

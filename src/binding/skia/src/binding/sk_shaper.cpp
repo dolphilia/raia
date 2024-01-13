@@ -3,6 +3,7 @@
 //
 
 #include "sk_shaper.h"
+#include "../static/static_sk_font_mgr.h"
 
 extern "C" {
 
@@ -10,16 +11,16 @@ void SkShaper_delete(SkShaper *shaper) {
     delete shaper;
 }
 
-void SkShaper_shape(SkShaper *shaper, const char *utf8, size_t utf8Bytes, const SkFont &srcFont, bool leftToRight, SkScalar width, SkShaper::RunHandler *handler) {
-    shaper->shape(utf8, utf8Bytes, srcFont, leftToRight, width, handler);
+void SkShaper_shape(SkShaper *shaper, const char *utf8, size_t utf8Bytes, const SkFont *srcFont, bool leftToRight, SkScalar width, SkShaper::RunHandler *handler) {
+    shaper->shape(utf8, utf8Bytes, *srcFont, leftToRight, width, handler);
 }
 
-void SkShaper_shape_2(SkShaper *shaper, const char *utf8, size_t utf8Bytes, SkShaper::FontRunIterator &font, SkShaper::BiDiRunIterator &bidi, SkShaper::ScriptRunIterator &script, SkShaper::LanguageRunIterator &language, SkScalar width, SkShaper::RunHandler *handler) {
-    shaper->shape(utf8, utf8Bytes, font, bidi, script, language, width, handler);
+void SkShaper_shape_2(SkShaper *shaper, const char *utf8, size_t utf8Bytes, SkShaper::FontRunIterator *font, SkShaper::BiDiRunIterator *bidi, SkShaper::ScriptRunIterator *script, SkShaper::LanguageRunIterator *language, SkScalar width, SkShaper::RunHandler *handler) {
+    shaper->shape(utf8, utf8Bytes, *font, *bidi, *script, *language, width, handler);
 }
 
-void SkShaper_shape_3(SkShaper *shaper, const char *utf8, size_t utf8Bytes, SkShaper::FontRunIterator &font, SkShaper::BiDiRunIterator &bidi, SkShaper::ScriptRunIterator &script, SkShaper::LanguageRunIterator &language, const SkShaper::Feature *features, size_t featuresSize, SkScalar width, SkShaper::RunHandler *handler) {
-    shaper->shape(utf8, utf8Bytes, font, bidi, script, language, features, featuresSize, width, handler);
+void SkShaper_shape_3(SkShaper *shaper, const char *utf8, size_t utf8Bytes, SkShaper::FontRunIterator *font, SkShaper::BiDiRunIterator *bidi, SkShaper::ScriptRunIterator *script, SkShaper::LanguageRunIterator *language, const SkShaper::Feature *features, size_t featuresSize, SkScalar width, SkShaper::RunHandler *handler) {
+    shaper->shape(utf8, utf8Bytes, *font, *bidi, *script, *language, features, featuresSize, width, handler);
 }
 
 // static
@@ -28,20 +29,24 @@ void SkShaper_MakePrimitive(const char *sk_shaper_key_out) {
     static_sk_shaper_set(sk_shaper_key_out, SkShaper::MakePrimitive());
 }
 
-void SkShaper_Make(const char *sk_shaper_key_out, sk_sp<SkFontMgr> font_mgr) {
-    static_sk_shaper_set(sk_shaper_key_out, SkShaper::Make(std::move(font_mgr)));
+void SkShaper_Make(const char *sk_shaper_key_out, const char *sk_font_mgr_key_in) {
+    static_sk_shaper_set(sk_shaper_key_out, SkShaper::Make(static_sk_font_mgr_move(sk_font_mgr_key_in)));
 }
 
 void SkShaper_PurgeCaches() {
     SkShaper::PurgeCaches();
 }
 
-void SkShaper_MakeFontMgrRunIterator(const char *sk_shaper_font_run_iterator_key_out, const char *utf8, size_t utf8Bytes, const SkFont &font, sk_sp<SkFontMgr> fallback) {
-    static_sk_shaper_font_run_iterator_set(sk_shaper_font_run_iterator_key_out, SkShaper::MakeFontMgrRunIterator(utf8, utf8Bytes, font, std::move(fallback)));
+void SkShaper_MakeFontMgrRunIterator(const char *sk_shaper_font_run_iterator_key_out, const char *sk_font_mgr_key_in,
+                                     const char *utf8, size_t utf8Bytes, const SkFont *font) {
+    static_sk_shaper_font_run_iterator_set(sk_shaper_font_run_iterator_key_out, SkShaper::MakeFontMgrRunIterator(utf8, utf8Bytes, *font, static_sk_font_mgr_move(sk_font_mgr_key_in)));
 }
 
-void SkShaper_MakeFontMgrRunIterator_2(const char *sk_shaper_font_run_iterator_key_out, const char *utf8, size_t utf8Bytes, const SkFont &font, sk_sp<SkFontMgr> fallback, const char *requestName, SkFontStyle requestStyle, const SkShaper::LanguageRunIterator *language_run_iterator) {
-    static_sk_shaper_font_run_iterator_set(sk_shaper_font_run_iterator_key_out, SkShaper::MakeFontMgrRunIterator(utf8, utf8Bytes, font, std::move(fallback), requestName, requestStyle, language_run_iterator));
+void SkShaper_MakeFontMgrRunIterator_2(const char *sk_shaper_font_run_iterator_key_out, const char *sk_font_mgr_key_in,
+                                       const char *utf8, size_t utf8Bytes, const SkFont *font, const char *requestName,
+                                       SkFontStyle requestStyle,
+                                       const SkShaper::LanguageRunIterator *language_run_iterator) {
+    static_sk_shaper_font_run_iterator_set(sk_shaper_font_run_iterator_key_out, SkShaper::MakeFontMgrRunIterator(utf8, utf8Bytes, *font, static_sk_font_mgr_move(sk_font_mgr_key_in), requestName, requestStyle, language_run_iterator));
 }
 
 void SkShaper_MakeBiDiRunIterator(const char *sk_shaper_bi_di_run_iterator_key_out, const char *utf8, size_t utf8Bytes, uint8_t bidiLevel) {

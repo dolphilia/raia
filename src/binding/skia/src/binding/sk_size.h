@@ -20,7 +20,7 @@ SkISize SkSize_toCeil(SkSize *size);
 SkISize SkSize_toFloor(SkSize *size);
 // static
 SkSize SkSize_Make(SkScalar w, SkScalar h);
-SkSize SkSize_Make_2(const SkISize &src);
+SkSize SkSize_Make_2(const SkISize *src);
 SkSize SkSize_MakeEmpty();
 }
 

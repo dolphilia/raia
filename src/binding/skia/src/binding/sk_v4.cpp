@@ -23,8 +23,8 @@ SkScalar SkV4_length(SkV4 *v4) {
     return v4->length();
 }
 
-SkScalar SkV4_dot(SkV4 *v4, const SkV4 &v) {
-    return v4->dot(v);
+SkScalar SkV4_dot(SkV4 *v4, const SkV4 *v) {
+    return v4->dot(*v);
 }
 
 SkV4 SkV4_normalize(SkV4 *v4) {
@@ -41,12 +41,12 @@ float * SkV4_ptr_2(SkV4 *v4) {
 
 // static
 
-SkScalar SkV4_Dot(const SkV4 &a, const SkV4 &b) {
-    return SkV4::Dot(a, b);
+SkScalar SkV4_Dot(const SkV4 *a, const SkV4 *b) {
+    return SkV4::Dot(*a, *b);
 }
 
-SkV4 SkV4_Normalize(const SkV4 &v) {
-    return SkV4::Normalize(v);
+SkV4 SkV4_Normalize(const SkV4 *v) {
+    return SkV4::Normalize(*v);
 }
 
 }

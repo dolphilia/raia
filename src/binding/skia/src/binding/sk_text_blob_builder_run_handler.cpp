@@ -22,19 +22,19 @@ void SkTextBlobBuilderRunHandler_beginLine(SkTextBlobBuilderRunHandler *text_blo
     text_blob_builder_run_handler->beginLine();
 }
 
-void SkTextBlobBuilderRunHandler_runInfo(SkTextBlobBuilderRunHandler *text_blob_builder_run_handler, const SkTextBlobBuilderRunHandler::RunInfo &run_info) {
-    text_blob_builder_run_handler->runInfo(run_info);
+void SkTextBlobBuilderRunHandler_runInfo(SkTextBlobBuilderRunHandler *text_blob_builder_run_handler, const SkTextBlobBuilderRunHandler::RunInfo *run_info) {
+    text_blob_builder_run_handler->runInfo(*run_info);
 }
 void SkTextBlobBuilderRunHandler_commitRunInfo(SkTextBlobBuilderRunHandler *text_blob_builder_run_handler) {
     text_blob_builder_run_handler->commitRunInfo();
 }
 
-SkTextBlobBuilderRunHandler::Buffer SkTextBlobBuilderRunHandler_runBuffer(SkTextBlobBuilderRunHandler *text_blob_builder_run_handler, const SkTextBlobBuilderRunHandler::RunInfo &run_info) {
-    return text_blob_builder_run_handler->runBuffer(run_info);
+SkTextBlobBuilderRunHandler::Buffer SkTextBlobBuilderRunHandler_runBuffer(SkTextBlobBuilderRunHandler *text_blob_builder_run_handler, const SkTextBlobBuilderRunHandler::RunInfo *run_info) {
+    return text_blob_builder_run_handler->runBuffer(*run_info);
 }
 
-void SkTextBlobBuilderRunHandler_commitRunBuffer(SkTextBlobBuilderRunHandler *text_blob_builder_run_handler, const SkTextBlobBuilderRunHandler::RunInfo &run_info) {
-    text_blob_builder_run_handler->commitRunBuffer(run_info);
+void SkTextBlobBuilderRunHandler_commitRunBuffer(SkTextBlobBuilderRunHandler *text_blob_builder_run_handler, const SkTextBlobBuilderRunHandler::RunInfo *run_info) {
+    text_blob_builder_run_handler->commitRunBuffer(*run_info);
 }
 
 void SkTextBlobBuilderRunHandler_commitLine(SkTextBlobBuilderRunHandler *text_blob_builder_run_handler) {

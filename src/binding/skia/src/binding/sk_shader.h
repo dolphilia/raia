@@ -17,12 +17,13 @@ extern "C" {
 bool SkShader_isOpaque(SkShader *shader);
 SkImage * SkShader_isAImage(SkShader *shader, SkMatrix *localMatrix, SkTileMode xy[2]);
 bool SkShader_isAImage_2(SkShader *shader);
-void SkShader_makeWithLocalMatrix(const char *sk_shader_key_out, SkShader *shader, const SkMatrix &matrix);
-void SkShader_makeWithColorFilter(const char *sk_shader_key_out, SkShader *shader, sk_sp<SkColorFilter> filter);
-void SkShader_makeWithWorkingColorSpace(const char *sk_shader_key_out, SkShader *shader, sk_sp<SkColorSpace> space);
+void SkShader_makeWithLocalMatrix(const char *sk_shader_key_out, SkShader *shader, const SkMatrix *matrix);
+void SkShader_makeWithColorFilter(const char *sk_shader_key_out, const char *sk_color_filter_key_in, SkShader *shader);
+void
+SkShader_makeWithWorkingColorSpace(const char *sk_shader_key_out, const char *sk_color_space_key_in, SkShader *shader);
 SkShader::Factory SkShader_getFactory(SkShader *shader);
 const char * SkShader_getTypeName(SkShader *shader);
-void SkShader_flatten(SkShader *shader, SkWriteBuffer &buffer);
+void SkShader_flatten(SkShader *shader, SkWriteBuffer *buffer);
 SkShader::Type SkShader_getFlattenableType(SkShader *shader);
 void SkShader_serialize(const char *sk_data_key_out, SkShader *shader, const SkSerialProcs *procs);
 size_t SkShader_serialize_2(SkShader *shader, void *memory, size_t memory_size, const SkSerialProcs *procs);

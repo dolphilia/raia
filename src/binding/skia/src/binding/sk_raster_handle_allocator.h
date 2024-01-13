@@ -9,8 +9,8 @@
 
 extern "C" {
 void SkRasterHandleAllocator_delete(SkRasterHandleAllocator *raster_handle_allocator);
-bool SkRasterHandleAllocator_allocHandle(SkRasterHandleAllocator *raster_handle_allocator, const SkImageInfo &info, SkRasterHandleAllocator::Rec *rec);
-void SkRasterHandleAllocator_updateHandle(SkRasterHandleAllocator *raster_handle_allocator, SkRasterHandleAllocator::Handle handle, const SkMatrix &matrix, const SkIRect &irect);
+bool SkRasterHandleAllocator_allocHandle(SkRasterHandleAllocator *raster_handle_allocator, const SkImageInfo *info, SkRasterHandleAllocator::Rec *rec);
+void SkRasterHandleAllocator_updateHandle(SkRasterHandleAllocator *raster_handle_allocator, SkRasterHandleAllocator::Handle handle, const SkMatrix *matrix, const SkIRect *irect);
 }
 
 #endif //RAIA_SKIA_SK_RASTER_HANDLE_ALLOCATOR_H

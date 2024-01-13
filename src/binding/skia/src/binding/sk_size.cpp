@@ -52,8 +52,8 @@ SkSize SkSize_Make(SkScalar w, SkScalar h) {
     return SkSize::Make(w, h);
 }
 
-SkSize SkSize_Make_2(const SkISize &src) {
-    return SkSize::Make(src);
+SkSize SkSize_Make_2(const SkISize *src) {
+    return SkSize::Make(*src);
 }
 
 SkSize SkSize_MakeEmpty() {

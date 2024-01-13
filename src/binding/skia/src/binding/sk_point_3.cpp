@@ -46,12 +46,12 @@ bool SkPoint3_isFinite(SkPoint3 *point3) {
     return point3->isFinite();
 }
 
-SkScalar SkPoint3_dot(SkPoint3 *point3, const SkPoint3 &vec) {
-    return point3->dot(vec);
+SkScalar SkPoint3_dot(SkPoint3 *point3, const SkPoint3 *vec) {
+    return point3->dot(*vec);
 }
 
-SkPoint3 SkPoint3_cross(SkPoint3 *point3, const SkPoint3 &vec) {
-    return point3->cross(vec);
+SkPoint3 SkPoint3_cross(SkPoint3 *point3, const SkPoint3 *vec) {
+    return point3->cross(*vec);
 }
 
 // static
@@ -64,12 +64,12 @@ SkScalar SkPoint3_Length(SkScalar x, SkScalar y, SkScalar z) {
     return SkPoint3::Length(x, y, z);
 }
 
-SkScalar SkPoint3_DotProduct(const SkPoint3 &a, const SkPoint3 &b) {
-    return SkPoint3::DotProduct(a, b);
+SkScalar SkPoint3_DotProduct(const SkPoint3 *a, const SkPoint3 *b) {
+    return SkPoint3::DotProduct(*a, *b);
 }
 
-SkPoint3 SkPoint3_CrossProduct(const SkPoint3 &a, const SkPoint3 &b) {
-    return SkPoint3::CrossProduct(a, b);
+SkPoint3 SkPoint3_CrossProduct(const SkPoint3 *a, const SkPoint3 *b) {
+    return SkPoint3::CrossProduct(*a, *b);
 }
 
 }

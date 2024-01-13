@@ -8,11 +8,12 @@
 #include "include/effects/SkRuntimeEffect.h"
 #include "../static/static_sk_shader.h"
 #include "../static/static_sk_data.h"
+#include "../static/static_sk_runtime_effect.h"
 #include "../static/static_sk_runtime_effect_child_ptr.h"
 
 extern "C" {
-SkRuntimeShaderBuilder *SkRuntimeShaderBuilder_new(sk_sp<SkRuntimeEffect> effect);
-SkRuntimeShaderBuilder *SkRuntimeShaderBuilder_new_2(const SkRuntimeShaderBuilder &builder);
+SkRuntimeShaderBuilder *SkRuntimeShaderBuilder_new(const char *sk_runtime_effect_key_in);
+SkRuntimeShaderBuilder *SkRuntimeShaderBuilder_new_2(const SkRuntimeShaderBuilder *builder);
 void SkRuntimeShaderBuilder_delete(SkRuntimeShaderBuilder *runtime_shader_builder);
 void SkRuntimeShaderBuilder_makeShader(const char *sk_shader_key_out, SkRuntimeShaderBuilder *runtime_shader_builder, const SkMatrix *localMatrix);
 const SkRuntimeEffect * SkRuntimeShaderBuilder_effect(SkRuntimeShaderBuilder *runtime_shader_builder);

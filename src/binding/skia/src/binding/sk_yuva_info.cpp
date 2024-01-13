@@ -14,8 +14,8 @@ SkYUVAInfo *SkYUVAInfo_new() {
     return new SkYUVAInfo();
 }
 
-SkYUVAInfo *SkYUVAInfo_new_2(const SkYUVAInfo &info) {
-    return new SkYUVAInfo(info);
+SkYUVAInfo *SkYUVAInfo_new_2(const SkYUVAInfo *info) {
+    return new SkYUVAInfo(*info);
 }
 
 SkYUVAInfo *SkYUVAInfo_new_3(SkISize dimensions, SkYUVAInfo::PlaneConfig config, SkYUVAInfo::Subsampling subsampling, SkYUVColorSpace space, SkEncodedOrigin origin, SkYUVAInfo::Siting sitingX, SkYUVAInfo::Siting sitingY) {

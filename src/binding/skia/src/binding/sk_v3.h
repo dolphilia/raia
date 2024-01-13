@@ -20,15 +20,15 @@ extern "C" {
 // void operator*=(SkScalar s)
 SkScalar SkV3_lengthSquared(SkV3 *v3);
 SkScalar SkV3_length(SkV3 *v3);
-SkScalar SkV3_dot(SkV3 *v3, const SkV3 &v);
-SkV3 SkV3_cross(SkV3 *v3, const SkV3 &v);
+SkScalar SkV3_dot(SkV3 *v3, const SkV3 *v);
+SkV3 SkV3_cross(SkV3 *v3, const SkV3 *v);
 SkV3 SkV3_normalize(SkV3 *v3);
 const float * SkV3_ptr(SkV3 *v3);
 float * SkV3_ptr_2(SkV3 *v3);
 // static
-SkScalar SkV3_Dot(const SkV3 &a, const SkV3 &b);
-SkV3 SkV3_Cross(const SkV3 &a, const SkV3 &b);
-SkV3 SkV3_Normalize(const SkV3 &v);
+SkScalar SkV3_Dot(const SkV3 *a, const SkV3 *b);
+SkV3 SkV3_Cross(const SkV3 *a, const SkV3 *b);
+SkV3 SkV3_Normalize(const SkV3 *v);
 }
 
 #endif //RAIA_SKIA_SK_V3_H

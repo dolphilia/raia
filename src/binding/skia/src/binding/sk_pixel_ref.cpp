@@ -3,6 +3,7 @@
 //
 
 #include "sk_pixel_ref.h"
+#include "../static/static_sk_id_change_listener.h"
 
 extern "C" {
 
@@ -50,8 +51,8 @@ void SkPixelRef_setImmutable(SkPixelRef *pixel_ref) {
     pixel_ref->setImmutable();
 }
 
-void SkPixelRef_addGenIDChangeListener(SkPixelRef *pixel_ref, sk_sp<SkIDChangeListener> listener) {
-    pixel_ref->addGenIDChangeListener(std::move(listener));
+void SkPixelRef_addGenIDChangeListener(const char *sk_id_change_listener_key_in, SkPixelRef *pixel_ref) {
+    pixel_ref->addGenIDChangeListener(static_sk_id_change_listener_move(sk_id_change_listener_key_in));
 }
 
 void SkPixelRef_notifyAddedToCache(SkPixelRef *pixel_ref) {

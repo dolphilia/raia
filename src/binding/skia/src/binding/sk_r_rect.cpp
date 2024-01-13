@@ -12,8 +12,8 @@ SkRRect *SkRRect_new() {
     return new SkRRect();
 }
 
-SkRRect *SkRRect_new_2(const SkRRect &rrect) {
-    return new SkRRect(rrect);
+SkRRect *SkRRect_new_2(const SkRRect *rrect) {
+    return new SkRRect(*rrect);
 }
 
 SkRRect::Type getType(SkRRect *rrect) {
@@ -64,24 +64,24 @@ void SkRRect_setEmpty(SkRRect *rrect) {
     rrect->setEmpty();
 }
 
-void SkRRect_setRect(SkRRect *rrect, const SkRect &rect) {
-    rrect->setRect(rect);
+void SkRRect_setRect(SkRRect *rrect, const SkRect *rect) {
+    rrect->setRect(*rect);
 }
 
-void SkRRect_setOval(SkRRect *rrect, const SkRect &oval) {
-    rrect->setOval(oval);
+void SkRRect_setOval(SkRRect *rrect, const SkRect *oval) {
+    rrect->setOval(*oval);
 }
 
-void SkRRect_setRectXY(SkRRect *rrect, const SkRect &rect, SkScalar xRad, SkScalar yRad) {
-    rrect->setRectXY(rect, xRad, yRad);
+void SkRRect_setRectXY(SkRRect *rrect, const SkRect *rect, SkScalar xRad, SkScalar yRad) {
+    rrect->setRectXY(*rect, xRad, yRad);
 }
 
-void SkRRect_setNinePatch(SkRRect *rrect, const SkRect &rect, SkScalar leftRad, SkScalar topRad, SkScalar rightRad, SkScalar bottomRad) {
-    rrect->setNinePatch(rect, leftRad, topRad, rightRad, bottomRad);
+void SkRRect_setNinePatch(SkRRect *rrect, const SkRect *rect, SkScalar leftRad, SkScalar topRad, SkScalar rightRad, SkScalar bottomRad) {
+    rrect->setNinePatch(*rect, leftRad, topRad, rightRad, bottomRad);
 }
 
-void SkRRect_setRectRadii(SkRRect *rrect, const SkRect &rect, const SkVector radii[4]) {
-    rrect->setRectRadii(rect, radii);
+void SkRRect_setRectRadii(SkRRect *rrect, const SkRect *rect, const SkVector radii[4]) {
+    rrect->setRectRadii(*rect, radii);
 }
 
 const SkRect * SkRRect_rect(SkRRect *rrect) {
@@ -120,8 +120,8 @@ void SkRRect_makeOffset(const char *sk_r_rect_key_out, SkRRect *rrect, SkScalar 
     static_sk_r_rect_set(sk_r_rect_key_out, rrect->makeOffset(dx, dy));
 }
 
-bool SkRRect_contains(SkRRect *rrect, const SkRect &rect) {
-    return rrect->contains(rect);
+bool SkRRect_contains(SkRRect *rrect, const SkRect *rect) {
+    return rrect->contains(*rect);
 }
 
 bool SkRRect_isValid(SkRRect *rrect) {
@@ -136,8 +136,8 @@ size_t SkRRect_readFromMemory(SkRRect *rrect, const void *buffer, size_t length)
     return rrect->readFromMemory(buffer, length);
 }
 
-bool SkRRect_transform(SkRRect *rrect, const SkMatrix &matrix, SkRRect *dst) {
-    return rrect->transform(matrix, dst);
+bool SkRRect_transform(SkRRect *rrect, const SkMatrix *matrix, SkRRect *dst) {
+    return rrect->transform(*matrix, dst);
 }
 
 void SkRRect_dump(SkRRect *rrect, bool asHex) {
@@ -162,16 +162,16 @@ void SkRRect_MakeEmpty(const char *sk_r_rect_key_out) {
     static_sk_r_rect_set(sk_r_rect_key_out, SkRRect::MakeEmpty());
 }
 
-void SkRRect_MakeRect(const char *sk_r_rect_key_out, const SkRect &r) {
-    static_sk_r_rect_set(sk_r_rect_key_out, SkRRect::MakeRect(r));
+void SkRRect_MakeRect(const char *sk_r_rect_key_out, const SkRect *r) {
+    static_sk_r_rect_set(sk_r_rect_key_out, SkRRect::MakeRect(*r));
 }
 
-void SkRRect_MakeOval(const char *sk_r_rect_key_out, const SkRect &oval) {
-    static_sk_r_rect_set(sk_r_rect_key_out, SkRRect::MakeOval(oval));
+void SkRRect_MakeOval(const char *sk_r_rect_key_out, const SkRect *oval) {
+    static_sk_r_rect_set(sk_r_rect_key_out, SkRRect::MakeOval(*oval));
 }
 
-void SkRRect_MakeRectXY(const char *sk_r_rect_key_out, const SkRect &rect, SkScalar xRad, SkScalar yRad) {
-    static_sk_r_rect_set(sk_r_rect_key_out, SkRRect::MakeRectXY(rect, xRad, yRad));
+void SkRRect_MakeRectXY(const char *sk_r_rect_key_out, const SkRect *rect, SkScalar xRad, SkScalar yRad) {
+    static_sk_r_rect_set(sk_r_rect_key_out, SkRRect::MakeRectXY(*rect, xRad, yRad));
 }
 
 }

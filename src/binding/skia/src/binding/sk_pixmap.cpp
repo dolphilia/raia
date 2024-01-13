@@ -10,28 +10,28 @@ SkPixmap *SkPixmap_new() {
     return new SkPixmap();
 }
 
-SkPixmap *SkPixmap_new_2(const SkImageInfo &info, const void *addr, size_t rowBytes) {
-    return new SkPixmap(info, addr, rowBytes);
+SkPixmap *SkPixmap_new_2(const SkImageInfo *info, const void *addr, size_t rowBytes) {
+    return new SkPixmap(*info, addr, rowBytes);
 }
 
 void SkPixmap_reset(SkPixmap *pixmap) {
     return pixmap->reset();
 }
 
-void SkPixmap_reset_2(SkPixmap *pixmap, const SkImageInfo &info, const void *addr, size_t rowBytes) {
-    return pixmap->reset(info, addr, rowBytes);
+void SkPixmap_reset_2(SkPixmap *pixmap, const SkImageInfo *info, const void *addr, size_t rowBytes) {
+    return pixmap->reset(*info, addr, rowBytes);
 }
 
-bool SkPixmap_reset_3(SkPixmap *pixmap, const SkMask &mask) {
-    return pixmap->reset(mask);
+bool SkPixmap_reset_3(SkPixmap *pixmap, const SkMask *mask) {
+    return pixmap->reset(*mask);
 }
 
-void SkPixmap_setColorSpace(SkPixmap *pixmap, sk_sp<SkColorSpace> colorSpace) {
-    return pixmap->setColorSpace(std::move(colorSpace));
+void SkPixmap_setColorSpace(const char *sk_color_space_key_in, SkPixmap *pixmap) {
+    return pixmap->setColorSpace(static_sk_color_space_move(sk_color_space_key_in));
 }
 
-bool SkPixmap_extractSubset(SkPixmap *pixmap, SkPixmap *subset, const SkIRect &area) {
-    return pixmap->extractSubset(subset, area);
+bool SkPixmap_extractSubset(SkPixmap *pixmap, SkPixmap *subset, const SkIRect *area) {
+    return pixmap->extractSubset(subset, *area);
 }
 
 const SkImageInfo * SkPixmap_info(SkPixmap *pixmap) {
@@ -182,36 +182,36 @@ uint16_t * SkPixmap_writable_addrF16(SkPixmap *pixmap, int x, int y) {
     return pixmap->writable_addrF16(x, y);
 }
 
-bool SkPixmap_readPixels(SkPixmap *pixmap, const SkImageInfo &dstInfo, void *dstPixels, size_t dstRowBytes) {
-    return pixmap->readPixels(dstInfo, dstPixels, dstRowBytes);
+bool SkPixmap_readPixels(SkPixmap *pixmap, const SkImageInfo *dstInfo, void *dstPixels, size_t dstRowBytes) {
+    return pixmap->readPixels(*dstInfo, dstPixels, dstRowBytes);
 }
 
-bool SkPixmap_readPixels_2(SkPixmap *pixmap, const SkImageInfo &dstInfo, void *dstPixels, size_t dstRowBytes, int srcX, int srcY) {
-    return pixmap->readPixels(dstInfo, dstPixels, dstRowBytes, srcX, srcY);
+bool SkPixmap_readPixels_2(SkPixmap *pixmap, const SkImageInfo *dstInfo, void *dstPixels, size_t dstRowBytes, int srcX, int srcY) {
+    return pixmap->readPixels(*dstInfo, dstPixels, dstRowBytes, srcX, srcY);
 }
 
-bool SkPixmap_readPixels_3(SkPixmap *pixmap, const SkPixmap &dst, int srcX, int srcY) {
-    return pixmap->readPixels(dst, srcX, srcY);
+bool SkPixmap_readPixels_3(SkPixmap *pixmap, const SkPixmap *dst, int srcX, int srcY) {
+    return pixmap->readPixels(*dst, srcX, srcY);
 }
 
-bool SkPixmap_readPixels_4(SkPixmap *pixmap, const SkPixmap &dst) {
-    return pixmap->readPixels(dst);
+bool SkPixmap_readPixels_4(SkPixmap *pixmap, const SkPixmap *dst) {
+    return pixmap->readPixels(*dst);
 }
 
-bool SkPixmap_scalePixels(SkPixmap *pixmap, const SkPixmap &dst, const SkSamplingOptions &options) {
-    return pixmap->scalePixels(dst, options);
+bool SkPixmap_scalePixels(SkPixmap *pixmap, const SkPixmap *dst, const SkSamplingOptions *options) {
+    return pixmap->scalePixels(*dst, *options);
 }
 
-bool SkPixmap_erase(SkPixmap *pixmap, SkColor color, const SkIRect &subset) {
-    return pixmap->erase(color, subset);
+bool SkPixmap_erase(SkPixmap *pixmap, SkColor color, const SkIRect *subset) {
+    return pixmap->erase(color, *subset);
 }
 
 bool SkPixmap_erase_2(SkPixmap *pixmap, SkColor color) {
     return pixmap->erase(color);
 }
 
-bool SkPixmap_erase_3(SkPixmap *pixmap, const SkColor4f &color, const SkIRect *subset) {
-    return pixmap->erase(color, subset);
+bool SkPixmap_erase_3(SkPixmap *pixmap, const SkColor4f *color, const SkIRect *subset) {
+    return pixmap->erase(*color, subset);
 }
 
 }

@@ -19,7 +19,7 @@ uint32_t SkPixelRef_getGenerationID(SkPixelRef *pixel_ref);
 void SkPixelRef_notifyPixelsChanged(SkPixelRef *pixel_ref);
 bool SkPixelRef_isImmutable(SkPixelRef *pixel_ref);
 void SkPixelRef_setImmutable(SkPixelRef *pixel_ref);
-void SkPixelRef_addGenIDChangeListener(SkPixelRef *pixel_ref, sk_sp<SkIDChangeListener> listener);
+void SkPixelRef_addGenIDChangeListener(const char *sk_id_change_listener_key_in, SkPixelRef *pixel_ref);
 void SkPixelRef_notifyAddedToCache(SkPixelRef *pixel_ref);
 SkDiscardableMemory * SkPixelRef_diagnostic_only_getDiscardable(SkPixelRef *pixel_ref);
 bool SkPixelRef_unique(SkPixelRef *pixel_ref);

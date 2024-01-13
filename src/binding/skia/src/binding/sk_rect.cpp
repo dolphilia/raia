@@ -70,8 +70,8 @@ void SkRect_setEmpty(SkRect *rect) {
     rect->setEmpty();
 }
 
-void SkRect_set(SkRect *rect, const SkIRect &src) {
-    rect->set(src);
+void SkRect_set(SkRect *rect, const SkIRect *src) {
+    rect->set(*src);
 }
 
 void SkRect_setLTRB(SkRect *rect, float left, float top, float right, float bottom) {
@@ -90,8 +90,8 @@ void SkRect_setBoundsNoCheck(SkRect *rect, const SkPoint pts[], int count) {
     rect->setBoundsNoCheck(pts, count);
 }
 
-void SkRect_set_2(SkRect *rect, const SkPoint &p0, const SkPoint &p1) {
-    rect->set(p0, p1);
+void SkRect_set_2(SkRect *rect, const SkPoint *p0, const SkPoint *p1) {
+    rect->set(*p0, *p1);
 }
 
 void SkRect_setXYWH(SkRect *rect, float x, float y, float width, float height) {
@@ -126,8 +126,8 @@ void SkRect_offset(SkRect *rect, float dx, float dy) {
     rect->offset(dx, dy);
 }
 
-void SkRect_offset_2(SkRect *rect, const SkPoint &delta) {
-    rect->offset(delta);
+void SkRect_offset_2(SkRect *rect, const SkPoint *delta) {
+    rect->offset(*delta);
 }
 
 void SkRect_offsetTo(SkRect *rect, float newX, float newY) {
@@ -142,40 +142,40 @@ void SkRect_outset(SkRect *rect, float dx, float dy) {
     rect->outset(dx, dy);
 }
 
-bool SkRect_intersect(SkRect *rect, const SkRect &r) {
-    return rect->intersect(r);
+bool SkRect_intersect(SkRect *rect, const SkRect *r) {
+    return rect->intersect(*r);
 }
 
-bool SkRect_intersect_2(SkRect *rect, const SkRect &a, const SkRect &b) {
-    return rect->intersect(a, b);
+bool SkRect_intersect_2(SkRect *rect, const SkRect *a, const SkRect *b) {
+    return rect->intersect(*a, *b);
 }
 
-bool SkRect_intersects(SkRect *rect, const SkRect &r) {
-    return rect->intersects(r);
+bool SkRect_intersects(SkRect *rect, const SkRect *r) {
+    return rect->intersects(*r);
 }
 
-void SkRect_join(SkRect *rect, const SkRect &r) {
-    rect->join(r);
+void SkRect_join(SkRect *rect, const SkRect *r) {
+    rect->join(*r);
 }
 
-void SkRect_joinNonEmptyArg(SkRect *rect, const SkRect &r) {
-    rect->joinNonEmptyArg(r);
+void SkRect_joinNonEmptyArg(SkRect *rect, const SkRect *r) {
+    rect->joinNonEmptyArg(*r);
 }
 
-void SkRect_joinPossiblyEmptyRect(SkRect *rect, const SkRect &r) {
-    rect->joinPossiblyEmptyRect(r);
+void SkRect_joinPossiblyEmptyRect(SkRect *rect, const SkRect *r) {
+    rect->joinPossiblyEmptyRect(*r);
 }
 
 bool SkRect_contains(SkRect *rect, float x, float y) {
     return rect->contains(x, y);
 }
 
-bool SkRect_contains_2(SkRect *rect, const SkRect &r) {
-    return rect->contains(r);
+bool SkRect_contains_2(SkRect *rect, const SkRect *r) {
+    return rect->contains(*r);
 }
 
-bool SkRect_contains_3(SkRect *rect, const SkIRect &r) {
-    return rect->contains(r);
+bool SkRect_contains_3(SkRect *rect, const SkIRect *r) {
+    return rect->contains(*r);
 }
 
 void SkRect_round(SkRect *rect, SkIRect *dst) {
@@ -244,8 +244,8 @@ void SkRect_MakeIWH(const char *sk_rect_key_out, int w, int h) {
     static_sk_rect_set(sk_rect_key_out, SkRect::MakeIWH(w, h));
 }
 
-void SkRect_MakeSize(const char *sk_rect_key_out, const SkSize &size) {
-    static_sk_rect_set(sk_rect_key_out, SkRect::MakeSize(size));
+void SkRect_MakeSize(const char *sk_rect_key_out, const SkSize *size) {
+    static_sk_rect_set(sk_rect_key_out, SkRect::MakeSize(*size));
 }
 
 void SkRect_MakeLTRB(const char *sk_rect_key_out, float l, float t, float r, float b) {
@@ -256,16 +256,16 @@ void SkRect_MakeXYWH(const char *sk_rect_key_out, float x, float y, float w, flo
     static_sk_rect_set(sk_rect_key_out, SkRect::MakeXYWH(x, y, w, h));
 }
 
-void SkRect_Make(const char *sk_rect_key_out, const SkISize &size) {
-    static_sk_rect_set(sk_rect_key_out, SkRect::Make(size));
+void SkRect_Make(const char *sk_rect_key_out, const SkISize *size) {
+    static_sk_rect_set(sk_rect_key_out, SkRect::Make(*size));
 }
 
-void SkRect_Make_2(const char *sk_rect_key_out, const SkIRect &irect) {
-    static_sk_rect_set(sk_rect_key_out, SkRect::Make(irect));
+void SkRect_Make_2(const char *sk_rect_key_out, const SkIRect *irect) {
+    static_sk_rect_set(sk_rect_key_out, SkRect::Make(*irect));
 }
 
-bool SkRect_Intersects(const SkRect &a, const SkRect &b) {
-    return SkRect::Intersects(a, b);
+bool SkRect_Intersects(const SkRect *a, const SkRect *b) {
+    return SkRect::Intersects(*a, *b);
 }
 
 }

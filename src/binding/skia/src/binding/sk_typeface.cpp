@@ -3,6 +3,7 @@
 //
 
 #include "sk_typeface.h"
+#include "../static/static_sk_font_mgr.h"
 
 extern "C" {
 
@@ -34,8 +35,8 @@ SkTypefaceID SkTypeface_uniqueID(SkTypeface *typeface) {
     return typeface->uniqueID();
 }
 
-void SkTypeface_makeClone(const char *sk_typeface_key_out, SkTypeface *typeface, const SkFontArguments &arguments) {
-    static_sk_typeface_set(sk_typeface_key_out, typeface->makeClone(arguments));
+void SkTypeface_makeClone(const char *sk_typeface_key_out, SkTypeface *typeface, const SkFontArguments *arguments) {
+    static_sk_typeface_set(sk_typeface_key_out, typeface->makeClone(*arguments));
 }
 
 void SkTypeface_serialize(SkTypeface *typeface, SkWStream *stream, SkTypeface::SerializeBehavior behavior) {
@@ -154,20 +155,20 @@ void SkTypeface_MakeFromFile(const char *sk_typeface_key_out, const char path[],
     static_sk_typeface_set(sk_typeface_key_out, SkTypeface::MakeFromFile(path, index));
 }
 
-void SkTypeface_MakeFromStream(const char *sk_typeface_key_out, std::unique_ptr<SkStreamAsset> stream, int index) {
-    static_sk_typeface_set(sk_typeface_key_out, SkTypeface::MakeFromStream(std::move(stream), index));
+void SkTypeface_MakeFromStream(const char *sk_typeface_key_out, const char *sk_stream_asset_key_in, int index) {
+    static_sk_typeface_set(sk_typeface_key_out, SkTypeface::MakeFromStream(static_sk_stream_asset_move(sk_stream_asset_key_in), index));
 }
 
-void SkTypeface_MakeFromData(const char *sk_typeface_key_out, sk_sp<SkData> data, int index) {
-    static_sk_typeface_set(sk_typeface_key_out, SkTypeface::MakeFromData(std::move(data), index));
+void SkTypeface_MakeFromData(const char *sk_typeface_key_out, const char *sk_data_key_in, int index) {
+    static_sk_typeface_set(sk_typeface_key_out, SkTypeface::MakeFromData(static_sk_data_move(sk_data_key_in), index));
 }
 
 void SkTypeface_MakeDeserialize(const char *sk_typeface_key_out, SkStream *stream) {
     static_sk_typeface_set(sk_typeface_key_out, SkTypeface::MakeDeserialize(stream));
 }
 
-void SkTypeface_MakeDeserialize_2(const char *sk_typeface_key_out, SkStream *stream, sk_sp<SkFontMgr> lastResortMgr) {
-    static_sk_typeface_set(sk_typeface_key_out, SkTypeface::MakeDeserialize(stream, std::move(lastResortMgr)));
+void SkTypeface_MakeDeserialize_2(const char *sk_typeface_key_out, const char *sk_font_mgr_key_in, SkStream *stream) {
+    static_sk_typeface_set(sk_typeface_key_out, SkTypeface::MakeDeserialize(stream, static_sk_font_mgr_move(sk_font_mgr_key_in)));
 }
 
 void SkTypeface_Register(SkTypeface::FactoryId id, sk_sp<SkTypeface>(*make)(std::unique_ptr<SkStreamAsset>, const SkFontArguments &)) {

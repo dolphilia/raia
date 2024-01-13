@@ -18,13 +18,13 @@ extern "C" {
 // float & operator[](int i)
 SkScalar SkV4_lengthSquared(SkV4 *v4);
 SkScalar SkV4_length(SkV4 *v4);
-SkScalar SkV4_dot(SkV4 *v4, const SkV4 &v);
+SkScalar SkV4_dot(SkV4 *v4, const SkV4 *v);
 SkV4 SkV4_normalize(SkV4 *v4);
 const float * SkV4_ptr(SkV4 *v4);
 float * SkV4_ptr_2(SkV4 *v4);
 // static
-SkScalar SkV4_Dot(const SkV4 &a, const SkV4 &b);
-SkV4 SkV4_Normalize(const SkV4 &v);
+SkScalar SkV4_Dot(const SkV4 *a, const SkV4 *b);
+SkV4 SkV4_Normalize(const SkV4 *v);
 }
 
 #endif //RAIA_SKIA_SK_V4_H
