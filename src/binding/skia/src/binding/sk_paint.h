@@ -18,10 +18,8 @@ extern "C" {
 //SkPaint & operator=(const SkPaint &paint)
 //SkPaint & operator=(SkPaint &&paint)
 SkPaint *SkPaint_new();
-SkPaint *SkPaint_new_2(const SkColor4f &color, SkColorSpace *colorSpace);
-SkPaint *SkPaint_new_3(const SkPaint &paint);
-// @TODO
-SkPaint *SkPaint_new_4(SkPaint &&paint);
+SkPaint *SkPaint_new_2(const SkColor4f *color, SkColorSpace *colorSpace);
+SkPaint *SkPaint_new_3(const SkPaint *paint);
 void SkPaint_delete(SkPaint *paint);
 void SkPaint_reset(SkPaint *paint);
 bool SkPaint_isAntiAlias(SkPaint *paint);
@@ -34,8 +32,8 @@ void SkPaint_setStroke(SkPaint *paint, bool v);
 SkColor SkPaint_getColor(SkPaint *paint);
 SkColor4f SkPaint_getColor4f(SkPaint *paint);
 void SkPaint_setColor(SkPaint *paint, SkColor color);
-void SkPaint_setColor_2(SkPaint *paint, const SkColor4f &color, SkColorSpace *colorSpace);
-void SkPaint_setColor4f(SkPaint *paint, const SkColor4f &color, SkColorSpace *colorSpace);
+void SkPaint_setColor_2(SkPaint *paint, const SkColor4f *color, SkColorSpace *colorSpace);
+void SkPaint_setColor4f(SkPaint *paint, const SkColor4f *color, SkColorSpace *colorSpace);
 float SkPaint_getAlphaf(SkPaint *paint);
 uint8_t SkPaint_getAlpha(SkPaint *paint);
 void SkPaint_setAlphaf(SkPaint *paint, float a);
@@ -51,32 +49,32 @@ SkPaint::Join SkPaint_getStrokeJoin(SkPaint *paint);
 void SkPaint_setStrokeJoin(SkPaint *paint, SkPaint::Join join);
 SkShader * SkPaint_getShader(SkPaint *paint);
 void SkPaint_refShader(const char *sk_shader_key_out, SkPaint *paint);
-void SkPaint_setShader(SkPaint *paint, sk_sp<SkShader> shader);
+void SkPaint_setShader(const char *sk_shader_key_in, SkPaint *paint);
 SkColorFilter * SkPaint_getColorFilter(SkPaint *paint);
 void SkPaint_refColorFilter(const char *sk_color_filter_key_out, SkPaint *paint);
-void SkPaint_setColorFilter(SkPaint *paint, sk_sp<SkColorFilter> colorFilter);
+void SkPaint_setColorFilter(const char *sk_color_filter_key_in, SkPaint *paint);
 void SkPaint_asBlendMode(const char *sk_blend_mode_key_out, SkPaint *paint);
 SkBlendMode SkPaint_getBlendMode_or(SkPaint *paint, SkBlendMode defaultMode);
 bool SkPaint_isSrcOver(SkPaint *paint);
 void SkPaint_setBlendMode(SkPaint *paint, SkBlendMode mode);
 SkBlender * SkPaint_getBlender(SkPaint *paint);
 void SkPaint_refBlender(const char *sk_blender_key_out, SkPaint *paint);
-void SkPaint_setBlender(SkPaint *paint, sk_sp<SkBlender> blender);
+void SkPaint_setBlender(const char *sk_blender_key_in, SkPaint *paint);
 SkPathEffect * SkPaint_getPathEffect(SkPaint *paint);
 void SkPaint_refPathEffect(const char *sk_path_effect_key_out, SkPaint *paint);
-void SkPaint_setPathEffect(SkPaint *paint, sk_sp<SkPathEffect> pathEffect);
+void SkPaint_setPathEffect(const char *sk_path_effect_key_in, SkPaint *paint);
 SkMaskFilter * SkPaint_getMaskFilter(SkPaint *paint);
 void SkPaint_refMaskFilter(const char *sk_mask_filter_key_out, SkPaint *paint);
-void SkPaint_setMaskFilter(SkPaint *paint, sk_sp<SkMaskFilter> maskFilter);
+void SkPaint_setMaskFilter(const char *sk_mask_filter_key_in, SkPaint *paint);
 SkImageFilter * SkPaint_getImageFilter(SkPaint *paint);
 void SkPaint_refImageFilter(const char *sk_image_filter_key_out, SkPaint *paint);
-void SkPaint_setImageFilter(SkPaint *paint, sk_sp<SkImageFilter> imageFilter);
+void SkPaint_setImageFilter(const char *sk_image_filter_key_in, SkPaint *paint);
 
 bool SkPaint_nothingToDraw(SkPaint *paint);
 bool SkPaint_canComputeFastBounds(SkPaint *paint);
-const SkRect * SkPaint_computeFastBounds(SkPaint *paint, const SkRect &orig, SkRect *storage);
-const SkRect * SkPaint_computeFastStrokeBounds(SkPaint *paint, const SkRect &orig, SkRect *storage);
-const SkRect * SkPaint_doComputeFastBounds(SkPaint *paint, const SkRect &orig, SkRect *storage, SkPaint::Style style);
+const SkRect * SkPaint_computeFastBounds(SkPaint *paint, const SkRect *orig, SkRect *storage);
+const SkRect * SkPaint_computeFastStrokeBounds(SkPaint *paint, const SkRect *orig, SkRect *storage);
+const SkRect * SkPaint_doComputeFastBounds(SkPaint *paint, const SkRect *orig, SkRect *storage, SkPaint::Style style);
 }
 
 #endif //RAIA_SKIA_SK_PAINT_H

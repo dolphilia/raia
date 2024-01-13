@@ -13,16 +13,12 @@ SkPaint *SkPaint_new() {
     return new SkPaint();
 }
 
-SkPaint *SkPaint_new_2(const SkColor4f &color, SkColorSpace *colorSpace) {
-    return new SkPaint(color, colorSpace);
+SkPaint *SkPaint_new_2(const SkColor4f *color, SkColorSpace *colorSpace) {
+    return new SkPaint(*color, colorSpace);
 }
 
-SkPaint *SkPaint_new_3(const SkPaint &paint) {
-    return new SkPaint(paint);
-}
-
-SkPaint *SkPaint_new_4(SkPaint &&paint) { //@TODO
-    return new SkPaint(paint);
+SkPaint *SkPaint_new_3(const SkPaint *paint) {
+    return new SkPaint(*paint);
 }
 
 void SkPaint_delete(SkPaint *paint) {
@@ -73,12 +69,12 @@ void SkPaint_setColor(SkPaint *paint, SkColor color) {
     paint->setColor(color);
 }
 
-void SkPaint_setColor_2(SkPaint *paint, const SkColor4f &color, SkColorSpace *colorSpace) {
-    paint->setColor(color, colorSpace);
+void SkPaint_setColor_2(SkPaint *paint, const SkColor4f *color, SkColorSpace *colorSpace) {
+    paint->setColor(*color, colorSpace);
 }
 
-void SkPaint_setColor4f(SkPaint *paint, const SkColor4f &color, SkColorSpace *colorSpace) {
-    paint->setColor4f(color, colorSpace);
+void SkPaint_setColor4f(SkPaint *paint, const SkColor4f *color, SkColorSpace *colorSpace) {
+    paint->setColor4f(*color, colorSpace);
 }
 
 float SkPaint_getAlphaf(SkPaint *paint) {
@@ -141,8 +137,8 @@ void SkPaint_refShader(const char *sk_shader_key_out, SkPaint *paint) {
     static_sk_shader_set(sk_shader_key_out, paint->refShader());
 }
 
-void SkPaint_setShader(SkPaint *paint, sk_sp<SkShader> shader) {
-    paint->setShader(std::move(shader));
+void SkPaint_setShader(const char *sk_shader_key_in, SkPaint *paint) {
+    paint->setShader(static_sk_shader_move(sk_shader_key_in));
 }
 
 SkColorFilter * SkPaint_getColorFilter(SkPaint *paint) {
@@ -153,8 +149,8 @@ void SkPaint_refColorFilter(const char *sk_color_filter_key_out, SkPaint *paint)
     static_sk_color_filter_set(sk_color_filter_key_out, paint->refColorFilter());
 }
 
-void SkPaint_setColorFilter(SkPaint *paint, sk_sp<SkColorFilter> colorFilter) {
-    paint->setColorFilter(std::move(colorFilter));
+void SkPaint_setColorFilter(const char *sk_color_filter_key_in, SkPaint *paint) {
+    paint->setColorFilter(static_sk_color_filter_move(sk_color_filter_key_in));
 }
 
 void SkPaint_asBlendMode(const char *sk_blend_mode_key_out, SkPaint *paint) {
@@ -181,8 +177,8 @@ void SkPaint_refBlender(const char *sk_blender_key_out, SkPaint *paint) {
     static_sk_blender_set(sk_blender_key_out, paint->refBlender());
 }
 
-void SkPaint_setBlender(SkPaint *paint, sk_sp<SkBlender> blender) {
-    paint->setBlender(std::move(blender));
+void SkPaint_setBlender(const char *sk_blender_key_in, SkPaint *paint) {
+    paint->setBlender(static_sk_blender_move(sk_blender_key_in));
 }
 
 SkPathEffect * SkPaint_getPathEffect(SkPaint *paint) {
@@ -193,8 +189,8 @@ void SkPaint_refPathEffect(const char *sk_path_effect_key_out, SkPaint *paint) {
     static_sk_path_effect_set(sk_path_effect_key_out, paint->refPathEffect());
 }
 
-void SkPaint_setPathEffect(SkPaint *paint, sk_sp<SkPathEffect> pathEffect) {
-    paint->setPathEffect(std::move(pathEffect));
+void SkPaint_setPathEffect(const char *sk_path_effect_key_in, SkPaint *paint) {
+    paint->setPathEffect(static_sk_path_effect_move(sk_path_effect_key_in));
 }
 
 SkMaskFilter * SkPaint_getMaskFilter(SkPaint *paint) {
@@ -205,8 +201,8 @@ void SkPaint_refMaskFilter(const char *sk_mask_filter_key_out, SkPaint *paint) {
     static_sk_mask_filter_set(sk_mask_filter_key_out, paint->refMaskFilter());
 }
 
-void SkPaint_setMaskFilter(SkPaint *paint, sk_sp<SkMaskFilter> maskFilter) {
-    paint->setMaskFilter(std::move(maskFilter));
+void SkPaint_setMaskFilter(const char *sk_mask_filter_key_in, SkPaint *paint) {
+    paint->setMaskFilter(static_sk_mask_filter_move(sk_mask_filter_key_in));
 }
 
 SkImageFilter * SkPaint_getImageFilter(SkPaint *paint) {
@@ -217,8 +213,8 @@ void SkPaint_refImageFilter(const char *sk_image_filter_key_out, SkPaint *paint)
     static_sk_image_filter_set(sk_image_filter_key_out, paint->refImageFilter());
 }
 
-void SkPaint_setImageFilter(SkPaint *paint, sk_sp<SkImageFilter> imageFilter) {
-    paint->setImageFilter(std::move(imageFilter));
+void SkPaint_setImageFilter(const char *sk_image_filter_key_in, SkPaint *paint) {
+    paint->setImageFilter(static_sk_image_filter_move(sk_image_filter_key_in));
 }
 
 bool SkPaint_nothingToDraw(SkPaint *paint) {
@@ -229,16 +225,16 @@ bool SkPaint_canComputeFastBounds(SkPaint *paint) {
     return paint->canComputeFastBounds();
 }
 
-const SkRect * SkPaint_computeFastBounds(SkPaint *paint, const SkRect &orig, SkRect *storage) {
-    return &paint->computeFastBounds(orig, storage);
+const SkRect * SkPaint_computeFastBounds(SkPaint *paint, const SkRect *orig, SkRect *storage) {
+    return &paint->computeFastBounds(*orig, storage);
 }
 
-const SkRect * SkPaint_computeFastStrokeBounds(SkPaint *paint, const SkRect &orig, SkRect *storage) {
-    return &paint->computeFastStrokeBounds(orig, storage);
+const SkRect * SkPaint_computeFastStrokeBounds(SkPaint *paint, const SkRect *orig, SkRect *storage) {
+    return &paint->computeFastStrokeBounds(*orig, storage);
 }
 
-const SkRect * SkPaint_doComputeFastBounds(SkPaint *paint, const SkRect &orig, SkRect *storage, SkPaint::Style style) {
-    return &paint->doComputeFastBounds(orig, storage, style);
+const SkRect * SkPaint_doComputeFastBounds(SkPaint *paint, const SkRect *orig, SkRect *storage, SkPaint::Style style) {
+    return &paint->doComputeFastBounds(*orig, storage, style);
 }
 
 }
