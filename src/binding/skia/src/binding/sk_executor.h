@@ -9,7 +9,7 @@
 #include "../static/static_sk_executor.h"
 
 extern "C" {
-void SkExecutor_add(SkExecutor *executor, std::function<void(void)> fn); // @TODO
+void SkExecutor_add(const char *function_void_void_key_in, SkExecutor *executor);
 void SkExecutor_borrow(SkExecutor *executor);
 // static
 void SkExecutor_MakeFIFOThreadPool(const char *sk_executor_key_out, int threads, bool allowBorrowing);

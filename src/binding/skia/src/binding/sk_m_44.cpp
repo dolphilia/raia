@@ -129,7 +129,7 @@ SkV4 SkM44_map(SkM44 *m44, float x, float y, float z, float w) {
 }
 
 void SkM44_asM33(const char* sk_matrix_key_out, SkM44 *m44) {
-    static_sk_matrix_set("", m44->asM33());
+    static_sk_matrix_set(sk_matrix_key_out, m44->asM33());
 }
 
 void SkM44_preTranslate(const char* sk_m_44_key_out, SkM44 *m44, SkScalar x, SkScalar y, SkScalar z) {

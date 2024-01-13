@@ -3,7 +3,7 @@
 //
 
 #include "sk_font.h"
-#include "../static/static_vector_sk_scalar.h"
+#include "../static/static_std_vector_sk_scalar.h"
 #include "../static/static_sk_font.h"
 
 extern "C" {

@@ -80,7 +80,6 @@ void SkImageFilters_MatrixTransform(const char *sk_image_filter_key_out, const c
     static_sk_image_filter_set(sk_image_filter_key_out, SkImageFilters::MatrixTransform(*matrix, *sampling, static_sk_image_filter_move(sk_image_filter_key_in)));
 }
 
-// @TODO
 void SkImageFilters_Merge(const char *sk_image_filter_key_out, sk_sp<SkImageFilter> *filters, int count, const SkImageFilters::CropRect *cropRect) {
     static_sk_image_filter_set(sk_image_filter_key_out, SkImageFilters::Merge(filters, count, *cropRect));
 }
@@ -109,13 +108,11 @@ void SkImageFilters_RuntimeShader_2(const char *sk_image_filter_key_out, const c
     static_sk_image_filter_set(sk_image_filter_key_out, SkImageFilters::RuntimeShader(*builder, sampleRadius, childShaderName, static_sk_image_filter_move(sk_image_filter_key_in)));
 }
 
-// @TODO
-void SkImageFilters_RuntimeShader_3(const char *sk_image_filter_key_out, const SkRuntimeShaderBuilder *builder, std::string_view childShaderNames[], const sk_sp<SkImageFilter> inputs[], int inputCount) {
+void SkImageFilters_RuntimeShader_3(const char *sk_image_filter_key_out, const SkRuntimeShaderBuilder *builder, std::string_view childShaderNames[], const sk_sp<SkImageFilter> *inputs, int inputCount) {
     static_sk_image_filter_set(sk_image_filter_key_out, SkImageFilters::RuntimeShader(*builder, childShaderNames, inputs, inputCount));
 }
 
-// @TODO
-void SkImageFilters_RuntimeShader_4(const char *sk_image_filter_key_out, const SkRuntimeShaderBuilder *builder, SkScalar maxSampleRadius, std::string_view childShaderNames[], const sk_sp<SkImageFilter> inputs[], int inputCount) {
+void SkImageFilters_RuntimeShader_4(const char *sk_image_filter_key_out, const SkRuntimeShaderBuilder *builder, SkScalar maxSampleRadius, std::string_view childShaderNames[], const sk_sp<SkImageFilter> *inputs, int inputCount) {
     static_sk_image_filter_set(sk_image_filter_key_out, SkImageFilters::RuntimeShader(*builder, maxSampleRadius, childShaderNames, inputs, inputCount));
 }
 

@@ -10,7 +10,7 @@ extern "C" {
 // SkScalar & operator[](int index)
 
 SkMatrix *SkMatrix_new(SkMatrix *matrix) {
-    return new SkMatrix();
+    return new SkMatrix(*matrix);
 }
 
 SkMatrix::TypeMask SkMatrix_getType(SkMatrix *matrix) {

@@ -3,11 +3,12 @@
 //
 
 #include "sk_executor.h"
+#include "../static/static_std_function_void_void.h"
 
 extern "C" {
 
-void SkExecutor_add(SkExecutor *executor, std::function<void(void)> fn) { // @TODO
-    executor->add(std::move(fn));
+void SkExecutor_add(const char *function_void_void_key_in, SkExecutor *executor) {
+    executor->add(static_function_void_void_get(function_void_void_key_in));
 }
 
 void SkExecutor_borrow(SkExecutor *executor) {

@@ -8,7 +8,7 @@
 #include "include/pathops/SkPathOps.h"
 
 extern "C" {
-void SkOpBuilder_add(SkOpBuilder *op_builder, const SkPath &path, SkPathOp _operator);
+void SkOpBuilder_add(SkOpBuilder *op_builder, const SkPath *path, SkPathOp path_operator);
 bool SkOpBuilder_resolve(SkOpBuilder *op_builder, SkPath *result);
 }
 
