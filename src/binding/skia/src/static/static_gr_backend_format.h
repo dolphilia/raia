@@ -9,8 +9,11 @@
 #include <map>
 #include "include/gpu/GrBackendSurface.h"
 
+extern "C" {
 void static_gr_backend_format_delete(const char *key);
+}
 GrBackendFormat static_gr_backend_format_get(const char *key);
 void static_gr_backend_format_set(const char *key, GrBackendFormat value);
+
 
 #endif //RAIA_SKIA_STATIC_GR_BACKEND_FORMAT_H
