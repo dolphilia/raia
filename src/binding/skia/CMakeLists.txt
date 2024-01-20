@@ -3,24 +3,17 @@ project(raia_skia)
 
 include(${PROJECT_SOURCE_DIR}/../../setting.cmake)
 include_directories(${PROJECT_SOURCE_DIR}/../../../sdk/macos/arm64/include/skia)
-#include_directories(${PROJECT_SOURCE_DIR}/../../../../third_party/skia/)
-#include_directories(${PROJECT_SOURCE_DIR}/skia)
-#include_directories(/opt/homebrew/opt)
-#link_directories(/opt/homebrew/opt)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
 if(APPLE)
-        # macOSの場合
         set(CMAKE_INSTALL_RPATH "@loader_path")
 else()
-        # Linuxの場合
         set(CMAKE_INSTALL_RPATH "$ORIGIN")
 endif()
 
+add_executable(raia_skia src/raia_skia.cpp
 #add_library(raia_skia SHARED
-add_executable(raia_skia
-        src/raia_skia.cpp
         src/binding/gr_backend_drawable_info.cpp
         src/binding/gr_backend_drawable_info.h
         src/binding/gr_backend_format.cpp
@@ -157,12 +150,16 @@ add_executable(raia_skia
         src/binding/sk_luma_color_filter.h
         src/binding/sk_m_44.cpp
         src/binding/sk_m_44.h
+        src/binding/sk_malloc_pixel_ref.cpp
+        src/binding/sk_malloc_pixel_ref.h
         src/binding/sk_mask_filter.cpp
         src/binding/sk_mask_filter.h
         src/binding/sk_matrix.cpp
         src/binding/sk_matrix.h
         src/binding/sk_memory_stream.cpp
         src/binding/sk_memory_stream.h
+        src/binding/sk_meshes.cpp
+        src/binding/sk_meshes.h
         src/binding/sk_op_builder.cpp
         src/binding/sk_op_builder.h
         src/binding/sk_open_type_svg_decoder.cpp
@@ -185,6 +182,8 @@ add_executable(raia_skia
         src/binding/sk_path_measure.h
         src/binding/sk_path.cpp
         src/binding/sk_path.h
+        src/binding/sk_pdf.cpp
+        src/binding/sk_pdf.h
         src/binding/sk_picture_recorder.cpp
         src/binding/sk_picture_recorder.h
         src/binding/sk_picture.cpp
@@ -225,6 +224,8 @@ add_executable(raia_skia
         src/binding/sk_shader_mask_filter.h
         src/binding/sk_shader.cpp
         src/binding/sk_shader.h
+        src/binding/sk_shaders.cpp
+        src/binding/sk_shaders.h
         src/binding/sk_shaper.cpp
         src/binding/sk_shaper.h
         src/binding/sk_size.cpp
@@ -247,6 +248,8 @@ add_executable(raia_skia
         src/binding/sk_surface_props.h
         src/binding/sk_surface.cpp
         src/binding/sk_surface.h
+        src/binding/sk_surfaces.cpp
+        src/binding/sk_surfaces.h
         src/binding/sk_table_mask_filter.cpp
         src/binding/sk_table_mask_filter.h
         src/binding/sk_text_blob_builder_run_handler.cpp
@@ -255,6 +258,8 @@ add_executable(raia_skia
         src/binding/sk_text_blob_builder.h
         src/binding/sk_text_blob.cpp
         src/binding/sk_text_blob.h
+        src/binding/sk_tiled_image_utils.cpp
+        src/binding/sk_tiled_image_utils.h
         src/binding/sk_trace_memory_dump.cpp
         src/binding/sk_trace_memory_dump.h
         src/binding/sk_trim_path_effect.cpp
@@ -308,6 +313,8 @@ add_executable(raia_skia
         src/static/static_sk_contour_measure.cpp
         src/static/static_sk_data_table.cpp
         src/static/static_sk_data.cpp
+        src/static/static_sk_document.cpp
+        src/static/static_sk_document.h
         src/static/static_sk_drawable_gpu_draw_handler.cpp
         src/static/static_sk_drawable.cpp
         src/static/static_sk_executor.cpp
@@ -406,25 +413,12 @@ add_executable(raia_skia
         src/static/static_std_tuple_int_sk_yuva_pixmap_info_data_type.h
         src/static/static_std_vector_sk_scalar.cpp
         src/static/static_std_vector_sk_scalar.h
-        src/binding/sk_shaders.cpp
-        src/binding/sk_shaders.h
-        src/binding/sk_surfaces.cpp
-        src/binding/sk_surfaces.h
-        src/binding/sk_malloc_pixel_ref.cpp
-        src/binding/sk_malloc_pixel_ref.h
-        src/binding/sk_meshes.cpp
-        src/binding/sk_meshes.h
-        src/binding/sk_tiled_image_utils.cpp
-        src/binding/sk_tiled_image_utils.h
 )
 
-# 現在のRPATH設定を取得（もしあれば）
 get_property(CURRENT_RPATH TARGET raia_skia PROPERTY INSTALL_RPATH)
 
-# 特定のディレクトリ（この場合は作成されたライブラリがあるディレクトリ）を最優先にする
 list(PREPEND CURRENT_RPATH "${SPECIAL_RPATH_KEYWORD}")
 
-# 更新されたRPATH設定をターゲットに適用
 set_target_properties(raia_skia PROPERTIES
         BUILD_WITH_INSTALL_RPATH TRUE
         INSTALL_RPATH "${CURRENT_RPATH}")

@@ -5,6 +5,12 @@
 #ifndef RAIA_GUI_RAIA_SKIA_H
 #define RAIA_GUI_RAIA_SKIA_H
 
+#ifdef _WIN32
+# define SK_C_API __declspec(dllexport)
+#else
+# define SK_C_API
+#endif
+
 #include "static/static_sk_rect.h"
 #include "static/static_sk_i_rect.h"
 #include "static/static_sk_image_info.h"
@@ -58,6 +64,7 @@ extern "C" {
 #ifdef __WINDOWS__
 #define GL_TEXTURE0 0x84C0
 #endif
+
 }
 
 #endif //RAIA_GUI_RAIA_SKIA_H
