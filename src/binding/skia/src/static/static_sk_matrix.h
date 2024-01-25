@@ -9,8 +9,9 @@
 #include <map>
 #include "include/core/SkMatrix.h"
 
-void static_sk_matrix_delete(const char *key);
-SkMatrix static_sk_matrix_get(const char *key);
-void static_sk_matrix_set(const char *key, SkMatrix value);
+int static_sk_matrix_make(SkMatrix value);
+void static_sk_matrix_delete(int key);
+SkMatrix static_sk_matrix_get(int key);
+void static_sk_matrix_set(int key, SkMatrix value);
 
 #endif //RAIA_SKIA_STATIC_SK_MATRIX_H

@@ -10,8 +10,8 @@
 
 extern "C" {
 void SkPDF_SetNodeId(SkCanvas *dst, int nodeID);
-void SkPDF_MakeDocument(const char *sk_document_key_out, SkWStream *stream, const SkPDF::Metadata *metadata);
-void SkPDF_MakeDocument_2(const char *sk_document_key_out, SkWStream *stream);
+int SkPDF_MakeDocument(SkWStream *stream, const SkPDF::Metadata *metadata);
+int SkPDF_MakeDocument_2(SkWStream *stream);
 }
 
 #endif //RAIA_SKIA_SK_PDF_H

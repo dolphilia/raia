@@ -13,42 +13,42 @@ void SkFontMgr_getFamilyName(SkFontMgr *font_mgr, int index, SkString *familyNam
     font_mgr->getFamilyName(index, familyName);
 }
 
-void SkFontMgr_createStyleSet(const char *sk_font_style_set_out, SkFontMgr *font_mgr, int index) {
+void SkFontMgr_createStyleSet(int sk_font_style_set_out, SkFontMgr *font_mgr, int index) {
     static_sk_font_style_set_set(sk_font_style_set_out, font_mgr->createStyleSet(index));
 }
 
-void SkFontMgr_matchFamily(const char *sk_font_style_set_out, SkFontMgr *font_mgr, const char familyName[]) {
+void SkFontMgr_matchFamily(int sk_font_style_set_out, SkFontMgr *font_mgr, const char familyName[]) {
     static_sk_font_style_set_set(sk_font_style_set_out, font_mgr->matchFamily(familyName));
 }
 
-void SkFontMgr_matchFamilyStyle(const char *sk_typeface_key_out, SkFontMgr *font_mgr, const char familyName[], const SkFontStyle *font_style) {
-    static_sk_typeface_set(sk_typeface_key_out, font_mgr->matchFamilyStyle(familyName, *font_style));
+int SkFontMgr_matchFamilyStyle(SkFontMgr *font_mgr, const char familyName[], const SkFontStyle *font_style) {
+    return static_sk_typeface_make(font_mgr->matchFamilyStyle(familyName, *font_style));
 }
 
-void SkFontMgr_matchFamilyStyleCharacter(const char *sk_typeface_key_out, SkFontMgr *font_mgr, const char familyName[], const SkFontStyle *font_style, const char *bcp47[], int bcp47Count, SkUnichar character) {
-    static_sk_typeface_set(sk_typeface_key_out, font_mgr->matchFamilyStyleCharacter(familyName, *font_style, bcp47, bcp47Count, character));
+int SkFontMgr_matchFamilyStyleCharacter(SkFontMgr *font_mgr, const char familyName[], const SkFontStyle *font_style, const char *bcp47[], int bcp47Count, SkUnichar character) {
+    return static_sk_typeface_make(font_mgr->matchFamilyStyleCharacter(familyName, *font_style, bcp47, bcp47Count, character));
 }
 
-void SkFontMgr_makeFromData(const char *sk_typeface_key_out, const char *sk_data_key_in, SkFontMgr *font_mgr, int ttcIndex) {
-    static_sk_typeface_set(sk_typeface_key_out, font_mgr->makeFromData(static_sk_data_move(sk_data_key_in), ttcIndex));
+int SkFontMgr_makeFromData(int sk_data_key_in, SkFontMgr *font_mgr, int ttcIndex) {
+    return static_sk_typeface_make(font_mgr->makeFromData(static_sk_data_move(sk_data_key_in), ttcIndex));
 }
 
-void SkFontMgr_makeFromStream(const char *sk_typeface_key_out, const char *sk_stream_asset_key_in, SkFontMgr *font_mgr, int ttcIndex) {
-    static_sk_typeface_set(sk_typeface_key_out, font_mgr->makeFromStream(
+int SkFontMgr_makeFromStream(int sk_stream_asset_key_in, SkFontMgr *font_mgr, int ttcIndex) {
+    return static_sk_typeface_make(font_mgr->makeFromStream(
             static_cast<std::unique_ptr<SkStreamAsset>>(static_sk_stream_asset_get(sk_stream_asset_key_in)), ttcIndex));
 }
 
-void SkFontMgr_makeFromStream_2(const char *sk_typeface_key_out, const char *sk_stream_asset_key_in, SkFontMgr *font_mgr, const SkFontArguments *font_argments) {
-    static_sk_typeface_set(sk_typeface_key_out, font_mgr->makeFromStream(
+int SkFontMgr_makeFromStream_2(int sk_stream_asset_key_in, SkFontMgr *font_mgr, const SkFontArguments *font_argments) {
+    return static_sk_typeface_make(font_mgr->makeFromStream(
             static_cast<std::unique_ptr<SkStreamAsset>>(static_sk_stream_asset_get(sk_stream_asset_key_in)), *font_argments));
 }
 
-void SkFontMgr_makeFromFile(const char *sk_typeface_key_out, SkFontMgr *font_mgr, const char path[], int ttcIndex) {
-    static_sk_typeface_set(sk_typeface_key_out, font_mgr->makeFromFile(path, ttcIndex));
+int SkFontMgr_makeFromFile(SkFontMgr *font_mgr, const char path[], int ttcIndex) {
+    return static_sk_typeface_make(font_mgr->makeFromFile(path, ttcIndex));
 }
 
-void SkFontMgr_legacyMakeTypeface(const char *sk_typeface_key_out, SkFontMgr *font_mgr, const char familyName[], SkFontStyle style) {
-    static_sk_typeface_set(sk_typeface_key_out, font_mgr->legacyMakeTypeface(familyName, style));
+int SkFontMgr_legacyMakeTypeface(SkFontMgr *font_mgr, const char familyName[], SkFontStyle style) {
+    return static_sk_typeface_make(font_mgr->legacyMakeTypeface(familyName, style));
 }
 
 bool SkFontMgr_unique(SkFontMgr *font_mgr) {
@@ -65,12 +65,12 @@ void SkFontMgr_unref(SkFontMgr *font_mgr) {
 
 // static
 
-void SkFontMgr_RefDefault(const char *sk_font_mgr_key_out) {
-    static_sk_font_mgr_set(sk_font_mgr_key_out, SkFontMgr::RefDefault());
+int SkFontMgr_RefDefault() {
+    return static_sk_font_mgr_make(SkFontMgr::RefDefault());
 }
 
-void SkFontMgr_RefEmpty(const char *sk_font_mgr_key_out) {
-    static_sk_font_mgr_set(sk_font_mgr_key_out, SkFontMgr::RefEmpty());
+int SkFontMgr_RefEmpty() {
+    return static_sk_font_mgr_make(SkFontMgr::RefEmpty());
 }
 
 }

@@ -4,16 +4,23 @@
 
 #include "static_sk_m_44.h"
 
-static std::map<std::string, SkM44> static_sk_m_44;
+static std::map<int , SkM44> static_sk_m_44;
+static int static_sk_m_44_index = 0;
 
-void static_sk_m_44_delete(const char *key) {
+int static_sk_m_44_make(SkM44 value) {
+    static_sk_m_44[static_sk_m_44_index] = value;
+    static_sk_m_44_index++;
+    return static_sk_m_44_index - 1;
+}
+
+void static_sk_m_44_delete(int key) {
     static_sk_m_44.erase(key);
 }
 
-SkM44 static_sk_m_44_get(const char *key) {
+SkM44 static_sk_m_44_get(int key) {
     return static_sk_m_44[key];
 }
 
-void static_sk_m_44_set(const char *key, SkM44 value) {
+void static_sk_m_44_set(int key, SkM44 value) {
     static_sk_m_44[key] = value;
 }

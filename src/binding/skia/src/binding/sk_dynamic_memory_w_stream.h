@@ -22,8 +22,8 @@ void SkDynamicMemoryWStream_copyToAndReset(SkDynamicMemoryWStream *dynamic_memor
 bool SkDynamicMemoryWStream_writeToAndReset(SkDynamicMemoryWStream *dynamic_memory_w_stream, SkWStream *dst);
 bool SkDynamicMemoryWStream_writeToAndReset_2(SkDynamicMemoryWStream *dynamic_memory_w_stream, SkDynamicMemoryWStream *dst);
 void SkDynamicMemoryWStream_prependToAndReset(SkDynamicMemoryWStream *dynamic_memory_w_stream, SkDynamicMemoryWStream *dst);
-void SkDynamicMemoryWStream_detachAsData(const char *sk_data_key_out, SkDynamicMemoryWStream *dynamic_memory_w_stream);
-void SkDynamicMemoryWStream_detachAsStream(const char *sk_stream_asset_key_out, SkDynamicMemoryWStream *dynamic_memory_w_stream);
+int SkDynamicMemoryWStream_detachAsData(SkDynamicMemoryWStream *dynamic_memory_w_stream);
+int SkDynamicMemoryWStream_detachAsStream(SkDynamicMemoryWStream *dynamic_memory_w_stream);
 void SkDynamicMemoryWStream_reset(SkDynamicMemoryWStream *dynamic_memory_w_stream);
 void SkDynamicMemoryWStream_padToAlign4(SkDynamicMemoryWStream *dynamic_memory_w_stream);
 void SkDynamicMemoryWStream_flush(SkDynamicMemoryWStream *dynamic_memory_w_stream);

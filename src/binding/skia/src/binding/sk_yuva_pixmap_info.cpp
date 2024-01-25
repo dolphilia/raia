@@ -73,8 +73,8 @@ SkColorType SkYUVAPixmapInfo_DefaultColorTypeForDataType(SkYUVAPixmapInfo::DataT
     return SkYUVAPixmapInfo::DefaultColorTypeForDataType(dataType, numChannels);
 }
 
-void SkYUVAPixmapInfo_NumChannelsAndDataType(const char *tuple_int_sk_yuva_pixmap_info_data_type_key_out, SkColorType type) {
-    static_tuple_int_sk_yuva_pixmap_info_data_type_set(tuple_int_sk_yuva_pixmap_info_data_type_key_out, SkYUVAPixmapInfo::NumChannelsAndDataType(type));
+int SkYUVAPixmapInfo_NumChannelsAndDataType(SkColorType type) {
+    return static_tuple_int_sk_yuva_pixmap_info_data_type_make(SkYUVAPixmapInfo::NumChannelsAndDataType(type));
 }
 
 }

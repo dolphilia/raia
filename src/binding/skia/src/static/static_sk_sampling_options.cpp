@@ -4,16 +4,23 @@
 
 #include "static_sk_sampling_options.h"
 
-static std::map<std::string, SkSamplingOptions> static_sk_sampling_options;
+static std::map<int , SkSamplingOptions> static_sk_sampling_options;
+static int static_sk_sampling_options_index = 0;
 
-void static_sk_sampling_options_delete(const char *key) {
+int static_sk_sampling_options_make(SkSamplingOptions value) {
+    static_sk_sampling_options[static_sk_sampling_options_index] = value;
+    static_sk_sampling_options_index++;
+    return static_sk_sampling_options_index - 1;
+}
+
+void static_sk_sampling_options_delete(int key) {
     static_sk_sampling_options.erase(key);
 }
 
-SkSamplingOptions static_sk_sampling_options_get(const char *key) {
+SkSamplingOptions static_sk_sampling_options_get(int key) {
     return static_sk_sampling_options[key];
 }
 
-void static_sk_sampling_options_set(const char *key, SkSamplingOptions value) {
+void static_sk_sampling_options_set(int key, SkSamplingOptions value) {
     static_sk_sampling_options[key] = value;
 }

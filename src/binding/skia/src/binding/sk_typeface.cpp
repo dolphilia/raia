@@ -7,8 +7,8 @@
 
 extern "C" {
 
-void SkTypeface_fontStyle(const char *sk_font_style_key_out, SkTypeface *typeface) {
-    static_sk_font_style_set(sk_font_style_key_out, typeface->fontStyle());
+int SkTypeface_fontStyle(SkTypeface *typeface) {
+    return static_sk_font_style_make(typeface->fontStyle());
 }
 
 bool SkTypeface_isBold(SkTypeface *typeface) {
@@ -35,16 +35,16 @@ SkTypefaceID SkTypeface_uniqueID(SkTypeface *typeface) {
     return typeface->uniqueID();
 }
 
-void SkTypeface_makeClone(const char *sk_typeface_key_out, SkTypeface *typeface, const SkFontArguments *arguments) {
-    static_sk_typeface_set(sk_typeface_key_out, typeface->makeClone(*arguments));
+int SkTypeface_makeClone(SkTypeface *typeface, const SkFontArguments *arguments) {
+    return static_sk_typeface_make(typeface->makeClone(*arguments));
 }
 
 void SkTypeface_serialize(SkTypeface *typeface, SkWStream *stream, SkTypeface::SerializeBehavior behavior) {
     typeface->serialize(stream, behavior);
 }
 
-void SkTypeface_serialize_2(const char *sk_data_key_out, SkTypeface *typeface, SkTypeface::SerializeBehavior behavior) {
-    static_sk_data_set(sk_data_key_out, typeface->serialize(behavior));
+int SkTypeface_serialize_2(SkTypeface *typeface, SkTypeface::SerializeBehavior behavior) {
+    return static_sk_data_make(typeface->serialize(behavior));
 }
 
 void SkTypeface_unicharsToGlyphs(SkTypeface *typeface, const SkUnichar uni[], int count, SkGlyphID glyphs[]) {
@@ -79,8 +79,8 @@ size_t SkTypeface_getTableData(SkTypeface *typeface, SkFontTableTag tag, size_t 
     return typeface->getTableData(tag, offset, length, data);
 }
 
-void SkTypeface_copyTableData(const char *sk_data_key_out, SkTypeface *typeface, SkFontTableTag tag) {
-    static_sk_data_set(sk_data_key_out, typeface->copyTableData(tag));
+int SkTypeface_copyTableData(SkTypeface *typeface, SkFontTableTag tag) {
+    return static_sk_data_make(typeface->copyTableData(tag));
 }
 
 int SkTypeface_getUnitsPerEm(SkTypeface *typeface) {
@@ -103,12 +103,12 @@ bool SkTypeface_getPostScriptName(SkTypeface *typeface, SkString *name) {
     return typeface->getPostScriptName(name);
 }
 
-void SkTypeface_openStream(const char *sk_stream_asset_key_out, SkTypeface *typeface, int *ttcIndex) {
-    static_sk_stream_asset_set(sk_stream_asset_key_out, typeface->openStream(ttcIndex));
+int SkTypeface_openStream(SkTypeface *typeface, int *ttcIndex) {
+    return static_sk_stream_asset_make(typeface->openStream(ttcIndex));
 }
 
-void SkTypeface_openExistingStream(const char *sk_stream_asset_key_out, SkTypeface *typeface, int *ttcIndex) {
-    static_sk_stream_asset_set(sk_stream_asset_key_out, typeface->openExistingStream(ttcIndex));
+int SkTypeface_openExistingStream(SkTypeface *typeface, int *ttcIndex) {
+    return static_sk_stream_asset_make(typeface->openExistingStream(ttcIndex));
 }
 
 //@TODO
@@ -116,8 +116,8 @@ void SkTypeface_openExistingStream(const char *sk_stream_asset_key_out, SkTypefa
 //    return typeface->createScalerContext(effects, descriptor);
 //}
 
-void SkTypeface_getBounds(const char *sk_rect_key_out, SkTypeface *typeface) {
-    static_sk_rect_set(sk_rect_key_out, typeface->getBounds());
+int SkTypeface_getBounds(SkTypeface *typeface) {
+    return static_sk_rect_make(typeface->getBounds());
 }
 
 void SkTypeface_filterRec(SkTypeface *typeface, SkScalerContextRec *rec) {
@@ -143,32 +143,32 @@ bool SkTypeface_Equal(const SkTypeface *facea, const SkTypeface *faceb) {
 //    return SkTypeface::MakeDefault();
 //}
 
-void SkTypeface_MakeEmpty(const char *sk_typeface_key_out) {
-    static_sk_typeface_set(sk_typeface_key_out, SkTypeface::MakeEmpty());
+int SkTypeface_MakeEmpty() {
+    return static_sk_typeface_make(SkTypeface::MakeEmpty());
 }
 
-void SkTypeface_MakeFromName(const char *sk_typeface_key_out, const char familyName[], SkFontStyle fontStyle) {
-    static_sk_typeface_set(sk_typeface_key_out, SkTypeface::MakeFromName(familyName, fontStyle));
+int SkTypeface_MakeFromName(const char familyName[], SkFontStyle fontStyle) {
+    return static_sk_typeface_make(SkTypeface::MakeFromName(familyName, fontStyle));
 }
 
-void SkTypeface_MakeFromFile(const char *sk_typeface_key_out, const char path[], int index) {
-    static_sk_typeface_set(sk_typeface_key_out, SkTypeface::MakeFromFile(path, index));
+int SkTypeface_MakeFromFile(const char path[], int index) {
+    return static_sk_typeface_make(SkTypeface::MakeFromFile(path, index));
 }
 
-void SkTypeface_MakeFromStream(const char *sk_typeface_key_out, const char *sk_stream_asset_key_in, int index) {
-    static_sk_typeface_set(sk_typeface_key_out, SkTypeface::MakeFromStream(static_sk_stream_asset_move(sk_stream_asset_key_in), index));
+int SkTypeface_MakeFromStream(int sk_stream_asset_key_in, int index) {
+    return static_sk_typeface_make(SkTypeface::MakeFromStream(static_sk_stream_asset_move(sk_stream_asset_key_in), index));
 }
 
-void SkTypeface_MakeFromData(const char *sk_typeface_key_out, const char *sk_data_key_in, int index) {
-    static_sk_typeface_set(sk_typeface_key_out, SkTypeface::MakeFromData(static_sk_data_move(sk_data_key_in), index));
+int SkTypeface_MakeFromData(int sk_data_key_in, int index) {
+    return static_sk_typeface_make(SkTypeface::MakeFromData(static_sk_data_move(sk_data_key_in), index));
 }
 
-void SkTypeface_MakeDeserialize(const char *sk_typeface_key_out, SkStream *stream) {
-    static_sk_typeface_set(sk_typeface_key_out, SkTypeface::MakeDeserialize(stream));
+int SkTypeface_MakeDeserialize(SkStream *stream) {
+    return static_sk_typeface_make(SkTypeface::MakeDeserialize(stream));
 }
 
-void SkTypeface_MakeDeserialize_2(const char *sk_typeface_key_out, const char *sk_font_mgr_key_in, SkStream *stream) {
-    static_sk_typeface_set(sk_typeface_key_out, SkTypeface::MakeDeserialize(stream, static_sk_font_mgr_move(sk_font_mgr_key_in)));
+int SkTypeface_MakeDeserialize_2(int sk_font_mgr_key_in, SkStream *stream) {
+    return static_sk_typeface_make(SkTypeface::MakeDeserialize(stream, static_sk_font_mgr_move(sk_font_mgr_key_in)));
 }
 
 void SkTypeface_Register(SkTypeface::FactoryId id, sk_sp<SkTypeface>(*make)(std::unique_ptr<SkStreamAsset>, const SkFontArguments &)) {

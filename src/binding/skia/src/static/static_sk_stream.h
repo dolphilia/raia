@@ -9,9 +9,10 @@
 #include <map>
 #include "include/core/SkStream.h"
 
-void static_sk_stream_delete(const char *key);
-SkStream *static_sk_stream_get(const char *key);
-void static_sk_stream_set(const char *key, std::unique_ptr<SkStream> value);
-std::unique_ptr<SkStream> static_sk_stream_move(const char *key);
+int static_sk_stream_make(std::unique_ptr<SkStream> value);
+void static_sk_stream_delete(int key);
+SkStream *static_sk_stream_get(int key);
+void static_sk_stream_set(int key, std::unique_ptr<SkStream> value);
+std::unique_ptr<SkStream> static_sk_stream_move(int key);
 
 #endif //RAIA_SKIA_STATIC_SK_STREAM_H

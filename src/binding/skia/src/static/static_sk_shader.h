@@ -9,9 +9,10 @@
 #include <map>
 #include "include/core/SkShader.h"
 
-void static_sk_shader_delete(const char *key);
-SkShader *static_sk_shader_get(const char *key);
-void static_sk_shader_set(const char *key, sk_sp<SkShader> value);
-sk_sp<SkShader> static_sk_shader_move(const char *key);
+int static_sk_shader_make(sk_sp<SkShader> value);
+void static_sk_shader_delete(int key);
+SkShader *static_sk_shader_get(int key);
+void static_sk_shader_set(int key, sk_sp<SkShader> value);
+sk_sp<SkShader> static_sk_shader_move(int key);
 
 #endif //RAIA_SKIA_STATIC_SK_SHADER_H

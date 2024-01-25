@@ -4,16 +4,23 @@
 
 #include "static_gr_backend_format.h"
 
-static std::map<std::string, GrBackendFormat> static_gr_backend_format;
+static std::map<int, GrBackendFormat> static_gr_backend_format;
+static int static_gr_backend_format_index = 0;
 
-void static_gr_backend_format_delete(const char *key) {
+int static_gr_backend_format_make(GrBackendFormat value) {
+    static_gr_backend_format[static_gr_backend_format_index] = value;
+    static_gr_backend_format_index++;
+    return static_gr_backend_format_index - 1;
+}
+
+void static_gr_backend_format_delete(int key) {
     static_gr_backend_format.erase(key);
 }
 
-GrBackendFormat static_gr_backend_format_get(const char *key) {
+GrBackendFormat static_gr_backend_format_get(int key) {
     return static_gr_backend_format[key];
 }
 
-void static_gr_backend_format_set(const char *key, GrBackendFormat value) {
+void static_gr_backend_format_set(int key, GrBackendFormat value) {
     static_gr_backend_format[key] = value;
 }

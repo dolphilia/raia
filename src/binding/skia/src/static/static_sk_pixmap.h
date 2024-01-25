@@ -9,8 +9,9 @@
 #include <map>
 #include "include/core/SkPixmap.h"
 
-void static_sk_pixmap_delete(const char *key);
-SkPixmap static_sk_pixmap_get(const char *key) ;
-void static_sk_pixmap_set(const char *key, SkPixmap value);
+int static_sk_pixmap_make(SkPixmap value);
+void static_sk_pixmap_delete(int key);
+SkPixmap static_sk_pixmap_get(int key) ;
+void static_sk_pixmap_set(int key, SkPixmap value);
 
 #endif //RAIA_SKIA_STATIC_SK_PIXMAP_H

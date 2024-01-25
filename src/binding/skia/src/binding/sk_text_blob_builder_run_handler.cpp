@@ -10,8 +10,8 @@ SkTextBlobBuilderRunHandler *SkTextBlobBuilderRunHandler_new(const char *utf8Tex
     return new SkTextBlobBuilderRunHandler(utf8Text, offset);
 }
 
-void SkTextBlobBuilderRunHandler_makeBlob(const char *sk_text_blob_key_out, SkTextBlobBuilderRunHandler *text_blob_builder_run_handler) {
-    static_sk_text_blob_set(sk_text_blob_key_out, text_blob_builder_run_handler->makeBlob());
+int SkTextBlobBuilderRunHandler_makeBlob(SkTextBlobBuilderRunHandler *text_blob_builder_run_handler) {
+    return static_sk_text_blob_make(text_blob_builder_run_handler->makeBlob());
 }
 
 SkPoint SkTextBlobBuilderRunHandler_endPoint(SkTextBlobBuilderRunHandler *text_blob_builder_run_handler) {

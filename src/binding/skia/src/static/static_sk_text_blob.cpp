@@ -4,21 +4,30 @@
 
 #include "static_sk_text_blob.h"
 
-static std::map<std::string, sk_sp<SkTextBlob>> static_sk_text_blob;
+#include <utility>
 
-void static_sk_text_blob_delete(const char *key) {
+static std::map<int , sk_sp<SkTextBlob>> static_sk_text_blob;
+static int static_sk_text_blob_index = 0;
+
+int static_sk_text_blob_make(sk_sp<SkTextBlob> value) {
+    static_sk_text_blob[static_sk_text_blob_index] = std::move(value);
+    static_sk_text_blob_index++;
+    return static_sk_text_blob_index - 1;
+}
+
+void static_sk_text_blob_delete(int key) {
     static_sk_text_blob[key].reset();
     static_sk_text_blob.erase(key);
 }
 
-SkTextBlob *static_sk_text_blob_get(const char *key) {
+SkTextBlob *static_sk_text_blob_get(int key) {
     return static_sk_text_blob[key].get();
 }
 
-void static_sk_text_blob_set(const char *key, sk_sp<SkTextBlob> value) {
+void static_sk_text_blob_set(int key, sk_sp<SkTextBlob> value) {
     static_sk_text_blob[key] = std::move(value);
 }
 
-sk_sp<SkTextBlob> static_sk_text_blob_move(const char *key) {
+sk_sp<SkTextBlob> static_sk_text_blob_move(int key) {
     return std::move(static_sk_text_blob[key]);
 }

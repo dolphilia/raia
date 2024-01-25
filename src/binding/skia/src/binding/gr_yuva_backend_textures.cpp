@@ -21,8 +21,8 @@ const std::array< GrBackendTexture, SkYUVAInfo::kMaxPlanes > * GrYUVABackendText
     return &yuvaBackendTextures->textures();
 }
 
-void GrYUVABackendTextures_texture(const char *gr_backend_textur_key_out, GrYUVABackendTextures *yuvaBackendTextures, int i) {
-    static_gr_backend_texture_set(gr_backend_textur_key_out, yuvaBackendTextures->texture(i));
+int GrYUVABackendTextures_texture(GrYUVABackendTextures *yuvaBackendTextures, int i) {
+    return static_gr_backend_texture_make(yuvaBackendTextures->texture(i));
 }
 
 const SkYUVAInfo * GrYUVABackendTextures_yuvaInfo(GrYUVABackendTextures *yuvaBackendTextures) {

@@ -4,16 +4,23 @@
 
 #include "static_sk_i_rect.h"
 
-static std::map<std::string, SkIRect> static_sk_i_rect;
+static std::map<int , SkIRect> static_sk_i_rect;
+static int static_sk_i_rect_index = 0;
 
-void static_sk_i_rect_delete(const char *key) {
+int static_sk_i_rect_make(SkIRect value) {
+    static_sk_i_rect[static_sk_i_rect_index] = value;
+    static_sk_i_rect_index++;
+    return static_sk_i_rect_index - 1;
+}
+
+void static_sk_i_rect_delete(int key) {
     static_sk_i_rect.erase(key);
 }
 
-SkIRect static_sk_i_rect_get(const char *key) {
+SkIRect static_sk_i_rect_get(int key) {
     return static_sk_i_rect[key];
 }
 
-void static_sk_i_rect_set(const char *key, SkIRect value) {
+void static_sk_i_rect_set(int key, SkIRect value) {
     static_sk_i_rect[key] = value;
 }

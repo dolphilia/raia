@@ -4,16 +4,25 @@
 
 #include "static_sk_color_info.h"
 
-static std::map<std::string, SkColorInfo> static_sk_color_info;
+#include <utility>
 
-void static_sk_color_info_delete(const char *key) {
+static std::map<int , SkColorInfo> static_sk_color_info;
+static int static_sk_color_info_index = 0;
+
+int static_sk_color_info_make(SkColorInfo value) {
+    static_sk_color_info[static_sk_color_info_index] = std::move(value);
+    static_sk_color_info_index++;
+    return static_sk_color_info_index - 1;
+}
+
+void static_sk_color_info_delete(int key) {
     static_sk_color_info.erase(key);
 }
 
-SkColorInfo static_sk_color_info_get(const char *key) {
+SkColorInfo static_sk_color_info_get(int key) {
     return static_sk_color_info[key];
 }
 
-void static_sk_color_info_set(const char *key, SkColorInfo value) {
-    static_sk_color_info[key] = value;
+void static_sk_color_info_set(int key, SkColorInfo value) {
+    static_sk_color_info[key] = std::move(value);
 }

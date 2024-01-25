@@ -9,8 +9,9 @@
 #include <map>
 #include "include/core/SkSurfaceProps.h"
 
-void static_sk_surface_props_delete(const char *key);
-SkSurfaceProps static_sk_surface_props_get(const char *key);
-void static_sk_surface_props_set(const char *key, SkSurfaceProps value);
+int static_sk_surface_props_make(SkSurfaceProps value);
+void static_sk_surface_props_delete(int key);
+SkSurfaceProps static_sk_surface_props_get(int key);
+void static_sk_surface_props_set(int key, SkSurfaceProps value);
 
 #endif //RAIA_SKIA_STATIC_SK_SURFACE_PROPS_H

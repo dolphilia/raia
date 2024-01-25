@@ -9,12 +9,12 @@
 #include "../static/static_sk_surface.h"
 
 extern "C" {
-void SkSurfaces_Null(const char *sk_surface_key_out, int width, int height);
-void SkSurfaces_Raster(const char *sk_surface_key_out, const SkImageInfo *imageInfo, size_t rowBytes, const SkSurfaceProps *surfaceProps);
-void SkSurfaces_Raster_2(const char *sk_surface_key_out, const SkImageInfo *imageInfo, const SkSurfaceProps *props);
-void SkSurfaces_WrapPixels(const char *sk_surface_key_out, const SkImageInfo *imageInfo, void *pixels, size_t rowBytes, const SkSurfaceProps *surfaceProps);
-void SkSurfaces_WrapPixels_2(const char *sk_surface_key_out, const SkPixmap *pm, const SkSurfaceProps *props);
-void SkSurfaces_WrapPixels_3(const char *sk_surface_key_out, const SkImageInfo *imageInfo, void *pixels, size_t rowBytes, SkSurfaces::PixelsReleaseProc pixelsReleaseProc, void *context, const SkSurfaceProps *surfaceProps);
+int SkSurfaces_Null(int width, int height);
+int SkSurfaces_Raster(const SkImageInfo *imageInfo, size_t rowBytes, const SkSurfaceProps *surfaceProps);
+int SkSurfaces_Raster_2(const SkImageInfo *imageInfo, const SkSurfaceProps *props);
+int SkSurfaces_WrapPixels(const SkImageInfo *imageInfo, void *pixels, size_t rowBytes, const SkSurfaceProps *surfaceProps);
+int SkSurfaces_WrapPixels_2(const SkPixmap *pm, const SkSurfaceProps *props);
+int SkSurfaces_WrapPixels_3(const SkImageInfo *imageInfo, void *pixels, size_t rowBytes, SkSurfaces::PixelsReleaseProc pixelsReleaseProc, void *context, const SkSurfaceProps *surfaceProps);
 }
 
 #endif //RAIA_SKIA_SK_SURFACES_H

@@ -12,8 +12,8 @@
 extern "C" {
 void SkImageGenerator_delete(SkImageGenerator *image_generator);
 uint32_t SkImageGenerator_uniqueID(SkImageGenerator *image_generator);
-void SkImageGenerator_refEncodedData(const char *sk_data_key_out, SkImageGenerator *image_generator);
-void SkImageGenerator_getInfo(const char *sk_image_info_key_out, SkImageGenerator *image_generator);
+int SkImageGenerator_refEncodedData(SkImageGenerator *image_generator);
+int SkImageGenerator_getInfo(SkImageGenerator *image_generator);
 bool SkImageGenerator_isValid(SkImageGenerator *image_generator, GrRecordingContext *context);
 bool SkImageGenerator_isProtected(SkImageGenerator *image_generator);
 bool SkImageGenerator_getPixels(SkImageGenerator *image_generator, const SkImageInfo *info, void *pixels, size_t rowBytes);

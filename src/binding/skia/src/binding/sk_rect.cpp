@@ -106,20 +106,20 @@ void SkRect_setIWH(SkRect *rect, int32_t width, int32_t height) {
     rect->setIWH(width, height);
 }
 
-void SkRect_makeOffset(const char *sk_rect_key_out, SkRect *rect, float dx, float dy) {
-    static_sk_rect_set(sk_rect_key_out, rect->makeOutset(dx, dy));
+int SkRect_makeOffset(SkRect *rect, float dx, float dy) {
+    return static_sk_rect_make(rect->makeOutset(dx, dy));
 }
 
-void SkRect_makeOffset_2(const char *sk_rect_key_out, SkRect *rect, SkVector v) {
-    static_sk_rect_set(sk_rect_key_out, rect->makeOffset(v));
+int SkRect_makeOffset_2(SkRect *rect, SkVector v) {
+    return static_sk_rect_make(rect->makeOffset(v));
 }
 
-void SkRect_makeInset(const char *sk_rect_key_out, SkRect *rect, float dx, float dy) {
-    static_sk_rect_set(sk_rect_key_out, rect->makeInset(dx, dy));
+int SkRect_makeInset(SkRect *rect, float dx, float dy) {
+    return static_sk_rect_make(rect->makeInset(dx, dy));
 }
 
-void SkRect_makeOutset(const char *sk_rect_key_out, SkRect *rect, float dx, float dy) {
-    static_sk_rect_set(sk_rect_key_out, rect->makeOutset(dx, dy));
+int SkRect_makeOutset(SkRect *rect, float dx, float dy) {
+    return static_sk_rect_make(rect->makeOutset(dx, dy));
 }
 
 void SkRect_offset(SkRect *rect, float dx, float dy) {
@@ -194,24 +194,24 @@ void SkRect_roundIn(SkRect *rect, SkIRect *dst) {
     rect->roundIn(dst);
 }
 
-void SkRect_round_2(const char *sk_i_rect_key_out, SkRect *rect) {
-    static_sk_i_rect_set(sk_i_rect_key_out, rect->round());
+int SkRect_round_2(SkRect *rect) {
+    return static_sk_i_rect_make(rect->round());
 }
 
-void SkRect_roundOut_3(const char *sk_i_rect_key_out, SkRect *rect) {
-    static_sk_i_rect_set(sk_i_rect_key_out, rect->roundOut());
+int SkRect_roundOut_3(SkRect *rect) {
+    return static_sk_i_rect_make(rect->roundOut());
 }
 
-void SkRect_roundIn_2(const char *sk_i_rect_key_out, SkRect *rect) {
-    static_sk_i_rect_set(sk_i_rect_key_out, rect->roundIn());
+int SkRect_roundIn_2(SkRect *rect) {
+    return static_sk_i_rect_make(rect->roundIn());
 }
 
 void SkRect_sort(SkRect *rect) {
     rect->sort();
 }
 
-void SkRect_makeSorted(const char *sk_rect_key_out, SkRect *rect) {
-    static_sk_rect_set(sk_rect_key_out, rect->makeSorted());
+int SkRect_makeSorted(SkRect *rect) {
+    return static_sk_rect_make(rect->makeSorted());
 }
 
 const float * SkRect_asScalars(SkRect *rect) {
@@ -232,36 +232,36 @@ void SkRect_dumpHex(SkRect *rect) {
 
 // static
 
-void SkRect_MakeEmpty(const char *sk_rect_key_out) {
-    static_sk_rect_set(sk_rect_key_out, SkRect::MakeEmpty());
+int SkRect_MakeEmpty() {
+    return static_sk_rect_make(SkRect::MakeEmpty());
 }
 
-void SkRect_MakeWH(const char *sk_rect_key_out, float w, float h) {
-    static_sk_rect_set(sk_rect_key_out, SkRect::MakeWH(w, h));
+int SkRect_MakeWH(float w, float h) {
+    return static_sk_rect_make(SkRect::MakeWH(w, h));
 }
 
-void SkRect_MakeIWH(const char *sk_rect_key_out, int w, int h) {
-    static_sk_rect_set(sk_rect_key_out, SkRect::MakeIWH(w, h));
+int SkRect_MakeIWH(int w, int h) {
+    return static_sk_rect_make(SkRect::MakeIWH(w, h));
 }
 
-void SkRect_MakeSize(const char *sk_rect_key_out, const SkSize *size) {
-    static_sk_rect_set(sk_rect_key_out, SkRect::MakeSize(*size));
+int SkRect_MakeSize(const SkSize *size) {
+    return static_sk_rect_make(SkRect::MakeSize(*size));
 }
 
-void SkRect_MakeLTRB(const char *sk_rect_key_out, float l, float t, float r, float b) {
-    static_sk_rect_set(sk_rect_key_out, SkRect::MakeLTRB(l, t, r, b));
+int SkRect_MakeLTRB(float l, float t, float r, float b) {
+    return static_sk_rect_make(SkRect::MakeLTRB(l, t, r, b));
 }
 
-void SkRect_MakeXYWH(const char *sk_rect_key_out, float x, float y, float w, float h) {
-    static_sk_rect_set(sk_rect_key_out, SkRect::MakeXYWH(x, y, w, h));
+int SkRect_MakeXYWH(float x, float y, float w, float h) {
+    return static_sk_rect_make(SkRect::MakeXYWH(x, y, w, h));
 }
 
-void SkRect_Make(const char *sk_rect_key_out, const SkISize *size) {
-    static_sk_rect_set(sk_rect_key_out, SkRect::Make(*size));
+int SkRect_Make(const SkISize *size) {
+    return static_sk_rect_make(SkRect::Make(*size));
 }
 
-void SkRect_Make_2(const char *sk_rect_key_out, const SkIRect *irect) {
-    static_sk_rect_set(sk_rect_key_out, SkRect::Make(*irect));
+int SkRect_Make_2(const SkIRect *irect) {
+    return static_sk_rect_make(SkRect::Make(*irect));
 }
 
 bool SkRect_Intersects(const SkRect *a, const SkRect *b) {

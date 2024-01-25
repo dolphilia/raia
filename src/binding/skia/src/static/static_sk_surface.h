@@ -9,9 +9,10 @@
 #include <map>
 #include "include/core/SkSurface.h"
 
-void static_sk_surface_delete(const char *key);
-SkSurface *static_sk_surface_get(const char *key);
-void static_sk_surface_set(const char *key, sk_sp<SkSurface> value);
-sk_sp<SkSurface> static_sk_surface_move(const char *key);
+int static_sk_surface_make(sk_sp<SkSurface> value);
+void static_sk_surface_delete(int key);
+SkSurface *static_sk_surface_get(int key);
+void static_sk_surface_set(int key, sk_sp<SkSurface> value);
+sk_sp<SkSurface> static_sk_surface_move(int key);
 
 #endif //RAIA_SKIA_STATIC_SK_SURFACE_H

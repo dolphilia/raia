@@ -9,8 +9,9 @@
 #include <map>
 #include <tuple>
 
-void static_tuple_int_int_delete(const char *key);
-std::tuple<int, int> static_tuple_int_int_get(const char *key);
-void static_tuple_int_int_set(const char *key, std::tuple<int, int> value);
+int static_tuple_int_int_make(std::tuple<int, int> value);
+void static_tuple_int_int_delete(int key);
+std::tuple<int, int> static_tuple_int_int_get(int key);
+void static_tuple_int_int_set(int key, std::tuple<int, int> value);
 
 #endif //RAIA_SKIA_STATIC_STD_TUPLE_INT_INT_H

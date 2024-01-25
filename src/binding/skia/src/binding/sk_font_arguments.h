@@ -10,11 +10,11 @@
 
 extern "C" {
 SkFontArguments *SkFontArguments_new();
-void SkFontArguments_setCollectionIndex(const char *sk_font_arguments_key_out, SkFontArguments *font_argments, int collectionIndex);
-void SkFontArguments_setVariationDesignPosition(const char *sk_font_arguments_key_out, SkFontArguments *font_argments, SkFontArguments::VariationPosition position);
+int SkFontArguments_setCollectionIndex(SkFontArguments *font_argments, int collectionIndex);
+int SkFontArguments_setVariationDesignPosition(SkFontArguments *font_argments, SkFontArguments::VariationPosition position);
 int SkFontArguments_getCollectionIndex(SkFontArguments *font_argments);
 SkFontArguments::VariationPosition SkFontArguments_getVariationDesignPosition(SkFontArguments *font_argments);
-void SkFontArguments_setPalette(const char *sk_font_arguments_key_out, SkFontArguments *font_argments, SkFontArguments::Palette palette);
+int SkFontArguments_setPalette(SkFontArguments *font_argments, SkFontArguments::Palette palette);
 SkFontArguments::Palette SkFontArguments_getPalette(SkFontArguments *font_argments);
 }
 

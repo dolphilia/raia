@@ -9,9 +9,10 @@
 #include <map>
 #include "include/core/SkColorSpace.h"
 
-void static_sk_color_space_delete(const char *key);
-SkColorSpace *static_sk_color_space_get(const char *key);
-void static_sk_color_space_set(const char *key, sk_sp<SkColorSpace> value);
-sk_sp<SkColorSpace> static_sk_color_space_move(const char *key);
+int static_sk_color_space_make(sk_sp<SkColorSpace> value);
+void static_sk_color_space_delete(int key);
+SkColorSpace *static_sk_color_space_get(int key);
+void static_sk_color_space_set(int key, sk_sp<SkColorSpace> value);
+sk_sp<SkColorSpace> static_sk_color_space_move(int key);
 
 #endif //RAIA_SKIA_STATIC_SK_COLOR_SPACE_H

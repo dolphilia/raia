@@ -9,8 +9,9 @@
 #include <map>
 #include "include/core/SkYUVAPixmaps.h"
 
-void static_sk_yuva_pixmaps_delete(const char *key);
-SkYUVAPixmaps static_sk_yuva_pixmaps_get(const char *key);
-void static_sk_yuva_pixmaps_set(const char *key, SkYUVAPixmaps value);
+int static_sk_yuva_pixmaps_make(SkYUVAPixmaps value);
+void static_sk_yuva_pixmaps_delete(int key);
+SkYUVAPixmaps static_sk_yuva_pixmaps_get(int key);
+void static_sk_yuva_pixmaps_set(int key, SkYUVAPixmaps value);
 
 #endif //RAIA_SKIA_STATIC_SK_YUVA_PIXMAPS_H

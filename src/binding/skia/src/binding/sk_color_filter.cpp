@@ -27,15 +27,14 @@ SkColor4f SkColorFilter_filterColor4f(SkColorFilter *color_filter, const SkColor
     return color_filter->filterColor4f(*srcColor, srcCS, dstCS);
 }
 
-void SkColorFilter_makeComposed(const char *sk_color_filter_key_out, const char *sk_color_filter_key_in,
+int SkColorFilter_makeComposed(int sk_color_filter_key_in,
                                 SkColorFilter *color_filter) {
-    static_sk_color_filter_set(sk_color_filter_key_out,
-                               color_filter->makeComposed(static_sk_color_filter_move(sk_color_filter_key_in)));
+    return static_sk_color_filter_make(color_filter->makeComposed(static_sk_color_filter_move(sk_color_filter_key_in)));
 }
 
-void SkColorFilter_makeWithWorkingColorSpace(const char *sk_color_filter_key_out, const char *sk_color_space_key_in,
+int SkColorFilter_makeWithWorkingColorSpace(int sk_color_space_key_in,
                                              SkColorFilter *color_filter) {
-    static_sk_color_filter_set(sk_color_filter_key_out, color_filter->makeWithWorkingColorSpace(
+    return static_sk_color_filter_make(color_filter->makeWithWorkingColorSpace(
             static_sk_color_space_move(sk_color_space_key_in)));
 }
 
@@ -55,9 +54,8 @@ SkColorFilter::Type SkColorFilter_getFlattenableType(SkColorFilter *color_filter
     return color_filter->getFlattenableType();
 }
 
-void
-SkColorFilter_serialize(const char *sk_data_key_out, SkColorFilter *color_filter, const SkSerialProcs *serial_procs) {
-    static_sk_data_set(sk_data_key_out, color_filter->serialize(serial_procs));
+int SkColorFilter_serialize(SkColorFilter *color_filter, const SkSerialProcs *serial_procs) {
+    return static_sk_data_make(color_filter->serialize(serial_procs));
 }
 
 size_t SkColorFilter_serialize_2(SkColorFilter *color_filter, void *memory, size_t memory_size,
@@ -79,9 +77,9 @@ void SkColorFilter_unref(SkColorFilter *color_filter) {
 
 // static
 
-void SkColorFilter_Deserialize(const char *sk_color_filter_key_out, const void *data, size_t size,
+int SkColorFilter_Deserialize(const void *data, size_t size,
                                const SkDeserialProcs *procs) {
-    static_sk_color_filter_set(sk_color_filter_key_out, SkColorFilter::Deserialize(data, size, procs));
+    return static_sk_color_filter_make(SkColorFilter::Deserialize(data, size, procs));
 }
 
 SkColorFilter::Factory SkColorFilter_NameToFactory(const char name[]) {

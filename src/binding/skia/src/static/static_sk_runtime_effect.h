@@ -9,9 +9,10 @@
 #include <map>
 #include "include/effects/SkRuntimeEffect.h"
 
-void static_sk_runtime_effect_delete(const char *key);
-SkRuntimeEffect *static_sk_runtime_effect_get(const char *key);
-void static_sk_runtime_effect_set(const char *key, sk_sp<SkRuntimeEffect> value);
-sk_sp<SkRuntimeEffect> static_sk_runtime_effect_move(const char *key);
+int static_sk_runtime_effect_make(sk_sp<SkRuntimeEffect> value);
+void static_sk_runtime_effect_delete(int key);
+SkRuntimeEffect *static_sk_runtime_effect_get(int key);
+void static_sk_runtime_effect_set(int key, sk_sp<SkRuntimeEffect> value);
+sk_sp<SkRuntimeEffect> static_sk_runtime_effect_move(int key);
 
 #endif //RAIA_SKIA_STATIC_SK_RUNTIME_EFFECT_H

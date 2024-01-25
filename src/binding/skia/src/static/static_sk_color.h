@@ -10,8 +10,9 @@
 #include "include/private/base/SkSpan_impl.h"
 #include "include/core/SkColor.h"
 
-void static_sk_color_delete(const char *key);
-SkSpan<SkColor> static_sk_color_get(const char *key);
-void static_color_set(const char *key, SkSpan<SkColor> value);
+int static_const_sk_color_make(SkSpan<SkColor> value);
+void static_sk_color_delete(int key);
+SkSpan<SkColor> static_sk_color_get(int key);
+void static_color_set(int key, SkSpan<SkColor> value);
 
 #endif //RAIA_SKIA_STATIC_SK_COLOR_H

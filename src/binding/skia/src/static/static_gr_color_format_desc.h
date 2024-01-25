@@ -9,8 +9,9 @@
 #include <map>
 #include "include/gpu/GrBackendSurface.h"
 
-void static_gr_color_format_desc_delete(const char *key);
-GrColorFormatDesc static_gr_color_format_desc_get(const char *key);
-void static_gr_color_format_desc_set(const char *key, GrColorFormatDesc value);
+int static_gr_color_format_desc_make(GrColorFormatDesc value);
+void static_gr_color_format_desc_delete(int key);
+GrColorFormatDesc static_gr_color_format_desc_get(int key);
+void static_gr_color_format_desc_set(int key, GrColorFormatDesc value);
 
 #endif //RAIA_SKIA_STATIC_GR_COLOR_FORMAT_DESC_H

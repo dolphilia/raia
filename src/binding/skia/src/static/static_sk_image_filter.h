@@ -9,9 +9,10 @@
 #include <map>
 #include "include/core/SkImageFilter.h"
 
-void static_sk_image_filter_delete(const char *key);
-SkImageFilter *static_sk_image_filter_get(const char *key);
-void static_sk_image_filter_set(const char *key, sk_sp<SkImageFilter> value);
-sk_sp<SkImageFilter> static_sk_image_filter_move(const char *key);
+int static_sk_image_filter_make(sk_sp<SkImageFilter> value);
+void static_sk_image_filter_delete(int key);
+SkImageFilter *static_sk_image_filter_get(int key);
+void static_sk_image_filter_set(int key, sk_sp<SkImageFilter> value);
+sk_sp<SkImageFilter> static_sk_image_filter_move(int key);
 
 #endif //RAIA_SKIA_STATIC_SK_IMAGE_FILTER_H

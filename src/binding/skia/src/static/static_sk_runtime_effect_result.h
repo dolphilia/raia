@@ -11,8 +11,9 @@
 #include "include/effects/SkRuntimeEffect.h"
 
 // const
-void static_sk_runtime_effect_result_delete(const char *key);
-SkRuntimeEffect::Result static_sk_runtime_effect_result_get(const char *key);
-void static_sk_runtime_effect_result_set(const char *key, SkRuntimeEffect::Result value);
+int static_sk_runtime_effect_result_make(SkRuntimeEffect::Result value);
+void static_sk_runtime_effect_result_delete(int key);
+SkRuntimeEffect::Result static_sk_runtime_effect_result_get(int key);
+void static_sk_runtime_effect_result_set(int key, SkRuntimeEffect::Result value);
 
 #endif //RAIA_SKIA_STATIC_SK_RUNTIME_EFFECT_RESULT_H

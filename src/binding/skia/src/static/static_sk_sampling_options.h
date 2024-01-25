@@ -9,8 +9,9 @@
 #include <map>
 #include "include/core/SkSamplingOptions.h"
 
-void static_sk_sampling_options_delete(const char *key);
-SkSamplingOptions static_sk_sampling_options_get(const char *key);
-void static_sk_sampling_options_set(const char *key, SkSamplingOptions value);
+int static_sk_sampling_options_make(SkSamplingOptions value);
+void static_sk_sampling_options_delete(int key);
+SkSamplingOptions static_sk_sampling_options_get(int key);
+void static_sk_sampling_options_set(int key, SkSamplingOptions value);
 
 #endif //RAIA_SKIA_STATIC_SK_SAMPLING_OPTIONS_H

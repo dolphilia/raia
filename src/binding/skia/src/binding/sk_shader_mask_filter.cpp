@@ -8,8 +8,8 @@ extern "C" {
 
 // static
 
-void SkShaderMaskFilter_Make(const char *sk_mask_filter_key_out, const char *sk_shader_key_in) {
-    static_sk_mask_filter_set(sk_mask_filter_key_out, SkShaderMaskFilter::Make(static_sk_shader_move(sk_shader_key_in)));
+int SkShaderMaskFilter_Make(int sk_shader_key_in) {
+    return static_sk_mask_filter_make(SkShaderMaskFilter::Make(static_sk_shader_move(sk_shader_key_in)));
 }
 
 }

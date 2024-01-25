@@ -10,7 +10,7 @@
 
 extern "C" {
 // static
-void SkOverdrawColorFilter_MakeWithSkColors(const char *sk_color_filter_key_out, const SkColor color[SkOverdrawColorFilter::kNumColors]);
+int SkOverdrawColorFilter_MakeWithSkColors(const SkColor color[SkOverdrawColorFilter::kNumColors]);
 }
 
 #endif //RAIA_SKIA_SK_OVERDRAW_COLOR_FILTER_H

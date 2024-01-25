@@ -66,12 +66,12 @@ bool SkStream_rewind(SkStream *stream) {
     return stream->rewind();
 }
 
-void SkStream_duplicate(const char *sk_stream_key_out, SkStream *stream) {
-    static_sk_stream_set(sk_stream_key_out, stream->duplicate());
+int SkStream_duplicate(SkStream *stream) {
+    return static_sk_stream_make(stream->duplicate());
 }
 
-void SkStream_fork(const char *sk_stream_key_out, SkStream *stream) {
-    static_sk_stream_set(sk_stream_key_out, stream->fork());
+int SkStream_fork(SkStream *stream) {
+    return static_sk_stream_make(stream->fork());
 }
 
 bool SkStream_hasPosition(SkStream *stream) {
@@ -104,8 +104,8 @@ const void * SkStream_getMemoryBase(SkStream *stream) {
 
 // static
 
-void SkStream_MakeFromFile(const char *sk_stream_key_out, const char path[]) { // static
-    static_sk_stream_set(sk_stream_key_out, SkStream::MakeFromFile(path));
+int SkStream_MakeFromFile(const char path[]) { // static
+    return static_sk_stream_make(SkStream::MakeFromFile(path));
 }
 
 }

@@ -20,7 +20,7 @@ SkSamplingOptions *SkSamplingOptions_new_4(SkFilterMode fm);
 SkSamplingOptions *SkSamplingOptions_new_5(const SkCubicResampler *c);
 bool SkSamplingOptions_isAniso(SkSamplingOptions *sampling_options);
 // static
-void SkSamplingOptions_Aniso(const char *sk_sampling_options_key_out, int maxAniso);
+int SkSamplingOptions_Aniso(int maxAniso);
 }
 
 #endif //RAIA_SKIA_SK_SAMPLING_OPTIONS_H

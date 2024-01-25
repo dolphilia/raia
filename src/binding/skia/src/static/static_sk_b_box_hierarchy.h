@@ -9,9 +9,10 @@
 #include <map>
 #include "include/core/SkBBHFactory.h"
 
-void static_sk_b_box_hierarchy_delete(const char *key);
-SkBBoxHierarchy *static_sk_b_box_hierarchy_get(const char *key);
-void static_sk_b_box_hierarchy_set(const char *key, sk_sp<SkBBoxHierarchy> value);
-sk_sp<SkBBoxHierarchy> static_sk_b_box_hierarchy_move(const char *key);
+int static_sk_b_box_hierarchy_make(sk_sp<SkBBoxHierarchy> value);
+void static_sk_b_box_hierarchy_delete(int key);
+SkBBoxHierarchy *static_sk_b_box_hierarchy_get(int key);
+void static_sk_b_box_hierarchy_set(int key, sk_sp<SkBBoxHierarchy> value);
+sk_sp<SkBBoxHierarchy> static_sk_b_box_hierarchy_move(int key);
 
 #endif //RAIA_SKIA_STATIC_SK_B_BOX_HIERARCHY_H

@@ -7,8 +7,8 @@
 extern "C" {
 
 // static
-void SkOverdrawColorFilter_MakeWithSkColors(const char *sk_color_filter_key_out, const SkColor color[SkOverdrawColorFilter::kNumColors]) {
-    static_sk_color_filter_set(sk_color_filter_key_out, SkOverdrawColorFilter::MakeWithSkColors(color));
+int SkOverdrawColorFilter_MakeWithSkColors(const SkColor color[SkOverdrawColorFilter::kNumColors]) {
+    return static_sk_color_filter_make(SkOverdrawColorFilter::MakeWithSkColors(color));
 }
 
 }

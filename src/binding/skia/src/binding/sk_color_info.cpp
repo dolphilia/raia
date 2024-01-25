@@ -11,7 +11,7 @@ SkColorInfo *SkColorInfo_new() {
     return new SkColorInfo();
 }
 
-SkColorInfo *SkColorInfo_new_2(const char *sk_color_space_key_in, SkColorType ct, SkAlphaType at) {
+SkColorInfo *SkColorInfo_new_2(int sk_color_space_key_in, SkColorType ct, SkAlphaType at) {
     return new SkColorInfo(ct, at, static_sk_color_space_move(sk_color_space_key_in));
 }
 
@@ -47,20 +47,20 @@ bool SkColorInfo_isOpaque(SkColorInfo *color_info) {
     return color_info->isOpaque();
 }
 
-void SkColorInfo_makeAlphaType(const char *sk_color_info_key_in, SkColorInfo *color_info, SkAlphaType newAlphaType) {
+void SkColorInfo_makeAlphaType(int sk_color_info_key_in, SkColorInfo *color_info, SkAlphaType newAlphaType) {
     static_sk_color_info_set(sk_color_info_key_in, color_info->makeAlphaType(newAlphaType));
 }
 
-void SkColorInfo_makeColorSpace(const char *sk_color_info_key_in, const char *sk_color_space_key_in, SkColorInfo *color_info) {
+void SkColorInfo_makeColorSpace(int sk_color_info_key_in, int sk_color_space_key_in, SkColorInfo *color_info) {
     static_sk_color_info_set(sk_color_info_key_in, color_info->makeColorSpace(static_sk_color_space_move(sk_color_space_key_in)));
 }
 
-void SkColorInfo_makeColorType(const char *sk_color_info_key_in, SkColorInfo *color_info, SkColorType newColorType) {
+void SkColorInfo_makeColorType(int sk_color_info_key_in, SkColorInfo *color_info, SkColorType newColorType) {
     static_sk_color_info_set(sk_color_info_key_in, color_info->makeColorType(newColorType));
 }
 
-void SkColorInfo_refColorSpace(const char *sk_color_space_key_out, SkColorInfo *color_info) {
-    static_sk_color_space_set(sk_color_space_key_out, color_info->refColorSpace());
+int SkColorInfo_refColorSpace(SkColorInfo *color_info) {
+    return static_sk_color_space_make(color_info->refColorSpace());
 }
 
 int SkColorInfo_shiftPerPixel(SkColorInfo *color_info) {

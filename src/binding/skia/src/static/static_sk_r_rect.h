@@ -9,8 +9,9 @@
 #include <map>
 #include "include/core/SkRRect.h"
 
-void static_sk_r_rect_delete(const char *key);
-SkRRect static_sk_r_rect_get(const char *key);
-void static_sk_r_rect_set(const char *key, SkRRect value);
+int static_sk_r_rect_make(SkRRect value);
+void static_sk_r_rect_delete(int key);
+SkRRect static_sk_r_rect_get(int key);
+void static_sk_r_rect_set(int key, SkRRect value);
 
 #endif //RAIA_SKIA_STATIC_SK_R_RECT_H

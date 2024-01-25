@@ -9,8 +9,9 @@
 #include <map>
 #include "include/core/SkImageInfo.h"
 
-void static_sk_color_info_delete(const char *key);
-SkColorInfo static_sk_color_info_get(const char *key);
-void static_sk_color_info_set(const char *key, SkColorInfo value);
+int static_sk_color_info_make(SkColorInfo value);
+void static_sk_color_info_delete(int key);
+SkColorInfo static_sk_color_info_get(int key);
+void static_sk_color_info_set(int key, SkColorInfo value);
 
 #endif //RAIA_SKIA_STATIC_SK_COLOR_INFO_H

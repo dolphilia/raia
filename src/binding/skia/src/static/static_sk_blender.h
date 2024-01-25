@@ -9,9 +9,10 @@
 #include <map>
 #include "include/core/SkBlender.h"
 
-void static_sk_blender_delete(const char *key);
-SkBlender *static_sk_blender_get(const char *key);
-void static_sk_blender_set(const char *key, sk_sp<SkBlender> value);
-sk_sp<SkBlender> static_sk_blender_move(const char *key);
+int static_sk_blender_make(sk_sp<SkBlender> value);
+void static_sk_blender_delete(int key);
+SkBlender *static_sk_blender_get(int key);
+void static_sk_blender_set(int key, sk_sp<SkBlender> value);
+sk_sp<SkBlender> static_sk_blender_move(int key);
 
 #endif //RAIA_SKIA_STATIC_SK_BLENDER_H

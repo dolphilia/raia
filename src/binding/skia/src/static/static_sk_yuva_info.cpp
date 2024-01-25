@@ -4,16 +4,23 @@
 
 #include "static_sk_yuva_info.h"
 
-static std::map<std::string, SkYUVAInfo> static_sk_yuva_info;
+static std::map<int , SkYUVAInfo> static_sk_yuva_info;
+static int static_sk_yuva_info_index = 0;
 
-void static_sk_yuva_info_delete(const char *key) {
+int static_sk_yuva_info_make(SkYUVAInfo value) {
+    static_sk_yuva_info[static_sk_yuva_info_index] = value;
+    static_sk_yuva_info_index++;
+    return static_sk_yuva_info_index - 1;
+}
+
+void static_sk_yuva_info_delete(int key) {
     static_sk_yuva_info.erase(key);
 }
 
-SkYUVAInfo static_sk_yuva_info_get(const char *key) {
+SkYUVAInfo static_sk_yuva_info_get(int key) {
     return static_sk_yuva_info[key];
 }
 
-void static_sk_yuva_info_set(const char *key, SkYUVAInfo value) {
+void static_sk_yuva_info_set(int key, SkYUVAInfo value) {
     static_sk_yuva_info[key] = value;
 }

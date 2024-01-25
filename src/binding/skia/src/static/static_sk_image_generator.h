@@ -9,9 +9,10 @@
 #include <map>
 #include "include/core/SkImageGenerator.h"
 
-void static_sk_image_generator_delete(const char *key);
-SkImageGenerator *static_sk_image_generator_get(const char *key);
-void static_sk_image_generator_set(const char *key, std::unique_ptr<SkImageGenerator> value);
-std::unique_ptr<SkImageGenerator> static_sk_image_generator_move(const char *key);
+int static_sk_image_generator_make(std::unique_ptr<SkImageGenerator> value);
+void static_sk_image_generator_delete(int key);
+SkImageGenerator *static_sk_image_generator_get(int key);
+void static_sk_image_generator_set(int key, std::unique_ptr<SkImageGenerator> value);
+std::unique_ptr<SkImageGenerator> static_sk_image_generator_move(int key);
 
 #endif //RAIA_SKIA_STATIC_SK_IMAGE_GENERATOR_H

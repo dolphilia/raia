@@ -9,7 +9,7 @@
 #include "../static/static_sk_blender.h"
 
 extern "C" {
-void SkBlenders_Arithmetic(const char *sk_blender_key_out, float k1, float k2, float k3, float k4, bool enforcePremul);
+int SkBlenders_Arithmetic(float k1, float k2, float k3, float k4, bool enforcePremul);
 }
 
 #endif //RAIA_SKIA_SK_BLENDERS_H

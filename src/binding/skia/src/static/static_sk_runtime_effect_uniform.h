@@ -10,9 +10,9 @@
 #include "include/effects/SkRuntimeEffect.h"
 
 // const
-
-void static_const_sk_runtime_effect_uniform_delete(const char *key);
-SkSpan<const SkRuntimeEffect::Uniform> static_const_sk_runtime_effect_uniform_get(const char *key);
-void static_const_sk_runtime_effect_uniform_set(const char *key, SkSpan<const SkRuntimeEffect::Uniform> value);
+int static_const_sk_runtime_effect_uniform_make(SkSpan<const SkRuntimeEffect::Uniform> value);
+void static_const_sk_runtime_effect_uniform_delete(int key);
+SkSpan<const SkRuntimeEffect::Uniform> static_const_sk_runtime_effect_uniform_get(int key);
+void static_const_sk_runtime_effect_uniform_set(int key, SkSpan<const SkRuntimeEffect::Uniform> value);
 
 #endif //RAIA_SKIA_STATIC_SK_RUNTIME_EFFECT_UNIFORM_H

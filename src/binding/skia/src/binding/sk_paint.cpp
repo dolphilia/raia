@@ -133,11 +133,11 @@ SkShader * SkPaint_getShader(SkPaint *paint) {
     return paint->getShader();
 }
 
-void SkPaint_refShader(const char *sk_shader_key_out, SkPaint *paint) {
-    static_sk_shader_set(sk_shader_key_out, paint->refShader());
+int SkPaint_refShader(SkPaint *paint) {
+    return static_sk_shader_make(paint->refShader());
 }
 
-void SkPaint_setShader(const char *sk_shader_key_in, SkPaint *paint) {
+void SkPaint_setShader(int sk_shader_key_in, SkPaint *paint) {
     paint->setShader(static_sk_shader_move(sk_shader_key_in));
 }
 
@@ -145,16 +145,16 @@ SkColorFilter * SkPaint_getColorFilter(SkPaint *paint) {
     return paint->getColorFilter();
 }
 
-void SkPaint_refColorFilter(const char *sk_color_filter_key_out, SkPaint *paint) {
-    static_sk_color_filter_set(sk_color_filter_key_out, paint->refColorFilter());
+int SkPaint_refColorFilter(SkPaint *paint) {
+    return static_sk_color_filter_make(paint->refColorFilter());
 }
 
-void SkPaint_setColorFilter(const char *sk_color_filter_key_in, SkPaint *paint) {
+void SkPaint_setColorFilter(int sk_color_filter_key_in, SkPaint *paint) {
     paint->setColorFilter(static_sk_color_filter_move(sk_color_filter_key_in));
 }
 
-void SkPaint_asBlendMode(const char *sk_blend_mode_key_out, SkPaint *paint) {
-    static_optional_sk_blend_mode_set(sk_blend_mode_key_out, paint->asBlendMode());
+int SkPaint_asBlendMode(SkPaint *paint) {
+    return static_optional_sk_blend_mode_make(paint->asBlendMode());
 }
 
 SkBlendMode SkPaint_getBlendMode_or(SkPaint *paint, SkBlendMode defaultMode) {
@@ -173,11 +173,11 @@ SkBlender * SkPaint_getBlender(SkPaint *paint) {
     return paint->getBlender();
 }
 
-void SkPaint_refBlender(const char *sk_blender_key_out, SkPaint *paint) {
-    static_sk_blender_set(sk_blender_key_out, paint->refBlender());
+int SkPaint_refBlender(SkPaint *paint) {
+    return static_sk_blender_make(paint->refBlender());
 }
 
-void SkPaint_setBlender(const char *sk_blender_key_in, SkPaint *paint) {
+void SkPaint_setBlender(int sk_blender_key_in, SkPaint *paint) {
     paint->setBlender(static_sk_blender_move(sk_blender_key_in));
 }
 
@@ -185,11 +185,11 @@ SkPathEffect * SkPaint_getPathEffect(SkPaint *paint) {
     return paint->getPathEffect();
 }
 
-void SkPaint_refPathEffect(const char *sk_path_effect_key_out, SkPaint *paint) {
-    static_sk_path_effect_set(sk_path_effect_key_out, paint->refPathEffect());
+int SkPaint_refPathEffect(SkPaint *paint) {
+    return static_sk_path_effect_make(paint->refPathEffect());
 }
 
-void SkPaint_setPathEffect(const char *sk_path_effect_key_in, SkPaint *paint) {
+void SkPaint_setPathEffect(int sk_path_effect_key_in, SkPaint *paint) {
     paint->setPathEffect(static_sk_path_effect_move(sk_path_effect_key_in));
 }
 
@@ -197,11 +197,11 @@ SkMaskFilter * SkPaint_getMaskFilter(SkPaint *paint) {
     return paint->getMaskFilter();
 }
 
-void SkPaint_refMaskFilter(const char *sk_mask_filter_key_out, SkPaint *paint) {
-    static_sk_mask_filter_set(sk_mask_filter_key_out, paint->refMaskFilter());
+int SkPaint_refMaskFilter(SkPaint *paint) {
+    return static_sk_mask_filter_make(paint->refMaskFilter());
 }
 
-void SkPaint_setMaskFilter(const char *sk_mask_filter_key_in, SkPaint *paint) {
+void SkPaint_setMaskFilter(int sk_mask_filter_key_in, SkPaint *paint) {
     paint->setMaskFilter(static_sk_mask_filter_move(sk_mask_filter_key_in));
 }
 
@@ -209,11 +209,11 @@ SkImageFilter * SkPaint_getImageFilter(SkPaint *paint) {
     return paint->getImageFilter();
 }
 
-void SkPaint_refImageFilter(const char *sk_image_filter_key_out, SkPaint *paint) {
-    static_sk_image_filter_set(sk_image_filter_key_out, paint->refImageFilter());
+int SkPaint_refImageFilter(SkPaint *paint) {
+    return static_sk_image_filter_make(paint->refImageFilter());
 }
 
-void SkPaint_setImageFilter(const char *sk_image_filter_key_in, SkPaint *paint) {
+void SkPaint_setImageFilter(int sk_image_filter_key_in, SkPaint *paint) {
     paint->setImageFilter(static_sk_image_filter_move(sk_image_filter_key_in));
 }
 

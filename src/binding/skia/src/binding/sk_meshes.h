@@ -10,10 +10,10 @@
 #include "../static/static_sk_mesh_vertex_buffer.h"
 
 extern "C" {
-void SkMeshes_MakeIndexBuffer(const char *sk_mesh_index_buffer_key_out, const void *data, size_t size);
-void SkMeshes_CopyIndexBuffer(const char *sk_mesh_index_buffer_key_out, const sk_sp< SkMesh::IndexBuffer > *indexBuffer);
-void SkMeshes_MakeVertexBuffer(const char *sk_mesh_vertex_buffer_key_out, const void *data, size_t size);
-void SkMeshes_CopyVertexBuffer(const char *sk_mesh_vertex_buffer_key_out, const sk_sp< SkMesh::VertexBuffer > *vertexBuffer);
+int SkMeshes_MakeIndexBuffer(const void *data, size_t size);
+int SkMeshes_CopyIndexBuffer(const sk_sp< SkMesh::IndexBuffer > *indexBuffer);
+int SkMeshes_MakeVertexBuffer(const void *data, size_t size);
+int SkMeshes_CopyVertexBuffer(const sk_sp< SkMesh::VertexBuffer > *vertexBuffer);
 }
 
 #endif //RAIA_SKIA_SK_MESHES_H

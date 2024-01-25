@@ -11,8 +11,8 @@
 extern "C" {
 bool SkStreamAsset_hasLength(SkStreamAsset *stream_asset);
 size_t SkStreamAsset_getLength(SkStreamAsset *stream_asset);
-void SkStreamAsset_duplicate(const char *sk_stream_asset_key_out, SkStreamAsset *stream_asset);
-void SkStreamAsset_fork(const char *sk_stream_asset_key_out, SkStreamAsset *stream_asset);
+int SkStreamAsset_duplicate(SkStreamAsset *stream_asset);
+int SkStreamAsset_fork(SkStreamAsset *stream_asset);
 bool SkStreamAsset_hasPosition(SkStreamAsset *stream_asset);
 size_t SkStreamAsset_getPosition(SkStreamAsset *stream_asset);
 bool SkStreamAsset_seek(SkStreamAsset *stream_asset, size_t position);
@@ -33,7 +33,7 @@ bool SkStreamAsset_readScalar(SkStreamAsset *stream_asset, SkScalar *v);
 bool SkStreamAsset_readPackedUInt(SkStreamAsset *stream_asset, size_t *size);
 const void * SkStreamAsset_getMemoryBase(SkStreamAsset *stream_asset);
 // static
-void SkStreamAsset_MakeFromFile(const char *sk_stream_asset_key_out, const char path[]);
+int SkStreamAsset_MakeFromFile(const char path[]);
 }
 
 #endif //RAIA_SKIA_SK_STREAM_ASSET_H

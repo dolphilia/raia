@@ -4,21 +4,30 @@
 
 #include "static_sk_id_change_listener.h"
 
-static std::map<std::string, sk_sp<SkIDChangeListener>> static_sk_id_change_listener;
+#include <utility>
 
-void static_sk_id_change_listener_delete(const char *key) {
+static std::map<int , sk_sp<SkIDChangeListener>> static_sk_id_change_listener;
+static int static_sk_id_change_listener_index = 0;
+
+int static_sk_id_change_listener_make(sk_sp<SkIDChangeListener> value) {
+    static_sk_id_change_listener[static_sk_id_change_listener_index] = std::move(value);
+    static_sk_id_change_listener_index++;
+    return static_sk_id_change_listener_index - 1;
+}
+
+void static_sk_id_change_listener_delete(int key) {
     static_sk_id_change_listener[key].reset();
     static_sk_id_change_listener.erase(key);
 }
 
-SkIDChangeListener *static_sk_id_change_listener_get(const char *key) {
+SkIDChangeListener *static_sk_id_change_listener_get(int key) {
     return static_sk_id_change_listener[key].get();
 }
 
-void static_sk_id_change_listener_set(const char *key, sk_sp<SkIDChangeListener> value) {
+void static_sk_id_change_listener_set(int key, sk_sp<SkIDChangeListener> value) {
     static_sk_id_change_listener[key] = std::move(value);
 }
 
-sk_sp<SkIDChangeListener> static_sk_id_change_listener_move(const char *key) {
+sk_sp<SkIDChangeListener> static_sk_id_change_listener_move(int key) {
     return std::move(static_sk_id_change_listener[key]);
 }
