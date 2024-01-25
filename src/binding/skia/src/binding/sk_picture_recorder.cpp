@@ -14,7 +14,7 @@ void SkPictureRecorder_delete(SkPictureRecorder *picture_recorder) {
     delete picture_recorder;
 }
 
-SkCanvas *SkPictureRecorder_beginRecording(const char *sk_b_box_hierarchy_key_in, SkPictureRecorder *picture_recorder,
+SkCanvas *SkPictureRecorder_beginRecording(int sk_b_box_hierarchy_key_in, SkPictureRecorder *picture_recorder,
                                            const SkRect *bounds) {
     return picture_recorder->beginRecording(*bounds, static_sk_b_box_hierarchy_move(sk_b_box_hierarchy_key_in));
 }
@@ -31,15 +31,15 @@ SkCanvas * SkPictureRecorder_getRecordingCanvas(SkPictureRecorder *picture_recor
     return picture_recorder->getRecordingCanvas();
 }
 
-void SkPictureRecorder_finishRecordingAsPicture(const char *sk_picture_key_out, SkPictureRecorder *picture_recorder) {
+void SkPictureRecorder_finishRecordingAsPicture(int sk_picture_key_out, SkPictureRecorder *picture_recorder) {
     static_sk_picture_set(sk_picture_key_out, picture_recorder->finishRecordingAsPicture());
 }
 
-void SkPictureRecorder_finishRecordingAsPictureWithCull(const char *sk_picture_key_out, SkPictureRecorder *picture_recorder, const SkRect *cullRect) {
+void SkPictureRecorder_finishRecordingAsPictureWithCull(int sk_picture_key_out, SkPictureRecorder *picture_recorder, const SkRect *cullRect) {
     static_sk_picture_set(sk_picture_key_out, picture_recorder->finishRecordingAsPictureWithCull(*cullRect));
 }
 
-void SkPictureRecorder_finishRecordingAsDrawable(const char *sk_drawable_key_out, SkPictureRecorder *picture_recorder) {
+void SkPictureRecorder_finishRecordingAsDrawable(int sk_drawable_key_out, SkPictureRecorder *picture_recorder) {
     static_sk_drawable_set(sk_drawable_key_out, picture_recorder->finishRecordingAsDrawable());
 }
 

@@ -10,7 +10,7 @@
 
 extern "C" {
 // static
-void SkCornerPathEffect_Make(const char *sk_path_effect_key_out, SkScalar radius);
+void SkCornerPathEffect_Make(int sk_path_effect_key_out, SkScalar radius);
 void SkCornerPathEffect_RegisterFlattenables();
 }
 

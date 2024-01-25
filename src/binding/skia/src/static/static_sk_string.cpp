@@ -6,16 +6,16 @@
 
 #include <utility>
 
-static std::map<std::string, SkString> static_sk_string;
+static std::map<int , SkString> static_sk_string;
 
-void static_sk_string_delete(const char *key) {
+void static_sk_string_delete(int key) {
     static_sk_string.erase(key);
 }
 
-SkString static_sk_string_get(const char *key) {
+SkString static_sk_string_get(int key) {
     return static_sk_string[key];
 }
 
-void static_sk_string_set(const char *key, SkString value) {
+void static_sk_string_set(int key, SkString value) {
     static_sk_string[key] = std::move(value);
 }

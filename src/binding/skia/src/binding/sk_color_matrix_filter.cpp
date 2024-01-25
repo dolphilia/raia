@@ -26,11 +26,11 @@ SkColor4f SkColorMatrixFilter_filterColor4f(SkColorMatrixFilter *color_matrix_fi
     return color_matrix_filter->filterColor4f(srcColor, srcCS, dstCS);
 }
 
-void SkColorMatrixFilter_makeComposed(const char *sk_color_filter_key_out, const char *sk_color_filter_key_in, SkColorMatrixFilter *color_matrix_filter) {
+void SkColorMatrixFilter_makeComposed(int sk_color_filter_key_out, int sk_color_filter_key_in, SkColorMatrixFilter *color_matrix_filter) {
     static_sk_color_filter_set(sk_color_filter_key_out, color_matrix_filter->makeComposed(static_sk_color_filter_move(sk_color_filter_key_in)));
 }
 
-void SkColorMatrixFilter_makeWithWorkingColorSpace(const char *sk_color_filter_key_out, const char *sk_color_space_key_in, SkColorMatrixFilter *color_matrix_filter) {
+void SkColorMatrixFilter_makeWithWorkingColorSpace(int sk_color_filter_key_out, int sk_color_space_key_in, SkColorMatrixFilter *color_matrix_filter) {
     static_sk_color_filter_set(sk_color_filter_key_out, color_matrix_filter->makeWithWorkingColorSpace(static_sk_color_space_move(sk_color_space_key_in)));
 }
 
@@ -50,7 +50,7 @@ SkColorMatrixFilter::Type SkColorMatrixFilter_getFlattenableType(SkColorMatrixFi
     return color_matrix_filter->getFlattenableType();
 }
 
-void SkColorMatrixFilter_serialize(const char *sk_data_key_out, SkColorMatrixFilter *color_matrix_filter, const SkSerialProcs *serial_procs) {
+void SkColorMatrixFilter_serialize(int sk_data_key_out, SkColorMatrixFilter *color_matrix_filter, const SkSerialProcs *serial_procs) {
     static_sk_data_set(sk_data_key_out, color_matrix_filter->serialize(serial_procs));
 }
 
@@ -72,11 +72,11 @@ void SkColorMatrixFilter_unref(SkColorMatrixFilter *color_matrix_filter) {
 
 // static
 
-void SkColorMatrixFilter_MakeLightingFilter(const char *sk_color_filter_key_out, SkColor mul, SkColor add) {
+void SkColorMatrixFilter_MakeLightingFilter(int sk_color_filter_key_out, SkColor mul, SkColor add) {
     static_sk_color_filter_set(sk_color_filter_key_out, SkColorMatrixFilter::MakeLightingFilter(mul, add));
 }
 
-void SkColorMatrixFilter_Deserialize(const char *sk_color_filter_key_out, const void *data, size_t size, const SkDeserialProcs *procs) {
+void SkColorMatrixFilter_Deserialize(int sk_color_filter_key_out, const void *data, size_t size, const SkDeserialProcs *procs) {
     static_sk_color_filter_set(sk_color_filter_key_out, SkColorMatrixFilter::Deserialize(data, size, procs));
 }
 

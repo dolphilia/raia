@@ -9,9 +9,9 @@
 #include "../static/static_sk_stroke_rec.h"
 
 extern "C" {
-void SkStrokeRec_static(const char *sk_stroke_key_out, SkStrokeRec::InitStyle style);
-void SkStrokeRec_static_2(const char *sk_stroke_key_out, const SkPaint *paint, SkPaint::Style style, SkScalar resScale);
-void SkStrokeRec_static_3(const char *sk_stroke_key_out, const SkPaint *paint, SkScalar resScale);
+void SkStrokeRec_static(int sk_stroke_key_out, SkStrokeRec::InitStyle style);
+void SkStrokeRec_static_2(int sk_stroke_key_out, const SkPaint *paint, SkPaint::Style style, SkScalar resScale);
+void SkStrokeRec_static_3(int sk_stroke_key_out, const SkPaint *paint, SkScalar resScale);
 SkStrokeRec::Style SkStrokeRec_getStyle(SkStrokeRec *stroke_rec);
 SkScalar SkStrokeRec_getWidth(SkStrokeRec *stroke_rec);
 SkScalar SkStrokeRec_getMiter(SkStrokeRec *stroke_rec);

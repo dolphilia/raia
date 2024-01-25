@@ -9,9 +9,9 @@
 #include <map>
 #include "include/core/SkImage.h"
 
-void static_sk_image_delete(const char *key);
-SkImage *static_sk_image_get(const char *key);
-void static_sk_image_set(const char *key, sk_sp<SkImage> value);
-sk_sp<SkImage> static_sk_image_move(const char *key);
+void static_sk_image_delete(int key);
+SkImage *static_sk_image_get(int key);
+void static_sk_image_set(int key, sk_sp<SkImage> value);
+sk_sp<SkImage> static_sk_image_move(int key);
 
 #endif //RAIA_SKIA_STATIC_SK_IMAGE_H

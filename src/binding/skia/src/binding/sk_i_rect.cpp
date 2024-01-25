@@ -82,19 +82,19 @@ void SkIRect_setSize(SkIRect *i_rect, SkISize size) {
     i_rect->setSize(size);
 }
 
-void SkIRect_makeOffset(const char* sk_i_rect_key_out, SkIRect *i_rect, int32_t dx, int32_t dy) {
+void SkIRect_makeOffset(int sk_i_rect_key_out, SkIRect *i_rect, int32_t dx, int32_t dy) {
     static_sk_i_rect_set(sk_i_rect_key_out, i_rect->makeOffset(dx, dy));
 }
 
-void SkIRect_makeOffset_2(const char* sk_i_rect_key_out, SkIRect *i_rect, SkIVector offset) {
+void SkIRect_makeOffset_2(int sk_i_rect_key_out, SkIRect *i_rect, SkIVector offset) {
     static_sk_i_rect_set(sk_i_rect_key_out, i_rect->makeOffset(offset));
 }
 
-void SkIRect_makeInset(const char* sk_i_rect_key_out, SkIRect *i_rect, int32_t dx, int32_t dy) {
+void SkIRect_makeInset(int sk_i_rect_key_out, SkIRect *i_rect, int32_t dx, int32_t dy) {
     static_sk_i_rect_set(sk_i_rect_key_out, i_rect->makeInset(dx, dy));
 }
 
-void SkIRect_makeOutset(const char* sk_i_rect_key_out, SkIRect *i_rect, int32_t dx, int32_t dy) {
+void SkIRect_makeOutset(int sk_i_rect_key_out, SkIRect *i_rect, int32_t dx, int32_t dy) {
     static_sk_i_rect_set(sk_i_rect_key_out, i_rect->makeOutset(dx, dy));
 }
 
@@ -154,33 +154,33 @@ void SkIRect_sort(SkIRect *i_rect) {
     i_rect->sort();
 }
 
-void SkIRect_makeSorted(const char* sk_i_rect_key_out, SkIRect *i_rect) {
+void SkIRect_makeSorted(int sk_i_rect_key_out, SkIRect *i_rect) {
     static_sk_i_rect_set(sk_i_rect_key_out, i_rect->makeSorted());
 }
 
 // static
 
-void SkIRect_MakeEmpty(const char* sk_i_rect_key_out) {
+void SkIRect_MakeEmpty(int sk_i_rect_key_out) {
     static_sk_i_rect_set(sk_i_rect_key_out, SkIRect::MakeEmpty());
 }
 
-void SkIRect_MakeWH(const char* sk_i_rect_key_out, int32_t w, int32_t h) {
+void SkIRect_MakeWH(int sk_i_rect_key_out, int32_t w, int32_t h) {
     static_sk_i_rect_set(sk_i_rect_key_out, SkIRect::MakeWH(w, h));
 }
 
-void SkIRect_MakeSize(const char* sk_i_rect_key_out, const SkISize *size) {
+void SkIRect_MakeSize(int sk_i_rect_key_out, const SkISize *size) {
     static_sk_i_rect_set(sk_i_rect_key_out, SkIRect::MakeSize(*size));
 }
 
-void SkIRect_MakePtSize(const char* sk_i_rect_key_out, SkIPoint pt, SkISize size) {
+void SkIRect_MakePtSize(int sk_i_rect_key_out, SkIPoint pt, SkISize size) {
     static_sk_i_rect_set(sk_i_rect_key_out, SkIRect::MakePtSize(pt, size));
 }
 
-void SkIRect_MakeLTRB(const char* sk_i_rect_key_out, int32_t l, int32_t t, int32_t r, int32_t b) {
+void SkIRect_MakeLTRB(int sk_i_rect_key_out, int32_t l, int32_t t, int32_t r, int32_t b) {
     static_sk_i_rect_set(sk_i_rect_key_out, SkIRect::MakeLTRB(l, t, r, b));
 }
 
-void SkIRect_MakeXYWH(const char* sk_i_rect_key_out, int32_t x, int32_t y, int32_t w, int32_t h) {
+void SkIRect_MakeXYWH(int sk_i_rect_key_out, int32_t x, int32_t y, int32_t w, int32_t h) {
     static_sk_i_rect_set(sk_i_rect_key_out, SkIRect::MakeXYWH(x, y, w, h));
 }
 

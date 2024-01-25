@@ -14,7 +14,7 @@ SkSL::Version SkCapabilities_skslVersion(SkCapabilities *capabilities);
 bool SkCapabilities_unique(SkCapabilities *capabilities);
 void SkCapabilities_unref(SkCapabilities *capabilities);
 // static
-void SkCapabilities_RasterBackend(const char *sk_capabilities_key_out);
+void SkCapabilities_RasterBackend(int sk_capabilities_key_out);
 }
 
 #endif //RAIA_SKIA_SK_CAPABILITIES_H

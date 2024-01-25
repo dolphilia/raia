@@ -6,7 +6,7 @@
 
 extern "C" {
 
-void SkStreamSeekable_duplicate(const char *sk_stream_key_out, SkStreamSeekable *stream_seekable) {
+void SkStreamSeekable_duplicate(int sk_stream_key_out, SkStreamSeekable *stream_seekable) {
     static_sk_stream_seekable_set(sk_stream_key_out, stream_seekable->duplicate());
 }
 
@@ -26,7 +26,7 @@ bool SkStreamSeekable_move(SkStreamSeekable *stream_seekable, long offset) {
     return stream_seekable->move(offset);
 }
 
-void SkStreamSeekable_fork(const char *sk_stream_seekable_key_out, SkStreamSeekable *stream_seekable) {
+void SkStreamSeekable_fork(int sk_stream_seekable_key_out, SkStreamSeekable *stream_seekable) {
     static_sk_stream_seekable_set(sk_stream_seekable_key_out, stream_seekable->fork());
 }
 
@@ -100,7 +100,7 @@ const void * SkStreamSeekable_getMemoryBase(SkStreamSeekable *stream_seekable) {
 
 // static
 
-void SkStreamSeekable_MakeFromFile(const char *sk_stream_asset_key_out, const char path[]) {
+void SkStreamSeekable_MakeFromFile(int sk_stream_asset_key_out, const char path[]) {
     static_sk_stream_asset_set(sk_stream_asset_key_out, SkStreamSeekable::MakeFromFile(path));
 }
 

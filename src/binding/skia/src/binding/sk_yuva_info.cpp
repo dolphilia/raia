@@ -30,7 +30,7 @@ SkYUVAInfo::Subsampling SkYUVAInfo_subsampling(SkYUVAInfo * yuva_info) {
     return yuva_info->subsampling();
 }
 
-void SkYUVAInfo_planeSubsamplingFactors(const char *tuple_int_int_key_out, SkYUVAInfo * yuva_info, int planeIdx) {
+void SkYUVAInfo_planeSubsamplingFactors(int tuple_int_int_key_out, SkYUVAInfo * yuva_info, int planeIdx) {
     static_tuple_int_int_set(tuple_int_int_key_out, yuva_info->planeSubsamplingFactors(planeIdx));
 }
 
@@ -62,7 +62,7 @@ SkEncodedOrigin SkYUVAInfo_origin(SkYUVAInfo * yuva_info) {
     return yuva_info->origin();
 }
 
-void SkYUVAInfo_originMatrix(const char *sk_matrix_key_out, SkYUVAInfo * yuva_info) {
+void SkYUVAInfo_originMatrix(int sk_matrix_key_out, SkYUVAInfo * yuva_info) {
     static_sk_matrix_set(sk_matrix_key_out, yuva_info->originMatrix());
 }
 
@@ -90,11 +90,11 @@ int SkYUVAInfo_numChannelsInPlane(SkYUVAInfo * yuva_info, int i) {
 //    return yuva_info->toYUVALocations(channelFlags);
 //}
 
-void SkYUVAInfo_makeSubsampling(const char *sk_yuva_info_key_out, SkYUVAInfo * yuva_info, SkYUVAInfo::Subsampling subsampling) {
+void SkYUVAInfo_makeSubsampling(int sk_yuva_info_key_out, SkYUVAInfo * yuva_info, SkYUVAInfo::Subsampling subsampling) {
     static_sk_yuva_info_set(sk_yuva_info_key_out, yuva_info->makeSubsampling(subsampling));
 }
 
-void SkYUVAInfo_makeDimensions(const char *sk_yuva_info_key_out, SkYUVAInfo * yuva_info, SkISize size) {
+void SkYUVAInfo_makeDimensions(int sk_yuva_info_key_out, SkYUVAInfo * yuva_info, SkISize size) {
     static_sk_yuva_info_set(sk_yuva_info_key_out, yuva_info->makeDimensions(size));
 }
 
@@ -104,11 +104,11 @@ bool SkYUVAInfo_isValid(SkYUVAInfo * yuva_info) {
 
 // static
 
-void SkYUVAInfo_SubsamplingFactors(const char *tuple_int_int_key_out, SkYUVAInfo::Subsampling subsampling) {
+void SkYUVAInfo_SubsamplingFactors(int tuple_int_int_key_out, SkYUVAInfo::Subsampling subsampling) {
     static_tuple_int_int_set(tuple_int_int_key_out, SkYUVAInfo::SubsamplingFactors(subsampling));
 }
 
-void SkYUVAInfo_PlaneSubsamplingFactors(const char *tuple_int_int_key_out, SkYUVAInfo::PlaneConfig config, SkYUVAInfo::Subsampling subsampling, int planeIdx) {
+void SkYUVAInfo_PlaneSubsamplingFactors(int tuple_int_int_key_out, SkYUVAInfo::PlaneConfig config, SkYUVAInfo::Subsampling subsampling, int planeIdx) {
     static_tuple_int_int_set(tuple_int_int_key_out, SkYUVAInfo::PlaneSubsamplingFactors(config, subsampling, planeIdx));
 }
 

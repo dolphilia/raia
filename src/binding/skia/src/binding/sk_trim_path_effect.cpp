@@ -6,7 +6,7 @@
 
 extern "C" {
 
-void SkTrimPathEffect_Make(const char *sk_path_effect_key_out, SkScalar startT, SkScalar stopT, SkTrimPathEffect::Mode mode) {
+void SkTrimPathEffect_Make(int sk_path_effect_key_out, SkScalar startT, SkScalar stopT, SkTrimPathEffect::Mode mode) {
     static_sk_path_effect_set(sk_path_effect_key_out, SkTrimPathEffect::Make(startT, stopT, mode));
 }
 

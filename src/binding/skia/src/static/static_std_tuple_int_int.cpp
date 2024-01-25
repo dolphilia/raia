@@ -4,16 +4,16 @@
 
 #include "static_std_tuple_int_int.h"
 
-static std::map<std::string, std::tuple<int, int>> static_tuple_int_int;
+static std::map<int , std::tuple<int, int>> static_tuple_int_int;
 
-void static_tuple_int_int_delete(const char *key) {
+void static_tuple_int_int_delete(int key) {
     static_tuple_int_int.erase(key);
 }
 
-std::tuple<int, int> static_tuple_int_int_get(const char *key) {
+std::tuple<int, int> static_tuple_int_int_get(int key) {
     return static_tuple_int_int[key];
 }
 
-void static_tuple_int_int_set(const char *key, std::tuple<int, int> value) {
+void static_tuple_int_int_set(int key, std::tuple<int, int> value) {
     static_tuple_int_int[key] = std::move(value);
 }

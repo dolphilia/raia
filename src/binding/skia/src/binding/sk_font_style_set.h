@@ -12,13 +12,13 @@
 extern "C" {
 int SkFontStyleSet_count(SkFontStyleSet *font_style_set);
 void SkFontStyleSet_getStyle(SkFontStyleSet *font_style_set, int index, SkFontStyle * font_style, SkString *style);
-void SkFontStyleSet_createTypeface(const char *sk_typeface_key_out, SkFontStyleSet *font_style_set, int index);
-void SkFontStyleSet_matchStyle(const char *sk_typeface_key_out, SkFontStyleSet *font_style_set, const SkFontStyle *pattern);
+void SkFontStyleSet_createTypeface(int sk_typeface_key_out, SkFontStyleSet *font_style_set, int index);
+void SkFontStyleSet_matchStyle(int sk_typeface_key_out, SkFontStyleSet *font_style_set, const SkFontStyle *pattern);
 bool SkFontStyleSet_unique(SkFontStyleSet *font_style_set);
 void SkFontStyleSet_ref(SkFontStyleSet *font_style_set);
 void SkFontStyleSet_unref(SkFontStyleSet *font_style_set);
 // static
-void SkFontStyleSet_CreateEmpty(const char *sk_font_style_set_key_out);
+void SkFontStyleSet_CreateEmpty(int sk_font_style_set_key_out);
 }
 
 #endif //RAIA_SKIA_SK_FONT_STYLE_SET_H

@@ -4,21 +4,21 @@
 
 #include "static_sk_mesh_index_buffer.h"
 
-static std::map<std::string, sk_sp<SkMesh::IndexBuffer>> static_sk_mesh_index_buffer;
+static std::map<int , sk_sp<SkMesh::IndexBuffer>> static_sk_mesh_index_buffer;
 
-void static_sk_mesh_index_buffer_delete(const char *key) {
+void static_sk_mesh_index_buffer_delete(int key) {
     static_sk_mesh_index_buffer[key].reset();
     static_sk_mesh_index_buffer.erase(key);
 }
 
-SkMesh::IndexBuffer *static_sk_mesh_index_buffer_get(const char *key) {
+SkMesh::IndexBuffer *static_sk_mesh_index_buffer_get(int key) {
     return static_sk_mesh_index_buffer[key].get();
 }
 
-void static_sk_mesh_index_buffer_set(const char *key, sk_sp<SkMesh::IndexBuffer> value) {
+void static_sk_mesh_index_buffer_set(int key, sk_sp<SkMesh::IndexBuffer> value) {
     static_sk_mesh_index_buffer[key] = std::move(value);
 }
 
-sk_sp<SkMesh::IndexBuffer> static_sk_mesh_index_buffer_move(const char *key) {
+sk_sp<SkMesh::IndexBuffer> static_sk_mesh_index_buffer_move(int key) {
     return std::move(static_sk_mesh_index_buffer[key]);
 }

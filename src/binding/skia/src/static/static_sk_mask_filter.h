@@ -9,9 +9,9 @@
 #include <map>
 #include "include/core/SkMaskFilter.h"
 
-void static_sk_mask_filter_delete(const char *key);
-SkMaskFilter *static_sk_mask_filter_get(const char *key);
-void static_sk_mask_filter_set(const char *key, sk_sp<SkMaskFilter> value);
-sk_sp<SkMaskFilter> static_sk_mask_filter_move(const char *key);
+void static_sk_mask_filter_delete(int key);
+SkMaskFilter *static_sk_mask_filter_get(int key);
+void static_sk_mask_filter_set(int key, sk_sp<SkMaskFilter> value);
+sk_sp<SkMaskFilter> static_sk_mask_filter_move(int key);
 
 #endif //RAIA_SKIA_STATIC_SK_MASK_FILTER_H

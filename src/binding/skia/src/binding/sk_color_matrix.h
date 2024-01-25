@@ -20,8 +20,8 @@ void SkColorMatrix_setSaturation(SkColorMatrix *color_matrix, float sat);
 void SkColorMatrix_setRowMajor(SkColorMatrix *color_matrix, const float src[20]);
 void SkColorMatrix_getRowMajor(SkColorMatrix *color_matrix, float dst[20]);
 // static
-void SkColorMatrix_RGBtoYUV(const char *sk_color_matrix_key_out, SkYUVColorSpace color_space);
-void SkColorMatrix_YUVtoRGB(const char *sk_color_matrix_key_out, SkYUVColorSpace color_space);
+void SkColorMatrix_RGBtoYUV(int sk_color_matrix_key_out, SkYUVColorSpace color_space);
+void SkColorMatrix_YUVtoRGB(int sk_color_matrix_key_out, SkYUVColorSpace color_space);
 }
 
 #endif //RAIA_SKIA_SK_COLOR_MATRIX_H

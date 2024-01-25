@@ -9,9 +9,9 @@
 #include <map>
 #include "include/core/SkPicture.h"
 
-void static_sk_picture_delete(const char *key);
-SkPicture *static_sk_picture_get(const char *key);
-void static_sk_picture_set(const char *key, sk_sp<SkPicture> value);
-sk_sp<SkPicture> static_sk_picture_move(const char *key);
+void static_sk_picture_delete(int key);
+SkPicture *static_sk_picture_get(int key);
+void static_sk_picture_set(int key, sk_sp<SkPicture> value);
+sk_sp<SkPicture> static_sk_picture_move(int key);
 
 #endif //RAIA_SKIA_STATIC_SK_PICTURE_H

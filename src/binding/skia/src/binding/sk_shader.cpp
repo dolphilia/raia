@@ -18,16 +18,16 @@ bool SkShader_isAImage_2(SkShader *shader) {
     return shader->isAImage();
 }
 
-void SkShader_makeWithLocalMatrix(const char *sk_shader_key_out, SkShader *shader, const SkMatrix *matrix) {
+void SkShader_makeWithLocalMatrix(int sk_shader_key_out, SkShader *shader, const SkMatrix *matrix) {
     static_sk_shader_set(sk_shader_key_out, shader->makeWithLocalMatrix(*matrix));
 }
 
-void SkShader_makeWithColorFilter(const char *sk_shader_key_out, const char *sk_color_filter_key_in, SkShader *shader) {
+void SkShader_makeWithColorFilter(int sk_shader_key_out, int sk_color_filter_key_in, SkShader *shader) {
     static_sk_shader_set(sk_shader_key_out, shader->makeWithColorFilter(static_sk_color_filter_move(sk_color_filter_key_in)));
 }
 
 void
-SkShader_makeWithWorkingColorSpace(const char *sk_shader_key_out, const char *sk_color_space_key_in, SkShader *shader) {
+SkShader_makeWithWorkingColorSpace(int sk_shader_key_out, int sk_color_space_key_in, SkShader *shader) {
     static_sk_shader_set(sk_shader_key_out, shader->makeWithWorkingColorSpace(static_sk_color_space_move(sk_color_space_key_in)));
 }
 
@@ -47,7 +47,7 @@ SkShader::Type SkShader_getFlattenableType(SkShader *shader) {
     return shader->getFlattenableType();
 }
 
-void SkShader_serialize(const char *sk_data_key_out, SkShader *shader, const SkSerialProcs *procs) {
+void SkShader_serialize(int sk_data_key_out, SkShader *shader, const SkSerialProcs *procs) {
     static_sk_data_set(sk_data_key_out, shader->serialize(procs));
 }
 
@@ -81,7 +81,7 @@ void SkShader_Register(const char name[], SkShader::Factory factory) {
     SkShader::Register(name, factory);
 }
 
-void SkShader_Deserialize(const char *sk_flattenable_key_out, SkShader::Type type, const void *data, size_t length, const SkDeserialProcs *procs) {
+void SkShader_Deserialize(int sk_flattenable_key_out, SkShader::Type type, const void *data, size_t length, const SkDeserialProcs *procs) {
     static_sk_flattenable_set(sk_flattenable_key_out, SkShader::Deserialize(type, data, length, procs));
 }
 

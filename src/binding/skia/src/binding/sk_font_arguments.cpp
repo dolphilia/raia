@@ -10,11 +10,11 @@ SkFontArguments *SkFontArguments_new() {
     return new SkFontArguments();
 }
 
-void SkFontArguments_setCollectionIndex(const char *sk_font_arguments_key_out, SkFontArguments *font_argments, int collectionIndex) {
+void SkFontArguments_setCollectionIndex(int sk_font_arguments_key_out, SkFontArguments *font_argments, int collectionIndex) {
     static_sk_font_arguments_set(sk_font_arguments_key_out, font_argments->setCollectionIndex(collectionIndex));
 }
 
-void SkFontArguments_setVariationDesignPosition(const char *sk_font_arguments_key_out, SkFontArguments *font_argments, SkFontArguments::VariationPosition position) {
+void SkFontArguments_setVariationDesignPosition(int sk_font_arguments_key_out, SkFontArguments *font_argments, SkFontArguments::VariationPosition position) {
     static_sk_font_arguments_set(sk_font_arguments_key_out, font_argments->setVariationDesignPosition(position));
 }
 
@@ -26,7 +26,7 @@ SkFontArguments::VariationPosition SkFontArguments_getVariationDesignPosition(Sk
     return font_argments->getVariationDesignPosition();
 }
 
-void SkFontArguments_setPalette(const char *sk_font_arguments_key_out, SkFontArguments *font_argments, SkFontArguments::Palette palette) {
+void SkFontArguments_setPalette(int sk_font_arguments_key_out, SkFontArguments *font_argments, SkFontArguments::Palette palette) {
     static_sk_font_arguments_set(sk_font_arguments_key_out, font_argments->setPalette(palette));
 }
 

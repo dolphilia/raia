@@ -8,7 +8,7 @@ extern "C" {
 
 // static
 
-void SkCornerPathEffect_Make(const char *sk_path_effect_key_out, SkScalar radius) {
+void SkCornerPathEffect_Make(int sk_path_effect_key_out, SkScalar radius) {
     static_sk_path_effect_set(sk_path_effect_key_out, SkCornerPathEffect::Make(radius));
 }
 

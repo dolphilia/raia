@@ -116,7 +116,7 @@ void SkRRect_offset(SkRRect *rrect, SkScalar dx, SkScalar dy) {
     rrect->offset(dx, dy);
 }
 
-void SkRRect_makeOffset(const char *sk_r_rect_key_out, SkRRect *rrect, SkScalar dx, SkScalar dy) {
+void SkRRect_makeOffset(int sk_r_rect_key_out, SkRRect *rrect, SkScalar dx, SkScalar dy) {
     static_sk_r_rect_set(sk_r_rect_key_out, rrect->makeOffset(dx, dy));
 }
 
@@ -144,7 +144,7 @@ void SkRRect_dump(SkRRect *rrect, bool asHex) {
     rrect->dump(asHex);
 }
 
-void SkRRect_dumpToString(const char *sk_string_key_out, SkRRect *rrect, bool asHex) {
+void SkRRect_dumpToString(int sk_string_key_out, SkRRect *rrect, bool asHex) {
     static_sk_string_set(sk_string_key_out, rrect->dumpToString(asHex));
 }
 
@@ -158,19 +158,19 @@ void SkRRect_dumpHex(SkRRect *rrect) {
 
 // static
 
-void SkRRect_MakeEmpty(const char *sk_r_rect_key_out) {
+void SkRRect_MakeEmpty(int sk_r_rect_key_out) {
     static_sk_r_rect_set(sk_r_rect_key_out, SkRRect::MakeEmpty());
 }
 
-void SkRRect_MakeRect(const char *sk_r_rect_key_out, const SkRect *r) {
+void SkRRect_MakeRect(int sk_r_rect_key_out, const SkRect *r) {
     static_sk_r_rect_set(sk_r_rect_key_out, SkRRect::MakeRect(*r));
 }
 
-void SkRRect_MakeOval(const char *sk_r_rect_key_out, const SkRect *oval) {
+void SkRRect_MakeOval(int sk_r_rect_key_out, const SkRect *oval) {
     static_sk_r_rect_set(sk_r_rect_key_out, SkRRect::MakeOval(*oval));
 }
 
-void SkRRect_MakeRectXY(const char *sk_r_rect_key_out, const SkRect *rect, SkScalar xRad, SkScalar yRad) {
+void SkRRect_MakeRectXY(int sk_r_rect_key_out, const SkRect *rect, SkScalar xRad, SkScalar yRad) {
     static_sk_r_rect_set(sk_r_rect_key_out, SkRRect::MakeRectXY(*rect, xRad, yRad));
 }
 

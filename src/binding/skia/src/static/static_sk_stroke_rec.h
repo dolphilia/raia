@@ -9,8 +9,8 @@
 #include <map>
 #include "include/core/SkStrokeRec.h"
 
-void static_sk_stroke_rec_delete(const char *key);
-SkStrokeRec static_sk_stroke_rec_get(const char *key);
-void static_sk_stroke_rec_set(const char *key, SkStrokeRec value);
+void static_sk_stroke_rec_delete(int key);
+SkStrokeRec static_sk_stroke_rec_get(int key);
+void static_sk_stroke_rec_set(int key, SkStrokeRec value);
 
 #endif //RAIA_SKIA_STATIC_SK_STROKE_REC_H

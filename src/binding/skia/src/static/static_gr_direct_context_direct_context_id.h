@@ -9,8 +9,9 @@
 #include <map>
 #include "include/gpu/GrDirectContext.h"
 
-void static_gr_direct_context_direct_context_id_delete(const char *key);
-GrDirectContext::DirectContextID static_gr_direct_context_direct_context_id_get(const char *key);
-void static_gr_direct_context_direct_context_id_set(const char *key, GrDirectContext::DirectContextID value);
+int static_gr_direct_context_direct_context_id_make(GrDirectContext::DirectContextID value);
+void static_gr_direct_context_direct_context_id_delete(int key);
+GrDirectContext::DirectContextID static_gr_direct_context_direct_context_id_get(int key);
+void static_gr_direct_context_direct_context_id_set(int key, GrDirectContext::DirectContextID value);
 
 #endif //RAIA_SKIA_STATIC_GR_DIRECT_CONTEXT_DIRECT_CONTEXT_ID_H

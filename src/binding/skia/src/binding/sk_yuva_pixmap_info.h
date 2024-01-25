@@ -29,7 +29,7 @@ bool SkYUVAPixmapInfo_isValid(SkYUVAPixmapInfo *yuva_pixmap_info);
 bool SkYUVAPixmapInfo_isSupported(SkYUVAPixmapInfo *yuva_pixmap_info, const SkYUVAPixmapInfo::SupportedDataTypes *type);
 // static
 SkColorType SkYUVAPixmapInfo_DefaultColorTypeForDataType(SkYUVAPixmapInfo::DataType dataType, int numChannels);
-void SkYUVAPixmapInfo_NumChannelsAndDataType(const char *tuple_int_sk_yuva_pixmap_info_data_type_key_out, SkColorType type);
+void SkYUVAPixmapInfo_NumChannelsAndDataType(int tuple_int_sk_yuva_pixmap_info_data_type_key_out, SkColorType type);
 }
 
 #endif //RAIA_SKIA_SK_YUVA_PIXMAP_INFO_H

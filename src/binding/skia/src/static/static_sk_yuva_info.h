@@ -9,8 +9,8 @@
 #include <map>
 #include "include/core/SkYUVAInfo.h"
 
-void static_sk_yuva_info_delete(const char *key);
-SkYUVAInfo static_sk_yuva_info_get(const char *key);
-void static_sk_yuva_info_set(const char *key, SkYUVAInfo value);
+void static_sk_yuva_info_delete(int key);
+SkYUVAInfo static_sk_yuva_info_get(int key);
+void static_sk_yuva_info_set(int key, SkYUVAInfo value);
 
 #endif //RAIA_SKIA_STATIC_SK_YUVA_INFO_H

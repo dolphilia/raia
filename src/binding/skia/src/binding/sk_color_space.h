@@ -16,11 +16,11 @@ bool SkColorSpace_gammaIsLinear(SkColorSpace *color_space);
 bool SkColorSpace_isNumericalTransferFn(SkColorSpace *color_space, skcms_TransferFunction *fn);
 bool SkColorSpace_toXYZD50(SkColorSpace *color_space, skcms_Matrix3x3 *toXYZD50);
 uint32_t SkColorSpace_toXYZD50Hash(SkColorSpace *color_space);
-void SkColorSpace_makeLinearGamma(const char *sk_color_space_key_out, SkColorSpace *color_space);
-void SkColorSpace_makeSRGBGamma(const char *sk_color_space_key_out, SkColorSpace *color_space);
-void SkColorSpace_makeColorSpin(const char *sk_color_space_key_out, SkColorSpace *color_space);
+void SkColorSpace_makeLinearGamma(int sk_color_space_key_out, SkColorSpace *color_space);
+void SkColorSpace_makeSRGBGamma(int sk_color_space_key_out, SkColorSpace *color_space);
+void SkColorSpace_makeColorSpin(int sk_color_space_key_out, SkColorSpace *color_space);
 bool SkColorSpace_isSRGB(SkColorSpace *color_space);
-void SkColorSpace_serialize(const char *sk_data_key_out, SkColorSpace *color_space);
+void SkColorSpace_serialize(int sk_data_key_out, SkColorSpace *color_space);
 size_t SkColorSpace_writeToMemory(SkColorSpace *color_space, void *memory);
 void SkColorSpace_transferFn(SkColorSpace *color_space, float gabcdef[7]);
 void SkColorSpace_transferFn_2(SkColorSpace *color_space, skcms_TransferFunction *fn);
@@ -34,11 +34,11 @@ void SkColorSpace_unref(SkColorSpace *color_space);
 void SkColorSpace_deref(SkColorSpace *color_space);
 bool SkColorSpace_refCntGreaterThan(SkColorSpace *color_space, int32_t threadIsolatedTestCnt);
 // static
-void SkColorSpace_MakeSRGB(const char *sk_color_space_key_out);
-void SkColorSpace_MakeSRGBLinear(const char *sk_color_space_key_out);
-void SkColorSpace_MakeRGB(const char *sk_color_space_key_out, const skcms_TransferFunction *transferFn, const skcms_Matrix3x3 *toXYZ);
-void SkColorSpace_Make(const char *sk_color_space_key_out, const skcms_ICCProfile * profile);
-void SkColorSpace_Deserialize(const char *sk_color_space_key_out, const void *data, size_t length);
+void SkColorSpace_MakeSRGB(int sk_color_space_key_out);
+void SkColorSpace_MakeSRGBLinear(int sk_color_space_key_out);
+void SkColorSpace_MakeRGB(int sk_color_space_key_out, const skcms_TransferFunction *transferFn, const skcms_Matrix3x3 *toXYZ);
+void SkColorSpace_Make(int sk_color_space_key_out, const skcms_ICCProfile * profile);
+void SkColorSpace_Deserialize(int sk_color_space_key_out, const void *data, size_t length);
 bool SkColorSpace_Equals(SkColorSpace *color_space_1, const SkColorSpace *color_space_2);
 }
 

@@ -56,55 +56,55 @@ bool SkData_refCntGreaterThan(SkData *sk_data, int32_t threadIsolatedTestCnt) {
 
 // static
 
-void SkData_MakeWithCopy(const char *sk_data_key_out, const void *data, size_t length) {
+void SkData_MakeWithCopy(int sk_data_key_out, const void *data, size_t length) {
     static_sk_data_set(sk_data_key_out, SkData::MakeWithCopy(data, length));
 }
 
-void SkData_MakeUninitialized(const char *sk_data_key_out, size_t length) {
+void SkData_MakeUninitialized(int sk_data_key_out, size_t length) {
     static_sk_data_set(sk_data_key_out, SkData::MakeUninitialized(length));
 }
 
-void SkData_MakeZeroInitialized(const char *sk_data_key_out, size_t length) {
+void SkData_MakeZeroInitialized(int sk_data_key_out, size_t length) {
     static_sk_data_set(sk_data_key_out, SkData::MakeZeroInitialized(length));
 }
 
-void SkData_MakeWithCString(const char *sk_data_key_out, const char cstr[]) {
+void SkData_MakeWithCString(int sk_data_key_out, const char cstr[]) {
     static_sk_data_set(sk_data_key_out, SkData::MakeWithCString(cstr));
 }
 
-void SkData_MakeWithProc(const char *sk_data_key_out, const void *ptr, size_t length, SkData::ReleaseProc proc, void *ctx) {
+void SkData_MakeWithProc(int sk_data_key_out, const void *ptr, size_t length, SkData::ReleaseProc proc, void *ctx) {
     static_sk_data_set(sk_data_key_out, SkData::MakeWithProc(ptr, length, proc, ctx));
 }
 
-void SkData_MakeWithoutCopy(const char *sk_data_key_out, const void *data, size_t length) {
+void SkData_MakeWithoutCopy(int sk_data_key_out, const void *data, size_t length) {
     static_sk_data_set(sk_data_key_out, SkData::MakeWithoutCopy(data, length));
 }
 
-void SkData_MakeFromMalloc(const char *sk_data_key_out, const void *data, size_t length) {
+void SkData_MakeFromMalloc(int sk_data_key_out, const void *data, size_t length) {
     static_sk_data_set(sk_data_key_out, SkData::MakeFromMalloc(data, length));
 }
 
-void SkData_MakeFromFileName(const char *sk_data_key_out, const char path[]) {
+void SkData_MakeFromFileName(int sk_data_key_out, const char path[]) {
     static_sk_data_set(sk_data_key_out, SkData::MakeFromFileName(path));
 }
 
-void SkData_MakeFromFILE(const char *sk_data_key_out, FILE *f) {
+void SkData_MakeFromFILE(int sk_data_key_out, FILE *f) {
     static_sk_data_set(sk_data_key_out, SkData::MakeFromFILE(f));
 }
 
-void SkData_MakeFromFD(const char *sk_data_key_out, int fd) {
+void SkData_MakeFromFD(int sk_data_key_out, int fd) {
     static_sk_data_set(sk_data_key_out, SkData::MakeFromFD(fd));
 }
 
-void SkData_MakeFromStream(const char *sk_data_key_out, SkStream * stream, size_t size) {
+void SkData_MakeFromStream(int sk_data_key_out, SkStream * stream, size_t size) {
     static_sk_data_set(sk_data_key_out, SkData::MakeFromStream(stream, size));
 }
 
-void SkData_MakeSubset(const char *sk_data_key_out, const SkData *src, size_t offset, size_t length) {
+void SkData_MakeSubset(int sk_data_key_out, const SkData *src, size_t offset, size_t length) {
     static_sk_data_set(sk_data_key_out, SkData::MakeSubset(src, offset, length));
 }
 
-void SkData_MakeEmpty(const char *sk_data_key_out) {
+void SkData_MakeEmpty(int sk_data_key_out) {
     static_sk_data_set(sk_data_key_out, SkData::MakeEmpty());
 }
 

@@ -51,7 +51,7 @@ void SkPixelRef_setImmutable(SkPixelRef *pixel_ref) {
     pixel_ref->setImmutable();
 }
 
-void SkPixelRef_addGenIDChangeListener(const char *sk_id_change_listener_key_in, SkPixelRef *pixel_ref) {
+void SkPixelRef_addGenIDChangeListener(int sk_id_change_listener_key_in, SkPixelRef *pixel_ref) {
     pixel_ref->addGenIDChangeListener(static_sk_id_change_listener_move(sk_id_change_listener_key_in));
 }
 

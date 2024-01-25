@@ -14,11 +14,11 @@ void SkFontStyleSet_getStyle(SkFontStyleSet *font_style_set, int index, SkFontSt
     return font_style_set->getStyle(index, font_style, style);
 }
 
-void SkFontStyleSet_createTypeface(const char *sk_typeface_key_out, SkFontStyleSet *font_style_set, int index) {
+void SkFontStyleSet_createTypeface(int sk_typeface_key_out, SkFontStyleSet *font_style_set, int index) {
     static_sk_typeface_set(sk_typeface_key_out, font_style_set->createTypeface(index));
 }
 
-void SkFontStyleSet_matchStyle(const char *sk_typeface_key_out, SkFontStyleSet *font_style_set, const SkFontStyle *pattern) {
+void SkFontStyleSet_matchStyle(int sk_typeface_key_out, SkFontStyleSet *font_style_set, const SkFontStyle *pattern) {
     static_sk_typeface_set(sk_typeface_key_out, font_style_set->matchStyle(*pattern));
 }
 
@@ -36,7 +36,7 @@ void SkFontStyleSet_unref(SkFontStyleSet *font_style_set) {
 
 // static
 
-void SkFontStyleSet_CreateEmpty(const char *sk_font_style_set_key_out) {
+void SkFontStyleSet_CreateEmpty(int sk_font_style_set_key_out) {
     static_sk_font_style_set_set(sk_font_style_set_key_out, SkFontStyleSet::CreateEmpty());
 }
 

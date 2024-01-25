@@ -10,7 +10,7 @@
 
 extern "C" {
 // static
-void SkLumaColorFilter_Make(const char *sk_color_filter_key_out);
+void SkLumaColorFilter_Make(int sk_color_filter_key_out);
 }
 
 #endif //RAIA_SKIA_SK_LUMA_COLOR_FILTER_H

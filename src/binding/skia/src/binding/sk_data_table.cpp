@@ -43,19 +43,19 @@ void SkDataTable_unref(SkDataTable *data_table) {
 
 // static
 
-void SkDataTable_MakeEmpty(const char *sk_data_table_key_out) {
+void SkDataTable_MakeEmpty(int sk_data_table_key_out) {
     static_sk_data_table_set(sk_data_table_key_out, SkDataTable::MakeEmpty());
 }
 
-void SkDataTable_MakeCopyArrays(const char *sk_data_table_key_out, const void *const *ptrs, const size_t sizes[], int count) {
+void SkDataTable_MakeCopyArrays(int sk_data_table_key_out, const void *const *ptrs, const size_t sizes[], int count) {
     static_sk_data_table_set(sk_data_table_key_out, SkDataTable::MakeCopyArrays(ptrs, sizes, count));
 }
 
-void SkDataTable_MakeCopyArray(const char *sk_data_table_key_out, const void *array, size_t elemSize, int count) {
+void SkDataTable_MakeCopyArray(int sk_data_table_key_out, const void *array, size_t elemSize, int count) {
     static_sk_data_table_set(sk_data_table_key_out, SkDataTable::MakeCopyArray(array, elemSize, count));
 }
 
-void SkDataTable_MakeArrayProc(const char *sk_data_table_key_out, const void *array, size_t elemSize, int count, SkDataTable::FreeProc proc, void *context) {
+void SkDataTable_MakeArrayProc(int sk_data_table_key_out, const void *array, size_t elemSize, int count, SkDataTable::FreeProc proc, void *context) {
     static_sk_data_table_set(sk_data_table_key_out, SkDataTable::MakeArrayProc(array, elemSize, count, proc, context));
 }
 

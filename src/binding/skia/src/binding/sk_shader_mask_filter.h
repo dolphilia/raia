@@ -14,7 +14,7 @@
 
 extern "C" {
 // static
-void SkShaderMaskFilter_Make(const char *sk_mask_filter_key_out, const char *sk_shader_key_in);
+void SkShaderMaskFilter_Make(int sk_mask_filter_key_out, int sk_shader_key_in);
 }
 
 #endif //RAIA_SKIA_SK_SHADER_MASK_FILTER_H

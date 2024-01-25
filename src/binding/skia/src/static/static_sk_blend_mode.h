@@ -9,9 +9,9 @@
 #include <map>
 #include "include/core/SkBlendMode.h"
 
-void static_optional_sk_blend_mode_delete(const char *key);
-SkBlendMode static_optional_sk_blend_mode_get(const char *key);
-void static_optional_sk_blend_mode_set(const char *key, std::optional<SkBlendMode> value);
-std::optional<SkBlendMode> static_optional_sk_blend_mode_move(const char *key);
+void static_optional_sk_blend_mode_delete(int key);
+SkBlendMode static_optional_sk_blend_mode_get(int key);
+void static_optional_sk_blend_mode_set(int key, std::optional<SkBlendMode> value);
+std::optional<SkBlendMode> static_optional_sk_blend_mode_move(int key);
 
 #endif //RAIA_SKIA_STATIC_SK_BLEND_MODE_H

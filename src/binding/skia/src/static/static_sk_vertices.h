@@ -9,9 +9,9 @@
 #include <map>
 #include "include/core/SkVertices.h"
 
-void static_sk_vertices_delete(const char *key);
-SkVertices *static_sk_vertices_get(const char *key);
-void static_sk_vertices_set(const char *key, sk_sp<SkVertices> value);
-sk_sp<SkVertices> static_sk_vertices_move(const char *key);
+void static_sk_vertices_delete(int key);
+SkVertices *static_sk_vertices_get(int key);
+void static_sk_vertices_set(int key, sk_sp<SkVertices> value);
+sk_sp<SkVertices> static_sk_vertices_move(int key);
 
 #endif //RAIA_SKIA_STATIC_SK_VERTICES_H

@@ -4,21 +4,21 @@
 
 #include "static_sk_blend_mode.h"
 
-static std::map<std::string, std::optional<SkBlendMode>> static_optional_sk_blend_mode;
+static std::map<int, std::optional<SkBlendMode>> static_optional_sk_blend_mode;
 
-void static_optional_sk_blend_mode_delete(const char *key) {
+void static_optional_sk_blend_mode_delete(int key) {
     static_optional_sk_blend_mode[key].reset();
     static_optional_sk_blend_mode.erase(key);
 }
 
-SkBlendMode static_optional_sk_blend_mode_get(const char *key) {
+SkBlendMode static_optional_sk_blend_mode_get(int key) {
     return *static_optional_sk_blend_mode[key];
 }
 
-void static_optional_sk_blend_mode_set(const char *key, std::optional<SkBlendMode> value) {
+void static_optional_sk_blend_mode_set(int key, std::optional<SkBlendMode> value) {
     static_optional_sk_blend_mode[key] = value;
 }
 
-std::optional<SkBlendMode> static_optional_sk_blend_mode_move(const char *key) {
+std::optional<SkBlendMode> static_optional_sk_blend_mode_move(int key) {
     return static_optional_sk_blend_mode[key];
 }

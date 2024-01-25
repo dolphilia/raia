@@ -10,9 +10,9 @@
 
 extern "C" {
 SkFont *SkFont_new();
-SkFont *SkFont_new_2(const char *sk_typeface_key_in, SkScalar size);
-SkFont *SkFont_new_3(const char *sk_typeface_key_in);
-SkFont *SkFont_new_4(const char *sk_typeface_key_in, SkScalar size, SkScalar scaleX, SkScalar skewX);
+SkFont *SkFont_new_2(int sk_typeface_key_in, SkScalar size);
+SkFont *SkFont_new_3(int sk_typeface_key_in);
+SkFont *SkFont_new_4(int sk_typeface_key_in, SkScalar size, SkScalar scaleX, SkScalar skewX);
 bool SkFont_isForceAutoHinting(SkFont *font);
 bool SkFont_isEmbeddedBitmaps(SkFont *font);
 bool SkFont_isSubpixel(SkFont *font);
@@ -29,13 +29,13 @@ SkFont::Edging SkFont_getEdging(SkFont *font);
 void SkFont_setEdging(SkFont *font, SkFont::Edging edging);
 void SkFont_setHinting(SkFont *font, SkFontHinting hintingLevel);
 SkFontHinting SkFont_getHinting(SkFont *font);
-void SkFont_makeWithSize(const char *sk_font_key_out, SkFont *font, SkScalar size);
+void SkFont_makeWithSize(int sk_font_key_out, SkFont *font, SkScalar size);
 SkTypeface * SkFont_getTypeface(SkFont *font);
 SkScalar SkFont_getSize(SkFont *font);
 SkScalar SkFont_getScaleX(SkFont *font);
 SkScalar SkFont_getSkewX(SkFont *font);
-void SkFont_refTypeface(const char *sk_typeface_key_out, SkFont *font);
-void SkFont_setTypeface(const char *sk_typeface_key_in, SkFont *font);
+void SkFont_refTypeface(int sk_typeface_key_out, SkFont *font);
+void SkFont_setTypeface(int sk_typeface_key_in, SkFont *font);
 void SkFont_setSize(SkFont *font, SkScalar textSize);
 void SkFont_setScaleX(SkFont *font, SkScalar scaleX);
 void SkFont_setSkewX(SkFont *font, SkScalar skewX);
@@ -53,7 +53,7 @@ void SkFont_getWidthsBounds(SkFont *font, const SkGlyphID glyphs[], int count, S
 void SkFont_getBounds(SkFont *font, const SkGlyphID glyphs[], int count, SkRect bounds[], const SkPaint *paint);
 void SkFont_getPos(SkFont *font, const SkGlyphID glyphs[], int count, SkPoint pos[], SkPoint origin);
 void SkFont_getXPos(SkFont *font, const SkGlyphID glyphs[], int count, SkScalar xpos[], SkScalar origin);
-void SkFont_getIntercepts(const char* vector_sk_scalar_key_out, SkFont *font, const SkGlyphID glyphs[], int count, const SkPoint pos[], SkScalar top, SkScalar bottom, const SkPaint *paint);
+void SkFont_getIntercepts(int vector_sk_scalar_key_out, SkFont *font, const SkGlyphID glyphs[], int count, const SkPoint pos[], SkScalar top, SkScalar bottom, const SkPaint *paint);
 bool SkFont_getPath(SkFont *font, SkGlyphID glyphID, SkPath *path);
 // @TODO
 void SkFont_getPaths(SkFont *font, const SkGlyphID glyphIDs[], int count, void(*glyphPathProc)(const SkPath *pathOrNull, const SkMatrix &mx, void *ctx), void *ctx);

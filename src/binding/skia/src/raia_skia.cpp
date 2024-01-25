@@ -196,6 +196,7 @@ int main(int argc, char* argv[]) {
     }
 
 
+    /*
     // SkBitmapとSkCanvasを初期化する
     SkBitmap* skBitmap = SkBitmap_new();
     {
@@ -252,7 +253,7 @@ int main(int argc, char* argv[]) {
     }
     // Skiaのビットマップからピクセルデータを取得
     GLubyte* skia_pixels = (GLubyte*)SkBitmap_getPixels(skBitmap);;
-
+    */
 
 
     // メインループ
@@ -263,7 +264,7 @@ int main(int argc, char* argv[]) {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         //glBindTexture(GL_TEXTURE_2D, window_texture);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image_width, image_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, skia_pixels);
+        //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image_width, image_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, skia_pixels);
 
         glUseProgram(shader_program);
         glBindVertexArray(vertex_array_object);

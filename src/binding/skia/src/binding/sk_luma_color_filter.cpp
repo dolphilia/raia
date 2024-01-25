@@ -8,7 +8,7 @@ extern "C" {
 
 // static
 
-void SkLumaColorFilter_Make(const char *sk_color_filter_key_out) {
+void SkLumaColorFilter_Make(int sk_color_filter_key_out) {
     static_sk_color_filter_set(sk_color_filter_key_out, SkLumaColorFilter::Make());
 }
 

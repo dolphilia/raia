@@ -9,9 +9,10 @@
 #include <map>
 #include "include/gpu/GrContextThreadSafeProxy.h"
 
-void static_gr_context_thread_safe_proxy_delete(const char *key);
-GrContextThreadSafeProxy *static_gr_context_thread_safe_proxy_get(const char *key);
-void static_gr_context_thread_safe_proxy_set(const char *key, sk_sp<GrContextThreadSafeProxy> value);
-sk_sp<GrContextThreadSafeProxy> static_gr_context_thread_safe_proxy_move(const char *key);
+int static_gr_context_thread_safe_proxy_make(GrContextThreadSafeProxy value);
+void static_gr_context_thread_safe_proxy_delete(int key);
+GrContextThreadSafeProxy *static_gr_context_thread_safe_proxy_get(int key);
+void static_gr_context_thread_safe_proxy_set(int key, sk_sp<GrContextThreadSafeProxy> value);
+sk_sp<GrContextThreadSafeProxy> static_gr_context_thread_safe_proxy_move(int key);
 
 #endif //RAIA_SKIA_STATIC_GR_CONTEXT_THREAD_SAFE_PROXY_H

@@ -9,9 +9,9 @@
 #include <map>
 #include "include/core/SkFontMgr.h"
 
-void static_sk_font_style_set_delete(const char *key);
-SkFontStyleSet *static_sk_font_style_set_get(const char *key);
-void static_sk_font_style_set_set(const char *key, sk_sp<SkFontStyleSet> value);
-sk_sp<SkFontStyleSet> static_sk_font_style_set_move(const char *key);
+void static_sk_font_style_set_delete(int key);
+SkFontStyleSet *static_sk_font_style_set_get(int key);
+void static_sk_font_style_set_set(int key, sk_sp<SkFontStyleSet> value);
+sk_sp<SkFontStyleSet> static_sk_font_style_set_move(int key);
 
 #endif //RAIA_SKIA_STATIC_SK_FONT_STYLE_SET_H

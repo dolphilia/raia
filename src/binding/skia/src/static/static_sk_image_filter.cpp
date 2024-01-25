@@ -4,21 +4,21 @@
 
 #include "static_sk_image_filter.h"
 
-static std::map<std::string, sk_sp<SkImageFilter>> static_sk_image_filter;
+static std::map<int , sk_sp<SkImageFilter>> static_sk_image_filter;
 
-void static_sk_image_filter_delete(const char *key) {
+void static_sk_image_filter_delete(int key) {
     static_sk_image_filter[key].reset();
     static_sk_image_filter.erase(key);
 }
 
-SkImageFilter *static_sk_image_filter_get(const char *key) {
+SkImageFilter *static_sk_image_filter_get(int key) {
     return static_sk_image_filter[key].get();
 }
 
-void static_sk_image_filter_set(const char *key, sk_sp<SkImageFilter> value) {
+void static_sk_image_filter_set(int key, sk_sp<SkImageFilter> value) {
     static_sk_image_filter[key] = std::move(value);
 }
 
-sk_sp<SkImageFilter> static_sk_image_filter_move(const char *key) {
+sk_sp<SkImageFilter> static_sk_image_filter_move(int key) {
     return std::move(static_sk_image_filter[key]);
 }

@@ -4,21 +4,21 @@
 
 #include "static_sk_flattenable.h"
 
-static std::map<std::string, sk_sp<SkFlattenable>> static_sk_flattenable;
+static std::map<int , sk_sp<SkFlattenable>> static_sk_flattenable;
 
-void static_sk_flattenable_delete(const char *key) {
+void static_sk_flattenable_delete(int key) {
     static_sk_flattenable[key].reset();
     static_sk_flattenable.erase(key);
 }
 
-SkFlattenable *static_sk_flattenable_get(const char *key) {
+SkFlattenable *static_sk_flattenable_get(int key) {
     return static_sk_flattenable[key].get();
 }
 
-void static_sk_flattenable_set(const char *key, sk_sp<SkFlattenable> value) {
+void static_sk_flattenable_set(int key, sk_sp<SkFlattenable> value) {
     static_sk_flattenable[key] = std::move(value);
 }
 
-sk_sp<SkFlattenable> static_sk_flattenable_move(const char *key) {
+sk_sp<SkFlattenable> static_sk_flattenable_move(int key) {
     return std::move(static_sk_flattenable[key]);
 }

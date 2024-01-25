@@ -22,7 +22,7 @@ SkFlattenable::Type SkFlattenable_getFlattenableType(SkFlattenable *flattenable)
     return flattenable->getFlattenableType();
 }
 
-void SkFlattenable_serialize(const char *sk_data_key_out, SkFlattenable *flattenable, const SkSerialProcs * serial_procs) {
+void SkFlattenable_serialize(int sk_data_key_out, SkFlattenable *flattenable, const SkSerialProcs * serial_procs) {
     static_sk_data_set(sk_data_key_out, flattenable->serialize(serial_procs));
 }
 
@@ -55,7 +55,7 @@ void SkFlattenable_Register(const char name[], SkFlattenable::Factory factory) {
     SkFlattenable::Register(name, factory);
 }
 
-void SkFlattenable_Deserialize(const char* sk_flattenable_key_out, SkFlattenable::Type type, const void *data, size_t length, const SkDeserialProcs *procs) {
+void SkFlattenable_Deserialize(int sk_flattenable_key_out, SkFlattenable::Type type, const void *data, size_t length, const SkDeserialProcs *procs) {
     static_sk_flattenable_set(sk_flattenable_key_out, SkFlattenable::Deserialize(type, data, length, procs));
 }
 

@@ -10,8 +10,8 @@
 #include <utility>
 #include "include/core/SkImageInfo.h"
 
-void static_sk_image_info_delete(const char *key);
-SkImageInfo static_sk_image_info_get(const char *key);
-void static_sk_image_info_set(const char *key, SkImageInfo value);
+void static_sk_image_info_delete(int key);
+SkImageInfo static_sk_image_info_get(int key);
+void static_sk_image_info_set(int key, SkImageInfo value);
 
 #endif //RAIA_SKIA_STATIC_SK_IMAGE_INFO_H

@@ -27,13 +27,13 @@ SkColor4f SkColorFilter_filterColor4f(SkColorFilter *color_filter, const SkColor
     return color_filter->filterColor4f(*srcColor, srcCS, dstCS);
 }
 
-void SkColorFilter_makeComposed(const char *sk_color_filter_key_out, const char *sk_color_filter_key_in,
+void SkColorFilter_makeComposed(int sk_color_filter_key_out, int sk_color_filter_key_in,
                                 SkColorFilter *color_filter) {
     static_sk_color_filter_set(sk_color_filter_key_out,
                                color_filter->makeComposed(static_sk_color_filter_move(sk_color_filter_key_in)));
 }
 
-void SkColorFilter_makeWithWorkingColorSpace(const char *sk_color_filter_key_out, const char *sk_color_space_key_in,
+void SkColorFilter_makeWithWorkingColorSpace(int sk_color_filter_key_out, int sk_color_space_key_in,
                                              SkColorFilter *color_filter) {
     static_sk_color_filter_set(sk_color_filter_key_out, color_filter->makeWithWorkingColorSpace(
             static_sk_color_space_move(sk_color_space_key_in)));
@@ -56,7 +56,7 @@ SkColorFilter::Type SkColorFilter_getFlattenableType(SkColorFilter *color_filter
 }
 
 void
-SkColorFilter_serialize(const char *sk_data_key_out, SkColorFilter *color_filter, const SkSerialProcs *serial_procs) {
+SkColorFilter_serialize(int sk_data_key_out, SkColorFilter *color_filter, const SkSerialProcs *serial_procs) {
     static_sk_data_set(sk_data_key_out, color_filter->serialize(serial_procs));
 }
 
@@ -79,7 +79,7 @@ void SkColorFilter_unref(SkColorFilter *color_filter) {
 
 // static
 
-void SkColorFilter_Deserialize(const char *sk_color_filter_key_out, const void *data, size_t size,
+void SkColorFilter_Deserialize(int sk_color_filter_key_out, const void *data, size_t size,
                                const SkDeserialProcs *procs) {
     static_sk_color_filter_set(sk_color_filter_key_out, SkColorFilter::Deserialize(data, size, procs));
 }

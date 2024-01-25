@@ -19,7 +19,7 @@ int SkSurface_height(SkSurface *surface) {
     return surface->height();
 }
 
-void SkSurface_imageInfo(const char *sk_image_info_key_out, SkSurface *surface) {
+void SkSurface_imageInfo(int sk_image_info_key_out, SkSurface *surface) {
     static_sk_image_info_set(sk_image_info_key_out, surface->imageInfo());
 }
 
@@ -47,23 +47,23 @@ SkCanvas * SkSurface_getCanvas(SkSurface *surface) {
     return surface->getCanvas();
 }
 
-void SkSurface_capabilities(const char *sk_capabilities_key_out, SkSurface *surface) {
+void SkSurface_capabilities(int sk_capabilities_key_out, SkSurface *surface) {
     static_const_sk_capabilities_set(sk_capabilities_key_out, surface->capabilities());
 }
 
-void SkSurface_makeSurface(const char *sk_surface_key_out, SkSurface *surface, const SkImageInfo *imageInfo) {
+void SkSurface_makeSurface(int sk_surface_key_out, SkSurface *surface, const SkImageInfo *imageInfo) {
     static_sk_surface_set(sk_surface_key_out, surface->makeSurface(*imageInfo));
 }
 
-void SkSurface_makeSurface_2(const char *sk_surface_key_out, SkSurface *surface, int width, int height) {
+void SkSurface_makeSurface_2(int sk_surface_key_out, SkSurface *surface, int width, int height) {
     static_sk_surface_set(sk_surface_key_out, surface->makeSurface(width, height));
 }
 
-void SkSurface_makeImageSnapshot(const char *sk_image_key_out, SkSurface *surface) {
+void SkSurface_makeImageSnapshot(int sk_image_key_out, SkSurface *surface) {
     static_sk_image_set(sk_image_key_out, surface->makeImageSnapshot());
 }
 
-void SkSurface_makeImageSnapshot_2(const char *sk_image_key_out, SkSurface *surface, const SkIRect *bounds) {
+void SkSurface_makeImageSnapshot_2(int sk_image_key_out, SkSurface *surface, const SkIRect *bounds) {
     static_sk_image_set(sk_image_key_out, surface->makeImageSnapshot(*bounds));
 }
 
@@ -95,7 +95,7 @@ void SkSurface_asyncRescaleAndReadPixels(SkSurface *surface, const SkImageInfo *
     surface->asyncRescaleAndReadPixels(*info, *srcRect, rescaleGamma, rescaleMode, callback, context);
 }
 
-void SkSurface_asyncRescaleAndReadPixelsYUV420(SkSurface *surface, const char *sk_color_space_key_in,
+void SkSurface_asyncRescaleAndReadPixelsYUV420(SkSurface *surface, int sk_color_space_key_in,
                                                SkYUVColorSpace yuvColorSpace, const SkIRect *srcRect,
                                                const SkISize *dstSize, SkSurface::RescaleGamma rescaleGamma,
                                                SkSurface::RescaleMode rescaleMode,
@@ -104,7 +104,7 @@ void SkSurface_asyncRescaleAndReadPixelsYUV420(SkSurface *surface, const char *s
     surface->asyncRescaleAndReadPixelsYUV420(yuvColorSpace, static_sk_color_space_move(sk_color_space_key_in), *srcRect, *dstSize, rescaleGamma, rescaleMode, callback, context);
 }
 
-void SkSurface_asyncRescaleAndReadPixelsYUVA420(SkSurface *surface, const char *sk_color_space_key_in,
+void SkSurface_asyncRescaleAndReadPixelsYUVA420(SkSurface *surface, int sk_color_space_key_in,
                                                 SkYUVColorSpace yuvColorSpace, const SkIRect *srcRect,
                                                 const SkISize *dstSize, SkSurface::RescaleGamma rescaleGamma,
                                                 SkSurface::RescaleMode rescaleMode,

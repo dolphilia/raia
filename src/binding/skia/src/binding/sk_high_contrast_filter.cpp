@@ -8,7 +8,7 @@ extern "C" {
 
 // static
 
-void SkHighContrastFilter_Make(const char *sk_color_filter_key_out, const SkHighContrastConfig * config) {
+void SkHighContrastFilter_Make(int sk_color_filter_key_out, const SkHighContrastConfig * config) {
     static_sk_color_filter_set(sk_color_filter_key_out, SkHighContrastFilter::Make(*config));
 }
 

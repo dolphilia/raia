@@ -19,11 +19,11 @@ void SkFILEStream_close(SkFILEStream *file_stream);
 size_t SkFILEStream_read(SkFILEStream *file_stream, void *buffer, size_t size);
 bool SkFILEStream_isAtEnd(SkFILEStream *file_stream);
 bool SkFILEStream_rewind(SkFILEStream *file_stream);
-void SkFILEStream_duplicate(const char *sk_stream_asset_key_out, SkFILEStream *file_stream);
+void SkFILEStream_duplicate(int sk_stream_asset_key_out, SkFILEStream *file_stream);
 size_t SkFILEStream_getPosition(SkFILEStream *file_stream);
 bool SkFILEStream_seek(SkFILEStream *file_stream, size_t position);
 bool SkFILEStream_move(SkFILEStream *file_stream, long offset);
-void SkFILEStream_fork(const char *sk_stream_asset_key_out, SkFILEStream *file_stream);
+void SkFILEStream_fork(int sk_stream_asset_key_out, SkFILEStream *file_stream);
 size_t SkFILEStream_getLength(SkFILEStream *file_stream);
 bool SkFILEStream_hasLength(SkFILEStream *file_stream);
 bool SkFILEStream_hasPosition(SkFILEStream *file_stream);
@@ -40,7 +40,7 @@ bool SkFILEStream_readScalar(SkFILEStream *file_stream, SkScalar *scalar);
 bool SkFILEStream_readPackedUInt(SkFILEStream *file_stream, size_t *size);
 const void * SkFILEStream_getMemoryBase(SkFILEStream *file_stream);
 // static
-void SkFILEStream_Make(const char *sk_file_stream_key_out, const char path[]);
+void SkFILEStream_Make(int sk_file_stream_key_out, const char path[]);
 }
 
 #endif //RAIA_SKIA_SK_FILE_STREAM_H

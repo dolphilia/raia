@@ -22,7 +22,7 @@ SkISize SkImage_dimensions(SkImage *image) {
     return image->dimensions();
 }
 
-void SkImage_bounds(const char *sk_i_rect_key_out, SkImage *image) {
+void SkImage_bounds(int sk_i_rect_key_out, SkImage *image) {
     static_sk_i_rect_set(sk_i_rect_key_out, image->bounds());
 }
 
@@ -42,7 +42,7 @@ SkColorSpace * cSkImage_olorSpace(SkImage *image) {
     return image->colorSpace();
 }
 
-void SkImage_refColorSpace(const char *sk_color_space_key_out, SkImage *image) {
+void SkImage_refColorSpace(int sk_color_space_key_out, SkImage *image) {
     static_sk_color_space_set(sk_color_space_key_out, image->refColorSpace());
 }
 
@@ -54,35 +54,35 @@ bool SkImage_isOpaque(SkImage *image) {
     return image->isOpaque();
 }
 
-void SkImage_makeShader(const char *sk_shader_key_out, SkImage *image, SkTileMode tmx, SkTileMode tmy, const SkSamplingOptions *sampling, const SkMatrix *localMatrix) {
+void SkImage_makeShader(int sk_shader_key_out, SkImage *image, SkTileMode tmx, SkTileMode tmy, const SkSamplingOptions *sampling, const SkMatrix *localMatrix) {
     static_sk_shader_set(sk_shader_key_out, image->makeShader(tmx, tmy, *sampling, localMatrix));
 }
 
-void SkImage_makeShader_2(const char *sk_shader_key_out, SkImage *image, SkTileMode tmx, SkTileMode tmy, const SkSamplingOptions *sampling, const SkMatrix *lm) {
+void SkImage_makeShader_2(int sk_shader_key_out, SkImage *image, SkTileMode tmx, SkTileMode tmy, const SkSamplingOptions *sampling, const SkMatrix *lm) {
     static_sk_shader_set(sk_shader_key_out, image->makeShader(tmx, tmy, *sampling, *lm));
 }
 
-void SkImage_makeShader_3(const char *sk_shader_key_out, SkImage *image, const SkSamplingOptions *sampling, const SkMatrix *lm) {
+void SkImage_makeShader_3(int sk_shader_key_out, SkImage *image, const SkSamplingOptions *sampling, const SkMatrix *lm) {
     static_sk_shader_set(sk_shader_key_out, image->makeShader(*sampling, *lm));
 }
 
-void SkImage_makeShader_4(const char *sk_shader_key_out, SkImage *image, const SkSamplingOptions *sampling, const SkMatrix *lm) {
+void SkImage_makeShader_4(int sk_shader_key_out, SkImage *image, const SkSamplingOptions *sampling, const SkMatrix *lm) {
     static_sk_shader_set(sk_shader_key_out, image->makeShader(*sampling, lm));
 }
 
-void SkImage_makeRawShader(const char *sk_shader_key_out, SkImage *image, SkTileMode tmx, SkTileMode tmy, const SkSamplingOptions *sampling, const SkMatrix *localMatrix) {
+void SkImage_makeRawShader(int sk_shader_key_out, SkImage *image, SkTileMode tmx, SkTileMode tmy, const SkSamplingOptions *sampling, const SkMatrix *localMatrix) {
     static_sk_shader_set(sk_shader_key_out, image->makeRawShader(tmx, tmy, *sampling, localMatrix));
 }
 
-void SkImage_makeRawShader_2(const char *sk_shader_key_out, SkImage *image, SkTileMode tmx, SkTileMode tmy, const SkSamplingOptions *sampling, const SkMatrix *lm) {
+void SkImage_makeRawShader_2(int sk_shader_key_out, SkImage *image, SkTileMode tmx, SkTileMode tmy, const SkSamplingOptions *sampling, const SkMatrix *lm) {
     static_sk_shader_set(sk_shader_key_out, image->makeRawShader(tmx, tmy, *sampling, *lm));
 }
 
-void SkImage_makeRawShader_3(const char *sk_shader_key_out, SkImage *image, const SkSamplingOptions *sampling, const SkMatrix *lm) {
+void SkImage_makeRawShader_3(int sk_shader_key_out, SkImage *image, const SkSamplingOptions *sampling, const SkMatrix *lm) {
     static_sk_shader_set(sk_shader_key_out, image->makeRawShader(*sampling, *lm));
 }
 
-void SkImage_makeRawShader_4(const char *sk_shader_key_out, SkImage *image, const SkSamplingOptions *sampling, const SkMatrix *lm) {
+void SkImage_makeRawShader_4(int sk_shader_key_out, SkImage *image, const SkSamplingOptions *sampling, const SkMatrix *lm) {
     static_sk_shader_set(sk_shader_key_out, image->makeRawShader(*sampling, lm));
 }
 
@@ -122,12 +122,12 @@ void SkImage_asyncRescaleAndReadPixels(SkImage *image, const SkImageInfo *info, 
     image->asyncRescaleAndReadPixels(*info, *srcRect, rescaleGamma, rescaleMode, callback, context);
 }
 
-void SkImage_asyncRescaleAndReadPixelsYUV420(const char *sk_color_space_key_in, SkImage *image, SkYUVColorSpace yuvColorSpace, const SkIRect *srcRect, const SkISize *dstSize, SkImage::RescaleGamma rescaleGamma, SkImage::RescaleMode rescaleMode, SkImage::ReadPixelsCallback callback, SkImage::ReadPixelsContext context) {
+void SkImage_asyncRescaleAndReadPixelsYUV420(int sk_color_space_key_in, SkImage *image, SkYUVColorSpace yuvColorSpace, const SkIRect *srcRect, const SkISize *dstSize, SkImage::RescaleGamma rescaleGamma, SkImage::RescaleMode rescaleMode, SkImage::ReadPixelsCallback callback, SkImage::ReadPixelsContext context) {
     image->asyncRescaleAndReadPixelsYUV420(yuvColorSpace, static_sk_color_space_move(sk_color_space_key_in), *srcRect,
                                            *dstSize, rescaleGamma, rescaleMode, callback, context);
 }
 
-void SkImage_asyncRescaleAndReadPixelsYUVA420(const char *sk_color_space_key_in, SkImage *image, SkYUVColorSpace yuvColorSpace, const SkIRect *srcRect, const SkISize *dstSize, SkImage::RescaleGamma rescaleGamma, SkImage::RescaleMode rescaleMode, SkImage::ReadPixelsCallback callback, SkImage::ReadPixelsContext context) {
+void SkImage_asyncRescaleAndReadPixelsYUVA420(int sk_color_space_key_in, SkImage *image, SkYUVColorSpace yuvColorSpace, const SkIRect *srcRect, const SkISize *dstSize, SkImage::RescaleGamma rescaleGamma, SkImage::RescaleMode rescaleMode, SkImage::ReadPixelsCallback callback, SkImage::ReadPixelsContext context) {
     image->asyncRescaleAndReadPixelsYUVA420(yuvColorSpace, static_sk_color_space_move(sk_color_space_key_in), *srcRect, *dstSize, rescaleGamma, rescaleMode, callback, context);
 }
 
@@ -135,15 +135,15 @@ bool SkImage_scalePixels(SkImage *image, const SkPixmap *dst, const SkSamplingOp
     return image->scalePixels(*dst, *sampling, cachingHint);
 }
 
-void SkImage_refEncodedData(const char *sk_data_key_out, SkImage *image) {
+void SkImage_refEncodedData(int sk_data_key_out, SkImage *image) {
     static_sk_data_set(sk_data_key_out, image->refEncodedData());
 }
 
-void SkImage_makeSubset(const char *sk_image_key_out, SkImage *image, GrDirectContext *direct, const SkIRect *subset) {
+void SkImage_makeSubset(int sk_image_key_out, SkImage *image, GrDirectContext *direct, const SkIRect *subset) {
     static_sk_image_set(sk_image_key_out, image->makeSubset(direct, *subset));
 }
 
-void SkImage_makeSubset_2(const char *sk_image_key_out, SkImage *image, skgpu::graphite::Recorder *recorder, const SkIRect *subset, SkImage::RequiredProperties properties) {
+void SkImage_makeSubset_2(int sk_image_key_out, SkImage *image, skgpu::graphite::Recorder *recorder, const SkIRect *subset, SkImage::RequiredProperties properties) {
     static_sk_image_set(sk_image_key_out, image->makeSubset(recorder, *subset, properties));
 }
 
@@ -155,19 +155,19 @@ bool SkImage_isProtected(SkImage *image) {
     return image->isProtected();
 }
 
-void SkImage_withDefaultMipmaps(const char *sk_image_key_out, SkImage *image) {
+void SkImage_withDefaultMipmaps(int sk_image_key_out, SkImage *image) {
     static_sk_image_set(sk_image_key_out, image->withDefaultMipmaps());
 }
 
-void SkImage_makeNonTextureImage(const char *sk_image_key_out, SkImage *image, GrDirectContext *context) {
+void SkImage_makeNonTextureImage(int sk_image_key_out, SkImage *image, GrDirectContext *context) {
     static_sk_image_set(sk_image_key_out, image->makeNonTextureImage(context));
 }
 
-void SkImage_makeRasterImage(const char *sk_image_key_out, SkImage *image, GrDirectContext *context, SkImage::CachingHint cachingHint) {
+void SkImage_makeRasterImage(int sk_image_key_out, SkImage *image, GrDirectContext *context, SkImage::CachingHint cachingHint) {
     static_sk_image_set(sk_image_key_out, image->makeRasterImage(context, cachingHint));
 }
 
-void SkImage_makeRasterImage_2(const char *sk_image_key_out, SkImage *image, SkImage::CachingHint cachingHint) {
+void SkImage_makeRasterImage_2(int sk_image_key_out, SkImage *image, SkImage::CachingHint cachingHint) {
     static_sk_image_set(sk_image_key_out, image->makeRasterImage(cachingHint));
 }
 
@@ -179,23 +179,23 @@ bool SkImage_isLazyGenerated(SkImage *image) {
     return image->isLazyGenerated();
 }
 
-void SkImage_makeColorSpace(const char *sk_image_key_out, const char *sk_color_space_key_in, SkImage *image, GrDirectContext *direct) {
+void SkImage_makeColorSpace(int sk_image_key_out, int sk_color_space_key_in, SkImage *image, GrDirectContext *direct) {
     static_sk_image_set(sk_image_key_out, image->makeColorSpace(direct, static_sk_color_space_move(sk_color_space_key_in)));
 }
 
-void SkImage_makeColorSpace_2(const char *sk_image_key_out, const char *sk_color_space_key_in, SkImage *image, skgpu::graphite::Recorder *recorder, SkImage::RequiredProperties properties) {
+void SkImage_makeColorSpace_2(int sk_image_key_out, int sk_color_space_key_in, SkImage *image, skgpu::graphite::Recorder *recorder, SkImage::RequiredProperties properties) {
     static_sk_image_set(sk_image_key_out, image->makeColorSpace(recorder, static_sk_color_space_move(sk_color_space_key_in), properties));
 }
 
-void SkImage_makeColorTypeAndColorSpace(const char *sk_image_key_out, const char *sk_color_space_key_in, SkImage *image, GrDirectContext *direct, SkColorType targetColorType) {
+void SkImage_makeColorTypeAndColorSpace(int sk_image_key_out, int sk_color_space_key_in, SkImage *image, GrDirectContext *direct, SkColorType targetColorType) {
     static_sk_image_set(sk_image_key_out, image->makeColorTypeAndColorSpace(direct, targetColorType, static_sk_color_space_move(sk_color_space_key_in)));
 }
 
-void SkImage_makeColorTypeAndColorSpace_2(const char *sk_image_key_out, const char *sk_color_space_key_in, SkImage *image, skgpu::graphite::Recorder *recorder, SkColorType targetColorType, SkImage::RequiredProperties properties) {
+void SkImage_makeColorTypeAndColorSpace_2(int sk_image_key_out, int sk_color_space_key_in, SkImage *image, skgpu::graphite::Recorder *recorder, SkColorType targetColorType, SkImage::RequiredProperties properties) {
     static_sk_image_set(sk_image_key_out, image->makeColorTypeAndColorSpace(recorder, targetColorType, static_sk_color_space_move(sk_color_space_key_in), properties));
 }
 
-void SkImage_reinterpretColorSpace(const char *sk_image_key_out, const char *sk_color_space_key_in, SkImage *image) {
+void SkImage_reinterpretColorSpace(int sk_image_key_out, int sk_color_space_key_in, SkImage *image) {
     static_sk_image_set(sk_image_key_out, image->reinterpretColorSpace(static_sk_color_space_move(sk_color_space_key_in)));
 }
 

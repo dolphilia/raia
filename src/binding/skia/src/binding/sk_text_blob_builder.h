@@ -11,7 +11,7 @@
 extern "C" {
 SkTextBlobBuilder *SkTextBlobBuilder_new();
 void SkTextBlobBuilder_delete(SkTextBlobBuilder *text_blob_builder);
-void SkTextBlobBuilder_make(const char *sk_text_blob_key_out, SkTextBlobBuilder *text_blob_builder);
+void SkTextBlobBuilder_make(int sk_text_blob_key_out, SkTextBlobBuilder *text_blob_builder);
 const SkTextBlobBuilder::RunBuffer * SkTextBlobBuilder_allocRun(SkTextBlobBuilder *text_blob_builder, const SkFont *font, int count, SkScalar x, SkScalar y, const SkRect *bounds);
 const SkTextBlobBuilder::RunBuffer * SkTextBlobBuilder_allocRunPosH(SkTextBlobBuilder *text_blob_builder, const SkFont *font, int count, SkScalar y, const SkRect *bounds);
 const SkTextBlobBuilder::RunBuffer * SkTextBlobBuilder_allocRunPos(SkTextBlobBuilder *text_blob_builder, const SkFont *font, int count, const SkRect *bounds);

@@ -7,7 +7,7 @@
 
 extern "C" {
 
-void SkExecutor_add(const char *function_void_void_key_in, SkExecutor *executor) {
+void SkExecutor_add(int function_void_void_key_in, SkExecutor *executor) {
     executor->add(static_function_void_void_get(function_void_void_key_in));
 }
 
@@ -17,11 +17,11 @@ void SkExecutor_borrow(SkExecutor *executor) {
 
 // static
 
-void SkExecutor_MakeFIFOThreadPool(const char *sk_executor_key_out, int threads, bool allowBorrowing) {
+void SkExecutor_MakeFIFOThreadPool(int sk_executor_key_out, int threads, bool allowBorrowing) {
     static_sk_executor_set(sk_executor_key_out, SkExecutor::MakeFIFOThreadPool(threads, allowBorrowing));
 }
 
-void SkExecutor_MakeLIFOThreadPool(const char *sk_executor_key_out, int threads, bool allowBorrowing) {
+void SkExecutor_MakeLIFOThreadPool(int sk_executor_key_out, int threads, bool allowBorrowing) {
     static_sk_executor_set(sk_executor_key_out, SkExecutor::MakeLIFOThreadPool(threads, allowBorrowing));
 }
 

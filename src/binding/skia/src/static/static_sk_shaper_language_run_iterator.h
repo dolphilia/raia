@@ -9,9 +9,9 @@
 #include <map>
 #include "modules/skshaper/include/SkShaper.h"
 
-void static_sk_shaper_language_run_iterator_delete(const char *key);
-SkShaper::LanguageRunIterator *static_sk_shaper_language_run_iterator_get(const char *key);
-void static_sk_shaper_language_run_iterator_set(const char *key, std::unique_ptr<SkShaper::LanguageRunIterator> value);
-std::unique_ptr<SkShaper::LanguageRunIterator> static_sk_shaper_language_run_iterator_move(const char *key);
+void static_sk_shaper_language_run_iterator_delete(int key);
+SkShaper::LanguageRunIterator *static_sk_shaper_language_run_iterator_get(int key);
+void static_sk_shaper_language_run_iterator_set(int key, std::unique_ptr<SkShaper::LanguageRunIterator> value);
+std::unique_ptr<SkShaper::LanguageRunIterator> static_sk_shaper_language_run_iterator_move(int key);
 
 #endif //RAIA_SKIA_STATIC_SK_SHAPER_LANGUAGE_RUN_ITERATOR_H

@@ -9,9 +9,9 @@
 #include <map>
 #include "include/core/SkDataTable.h"
 
-void static_sk_data_table_delete(const char *key);
-SkDataTable *static_sk_data_table_get(const char *key);
-void static_sk_data_table_set(const char *key, sk_sp<SkDataTable> value);
-sk_sp<SkDataTable> static_sk_data_table_move(const char *key);
+void static_sk_data_table_delete(int key);
+SkDataTable *static_sk_data_table_get(int key);
+void static_sk_data_table_set(int key, sk_sp<SkDataTable> value);
+sk_sp<SkDataTable> static_sk_data_table_move(int key);
 
 #endif //RAIA_SKIA_STATIC_SK_DATA_TABLE_H

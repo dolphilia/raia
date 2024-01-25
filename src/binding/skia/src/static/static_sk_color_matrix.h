@@ -9,8 +9,8 @@
 #include <map>
 #include "include/effects/SkColorMatrix.h"
 
-void static_sk_color_matrix_delete(const char *key);
-SkColorMatrix static_sk_color_matrix_get(const char *key);
-void static_sk_color_matrix_set(const char *key, SkColorMatrix value);
+void static_sk_color_matrix_delete(int key);
+SkColorMatrix static_sk_color_matrix_get(int key);
+void static_sk_color_matrix_set(int key, SkColorMatrix value);
 
 #endif //RAIA_SKIA_STATIC_SK_COLOR_MATRIX_H

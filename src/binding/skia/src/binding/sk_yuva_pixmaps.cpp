@@ -33,7 +33,7 @@ SkYUVAPixmaps::DataType SkYUVAPixmaps_dataType(SkYUVAPixmaps *yuva_pixmaps) {
     return yuva_pixmaps->dataType();
 }
 
-void SkYUVAPixmaps_pixmapsInfo(const char *sk_yuva_pixmap_info_key_out, SkYUVAPixmaps *yuva_pixmaps) {
+void SkYUVAPixmaps_pixmapsInfo(int sk_yuva_pixmap_info_key_out, SkYUVAPixmaps *yuva_pixmaps) {
     static_sk_yuva_pixmap_info_set(sk_yuva_pixmap_info_key_out, yuva_pixmaps->pixmapsInfo());
 }
 
@@ -63,24 +63,24 @@ SkColorType SkYUVAPixmaps_RecommendedRGBAColorType(SkYUVAPixmaps::DataType type)
     return SkYUVAPixmaps::RecommendedRGBAColorType(type);
 }
 
-void SkYUVAPixmaps_Allocate(const char *sk_yuva_pixmaps_key_out, const SkYUVAPixmapInfo *yuvaPixmapInfo) {
+void SkYUVAPixmaps_Allocate(int sk_yuva_pixmaps_key_out, const SkYUVAPixmapInfo *yuvaPixmapInfo) {
     static_sk_yuva_pixmaps_set(sk_yuva_pixmaps_key_out, SkYUVAPixmaps::Allocate(*yuvaPixmapInfo));
 }
 
-void SkYUVAPixmaps_FromData(const char *sk_yuva_pixmaps_key_out, const char *sk_data_key_in,
+void SkYUVAPixmaps_FromData(int sk_yuva_pixmaps_key_out, int sk_data_key_in,
                             const SkYUVAPixmapInfo *yuvaPixmapInfo) {
     static_sk_yuva_pixmaps_set(sk_yuva_pixmaps_key_out, SkYUVAPixmaps::FromData(*yuvaPixmapInfo, static_sk_data_move(sk_data_key_in)));
 }
 
-void SkYUVAPixmaps_MakeCopy(const char *sk_yuva_pixmaps_key_out, const SkYUVAPixmaps *src) {
+void SkYUVAPixmaps_MakeCopy(int sk_yuva_pixmaps_key_out, const SkYUVAPixmaps *src) {
     static_sk_yuva_pixmaps_set(sk_yuva_pixmaps_key_out, SkYUVAPixmaps::MakeCopy(*src));
 }
 
-void SkYUVAPixmaps_FromExternalMemory(const char *sk_yuva_pixmaps_key_out, const SkYUVAPixmapInfo *yuvaPixmapInfo, void *memory) {
+void SkYUVAPixmaps_FromExternalMemory(int sk_yuva_pixmaps_key_out, const SkYUVAPixmapInfo *yuvaPixmapInfo, void *memory) {
     static_sk_yuva_pixmaps_set(sk_yuva_pixmaps_key_out, SkYUVAPixmaps::FromExternalMemory(*yuvaPixmapInfo, memory));
 }
 
-void SkYUVAPixmaps_FromExternalPixmaps(const char *sk_yuva_pixmaps_key_out, const SkYUVAInfo *yuvaInfo,
+void SkYUVAPixmaps_FromExternalPixmaps(int sk_yuva_pixmaps_key_out, const SkYUVAInfo *yuvaInfo,
                                        const SkPixmap pixmaps[4]) {
     static_sk_yuva_pixmaps_set(sk_yuva_pixmaps_key_out, SkYUVAPixmaps::FromExternalPixmaps(*yuvaInfo, pixmaps));
 }

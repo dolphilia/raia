@@ -9,9 +9,9 @@
 #include <map>
 #include "include/core/SkFlattenable.h"
 
-void static_sk_flattenable_delete(const char *key);
-SkFlattenable *static_sk_flattenable_get(const char *key);
-void static_sk_flattenable_set(const char *key, sk_sp<SkFlattenable> value);
-sk_sp<SkFlattenable> static_sk_flattenable_move(const char *key);
+void static_sk_flattenable_delete(int key);
+SkFlattenable *static_sk_flattenable_get(int key);
+void static_sk_flattenable_set(int key, sk_sp<SkFlattenable> value);
+sk_sp<SkFlattenable> static_sk_flattenable_move(int key);
 
 #endif //RAIA_SKIA_STATIC_SK_FLATTENABLE_H

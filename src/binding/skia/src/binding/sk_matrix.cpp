@@ -89,43 +89,43 @@ SkScalar SkMatrix_getPerspY(SkMatrix *matrix) {
     return matrix->getPerspY();
 }
 
-void SkMatrix_set(const char *sk_matrix_key_out, SkMatrix *matrix, int index, SkScalar value) {
+void SkMatrix_set(int sk_matrix_key_out, SkMatrix *matrix, int index, SkScalar value) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->set(index, value));
 }
 
-void SkMatrix_setScaleX(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar v) {
+void SkMatrix_setScaleX(int sk_matrix_key_out, SkMatrix *matrix, SkScalar v) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->setScaleX(v));
 }
 
-void SkMatrix_setScaleY(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar v) {
+void SkMatrix_setScaleY(int sk_matrix_key_out, SkMatrix *matrix, SkScalar v) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->setScaleY(v));
 }
 
-void SkMatrix_setSkewY(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar v) {
+void SkMatrix_setSkewY(int sk_matrix_key_out, SkMatrix *matrix, SkScalar v) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->setSkewY(v));
 }
 
-void SkMatrix_setSkewX(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar v) {
+void SkMatrix_setSkewX(int sk_matrix_key_out, SkMatrix *matrix, SkScalar v) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->setSkewX(v));
 }
 
-void SkMatrix_setTranslateX(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar v) {
+void SkMatrix_setTranslateX(int sk_matrix_key_out, SkMatrix *matrix, SkScalar v) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->setTranslateX(v));
 }
 
-void SkMatrix_setTranslateY(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar v) {
+void SkMatrix_setTranslateY(int sk_matrix_key_out, SkMatrix *matrix, SkScalar v) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->setTranslateY(v));
 }
 
-void SkMatrix_setPerspX(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar v) {
+void SkMatrix_setPerspX(int sk_matrix_key_out, SkMatrix *matrix, SkScalar v) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->setPerspX(v));
 }
 
-void SkMatrix_setPerspY(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar v) {
+void SkMatrix_setPerspY(int sk_matrix_key_out, SkMatrix *matrix, SkScalar v) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->setPerspY(v));
 }
 
-void SkMatrix_setAll(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar scaleX, SkScalar skewX, SkScalar transX, SkScalar skewY, SkScalar scaleY, SkScalar transY, SkScalar persp0, SkScalar persp1, SkScalar persp2) {
+void SkMatrix_setAll(int sk_matrix_key_out, SkMatrix *matrix, SkScalar scaleX, SkScalar skewX, SkScalar transX, SkScalar skewY, SkScalar scaleY, SkScalar transY, SkScalar persp0, SkScalar persp1, SkScalar persp2) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->setAll(scaleX, skewX, transX, skewY, scaleY, transY, persp0, persp1, persp2));
 }
 
@@ -133,127 +133,127 @@ void SkMatrix_get9(SkMatrix *matrix, SkScalar buffer[9]) {
     matrix->get9(buffer);
 }
 
-void SkMatrix_set9(const char *sk_matrix_key_out, SkMatrix *matrix, const SkScalar buffer[9]) {
+void SkMatrix_set9(int sk_matrix_key_out, SkMatrix *matrix, const SkScalar buffer[9]) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->set9(buffer));
 }
 
-void SkMatrix_reset(const char *sk_matrix_key_out, SkMatrix *matrix) {
+void SkMatrix_reset(int sk_matrix_key_out, SkMatrix *matrix) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->reset());
 }
 
-void SkMatrix_setIdentity(const char *sk_matrix_key_out, SkMatrix *matrix) {
+void SkMatrix_setIdentity(int sk_matrix_key_out, SkMatrix *matrix) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->setIdentity());
 }
 
-void SkMatrix_setTranslate(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar dx, SkScalar dy) {
+void SkMatrix_setTranslate(int sk_matrix_key_out, SkMatrix *matrix, SkScalar dx, SkScalar dy) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->setTranslate(dx, dy));
 }
 
-void SkMatrix_setTranslate_2(const char *sk_matrix_key_out, SkMatrix *matrix, const SkVector *v) {
+void SkMatrix_setTranslate_2(int sk_matrix_key_out, SkMatrix *matrix, const SkVector *v) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->setTranslate(*v));
 }
 
-void SkMatrix_setScale(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar sx, SkScalar sy, SkScalar px, SkScalar py) {
+void SkMatrix_setScale(int sk_matrix_key_out, SkMatrix *matrix, SkScalar sx, SkScalar sy, SkScalar px, SkScalar py) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->setScale(sx, sy, px, py));
 }
 
-void SkMatrix_setScale_2(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar sx, SkScalar sy) {
+void SkMatrix_setScale_2(int sk_matrix_key_out, SkMatrix *matrix, SkScalar sx, SkScalar sy) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->setScale(sx, sy));
 }
 
-void SkMatrix_setRotate(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar degrees, SkScalar px, SkScalar py) {
+void SkMatrix_setRotate(int sk_matrix_key_out, SkMatrix *matrix, SkScalar degrees, SkScalar px, SkScalar py) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->setRotate(degrees, px, py));
 }
 
-void SkMatrix_setRotate_2(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar degrees) {
+void SkMatrix_setRotate_2(int sk_matrix_key_out, SkMatrix *matrix, SkScalar degrees) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->setRotate(degrees));
 }
 
-void SkMatrix_setSinCos(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar sinValue, SkScalar cosValue, SkScalar px, SkScalar py) {
+void SkMatrix_setSinCos(int sk_matrix_key_out, SkMatrix *matrix, SkScalar sinValue, SkScalar cosValue, SkScalar px, SkScalar py) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->setSinCos(sinValue, cosValue, px, py));
 }
 
-void SkMatrix_setSinCos_2(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar sinValue, SkScalar cosValue) {
+void SkMatrix_setSinCos_2(int sk_matrix_key_out, SkMatrix *matrix, SkScalar sinValue, SkScalar cosValue) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->setSinCos(sinValue, cosValue));
 }
 
-void SkMatrix_setRSXform(const char *sk_matrix_key_out, SkMatrix *matrix, const SkRSXform *rsxForm) {
+void SkMatrix_setRSXform(int sk_matrix_key_out, SkMatrix *matrix, const SkRSXform *rsxForm) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->setRSXform(*rsxForm));
 }
 
-void SkMatrix_setSkew(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar kx, SkScalar ky, SkScalar px, SkScalar py) {
+void SkMatrix_setSkew(int sk_matrix_key_out, SkMatrix *matrix, SkScalar kx, SkScalar ky, SkScalar px, SkScalar py) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->setSkew(kx, ky, px, py));
 }
 
-void SkMatrix_setSkew_2(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar kx, SkScalar ky) {
+void SkMatrix_setSkew_2(int sk_matrix_key_out, SkMatrix *matrix, SkScalar kx, SkScalar ky) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->setSkew(kx, ky));
 }
 
-void SkMatrix_setConcat(const char *sk_matrix_key_out, SkMatrix *matrix, const SkMatrix *a, const SkMatrix *b) {
+void SkMatrix_setConcat(int sk_matrix_key_out, SkMatrix *matrix, const SkMatrix *a, const SkMatrix *b) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->setConcat(*a, *b));
 }
 
-void SkMatrix_preTranslate(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar dx, SkScalar dy) {
+void SkMatrix_preTranslate(int sk_matrix_key_out, SkMatrix *matrix, SkScalar dx, SkScalar dy) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->preTranslate(dx, dy));
 }
 
-void SkMatrix_preScale(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar sx, SkScalar sy, SkScalar px, SkScalar py) {
+void SkMatrix_preScale(int sk_matrix_key_out, SkMatrix *matrix, SkScalar sx, SkScalar sy, SkScalar px, SkScalar py) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->preScale(sx, sy, px, py));
 }
 
-void SkMatrix_preScale_2(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar sx, SkScalar sy) {
+void SkMatrix_preScale_2(int sk_matrix_key_out, SkMatrix *matrix, SkScalar sx, SkScalar sy) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->preScale(sx, sy));
 }
 
-void SkMatrix_preRotate(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar degrees, SkScalar px, SkScalar py) {
+void SkMatrix_preRotate(int sk_matrix_key_out, SkMatrix *matrix, SkScalar degrees, SkScalar px, SkScalar py) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->preRotate(degrees, px, py));
 }
 
-void SkMatrix_preRotate_2(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar degrees) {
+void SkMatrix_preRotate_2(int sk_matrix_key_out, SkMatrix *matrix, SkScalar degrees) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->preRotate(degrees));
 }
 
-void SkMatrix_preSkew(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar kx, SkScalar ky, SkScalar px, SkScalar py) {
+void SkMatrix_preSkew(int sk_matrix_key_out, SkMatrix *matrix, SkScalar kx, SkScalar ky, SkScalar px, SkScalar py) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->preSkew(kx, ky, px, py));
 }
 
-void SkMatrix_preSkew_2(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar kx, SkScalar ky) {
+void SkMatrix_preSkew_2(int sk_matrix_key_out, SkMatrix *matrix, SkScalar kx, SkScalar ky) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->preSkew(kx, ky));
 }
 
-void SkMatrix_preConcat(const char *sk_matrix_key_out, SkMatrix *matrix, const SkMatrix *other) {
+void SkMatrix_preConcat(int sk_matrix_key_out, SkMatrix *matrix, const SkMatrix *other) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->preConcat(*other));
 }
 
-void SkMatrix_postTranslate(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar dx, SkScalar dy) {
+void SkMatrix_postTranslate(int sk_matrix_key_out, SkMatrix *matrix, SkScalar dx, SkScalar dy) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->postTranslate(dx, dy));
 }
 
-void SkMatrix_postScale(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar sx, SkScalar sy, SkScalar px, SkScalar py) {
+void SkMatrix_postScale(int sk_matrix_key_out, SkMatrix *matrix, SkScalar sx, SkScalar sy, SkScalar px, SkScalar py) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->postScale(sx, sy, px, py));
 }
 
-void SkMatrix_postScale_2(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar sx, SkScalar sy) {
+void SkMatrix_postScale_2(int sk_matrix_key_out, SkMatrix *matrix, SkScalar sx, SkScalar sy) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->postScale(sx, sy));
 }
 
-void SkMatrix_postRotate(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar degrees, SkScalar px, SkScalar py) {
+void SkMatrix_postRotate(int sk_matrix_key_out, SkMatrix *matrix, SkScalar degrees, SkScalar px, SkScalar py) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->postRotate(degrees, px, py));
 }
 
-void SkMatrix_postRotate_2(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar degrees) {
+void SkMatrix_postRotate_2(int sk_matrix_key_out, SkMatrix *matrix, SkScalar degrees) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->postRotate(degrees));
 }
 
-void SkMatrix_postSkew(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar kx, SkScalar ky, SkScalar px, SkScalar py) {
+void SkMatrix_postSkew(int sk_matrix_key_out, SkMatrix *matrix, SkScalar kx, SkScalar ky, SkScalar px, SkScalar py) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->postSkew(kx, ky, px, py));
 }
 
-void SkMatrix_postSkew_2(const char *sk_matrix_key_out, SkMatrix *matrix, SkScalar kx, SkScalar ky) {
+void SkMatrix_postSkew_2(int sk_matrix_key_out, SkMatrix *matrix, SkScalar kx, SkScalar ky) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->postSkew(kx, ky));
 }
 
-void SkMatrix_postConcat(const char *sk_matrix_key_out, SkMatrix *matrix, const SkMatrix *other) {
+void SkMatrix_postConcat(int sk_matrix_key_out, SkMatrix *matrix, const SkMatrix *other) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->postConcat(*other));
 }
 
@@ -273,7 +273,7 @@ bool SkMatrix_asAffine(SkMatrix *matrix, SkScalar affine[6]) {
     return matrix->asAffine(affine);
 }
 
-void SkMatrix_setAffine(const char *sk_matrix_key_out, SkMatrix *matrix, const SkScalar affine[6]) {
+void SkMatrix_setAffine(int sk_matrix_key_out, SkMatrix *matrix, const SkScalar affine[6]) {
     static_sk_matrix_set(sk_matrix_key_out, matrix->setAffine(affine));
 }
 
@@ -337,7 +337,7 @@ bool SkMatrix_mapRect_2(SkMatrix *matrix, SkRect *rect, SkApplyPerspectiveClip p
     return matrix->mapRect(rect, pc);
 }
 
-void SkMatrix_mapRect_3(const char *sk_rect_key_out, SkMatrix *matrix, const SkRect *src, SkApplyPerspectiveClip pc) {
+void SkMatrix_mapRect_3(int sk_rect_key_out, SkMatrix *matrix, const SkRect *src, SkApplyPerspectiveClip pc) {
     static_sk_rect_set(sk_rect_key_out, matrix->mapRect(*src, pc));
 }
 
@@ -388,47 +388,47 @@ bool SkMatrix_isFinite(SkMatrix *matrix) {
 
 // static
 
-void SkMatrix_Scale(const char *sk_matrix_key_out, SkScalar sx, SkScalar sy) {
+void SkMatrix_Scale(int sk_matrix_key_out, SkScalar sx, SkScalar sy) {
     static_sk_matrix_set(sk_matrix_key_out, SkMatrix::Scale(sx, sy));
 }
 
-void SkMatrix_Translate(const char *sk_matrix_key_out, SkScalar dx, SkScalar dy) {
+void SkMatrix_Translate(int sk_matrix_key_out, SkScalar dx, SkScalar dy) {
     static_sk_matrix_set(sk_matrix_key_out, SkMatrix::Translate(dx, dy));
 }
 
-void SkMatrix_Translate_2(const char *sk_matrix_key_out, SkVector t) {
+void SkMatrix_Translate_2(int sk_matrix_key_out, SkVector t) {
     static_sk_matrix_set(sk_matrix_key_out, SkMatrix::Translate(t));
 }
 
-void SkMatrix_Translate_3(const char *sk_matrix_key_out, SkIVector t) {
+void SkMatrix_Translate_3(int sk_matrix_key_out, SkIVector t) {
     static_sk_matrix_set(sk_matrix_key_out, SkMatrix::Translate(t));
 }
 
-void SkMatrix_RotateDeg(const char *sk_matrix_key_out, SkScalar deg) {
+void SkMatrix_RotateDeg(int sk_matrix_key_out, SkScalar deg) {
     static_sk_matrix_set(sk_matrix_key_out, SkMatrix::RotateDeg(deg));
 }
 
-void SkMatrix_RotateDeg_2(const char *sk_matrix_key_out, SkScalar deg, SkPoint pt) {
+void SkMatrix_RotateDeg_2(int sk_matrix_key_out, SkScalar deg, SkPoint pt) {
     static_sk_matrix_set(sk_matrix_key_out, SkMatrix::RotateDeg(deg, pt));
 }
 
-void SkMatrix_RotateRad(const char *sk_matrix_key_out, SkScalar rad) {
+void SkMatrix_RotateRad(int sk_matrix_key_out, SkScalar rad) {
     static_sk_matrix_set(sk_matrix_key_out, SkMatrix::RotateRad(rad));
 }
 
-void SkMatrix_Skew(const char *sk_matrix_key_out, SkScalar kx, SkScalar ky) {
+void SkMatrix_Skew(int sk_matrix_key_out, SkScalar kx, SkScalar ky) {
     static_sk_matrix_set(sk_matrix_key_out, SkMatrix::Skew(kx, ky));
 }
 
-void SkMatrix_RectToRect(const char *sk_matrix_key_out, const SkRect *src, const SkRect *dst, SkMatrix::ScaleToFit mode) {
+void SkMatrix_RectToRect(int sk_matrix_key_out, const SkRect *src, const SkRect *dst, SkMatrix::ScaleToFit mode) {
     static_sk_matrix_set(sk_matrix_key_out, SkMatrix::RectToRect(*src, *dst, mode));
 }
 
-void SkMatrix_MakeAll(const char *sk_matrix_key_out, SkScalar scaleX, SkScalar skewX, SkScalar transX, SkScalar skewY, SkScalar scaleY, SkScalar transY, SkScalar pers0, SkScalar pers1, SkScalar pers2) {
+void SkMatrix_MakeAll(int sk_matrix_key_out, SkScalar scaleX, SkScalar skewX, SkScalar transX, SkScalar skewY, SkScalar scaleY, SkScalar transY, SkScalar pers0, SkScalar pers1, SkScalar pers2) {
     static_sk_matrix_set(sk_matrix_key_out, SkMatrix::MakeAll(scaleX, skewX, transX, skewY, scaleY, transY, pers0, pers1, pers2));
 }
 
-void SkMatrix_MakeRectToRect(const char *sk_matrix_key_out, const SkRect *src, const SkRect *dst, SkMatrix::ScaleToFit stf) {
+void SkMatrix_MakeRectToRect(int sk_matrix_key_out, const SkRect *src, const SkRect *dst, SkMatrix::ScaleToFit stf) {
     static_sk_matrix_set(sk_matrix_key_out, SkMatrix::MakeRectToRect(*src, *dst, stf));
 }
 
@@ -436,15 +436,15 @@ void SkMatrix_SetAffineIdentity(SkScalar affine[6]) {
     SkMatrix::SetAffineIdentity(affine);
 }
 
-void SkMatrix_I(const char *sk_matrix_key_out) {
+void SkMatrix_I(int sk_matrix_key_out) {
     static_sk_matrix_set(sk_matrix_key_out, SkMatrix::I());
 }
 
-void SkMatrix_InvalidMatrix(const char *sk_matrix_key_out) {
+void SkMatrix_InvalidMatrix(int sk_matrix_key_out) {
     static_sk_matrix_set(sk_matrix_key_out, SkMatrix::InvalidMatrix());
 }
 
-void SkMatrix_Concat(const char *sk_matrix_key_out, const SkMatrix *a, const SkMatrix *b) {
+void SkMatrix_Concat(int sk_matrix_key_out, const SkMatrix *a, const SkMatrix *b) {
     static_sk_matrix_set(sk_matrix_key_out, SkMatrix::Concat(*a, *b));
 }
 

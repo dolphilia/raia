@@ -38,7 +38,7 @@ int GrRecordingContext_maxSurfaceSampleCountForColorType(GrRecordingContext *rec
     return recordingContext->maxSurfaceSampleCountForColorType(colorType);
 }
 
-void GrRecordingContext_skCapabilities(const char *sk_capabilities_key_out, GrRecordingContext *recordingContext) {
+void GrRecordingContext_skCapabilities(int sk_capabilities_key_out, GrRecordingContext *recordingContext) {
     static_const_sk_capabilities_set(sk_capabilities_key_out, recordingContext->skCapabilities());
 }
 

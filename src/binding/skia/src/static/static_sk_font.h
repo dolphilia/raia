@@ -9,8 +9,8 @@
 #include <map>
 #include "include/core/SkFont.h"
 
-void static_sk_font_delete(const char *key);
-SkFont static_sk_font_get(const char *key);
-void static_sk_font_set(const char *key, SkFont value);
+void static_sk_font_delete(int key);
+SkFont static_sk_font_get(int key);
+void static_sk_font_set(int key, SkFont value);
 
 #endif //RAIA_SKIA_STATIC_SK_FONT_H

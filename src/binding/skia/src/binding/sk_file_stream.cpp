@@ -42,7 +42,7 @@ bool SkFILEStream_rewind(SkFILEStream *file_stream) {
     return file_stream->rewind();
 }
 
-void SkFILEStream_duplicate(const char *sk_stream_asset_key_out, SkFILEStream *file_stream) {
+void SkFILEStream_duplicate(int sk_stream_asset_key_out, SkFILEStream *file_stream) {
     static_sk_stream_asset_set(sk_stream_asset_key_out, file_stream->duplicate());
 }
 
@@ -58,7 +58,7 @@ bool SkFILEStream_move(SkFILEStream *file_stream, long offset) {
     return file_stream->move(offset);
 }
 
-void SkFILEStream_fork(const char *sk_stream_asset_key_out, SkFILEStream *file_stream) {
+void SkFILEStream_fork(int sk_stream_asset_key_out, SkFILEStream *file_stream) {
     static_sk_stream_asset_set(sk_stream_asset_key_out, file_stream->fork());
 }
 
@@ -124,7 +124,7 @@ const void * SkFILEStream_getMemoryBase(SkFILEStream *file_stream) {
 
 // static
 
-void SkFILEStream_Make(const char *sk_file_stream_key_out, const char path[]) {
+void SkFILEStream_Make(int sk_file_stream_key_out, const char path[]) {
     static_sk_file_stream_set(sk_file_stream_key_out, SkFILEStream::Make(path));
 }
 

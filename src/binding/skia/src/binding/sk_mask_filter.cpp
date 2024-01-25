@@ -6,7 +6,7 @@
 
 extern "C" {
 
-void SkMaskFilter_approximateFilteredBounds(const char* sk_rect_key_out, SkMaskFilter *mask_filter, const SkRect *src) {
+void SkMaskFilter_approximateFilteredBounds(int sk_rect_key_out, SkMaskFilter *mask_filter, const SkRect *src) {
     static_sk_rect_set(sk_rect_key_out, mask_filter->approximateFilteredBounds(*src));
 }
 
@@ -26,7 +26,7 @@ SkMaskFilter::Type SkMaskFilter_getFlattenableType(SkMaskFilter *mask_filter) {
     return mask_filter->getFlattenableType();
 }
 
-void SkMaskFilter_serialize(const char *sk_data_key_out, SkMaskFilter *mask_filter, const SkSerialProcs *procs) {
+void SkMaskFilter_serialize(int sk_data_key_out, SkMaskFilter *mask_filter, const SkSerialProcs *procs) {
     static_sk_data_set(sk_data_key_out, mask_filter->serialize(procs));
 }
 
@@ -49,11 +49,11 @@ void SkMaskFilter_unref(SkMaskFilter *mask_filter) {
 
 // static
 
-void SkMaskFilter_MakeBlur(const char *sk_mask_filter_key_out, SkBlurStyle style, SkScalar sigma, bool respectCTM) {
+void SkMaskFilter_MakeBlur(int sk_mask_filter_key_out, SkBlurStyle style, SkScalar sigma, bool respectCTM) {
     static_sk_mask_filter_set(sk_mask_filter_key_out, SkMaskFilter::MakeBlur(style, sigma, respectCTM));
 }
 
-void SkMaskFilter_Deserialize(const char *sk_mask_filter_key_out, const void *data, size_t size, const SkDeserialProcs *procs) {
+void SkMaskFilter_Deserialize(int sk_mask_filter_key_out, const void *data, size_t size, const SkDeserialProcs *procs) {
     static_sk_mask_filter_set(sk_mask_filter_key_out, SkMaskFilter::Deserialize(data, size, procs));
 }
 

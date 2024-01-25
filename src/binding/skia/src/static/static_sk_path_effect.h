@@ -9,9 +9,9 @@
 #include <map>
 #include "include/core/SkPathEffect.h"
 
-void static_sk_path_effect_delete(const char *key);
-SkPathEffect *static_sk_path_effect_get(const char *key);
-void static_sk_path_effect_set(const char *key, sk_sp<SkPathEffect> value);
-sk_sp<SkPathEffect> static_sk_path_effect_move(const char *key);
+void static_sk_path_effect_delete(int key);
+SkPathEffect *static_sk_path_effect_get(int key);
+void static_sk_path_effect_set(int key, sk_sp<SkPathEffect> value);
+sk_sp<SkPathEffect> static_sk_path_effect_move(int key);
 
 #endif //RAIA_SKIA_STATIC_SK_PATH_EFFECT_H

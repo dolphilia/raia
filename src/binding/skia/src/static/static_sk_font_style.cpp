@@ -4,16 +4,16 @@
 
 #include "static_sk_font_style.h"
 
-static std::map<std::string, SkFontStyle> static_sk_font_style;
+static std::map<int , SkFontStyle> static_sk_font_style;
 
-void static_sk_font_style_delete(const char *key) {
+void static_sk_font_style_delete(int key) {
     static_sk_font_style.erase(key);
 }
 
-SkFontStyle static_sk_font_style_get(const char *key) {
+SkFontStyle static_sk_font_style_get(int key) {
     return static_sk_font_style[key];
 }
 
-void static_sk_font_style_set(const char *key, SkFontStyle value) {
+void static_sk_font_style_set(int key, SkFontStyle value) {
     static_sk_font_style[key] = value;
 }

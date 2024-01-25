@@ -24,7 +24,7 @@ void SkCapabilities_unref(SkCapabilities *capabilities) {
 
 // static
 
-void SkCapabilities_RasterBackend(const char *sk_capabilities_key_out) {
+void SkCapabilities_RasterBackend(int sk_capabilities_key_out) {
     static_const_sk_capabilities_set(sk_capabilities_key_out, SkCapabilities::RasterBackend());
 }
 

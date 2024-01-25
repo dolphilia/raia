@@ -15,11 +15,11 @@ void SkDrawable_draw_2(SkDrawable *drawable, SkCanvas *canvas, SkScalar x, SkSca
     drawable->draw(canvas, x, y);
 }
 
-void SkDrawable_snapGpuDrawHandler(const char *gpu_draw_handler_key_out, SkDrawable *drawable, GrBackendApi backendApi, const SkMatrix *matrix, const SkIRect *clipBounds, const SkImageInfo *bufferInfo) {
+void SkDrawable_snapGpuDrawHandler(int gpu_draw_handler_key_out, SkDrawable *drawable, GrBackendApi backendApi, const SkMatrix *matrix, const SkIRect *clipBounds, const SkImageInfo *bufferInfo) {
     static_sk_drawable_gpu_draw_handler_set(gpu_draw_handler_key_out, drawable->snapGpuDrawHandler(backendApi, *matrix, *clipBounds, *bufferInfo));
 }
 
-void SkDrawable_makePictureSnapshot(const char *sk_picture_key_out, SkDrawable *drawable) {
+void SkDrawable_makePictureSnapshot(int sk_picture_key_out, SkDrawable *drawable) {
     static_sk_picture_set(sk_picture_key_out, drawable->makePictureSnapshot());
 }
 
@@ -27,7 +27,7 @@ uint32_t SkDrawable_getGenerationID(SkDrawable *drawable) {
     return drawable->getGenerationID();
 }
 
-void SkDrawable_getBounds(const char *sk_rect_key_out, SkDrawable *drawable) {
+void SkDrawable_getBounds(int sk_rect_key_out, SkDrawable *drawable) {
     static_sk_rect_set(sk_rect_key_out,drawable->getBounds());
 }
 
@@ -55,7 +55,7 @@ void SkDrawable_flatten(SkDrawable *drawable, SkWriteBuffer *write_buffer) {
     drawable->flatten(*write_buffer);
 }
 
-void SkDrawable_serialize(const char *sk_data_key_out, SkDrawable *drawable, const SkSerialProcs *serial_procs) {
+void SkDrawable_serialize(int sk_data_key_out, SkDrawable *drawable, const SkSerialProcs *serial_procs) {
     static_sk_data_set(sk_data_key_out, drawable->serialize(serial_procs));
 }
 
@@ -81,7 +81,7 @@ SkFlattenable::Type SkDrawable_GetFlattenableType() {
     return SkDrawable::GetFlattenableType();
 }
 
-void SkDrawable_Deserialize(const char *sk_drawable_key_out, const void *data, size_t size, const SkDeserialProcs *procs) {
+void SkDrawable_Deserialize(int sk_drawable_key_out, const void *data, size_t size, const SkDeserialProcs *procs) {
     static_sk_drawable_set(sk_drawable_key_out, SkDrawable::Deserialize(data, size, procs));
 }
 

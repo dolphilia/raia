@@ -9,7 +9,7 @@
 #include "../static/static_sk_path_effect.h"
 
 extern "C" {
-void SkDashPathEffect_Make(const char *sk_path_effect_key_out, const SkScalar intervals[], int count, SkScalar phase);
+void SkDashPathEffect_Make(int sk_path_effect_key_out, const SkScalar intervals[], int count, SkScalar phase);
 }
 
 #endif //RAIA_SKIA_SK_DASH_PATH_EFFECT_H

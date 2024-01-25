@@ -54,11 +54,11 @@ void SkDynamicMemoryWStream_prependToAndReset(SkDynamicMemoryWStream *dynamic_me
     dynamic_memory_w_stream->prependToAndReset(dst);
 }
 
-void SkDynamicMemoryWStream_detachAsData(const char *sk_data_key_out, SkDynamicMemoryWStream *dynamic_memory_w_stream) {
+void SkDynamicMemoryWStream_detachAsData(int sk_data_key_out, SkDynamicMemoryWStream *dynamic_memory_w_stream) {
     static_sk_data_set(sk_data_key_out, dynamic_memory_w_stream->detachAsData());
 }
 
-void SkDynamicMemoryWStream_detachAsStream(const char *sk_stream_asset_key_out, SkDynamicMemoryWStream *dynamic_memory_w_stream) {
+void SkDynamicMemoryWStream_detachAsStream(int sk_stream_asset_key_out, SkDynamicMemoryWStream *dynamic_memory_w_stream) {
     static_sk_stream_asset_set(sk_stream_asset_key_out, dynamic_memory_w_stream->detachAsStream());
 }
 

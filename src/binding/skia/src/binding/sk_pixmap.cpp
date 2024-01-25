@@ -26,7 +26,7 @@ bool SkPixmap_reset_3(SkPixmap *pixmap, const SkMask *mask) {
     return pixmap->reset(*mask);
 }
 
-void SkPixmap_setColorSpace(const char *sk_color_space_key_in, SkPixmap *pixmap) {
+void SkPixmap_setColorSpace(int sk_color_space_key_in, SkPixmap *pixmap) {
     return pixmap->setColorSpace(static_sk_color_space_move(sk_color_space_key_in));
 }
 
@@ -70,7 +70,7 @@ SkColorSpace * SkPixmap_colorSpace(SkPixmap *pixmap) {
     return pixmap->colorSpace();
 }
 
-void SkPixmap_refColorSpace(const char *sk_color_space_key_out, SkPixmap *pixmap) {
+void SkPixmap_refColorSpace(int sk_color_space_key_out, SkPixmap *pixmap) {
     static_sk_color_space_set(sk_color_space_key_out, pixmap->refColorSpace());
 }
 
@@ -78,7 +78,7 @@ bool SkPixmap_isOpaque(SkPixmap *pixmap) {
     return pixmap->isOpaque();
 }
 
-void SkPixmap_bounds(const char *sk_i_rect_key_out, SkPixmap *pixmap) {
+void SkPixmap_bounds(int sk_i_rect_key_out, SkPixmap *pixmap) {
     static_sk_i_rect_set(sk_i_rect_key_out, pixmap->bounds());
 }
 

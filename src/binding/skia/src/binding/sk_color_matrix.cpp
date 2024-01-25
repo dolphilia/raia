@@ -53,11 +53,11 @@ void SkColorMatrix_getRowMajor(SkColorMatrix *color_matrix, float dst[20]) {
 
 // static
 
-void SkColorMatrix_RGBtoYUV(const char *sk_color_matrix_key_out, SkYUVColorSpace color_space) {
+void SkColorMatrix_RGBtoYUV(int sk_color_matrix_key_out, SkYUVColorSpace color_space) {
     static_sk_color_matrix_set(sk_color_matrix_key_out, SkColorMatrix::RGBtoYUV(color_space));
 }
 
-void SkColorMatrix_YUVtoRGB(const char *sk_color_matrix_key_out, SkYUVColorSpace color_space) {
+void SkColorMatrix_YUVtoRGB(int sk_color_matrix_key_out, SkYUVColorSpace color_space) {
     static_sk_color_matrix_set(sk_color_matrix_key_out, SkColorMatrix::YUVtoRGB(color_space));
 }
 

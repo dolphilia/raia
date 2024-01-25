@@ -12,15 +12,15 @@ SkFont *SkFont_new() {
     return new SkFont();
 }
 
-SkFont *SkFont_new_2(const char *sk_typeface_key_in, SkScalar size) {
+SkFont *SkFont_new_2(int sk_typeface_key_in, SkScalar size) {
     return new SkFont(static_sk_typeface_move(sk_typeface_key_in), size);
 }
 
-SkFont *SkFont_new_3(const char *sk_typeface_key_in) {
+SkFont *SkFont_new_3(int sk_typeface_key_in) {
     return new SkFont(static_sk_typeface_move(sk_typeface_key_in));
 }
 
-SkFont *SkFont_new_4(const char *sk_typeface_key_in, SkScalar size, SkScalar scaleX, SkScalar skewX) {
+SkFont *SkFont_new_4(int sk_typeface_key_in, SkScalar size, SkScalar scaleX, SkScalar skewX) {
     return new SkFont(static_sk_typeface_move(sk_typeface_key_in), size, scaleX, skewX);
 }
 
@@ -88,7 +88,7 @@ SkFontHinting SkFont_getHinting(SkFont *font) {
     return font->getHinting();
 }
 
-void SkFont_makeWithSize(const char *sk_font_key_out, SkFont *font, SkScalar size) {
+void SkFont_makeWithSize(int sk_font_key_out, SkFont *font, SkScalar size) {
     static_sk_font_set(sk_font_key_out,font->makeWithSize(size));
 }
 
@@ -108,11 +108,11 @@ SkScalar SkFont_getSkewX(SkFont *font) {
     return font->getSkewX();
 }
 
-void SkFont_refTypeface(const char *sk_typeface_key_out, SkFont *font) {
+void SkFont_refTypeface(int sk_typeface_key_out, SkFont *font) {
     static_sk_typeface_set(sk_typeface_key_out, font->refTypeface());
 }
 
-void SkFont_setTypeface(const char *sk_typeface_key_in, SkFont *font) {
+void SkFont_setTypeface(int sk_typeface_key_in, SkFont *font) {
     font->setTypeface(static_sk_typeface_move(sk_typeface_key_in));
 }
 
@@ -180,7 +180,7 @@ void SkFont_getXPos(SkFont *font, const SkGlyphID glyphs[], int count, SkScalar 
     font->getXPos(glyphs, count, xpos, origin);
 }
 
-void SkFont_getIntercepts(const char* vector_sk_scalar_key_out, SkFont *font, const SkGlyphID glyphs[], int count, const SkPoint pos[], SkScalar top, SkScalar bottom, const SkPaint *paint) { // @TODO
+void SkFont_getIntercepts(int vector_sk_scalar_key_out, SkFont *font, const SkGlyphID glyphs[], int count, const SkPoint pos[], SkScalar top, SkScalar bottom, const SkPaint *paint) { // @TODO
     static_vector_sk_scalar_set(vector_sk_scalar_key_out, font->getIntercepts(glyphs, count, pos, top, bottom, paint));
 }
 

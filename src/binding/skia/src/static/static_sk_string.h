@@ -9,8 +9,8 @@
 #include <map>
 #include "include/core/SkString.h"
 
-void static_sk_string_delete(const char *key);
-SkString static_sk_string_get(const char *key);
-void static_sk_string_set(const char *key, SkString value);
+void static_sk_string_delete(int key);
+SkString static_sk_string_get(int key);
+void static_sk_string_set(int key, SkString value);
 
 #endif //RAIA_SKIA_STATIC_SK_STRING_H

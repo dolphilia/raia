@@ -12,7 +12,7 @@
 
 extern "C" {
 bool SkStreamRewindable_rewind(SkStreamRewindable *stream_rewindable);
-void SkStreamRewindable_duplicate(const char *sk_stream_rewindable, SkStreamRewindable *stream_rewindable);
+void SkStreamRewindable_duplicate(int sk_stream_rewindable_key_out, SkStreamRewindable *stream_rewindable);
 size_t SkStreamRewindable_read(SkStreamRewindable *stream_rewindable, void *buffer, size_t size);
 size_t SkStreamRewindable_skip(SkStreamRewindable *stream_rewindable, size_t size);
 size_t SkStreamRewindable_peek(SkStreamRewindable *stream_rewindable, void *buffer, size_t size);
@@ -26,7 +26,7 @@ bool SkStreamRewindable_readU32(SkStreamRewindable *stream_rewindable, uint32_t 
 bool SkStreamRewindable_readBool(SkStreamRewindable *stream_rewindable, bool *b);
 bool SkStreamRewindable_readScalar(SkStreamRewindable *stream_rewindable, SkScalar *v);
 bool SkStreamRewindable_readPackedUInt(SkStreamRewindable *stream_rewindable, size_t *size);
-void SkStreamRewindable_fork(const char *sk_stream_key_out, SkStreamRewindable *stream_rewindable);
+void SkStreamRewindable_fork(int sk_stream_key_out, SkStreamRewindable *stream_rewindable);
 bool SkStreamRewindable_hasPosition(SkStreamRewindable *stream_rewindable);
 size_t SkStreamRewindable_getPosition(SkStreamRewindable *stream_rewindable);
 bool SkStreamRewindable_seek(SkStreamRewindable *stream_rewindable, size_t size);
@@ -35,7 +35,7 @@ bool SkStreamRewindable_hasLength(SkStreamRewindable *stream_rewindable);
 size_t SkStreamRewindable_getLength(SkStreamRewindable *stream_rewindable);
 const void * SkStreamRewindable_getMemoryBase(SkStreamRewindable *stream_rewindable);
 // static
-void SkStreamRewindable_MakeFromFile(const char *sk_stream_asset_key_out, const char path[]);
+void SkStreamRewindable_MakeFromFile(int sk_stream_asset_key_out, const char path[]);
 }
 
 #endif //RAIA_SKIA_SK_STREAM_REWINDABLE_H

@@ -40,15 +40,15 @@ void SkColorTable_unref(SkColorTable *color_table) {
 
 // static
 
-void SkColorTable_Make(const char *sk_color_table_key_out, const uint8_t table[256]) {
+void SkColorTable_Make(int sk_color_table_key_out, const uint8_t table[256]) {
     static_sk_color_table_set(sk_color_table_key_out, SkColorTable::Make(table));
 }
 
-void SkColorTable_Make_2(const char *sk_color_table_key_out, const uint8_t tableA[256], const uint8_t tableR[256], const uint8_t tableG[256], const uint8_t tableB[256]) {
+void SkColorTable_Make_2(int sk_color_table_key_out, const uint8_t tableA[256], const uint8_t tableR[256], const uint8_t tableG[256], const uint8_t tableB[256]) {
     static_sk_color_table_set(sk_color_table_key_out, SkColorTable::Make(tableA, tableR, tableG, tableB));
 }
 
-void SkColorTable_Deserialize(const char *sk_color_table_key_out, SkReadBuffer *buffer) {
+void SkColorTable_Deserialize(int sk_color_table_key_out, SkReadBuffer *buffer) {
     static_sk_color_table_set(sk_color_table_key_out, SkColorTable::Deserialize(*buffer));
 }
 

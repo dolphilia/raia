@@ -9,9 +9,9 @@
 #include <map>
 #include "include/core/SkPixelRef.h"
 
-void static_sk_pixel_ref_delete(const char *key);
-SkPixelRef *static_sk_pixel_ref_get(const char *key);
-void static_sk_pixel_ref_set(const char *key, sk_sp<SkPixelRef> value);
-sk_sp<SkPixelRef> static_sk_pixel_ref_move(const char *key);
+void static_sk_pixel_ref_delete(int key);
+SkPixelRef *static_sk_pixel_ref_get(int key);
+void static_sk_pixel_ref_set(int key, sk_sp<SkPixelRef> value);
+sk_sp<SkPixelRef> static_sk_pixel_ref_move(int key);
 
 #endif //RAIA_SKIA_STATIC_SK_PIXEL_REF_H

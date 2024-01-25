@@ -22,7 +22,7 @@ SkBlender::Type SkBlender_getFlattenableType(SkBlender *blender) {
     return blender->getFlattenableType();
 }
 
-void SkBlender_serialize(const char *sk_data_key_out, SkBlender *blender, const SkSerialProcs *serial_procs) {
+void SkBlender_serialize(int sk_data_key_out, SkBlender *blender, const SkSerialProcs *serial_procs) {
     static_sk_data_set(sk_data_key_out, blender->serialize(serial_procs));
 }
 
@@ -44,7 +44,7 @@ void SkBlender_unref(SkBlender *blender) {
 
 // static
 
-void SkBlender_Mode(const char *sk_blender_key_out, SkBlendMode mode) {
+void SkBlender_Mode(int sk_blender_key_out, SkBlendMode mode) {
     static_sk_blender_set(sk_blender_key_out, SkBlender::Mode(mode));
 }
 
@@ -60,7 +60,7 @@ void SkBlender_Register(const char name[], SkBlender::Factory factory) {
     SkBlender::Register(name, factory);
 }
 
-void SkBlender_Deserialize(const char *sk_flattenable_key_out, SkBlender::Type type, const void *data, size_t length, const SkDeserialProcs *procs) {
+void SkBlender_Deserialize(int sk_flattenable_key_out, SkBlender::Type type, const void *data, size_t length, const SkDeserialProcs *procs) {
     static_sk_flattenable_set(sk_flattenable_key_out, SkBlender::Deserialize(type, data, length, procs));
 }
 
