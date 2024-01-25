@@ -10,6 +10,7 @@
 #include <tuple>
 #include "include/core/SkYUVAPixmaps.h"
 
+int static_tuple_int_sk_yuva_pixmap_info_data_type_make(std::tuple<int, SkYUVAPixmapInfo::DataType> value);
 void static_tuple_int_sk_yuva_pixmap_info_data_type_delete(int key);
 std::tuple<int, SkYUVAPixmapInfo::DataType> static_tuple_int_sk_yuva_pixmap_info_data_type_get(int key, int index);
 void static_tuple_int_sk_yuva_pixmap_info_data_type_set(int key, std::tuple<int, SkYUVAPixmapInfo::DataType> value);

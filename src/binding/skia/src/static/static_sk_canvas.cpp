@@ -5,6 +5,13 @@
 #include "static_sk_canvas.h"
 
 static std::map<int , std::unique_ptr<SkCanvas>> static_sk_canvas;
+static int static_sk_canvas_index = 0;
+
+int static_sk_canvas_make(std::unique_ptr<SkCanvas> value) {
+    static_sk_canvas[static_sk_canvas_index] = std::move(value);
+    static_sk_canvas_index++;
+    return static_sk_canvas_index - 1;
+}
 
 void static_sk_canvas_delete(int key) {
     static_sk_canvas[key].reset();

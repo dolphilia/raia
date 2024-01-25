@@ -9,6 +9,7 @@
 #include <map>
 #include "include/core/SkStream.h"
 
+int static_sk_stream_seekable_make(std::unique_ptr<SkStreamSeekable> value);
 void static_sk_stream_seekable_delete(int key);
 SkStreamSeekable *static_sk_stream_seekable_get(int key);
 void static_sk_stream_seekable_set(int key, std::unique_ptr<SkStreamSeekable> value);

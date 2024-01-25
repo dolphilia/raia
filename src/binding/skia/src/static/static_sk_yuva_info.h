@@ -9,6 +9,7 @@
 #include <map>
 #include "include/core/SkYUVAInfo.h"
 
+int static_sk_yuva_info_make(SkYUVAInfo value);
 void static_sk_yuva_info_delete(int key);
 SkYUVAInfo static_sk_yuva_info_get(int key);
 void static_sk_yuva_info_set(int key, SkYUVAInfo value);

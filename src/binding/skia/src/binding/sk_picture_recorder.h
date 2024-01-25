@@ -19,9 +19,9 @@ SkCanvas *SkPictureRecorder_beginRecording(int sk_b_box_hierarchy_key_in, SkPict
 SkCanvas * SkPictureRecorder_beginRecording_2(SkPictureRecorder *picture_recorder, const SkRect *bounds, SkBBHFactory *bbhFactory);
 SkCanvas * SkPictureRecorder_beginRecording_3(SkPictureRecorder *picture_recorder, SkScalar width, SkScalar height, SkBBHFactory *bbhFactory);
 SkCanvas * SkPictureRecorder_getRecordingCanvas(SkPictureRecorder *picture_recorder);
-void SkPictureRecorder_finishRecordingAsPicture(int sk_picture_key_out, SkPictureRecorder *picture_recorder);
-void SkPictureRecorder_finishRecordingAsPictureWithCull(int sk_picture_key_out, SkPictureRecorder *picture_recorder, const SkRect *cullRect);
-void SkPictureRecorder_finishRecordingAsDrawable(int sk_drawable_key_out, SkPictureRecorder *picture_recorder);
+int SkPictureRecorder_finishRecordingAsPicture(SkPictureRecorder *picture_recorder);
+int SkPictureRecorder_finishRecordingAsPictureWithCull(SkPictureRecorder *picture_recorder, const SkRect *cullRect);
+int SkPictureRecorder_finishRecordingAsDrawable(SkPictureRecorder *picture_recorder);
 }
 
 #endif //RAIA_SKIA_SK_PICTURE_RECORDER_H

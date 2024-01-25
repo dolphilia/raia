@@ -6,28 +6,28 @@
 
 extern "C" {
 
-void SkShaders_Empty(int sk_shader_key_out) {
-    static_sk_shader_set(sk_shader_key_out, SkShaders::Empty());
+int SkShaders_Empty() {
+    return static_sk_shader_make(SkShaders::Empty());
 }
 
-void SkShaders_Color(int sk_shader_key_out, SkColor color) {
-    static_sk_shader_set(sk_shader_key_out, SkShaders::Color(color));
+int SkShaders_Color(SkColor color) {
+    return static_sk_shader_make(SkShaders::Color(color));
 }
 
-void SkShaders_Color_2(int sk_shader_key_out, int sk_color_space_key_in, const SkColor4f &color4f) {
-    static_sk_shader_set(sk_shader_key_out, SkShaders::Color(color4f, static_sk_color_space_move(sk_color_space_key_in)));
+int SkShaders_Color_2(int sk_color_space_key_in, const SkColor4f &color4f) {
+    return static_sk_shader_make(SkShaders::Color(color4f, static_sk_color_space_move(sk_color_space_key_in)));
 }
 
-void SkShaders_Blend(int sk_shader_key_out, int sk_shader_key_in, int sk_shader_key_in_2, SkBlendMode mode) {
-    static_sk_shader_set(sk_shader_key_out, SkShaders::Blend(mode, static_sk_shader_move(sk_shader_key_in), static_sk_shader_move(sk_shader_key_in_2)));
+int SkShaders_Blend(int sk_shader_key_in, int sk_shader_key_in_2, SkBlendMode mode) {
+    return static_sk_shader_make(SkShaders::Blend(mode, static_sk_shader_move(sk_shader_key_in), static_sk_shader_move(sk_shader_key_in_2)));
 }
 
-void SkShaders_Blend_2(int sk_shader_key_out, int sk_blender_key_in, int sk_shader_key_in, int sk_shader_key_in_2) {
-    static_sk_shader_set(sk_shader_key_out, SkShaders::Blend(static_sk_blender_move(sk_blender_key_in), static_sk_shader_move(sk_shader_key_in), static_sk_shader_move(sk_shader_key_in_2)));
+int SkShaders_Blend_2(int sk_blender_key_in, int sk_shader_key_in, int sk_shader_key_in_2) {
+    return static_sk_shader_make(SkShaders::Blend(static_sk_blender_move(sk_blender_key_in), static_sk_shader_move(sk_shader_key_in), static_sk_shader_move(sk_shader_key_in_2)));
 }
 
-void SkShaders_CoordClamp(int sk_shader_key_out, int sk_shader_key_in, const SkRect *subset) {
-    static_sk_shader_set(sk_shader_key_out, SkShaders::CoordClamp(static_sk_shader_move(sk_shader_key_in), *subset));
+int SkShaders_CoordClamp(int sk_shader_key_in, const SkRect *subset) {
+    return static_sk_shader_make(SkShaders::CoordClamp(static_sk_shader_move(sk_shader_key_in), *subset));
 }
 
 //sk_sp< SkShader > SkShaders_MakeFractalNoise(SkScalar baseFrequencyX, SkScalar baseFrequencyY, int numOctaves, SkScalar seed, const SkISize *tileSize) {

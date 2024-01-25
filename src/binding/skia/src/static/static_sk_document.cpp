@@ -4,7 +4,16 @@
 
 #include "static_sk_document.h"
 
+#include <utility>
+
 static std::map<int , sk_sp<SkDocument>> static_sk_document;
+static int static_sk_document_index = 0;
+
+int static_sk_document_make(sk_sp<SkDocument> value) {
+    static_sk_document[static_sk_document_index] = std::move(value);
+    static_sk_document_index++;
+    return static_sk_document_index - 1;
+}
 
 void static_sk_document_delete(int key) {
     static_sk_document[key].reset();

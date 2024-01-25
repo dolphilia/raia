@@ -5,6 +5,13 @@
 #include "static_sk_stream_rewindable.h"
 
 static std::map<int , std::unique_ptr<SkStreamRewindable>> static_sk_stream_rewindable;
+static int static_sk_stream_rewindable_index = 0;
+
+int static_sk_stream_rewindable_make(std::unique_ptr<SkStreamRewindable> value) {
+    static_sk_stream_rewindable[static_sk_stream_rewindable_index] = std::move(value);
+    static_sk_stream_rewindable_index++;
+    return static_sk_stream_rewindable_index - 1;
+}
 
 void static_sk_stream_rewindable_delete(int key) {
     static_sk_stream_rewindable[key].reset();

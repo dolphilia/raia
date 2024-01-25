@@ -5,6 +5,13 @@
 #include "static_sk_memory_stream.h"
 
 static std::map<int , std::unique_ptr<SkMemoryStream>> static_sk_memory_stream;
+static int static_sk_memory_stream_index = 0;
+
+int static_sk_memory_stream_make(std::unique_ptr<SkMemoryStream> value) {
+    static_sk_memory_stream[static_sk_memory_stream_index] = std::move(value);
+    static_sk_memory_stream_index++;
+    return static_sk_memory_stream_index - 1;
+}
 
 void static_sk_memory_stream_delete(int key) {
     static_sk_memory_stream[key].reset();

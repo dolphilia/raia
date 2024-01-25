@@ -9,6 +9,7 @@
 #include <map>
 #include "include/core/SkStream.h"
 
+int static_sk_stream_rewindable_make(std::unique_ptr<SkStreamRewindable> value);
 void static_sk_stream_rewindable_delete(int key);
 SkStreamRewindable *static_sk_stream_rewindable_get(int key);
 void static_sk_stream_rewindable_set(int key, std::unique_ptr<SkStreamRewindable> value);

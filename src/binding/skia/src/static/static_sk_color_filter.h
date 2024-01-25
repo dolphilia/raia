@@ -9,6 +9,7 @@
 #include <map>
 #include "include/core/SkColorFilter.h"
 
+int static_sk_color_filter_make(sk_sp<SkColorFilter> value);
 void static_sk_color_filter_delete(int key);
 SkColorFilter *static_sk_color_filter_get(int key);
 void static_sk_color_filter_set(int key, sk_sp<SkColorFilter> value);

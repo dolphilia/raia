@@ -10,6 +10,7 @@
 #include <utility>
 #include "include/core/SkImageInfo.h"
 
+int static_sk_image_info_make(SkImageInfo value);
 void static_sk_image_info_delete(int key);
 SkImageInfo static_sk_image_info_get(int key);
 void static_sk_image_info_set(int key, SkImageInfo value);

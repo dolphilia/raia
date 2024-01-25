@@ -17,12 +17,12 @@ void SkExecutor_borrow(SkExecutor *executor) {
 
 // static
 
-void SkExecutor_MakeFIFOThreadPool(int sk_executor_key_out, int threads, bool allowBorrowing) {
-    static_sk_executor_set(sk_executor_key_out, SkExecutor::MakeFIFOThreadPool(threads, allowBorrowing));
+int SkExecutor_MakeFIFOThreadPool(int threads, bool allowBorrowing) {
+    return static_sk_executor_make(SkExecutor::MakeFIFOThreadPool(threads, allowBorrowing));
 }
 
-void SkExecutor_MakeLIFOThreadPool(int sk_executor_key_out, int threads, bool allowBorrowing) {
-    static_sk_executor_set(sk_executor_key_out, SkExecutor::MakeLIFOThreadPool(threads, allowBorrowing));
+int SkExecutor_MakeLIFOThreadPool(int threads, bool allowBorrowing) {
+    return static_sk_executor_make(SkExecutor::MakeLIFOThreadPool(threads, allowBorrowing));
 }
 
 SkExecutor *SkExecutor_GetDefault() {

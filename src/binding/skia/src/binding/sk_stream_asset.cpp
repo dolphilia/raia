@@ -14,12 +14,12 @@ size_t SkStreamAsset_getLength(SkStreamAsset *stream_asset) {
     return stream_asset->getLength();
 }
 
-void SkStreamAsset_duplicate(int sk_stream_asset_key_out, SkStreamAsset *stream_asset) {
-    static_sk_stream_asset_set(sk_stream_asset_key_out, stream_asset->duplicate());
+int SkStreamAsset_duplicate(SkStreamAsset *stream_asset) {
+    return static_sk_stream_asset_make(stream_asset->duplicate());
 }
 
-void SkStreamAsset_fork(int sk_stream_asset_key_out, SkStreamAsset *stream_asset) {
-    static_sk_stream_asset_set(sk_stream_asset_key_out, stream_asset->fork());
+int SkStreamAsset_fork(SkStreamAsset *stream_asset) {
+    return static_sk_stream_asset_make(stream_asset->fork());
 }
 
 bool SkStreamAsset_hasPosition(SkStreamAsset *stream_asset) {
@@ -100,8 +100,8 @@ const void * SkStreamAsset_getMemoryBase(SkStreamAsset *stream_asset) {
 
 // static
 
-void SkStreamAsset_MakeFromFile(int sk_stream_asset_key_out, const char path[]) {
-    static_sk_stream_asset_set(sk_stream_asset_key_out, SkStreamAsset::MakeFromFile(path));
+int SkStreamAsset_MakeFromFile(const char path[]) {
+    return static_sk_stream_asset_make(SkStreamAsset::MakeFromFile(path));
 }
 
 }

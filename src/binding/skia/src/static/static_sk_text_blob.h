@@ -9,6 +9,7 @@
 #include <map>
 #include "include/core/SkTextBlob.h"
 
+int static_sk_text_blob_make(sk_sp<SkTextBlob> value);
 void static_sk_text_blob_delete(int key);
 SkTextBlob *static_sk_text_blob_get(int key);
 void static_sk_text_blob_set(int key, sk_sp<SkTextBlob> value);

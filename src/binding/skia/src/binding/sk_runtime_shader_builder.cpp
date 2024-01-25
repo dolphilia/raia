@@ -18,8 +18,8 @@ void SkRuntimeShaderBuilder_delete(SkRuntimeShaderBuilder *runtime_shader_builde
     delete runtime_shader_builder;
 }
 
-void SkRuntimeShaderBuilder_makeShader(int sk_shader_key_out, SkRuntimeShaderBuilder *runtime_shader_builder, const SkMatrix *localMatrix) {
-    static_sk_shader_set(sk_shader_key_out, runtime_shader_builder->makeShader(localMatrix));
+int SkRuntimeShaderBuilder_makeShader(SkRuntimeShaderBuilder *runtime_shader_builder, const SkMatrix *localMatrix) {
+    return static_sk_shader_make(runtime_shader_builder->makeShader(localMatrix));
 }
 
 const SkRuntimeEffect * SkRuntimeShaderBuilder_effect(SkRuntimeShaderBuilder *runtime_shader_builder) {
@@ -34,12 +34,12 @@ SkRuntimeShaderBuilder::BuilderChild SkRuntimeShaderBuilder_child(SkRuntimeShade
     return runtime_shader_builder->child(name);
 }
 
-void SkRuntimeShaderBuilder_uniforms(int sk_data_key_out, SkRuntimeShaderBuilder *runtime_shader_builder) {
-    static_const_sk_data_set(sk_data_key_out, runtime_shader_builder->uniforms());
+int SkRuntimeShaderBuilder_uniforms(SkRuntimeShaderBuilder *runtime_shader_builder) {
+    return static_const_sk_data_make(runtime_shader_builder->uniforms());
 }
 
-void SkRuntimeShaderBuilder_children(int sk_runtime_effect_child_ptr_key_out, SkRuntimeShaderBuilder *runtime_shader_builder) {
-    static_const_sk_runtime_effect_child_ptr_set(sk_runtime_effect_child_ptr_key_out, runtime_shader_builder->children());
+int SkRuntimeShaderBuilder_children(SkRuntimeShaderBuilder *runtime_shader_builder) {
+    return static_const_sk_runtime_effect_child_ptr_make(runtime_shader_builder->children());
 }
 
 }

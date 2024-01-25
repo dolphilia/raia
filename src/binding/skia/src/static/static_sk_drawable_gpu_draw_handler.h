@@ -9,6 +9,7 @@
 #include <map>
 #include "include/core/SkDrawable.h"
 
+int static_sk_drawable_gpu_draw_handler_make(std::unique_ptr<SkDrawable::GpuDrawHandler> value);
 void static_sk_drawable_gpu_draw_handler_delete(int key);
 SkDrawable::GpuDrawHandler *static_sk_drawable_gpu_draw_handler_get(int key);
 void static_sk_drawable_gpu_draw_handler_set(int key, std::unique_ptr<SkDrawable::GpuDrawHandler> value);

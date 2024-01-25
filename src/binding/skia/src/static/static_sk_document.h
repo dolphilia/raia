@@ -9,6 +9,7 @@
 #include <map>
 #include "include/docs/SkPDFDocument.h"
 
+int static_sk_document_make(sk_sp<SkDocument> value);
 void static_sk_document_delete(int key);
 SkDocument *static_sk_document_get(int key);
 void static_sk_document_set(int key, sk_sp<SkDocument> value);

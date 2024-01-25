@@ -20,8 +20,8 @@ void SkVertices_unref(SkVertices *vertices);
 void SkVertices_deref(SkVertices *vertices);
 bool SkVertices_refCntGreaterThan(SkVertices *vertices, int32_t threadIsolatedTestCnt);
 // static
-void SkVertices_MakeCopy(int sk_vertices_key_out, SkVertices::VertexMode mode, int vertexCount, const SkPoint positions[], const SkPoint texs[], const SkColor colors[], int indexCount, const uint16_t indices[]);
-void SkVertices_MakeCopy_2(int sk_vertices_key_out, SkVertices::VertexMode mode, int vertexCount, const SkPoint positions[], const SkPoint texs[], const SkColor colors[]);
+int SkVertices_MakeCopy(SkVertices::VertexMode mode, int vertexCount, const SkPoint positions[], const SkPoint texs[], const SkColor colors[], int indexCount, const uint16_t indices[]);
+int SkVertices_MakeCopy_2(SkVertices::VertexMode mode, int vertexCount, const SkPoint positions[], const SkPoint texs[], const SkColor colors[]);
 }
 
 #endif //RAIA_SKIA_SK_VERTICES_H

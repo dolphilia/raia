@@ -9,6 +9,7 @@
 #include <map>
 #include "include/core/SkVertices.h"
 
+int static_sk_vertices_make(sk_sp<SkVertices> value);
 void static_sk_vertices_delete(int key);
 SkVertices *static_sk_vertices_get(int key);
 void static_sk_vertices_set(int key, sk_sp<SkVertices> value);

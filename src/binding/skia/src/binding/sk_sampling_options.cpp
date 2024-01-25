@@ -39,8 +39,8 @@ bool SkSamplingOptions_isAniso(SkSamplingOptions *sampling_options) {
 
 // static
 
-void SkSamplingOptions_Aniso(int sk_sampling_options_key_out, int maxAniso) {
-    static_sk_sampling_options_set(sk_sampling_options_key_out, SkSamplingOptions::Aniso(maxAniso));
+int SkSamplingOptions_Aniso(int maxAniso) {
+    return static_sk_sampling_options_make(SkSamplingOptions::Aniso(maxAniso));
 }
 
 }

@@ -8,8 +8,8 @@ extern "C" {
 
 // static
 
-void SkPath2DPathEffect_Make(int sk_path_effect_key_out, const SkMatrix *matrix, const SkPath *path) {
-    static_sk_path_effect_set(sk_path_effect_key_out, SkPath2DPathEffect::Make(*matrix, *path));
+int SkPath2DPathEffect_Make(const SkMatrix *matrix, const SkPath *path) {
+    return static_sk_path_effect_make(SkPath2DPathEffect::Make(*matrix, *path));
 }
 
 void SkPath2DPathEffect_RegisterFlattenables() {

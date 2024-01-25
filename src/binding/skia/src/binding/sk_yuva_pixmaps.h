@@ -19,7 +19,7 @@ void SkYUVAPixmaps_delete(SkYUVAPixmaps *yuva_pixmaps);
 bool SkYUVAPixmaps_isValid(SkYUVAPixmaps *yuva_pixmaps);
 const SkYUVAInfo * SkYUVAPixmaps_yuvaInfo(SkYUVAPixmaps *yuva_pixmaps);
 SkYUVAPixmaps::DataType SkYUVAPixmaps_dataType(SkYUVAPixmaps *yuva_pixmaps);
-void SkYUVAPixmaps_pixmapsInfo(int sk_yuva_pixmap_info_key_out, SkYUVAPixmaps *yuva_pixmaps);
+int SkYUVAPixmaps_pixmapsInfo(SkYUVAPixmaps *yuva_pixmaps);
 int SkYUVAPixmaps_numPlanes(SkYUVAPixmaps *yuva_pixmaps);
 const std::array<SkPixmap, SkYUVAPixmaps::kMaxPlanes> * SkYUVAPixmaps_planes(SkYUVAPixmaps *yuva_pixmaps);
 const SkPixmap * SkYUVAPixmaps_plane(SkYUVAPixmaps *yuva_pixmaps, int i);
@@ -27,12 +27,12 @@ const SkPixmap * SkYUVAPixmaps_plane(SkYUVAPixmaps *yuva_pixmaps, int i);
 bool SkYUVAPixmaps_ownsStorage(SkYUVAPixmaps *yuva_pixmaps);
 // static
 SkColorType SkYUVAPixmaps_RecommendedRGBAColorType(SkYUVAPixmaps::DataType type);
-void SkYUVAPixmaps_Allocate(int sk_yuva_pixmaps_key_out, const SkYUVAPixmapInfo *yuvaPixmapInfo);
-void SkYUVAPixmaps_FromData(int sk_yuva_pixmaps_key_out, int sk_data_key_in,
+int SkYUVAPixmaps_Allocate(const SkYUVAPixmapInfo *yuvaPixmapInfo);
+int SkYUVAPixmaps_FromData(int sk_data_key_in,
                             const SkYUVAPixmapInfo *yuvaPixmapInfo);
-void SkYUVAPixmaps_MakeCopy(int sk_yuva_pixmaps_key_out, const SkYUVAPixmaps *src);
-void SkYUVAPixmaps_FromExternalMemory(int sk_yuva_pixmaps_key_out, const SkYUVAPixmapInfo *yuvaPixmapInfo, void *memory);
-void SkYUVAPixmaps_FromExternalPixmaps(int sk_yuva_pixmaps_key_out, const SkYUVAInfo *yuvaInfo,
+int SkYUVAPixmaps_MakeCopy(const SkYUVAPixmaps *src);
+int SkYUVAPixmaps_FromExternalMemory(const SkYUVAPixmapInfo *yuvaPixmapInfo, void *memory);
+int SkYUVAPixmaps_FromExternalPixmaps(const SkYUVAInfo *yuvaInfo,
                                        const SkPixmap pixmaps[4]);
 }
 

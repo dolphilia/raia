@@ -4,7 +4,16 @@
 
 #include "static_sk_mask_filter.h"
 
+#include <utility>
+
 static std::map<int , sk_sp<SkMaskFilter>> static_sk_mask_filter;
+static int static_sk_mask_filter_index = 0;
+
+int static_sk_mask_filter_make(sk_sp<SkMaskFilter> value) {
+    static_sk_mask_filter[static_sk_mask_filter_index] = std::move(value);
+    static_sk_mask_filter_index++;
+    return static_sk_mask_filter_index - 1;
+}
 
 void static_sk_mask_filter_delete(int key) {
     static_sk_mask_filter[key].reset();

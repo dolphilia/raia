@@ -52,8 +52,8 @@ bool GrBackendRenderTarget_isFramebufferOnly(GrBackendRenderTarget *backend_rend
     return backend_render_target->isFramebufferOnly();
 }
 
-void GrBackendRenderTarget_getBackendFormat(int gr_backend_format_key_out, GrBackendRenderTarget *backend_render_target) {
-    static_gr_backend_format_set(gr_backend_format_key_out, backend_render_target->getBackendFormat());
+int GrBackendRenderTarget_getBackendFormat(GrBackendRenderTarget *backend_render_target) {
+    return static_gr_backend_format_make(backend_render_target->getBackendFormat());
 }
 
 bool GrBackendRenderTarget_getMockRenderTargetInfo(GrBackendRenderTarget *backend_render_target, GrMockRenderTargetInfo *info) {

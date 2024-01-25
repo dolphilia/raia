@@ -10,7 +10,7 @@
 
 extern "C" {
 // static
-void SkLine2DPathEffect_Make(int sk_path_effect_key_out, SkScalar width, const SkMatrix *matrix);
+int SkLine2DPathEffect_Make(SkScalar width, const SkMatrix *matrix);
 void SkLine2DPathEffect_RegisterFlattenables();
 }
 

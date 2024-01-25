@@ -9,6 +9,7 @@
 #include <map>
 #include "include/core/SkStream.h"
 
+int static_sk_file_stream_make(std::unique_ptr<SkFILEStream> value);
 void static_sk_file_stream_delete(int key);
 SkFILEStream *static_sk_file_stream_get(int key);
 void static_sk_file_stream_set(int key, std::unique_ptr<SkFILEStream> value);

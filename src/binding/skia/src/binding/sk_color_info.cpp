@@ -59,8 +59,8 @@ void SkColorInfo_makeColorType(int sk_color_info_key_in, SkColorInfo *color_info
     static_sk_color_info_set(sk_color_info_key_in, color_info->makeColorType(newColorType));
 }
 
-void SkColorInfo_refColorSpace(int sk_color_space_key_out, SkColorInfo *color_info) {
-    static_sk_color_space_set(sk_color_space_key_out, color_info->refColorSpace());
+int SkColorInfo_refColorSpace(SkColorInfo *color_info) {
+    return static_sk_color_space_make(color_info->refColorSpace());
 }
 
 int SkColorInfo_shiftPerPixel(SkColorInfo *color_info) {

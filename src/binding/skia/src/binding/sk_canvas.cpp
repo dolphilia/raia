@@ -366,32 +366,32 @@ SkISize SkCanvas_getBaseLayerSize(SkCanvas *canvas) { // virtual
     return canvas->getBaseLayerSize();
 }
 
-void SkCanvas_getBaseProps(int sk_surface_props_key_out, SkCanvas *canvas) {
-    static_sk_surface_props_set(sk_surface_props_key_out, canvas->getBaseProps());
+int SkCanvas_getBaseProps(SkCanvas *canvas) {
+    return static_sk_surface_props_make(canvas->getBaseProps());
 }
 
-void SkCanvas_getDeviceClipBounds(int sk_i_rect_key_out, SkCanvas *canvas) {
-    static_sk_i_rect_set(sk_i_rect_key_out, canvas->getDeviceClipBounds());
+int SkCanvas_getDeviceClipBounds(SkCanvas *canvas) {
+    return static_sk_i_rect_make(canvas->getDeviceClipBounds());
 }
 
 bool SkCanvas_getDeviceClipBounds_2(SkCanvas *canvas, SkIRect *bounds) {
     return canvas->getDeviceClipBounds(bounds);
 }
 
-void SkCanvas_getLocalClipBounds(int sk_rect_key_out, SkCanvas *canvas) {
-    static_sk_rect_set(sk_rect_key_out ,canvas->getLocalClipBounds());
+int SkCanvas_getLocalClipBounds(SkCanvas *canvas) {
+    return static_sk_rect_make(canvas->getLocalClipBounds());
 }
 
 bool SkCanvas_getLocalClipBounds_2(SkCanvas *canvas, SkRect *bounds) {
     return canvas->getLocalClipBounds(bounds);
 }
 
-void SkCanvas_getLocalToDevice(int sk_m_44_key_out, SkCanvas *canvas) {
-    static_sk_m_44_set(sk_m_44_key_out, canvas->getLocalToDevice());
+int SkCanvas_getLocalToDevice(SkCanvas *canvas) {
+    return static_sk_m_44_make(canvas->getLocalToDevice());
 }
 
-void SkCanvas_getLocalToDeviceAs3x3(int sk_matrix_key_out, SkCanvas *canvas) {
-    static_sk_matrix_set(sk_matrix_key_out, canvas->getLocalToDeviceAs3x3());
+int SkCanvas_getLocalToDeviceAs3x3(SkCanvas *canvas) {
+    return static_sk_matrix_make(canvas->getLocalToDeviceAs3x3());
 }
 
 bool SkCanvas_getProps(SkCanvas *canvas, SkSurfaceProps *props) {
@@ -406,16 +406,16 @@ SkSurface *SkCanvas_getSurface(SkCanvas *canvas) {
     return canvas->getSurface();
 }
 
-void SkCanvas_getTopProps(int sk_surface_props_key_out, SkCanvas *canvas) {
-    static_sk_surface_props_set(sk_surface_props_key_out, canvas->getTopProps());
+int SkCanvas_getTopProps(SkCanvas *canvas) {
+    return static_sk_surface_props_make(canvas->getTopProps());
 }
 
-void SkCanvas_getTotalMatrix(int sk_matrix_key_out, SkCanvas *canvas) {
-    static_sk_matrix_set(sk_matrix_key_out, canvas->getTotalMatrix());
+int SkCanvas_getTotalMatrix(SkCanvas *canvas) {
+    return static_sk_matrix_make(canvas->getTotalMatrix());
 }
 
-void SkCanvas_imageInfo(int sk_image_info_key_out, SkCanvas *canvas) {
-    static_sk_image_info_set(sk_image_info_key_out, canvas->imageInfo());
+int SkCanvas_imageInfo(SkCanvas *canvas) {
+    return static_sk_image_info_make(canvas->imageInfo());
 }
 
 bool SkCanvas_isClipEmpty(SkCanvas *canvas) {
@@ -426,9 +426,9 @@ bool SkCanvas_isClipRect(SkCanvas *canvas) {
     return canvas->isClipRect();
 }
 
-void SkCanvas_makeSurface(int sk_surface_key_out, SkCanvas *canvas, const SkImageInfo *info,
+int SkCanvas_makeSurface(SkCanvas *canvas, const SkImageInfo *info,
                           const SkSurfaceProps *props) {
-    static_sk_surface_set(sk_surface_key_out, canvas->makeSurface(*info, props));
+    return static_sk_surface_make(canvas->makeSurface(*info, props));
 }
 
 bool SkCanvas_peekPixels(SkCanvas *canvas, SkPixmap *pixmap) {
@@ -547,14 +547,13 @@ SkCanvas_writePixels_2(SkCanvas *canvas, const SkImageInfo *info, const void *pi
 
 // static
 
-void SkCanvas_MakeRasterDirect(int sk_canvas_key_out, const SkImageInfo *info, void *pixels, size_t rowBytes,
+int SkCanvas_MakeRasterDirect(const SkImageInfo *info, void *pixels, size_t rowBytes,
                                const SkSurfaceProps *props) {
-    static_sk_canvas_set(sk_canvas_key_out, SkCanvas::MakeRasterDirect(*info, pixels, rowBytes, props));
+    return static_sk_canvas_make(SkCanvas::MakeRasterDirect(*info, pixels, rowBytes, props));
 }
 
-void
-SkCanvas_MakeRasterDirectN32(int sk_canvas_key_out, int width, int height, SkPMColor *pixels, size_t rowBytes) {
-    static_sk_canvas_set(sk_canvas_key_out, SkCanvas::MakeRasterDirectN32(width, height, pixels, rowBytes));
+int SkCanvas_MakeRasterDirectN32(int width, int height, SkPMColor *pixels, size_t rowBytes) {
+    return static_sk_canvas_make(SkCanvas::MakeRasterDirectN32(width, height, pixels, rowBytes));
 }
 
 }

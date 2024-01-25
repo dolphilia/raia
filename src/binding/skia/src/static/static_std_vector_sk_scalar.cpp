@@ -7,6 +7,13 @@
 #include <utility>
 
 static std::map<int , std::vector<SkScalar>> static_vector_float;
+static int static_vector_float_index = 0;
+
+int static_vector_sk_scalar_make(std::vector<SkScalar> value) {
+    static_vector_float[static_vector_float_index] = std::move(value);
+    static_vector_float_index++;
+    return static_vector_float_index - 1;
+}
 
 void static_vector_sk_scalar_delete(int key) {
     static_vector_float.erase(key);

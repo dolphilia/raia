@@ -30,24 +30,24 @@ uint32_t SkColorSpace_toXYZD50Hash(SkColorSpace *color_space) {
     return color_space->toXYZD50Hash();
 }
 
-void SkColorSpace_makeLinearGamma(int sk_color_space_key_out, SkColorSpace *color_space) {
-    static_sk_color_space_set(sk_color_space_key_out, color_space->makeLinearGamma());
+int SkColorSpace_makeLinearGamma(SkColorSpace *color_space) {
+    return static_sk_color_space_make(color_space->makeLinearGamma());
 }
 
-void SkColorSpace_makeSRGBGamma(int sk_color_space_key_out, SkColorSpace *color_space) {
-    static_sk_color_space_set(sk_color_space_key_out, color_space->makeSRGBGamma());
+int SkColorSpace_makeSRGBGamma(SkColorSpace *color_space) {
+    return static_sk_color_space_make(color_space->makeSRGBGamma());
 }
 
-void SkColorSpace_makeColorSpin(int sk_color_space_key_out, SkColorSpace *color_space) {
-    static_sk_color_space_set(sk_color_space_key_out, color_space->makeColorSpin());
+int SkColorSpace_makeColorSpin(SkColorSpace *color_space) {
+    return static_sk_color_space_make(color_space->makeColorSpin());
 }
 
 bool SkColorSpace_isSRGB(SkColorSpace *color_space) {
     return color_space->isSRGB();
 }
 
-void SkColorSpace_serialize(int sk_data_key_out, SkColorSpace *color_space) {
-    static_sk_data_set(sk_data_key_out, color_space->serialize());
+int SkColorSpace_serialize(SkColorSpace *color_space) {
+    return static_sk_data_make(color_space->serialize());
 }
 
 size_t SkColorSpace_writeToMemory(SkColorSpace *color_space, void *memory) {
@@ -100,24 +100,24 @@ bool SkColorSpace_refCntGreaterThan(SkColorSpace *color_space, int32_t threadIso
 
 // static
 
-void SkColorSpace_MakeSRGB(int sk_color_space_key_out) {
-    static_sk_color_space_set(sk_color_space_key_out, SkColorSpace::MakeSRGB());
+int SkColorSpace_MakeSRGB() {
+    return static_sk_color_space_make(SkColorSpace::MakeSRGB());
 }
 
-void SkColorSpace_MakeSRGBLinear(int sk_color_space_key_out) {
-    static_sk_color_space_set(sk_color_space_key_out, SkColorSpace::MakeSRGBLinear());
+int SkColorSpace_MakeSRGBLinear() {
+    return static_sk_color_space_make(SkColorSpace::MakeSRGBLinear());
 }
 
-void SkColorSpace_MakeRGB(int sk_color_space_key_out, const skcms_TransferFunction *transferFn, const skcms_Matrix3x3 *toXYZ) {
-    static_sk_color_space_set(sk_color_space_key_out, SkColorSpace::MakeRGB(*transferFn, *toXYZ));
+int SkColorSpace_MakeRGB(const skcms_TransferFunction *transferFn, const skcms_Matrix3x3 *toXYZ) {
+    return static_sk_color_space_make(SkColorSpace::MakeRGB(*transferFn, *toXYZ));
 }
 
-void SkColorSpace_Make(int sk_color_space_key_out, const skcms_ICCProfile * profile) {
-    static_sk_color_space_set(sk_color_space_key_out, SkColorSpace::Make(*profile));
+int SkColorSpace_Make(const skcms_ICCProfile * profile) {
+    return static_sk_color_space_make(SkColorSpace::Make(*profile));
 }
 
-void SkColorSpace_Deserialize(int sk_color_space_key_out, const void *data, size_t length) {
-    static_sk_color_space_set(sk_color_space_key_out, SkColorSpace::Deserialize(data, length));
+int SkColorSpace_Deserialize(const void *data, size_t length) {
+    return static_sk_color_space_make(SkColorSpace::Deserialize(data, length));
 }
 
 bool SkColorSpace_Equals(SkColorSpace *color_space_1, const SkColorSpace *color_space_2) {

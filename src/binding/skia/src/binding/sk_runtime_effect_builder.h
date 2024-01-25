@@ -15,8 +15,8 @@ extern "C" {
 const SkRuntimeEffect * SkRuntimeEffectBuilder_effect(SkRuntimeEffectBuilder *runtime_effect_builder);
 SkRuntimeEffectBuilder::BuilderUniform SkRuntimeEffectBuilder_uniform(SkRuntimeEffectBuilder *runtime_effect_builder, std::string_view name);
 SkRuntimeEffectBuilder::BuilderChild SkRuntimeEffectBuilder_child(SkRuntimeEffectBuilder *runtime_effect_builder, std::string_view name);
-void SkRuntimeEffectBuilder_uniforms(int sk_data_key_out, SkRuntimeEffectBuilder *runtime_effect_builder);
-void SkRuntimeEffectBuilder_children(int sk_runtime_effect_child_ptr_key_out, SkRuntimeEffectBuilder *runtime_effect_builder);
+int SkRuntimeEffectBuilder_uniforms(SkRuntimeEffectBuilder *runtime_effect_builder);
+int SkRuntimeEffectBuilder_children(SkRuntimeEffectBuilder *runtime_effect_builder);
 // static
 // SkRuntimeEffectBuilder()=delete
 // SkRuntimeEffectBuilder(sk_sp<SkRuntimeEffect> effect)

@@ -7,8 +7,8 @@
 static std::map<int, sk_sp<GrContextThreadSafeProxy>> static_gr_context_thread_safe_proxy;
 static int static_gr_context_thread_safe_proxy_index = 0;
 
-int static_gr_context_thread_safe_proxy_make(GrContextThreadSafeProxy value) {
-    static_gr_context_thread_safe_proxy[static_gr_context_thread_safe_proxy_index] = value;
+int static_gr_context_thread_safe_proxy_make(sk_sp<GrContextThreadSafeProxy> value) {
+    static_gr_context_thread_safe_proxy[static_gr_context_thread_safe_proxy_index] = std::move(value);
     static_gr_context_thread_safe_proxy_index++;
     return static_gr_context_thread_safe_proxy_index - 1;
 }

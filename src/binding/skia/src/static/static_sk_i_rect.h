@@ -9,6 +9,7 @@
 #include <map>
 #include "include/core/SkRect.h"
 
+int static_sk_i_rect_make(SkIRect value);
 void static_sk_i_rect_delete(int key);
 SkIRect static_sk_i_rect_get(int key);
 void static_sk_i_rect_set(int key, SkIRect value);

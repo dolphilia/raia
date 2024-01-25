@@ -9,6 +9,7 @@
 #include <map>
 #include "include/core/SkFontMgr.h"
 
+int static_sk_font_mgr_make(sk_sp<SkFontMgr> value);
 void static_sk_font_mgr_delete(int key);
 SkFontMgr *static_sk_font_mgr_get(int key);
 void static_sk_font_mgr_set(int key, sk_sp<SkFontMgr> value);

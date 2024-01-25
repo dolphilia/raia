@@ -103,22 +103,22 @@ void SkCanvas_experimental_DrawEdgeAAImageSet(SkCanvas *canvas, const SkCanvas::
 void SkCanvas_experimental_DrawEdgeAAQuad(SkCanvas *canvas, const SkRect *rect, const SkPoint clip[4], SkCanvas::QuadAAFlags aaFlags, const SkColor4f *color, SkBlendMode mode);
 void SkCanvas_experimental_DrawEdgeAAQuad_2(SkCanvas *canvas, const SkRect *rect, const SkPoint clip[4], SkCanvas::QuadAAFlags aaFlags, SkColor color, SkBlendMode mode);
 SkISize SkCanvas_getBaseLayerSize(SkCanvas *canvas);
-void SkCanvas_getBaseProps(int sk_surface_props_key_out, SkCanvas *canvas);
-void SkCanvas_getDeviceClipBounds(int sk_i_rect_key_out, SkCanvas *canvas);
+int SkCanvas_getBaseProps(SkCanvas *canvas);
+int SkCanvas_getDeviceClipBounds(SkCanvas *canvas);
 bool SkCanvas_getDeviceClipBounds_2(SkCanvas *canvas, SkIRect *bounds);
-void SkCanvas_getLocalClipBounds(int sk_rect_key_out, SkCanvas *canvas);
+int SkCanvas_getLocalClipBounds(SkCanvas *canvas);
 bool SkCanvas_getLocalClipBounds_2(SkCanvas *canvas, SkRect *bounds);
-void SkCanvas_getLocalToDevice(int sk_m_44_key_out, SkCanvas *canvas);
-void SkCanvas_getLocalToDeviceAs3x3(int sk_matrix_key_out, SkCanvas *canvas);
+int SkCanvas_getLocalToDevice(SkCanvas *canvas);
+int SkCanvas_getLocalToDeviceAs3x3(SkCanvas *canvas);
 bool SkCanvas_getProps(SkCanvas *canvas, SkSurfaceProps *props);
 int SkCanvas_getSaveCount(SkCanvas *canvas);
 SkSurface *SkCanvas_getSurface(SkCanvas *canvas);
-void SkCanvas_getTopProps(int sk_surface_props_key_out, SkCanvas *canvas);
-void SkCanvas_getTotalMatrix(int sk_matrix_key_out, SkCanvas *canvas);
-void SkCanvas_imageInfo(int sk_image_info_key_out, SkCanvas *canvas);
+int SkCanvas_getTopProps(SkCanvas *canvas);
+int SkCanvas_getTotalMatrix(SkCanvas *canvas);
+int SkCanvas_imageInfo(SkCanvas *canvas);
 bool SkCanvas_isClipEmpty(SkCanvas *canvas);
 bool SkCanvas_isClipRect(SkCanvas *canvas);
-void SkCanvas_makeSurface(int sk_surface_key_out, SkCanvas *canvas, const SkImageInfo *info, const SkSurfaceProps *props);
+int SkCanvas_makeSurface(SkCanvas *canvas, const SkImageInfo *info, const SkSurfaceProps *props);
 bool SkCanvas_peekPixels(SkCanvas *canvas, SkPixmap *pixmap);
 void SkCanvas_private_draw_shadow_rec(SkCanvas *canvas, const SkPath *path, const SkDrawShadowRec *rec);
 bool SkCanvas_quickReject(SkCanvas *canvas, const SkPath *path);
@@ -148,8 +148,8 @@ void SkCanvas_translate(SkCanvas *canvas, SkScalar dx, SkScalar dy);
 bool SkCanvas_writePixels(SkCanvas *canvas, const SkBitmap *bitmap, int x, int y);
 bool SkCanvas_writePixels_2(SkCanvas *canvas, const SkImageInfo *info, const void *pixels, size_t rowBytes, int x, int y);
 // static
-void SkCanvas_MakeRasterDirect(int sk_canvas_key_out, const SkImageInfo *info, void *pixels, size_t rowBytes, const SkSurfaceProps *props);
-void SkCanvas_MakeRasterDirectN32(int sk_canvas_key_out, int width, int height, SkPMColor *pixels, size_t rowBytes);
+int SkCanvas_MakeRasterDirect(const SkImageInfo *info, void *pixels, size_t rowBytes, const SkSurfaceProps *props);
+int SkCanvas_MakeRasterDirectN32(int width, int height, SkPMColor *pixels, size_t rowBytes);
 }
 
 #endif //RAIA_SKIA_SK_CANVAS_H

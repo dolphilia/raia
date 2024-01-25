@@ -9,6 +9,7 @@
 #include <map>
 #include "include/core/SkSurfaceProps.h"
 
+int static_sk_surface_props_make(SkSurfaceProps value);
 void static_sk_surface_props_delete(int key);
 SkSurfaceProps static_sk_surface_props_get(int key);
 void static_sk_surface_props_set(int key, SkSurfaceProps value);

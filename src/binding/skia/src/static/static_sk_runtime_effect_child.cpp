@@ -5,8 +5,15 @@
 #include "static_sk_runtime_effect_child.h"
 
 static std::map<int , SkSpan<const SkRuntimeEffect::Child>> static_const_sk_runtime_effect_child;
+static int static_const_sk_runtime_effect_child_index = 0;
 
 // const
+
+int static_const_sk_runtime_effect_child_make(SkSpan<const SkRuntimeEffect::Child> value) {
+    static_const_sk_runtime_effect_child[static_const_sk_runtime_effect_child_index] = value;
+    static_const_sk_runtime_effect_child_index++;
+    return static_const_sk_runtime_effect_child_index - 1;
+}
 
 void static_const_sk_runtime_effect_child_delete(int key) {
     static_const_sk_runtime_effect_child.erase(key);

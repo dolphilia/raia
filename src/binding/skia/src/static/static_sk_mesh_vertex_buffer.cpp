@@ -4,7 +4,16 @@
 
 #include "static_sk_mesh_vertex_buffer.h"
 
+#include <utility>
+
 static std::map<int , sk_sp<SkMesh::VertexBuffer>> static_sk_mesh_vertex_buffer;
+static int static_sk_mesh_vertex_buffer_index = 0;
+
+int static_sk_mesh_vertex_buffer_make(sk_sp<SkMesh::VertexBuffer> value) {
+    static_sk_mesh_vertex_buffer[static_sk_mesh_vertex_buffer_index] = std::move(value);
+    static_sk_mesh_vertex_buffer_index++;
+    return static_sk_mesh_vertex_buffer_index - 1;
+}
 
 void static_sk_mesh_vertex_buffer_delete(int key) {
     static_sk_mesh_vertex_buffer[key].reset();

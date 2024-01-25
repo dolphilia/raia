@@ -18,12 +18,12 @@ SkRuntimeEffectBuilder::BuilderChild SkRuntimeEffectBuilder_child(SkRuntimeEffec
     return runtime_effect_builder->child(name);
 }
 
-void SkRuntimeEffectBuilder_uniforms(int sk_data_key_out, SkRuntimeEffectBuilder *runtime_effect_builder) {
-    static_const_sk_data_set(sk_data_key_out, runtime_effect_builder->uniforms());
+int SkRuntimeEffectBuilder_uniforms(SkRuntimeEffectBuilder *runtime_effect_builder) {
+    return static_const_sk_data_make(runtime_effect_builder->uniforms());
 }
 
-void SkRuntimeEffectBuilder_children(int sk_runtime_effect_child_ptr_key_out, SkRuntimeEffectBuilder *runtime_effect_builder) {
-    static_const_sk_runtime_effect_child_ptr_set(sk_runtime_effect_child_ptr_key_out, runtime_effect_builder->children());
+int SkRuntimeEffectBuilder_children(SkRuntimeEffectBuilder *runtime_effect_builder) {
+    return static_const_sk_runtime_effect_child_ptr_make(runtime_effect_builder->children());
 }
 
 // static

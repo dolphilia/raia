@@ -6,8 +6,8 @@
 
 extern "C" {
 
-void SkMaskFilter_approximateFilteredBounds(int sk_rect_key_out, SkMaskFilter *mask_filter, const SkRect *src) {
-    static_sk_rect_set(sk_rect_key_out, mask_filter->approximateFilteredBounds(*src));
+int SkMaskFilter_approximateFilteredBounds(SkMaskFilter *mask_filter, const SkRect *src) {
+    return static_sk_rect_make(mask_filter->approximateFilteredBounds(*src));
 }
 
 SkMaskFilter::Factory SkMaskFilter_getFactory(SkMaskFilter *mask_filter) {
@@ -26,8 +26,8 @@ SkMaskFilter::Type SkMaskFilter_getFlattenableType(SkMaskFilter *mask_filter) {
     return mask_filter->getFlattenableType();
 }
 
-void SkMaskFilter_serialize(int sk_data_key_out, SkMaskFilter *mask_filter, const SkSerialProcs *procs) {
-    static_sk_data_set(sk_data_key_out, mask_filter->serialize(procs));
+int SkMaskFilter_serialize(SkMaskFilter *mask_filter, const SkSerialProcs *procs) {
+    return static_sk_data_make(mask_filter->serialize(procs));
 }
 
 size_t SkMaskFilter_serialize_2(SkMaskFilter *mask_filter, void *memory, size_t memory_size, const SkSerialProcs *procs) {
@@ -49,12 +49,12 @@ void SkMaskFilter_unref(SkMaskFilter *mask_filter) {
 
 // static
 
-void SkMaskFilter_MakeBlur(int sk_mask_filter_key_out, SkBlurStyle style, SkScalar sigma, bool respectCTM) {
-    static_sk_mask_filter_set(sk_mask_filter_key_out, SkMaskFilter::MakeBlur(style, sigma, respectCTM));
+int SkMaskFilter_MakeBlur(SkBlurStyle style, SkScalar sigma, bool respectCTM) {
+    return static_sk_mask_filter_make(SkMaskFilter::MakeBlur(style, sigma, respectCTM));
 }
 
-void SkMaskFilter_Deserialize(int sk_mask_filter_key_out, const void *data, size_t size, const SkDeserialProcs *procs) {
-    static_sk_mask_filter_set(sk_mask_filter_key_out, SkMaskFilter::Deserialize(data, size, procs));
+int SkMaskFilter_Deserialize(const void *data, size_t size, const SkDeserialProcs *procs) {
+    return static_sk_mask_filter_make(SkMaskFilter::Deserialize(data, size, procs));
 }
 
 SkMaskFilter::Factory SkMaskFilter_NameToFactory(const char name[]) {

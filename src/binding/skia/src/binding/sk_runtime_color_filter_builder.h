@@ -16,12 +16,12 @@ extern "C" {
 //SkRuntimeColorFilterBuilder & operator=(const SkRuntimeColorFilterBuilder &)=delete
 SkRuntimeColorFilterBuilder *SkRuntimeColorFilterBuilder_new(int sk_runtime_effect_key_in);
 void SkRuntimeColorFilterBuilder_delete(SkRuntimeColorFilterBuilder *runtime_color_filter_builder);
-void SkRuntimeColorFilterBuilder_makeColorFilter(int sk_color_filter_key_out, SkRuntimeColorFilterBuilder *runtime_color_filter_builder);
+int SkRuntimeColorFilterBuilder_makeColorFilter(SkRuntimeColorFilterBuilder *runtime_color_filter_builder);
 const SkRuntimeEffect * SkRuntimeColorFilterBuilder_effect(SkRuntimeColorFilterBuilder *runtime_color_filter_builder);
 SkRuntimeColorFilterBuilder::BuilderUniform SkRuntimeColorFilterBuilder_uniform(SkRuntimeColorFilterBuilder *runtime_color_filter_builder, std::string_view name);
 SkRuntimeColorFilterBuilder::BuilderChild SkRuntimeColorFilterBuilder_child(SkRuntimeColorFilterBuilder *runtime_color_filter_builder, std::string_view name);
-void SkRuntimeColorFilterBuilder_uniforms(int sk_data_key_out, SkRuntimeColorFilterBuilder *runtime_color_filter_builder);
-void SkRuntimeColorFilterBuilder_children(int sk_runtime_effect_child_ptr_key_out, SkRuntimeColorFilterBuilder *runtime_color_filter_builder);
+int SkRuntimeColorFilterBuilder_uniforms(SkRuntimeColorFilterBuilder *runtime_color_filter_builder);
+int SkRuntimeColorFilterBuilder_children(SkRuntimeColorFilterBuilder *runtime_color_filter_builder);
 }
 
 #endif //RAIA_SKIA_SK_RUNTIME_COLOR_FILTER_BUILDER_H

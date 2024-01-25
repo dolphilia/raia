@@ -70,16 +70,16 @@ SkColorSpace * SkPixmap_colorSpace(SkPixmap *pixmap) {
     return pixmap->colorSpace();
 }
 
-void SkPixmap_refColorSpace(int sk_color_space_key_out, SkPixmap *pixmap) {
-    static_sk_color_space_set(sk_color_space_key_out, pixmap->refColorSpace());
+int SkPixmap_refColorSpace(SkPixmap *pixmap) {
+    return static_sk_color_space_make(pixmap->refColorSpace());
 }
 
 bool SkPixmap_isOpaque(SkPixmap *pixmap) {
     return pixmap->isOpaque();
 }
 
-void SkPixmap_bounds(int sk_i_rect_key_out, SkPixmap *pixmap) {
-    static_sk_i_rect_set(sk_i_rect_key_out, pixmap->bounds());
+int SkPixmap_bounds(SkPixmap *pixmap) {
+    return static_sk_i_rect_make(pixmap->bounds());
 }
 
 int SkPixmap_rowBytesAsPixels(SkPixmap *pixmap) {

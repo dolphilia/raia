@@ -22,7 +22,7 @@ bool SkColorInfo_isOpaque(SkColorInfo *color_info);
 void SkColorInfo_makeAlphaType(int sk_color_info_key_in, SkColorInfo *color_info, SkAlphaType newAlphaType);
 void SkColorInfo_makeColorSpace(int sk_color_info_key_in, int sk_color_space_key_in, SkColorInfo *color_info);
 void SkColorInfo_makeColorType(int sk_color_info_key_in, SkColorInfo *color_info, SkColorType newColorType);
-void SkColorInfo_refColorSpace(int sk_color_space_key_out, SkColorInfo *color_info);
+int SkColorInfo_refColorSpace(SkColorInfo *color_info);
 int SkColorInfo_shiftPerPixel(SkColorInfo *color_info);
 }
 

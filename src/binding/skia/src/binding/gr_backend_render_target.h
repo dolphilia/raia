@@ -21,7 +21,7 @@ int GrBackendRenderTarget_sampleCnt(GrBackendRenderTarget *backend_render_target
 int GrBackendRenderTarget_stencilBits(GrBackendRenderTarget *backend_render_target);
 GrBackendApi GrBackendRenderTarget_backend(GrBackendRenderTarget *backend_render_target);
 bool GrBackendRenderTarget_isFramebufferOnly(GrBackendRenderTarget *backend_render_target);
-void GrBackendRenderTarget_getBackendFormat(int gr_backend_format_key_out, GrBackendRenderTarget *backend_render_target);
+int GrBackendRenderTarget_getBackendFormat(GrBackendRenderTarget *backend_render_target);
 bool GrBackendRenderTarget_getMockRenderTargetInfo(GrBackendRenderTarget *backend_render_target, GrMockRenderTargetInfo *info);
 void GrBackendRenderTarget_setMutableState(GrBackendRenderTarget *backend_render_target, const skgpu::MutableTextureState *state);
 bool GrBackendRenderTarget_isProtected(GrBackendRenderTarget *backend_render_target);

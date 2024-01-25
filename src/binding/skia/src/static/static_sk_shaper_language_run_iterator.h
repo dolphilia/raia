@@ -9,6 +9,7 @@
 #include <map>
 #include "modules/skshaper/include/SkShaper.h"
 
+int static_sk_shaper_language_run_iterator_make(std::unique_ptr<SkShaper::LanguageRunIterator> value);
 void static_sk_shaper_language_run_iterator_delete(int key);
 SkShaper::LanguageRunIterator *static_sk_shaper_language_run_iterator_get(int key);
 void static_sk_shaper_language_run_iterator_set(int key, std::unique_ptr<SkShaper::LanguageRunIterator> value);

@@ -4,7 +4,16 @@
 
 #include "static_sk_image_info.h"
 
+#include <utility>
+
 static std::map<int , SkImageInfo> static_sk_image_info;
+static int static_sk_image_info_index = 0;
+
+int static_sk_image_info_make(SkImageInfo value) {
+    static_sk_image_info[static_sk_image_info_index] = std::move(value);
+    static_sk_image_info_index++;
+    return static_sk_image_info_index - 1;
+}
 
 void static_sk_image_info_delete(int key) {
     static_sk_image_info.erase(key);

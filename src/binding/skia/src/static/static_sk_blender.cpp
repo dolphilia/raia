@@ -5,6 +5,13 @@
 #include "static_sk_blender.h"
 
 static std::map<int, sk_sp<SkBlender>> static_sk_blender;
+static int static_sk_blender_index = 0;
+
+int static_sk_blender_make(sk_sp<SkBlender> value) {
+    static_sk_blender[static_sk_blender_index] = std::move(value);
+    static_sk_blender_index++;
+    return static_sk_blender_index - 1;
+}
 
 void static_sk_blender_delete(int key) {
     static_sk_blender[key].reset();

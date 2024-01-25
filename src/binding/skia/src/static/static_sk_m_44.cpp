@@ -5,6 +5,13 @@
 #include "static_sk_m_44.h"
 
 static std::map<int , SkM44> static_sk_m_44;
+static int static_sk_m_44_index = 0;
+
+int static_sk_m_44_make(SkM44 value) {
+    static_sk_m_44[static_sk_m_44_index] = value;
+    static_sk_m_44_index++;
+    return static_sk_m_44_index - 1;
+}
 
 void static_sk_m_44_delete(int key) {
     static_sk_m_44.erase(key);

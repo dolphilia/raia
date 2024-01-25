@@ -22,8 +22,8 @@ SkISize SkImage_dimensions(SkImage *image) {
     return image->dimensions();
 }
 
-void SkImage_bounds(int sk_i_rect_key_out, SkImage *image) {
-    static_sk_i_rect_set(sk_i_rect_key_out, image->bounds());
+int SkImage_bounds(SkImage *image) {
+    return static_sk_i_rect_make(image->bounds());
 }
 
 uint32_t SkImage_uniqueID(SkImage *image) {
@@ -42,8 +42,8 @@ SkColorSpace * cSkImage_olorSpace(SkImage *image) {
     return image->colorSpace();
 }
 
-void SkImage_refColorSpace(int sk_color_space_key_out, SkImage *image) {
-    static_sk_color_space_set(sk_color_space_key_out, image->refColorSpace());
+int SkImage_refColorSpace(SkImage *image) {
+    return static_sk_color_space_make(image->refColorSpace());
 }
 
 bool SkImage_isAlphaOnly(SkImage *image) {
@@ -54,36 +54,36 @@ bool SkImage_isOpaque(SkImage *image) {
     return image->isOpaque();
 }
 
-void SkImage_makeShader(int sk_shader_key_out, SkImage *image, SkTileMode tmx, SkTileMode tmy, const SkSamplingOptions *sampling, const SkMatrix *localMatrix) {
-    static_sk_shader_set(sk_shader_key_out, image->makeShader(tmx, tmy, *sampling, localMatrix));
+int SkImage_makeShader(SkImage *image, SkTileMode tmx, SkTileMode tmy, const SkSamplingOptions *sampling, const SkMatrix *localMatrix) {
+    return static_sk_shader_make(image->makeShader(tmx, tmy, *sampling, localMatrix));
 }
 
-void SkImage_makeShader_2(int sk_shader_key_out, SkImage *image, SkTileMode tmx, SkTileMode tmy, const SkSamplingOptions *sampling, const SkMatrix *lm) {
-    static_sk_shader_set(sk_shader_key_out, image->makeShader(tmx, tmy, *sampling, *lm));
+int SkImage_makeShader_2(SkImage *image, SkTileMode tmx, SkTileMode tmy, const SkSamplingOptions *sampling, const SkMatrix *lm) {
+    return static_sk_shader_make(image->makeShader(tmx, tmy, *sampling, *lm));
 }
 
-void SkImage_makeShader_3(int sk_shader_key_out, SkImage *image, const SkSamplingOptions *sampling, const SkMatrix *lm) {
-    static_sk_shader_set(sk_shader_key_out, image->makeShader(*sampling, *lm));
+int SkImage_makeShader_3(SkImage *image, const SkSamplingOptions *sampling, const SkMatrix *lm) {
+    return static_sk_shader_make(image->makeShader(*sampling, *lm));
 }
 
-void SkImage_makeShader_4(int sk_shader_key_out, SkImage *image, const SkSamplingOptions *sampling, const SkMatrix *lm) {
-    static_sk_shader_set(sk_shader_key_out, image->makeShader(*sampling, lm));
+int SkImage_makeShader_4(SkImage *image, const SkSamplingOptions *sampling, const SkMatrix *lm) {
+    return static_sk_shader_make(image->makeShader(*sampling, lm));
 }
 
-void SkImage_makeRawShader(int sk_shader_key_out, SkImage *image, SkTileMode tmx, SkTileMode tmy, const SkSamplingOptions *sampling, const SkMatrix *localMatrix) {
-    static_sk_shader_set(sk_shader_key_out, image->makeRawShader(tmx, tmy, *sampling, localMatrix));
+int SkImage_makeRawShader(SkImage *image, SkTileMode tmx, SkTileMode tmy, const SkSamplingOptions *sampling, const SkMatrix *localMatrix) {
+    return static_sk_shader_make(image->makeRawShader(tmx, tmy, *sampling, localMatrix));
 }
 
-void SkImage_makeRawShader_2(int sk_shader_key_out, SkImage *image, SkTileMode tmx, SkTileMode tmy, const SkSamplingOptions *sampling, const SkMatrix *lm) {
-    static_sk_shader_set(sk_shader_key_out, image->makeRawShader(tmx, tmy, *sampling, *lm));
+int SkImage_makeRawShader_2(SkImage *image, SkTileMode tmx, SkTileMode tmy, const SkSamplingOptions *sampling, const SkMatrix *lm) {
+    return static_sk_shader_make(image->makeRawShader(tmx, tmy, *sampling, *lm));
 }
 
-void SkImage_makeRawShader_3(int sk_shader_key_out, SkImage *image, const SkSamplingOptions *sampling, const SkMatrix *lm) {
-    static_sk_shader_set(sk_shader_key_out, image->makeRawShader(*sampling, *lm));
+int SkImage_makeRawShader_3(SkImage *image, const SkSamplingOptions *sampling, const SkMatrix *lm) {
+    return static_sk_shader_make(image->makeRawShader(*sampling, *lm));
 }
 
-void SkImage_makeRawShader_4(int sk_shader_key_out, SkImage *image, const SkSamplingOptions *sampling, const SkMatrix *lm) {
-    static_sk_shader_set(sk_shader_key_out, image->makeRawShader(*sampling, lm));
+int SkImage_makeRawShader_4(SkImage *image, const SkSamplingOptions *sampling, const SkMatrix *lm) {
+    return static_sk_shader_make(image->makeRawShader(*sampling, lm));
 }
 
 bool SkImage_peekPixels(SkImage *image, SkPixmap *pixmap) {
@@ -135,16 +135,16 @@ bool SkImage_scalePixels(SkImage *image, const SkPixmap *dst, const SkSamplingOp
     return image->scalePixels(*dst, *sampling, cachingHint);
 }
 
-void SkImage_refEncodedData(int sk_data_key_out, SkImage *image) {
-    static_sk_data_set(sk_data_key_out, image->refEncodedData());
+int SkImage_refEncodedData(SkImage *image) {
+    return static_sk_data_make(image->refEncodedData());
 }
 
-void SkImage_makeSubset(int sk_image_key_out, SkImage *image, GrDirectContext *direct, const SkIRect *subset) {
-    static_sk_image_set(sk_image_key_out, image->makeSubset(direct, *subset));
+int SkImage_makeSubset(SkImage *image, GrDirectContext *direct, const SkIRect *subset) {
+    return static_sk_image_make(image->makeSubset(direct, *subset));
 }
 
-void SkImage_makeSubset_2(int sk_image_key_out, SkImage *image, skgpu::graphite::Recorder *recorder, const SkIRect *subset, SkImage::RequiredProperties properties) {
-    static_sk_image_set(sk_image_key_out, image->makeSubset(recorder, *subset, properties));
+int SkImage_makeSubset_2(SkImage *image, skgpu::graphite::Recorder *recorder, const SkIRect *subset, SkImage::RequiredProperties properties) {
+    return static_sk_image_make(image->makeSubset(recorder, *subset, properties));
 }
 
 bool SkImage_hasMipmaps(SkImage *image) {
@@ -155,20 +155,20 @@ bool SkImage_isProtected(SkImage *image) {
     return image->isProtected();
 }
 
-void SkImage_withDefaultMipmaps(int sk_image_key_out, SkImage *image) {
-    static_sk_image_set(sk_image_key_out, image->withDefaultMipmaps());
+int SkImage_withDefaultMipmaps(SkImage *image) {
+    return static_sk_image_make(image->withDefaultMipmaps());
 }
 
-void SkImage_makeNonTextureImage(int sk_image_key_out, SkImage *image, GrDirectContext *context) {
-    static_sk_image_set(sk_image_key_out, image->makeNonTextureImage(context));
+int SkImage_makeNonTextureImage(SkImage *image, GrDirectContext *context) {
+    return static_sk_image_make(image->makeNonTextureImage(context));
 }
 
-void SkImage_makeRasterImage(int sk_image_key_out, SkImage *image, GrDirectContext *context, SkImage::CachingHint cachingHint) {
-    static_sk_image_set(sk_image_key_out, image->makeRasterImage(context, cachingHint));
+int SkImage_makeRasterImage(SkImage *image, GrDirectContext *context, SkImage::CachingHint cachingHint) {
+    return static_sk_image_make(image->makeRasterImage(context, cachingHint));
 }
 
-void SkImage_makeRasterImage_2(int sk_image_key_out, SkImage *image, SkImage::CachingHint cachingHint) {
-    static_sk_image_set(sk_image_key_out, image->makeRasterImage(cachingHint));
+int SkImage_makeRasterImage_2(SkImage *image, SkImage::CachingHint cachingHint) {
+    return static_sk_image_make(image->makeRasterImage(cachingHint));
 }
 
 bool SkImage_asLegacyBitmap(SkImage *image, SkBitmap *bitmap, SkImage::LegacyBitmapMode legacyBitmapMode) {
@@ -179,24 +179,24 @@ bool SkImage_isLazyGenerated(SkImage *image) {
     return image->isLazyGenerated();
 }
 
-void SkImage_makeColorSpace(int sk_image_key_out, int sk_color_space_key_in, SkImage *image, GrDirectContext *direct) {
-    static_sk_image_set(sk_image_key_out, image->makeColorSpace(direct, static_sk_color_space_move(sk_color_space_key_in)));
+int SkImage_makeColorSpace(int sk_color_space_key_in, SkImage *image, GrDirectContext *direct) {
+    return static_sk_image_make(image->makeColorSpace(direct, static_sk_color_space_move(sk_color_space_key_in)));
 }
 
-void SkImage_makeColorSpace_2(int sk_image_key_out, int sk_color_space_key_in, SkImage *image, skgpu::graphite::Recorder *recorder, SkImage::RequiredProperties properties) {
-    static_sk_image_set(sk_image_key_out, image->makeColorSpace(recorder, static_sk_color_space_move(sk_color_space_key_in), properties));
+int SkImage_makeColorSpace_2(int sk_color_space_key_in, SkImage *image, skgpu::graphite::Recorder *recorder, SkImage::RequiredProperties properties) {
+    return static_sk_image_make(image->makeColorSpace(recorder, static_sk_color_space_move(sk_color_space_key_in), properties));
 }
 
-void SkImage_makeColorTypeAndColorSpace(int sk_image_key_out, int sk_color_space_key_in, SkImage *image, GrDirectContext *direct, SkColorType targetColorType) {
-    static_sk_image_set(sk_image_key_out, image->makeColorTypeAndColorSpace(direct, targetColorType, static_sk_color_space_move(sk_color_space_key_in)));
+int SkImage_makeColorTypeAndColorSpace(int sk_color_space_key_in, SkImage *image, GrDirectContext *direct, SkColorType targetColorType) {
+    return static_sk_image_make(image->makeColorTypeAndColorSpace(direct, targetColorType, static_sk_color_space_move(sk_color_space_key_in)));
 }
 
-void SkImage_makeColorTypeAndColorSpace_2(int sk_image_key_out, int sk_color_space_key_in, SkImage *image, skgpu::graphite::Recorder *recorder, SkColorType targetColorType, SkImage::RequiredProperties properties) {
-    static_sk_image_set(sk_image_key_out, image->makeColorTypeAndColorSpace(recorder, targetColorType, static_sk_color_space_move(sk_color_space_key_in), properties));
+int SkImage_makeColorTypeAndColorSpace_2(int sk_color_space_key_in, SkImage *image, skgpu::graphite::Recorder *recorder, SkColorType targetColorType, SkImage::RequiredProperties properties) {
+    return static_sk_image_make(image->makeColorTypeAndColorSpace(recorder, targetColorType, static_sk_color_space_move(sk_color_space_key_in), properties));
 }
 
-void SkImage_reinterpretColorSpace(int sk_image_key_out, int sk_color_space_key_in, SkImage *image) {
-    static_sk_image_set(sk_image_key_out, image->reinterpretColorSpace(static_sk_color_space_move(sk_color_space_key_in)));
+int SkImage_reinterpretColorSpace(int sk_color_space_key_in, SkImage *image) {
+    return static_sk_image_make(image->reinterpretColorSpace(static_sk_color_space_move(sk_color_space_key_in)));
 }
 
 bool SkImage_unique(SkImage *image) {

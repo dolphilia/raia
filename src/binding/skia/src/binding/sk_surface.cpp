@@ -19,8 +19,8 @@ int SkSurface_height(SkSurface *surface) {
     return surface->height();
 }
 
-void SkSurface_imageInfo(int sk_image_info_key_out, SkSurface *surface) {
-    static_sk_image_info_set(sk_image_info_key_out, surface->imageInfo());
+int SkSurface_imageInfo(SkSurface *surface) {
+    return static_sk_image_info_make(surface->imageInfo());
 }
 
 uint32_t SkSurface_generationID(SkSurface *surface) {
@@ -47,24 +47,24 @@ SkCanvas * SkSurface_getCanvas(SkSurface *surface) {
     return surface->getCanvas();
 }
 
-void SkSurface_capabilities(int sk_capabilities_key_out, SkSurface *surface) {
-    static_const_sk_capabilities_set(sk_capabilities_key_out, surface->capabilities());
+int SkSurface_capabilities(SkSurface *surface) {
+    return static_const_sk_capabilities_make(surface->capabilities());
 }
 
-void SkSurface_makeSurface(int sk_surface_key_out, SkSurface *surface, const SkImageInfo *imageInfo) {
-    static_sk_surface_set(sk_surface_key_out, surface->makeSurface(*imageInfo));
+int SkSurface_makeSurface(SkSurface *surface, const SkImageInfo *imageInfo) {
+    return static_sk_surface_make(surface->makeSurface(*imageInfo));
 }
 
-void SkSurface_makeSurface_2(int sk_surface_key_out, SkSurface *surface, int width, int height) {
-    static_sk_surface_set(sk_surface_key_out, surface->makeSurface(width, height));
+int SkSurface_makeSurface_2(SkSurface *surface, int width, int height) {
+    return static_sk_surface_make(surface->makeSurface(width, height));
 }
 
-void SkSurface_makeImageSnapshot(int sk_image_key_out, SkSurface *surface) {
-    static_sk_image_set(sk_image_key_out, surface->makeImageSnapshot());
+int SkSurface_makeImageSnapshot(SkSurface *surface) {
+    return static_sk_image_make(surface->makeImageSnapshot());
 }
 
-void SkSurface_makeImageSnapshot_2(int sk_image_key_out, SkSurface *surface, const SkIRect *bounds) {
-    static_sk_image_set(sk_image_key_out, surface->makeImageSnapshot(*bounds));
+int SkSurface_makeImageSnapshot_2(SkSurface *surface, const SkIRect *bounds) {
+    return static_sk_image_make(surface->makeImageSnapshot(*bounds));
 }
 
 void SkSurface_draw(SkSurface *surface, SkCanvas *canvas, SkScalar x, SkScalar y, const SkSamplingOptions *sampling, const SkPaint *paint) {

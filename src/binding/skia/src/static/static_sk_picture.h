@@ -9,6 +9,7 @@
 #include <map>
 #include "include/core/SkPicture.h"
 
+int static_sk_picture_make(sk_sp<SkPicture> value);
 void static_sk_picture_delete(int key);
 SkPicture *static_sk_picture_get(int key);
 void static_sk_picture_set(int key, sk_sp<SkPicture> value);

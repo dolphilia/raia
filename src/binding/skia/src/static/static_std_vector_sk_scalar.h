@@ -10,6 +10,7 @@
 #include <vector>
 #include "include/core/SkScalar.h"
 
+int static_vector_sk_scalar_make(std::vector<SkScalar> value);
 void static_vector_sk_scalar_delete(int key);
 SkScalar static_vector_sk_scalar_get(int key, int index);
 void static_vector_sk_scalar_set(int key, std::vector<SkScalar> value);

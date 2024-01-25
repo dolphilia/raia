@@ -5,6 +5,13 @@
 #include "static_sk_shaper.h"
 
 static std::map<int , std::unique_ptr<SkShaper>> static_sk_shaper;
+static int static_sk_shaper_index = 0;
+
+int static_sk_shaper_make(std::unique_ptr<SkShaper> value) {
+    static_sk_shaper[static_sk_shaper_index] = std::move(value);
+    static_sk_shaper_index++;
+    return static_sk_shaper_index - 1;
+}
 
 void static_sk_shaper_delete(int key) {
     static_sk_shaper[key].reset();

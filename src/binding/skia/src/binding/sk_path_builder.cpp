@@ -33,16 +33,16 @@ SkPathFillType SkPathBuilder_fillType(SkPathBuilder *path_builder) {
     return path_builder->fillType();
 }
 
-void SkPathBuilder_computeBounds(int sk_rect_key_out, SkPathBuilder *path_builder) {
-    static_sk_rect_set(sk_rect_key_out, path_builder->computeBounds());
+int SkPathBuilder_computeBounds(SkPathBuilder *path_builder) {
+    return static_sk_rect_make(path_builder->computeBounds());
 }
 
-void SkPathBuilder_snapshot(int sk_path_key_out, SkPathBuilder *path_builder) {
-    static_sk_path_set(sk_path_key_out, path_builder->snapshot());
+int SkPathBuilder_snapshot(SkPathBuilder *path_builder) {
+    return static_sk_path_make(path_builder->snapshot());
 }
 
-void SkPathBuilder_detach(int sk_path_key_out, SkPathBuilder *path_builder) {
-    static_sk_path_set(sk_path_key_out, path_builder->detach());
+int SkPathBuilder_detach(SkPathBuilder *path_builder) {
+    return static_sk_path_make(path_builder->detach());
 }
 
 SkPathBuilder * SkPathBuilder_setFillType(SkPathBuilder *path_builder, SkPathFillType ft) {

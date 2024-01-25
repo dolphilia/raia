@@ -9,6 +9,7 @@
 #include <map>
 #include <tuple>
 
+int static_tuple_int_int_make(std::tuple<int, int> value);
 void static_tuple_int_int_delete(int key);
 std::tuple<int, int> static_tuple_int_int_get(int key);
 void static_tuple_int_int_set(int key, std::tuple<int, int> value);

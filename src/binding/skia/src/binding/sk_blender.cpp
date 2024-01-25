@@ -22,8 +22,8 @@ SkBlender::Type SkBlender_getFlattenableType(SkBlender *blender) {
     return blender->getFlattenableType();
 }
 
-void SkBlender_serialize(int sk_data_key_out, SkBlender *blender, const SkSerialProcs *serial_procs) {
-    static_sk_data_set(sk_data_key_out, blender->serialize(serial_procs));
+int SkBlender_serialize(SkBlender *blender, const SkSerialProcs *serial_procs) {
+    return static_sk_data_make(blender->serialize(serial_procs));
 }
 
 size_t SkBlender_serialize_2(SkBlender *blender, void *memory, size_t memory_size, const SkSerialProcs *serial_procs) {
@@ -44,8 +44,8 @@ void SkBlender_unref(SkBlender *blender) {
 
 // static
 
-void SkBlender_Mode(int sk_blender_key_out, SkBlendMode mode) {
-    static_sk_blender_set(sk_blender_key_out, SkBlender::Mode(mode));
+int SkBlender_Mode(SkBlendMode mode) {
+    return static_sk_blender_make(SkBlender::Mode(mode));
 }
 
 SkBlender::Factory SkBlender_NameToFactory(const char name[]) {
@@ -60,8 +60,8 @@ void SkBlender_Register(const char name[], SkBlender::Factory factory) {
     SkBlender::Register(name, factory);
 }
 
-void SkBlender_Deserialize(int sk_flattenable_key_out, SkBlender::Type type, const void *data, size_t length, const SkDeserialProcs *procs) {
-    static_sk_flattenable_set(sk_flattenable_key_out, SkBlender::Deserialize(type, data, length, procs));
+int SkBlender_Deserialize(SkBlender::Type type, const void *data, size_t length, const SkDeserialProcs *procs) {
+    return static_sk_flattenable_make(SkBlender::Deserialize(type, data, length, procs));
 }
 
 }

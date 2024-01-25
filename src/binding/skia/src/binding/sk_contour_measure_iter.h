@@ -13,7 +13,7 @@ SkContourMeasureIter *SkContourMeasureIter_new();
 SkContourMeasureIter *SkContourMeasureIter_new_2(const SkPath *path, bool forceClosed, SkScalar resScale);
 void SkContourMeasureIter_delete(SkContourMeasureIter *contour_measure_iter);
 void SkContourMeasureIter_reset(SkContourMeasureIter *contour_measure_iter, const SkPath *path, bool forceClosed, SkScalar resScale);
-void SkContourMeasureIter_next(int sk_contour_measure_key_out, SkContourMeasureIter *contour_measure_iter);
+int SkContourMeasureIter_next(SkContourMeasureIter *contour_measure_iter);
 }
 
 #endif //RAIA_SKIA_SK_CONTOUR_MEASURE_ITER_H

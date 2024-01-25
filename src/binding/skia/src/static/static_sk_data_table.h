@@ -9,6 +9,7 @@
 #include <map>
 #include "include/core/SkDataTable.h"
 
+int static_sk_data_table_make(sk_sp<SkDataTable> value);
 void static_sk_data_table_delete(int key);
 SkDataTable *static_sk_data_table_get(int key);
 void static_sk_data_table_set(int key, sk_sp<SkDataTable> value);

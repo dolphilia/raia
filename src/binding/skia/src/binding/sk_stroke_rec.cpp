@@ -6,16 +6,16 @@
 
 extern "C" {
 
-void SkStrokeRec_static(int sk_stroke_key_out, SkStrokeRec::InitStyle style) {
-    static_sk_stroke_rec_set(sk_stroke_key_out, SkStrokeRec(style));
+int SkStrokeRec_static(SkStrokeRec::InitStyle style) {
+    return static_sk_stroke_rec_make(SkStrokeRec(style));
 }
 
-void SkStrokeRec_static_2(int sk_stroke_key_out, const SkPaint *paint, SkPaint::Style style, SkScalar resScale) {
-    static_sk_stroke_rec_set(sk_stroke_key_out, SkStrokeRec(*paint, style, resScale));
+int SkStrokeRec_static_2(const SkPaint *paint, SkPaint::Style style, SkScalar resScale) {
+    return static_sk_stroke_rec_make(SkStrokeRec(*paint, style, resScale));
 }
 
-void SkStrokeRec_static_3(int sk_stroke_key_out, const SkPaint *paint, SkScalar resScale) {
-    static_sk_stroke_rec_set(sk_stroke_key_out, SkStrokeRec(*paint, resScale));
+int SkStrokeRec_static_3(const SkPaint *paint, SkScalar resScale) {
+    return static_sk_stroke_rec_make(SkStrokeRec(*paint, resScale));
 }
 
 SkStrokeRec::Style SkStrokeRec_getStyle(SkStrokeRec *stroke_rec) {

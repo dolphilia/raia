@@ -9,6 +9,7 @@
 #include <map>
 #include "modules/skshaper/include/SkShaper.h"
 
+int static_sk_shaper_make(std::unique_ptr<SkShaper> value);
 void static_sk_shaper_delete(int key);
 SkShaper *static_sk_shaper_get(int key);
 void static_sk_shaper_set(int key, std::unique_ptr<SkShaper> value);

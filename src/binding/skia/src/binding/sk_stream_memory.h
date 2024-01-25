@@ -11,8 +11,8 @@
 
 extern "C" {
 const void * SkStreamMemory_getMemoryBase(SkStreamMemory *stream_memory);
-void SkStreamMemory_duplicate(int sk_stream_memory_key_out, SkStreamMemory *stream_memory);
-void SkStreamMemory_fork(int sk_stream_memory_key_out, SkStreamMemory *stream_memory);
+int SkStreamMemory_duplicate(SkStreamMemory *stream_memory);
+int SkStreamMemory_fork(SkStreamMemory *stream_memory);
 bool SkStreamMemory_hasLength(SkStreamMemory *stream_memory);
 size_t SkStreamMemory_getLength(SkStreamMemory *stream_memory);
 bool SkStreamMemory_hasPosition(SkStreamMemory *stream_memory);
@@ -34,7 +34,7 @@ bool SkStreamMemory_readBool(SkStreamMemory *stream_memory, bool *b);
 bool SkStreamMemory_readScalar(SkStreamMemory *stream_memory, SkScalar *v);
 bool SkStreamMemory_readPackedUInt(SkStreamMemory *stream_memory, size_t *size);
 // static
-void SkStreamMemory_MakeFromFile(int sk_stream_asset_key_out, const char path[]);
+int SkStreamMemory_MakeFromFile(const char path[]);
 }
 
 #endif //RAIA_SKIA_SK_STREAM_MEMORY_H

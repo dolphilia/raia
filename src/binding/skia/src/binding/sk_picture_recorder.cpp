@@ -31,16 +31,16 @@ SkCanvas * SkPictureRecorder_getRecordingCanvas(SkPictureRecorder *picture_recor
     return picture_recorder->getRecordingCanvas();
 }
 
-void SkPictureRecorder_finishRecordingAsPicture(int sk_picture_key_out, SkPictureRecorder *picture_recorder) {
-    static_sk_picture_set(sk_picture_key_out, picture_recorder->finishRecordingAsPicture());
+int SkPictureRecorder_finishRecordingAsPicture(SkPictureRecorder *picture_recorder) {
+    return static_sk_picture_make(picture_recorder->finishRecordingAsPicture());
 }
 
-void SkPictureRecorder_finishRecordingAsPictureWithCull(int sk_picture_key_out, SkPictureRecorder *picture_recorder, const SkRect *cullRect) {
-    static_sk_picture_set(sk_picture_key_out, picture_recorder->finishRecordingAsPictureWithCull(*cullRect));
+int SkPictureRecorder_finishRecordingAsPictureWithCull(SkPictureRecorder *picture_recorder, const SkRect *cullRect) {
+    return static_sk_picture_make(picture_recorder->finishRecordingAsPictureWithCull(*cullRect));
 }
 
-void SkPictureRecorder_finishRecordingAsDrawable(int sk_drawable_key_out, SkPictureRecorder *picture_recorder) {
-    static_sk_drawable_set(sk_drawable_key_out, picture_recorder->finishRecordingAsDrawable());
+int SkPictureRecorder_finishRecordingAsDrawable(SkPictureRecorder *picture_recorder) {
+    return static_sk_drawable_make(picture_recorder->finishRecordingAsDrawable());
 }
 
 }

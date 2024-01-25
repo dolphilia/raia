@@ -22,8 +22,8 @@ void SkContourMeasureIter_reset(SkContourMeasureIter *contour_measure_iter, cons
     contour_measure_iter->reset(*path, forceClosed, resScale);
 }
 
-void SkContourMeasureIter_next(int sk_contour_measure_key_out, SkContourMeasureIter *contour_measure_iter) {
-    static_sk_contour_measure_set(sk_contour_measure_key_out, contour_measure_iter->next());
+int SkContourMeasureIter_next(SkContourMeasureIter *contour_measure_iter) {
+    return static_sk_contour_measure_make(contour_measure_iter->next());
 }
 
 }

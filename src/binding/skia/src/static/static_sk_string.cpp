@@ -7,6 +7,13 @@
 #include <utility>
 
 static std::map<int , SkString> static_sk_string;
+static int static_sk_string_index = 0;
+
+int static_sk_string_make(SkString value) {
+    static_sk_string[static_sk_string_index] = std::move(value);
+    static_sk_string_index++;
+    return static_sk_string_index - 1;
+}
 
 void static_sk_string_delete(int key) {
     static_sk_string.erase(key);

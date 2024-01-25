@@ -196,23 +196,28 @@ int main(int argc, char* argv[]) {
     }
 
 
-    /*
+
     // SkBitmapとSkCanvasを初期化する
     SkBitmap* skBitmap = SkBitmap_new();
+    int image_file_id = 0;
+    int image_data_id = 0;
+    int image_id = 0;
+    int rect_id = 0;
     {
         SkBitmap_allocN32Pixels(skBitmap, image_width, image_height, false);
         SkCanvas *canvas = SkCanvas_new_3(skBitmap);
 
         {
             // PNG画像を読み込む
-            SkStream_MakeFromFile("image_file", "adv_sample_image2.png");
-            SkData_MakeFromStream("image_data", static_sk_stream_get("image_file"), SkStream_getLength(static_sk_stream_get("image_file")));
-            SkImages_DeferredFromEncodedData("sample_image", "image_data");
+            image_file_id = SkStream_MakeFromFile("adv_sample_image2.png");
+            image_data_id = SkData_MakeFromStream(static_sk_stream_get(image_file_id),
+                                  SkStream_getLength(static_sk_stream_get(image_file_id)));
+            image_id = SkImages_DeferredFromEncodedData(image_data_id);
         }
 
         {
             // 画像をキャンバスに描画
-            SkCanvas_drawImage_4(canvas, static_sk_image_get("sample_image"), 0, 0);
+            SkCanvas_drawImage_4(canvas, static_sk_image_get(image_id), 0, 0);
         }
 
         {
@@ -220,9 +225,9 @@ int main(int argc, char* argv[]) {
             SkPaint *paint = SkPaint_new();
             SkPaint_setBlendMode(paint, SkBlendMode::kOverlay);
             SkPaint_setColor(paint, SK_ColorBLUE); // 赤色を選択
-            SkRect_MakeXYWH("rect", 20, 20, 400, 600 - 40); // 四角形の位置とサイズ
+            rect_id = SkRect_MakeXYWH(20, 20, 400, 600 - 40); // 四角形の位置とサイズ
             //SkCanvas_drawRect("rect", canvas, paint); // 四角形を描画
-            static_sk_rect_delete("rect");
+            static_sk_rect_delete(rect_id);
         }
 
         {
@@ -245,15 +250,16 @@ int main(int argc, char* argv[]) {
 
         // ピクセルデータを書き込む
         //skBitmap.setPixels(image_pixels);
-
-        // スマートポインタを明示的に解放する
-        static_sk_data_delete("image_data");
-        static_sk_stream_delete("image_file");
-        static_sk_image_delete("sample_image");
     }
+    // スマートポインタを明示的に解放する
+    static_sk_data_delete(image_data_id);
+    static_sk_stream_delete(image_file_id);
+    static_sk_image_delete(image_data_id);
+    static_sk_rect_delete(rect_id);
+
     // Skiaのビットマップからピクセルデータを取得
     GLubyte* skia_pixels = (GLubyte*)SkBitmap_getPixels(skBitmap);;
-    */
+
 
 
     // メインループ
@@ -264,7 +270,7 @@ int main(int argc, char* argv[]) {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         //glBindTexture(GL_TEXTURE_2D, window_texture);
-        //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image_width, image_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, skia_pixels);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image_width, image_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, skia_pixels);
 
         glUseProgram(shader_program);
         glBindVertexArray(vertex_array_object);

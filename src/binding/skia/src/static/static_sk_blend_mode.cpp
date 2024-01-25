@@ -5,6 +5,13 @@
 #include "static_sk_blend_mode.h"
 
 static std::map<int, std::optional<SkBlendMode>> static_optional_sk_blend_mode;
+static int static_optional_sk_blend_mode_index = 0;
+
+int static_optional_sk_blend_mode_make(std::optional<SkBlendMode> value) {
+    static_optional_sk_blend_mode[static_optional_sk_blend_mode_index] = value;
+    static_optional_sk_blend_mode_index++;
+    return static_optional_sk_blend_mode_index - 1;
+}
 
 void static_optional_sk_blend_mode_delete(int key) {
     static_optional_sk_blend_mode[key].reset();

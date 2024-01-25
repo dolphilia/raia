@@ -14,12 +14,12 @@ uint32_t SkImageGenerator_uniqueID(SkImageGenerator *image_generator) {
     return image_generator->uniqueID();
 }
 
-void SkImageGenerator_refEncodedData(int sk_data_key_out, SkImageGenerator *image_generator) {
-    static_sk_data_set(sk_data_key_out, image_generator->refEncodedData());
+int SkImageGenerator_refEncodedData(SkImageGenerator *image_generator) {
+    return static_sk_data_make(image_generator->refEncodedData());
 }
 
-void SkImageGenerator_getInfo(int sk_image_info_key_out, SkImageGenerator *image_generator) {
-    static_sk_image_info_set(sk_image_info_key_out, image_generator->getInfo());
+int SkImageGenerator_getInfo(SkImageGenerator *image_generator) {
+    return static_sk_image_info_make(image_generator->getInfo());
 }
 
 bool SkImageGenerator_isValid(SkImageGenerator *image_generator, GrRecordingContext *context) {

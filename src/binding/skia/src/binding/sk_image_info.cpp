@@ -33,16 +33,16 @@ SkColorSpace * SkImageInfo_colorSpace(SkImageInfo *image_info) {
     return image_info->colorSpace();
 }
 
-void SkImageInfo_refColorSpace(int sk_color_space_key_out, SkImageInfo *image_info) {
-    static_sk_color_space_set(sk_color_space_key_out, image_info->refColorSpace());
+int SkImageInfo_refColorSpace(SkImageInfo *image_info) {
+    return static_sk_color_space_make(image_info->refColorSpace());
 }
 
 bool SkImageInfo_isEmpty(SkImageInfo *image_info) {
     return image_info->isEmpty();
 }
 
-void SkImageInfo_colorInfo(int sk_color_info_key_out, SkImageInfo *image_info) {
-    static_sk_color_info_set(sk_color_info_key_out, image_info->colorInfo());
+int SkImageInfo_colorInfo(SkImageInfo *image_info) {
+    return static_sk_color_info_make(image_info->colorInfo());
 }
 
 bool SkImageInfo_isOpaque(SkImageInfo *image_info) {
@@ -53,32 +53,32 @@ SkISize SkImageInfo_dimensions(SkImageInfo *image_info) {
     return image_info->dimensions();
 }
 
-void SkImageInfo_bounds(int sk_i_rect_key_out, SkImageInfo *image_info) {
-    static_sk_i_rect_set(sk_i_rect_key_out, image_info->bounds());
+int SkImageInfo_bounds(SkImageInfo *image_info) {
+    return static_sk_i_rect_make(image_info->bounds());
 }
 
 bool SkImageInfo_gammaCloseToSRGB(SkImageInfo *image_info) {
     return image_info->gammaCloseToSRGB();
 }
 
-void SkImageInfo_makeWH(int sk_image_info_key_out, SkImageInfo *image_info, int newWidth, int newHeight) {
-    static_sk_image_info_set(sk_image_info_key_out, image_info->makeWH(newWidth, newHeight));
+int SkImageInfo_makeWH(SkImageInfo *image_info, int newWidth, int newHeight) {
+    return static_sk_image_info_make(image_info->makeWH(newWidth, newHeight));
 }
 
-void SkImageInfo_makeDimensions(int sk_image_info_key_out, SkImageInfo *image_info, SkISize newSize) {
-    static_sk_image_info_set(sk_image_info_key_out, image_info->makeDimensions(newSize));
+int SkImageInfo_makeDimensions(SkImageInfo *image_info, SkISize newSize) {
+    return static_sk_image_info_make(image_info->makeDimensions(newSize));
 }
 
-void SkImageInfo_makeAlphaType(int sk_image_info_key_out, SkImageInfo *image_info, SkAlphaType newAlphaType) {
-    static_sk_image_info_set(sk_image_info_key_out, image_info->makeAlphaType(newAlphaType));
+int SkImageInfo_makeAlphaType(SkImageInfo *image_info, SkAlphaType newAlphaType) {
+    return static_sk_image_info_make(image_info->makeAlphaType(newAlphaType));
 }
 
-void SkImageInfo_makeColorType(int sk_image_info_key_out, SkImageInfo *image_info, SkColorType newColorType) {
-    static_sk_image_info_set(sk_image_info_key_out, image_info->makeColorType(newColorType));
+int SkImageInfo_makeColorType(SkImageInfo *image_info, SkColorType newColorType) {
+    return static_sk_image_info_make(image_info->makeColorType(newColorType));
 }
 
-void SkImageInfo_makeColorSpace(int sk_image_info_key_out, SkImageInfo *image_info, int sk_color_space_key_in) {
-    static_sk_image_info_set(sk_image_info_key_out, image_info->makeColorSpace(static_sk_color_space_move(sk_color_space_key_in)));
+int SkImageInfo_makeColorSpace(SkImageInfo *image_info, int sk_color_space_key_in) {
+    return static_sk_image_info_make(image_info->makeColorSpace(static_sk_color_space_move(sk_color_space_key_in)));
 }
 
 int SkImageInfo_bytesPerPixel(SkImageInfo *image_info) {
@@ -119,72 +119,72 @@ void SkImageInfo_reset(SkImageInfo *image_info) {
 
 // static
 
-void SkImageInfo_Make(int sk_image_info_key_out, int width, int height, SkColorType ct, SkAlphaType at) {
-    static_sk_image_info_set(sk_image_info_key_out, SkImageInfo::Make(width, height, ct, at));
+int SkImageInfo_Make(int width, int height, SkColorType ct, SkAlphaType at) {
+    return static_sk_image_info_make(SkImageInfo::Make(width, height, ct, at));
 }
 
-void SkImageInfo_Make_2(int sk_image_info_key_out, int sk_color_space_key_in, int width, int height, SkColorType ct, SkAlphaType at) {
-    static_sk_image_info_set(sk_image_info_key_out, SkImageInfo::Make(width, height, ct, at, static_sk_color_space_move(sk_color_space_key_in)));
+int SkImageInfo_Make_2(int sk_color_space_key_in, int width, int height, SkColorType ct, SkAlphaType at) {
+    return static_sk_image_info_make(SkImageInfo::Make(width, height, ct, at, static_sk_color_space_move(sk_color_space_key_in)));
 }
 
-void SkImageInfo_Make_3(int sk_image_info_key_out, SkISize dimensions, SkColorType ct, SkAlphaType at) {
-    static_sk_image_info_set(sk_image_info_key_out, SkImageInfo::Make(dimensions, ct, at));
+int SkImageInfo_Make_3(SkISize dimensions, SkColorType ct, SkAlphaType at) {
+    return static_sk_image_info_make(SkImageInfo::Make(dimensions, ct, at));
 }
 
-void SkImageInfo_Make_4(int sk_image_info_key_out, int sk_color_space_key_in, SkISize dimensions, SkColorType ct, SkAlphaType at) {
-    static_sk_image_info_set(sk_image_info_key_out, SkImageInfo::Make(dimensions, ct, at, static_sk_color_space_move(sk_color_space_key_in)));
+int SkImageInfo_Make_4(int sk_color_space_key_in, SkISize dimensions, SkColorType ct, SkAlphaType at) {
+    return static_sk_image_info_make(SkImageInfo::Make(dimensions, ct, at, static_sk_color_space_move(sk_color_space_key_in)));
 }
 
-void SkImageInfo_Make_5(int sk_image_info_key_out, SkISize dimensions, const SkColorInfo *colorInfo) {
-    static_sk_image_info_set(sk_image_info_key_out, SkImageInfo::Make(dimensions, *colorInfo));
+int SkImageInfo_Make_5(SkISize dimensions, const SkColorInfo *colorInfo) {
+    return static_sk_image_info_make(SkImageInfo::Make(dimensions, *colorInfo));
 }
 
-void SkImageInfo_Make_6(int sk_image_info_key_out, SkISize dimensions, SkColorInfo &&colorInfo) { // @TODO
-    static_sk_image_info_set(sk_image_info_key_out, SkImageInfo::Make(dimensions, colorInfo));
+int SkImageInfo_Make_6(SkISize dimensions, SkColorInfo &&colorInfo) { // @TODO
+    return static_sk_image_info_make(SkImageInfo::Make(dimensions, colorInfo));
 }
 
-void SkImageInfo_MakeN32(int sk_image_info_key_out, int width, int height, SkAlphaType at) {
-    static_sk_image_info_set(sk_image_info_key_out, SkImageInfo::MakeN32(width, height, at));
+int SkImageInfo_MakeN32(int width, int height, SkAlphaType at) {
+    return static_sk_image_info_make(SkImageInfo::MakeN32(width, height, at));
 }
 
-void SkImageInfo_MakeN32_2(int sk_image_info_key_out, int sk_color_space_key_in, int width, int height, SkAlphaType at) {
-    static_sk_image_info_set(sk_image_info_key_out, SkImageInfo::MakeN32(width, height, at, static_sk_color_space_move(sk_color_space_key_in)));
+int SkImageInfo_MakeN32_2(int sk_color_space_key_in, int width, int height, SkAlphaType at) {
+    return static_sk_image_info_make(SkImageInfo::MakeN32(width, height, at, static_sk_color_space_move(sk_color_space_key_in)));
 }
 
-void SkImageInfo_MakeS32(int sk_image_info_key_out, int width, int height, SkAlphaType at) {
-    static_sk_image_info_set(sk_image_info_key_out, SkImageInfo::MakeS32(width, height, at));
+int SkImageInfo_MakeS32(int width, int height, SkAlphaType at) {
+    return static_sk_image_info_make(SkImageInfo::MakeS32(width, height, at));
 }
 
-void SkImageInfo_MakeN32Premul(int sk_image_info_key_out, int width, int height) {
-    static_sk_image_info_set(sk_image_info_key_out, SkImageInfo::MakeN32Premul(width, height));
+int SkImageInfo_MakeN32Premul(int width, int height) {
+    return static_sk_image_info_make(SkImageInfo::MakeN32Premul(width, height));
 }
 
-void SkImageInfo_MakeN32Premul_2(int sk_image_info_key_out, int sk_color_space_key_in, int width, int height) {
-    static_sk_image_info_set(sk_image_info_key_out, SkImageInfo::MakeN32Premul(width, height, static_sk_color_space_move(sk_color_space_key_in)));
+int SkImageInfo_MakeN32Premul_2(int sk_color_space_key_in, int width, int height) {
+    return static_sk_image_info_make(SkImageInfo::MakeN32Premul(width, height, static_sk_color_space_move(sk_color_space_key_in)));
 }
 
-void SkImageInfo_MakeN32Premul_3(int sk_image_info_key_out, SkISize dimensions) {
-    static_sk_image_info_set(sk_image_info_key_out, SkImageInfo::MakeN32Premul(dimensions));
+int SkImageInfo_MakeN32Premul_3(SkISize dimensions) {
+    return static_sk_image_info_make(SkImageInfo::MakeN32Premul(dimensions));
 }
 
-void SkImageInfo_MakeN32Premul_4(int sk_image_info_key_out, int sk_color_space_key_in, SkISize dimensions) {
-    static_sk_image_info_set(sk_image_info_key_out, SkImageInfo::MakeN32Premul(dimensions, static_sk_color_space_move(sk_color_space_key_in)));
+int SkImageInfo_MakeN32Premul_4(int sk_color_space_key_in, SkISize dimensions) {
+    return static_sk_image_info_make(SkImageInfo::MakeN32Premul(dimensions, static_sk_color_space_move(sk_color_space_key_in)));
 }
 
-void SkImageInfo_MakeA8(int sk_image_info_key_out, int width, int height) {
-    static_sk_image_info_set(sk_image_info_key_out, SkImageInfo::MakeA8(width, height));
+int SkImageInfo_MakeA8(int width, int height) {
+    return static_sk_image_info_make(SkImageInfo::MakeA8(width, height));
 }
 
-void SkImageInfo_MakeA8_2(int sk_image_info_key_out, SkISize dimensions) {
-    static_sk_image_info_set(sk_image_info_key_out, SkImageInfo::MakeA8(dimensions));
+int SkImageInfo_MakeA8_2(SkISize dimensions) {
+    return static_sk_image_info_make(SkImageInfo::MakeA8(dimensions));
 }
 
-void SkImageInfo_MakeUnknown(int sk_image_info_key_out, int width, int height) {
-    static_sk_image_info_set(sk_image_info_key_out, SkImageInfo::MakeUnknown(width, height));
+int SkImageInfo_MakeUnknown(int width, int height) {
+    return static_sk_image_info_make(SkImageInfo::MakeUnknown(width, height));
 }
 
-void SkImageInfo_MakeUnknown_2(int sk_image_info_key_out) {
-    static_sk_image_info_set(sk_image_info_key_out, SkImageInfo::MakeUnknown());
+int SkImageInfo_MakeUnknown_2() {
+    return static_sk_image_info_make(SkImageInfo::MakeUnknown());
 }
 
 bool SkImageInfo_ByteSizeOverflowed(size_t byteSize) {

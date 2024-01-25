@@ -24,8 +24,8 @@ bool SkStream_readBool(SkStream *stream, bool *b);
 bool SkStream_readScalar(SkStream *stream, SkScalar *v);
 bool SkStream_readPackedUInt(SkStream *stream, size_t *size);
 bool SkStream_rewind(SkStream *stream);
-void SkStream_duplicate(int sk_stream_key_out, SkStream *stream);
-void SkStream_fork(int sk_stream_key_out, SkStream *stream);
+int SkStream_duplicate(SkStream *stream);
+int SkStream_fork(SkStream *stream);
 bool SkStream_hasPosition(SkStream *stream);
 size_t SkStream_getPosition(SkStream *stream);
 bool SkStream_seek(SkStream *stream, size_t size);
@@ -34,7 +34,7 @@ bool SkStream_hasLength(SkStream *stream);
 size_t SkStream_getLength(SkStream *stream);
 const void * SkStream_getMemoryBase(SkStream *stream);
 // static
-void SkStream_MakeFromFile(int sk_stream_key_out, const char path[]);
+int SkStream_MakeFromFile(const char path[]);
 }
 
 #endif //RAIA_SKIA_SK_STREAM_H
