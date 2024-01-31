@@ -4,7 +4,7 @@
 
 #include "raia_v8.h"
 #include "static/static_v8_platform.h"
-#include "static/v8_isolate_create_params.h"
+#include "static/static_v8_isolate_create_params.h"
 
 void raia_lib_open(const v8_args_t &args) {
     auto lib_name = v8_args_to_str(args, 0) + "." + DYNAMIC_LIB_EXT;
@@ -489,31 +489,122 @@ extern "C" RAIA_API char *init(int argc, char *argv[]) {
 // static
 
 extern "C" {
-    int v8_platform_NewDefaultPlatform () {
-        return static_v8_platform_make(v8::platform::NewDefaultPlatform());
-    }
-    bool v8_v8_Initialize() {
-        return v8::V8::Initialize();
-    }
-    void v8_v8_InitializePlatform(int v8_platform_key_in) {
-        v8::V8::InitializePlatform(static_v8_platform_get(v8_platform_key_in));
-    }
+
+//
+// v8::V8
+//
+
+bool v8_V8_Initialize() {
+    return v8::V8::Initialize();
+}
+
+void v8_V8_InitializePlatform(int v8_platform_key_in) {
+    v8::V8::InitializePlatform(static_v8_platform_get(v8_platform_key_in));
+}
+
+bool v8_V8_Dispose() {
+    return v8::V8::Dispose();
+}
+
+void v8_V8_DisposePlatform() {
+    v8::V8::DisposePlatform();
+}
+
+
+//
+// v8::Platform
+//
+
+int v8_Platform_NewDefaultPlatform () {
+    return static_v8_platform_make(v8::platform::NewDefaultPlatform());
+}
+
+//
+// v8::Isolate
+//
+
+// static
+
+v8::Isolate * v8_Isolate_New(const v8::Isolate::CreateParams *params) {
+    return v8::Isolate::New(*params);
+}
+
+//
+// v8::Isolate::CreateParams
+//
+
+v8::Isolate::CreateParams* v8_Isolate_CreateParams_new() {
+    return new v8::Isolate::CreateParams();
+}
+
+//
+// v8::Isolate::Scope
+//
+
+v8::Isolate::Scope v8_Isolate_Scope_new(v8::Isolate *isolate) {
+    return v8::Isolate::Scope(isolate);
+}
+
+//
+// v8::ArrayBuffer::Allocator
+//
+
+v8::ArrayBuffer::Allocator * v8_ArrayBuffer_Allocator_NewDefaultAllocator() {
+    return v8::ArrayBuffer::Allocator::NewDefaultAllocator();
+}
+
+//
+// v8::HandleScope
+//
+
+v8::HandleScope v8_HandleScope_new(v8::Isolate *isolate) {
+    return v8::HandleScope(isolate);
+}
+
+//
+// v8::Context
+//
+
+// static
+
+v8::Local<v8::Context> v8_Context_New(v8::Isolate *isolate, v8::ExtensionConfiguration *extensions=nullptr, v8::MaybeLocal<v8::ObjectTemplate > global_template=v8::MaybeLocal< v8::ObjectTemplate >(), v8::MaybeLocal< v8::Value > global_object=v8::MaybeLocal< v8::Value >(), v8::DeserializeInternalFieldsCallback internal_fields_deserializer=v8::DeserializeInternalFieldsCallback(), v8::MicrotaskQueue *microtask_queue=nullptr) {
+    return v8::Context::New(isolate, extensions, global_template, global_object, internal_fields_deserializer, microtask_queue);
+}
+
+//
+// v8::Context::Scope
+//
+
+v8::Context::Scope v8_Context_ScopeScope_new(v8::Local<v8::Context> context) {
+    return v8::Context::Scope(context);
+}
+
+
+//
+// v8::ObjectTemplate
+//
+
+v8::Local<v8::ObjectTemplate> v8_ObjectTemplate_New(v8::Isolate *isolate, v8::Local<v8::FunctionTemplate> constructor=v8::Local<v8::FunctionTemplate >()) {
+    return v8::ObjectTemplate::New(isolate);
+}
+
 }
 
 int main(int argc, char *argv[]) {
-    // v8::V8::InitializeICUDefaultLocation(argv[0]);
-    // v8::V8::InitializeExternalStartupData(argv[1]);
-    // auto platform = v8::platform::NewDefaultPlatform();
-    // v8::V8::InitializePlatform(platform.get());
-    // v8::V8::Initialize()
-    int platform = v8_platform_NewDefaultPlatform();
-    v8_v8_InitializePlatform(platform);
-    v8_v8_Initialize();
-    //
-    auto *isolate_params = new v8::Isolate::CreateParams();
-    static_v8_isolate_create_params_set_array_buffer_allocator(isolate_params, v8::ArrayBuffer::Allocator::NewDefaultAllocator());
-    v8::Isolate *isolate = v8::Isolate::New(*isolate_params);
-    //
+    int platform = v8_Platform_NewDefaultPlatform();
+    v8_V8_InitializePlatform(platform);
+    v8_V8_Initialize();
+    auto isolate_params = v8_Isolate_CreateParams_new();
+    static_v8_isolate_create_params_set_array_buffer_allocator(isolate_params, v8_ArrayBuffer_Allocator_NewDefaultAllocator());
+    auto isolate = v8_Isolate_New(isolate_params);
+    auto isolate_scope = v8_Isolate_Scope_new(isolate);
+    auto handle_scope = v8_HandleScope_new(isolate);
+    auto context = v8_Context_New(isolate, nullptr, v8_ObjectTemplate_New(isolate));
+    auto context_scope = v8_Context_ScopeScope_new(context);
+    v8_V8_Dispose();
+    v8_V8_DisposePlatform();
+    static_v8_platform_delete(platform);
+    static_v8_isolate_create_params_delete_array_buffer_allocator(isolate_params);
     printf("Hello V8.");
     //init(argc, argv);
     return 0;
