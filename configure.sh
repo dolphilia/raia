@@ -73,6 +73,14 @@ brew install harfbuzz
 brew install icu4c
 git clone https://skia.googlesource.com/skia.git
 cd skia
+# git checkout  0d49b661d75adbb8ac8cf88f7d527b1587be2c63
+# git submodule update --init --recursive
+#
+# skia/BUILD.gn から以下の記述を削除またはコメントアウトすること
+#  defines = [
+#    "SK_DEFAULT_TYPEFACE_IS_EMPTY",
+#    "SK_DISABLE_LEGACY_DEFAULT_TYPEFACE",
+#  ]
 python3 tools/git-sync-deps
 bin/gn gen out/Shared --args='
 is_official_build = true
@@ -86,6 +94,14 @@ target_cpu = "arm64"
 extra_cflags = [ "-frtti", "-I/opt/homebrew/include", "-I/opt/homebrew/include/harfbuzz", "-I/opt/homebrew/opt/icu4c/include" ]
 extra_ldflags = [ "-L/opt/homebrew/lib", "-L/opt/homebrew/opt/icu4c/lib" ]
 '
+# bin/gn gen out/Shared --args='
+# is_official_build = false
+# is_component_build = true
+# cc = "clang"
+# cxx = "clang++"
+# target_os = "mac"
+# target_cpu = "arm64"
+# '
 ninja -C out/Shared
 cd ../
 cp skia/out/Shared/libbentleyottmann.dylib ../sdk/macos/arm64/lib
