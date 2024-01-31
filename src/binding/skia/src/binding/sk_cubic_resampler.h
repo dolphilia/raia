@@ -8,6 +8,7 @@
 #include "include/core/SkSamplingOptions.h"
 
 extern "C" {
+void SkCubicResampler_delete(SkCubicResampler *cubicResampler);
 SkCubicResampler SkCubicResampler_Mitchell();
 SkCubicResampler SkCubicResampler_CatmullRom();
 }

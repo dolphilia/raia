@@ -6,6 +6,12 @@
 
 extern "C" {
 
+void SkDashPathEffect_delete(SkDashPathEffect * dashPathEffect) {
+    delete dashPathEffect;
+}
+
+// static
+
 int SkDashPathEffect_Make(const SkScalar intervals[], int count, SkScalar phase) {
     return static_sk_path_effect_make(SkDashPathEffect::Make(intervals, count, phase));
 }

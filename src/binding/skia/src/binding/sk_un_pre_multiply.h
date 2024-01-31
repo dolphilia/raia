@@ -8,6 +8,7 @@
 #include "include/core/SkUnPreMultiply.h"
 
 extern "C" {
+void SkUnPreMultiply_delete(SkUnPreMultiply * unPreMultiply);
 // static
 const SkUnPreMultiply::Scale * SkUnPreMultiply_GetScaleTable();
 SkUnPreMultiply::Scale SkUnPreMultiply_GetScale(U8CPU alpha);

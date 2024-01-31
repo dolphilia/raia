@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkPath1DPathEffect_delete(SkPath1DPathEffect * path1DPathEffect) {
+    delete path1DPathEffect;
+}
+
 // static
 
 int SkPath1DPathEffect_Make(const SkPath *path, SkScalar advance, SkScalar phase, SkPath1DPathEffect::Style style) {

@@ -24,6 +24,10 @@ SkFont *SkFont_new_4(int sk_typeface_key_in, SkScalar size, SkScalar scaleX, SkS
     return new SkFont(static_sk_typeface_move(sk_typeface_key_in), size, scaleX, skewX);
 }
 
+void SkFont_delete(SkFont *font) {
+    delete font;
+}
+
 bool SkFont_isForceAutoHinting(SkFont *font) {
     return font->isForceAutoHinting();
 }

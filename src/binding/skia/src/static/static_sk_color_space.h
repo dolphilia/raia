@@ -10,8 +10,8 @@
 #include "include/core/SkColorSpace.h"
 
 int static_sk_color_space_make(sk_sp<SkColorSpace> value);
-void static_sk_color_space_delete(int key);
-SkColorSpace *static_sk_color_space_get(int key);
+extern "C" void static_sk_color_space_delete(int key);
+extern "C" SkColorSpace *static_sk_color_space_get(int key);
 void static_sk_color_space_set(int key, sk_sp<SkColorSpace> value);
 sk_sp<SkColorSpace> static_sk_color_space_move(int key);
 

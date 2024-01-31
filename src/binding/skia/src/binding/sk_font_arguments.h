@@ -10,6 +10,7 @@
 
 extern "C" {
 SkFontArguments *SkFontArguments_new();
+void SkFontArguments_delete(SkFontArguments *font_arguments);
 int SkFontArguments_setCollectionIndex(SkFontArguments *font_argments, int collectionIndex);
 int SkFontArguments_setVariationDesignPosition(SkFontArguments *font_argments, SkFontArguments::VariationPosition position);
 int SkFontArguments_getCollectionIndex(SkFontArguments *font_argments);

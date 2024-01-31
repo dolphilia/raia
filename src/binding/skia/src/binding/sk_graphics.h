@@ -8,6 +8,7 @@
 #include "include/core/SkGraphics.h"
 
 extern "C" {
+void SkGraphics_delete(SkGraphics * graphics);
 // static
 void SkGraphics_Init();
 size_t SkGraphics_GetFontCacheLimit();

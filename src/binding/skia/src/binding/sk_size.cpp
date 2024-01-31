@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkSize_delete(SkSize *size) {
+    delete size;
+}
+
 void SkSize_set(SkSize *size, SkScalar w, SkScalar h) {
     size->set(w, h);
 }

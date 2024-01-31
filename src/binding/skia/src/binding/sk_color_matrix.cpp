@@ -15,6 +15,10 @@ SkColorMatrix *SkColorMatrix_new_2(float m00, float m01, float m02, float m03, f
     return new SkColorMatrix(m00, m01, m02, m03, m04, m10, m11, m12, m13, m14, m20, m21, m22, m23, m24, m30, m31, m32, m33, m34);
 }
 
+void SkColorMatrix_delete(SkColorMatrix *color_matrix) {
+    delete color_matrix;
+}
+
 void SkColorMatrix_setIdentity(SkColorMatrix *color_matrix) {
     color_matrix->setIdentity();
 }

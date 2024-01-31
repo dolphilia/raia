@@ -27,6 +27,10 @@ SkYUVAPixmapInfo *SkYUVAPixmapInfo_new_4(const SkYUVAPixmapInfo *info) {
     return new SkYUVAPixmapInfo(*info);
 }
 
+void SkYUVAPixmapInfo_delete(SkYUVAPixmapInfo *yuvaPixmapInfo) {
+    delete yuvaPixmapInfo;
+}
+
 const SkYUVAInfo * SkYUVAPixmapInfo_yuvaInfo(SkYUVAPixmapInfo *yuva_pixmap_info) {
     return &yuva_pixmap_info->yuvaInfo();
 }

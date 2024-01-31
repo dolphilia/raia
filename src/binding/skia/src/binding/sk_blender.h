@@ -11,6 +11,7 @@
 #include "../static/static_sk_flattenable.h"
 
 extern "C" {
+void SkBlender_delete(SkBlender *blender);
 SkBlender::Factory SkBlender_getFactory(SkBlender *blender);
 const char *SkBlender_getTypeName(SkBlender *blender);
 void SkBlender_flatten(SkBlender *blender, SkWriteBuffer *write_buffer);

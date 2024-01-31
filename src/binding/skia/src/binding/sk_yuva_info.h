@@ -17,6 +17,7 @@ extern "C" {
 SkYUVAInfo *SkYUVAInfo_new();
 SkYUVAInfo *SkYUVAInfo_new_2(const SkYUVAInfo *info);
 SkYUVAInfo *SkYUVAInfo_new_3(SkISize dimensions, SkYUVAInfo::PlaneConfig config, SkYUVAInfo::Subsampling subsampling, SkYUVColorSpace space, SkEncodedOrigin origin, SkYUVAInfo::Siting sitingX, SkYUVAInfo::Siting sitingY);
+void SkYUVAInfo_delete(SkYUVAInfo *yuvaInfo);
 SkYUVAInfo::PlaneConfig SkYUVAInfo_planeConfig(SkYUVAInfo * yuva_info);
 SkYUVAInfo::Subsampling SkYUVAInfo_subsampling(SkYUVAInfo * yuva_info);
 int SkYUVAInfo_planeSubsamplingFactors(SkYUVAInfo * yuva_info, int planeIdx);

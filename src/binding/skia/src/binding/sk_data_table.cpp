@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkDataTable_delete(SkDataTable *data_table) {
+    delete &data_table;
+}
+
 bool SkDataTable_isEmpty(SkDataTable *data_table) {
     return data_table->isEmpty();
 }

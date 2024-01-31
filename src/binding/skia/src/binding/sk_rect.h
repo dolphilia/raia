@@ -10,6 +10,7 @@
 #include "../static/static_sk_i_rect.h"
 
 extern "C" {
+void SkRect_delete(SkRect *rect);
 bool SkRect_isEmpty(SkRect *rect);
 bool SkRect_isSorted(SkRect *rect);
 bool SkRect_isFinite(SkRect *rect);

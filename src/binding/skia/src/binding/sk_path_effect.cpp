@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkPathEffect_delete(SkPathEffect * pathEffect) {
+    delete pathEffect;
+}
+
 SkPathEffect::DashType SkPathEffect_asADash(SkPathEffect *path_effect, SkPathEffect::DashInfo *info) {
     return path_effect->asADash(info);
 }

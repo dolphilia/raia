@@ -10,7 +10,7 @@
 #include "include/core/SkString.h"
 
 int static_sk_string_make(SkString value);
-void static_sk_string_delete(int key);
+extern "C" void static_sk_string_delete(int key);
 SkString static_sk_string_get(int key);
 void static_sk_string_set(int key, SkString value);
 

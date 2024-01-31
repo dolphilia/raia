@@ -10,7 +10,7 @@
 #include "include/core/SkMatrix.h"
 
 int static_sk_matrix_make(SkMatrix value);
-void static_sk_matrix_delete(int key);
+extern "C" void static_sk_matrix_delete(int key);
 SkMatrix static_sk_matrix_get(int key);
 void static_sk_matrix_set(int key, SkMatrix value);
 

@@ -13,6 +13,10 @@ SkImageInfo *SkImageInfo_new() {
     return new SkImageInfo();
 }
 
+void SkImageInfo_delete(SkImageInfo *image_info) {
+    delete image_info;
+}
+
 int SkImageInfo_width(SkImageInfo *image_info) {
     return image_info->width();
 }

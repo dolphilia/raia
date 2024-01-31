@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkImageFilters_delete(SkImageFilters * imageFilters) {
+    delete imageFilters;
+}
+
 // static
 
 int SkImageFilters_Arithmetic(int sk_image_filter_key_in_1, int sk_image_filter_key_in_2, SkScalar k1, SkScalar k2, SkScalar k3, SkScalar k4, bool enforcePMColor, const SkImageFilters::CropRect *cropRect) {

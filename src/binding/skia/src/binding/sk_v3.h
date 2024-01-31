@@ -18,6 +18,7 @@ extern "C" {
 // void operator-=(SkV3 v)
 // void operator*=(SkV3 v)
 // void operator*=(SkScalar s)
+void SkV3_delete(SkV3 *v3);
 SkScalar SkV3_lengthSquared(SkV3 *v3);
 SkScalar SkV3_length(SkV3 *v3);
 SkScalar SkV3_dot(SkV3 *v3, const SkV3 *v);

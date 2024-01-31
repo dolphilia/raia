@@ -12,6 +12,7 @@
 #include "../static/static_sk_rect.h"
 
 extern "C" {
+void SkImageFilter_delete(SkImageFilter *image_filter);
 int SkImageFilter_filterBounds(SkImageFilter *image_filter, const SkIRect *src, const SkMatrix *ctm, SkImageFilter::MapDirection direction, const SkIRect *inputRect);
 bool SkImageFilter_isColorFilterNode(SkImageFilter *image_filter, SkColorFilter **filterPtr);
 bool SkImageFilter_asColorFilter(SkImageFilter *image_filter, SkColorFilter **filterPtr);

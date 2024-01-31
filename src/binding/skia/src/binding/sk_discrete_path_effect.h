@@ -9,6 +9,7 @@
 #include "../static/static_sk_path_effect.h"
 
 extern "C" {
+void SkDiscretePathEffect_delete(SkDiscretePathEffect * discretePathEffect);
 int SkDiscretePathEffect_Make(SkScalar segLength, SkScalar dev, uint32_t seedAssist);
 void SkDiscretePathEffect_RegisterFlattenables();
 }

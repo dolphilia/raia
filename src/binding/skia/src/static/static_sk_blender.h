@@ -10,8 +10,8 @@
 #include "include/core/SkBlender.h"
 
 int static_sk_blender_make(sk_sp<SkBlender> value);
-void static_sk_blender_delete(int key);
-SkBlender *static_sk_blender_get(int key);
+extern "C" void static_sk_blender_delete(int key);
+extern "C" SkBlender *static_sk_blender_get(int key);
 void static_sk_blender_set(int key, sk_sp<SkBlender> value);
 sk_sp<SkBlender> static_sk_blender_move(int key);
 

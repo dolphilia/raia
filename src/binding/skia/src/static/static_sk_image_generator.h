@@ -10,8 +10,8 @@
 #include "include/core/SkImageGenerator.h"
 
 int static_sk_image_generator_make(std::unique_ptr<SkImageGenerator> value);
-void static_sk_image_generator_delete(int key);
-SkImageGenerator *static_sk_image_generator_get(int key);
+extern "C" void static_sk_image_generator_delete(int key);
+extern "C" SkImageGenerator *static_sk_image_generator_get(int key);
 void static_sk_image_generator_set(int key, std::unique_ptr<SkImageGenerator> value);
 std::unique_ptr<SkImageGenerator> static_sk_image_generator_move(int key);
 

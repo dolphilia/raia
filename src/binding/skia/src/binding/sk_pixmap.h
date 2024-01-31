@@ -13,6 +13,7 @@
 extern "C" {
 SkPixmap *SkPixmap_new();
 SkPixmap *SkPixmap_new_2(const SkImageInfo *info, const void *addr, size_t rowBytes);
+void SkPixmap_delete(SkPixmap *pixmap);
 void SkPixmap_reset(SkPixmap *pixmap);
 void SkPixmap_reset_2(SkPixmap *pixmap, const SkImageInfo *info, const void *addr, size_t rowBytes);
 bool SkPixmap_reset_3(SkPixmap *pixmap, const SkMask *mask);

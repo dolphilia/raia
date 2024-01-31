@@ -22,6 +22,10 @@ SkMemoryStream *SkMemoryStream_new_4(int sk_data_key_in) {
     return new SkMemoryStream(static_sk_data_move(sk_data_key_in));
 }
 
+void SkMemoryStream_delete(SkMemoryStream *memoryStream) {
+    delete memoryStream;
+}
+
 void SkMemoryStream_setMemory(SkMemoryStream *memory_stream, const void *data, size_t length, bool copyData) {
     memory_stream->setMemory(data, length, copyData);
 }

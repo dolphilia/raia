@@ -9,6 +9,7 @@
 #include "../static/static_sk_color_table.h"
 
 extern "C" {
+void SkColorTable_delete(SkColorTable *color_table);
 const uint8_t * SkColorTable_alphaTable(SkColorTable *color_table);
 const uint8_t * SkColorTable_redTable(SkColorTable *color_table);
 const uint8_t * SkColorTable_greenTable(SkColorTable *color_table);

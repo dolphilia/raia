@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkColorTable_delete(SkColorTable *color_table) {
+    delete color_table;
+}
+
 const uint8_t * SkColorTable_alphaTable(SkColorTable *color_table) {
     return color_table->alphaTable();
 }

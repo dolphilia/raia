@@ -9,7 +9,7 @@
 #include <map>
 
 int static_function_void_void_make(std::function<void(void)> value);
-void static_function_void_void_delete(int key);
+extern "C" void static_function_void_void_delete(int key);
 std::function<void(void)> static_function_void_void_get(int key);
 void static_function_void_void_set(int key, std::function<void(void)> value);
 

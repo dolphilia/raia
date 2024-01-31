@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkImage_delete(SkImage *image) {
+    delete image;
+}
+
 const SkImageInfo * SkImage_imageInfo(SkImage *image) {
     return &image->imageInfo();
 }

@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkIRect_delete(SkIRect *i_rect) {
+    delete i_rect;
+}
+
 int32_t SkIRect_left(SkIRect *i_rect) {
     return i_rect->left();
 }

@@ -9,6 +9,7 @@
 #include "../static/static_sk_stream_asset.h"
 
 extern "C" {
+void SkStreamAsset_delete(SkStreamAsset *stream_asset);
 bool SkStreamAsset_hasLength(SkStreamAsset *stream_asset);
 size_t SkStreamAsset_getLength(SkStreamAsset *stream_asset);
 int SkStreamAsset_duplicate(SkStreamAsset *stream_asset);

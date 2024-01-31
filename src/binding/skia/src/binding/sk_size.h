@@ -8,6 +8,7 @@
 #include "include/core/SkSize.h"
 
 extern "C" {
+void SkSize_delete(SkSize *size);
 void SkSize_set(SkSize *size, SkScalar w, SkScalar h);
 bool SkSize_isZero(SkSize *size);
 bool SkSize_isEmpty(SkSize *size);

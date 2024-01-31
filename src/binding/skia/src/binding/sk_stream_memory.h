@@ -10,6 +10,7 @@
 #include "../static/static_sk_stream_asset.h"
 
 extern "C" {
+void SkStreamMemory_delete(SkStreamMemory *stream_memory);
 const void * SkStreamMemory_getMemoryBase(SkStreamMemory *stream_memory);
 int SkStreamMemory_duplicate(SkStreamMemory *stream_memory);
 int SkStreamMemory_fork(SkStreamMemory *stream_memory);

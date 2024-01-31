@@ -11,7 +11,7 @@
 
 // const
 int static_const_sk_runtime_effect_child_make(SkSpan<const SkRuntimeEffect::Child> value);
-void static_const_sk_runtime_effect_child_delete(int key);
+extern "C" void static_const_sk_runtime_effect_child_delete(int key);
 SkSpan<const SkRuntimeEffect::Child> static_const_sk_runtime_effect_child_get(int key);
 void static_const_sk_runtime_effect_child_set(int key, SkSpan<const SkRuntimeEffect::Child> value);
 

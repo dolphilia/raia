@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkUnPreMultiply_delete(SkUnPreMultiply * unPreMultiply) {
+    delete unPreMultiply;
+}
+
 // static
 
 const SkUnPreMultiply::Scale * SkUnPreMultiply_GetScaleTable() {

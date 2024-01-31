@@ -10,6 +10,10 @@ SkFontArguments *SkFontArguments_new() {
     return new SkFontArguments();
 }
 
+void SkFontArguments_delete(SkFontArguments *font_arguments) {
+    delete font_arguments;
+}
+
 int SkFontArguments_setCollectionIndex(SkFontArguments *font_argments, int collectionIndex) {
     return static_sk_font_arguments_make(font_argments->setCollectionIndex(collectionIndex));
 }

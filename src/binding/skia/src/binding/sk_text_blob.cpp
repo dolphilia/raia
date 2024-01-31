@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkTextBlob_delete(SkTextBlob *text_blob) {
+    delete &text_blob;
+}
+
 const SkRect * SkTextBlob_bounds(SkTextBlob *text_blob) {
     return &text_blob->bounds();
 }

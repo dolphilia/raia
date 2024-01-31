@@ -7,6 +7,10 @@
 
 extern "C" {
 
+void SkSurface_delete(SkSurface *surface) {
+    delete surface;
+}
+
 bool SkSurface_isCompatible(SkSurface *surface, const GrSurfaceCharacterization &characterization) {
     return surface->isCompatible(characterization);
 }

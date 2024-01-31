@@ -9,6 +9,7 @@
 #include "../static/static_sk_color_filter.h"
 
 extern "C" {
+void SkHighContrastFilter_delete(SkHighContrastFilter * highContrastFilter);
 // static
 int SkHighContrastFilter_Make(const SkHighContrastConfig * config);
 }

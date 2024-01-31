@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkGraphics_delete(SkGraphics * graphics) {
+    delete graphics;
+}
+
 // static
 
 void SkGraphics_Init() {

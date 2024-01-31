@@ -9,6 +9,7 @@
 #include "../static/static_sk_i_rect.h"
 
 extern "C" {
+void SkIRect_delete(SkIRect *i_rect);
 int32_t SkIRect_left(SkIRect *i_rect);
 int32_t SkIRect_top(SkIRect *i_rect);
 int32_t SkIRect_right(SkIRect *i_rect);

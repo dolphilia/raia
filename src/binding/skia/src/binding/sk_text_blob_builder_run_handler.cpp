@@ -10,6 +10,10 @@ SkTextBlobBuilderRunHandler *SkTextBlobBuilderRunHandler_new(const char *utf8Tex
     return new SkTextBlobBuilderRunHandler(utf8Text, offset);
 }
 
+void SkTextBlobBuilderRunHandler_delete(SkTextBlobBuilderRunHandler *text_blob_builder_run_handler) {
+    delete text_blob_builder_run_handler;
+}
+
 int SkTextBlobBuilderRunHandler_makeBlob(SkTextBlobBuilderRunHandler *text_blob_builder_run_handler) {
     return static_sk_text_blob_make(text_blob_builder_run_handler->makeBlob());
 }

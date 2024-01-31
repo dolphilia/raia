@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkStreamSeekable_delete(SkStreamSeekable *stream_seekable) {
+    delete stream_seekable;
+}
+
 int SkStreamSeekable_duplicate(SkStreamSeekable *stream_seekable) {
     return static_sk_stream_seekable_make(stream_seekable->duplicate());
 }

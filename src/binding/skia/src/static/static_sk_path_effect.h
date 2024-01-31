@@ -10,8 +10,8 @@
 #include "include/core/SkPathEffect.h"
 
 int static_sk_path_effect_make(sk_sp<SkPathEffect> value);
-void static_sk_path_effect_delete(int key);
-SkPathEffect *static_sk_path_effect_get(int key);
+extern "C" void static_sk_path_effect_delete(int key);
+extern "C" SkPathEffect *static_sk_path_effect_get(int key);
 void static_sk_path_effect_set(int key, sk_sp<SkPathEffect> value);
 sk_sp<SkPathEffect> static_sk_path_effect_move(int key);
 

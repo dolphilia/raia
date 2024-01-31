@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkColorSpace_delete(SkColorSpace *color_space) {
+    delete color_space;
+}
+
 void SkColorSpace_toProfile(SkColorSpace *color_space, skcms_ICCProfile *profile) {
     color_space->toProfile(profile);
 }

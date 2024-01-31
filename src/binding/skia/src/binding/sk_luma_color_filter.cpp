@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkLumaColorFilter_delete(SkLumaColorFilter * lumaColorFilter) {
+    delete lumaColorFilter;
+}
+
 // static
 
 int SkLumaColorFilter_Make() {

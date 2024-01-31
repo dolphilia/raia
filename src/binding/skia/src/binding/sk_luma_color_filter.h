@@ -9,6 +9,7 @@
 #include "../static/static_sk_color_filter.h"
 
 extern "C" {
+void SkLumaColorFilter_delete(SkLumaColorFilter * lumaColorFilter);
 // static
 int SkLumaColorFilter_Make();
 }

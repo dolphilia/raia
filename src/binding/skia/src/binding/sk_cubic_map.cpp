@@ -10,6 +10,10 @@ SkCubicMap *SkCubicMap_new(SkPoint p1, SkPoint p2) {
     return new SkCubicMap(p1, p2);
 }
 
+void SkCubicMap_delete(SkCubicMap * cubic_map) {
+    delete cubic_map;
+}
+
 float SkCubicMap_computeYFromX(SkCubicMap * cubic_map, float x) {
     return cubic_map->computeYFromX(x);
 }

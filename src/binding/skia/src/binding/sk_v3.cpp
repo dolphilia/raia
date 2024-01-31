@@ -4,6 +4,38 @@
 
 #include "sk_v3.h"
 
+bool SkV3_Equal(const SkV3 &v1, const SkV3 &v2) {
+    return v1 == v2;
+}
+
+bool SkV3_NotEqual(const SkV3 &v1, const SkV3 &v2) {
+    return  v1 != v2;
+}
+
+SkV3 SkV3_Minus(const SkV3 &v1, const SkV3 &v2) {
+    return v1 - v2;
+}
+
+SkV3 SkV3_Plus(const SkV3 &v1, const SkV3 &v2) {
+    return v1 + v2;
+}
+
+SkV3 SkV3_Star(const SkV3 &v1, const SkV3 &v2) {
+    return v1 * v2;
+}
+
+void SkV3_PlusAssign(SkV3 &v1, const SkV3 &v2) {
+    v1 += v2;
+}
+
+void SkV3_MinusAssign(SkV3 &v1, const SkV3 &v2) {
+    v1 -= v2;
+}
+
+void SkV3_StarAssign(SkV3 &v1, const SkV3 &v2) {
+    v1 *= v2;
+}
+
 extern "C" {
 
 // bool operator==(const SkV3 &v)
@@ -16,6 +48,10 @@ extern "C" {
 // void operator-=(SkV3 v)
 // void operator*=(SkV3 v)
 // void operator*=(SkScalar s)
+
+void SkV3_delete(SkV3 *v3) {
+    delete v3;
+}
 
 SkScalar SkV3_lengthSquared(SkV3 *v3) {
     return v3->lengthSquared();

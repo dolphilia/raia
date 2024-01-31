@@ -10,8 +10,8 @@
 #include "include/core/SkPixelRef.h"
 
 int static_sk_pixel_ref_make(sk_sp<SkPixelRef> value);
-void static_sk_pixel_ref_delete(int key);
-SkPixelRef *static_sk_pixel_ref_get(int key);
+extern "C" void static_sk_pixel_ref_delete(int key);
+extern "C" SkPixelRef *static_sk_pixel_ref_get(int key);
 void static_sk_pixel_ref_set(int key, sk_sp<SkPixelRef> value);
 sk_sp<SkPixelRef> static_sk_pixel_ref_move(int key);
 

@@ -14,6 +14,7 @@ SkMemoryStream *SkMemoryStream_new();
 SkMemoryStream *SkMemoryStream_new_2(size_t length);
 SkMemoryStream *SkMemoryStream_new_3(const void *data, size_t length, bool copyData);
 SkMemoryStream *SkMemoryStream_new_4(int sk_data_key_in);
+void SkMemoryStream_delete(SkMemoryStream *memoryStream);
 void SkMemoryStream_setMemory(SkMemoryStream *memory_stream, const void *data, size_t length, bool copyData);
 void SkMemoryStream_setMemoryOwned(SkMemoryStream *memory_stream, const void *data, size_t length);
 int SkMemoryStream_asData(SkMemoryStream *memory_stream);

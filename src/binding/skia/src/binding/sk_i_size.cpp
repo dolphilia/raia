@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkISize_delete(SkISize *i_size) {
+    delete i_size;
+}
+
 void SkISize_set(SkISize *i_size, int32_t w, int32_t h) {
     i_size->set(w, h);
 }

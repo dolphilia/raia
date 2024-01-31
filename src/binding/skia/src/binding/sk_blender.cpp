@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkBlender_delete(SkBlender *blender) {
+    delete blender;
+}
+
 SkBlender::Factory SkBlender_getFactory(SkBlender *blender) {
     return blender->getFactory();
 }

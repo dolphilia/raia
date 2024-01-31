@@ -10,8 +10,8 @@
 #include "include/core/SkImageFilter.h"
 
 int static_sk_image_filter_make(sk_sp<SkImageFilter> value);
-void static_sk_image_filter_delete(int key);
-SkImageFilter *static_sk_image_filter_get(int key);
+extern "C" void static_sk_image_filter_delete(int key);
+extern "C" SkImageFilter *static_sk_image_filter_get(int key);
 void static_sk_image_filter_set(int key, sk_sp<SkImageFilter> value);
 sk_sp<SkImageFilter> static_sk_image_filter_move(int key);
 

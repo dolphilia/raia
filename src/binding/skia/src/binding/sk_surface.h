@@ -14,6 +14,7 @@
 #include "../static/static_sk_image.h"
 
 extern "C" {
+void SkSurface_delete(SkSurface *surface);
 bool SkSurface_isCompatible(SkSurface *surface, const GrSurfaceCharacterization &characterization);
 int SkSurface_width(SkSurface *surface);
 int SkSurface_height(SkSurface *surface);

@@ -15,6 +15,7 @@
 #include "../static/static_sk_blender.h"
 
 extern "C" {
+void SkImageFilters_delete(SkImageFilters * imageFilters);
 // static
 int SkImageFilters_Arithmetic(int sk_image_filter_key_in_1, int sk_image_filter_key_in_2, SkScalar k1, SkScalar k2, SkScalar k3, SkScalar k4, bool enforcePMColor, const SkImageFilters::CropRect *cropRect);
 int SkImageFilters_Blend(int sk_image_filter_key_in_1, int sk_image_filter_key_in_2, SkBlendMode mode, const SkImageFilters::CropRect *cropRect);

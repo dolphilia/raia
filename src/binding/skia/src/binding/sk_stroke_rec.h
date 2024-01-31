@@ -9,6 +9,7 @@
 #include "../static/static_sk_stroke_rec.h"
 
 extern "C" {
+void SkStrokeRec_delete(SkStrokeRec *stroke_rec);
 int SkStrokeRec_static(SkStrokeRec::InitStyle style);
 int SkStrokeRec_static_2(const SkPaint *paint, SkPaint::Style style, SkScalar resScale);
 int SkStrokeRec_static_3(const SkPaint *paint, SkScalar resScale);

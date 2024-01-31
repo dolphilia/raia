@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkColorMatrixFilter_delete(SkColorMatrixFilter *color_matrix_filter) {
+    delete color_matrix_filter;
+}
+
 bool SkColorMatrixFilter_asAColorMode(SkColorMatrixFilter *color_matrix_filter, SkColor *color, SkBlendMode *mode) {
     return color_matrix_filter->asAColorMode(color, mode);
 }

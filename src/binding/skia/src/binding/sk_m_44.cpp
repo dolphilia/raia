@@ -32,6 +32,10 @@ SkM44 *SkM44_new_5(SkScalar m0, SkScalar m4, SkScalar m8, SkScalar m12, SkScalar
     return new SkM44(m0, m4, m8, m12, m1, m5, m9, m13, m2, m6, m10, m14, m3, m7, m11, m15);
 }
 
+void SkM44_delete(SkM44 *m44) {
+    delete m44;
+}
+
 void SkM44_getColMajor(SkM44 *m44, SkScalar v[]) {
     m44->getColMajor(v);
 }

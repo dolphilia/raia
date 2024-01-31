@@ -9,6 +9,8 @@
 #include "../static/static_sk_path_effect.h"
 
 extern "C" {
+void SkDashPathEffect_delete(SkDashPathEffect * dashPathEffect);
+// static
 int SkDashPathEffect_Make(const SkScalar intervals[], int count, SkScalar phase);
 }
 

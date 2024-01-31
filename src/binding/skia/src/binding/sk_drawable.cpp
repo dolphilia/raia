@@ -7,6 +7,10 @@
 
 extern "C" {
 
+void SkDrawable_delete(SkDrawable *drawable) {
+    delete drawable;
+}
+
 void SkDrawable_draw(SkDrawable *drawable, SkCanvas * canvas, const SkMatrix * matrix) {
     drawable->draw(canvas, matrix);
 }

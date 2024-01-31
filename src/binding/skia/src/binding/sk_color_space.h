@@ -10,6 +10,7 @@
 #include "../static/static_sk_data.h"
 
 extern "C" {
+void SkColorSpace_delete(SkColorSpace *color_space);
 void SkColorSpace_toProfile(SkColorSpace *color_space, skcms_ICCProfile *profile);
 bool SkColorSpace_gammaCloseToSRGB(SkColorSpace *color_space);
 bool SkColorSpace_gammaIsLinear(SkColorSpace *color_space);

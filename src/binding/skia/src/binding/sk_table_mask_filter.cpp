@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkTableMaskFilter_delete(SkTableMaskFilter *tableMaskFilter) {
+    delete tableMaskFilter;
+}
+
 // static
 
 void SkTableMaskFilter_MakeGammaTable(uint8_t table[256], SkScalar gamma) {

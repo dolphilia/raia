@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkRefCnt_delete(SkRefCnt* refCnt) {
+    delete refCnt;
+}
+
 bool SkRefCnt_unique(SkRefCnt* ref_cnt) {
     return ref_cnt->unique();
 }

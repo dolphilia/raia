@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkMaskFilter_delete(SkMaskFilter *maskFilter) {
+    delete maskFilter;
+}
+
 int SkMaskFilter_approximateFilteredBounds(SkMaskFilter *mask_filter, const SkRect *src) {
     return static_sk_rect_make(mask_filter->approximateFilteredBounds(*src));
 }

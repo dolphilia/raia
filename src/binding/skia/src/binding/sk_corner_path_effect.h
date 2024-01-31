@@ -9,6 +9,7 @@
 #include "../static/static_sk_path_effect.h"
 
 extern "C" {
+void SkCornerPathEffect_delete(SkCornerPathEffect * cornerPathEffect);
 // static
 int SkCornerPathEffect_Make(SkScalar radius);
 void SkCornerPathEffect_RegisterFlattenables();

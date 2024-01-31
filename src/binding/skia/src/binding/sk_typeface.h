@@ -15,6 +15,7 @@
 #include "../static/static_sk_rect.h"
 
 extern "C" {
+void SkTypeface_delete(SkTypeface *typeface);
 int SkTypeface_fontStyle(SkTypeface *typeface);
 bool SkTypeface_isBold(SkTypeface *typeface);
 bool SkTypeface_isItalic(SkTypeface *typeface);
@@ -49,16 +50,17 @@ void SkTypeface_getFontDescriptor(SkTypeface *typeface, SkFontDescriptor *desc, 
 void * SkTypeface_internal_private_getCTFontRef(SkTypeface *typeface);
 // static
 bool SkTypeface_Equal(const SkTypeface *facea, const SkTypeface *faceb);
-// @TODO
-//sk_sp<SkTypeface> SkTypeface_MakeDefault();
 int SkTypeface_MakeEmpty();
+int SkTypeface_MakeDeserialize(int sk_font_mgr_key_in, SkStream *stream);
+void SkTypeface_Register(SkTypeface::FactoryId id, sk_sp<SkTypeface>(*make)(std::unique_ptr<SkStreamAsset>, const SkFontArguments &));
+#if !defined(SK_DISABLE_LEGACY_FONTMGR_REFDEFAULT)
+int SkTypeface_MakeDefault();
 int SkTypeface_MakeFromName(const char familyName[], SkFontStyle fontStyle);
 int SkTypeface_MakeFromFile(const char path[], int index);
 int SkTypeface_MakeFromStream(int sk_stream_asset_key_in, int index);
 int SkTypeface_MakeFromData(int sk_data_key_in, int index);
-int SkTypeface_MakeDeserialize(SkStream *stream);
-int SkTypeface_MakeDeserialize_2(int sk_font_mgr_key_in, SkStream *stream);
-void SkTypeface_Register(SkTypeface::FactoryId id, sk_sp<SkTypeface>(*make)(std::unique_ptr<SkStreamAsset>, const SkFontArguments &));
+int SkTypeface_MakeDeserialize_2(SkStream *stream);
+#endif
 }
 
 #endif //RAIA_SKIA_SK_TYPEFACE_H

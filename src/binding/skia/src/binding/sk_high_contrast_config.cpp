@@ -14,6 +14,10 @@ SkHighContrastConfig *SkHighContrastConfig_new_2(bool grayscale, SkHighContrastC
     return new SkHighContrastConfig(grayscale, invertStyle, contrast);
 }
 
+void SkHighContrastConfig_delete(SkHighContrastConfig * highContrastConfig) {
+    delete highContrastConfig;
+}
+
 bool isValid(SkHighContrastConfig *high_contrast_config) {
     return high_contrast_config->isValid();
 }

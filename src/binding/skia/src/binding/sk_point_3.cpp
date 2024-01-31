@@ -10,6 +10,10 @@ extern "C" {
 // void operator+=(const SkPoint3 &v)
 // void operator-=(const SkPoint3 &v)
 
+void SkPoint3_delete(SkPoint3 *point3) {
+    delete point3;
+}
+
 SkScalar SkPoint3_x(SkPoint3 *point3) {
     return point3->x();
 }

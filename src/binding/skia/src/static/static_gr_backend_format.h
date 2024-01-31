@@ -9,10 +9,8 @@
 #include <map>
 #include "include/gpu/GrBackendSurface.h"
 
+extern "C" void static_gr_backend_format_delete(int key);
 int static_gr_backend_format_make(GrBackendFormat value);
-extern "C" {
-void static_gr_backend_format_delete(int key);
-}
 GrBackendFormat static_gr_backend_format_get(int key);
 void static_gr_backend_format_set(int key, GrBackendFormat value);
 

@@ -10,8 +10,8 @@
 #include "include/core/SkMesh.h"
 
 int static_sk_mesh_index_buffer_make(sk_sp<SkMesh::IndexBuffer> value);
-void static_sk_mesh_index_buffer_delete(int key);
-SkMesh::IndexBuffer *static_sk_mesh_index_buffer_get(int key);
+extern "C" void static_sk_mesh_index_buffer_delete(int key);
+extern "C" SkMesh::IndexBuffer *static_sk_mesh_index_buffer_get(int key);
 void static_sk_mesh_index_buffer_set(int key, sk_sp<SkMesh::IndexBuffer> value);
 sk_sp<SkMesh::IndexBuffer> static_sk_mesh_index_buffer_move(int key);
 

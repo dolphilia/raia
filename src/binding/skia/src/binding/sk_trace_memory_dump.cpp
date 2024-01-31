@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkTraceMemoryDump_delete(SkTraceMemoryDump * traceMemoryDump) {
+    delete &traceMemoryDump;
+}
+
 void SkTraceMemoryDump_dumpNumericValue(SkTraceMemoryDump *trace_memory_dump, const char *dumpName, const char *valueName, const char *units, uint64_t value) {
     trace_memory_dump->dumpNumericValue(dumpName, valueName, units, value);
 }

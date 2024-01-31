@@ -6,6 +6,12 @@
 
 extern "C" {
 
+void SkTrimPathEffect_delete(SkTrimPathEffect * trimPathEffect) {
+    delete trimPathEffect;
+}
+
+// static
+
 int SkTrimPathEffect_Make(SkScalar startT, SkScalar stopT, SkTrimPathEffect::Mode mode) {
     return static_sk_path_effect_make(SkTrimPathEffect::Make(startT, stopT, mode));
 }

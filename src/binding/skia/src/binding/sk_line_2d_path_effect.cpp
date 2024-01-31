@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkLine2DPathEffect_delete(SkLine2DPathEffect * line2DPathEffect) {
+    delete line2DPathEffect;
+}
+
 // static
 
 int SkLine2DPathEffect_Make(SkScalar width, const SkMatrix *matrix) {

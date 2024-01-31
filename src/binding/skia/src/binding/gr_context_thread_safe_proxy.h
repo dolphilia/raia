@@ -8,6 +8,7 @@
 #include "include/gpu/GrContextThreadSafeProxy.h"
 
 extern "C" {
+void GrContextThreadSafeProxy_delete(GrContextThreadSafeProxy *context_thread_safe_proxy);
 bool GrContextThreadSafeProxy_unique(GrContextThreadSafeProxy *context_thread_safe_proxy);
 void GrContextThreadSafeProxy_ref(GrContextThreadSafeProxy *context_thread_safe_proxy);
 void GrContextThreadSafeProxy_unref(GrContextThreadSafeProxy *context_thread_safe_proxy);

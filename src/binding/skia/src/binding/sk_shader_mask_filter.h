@@ -13,6 +13,7 @@
 #include "../static/static_sk_shader.h"
 
 extern "C" {
+void SkShaderMaskFilter_delete(SkShaderMaskFilter *shaderMaskFilter);
 // static
 int SkShaderMaskFilter_Make(int sk_shader_key_in);
 }

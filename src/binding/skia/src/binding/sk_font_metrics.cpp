@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkFontMetrics_delete(SkFontMetrics *font_metrics) {
+    delete font_metrics;
+}
+
 bool SkFontMetrics_hasUnderlineThickness(SkFontMetrics *font_metrics, SkScalar *thickness) {
     return font_metrics->hasUnderlineThickness(thickness);
 }

@@ -8,6 +8,7 @@
 #include "include/core/SkBBHFactory.h"
 
 extern "C" {
+void SkBBoxHierarchy_delete(SkBBoxHierarchy *b_box_hierarchy);
 void SkBBoxHierarchy_insert(SkBBoxHierarchy *b_box_hierarchy, const SkRect rect[], int N);
 void SkBBoxHierarchy_insert_2(SkBBoxHierarchy *b_box_hierarchy, const SkRect rect[], const SkBBoxHierarchy::Metadata metadata[], int N);
 void SkBBoxHierarchy_search(SkBBoxHierarchy *b_box_hierarchy, const SkRect *query, std::vector<int> *results);

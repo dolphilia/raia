@@ -33,6 +33,10 @@ SkSamplingOptions *SkSamplingOptions_new_5(const SkCubicResampler *c) {
     return new SkSamplingOptions(*c);
 }
 
+void SkSamplingOptions_delete(SkSamplingOptions *sampling_options) {
+    delete sampling_options;
+}
+
 bool SkSamplingOptions_isAniso(SkSamplingOptions *sampling_options) {
     return sampling_options->isAniso();
 }

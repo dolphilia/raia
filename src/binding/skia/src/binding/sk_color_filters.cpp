@@ -8,6 +8,10 @@ extern "C" {
 
 // static
 
+void SkColorFilters_delete(SkColorFilters *colorFilters) {
+    delete colorFilters;
+}
+
 int SkColorFilters_Blend(int sk_color_space_key_in, const SkColor4f * c, SkBlendMode mode) {
     return static_sk_color_filter_make(SkColorFilters::Blend(*c, static_sk_color_space_move(sk_color_space_key_in), mode));
 }

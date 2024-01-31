@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkColorFilter_delete(SkColorFilter *color_filter) {
+    delete color_filter;
+}
+
 bool SkColorFilter_asAColorMode(SkColorFilter *color_filter, SkColor *color, SkBlendMode *mode) {
     return color_filter->asAColorMode(color, mode);
 }

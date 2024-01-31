@@ -9,6 +9,7 @@
 #include "../static/static_sk_capabilities.h"
 
 extern "C" {
+void SkCapabilities_delete(SkCapabilities *capabilities);
 void SkCapabilities_ref(SkCapabilities *capabilities);
 SkSL::Version SkCapabilities_skslVersion(SkCapabilities *capabilities);
 bool SkCapabilities_unique(SkCapabilities *capabilities);

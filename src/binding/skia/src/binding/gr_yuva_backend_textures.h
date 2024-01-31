@@ -13,6 +13,7 @@ extern "C" {
 //GrYUVABackendTextures & operator= (GrYUVABackendTextures &&)=default
 GrYUVABackendTextures *GrYUVABackendTextures_new();
 GrYUVABackendTextures *GrYUVABackendTextures_new_2(const SkYUVAInfo *yuvaInfo, const GrBackendTexture backendTexture[SkYUVAInfo::kMaxPlanes], GrSurfaceOrigin textureOrigin);
+void GrYUVABackendTextures_delete(GrYUVABackendTextures *yuvaBackendTextures);
 const std::array< GrBackendTexture, SkYUVAInfo::kMaxPlanes > * GrYUVABackendTextures_textures(GrYUVABackendTextures *yuvaBackendTextures);
 int GrYUVABackendTextures_texture(GrYUVABackendTextures *yuvaBackendTextures, int i);
 const SkYUVAInfo * GrYUVABackendTextures_yuvaInfo(GrYUVABackendTextures *yuvaBackendTextures);

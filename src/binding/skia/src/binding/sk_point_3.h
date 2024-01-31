@@ -11,6 +11,7 @@ extern "C" {
 // SkPoint3 operator-()
 // void operator+=(const SkPoint3 &v)
 // void operator-=(const SkPoint3 &v)
+void SkPoint3_delete(SkPoint3 *point3);
 SkScalar SkPoint3_x(SkPoint3 *point3);
 SkScalar SkPoint3_y(SkPoint3 *point3);
 SkScalar SkPoint3_z(SkPoint3 *point3);

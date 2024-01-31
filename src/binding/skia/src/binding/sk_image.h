@@ -13,6 +13,7 @@
 #include "../static/static_sk_i_rect.h"
 
 extern "C" {
+void SkImage_delete(SkImage *image);
 const SkImageInfo * SkImage_imageInfo(SkImage *image);
 int SkImage_width(SkImage *image);
 int SkImage_height(SkImage *image);

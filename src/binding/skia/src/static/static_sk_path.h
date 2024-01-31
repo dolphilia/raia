@@ -10,7 +10,7 @@
 #include "include/core/SkPath.h"
 
 int static_sk_path_make(const SkPath& value);
-void static_sk_path_delete(int key);
+extern "C" void static_sk_path_delete(int key);
 SkPath static_sk_path_get(int key);
 void static_sk_path_set(int key, const SkPath& value);
 

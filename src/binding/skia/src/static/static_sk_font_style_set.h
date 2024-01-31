@@ -10,8 +10,8 @@
 #include "include/core/SkFontMgr.h"
 
 int static_sk_font_style_set_make(sk_sp<SkFontStyleSet> value);
-void static_sk_font_style_set_delete(int key);
-SkFontStyleSet *static_sk_font_style_set_get(int key);
+extern "C" void static_sk_font_style_set_delete(int key);
+extern "C" SkFontStyleSet *static_sk_font_style_set_get(int key);
 void static_sk_font_style_set_set(int key, sk_sp<SkFontStyleSet> value);
 sk_sp<SkFontStyleSet> static_sk_font_style_set_move(int key);
 

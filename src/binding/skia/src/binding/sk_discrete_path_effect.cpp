@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkDiscretePathEffect_delete(SkDiscretePathEffect * discretePathEffect) {
+    delete discretePathEffect;
+}
+
 int SkDiscretePathEffect_Make(SkScalar segLength, SkScalar dev, uint32_t seedAssist) {
     return static_sk_path_effect_make(SkDiscretePathEffect::Make(segLength, dev, seedAssist));
 }

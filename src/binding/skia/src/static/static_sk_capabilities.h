@@ -10,8 +10,8 @@
 #include "include/core/SkCapabilities.h"
 
 int static_const_sk_capabilities_make(sk_sp<const SkCapabilities> value);
-void static_const_sk_capabilities_delete(int key);
-const SkCapabilities *static_const_sk_capabilities_get(int key);
+extern "C" void static_const_sk_capabilities_delete(int key);
+extern "C" const SkCapabilities *static_const_sk_capabilities_get(int key);
 void static_const_sk_capabilities_set(int key, sk_sp<const SkCapabilities> value);
 sk_sp<const SkCapabilities> static_const_sk_capabilities_move(int key);
 

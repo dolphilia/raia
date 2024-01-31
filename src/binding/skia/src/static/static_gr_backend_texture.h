@@ -10,7 +10,7 @@
 #include "include/gpu/GrBackendSurface.h"
 
 int static_gr_backend_texture_make(GrBackendTexture value);
-void static_gr_backend_texture_delete(int key);
+extern "C" void static_gr_backend_texture_delete(int key);
 GrBackendTexture static_gr_backend_texture_get(int key);
 void static_gr_backend_texture_set(int key, GrBackendTexture value);
 

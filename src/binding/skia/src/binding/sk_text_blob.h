@@ -10,6 +10,7 @@
 #include "../static/static_sk_text_blob.h"
 
 extern "C" {
+void SkTextBlob_delete(SkTextBlob *text_blob);
 const SkRect * SkTextBlob_bounds(SkTextBlob *text_blob);
 uint32_t SkTextBlob_uniqueID(SkTextBlob *text_blob);
 int SkTextBlob_getIntercepts(SkTextBlob *text_blob, const SkScalar bounds[2], SkScalar intervals[], const SkPaint *paint);

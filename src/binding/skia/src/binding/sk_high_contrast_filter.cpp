@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkHighContrastFilter_delete(SkHighContrastFilter * highContrastFilter) {
+    delete highContrastFilter;
+}
+
 // static
 
 int SkHighContrastFilter_Make(const SkHighContrastConfig * config) {

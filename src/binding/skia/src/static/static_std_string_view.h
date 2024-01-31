@@ -9,7 +9,7 @@
 #include <map>
 
 int static_string_view_make(std::string_view value);
-void static_string_view_delete(int key);
+extern "C" void static_string_view_delete(int key);
 std::string_view static_string_view_get(int key);
 void static_string_view_set(int key, std::string_view value);
 

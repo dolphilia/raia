@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkCornerPathEffect_delete(SkCornerPathEffect * cornerPathEffect) {
+    delete cornerPathEffect;
+}
+
 // static
 
 int SkCornerPathEffect_Make(SkScalar radius) {

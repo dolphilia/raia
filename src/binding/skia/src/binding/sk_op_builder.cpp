@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkOpBuilder_delete(SkOpBuilder *opBuilder) {
+    delete opBuilder;
+}
+
 void SkOpBuilder_add(SkOpBuilder *op_builder, const SkPath *path, SkPathOp path_operator) {
     op_builder->add(*path, path_operator);
 }

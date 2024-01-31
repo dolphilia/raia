@@ -16,6 +16,7 @@ extern "C" {
 // SkV4 operator*(const SkV4 &v)
 // float operator[](int i)
 // float & operator[](int i)
+void SkV4_delete(SkV4 *v4);
 SkScalar SkV4_lengthSquared(SkV4 *v4);
 SkScalar SkV4_length(SkV4 *v4);
 SkScalar SkV4_dot(SkV4 *v4, const SkV4 *v);

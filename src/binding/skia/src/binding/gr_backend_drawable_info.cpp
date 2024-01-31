@@ -14,6 +14,10 @@ GrBackendDrawableInfo *GrBackendDrawableInfo_new_2(const GrVkDrawableInfo *info)
     return new GrBackendDrawableInfo(*info);
 }
 
+void GrBackendDrawableInfo_delete(GrBackendDrawableInfo *backend_drawable_info) {
+    delete backend_drawable_info;
+}
+
 bool GrBackendDrawableInfo_isValid(GrBackendDrawableInfo *backend_drawable_info) {
     return backend_drawable_info->isValid();
 }

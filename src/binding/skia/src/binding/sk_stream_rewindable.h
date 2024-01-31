@@ -11,6 +11,7 @@
 #include "../static/static_sk_stream_asset.h"
 
 extern "C" {
+void SkStreamRewindable_delete(SkStreamRewindable *stream_rewindable);
 bool SkStreamRewindable_rewind(SkStreamRewindable *stream_rewindable);
 int SkStreamRewindable_duplicate(SkStreamRewindable *stream_rewindable);
 size_t SkStreamRewindable_read(SkStreamRewindable *stream_rewindable, void *buffer, size_t size);

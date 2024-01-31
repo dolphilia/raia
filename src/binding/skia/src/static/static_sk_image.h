@@ -10,8 +10,8 @@
 #include "include/core/SkImage.h"
 
 int static_sk_image_make(sk_sp<SkImage> value);
-void static_sk_image_delete(int key);
-SkImage *static_sk_image_get(int key);
+extern "C" void static_sk_image_delete(int key);
+extern "C" SkImage *static_sk_image_get(int key);
 void static_sk_image_set(int key, sk_sp<SkImage> value);
 sk_sp<SkImage> static_sk_image_move(int key);
 

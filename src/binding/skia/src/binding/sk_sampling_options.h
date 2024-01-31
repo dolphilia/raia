@@ -18,6 +18,7 @@ SkSamplingOptions *SkSamplingOptions_new_2(const SkSamplingOptions *options);
 SkSamplingOptions *SkSamplingOptions_new_3(SkFilterMode fm, SkMipmapMode mm);
 SkSamplingOptions *SkSamplingOptions_new_4(SkFilterMode fm);
 SkSamplingOptions *SkSamplingOptions_new_5(const SkCubicResampler *c);
+void SkSamplingOptions_delete(SkSamplingOptions *sampling_options);
 bool SkSamplingOptions_isAniso(SkSamplingOptions *sampling_options);
 // static
 int SkSamplingOptions_Aniso(int maxAniso);

@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void GrContextThreadSafeProxy_delete(GrContextThreadSafeProxy *context_thread_safe_proxy) {
+    delete context_thread_safe_proxy;
+}
+
 bool GrContextThreadSafeProxy_unique(GrContextThreadSafeProxy *context_thread_safe_proxy) {
     return context_thread_safe_proxy->unique();
 }

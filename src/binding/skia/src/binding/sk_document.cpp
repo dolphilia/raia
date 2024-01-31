@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkDocument_delete(SkDocument *document) {
+    delete &document;
+}
+
 SkCanvas * SkDocument_beginPage(SkDocument * document, SkScalar width, SkScalar height, const SkRect *content) {
     return document->beginPage(width, height, content);
 }

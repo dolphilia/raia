@@ -10,7 +10,7 @@
 #include "include/effects/SkColorMatrix.h"
 
 int static_sk_color_matrix_make(SkColorMatrix value);
-void static_sk_color_matrix_delete(int key);
+extern "C" void static_sk_color_matrix_delete(int key);
 SkColorMatrix static_sk_color_matrix_get(int key);
 void static_sk_color_matrix_set(int key, SkColorMatrix value);
 

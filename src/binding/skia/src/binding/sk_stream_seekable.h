@@ -10,6 +10,7 @@
 #include "../static/static_sk_stream_asset.h"
 
 extern "C" {
+void SkStreamSeekable_delete(SkStreamSeekable *stream_seekable);
 int SkStreamSeekable_duplicate(SkStreamSeekable *stream_seekable);
 bool SkStreamSeekable_hasPosition(SkStreamSeekable *stream_seekable);
 size_t SkStreamSeekable_getPosition(SkStreamSeekable *stream_seekable);

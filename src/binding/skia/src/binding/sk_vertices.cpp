@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkVertices_delete(SkVertices * vertices) {
+    delete &vertices;
+}
+
 uint32_t SkVertices_uniqueID(SkVertices *vertices) {
     return vertices->uniqueID();
 }

@@ -14,6 +14,10 @@ SkPixmap *SkPixmap_new_2(const SkImageInfo *info, const void *addr, size_t rowBy
     return new SkPixmap(*info, addr, rowBytes);
 }
 
+void SkPixmap_delete(SkPixmap *pixmap) {
+    delete pixmap;
+}
+
 void SkPixmap_reset(SkPixmap *pixmap) {
     return pixmap->reset();
 }

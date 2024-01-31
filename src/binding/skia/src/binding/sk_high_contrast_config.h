@@ -10,6 +10,7 @@
 extern "C" {
 SkHighContrastConfig *SkHighContrastConfig_new();
 SkHighContrastConfig *SkHighContrastConfig_new_2(bool grayscale, SkHighContrastConfig::InvertStyle invertStyle, SkScalar contrast);
+void SkHighContrastConfig_delete(SkHighContrastConfig * highContrastConfig);
 bool isValid(SkHighContrastConfig *high_contrast_config);
 }
 

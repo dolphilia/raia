@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkImageFilter_delete(SkImageFilter *image_filter) {
+    delete image_filter;
+}
+
 int SkImageFilter_filterBounds(SkImageFilter *image_filter, const SkIRect *src, const SkMatrix *ctm, SkImageFilter::MapDirection direction, const SkIRect *inputRect) {
     return static_sk_i_rect_make(image_filter->filterBounds(*src, *ctm, direction, inputRect));
 }

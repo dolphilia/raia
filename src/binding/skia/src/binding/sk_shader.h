@@ -14,6 +14,7 @@
 #include "../static/static_sk_flattenable.h"
 
 extern "C" {
+void SkShader_delete(SkShader *shader);
 bool SkShader_isOpaque(SkShader *shader);
 SkImage * SkShader_isAImage(SkShader *shader, SkMatrix *localMatrix, SkTileMode xy[2]);
 bool SkShader_isAImage_2(SkShader *shader);

@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkStreamRewindable_delete(SkStreamRewindable *stream_rewindable) {
+    delete stream_rewindable;
+}
+
 bool SkStreamRewindable_rewind(SkStreamRewindable *stream_rewindable) {
     return stream_rewindable->rewind();
 }

@@ -9,6 +9,7 @@
 #include "../static/static_sk_executor.h"
 
 extern "C" {
+void SkExecutor_delete(SkExecutor *executor);
 void SkExecutor_add(int function_void_void_key_in, SkExecutor *executor);
 void SkExecutor_borrow(SkExecutor *executor);
 // static

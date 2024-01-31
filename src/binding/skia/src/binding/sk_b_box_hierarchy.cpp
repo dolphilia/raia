@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkBBoxHierarchy_delete(SkBBoxHierarchy *b_box_hierarchy) {
+    delete b_box_hierarchy;
+}
+
 void SkBBoxHierarchy_insert(SkBBoxHierarchy *b_box_hierarchy, const SkRect rect[], int N) {
     b_box_hierarchy->insert(rect, N);
 }

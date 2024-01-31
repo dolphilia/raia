@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkRect_delete(SkRect *rect) {
+    delete rect;
+}
+
 bool SkRect_isEmpty(SkRect *rect) {
     return rect->isEmpty();
 }

@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkFontMgr_delete(SkFontMgr *font_mgr) {
+    delete font_mgr;
+}
+
 int SkFontMgr_countFamilies(SkFontMgr *font_mgr) {
     return font_mgr->countFamilies();
 }
@@ -65,12 +69,14 @@ void SkFontMgr_unref(SkFontMgr *font_mgr) {
 
 // static
 
-int SkFontMgr_RefDefault() {
-    return static_sk_font_mgr_make(SkFontMgr::RefDefault());
-}
-
 int SkFontMgr_RefEmpty() {
     return static_sk_font_mgr_make(SkFontMgr::RefEmpty());
 }
+
+#if !defined(SK_DISABLE_LEGACY_FONTMGR_REFDEFAULT)
+int SkFontMgr_RefDefault() {
+    return static_sk_font_mgr_make(SkFontMgr::RefDefault());
+}
+#endif
 
 }

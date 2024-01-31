@@ -8,6 +8,7 @@
 #include "include/core/SkDocument.h"
 
 extern "C" {
+void SkDocument_delete(SkDocument *document);
 SkCanvas * SkDocument_beginPage(SkDocument * document, SkScalar width, SkScalar height, const SkRect *content);
 void SkDocument_endPage(SkDocument *document);
 void SkDocument_close(SkDocument *document);

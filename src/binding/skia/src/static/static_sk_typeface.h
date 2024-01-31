@@ -10,8 +10,8 @@
 #include "include/core/SkTypeface.h"
 
 int static_sk_typeface_make(sk_sp<SkTypeface> value);
-void static_sk_typeface_delete(int key);
-SkTypeface *static_sk_typeface_get(int key);
+extern "C" void static_sk_typeface_delete(int key);
+extern "C" SkTypeface *static_sk_typeface_get(int key);
 void static_sk_typeface_set(int key, sk_sp<SkTypeface> value);
 sk_sp<SkTypeface> static_sk_typeface_move(int key);
 

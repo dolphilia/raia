@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkCapabilities_delete(SkCapabilities *capabilities) {
+    delete capabilities;
+}
+
 void SkCapabilities_ref(SkCapabilities *capabilities) {
     capabilities->ref();
 }

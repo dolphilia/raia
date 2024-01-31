@@ -22,6 +22,10 @@ SkYUVAInfo *SkYUVAInfo_new_3(SkISize dimensions, SkYUVAInfo::PlaneConfig config,
     return new SkYUVAInfo(dimensions, config, subsampling, space, origin, sitingX, sitingY);
 }
 
+void SkYUVAInfo_delete(SkYUVAInfo *yuvaInfo) {
+    delete yuvaInfo;
+}
+
 SkYUVAInfo::PlaneConfig SkYUVAInfo_planeConfig(SkYUVAInfo * yuva_info) {
     return yuva_info->planeConfig();
 }

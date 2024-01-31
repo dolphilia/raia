@@ -8,6 +8,7 @@
 #include "include/core/SkRSXform.h"
 
 extern "C" {
+void SkRSXform_delete(SkRSXform *rsx_form);
 bool SkRSXform_rectStaysRect(SkRSXform *rsx_form);
 void SkRSXform_setIdentity(SkRSXform *rsx_form);
 void SkRSXform_set(SkRSXform *rsx_form, SkScalar scos, SkScalar ssin, SkScalar tx, SkScalar ty);

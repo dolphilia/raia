@@ -11,6 +11,7 @@
 #include "../static/static_sk_data.h"
 
 extern "C" {
+void SkColorMatrixFilter_delete(SkColorMatrixFilter *color_matrix_filter);
 bool SkColorMatrixFilter_asAColorMode(SkColorMatrixFilter *color_matrix_filter, SkColor *color, SkBlendMode *mode);
 bool SkColorMatrixFilter_asAColorMatrix(SkColorMatrixFilter *color_matrix_filter, float matrix[20]);
 bool SkColorMatrixFilter_isAlphaUnchanged(SkColorMatrixFilter *color_matrix_filter);

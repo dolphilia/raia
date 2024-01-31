@@ -15,6 +15,7 @@ extern "C" {
 GrYUVABackendTextureInfo *GrYUVABackendTextureInfo_new();
 GrYUVABackendTextureInfo *GrYUVABackendTextureInfo_new_2(const SkYUVAInfo *yuvaInfo, const GrBackendFormat backendFormat[GrYUVABackendTextureInfo::kMaxPlanes], skgpu::Mipmapped mipmapped, GrSurfaceOrigin surfaceOrigin);
 GrYUVABackendTextureInfo *GrYUVABackendTextureInfo_new_3(const GrYUVABackendTextureInfo *yuvaBackendTextureInfo);
+void GrYUVABackendTextureInfo_delete(GrYUVABackendTextureInfo *yuvaBackendTextureInfo);
 const SkYUVAInfo * GrYUVABackendTextureInfo_yuvaInfo(GrYUVABackendTextureInfo *yuvaBackendTextureInfo);
 SkYUVColorSpace GrYUVABackendTextureInfo_yuvColorSpace(GrYUVABackendTextureInfo *yuvaBackendTextureInfo);
 skgpu::Mipmapped GrYUVABackendTextureInfo_mipmapped(GrYUVABackendTextureInfo *yuvaBackendTextureInfo);

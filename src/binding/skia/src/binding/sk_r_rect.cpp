@@ -16,6 +16,10 @@ SkRRect *SkRRect_new_2(const SkRRect *rrect) {
     return new SkRRect(*rrect);
 }
 
+void SkRRect_delete(SkRRect *rrect) {
+    delete rrect;
+}
+
 SkRRect::Type getType(SkRRect *rrect) {
     return rrect->getType();
 }

@@ -10,6 +10,7 @@
 #include "../static/static_sk_color_space.h"
 
 extern "C" {
+void SkGradientShader_delete(SkGradientShader * gradientShader);
 // static
 int SkGradientShader_MakeLinear(const SkPoint pts[2], const SkColor colors[], const SkScalar pos[], int count, SkTileMode mode, uint32_t flags, const SkMatrix *localMatrix);
 int SkGradientShader_MakeLinear_2(int sk_color_space_key_in, const SkPoint pts[2], const SkColor4f colors[], const SkScalar pos[], int count, SkTileMode mode, const SkGradientShader::Interpolation *interpolation, const SkMatrix *localMatrix);

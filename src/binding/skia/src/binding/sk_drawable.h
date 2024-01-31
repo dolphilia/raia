@@ -12,6 +12,7 @@
 #include "../static/static_sk_drawable.h"
 
 extern "C" {
+void SkDrawable_delete(SkDrawable *drawable);
 void SkDrawable_draw(SkDrawable *drawable, SkCanvas * canvas, const SkMatrix * matrix);
 void SkDrawable_draw_2(SkDrawable *drawable, SkCanvas *canvas, SkScalar x, SkScalar y);
 int SkDrawable_snapGpuDrawHandler(SkDrawable *drawable, GrBackendApi backendApi, const SkMatrix *matrix, const SkIRect *clipBounds, const SkImageInfo *bufferInfo);

@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkShader_delete(SkShader *shader) {
+    delete shader;
+}
+
 bool SkShader_isOpaque(SkShader *shader) {
     return shader->isOpaque();
 }

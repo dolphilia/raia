@@ -13,6 +13,7 @@ extern "C" {
 // SkScalar operator[](int index)
 // SkScalar & operator[](int index)
 SkMatrix *SkMatrix_new(SkMatrix *matrix);
+void SkMatrix_delete(SkMatrix *matrix);
 SkMatrix::TypeMask SkMatrix_getType(SkMatrix *matrix);
 bool SkMatrix_isIdentity(SkMatrix *matrix);
 bool SkMatrix_isScaleTranslate(SkMatrix *matrix);

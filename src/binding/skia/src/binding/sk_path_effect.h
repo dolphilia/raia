@@ -10,6 +10,7 @@
 #include "../static/static_sk_path_effect.h"
 
 extern "C" {
+void SkPathEffect_delete(SkPathEffect * pathEffect);
 SkPathEffect::DashType SkPathEffect_asADash(SkPathEffect *path_effect, SkPathEffect::DashInfo *info);
 bool SkPathEffect_filterPath(SkPathEffect *path_effect, SkPath *dst, const SkPath *src, SkStrokeRec *rec, const SkRect *cullR);
 bool SkPathEffect_filterPath_2(SkPathEffect *path_effect, SkPath *dst, const SkPath *src, SkStrokeRec *rec, const SkRect *cullR, const SkMatrix *ctm);

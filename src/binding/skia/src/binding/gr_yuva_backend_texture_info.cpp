@@ -22,6 +22,10 @@ GrYUVABackendTextureInfo *GrYUVABackendTextureInfo_new_3(const GrYUVABackendText
     return new GrYUVABackendTextureInfo(*yuvaBackendTextureInfo);
 }
 
+void GrYUVABackendTextureInfo_delete(GrYUVABackendTextureInfo *yuvaBackendTextureInfo) {
+    delete yuvaBackendTextureInfo;
+}
+
 const SkYUVAInfo * GrYUVABackendTextureInfo_yuvaInfo(GrYUVABackendTextureInfo *yuvaBackendTextureInfo) {
     return &yuvaBackendTextureInfo->yuvaInfo();
 }

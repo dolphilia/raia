@@ -11,6 +11,7 @@
 #include "../static/static_sk_color_table.h"
 
 extern "C" {
+void SkColorFilters_delete(SkColorFilters *colorFilters);
 // static
 int SkColorFilters_Blend(int sk_color_space_key_in, const SkColor4f * c, SkBlendMode mode);
 int SkColorFilters_Blend_2(SkColor c, SkBlendMode mode);

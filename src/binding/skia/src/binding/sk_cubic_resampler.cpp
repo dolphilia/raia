@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkCubicResampler_delete(SkCubicResampler *cubicResampler) {
+    delete cubicResampler;
+}
+
 SkCubicResampler SkCubicResampler_Mitchell() {
     return SkCubicResampler::Mitchell();
 }

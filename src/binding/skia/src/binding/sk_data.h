@@ -9,6 +9,7 @@
 #include "../static/static_sk_data.h"
 
 extern "C" {
+void SkData_delete(SkData *sk_data);
 size_t SkData_size(SkData *sk_data);
 bool SkData_isEmpty(SkData *sk_data);
 const void * SkData_data(SkData *sk_data);

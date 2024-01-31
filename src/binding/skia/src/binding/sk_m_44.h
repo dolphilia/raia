@@ -20,6 +20,7 @@ SkM44 *SkM44_new_2(const SkMatrix *src);
 SkM44 *SkM44_new_3();
 SkM44 *SkM44_new_4(const SkM44 *a, const SkM44 *b);
 SkM44 *SkM44_new_5(SkScalar m0, SkScalar m4, SkScalar m8, SkScalar m12, SkScalar m1, SkScalar m5, SkScalar m9, SkScalar m13, SkScalar m2, SkScalar m6, SkScalar m10, SkScalar m14, SkScalar m3, SkScalar m7, SkScalar m11, SkScalar m15);
+void SkM44_delete(SkM44 *m44);
 void SkM44_getColMajor(SkM44 *m44, SkScalar v[]);
 void SkM44_getRowMajor(SkM44 *m44, SkScalar v[]);
 SkScalar SkM44_rc(SkM44 *m44, int r, int c);

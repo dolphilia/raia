@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkContourMeasure_delete(SkContourMeasure *contour_measure) {
+    delete &contour_measure;
+}
+
 SkScalar SkContourMeasure_length(SkContourMeasure *contour_measure) {
     return contour_measure->length();
 }

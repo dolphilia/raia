@@ -9,6 +9,7 @@
 #include "../static/static_sk_color_filter.h"
 
 extern "C" {
+void SkOverdrawColorFilter_delete(SkOverdrawColorFilter * overdrawColorFilter);
 // static
 int SkOverdrawColorFilter_MakeWithSkColors(const SkColor color[SkOverdrawColorFilter::kNumColors]);
 }

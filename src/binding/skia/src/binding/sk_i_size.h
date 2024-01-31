@@ -8,6 +8,7 @@
 #include "include/core/SkSize.h"
 
 extern "C" {
+void SkISize_delete(SkISize *i_size);
 void SkISize_set(SkISize *i_size, int32_t w, int32_t h) ;
 bool SkISize_isZero(SkISize *i_size);
 bool SkISize_isEmpty(SkISize *i_size);

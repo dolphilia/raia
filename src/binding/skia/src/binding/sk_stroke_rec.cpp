@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkStrokeRec_delete(SkStrokeRec *stroke_rec) {
+    delete stroke_rec;
+}
+
 int SkStrokeRec_static(SkStrokeRec::InitStyle style) {
     return static_sk_stroke_rec_make(SkStrokeRec(style));
 }

@@ -15,6 +15,7 @@ extern "C" {
 //bool operator==(const SkImageInfo &other)
 //bool operator!=(const SkImageInfo &other)
 SkImageInfo *SkImageInfo_new();
+void SkImageInfo_delete(SkImageInfo *image_info);
 int SkImageInfo_width(SkImageInfo *image_info);
 int SkImageInfo_height(SkImageInfo *image_info);
 SkColorType SkImageInfo_colorType(SkImageInfo *image_info);

@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkFontStyleSet_delete(SkFontStyleSet *font_style_set) {
+    delete font_style_set;
+}
+
 int SkFontStyleSet_count(SkFontStyleSet *font_style_set) {
     return font_style_set->count();
 }

@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkStreamMemory_delete(SkStreamMemory *stream_memory) {
+    delete stream_memory;
+}
+
 const void * SkStreamMemory_getMemoryBase(SkStreamMemory *stream_memory) {
     return stream_memory->getMemoryBase();
 }

@@ -9,6 +9,7 @@
 #include "../static/static_sk_data_table.h"
 
 extern "C" {
+void SkDataTable_delete(SkDataTable *data_table);
 bool SkDataTable_isEmpty(SkDataTable *data_table);
 int SkDataTable_count(SkDataTable *data_table);
 size_t SkDataTable_atSize(SkDataTable *data_table, int index);

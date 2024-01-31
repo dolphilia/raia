@@ -10,6 +10,7 @@
 #include "../static/static_sk_data.h"
 
 extern "C" {
+void SkFlattenable_delete(SkFlattenable *flattenable);
 SkFlattenable::Factory SkFlattenable_getFactory(SkFlattenable *flattenable);
 const char * SkFlattenable_getTypeName(SkFlattenable *flattenable);
 void SkFlattenable_flatten(SkFlattenable *flattenable, SkWriteBuffer *write_buffer);

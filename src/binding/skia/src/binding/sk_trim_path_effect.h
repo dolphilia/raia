@@ -9,6 +9,8 @@
 #include "../static/static_sk_path_effect.h"
 
 extern "C" {
+void SkTrimPathEffect_delete(SkTrimPathEffect * trimPathEffect);
+// static
 int SkTrimPathEffect_Make(SkScalar startT, SkScalar stopT, SkTrimPathEffect::Mode mode);
 }
 

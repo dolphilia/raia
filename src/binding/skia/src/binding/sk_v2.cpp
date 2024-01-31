@@ -18,6 +18,10 @@ extern "C" {
 // void operator*=(SkScalar s)
 // void operator/=(SkScalar s)
 
+void SkV2_delete(SkV2 *v2) {
+    delete v2;
+}
+
 SkScalar SkV2_lengthSquared(SkV2 *v2) {
     return v2->lengthSquared();
 }

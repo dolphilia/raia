@@ -10,7 +10,7 @@
 #include "include/core/SkFontStyle.h"
 
 int static_sk_font_style_make(SkFontStyle value);
-void static_sk_font_style_delete(int key);
+extern "C" void static_sk_font_style_delete(int key);
 SkFontStyle static_sk_font_style_get(int key);
 void static_sk_font_style_set(int key, SkFontStyle value);
 

@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkRuntimeEffectBuilder_delete(SkRuntimeEffectBuilder *runtime_effect_builder) {
+    delete runtime_effect_builder;
+}
+
 const SkRuntimeEffect * SkRuntimeEffectBuilder_effect(SkRuntimeEffectBuilder *runtime_effect_builder) {
     return runtime_effect_builder->effect();
 }

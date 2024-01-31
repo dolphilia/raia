@@ -17,6 +17,10 @@ GrYUVABackendTextures *GrYUVABackendTextures_new_2(const SkYUVAInfo *yuvaInfo, c
     return new GrYUVABackendTextures(*yuvaInfo, backendTexture, textureOrigin);
 }
 
+void GrYUVABackendTextures_delete(GrYUVABackendTextures *yuvaBackendTextures) {
+    delete yuvaBackendTextures;
+}
+
 const std::array< GrBackendTexture, SkYUVAInfo::kMaxPlanes > * GrYUVABackendTextures_textures(GrYUVABackendTextures *yuvaBackendTextures) {
     return &yuvaBackendTextures->textures();
 }

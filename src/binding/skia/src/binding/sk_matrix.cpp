@@ -13,6 +13,10 @@ SkMatrix *SkMatrix_new(SkMatrix *matrix) {
     return new SkMatrix(*matrix);
 }
 
+void SkMatrix_delete(SkMatrix *matrix) {
+    delete matrix;
+}
+
 SkMatrix::TypeMask SkMatrix_getType(SkMatrix *matrix) {
     return matrix->getType();
 }

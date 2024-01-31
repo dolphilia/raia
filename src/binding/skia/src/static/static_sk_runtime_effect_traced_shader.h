@@ -11,7 +11,7 @@
 
 // const
 int static_sk_runtime_effect_traced_shader_make(SkRuntimeEffect::TracedShader value);
-void static_sk_runtime_effect_traced_shader_delete(int key);
+extern "C" void static_sk_runtime_effect_traced_shader_delete(int key);
 SkRuntimeEffect::TracedShader static_sk_runtime_effect_traced_shader_get(int key);
 void static_sk_runtime_effect_traced_shader_set(int key, SkRuntimeEffect::TracedShader value);
 

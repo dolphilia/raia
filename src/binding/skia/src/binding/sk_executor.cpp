@@ -7,6 +7,10 @@
 
 extern "C" {
 
+void SkExecutor_delete(SkExecutor *executor) {
+    delete executor;
+}
+
 void SkExecutor_add(int function_void_void_key_in, SkExecutor *executor) {
     executor->add(static_function_void_void_get(function_void_void_key_in));
 }

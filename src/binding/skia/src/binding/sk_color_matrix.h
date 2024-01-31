@@ -10,6 +10,7 @@
 extern "C" {
 SkColorMatrix *SkColorMatrix_new();
 SkColorMatrix *SkColorMatrix_new_2(float m00, float m01, float m02, float m03, float m04, float m10, float m11, float m12, float m13, float m14, float m20, float m21, float m22, float m23, float m24, float m30, float m31, float m32, float m33, float m34);
+void SkColorMatrix_delete(SkColorMatrix *color_matrix);
 void SkColorMatrix_setIdentity(SkColorMatrix *color_matrix);
 void SkColorMatrix_setScale(SkColorMatrix *color_matrix, float rScale, float gScale, float bScale, float aScale);
 void SkColorMatrix_postTranslate(SkColorMatrix *color_matrix, float dr, float dg, float db, float da);

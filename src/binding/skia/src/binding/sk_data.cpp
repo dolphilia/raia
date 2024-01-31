@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkData_delete(SkData *sk_data) {
+    delete &sk_data;
+}
+
 size_t SkData_size(SkData *sk_data) {
     return sk_data->size();
 }

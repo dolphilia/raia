@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkFlattenable_delete(SkFlattenable *flattenable) {
+    delete flattenable;
+}
+
 SkFlattenable::Factory SkFlattenable_getFactory(SkFlattenable *flattenable) {
     return flattenable->getFactory();
 }

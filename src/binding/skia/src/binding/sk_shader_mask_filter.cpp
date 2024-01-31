@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkShaderMaskFilter_delete(SkShaderMaskFilter *shaderMaskFilter) {
+    delete shaderMaskFilter;
+}
+
 // static
 
 int SkShaderMaskFilter_Make(int sk_shader_key_in) {

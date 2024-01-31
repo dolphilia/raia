@@ -92,6 +92,7 @@ void used() {
 }
 */
 
+/*
 int main(int argc, char* argv[]) {
     // GLFWを初期化する
     {
@@ -291,3 +292,4 @@ int main(int argc, char* argv[]) {
     return 0;
 
 }
+*/

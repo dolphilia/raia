@@ -13,6 +13,7 @@
 #include "../static/static_sk_data.h"
 
 extern "C" {
+void SkMaskFilter_delete(SkMaskFilter *maskFilter);
 int SkMaskFilter_approximateFilteredBounds(SkMaskFilter *mask_filter, const SkRect *src);
 SkMaskFilter::Factory SkMaskFilter_getFactory(SkMaskFilter *mask_filter);
 const char * SkMaskFilter_getTypeName(SkMaskFilter *mask_filter);

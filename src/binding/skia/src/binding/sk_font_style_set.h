@@ -10,6 +10,7 @@
 #include "../static/static_sk_font_style_set.h"
 
 extern "C" {
+void SkFontStyleSet_delete(SkFontStyleSet *font_style_set);
 int SkFontStyleSet_count(SkFontStyleSet *font_style_set);
 void SkFontStyleSet_getStyle(SkFontStyleSet *font_style_set, int index, SkFontStyle * font_style, SkString *style);
 int SkFontStyleSet_createTypeface(SkFontStyleSet *font_style_set, int index);

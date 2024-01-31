@@ -10,8 +10,8 @@
 #include "include/gpu/GrContextThreadSafeProxy.h"
 
 int static_gr_context_thread_safe_proxy_make(sk_sp<GrContextThreadSafeProxy> value);
-void static_gr_context_thread_safe_proxy_delete(int key);
-GrContextThreadSafeProxy *static_gr_context_thread_safe_proxy_get(int key);
+extern "C" void static_gr_context_thread_safe_proxy_delete(int key);
+extern "C" GrContextThreadSafeProxy *static_gr_context_thread_safe_proxy_get(int key);
 void static_gr_context_thread_safe_proxy_set(int key, sk_sp<GrContextThreadSafeProxy> value);
 sk_sp<GrContextThreadSafeProxy> static_gr_context_thread_safe_proxy_move(int key);
 

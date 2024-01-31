@@ -8,6 +8,7 @@
 #include "include/effects/SkTableMaskFilter.h"
 
 extern "C" {
+void SkTableMaskFilter_delete(SkTableMaskFilter *tableMaskFilter);
 // static
 void SkTableMaskFilter_MakeGammaTable(uint8_t table[256], SkScalar gamma);
 void SkTableMaskFilter_MakeClipTable(uint8_t table[256], uint8_t min, uint8_t max);

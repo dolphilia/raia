@@ -10,7 +10,7 @@
 #include "include/core/SkStrokeRec.h"
 
 int static_sk_stroke_rec_make(SkStrokeRec value);
-void static_sk_stroke_rec_delete(int key);
+extern "C" void static_sk_stroke_rec_delete(int key);
 SkStrokeRec static_sk_stroke_rec_get(int key);
 void static_sk_stroke_rec_set(int key, SkStrokeRec value);
 

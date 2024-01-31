@@ -15,6 +15,10 @@ extern "C" {
 // float operator[](int i)
 // float & operator[](int i)
 
+void SkV4_delete(SkV4 *v4) {
+    delete v4;
+}
+
 SkScalar SkV4_lengthSquared(SkV4 *v4) {
     return v4->lengthSquared();
 }

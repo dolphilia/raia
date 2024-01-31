@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkRSXform_delete(SkRSXform *rsx_form) {
+    delete rsx_form;
+}
+
 bool SkRSXform_rectStaysRect(SkRSXform *rsx_form) {
     return rsx_form->rectStaysRect();
 }

@@ -13,6 +13,7 @@ extern "C" {
 //SkRRect & operator=(const SkRRect &rrect)
 SkRRect *SkRRect_new();
 SkRRect *SkRRect_new_2(const SkRRect *rrect);
+void SkRRect_delete(SkRRect *rrect);
 SkRRect::Type getType(SkRRect *rrect);
 SkRRect::Type type(SkRRect *rrect);
 bool SkRRect_isEmpty(SkRRect *rrect);

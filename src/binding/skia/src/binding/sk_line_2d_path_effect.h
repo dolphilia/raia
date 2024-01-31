@@ -9,6 +9,7 @@
 #include "../static/static_sk_path_effect.h"
 
 extern "C" {
+void SkLine2DPathEffect_delete(SkLine2DPathEffect * line2DPathEffect);
 // static
 int SkLine2DPathEffect_Make(SkScalar width, const SkMatrix *matrix);
 void SkLine2DPathEffect_RegisterFlattenables();

@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkStreamAsset_delete(SkStreamAsset *stream_asset) {
+    delete stream_asset;
+}
+
 bool SkStreamAsset_hasLength(SkStreamAsset *stream_asset) {
     return stream_asset->hasLength();
 }

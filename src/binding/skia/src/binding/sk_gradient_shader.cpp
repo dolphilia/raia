@@ -6,6 +6,10 @@
 
 extern "C" {
 
+void SkGradientShader_delete(SkGradientShader * gradientShader) {
+    delete gradientShader;
+}
+
 // static
 
 int SkGradientShader_MakeLinear(const SkPoint pts[2], const SkColor colors[], const SkScalar pos[], int count, SkTileMode mode, uint32_t flags, const SkMatrix *localMatrix) {

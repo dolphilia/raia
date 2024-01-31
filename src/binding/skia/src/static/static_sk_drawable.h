@@ -10,8 +10,8 @@
 #include "include/core/SkDrawable.h"
 
 int static_sk_drawable_make(sk_sp<SkDrawable> value);
-void static_sk_drawable_delete(int key);
-SkDrawable *static_sk_drawable_get(int key);
+extern "C" void static_sk_drawable_delete(int key);
+extern "C" SkDrawable *static_sk_drawable_get(int key);
 void static_sk_drawable_set(int key, sk_sp<SkDrawable> value);
 sk_sp<SkDrawable> static_sk_drawable_move(int key);
 

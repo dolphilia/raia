@@ -8,6 +8,7 @@
 #include "include/core/SkFontMetrics.h"
 
 extern "C" {
+void SkFontMetrics_delete(SkFontMetrics *font_metrics);
 bool SkFontMetrics_hasUnderlineThickness(SkFontMetrics *font_metrics, SkScalar *thickness);
 bool SkFontMetrics_hasUnderlinePosition(SkFontMetrics *font_metrics, SkScalar *position);
 bool SkFontMetrics_hasStrikeoutThickness(SkFontMetrics *font_metrics, SkScalar *thickness);

@@ -13,6 +13,7 @@
 #include "../static/static_sk_stream_asset.h"
 
 extern "C" {
+void SkFontMgr_delete(SkFontMgr *font_mgr);
 int SkFontMgr_countFamilies(SkFontMgr *font_mgr);
 void SkFontMgr_getFamilyName(SkFontMgr *font_mgr, int index, SkString *familyName);
 void SkFontMgr_createStyleSet(int sk_font_style_set_out, SkFontMgr *font_mgr, int index);
@@ -28,8 +29,10 @@ bool SkFontMgr_unique(SkFontMgr *font_mgr);
 void SkFontMgr_ref(SkFontMgr *font_mgr);
 void SkFontMgr_unref(SkFontMgr *font_mgr);
 // static
-int SkFontMgr_RefDefault();
 int SkFontMgr_RefEmpty();
+#if !defined(SK_DISABLE_LEGACY_FONTMGR_REFDEFAULT)
+int SkFontMgr_RefDefault();
+#endif
 }
 
 #endif //RAIA_SKIA_SK_FONT_MGR_H

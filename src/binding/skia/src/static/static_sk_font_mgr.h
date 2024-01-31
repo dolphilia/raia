@@ -10,8 +10,8 @@
 #include "include/core/SkFontMgr.h"
 
 int static_sk_font_mgr_make(sk_sp<SkFontMgr> value);
-void static_sk_font_mgr_delete(int key);
-SkFontMgr *static_sk_font_mgr_get(int key);
+extern "C" void static_sk_font_mgr_delete(int key);
+extern "C" SkFontMgr *static_sk_font_mgr_get(int key);
 void static_sk_font_mgr_set(int key, sk_sp<SkFontMgr> value);
 sk_sp<SkFontMgr> static_sk_font_mgr_move(int key);
 

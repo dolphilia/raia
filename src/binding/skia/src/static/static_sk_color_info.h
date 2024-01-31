@@ -10,7 +10,7 @@
 #include "include/core/SkImageInfo.h"
 
 int static_sk_color_info_make(SkColorInfo value);
-void static_sk_color_info_delete(int key);
+extern "C" void static_sk_color_info_delete(int key);
 SkColorInfo static_sk_color_info_get(int key);
 void static_sk_color_info_set(int key, SkColorInfo value);
 

@@ -13,6 +13,7 @@ SkFont *SkFont_new();
 SkFont *SkFont_new_2(int sk_typeface_key_in, SkScalar size);
 SkFont *SkFont_new_3(int sk_typeface_key_in);
 SkFont *SkFont_new_4(int sk_typeface_key_in, SkScalar size, SkScalar scaleX, SkScalar skewX);
+void SkFont_delete(SkFont *font);
 bool SkFont_isForceAutoHinting(SkFont *font);
 bool SkFont_isEmbeddedBitmaps(SkFont *font);
 bool SkFont_isSubpixel(SkFont *font);

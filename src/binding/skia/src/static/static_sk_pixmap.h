@@ -10,7 +10,7 @@
 #include "include/core/SkPixmap.h"
 
 int static_sk_pixmap_make(SkPixmap value);
-void static_sk_pixmap_delete(int key);
+extern "C" void static_sk_pixmap_delete(int key);
 SkPixmap static_sk_pixmap_get(int key) ;
 void static_sk_pixmap_set(int key, SkPixmap value);
 

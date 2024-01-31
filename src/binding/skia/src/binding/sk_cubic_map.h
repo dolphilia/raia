@@ -8,6 +8,7 @@
 #include "include/core/SkCubicMap.h"
 
 extern "C" {
+void SkCubicMap_delete(SkCubicMap * cubic_map);
 SkCubicMap *SkCubicMap_new(SkPoint p1, SkPoint p2);
 float SkCubicMap_computeYFromX(SkCubicMap * cubic_map, float x);
 SkPoint SkCubicMap_computeFromT(SkCubicMap * cubic_map, float t);

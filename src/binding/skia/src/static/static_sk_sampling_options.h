@@ -10,7 +10,7 @@
 #include "include/core/SkSamplingOptions.h"
 
 int static_sk_sampling_options_make(SkSamplingOptions value);
-void static_sk_sampling_options_delete(int key);
+extern "C" void static_sk_sampling_options_delete(int key);
 SkSamplingOptions static_sk_sampling_options_get(int key);
 void static_sk_sampling_options_set(int key, SkSamplingOptions value);
 

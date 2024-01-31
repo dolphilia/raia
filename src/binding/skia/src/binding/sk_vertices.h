@@ -9,6 +9,7 @@
 #include "../static/static_sk_vertices.h"
 
 extern "C" {
+void SkVertices_delete(SkVertices * vertices);
 uint32_t SkVertices_uniqueID(SkVertices *vertices);
 const SkRect * SkVertices_bounds(SkVertices *vertices);
 size_t SkVertices_approximateSize(SkVertices *vertices);

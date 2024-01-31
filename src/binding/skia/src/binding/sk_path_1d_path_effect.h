@@ -9,6 +9,7 @@
 #include "../static/static_sk_path_effect.h"
 
 extern "C" {
+void SkPath1DPathEffect_delete(SkPath1DPathEffect * path1DPathEffect);
 // static
 int SkPath1DPathEffect_Make(const SkPath *path, SkScalar advance, SkScalar phase, SkPath1DPathEffect::Style style);
 void SkPath1DPathEffect_RegisterFlattenables();
