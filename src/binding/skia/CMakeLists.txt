@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.25)
 project(raia_skia)
 
+#add_subdirectory(${PROJECT_SOURCE_DIR}/../../../third_party/googletest)
+
 include(${PROJECT_SOURCE_DIR}/../../setting.cmake)
 include_directories(${PROJECT_SOURCE_DIR}/../../../sdk/macos/arm64/include/skia)
 
@@ -12,8 +14,8 @@ else()
         set(CMAKE_INSTALL_RPATH "$ORIGIN")
 endif()
 
-add_executable(raia_skia src/raia_skia.cpp
-#add_library(raia_skia SHARED
+#add_executable(raia_skia src/raia_skia.cpp
+add_library(raia_skia SHARED
         src/binding/gr_backend_drawable_info.cpp
         src/binding/gr_backend_drawable_info.h
         src/binding/gr_backend_format.cpp
@@ -413,20 +415,46 @@ add_executable(raia_skia src/raia_skia.cpp
         src/static/static_std_tuple_int_sk_yuva_pixmap_info_data_type.h
         src/static/static_std_vector_sk_scalar.cpp
         src/static/static_std_vector_sk_scalar.h
+        test/test.cpp
+        test/test.h
+        src/binding/sk_point.cpp
+        src/binding/sk_point.h
+        src/binding/sk_perlin_noise_shader.cpp
+        src/binding/sk_perlin_noise_shader.h
+        src/binding/sk_typeface_mac.cpp
+        src/binding/sk_typeface_mac.h
+        src/binding/sk_font_mgr_fontconfig.cpp
+        src/binding/sk_font_mgr_fontconfig.h
 )
 
 get_property(CURRENT_RPATH TARGET raia_skia PROPERTY INSTALL_RPATH)
 
 list(PREPEND CURRENT_RPATH "${SPECIAL_RPATH_KEYWORD}")
 
+#add_library(raia_skia STATIC IMPORTED)
+#set_target_properties(raia_skia PROPERTIES IMPORTED_LOCATION libskia.a libskshaper.a)
+
+
 set_target_properties(raia_skia PROPERTIES
         BUILD_WITH_INSTALL_RPATH TRUE
         INSTALL_RPATH "${CURRENT_RPATH}")
 
 target_link_libraries(raia_skia
-        $<$<PLATFORM_ID:Darwin>: egl glfw.3.4 GLESv2 skia skshaper>
+        $<$<PLATFORM_ID:Darwin>: egl glfw.3.4 GLESv2 skia skshaper skparagraph skunicode "-framework CoreFoundation" "-framework CoreText" fontconfig>
         $<$<PLATFORM_ID:Linux>: m dl EGL glfw GLESv2 X11 Xxf86vm Xrandr Xinerama Xcursor pthread Xi>
         $<$<PLATFORM_ID:Windows>: EGL glfw3 GLESv2>
         )
 
 set_target_properties(raia_skia PROPERTIES PREFIX "")
+
+
+#--- test
+enable_testing()
+add_executable(test_c_skia test/test.cpp)
+if(APPLE)
+find_library(CORE_FOUNDATION CoreFoundation)
+find_library(CORE_TEXT CoreText)
+target_link_libraries(test_c_skia raia_skia skia "-framework CoreFoundation" ${CORE_FOUNDATION} ${CORE_TEXT} fontconfig)
+endif ()
+add_test(NAME c_skia_test COMMAND test_c_skia)
+#---
