@@ -38,8 +38,10 @@ add_executable(raia_v8
         ../../common/c/wrapper/wrapper_ffi.h
         src/static/static_v8_platform.cpp
         src/static/static_v8_platform.h
-        src/static/v8_isolate_create_params.cpp
-        src/static/v8_isolate_create_params.h
+        src/static/static_v8_isolate_create_params.cpp
+        src/static/static_v8_isolate_create_params.h
+        src/binding/v8_platform.cpp
+        src/binding/v8_platform.h
 )
 
 add_compile_options(-pthread -fno-rtti)
