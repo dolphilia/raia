@@ -2,7 +2,7 @@
 // Created by dolphilia on 2024/01/23.
 //
 
-#include "v8_isolate_create_params.h"
+#include "static_v8_isolate_create_params.h"
 
 static std::map<std::string, v8::Isolate::CreateParams> static_v8_isolate_create_params;
 
@@ -20,4 +20,8 @@ void static_v8_isolate_create_params_set(const char *key, v8::Isolate::CreatePar
 
 void static_v8_isolate_create_params_set_array_buffer_allocator(v8::Isolate::CreateParams *createParams, v8::ArrayBuffer::Allocator *allocator) {
     createParams->array_buffer_allocator = allocator;
+}
+
+void static_v8_isolate_create_params_delete_array_buffer_allocator(v8::Isolate::CreateParams *createParams) {
+    delete createParams->array_buffer_allocator;
 }
