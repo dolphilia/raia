@@ -11,7 +11,7 @@
 #include "include/private/base/SkSpan_impl.h"
 #include "include/core/SkColor.h"
 
-int static_const_sk_color_make(SkSpan<SkColor> value);
+int static_sk_color_make(SkSpan<SkColor> value);
 extern "C" void static_sk_color_delete(int key);
 SkSpan<SkColor> static_sk_color_get(int key);
 void static_color_set(int key, SkSpan<SkColor> value);

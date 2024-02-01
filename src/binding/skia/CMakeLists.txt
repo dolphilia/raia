@@ -425,6 +425,20 @@ add_library(raia_skia SHARED
         src/binding/sk_typeface_mac.h
         src/binding/sk_font_mgr_fontconfig.cpp
         src/binding/sk_font_mgr_fontconfig.h
+        src/binding/sk_jpeg_encoder.cpp
+        src/binding/sk_jpeg_encoder.h
+        src/static/static_sk_encoder.cpp
+        src/static/static_sk_encoder.h
+        src/binding/sk_png_encoder.cpp
+        src/binding/sk_png_encoder.h
+        src/binding/sk_webp_encoder.cpp
+        src/binding/sk_webp_encoder.h
+        src/static/static_sk_encoder_frame.cpp
+        src/static/static_sk_encoder_frame.h
+        src/binding/sk_encoder.cpp
+        src/binding/sk_encoder.h
+        src/binding/sk_icc.cpp
+        src/binding/sk_icc.h
 )
 
 get_property(CURRENT_RPATH TARGET raia_skia PROPERTY INSTALL_RPATH)

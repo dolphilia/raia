@@ -4,32 +4,32 @@
 
 #include "static_sk_color.h"
 
-static std::set<int> static_const_sk_color_available_keys;
-static std::map<int , SkSpan<SkColor>> static_const_sk_color;
-static int static_const_sk_color_index = 0;
+static std::set<int> static_sk_color_available_keys;
+static std::map<int , SkSpan<SkColor>> static_sk_color;
+static int static_sk_color_index = 0;
 
-int static_const_sk_color_make(SkSpan<SkColor> value) {
+int static_sk_color_make(SkSpan<SkColor> value) {
     int key;
-    if (!static_const_sk_color_available_keys.empty()) {
-        auto it = static_const_sk_color_available_keys.begin();
+    if (!static_sk_color_available_keys.empty()) {
+        auto it = static_sk_color_available_keys.begin();
         key = *it;
-        static_const_sk_color_available_keys.erase(it);
+        static_sk_color_available_keys.erase(it);
     } else {
-        key = static_const_sk_color_index++;
+        key = static_sk_color_index++;
     }
-    static_const_sk_color[key] = value;
+    static_sk_color[key] = value;
     return key;
 }
 
 void static_sk_color_delete(int key) {
-    static_const_sk_color.erase(key);
-    static_const_sk_color_available_keys.insert(key);
+    static_sk_color.erase(key);
+    static_sk_color_available_keys.insert(key);
 }
 
 SkSpan<SkColor> static_sk_color_get(int key) {
-    return static_const_sk_color[key];
+    return static_sk_color[key];
 }
 
 void static_color_set(int key, SkSpan<SkColor> value) {
-    static_const_sk_color[key] = value;
+    static_sk_color[key] = value;
 }
