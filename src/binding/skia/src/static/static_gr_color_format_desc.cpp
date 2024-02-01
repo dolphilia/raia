@@ -4,17 +4,26 @@
 
 #include "static_gr_color_format_desc.h"
 
+static std::set<int> static_gr_color_format_desc_available_keys;
 static std::map<int, GrColorFormatDesc> static_gr_color_format_desc;
 static int static_gr_color_format_desc_index = 0;
 
 int static_gr_color_format_desc_make(GrColorFormatDesc value) {
-    static_gr_color_format_desc.at(static_gr_color_format_desc_index) = value;
-    static_gr_color_format_desc_index++;
-    return static_gr_color_format_desc_index - 1;
+    int key;
+    if (!static_gr_color_format_desc_available_keys.empty()) {
+        auto it = static_gr_color_format_desc_available_keys.begin();
+        key = *it;
+        static_gr_color_format_desc_available_keys.erase(it);
+    } else {
+        key = static_gr_color_format_desc_index++;
+    }
+    static_gr_color_format_desc.at(key) = value;
+    return key;
 }
 
 void static_gr_color_format_desc_delete(int key) {
     static_gr_color_format_desc.erase(key);
+    static_gr_color_format_desc_available_keys.insert(key);
 }
 
 GrColorFormatDesc static_gr_color_format_desc_get(int key) {

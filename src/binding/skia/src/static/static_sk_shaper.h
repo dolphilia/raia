@@ -5,6 +5,7 @@
 #ifndef RAIA_SKIA_STATIC_SK_SHAPER_H
 #define RAIA_SKIA_STATIC_SK_SHAPER_H
 
+#include <set>
 #include <string>
 #include <map>
 #include "modules/skshaper/include/SkShaper.h"

@@ -5,6 +5,7 @@
 #ifndef RAIA_SKIA_STATIC_GR_COLOR_FORMAT_DESC_H
 #define RAIA_SKIA_STATIC_GR_COLOR_FORMAT_DESC_H
 
+#include <set>
 #include <string>
 #include <map>
 #include "include/gpu/GrBackendSurface.h"

@@ -4,17 +4,26 @@
 
 #include "static_sk_color.h"
 
+static std::set<int> static_const_sk_color_available_keys;
 static std::map<int , SkSpan<SkColor>> static_const_sk_color;
 static int static_const_sk_color_index = 0;
 
 int static_const_sk_color_make(SkSpan<SkColor> value) {
-    static_const_sk_color[static_const_sk_color_index] = value;
-    static_const_sk_color_index++;
-    return static_const_sk_color_index - 1;
+    int key;
+    if (!static_const_sk_color_available_keys.empty()) {
+        auto it = static_const_sk_color_available_keys.begin();
+        key = *it;
+        static_const_sk_color_available_keys.erase(it);
+    } else {
+        key = static_const_sk_color_index++;
+    }
+    static_const_sk_color[key] = value;
+    return key;
 }
 
 void static_sk_color_delete(int key) {
     static_const_sk_color.erase(key);
+    static_const_sk_color_available_keys.insert(key);
 }
 
 SkSpan<SkColor> static_sk_color_get(int key) {

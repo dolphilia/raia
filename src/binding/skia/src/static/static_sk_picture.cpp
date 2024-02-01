@@ -6,18 +6,27 @@
 
 #include <utility>
 
+static std::set<int> static_sk_picture_available_keys;
 static std::map<int , sk_sp<SkPicture>> static_sk_picture;
 static int static_sk_picture_index = 0;
 
 int static_sk_picture_make(sk_sp<SkPicture> value) {
-    static_sk_picture[static_sk_picture_index] = std::move(value);
-    static_sk_picture_index++;
-    return static_sk_picture_index - 1;
+    int key;
+    if (!static_sk_picture_available_keys.empty()) {
+        auto it = static_sk_picture_available_keys.begin();
+        key = *it;
+        static_sk_picture_available_keys.erase(it);
+    } else {
+        key = static_sk_picture_index++;
+    }
+    static_sk_picture[key] = std::move(value);
+    return key;
 }
 
 void static_sk_picture_delete(int key) {
     static_sk_picture[key].reset();
     static_sk_picture.erase(key);
+    static_sk_picture_available_keys.insert(key);
 }
 
 SkPicture *static_sk_picture_get(int key) {

@@ -6,18 +6,27 @@
 
 #include <utility>
 
+static std::set<int> static_sk_text_blob_available_keys;
 static std::map<int , sk_sp<SkTextBlob>> static_sk_text_blob;
 static int static_sk_text_blob_index = 0;
 
 int static_sk_text_blob_make(sk_sp<SkTextBlob> value) {
-    static_sk_text_blob[static_sk_text_blob_index] = std::move(value);
-    static_sk_text_blob_index++;
-    return static_sk_text_blob_index - 1;
+    int key;
+    if (!static_sk_text_blob_available_keys.empty()) {
+        auto it = static_sk_text_blob_available_keys.begin();
+        key = *it;
+        static_sk_text_blob_available_keys.erase(it);
+    } else {
+        key = static_sk_text_blob_index++;
+    }
+    static_sk_text_blob[key] = std::move(value);
+    return key;
 }
 
 void static_sk_text_blob_delete(int key) {
     static_sk_text_blob[key].reset();
     static_sk_text_blob.erase(key);
+    static_sk_text_blob_available_keys.insert(key);
 }
 
 SkTextBlob *static_sk_text_blob_get(int key) {

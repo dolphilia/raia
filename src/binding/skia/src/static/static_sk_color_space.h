@@ -5,6 +5,7 @@
 #ifndef RAIA_SKIA_STATIC_SK_COLOR_SPACE_H
 #define RAIA_SKIA_STATIC_SK_COLOR_SPACE_H
 
+#include <set>
 #include <string>
 #include <map>
 #include "include/core/SkColorSpace.h"

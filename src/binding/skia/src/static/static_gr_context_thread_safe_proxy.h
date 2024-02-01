@@ -5,6 +5,7 @@
 #ifndef RAIA_SKIA_STATIC_GR_CONTEXT_THREAD_SAFE_PROXY_H
 #define RAIA_SKIA_STATIC_GR_CONTEXT_THREAD_SAFE_PROXY_H
 
+#include <set>
 #include <string>
 #include <map>
 #include "include/gpu/GrContextThreadSafeProxy.h"

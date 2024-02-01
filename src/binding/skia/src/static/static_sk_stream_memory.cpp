@@ -4,18 +4,27 @@
 
 #include "static_sk_stream_memory.h"
 
+static std::set<int> static_sk_stream_memory_available_keys;
 static std::map<int , std::unique_ptr<SkStreamMemory>> static_sk_stream_memory;
 static int static_sk_stream_memory_index = 0;
 
 int static_sk_stream_memory_make(std::unique_ptr<SkStreamMemory> value) {
-    static_sk_stream_memory[static_sk_stream_memory_index] = std::move(value);
-    static_sk_stream_memory_index++;
-    return static_sk_stream_memory_index - 1;
+    int key;
+    if (!static_sk_stream_memory_available_keys.empty()) {
+        auto it = static_sk_stream_memory_available_keys.begin();
+        key = *it;
+        static_sk_stream_memory_available_keys.erase(it);
+    } else {
+        key = static_sk_stream_memory_index++;
+    }
+    static_sk_stream_memory[key] = std::move(value);
+    return key;
 }
 
 void static_sk_stream_memory_delete(int key) {
     static_sk_stream_memory[key].reset();
     static_sk_stream_memory.erase(key);
+    static_sk_stream_memory_available_keys.insert(key);
 }
 
 SkStreamMemory *static_sk_stream_memory_get(int key) {

@@ -5,6 +5,7 @@
 #ifndef RAIA_SKIA_STATIC_SK_EXECUTOR_H
 #define RAIA_SKIA_STATIC_SK_EXECUTOR_H
 
+#include <set>
 #include <string>
 #include <map>
 #include "include/core/SkExecutor.h"

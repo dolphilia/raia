@@ -5,6 +5,7 @@
 #ifndef RAIA_SKIA_STATIC_STD_FUNCTION_VOID_VOID_H
 #define RAIA_SKIA_STATIC_STD_FUNCTION_VOID_VOID_H
 
+#include <set>
 #include <string>
 #include <map>
 

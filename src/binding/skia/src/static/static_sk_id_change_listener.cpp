@@ -6,18 +6,27 @@
 
 #include <utility>
 
+static std::set<int> static_sk_id_change_listener_available_keys;
 static std::map<int , sk_sp<SkIDChangeListener>> static_sk_id_change_listener;
 static int static_sk_id_change_listener_index = 0;
 
 int static_sk_id_change_listener_make(sk_sp<SkIDChangeListener> value) {
-    static_sk_id_change_listener[static_sk_id_change_listener_index] = std::move(value);
-    static_sk_id_change_listener_index++;
-    return static_sk_id_change_listener_index - 1;
+    int key;
+    if (!static_sk_id_change_listener_available_keys.empty()) {
+        auto it = static_sk_id_change_listener_available_keys.begin();
+        key = *it;
+        static_sk_id_change_listener_available_keys.erase(it);
+    } else {
+        key = static_sk_id_change_listener_index++;
+    }
+    static_sk_id_change_listener[key] = std::move(value);
+    return key;
 }
 
 void static_sk_id_change_listener_delete(int key) {
     static_sk_id_change_listener[key].reset();
     static_sk_id_change_listener.erase(key);
+    static_sk_id_change_listener_available_keys.insert(key);
 }
 
 SkIDChangeListener *static_sk_id_change_listener_get(int key) {

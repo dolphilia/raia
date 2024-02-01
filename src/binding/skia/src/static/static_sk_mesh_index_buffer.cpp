@@ -6,18 +6,27 @@
 
 #include <utility>
 
+static std::set<int> static_sk_mesh_index_buffer_available_keys;
 static std::map<int , sk_sp<SkMesh::IndexBuffer>> static_sk_mesh_index_buffer;
 static int static_sk_mesh_index_buffer_index = 0;
 
 int static_sk_mesh_index_buffer_make(sk_sp<SkMesh::IndexBuffer> value) {
-    static_sk_mesh_index_buffer[static_sk_mesh_index_buffer_index] = std::move(value);
-    static_sk_mesh_index_buffer_index++;
-    return static_sk_mesh_index_buffer_index - 1;
+    int key;
+    if (!static_sk_mesh_index_buffer_available_keys.empty()) {
+        auto it = static_sk_mesh_index_buffer_available_keys.begin();
+        key = *it;
+        static_sk_mesh_index_buffer_available_keys.erase(it);
+    } else {
+        key = static_sk_mesh_index_buffer_index++;
+    }
+    static_sk_mesh_index_buffer[key] = std::move(value);
+    return key;
 }
 
 void static_sk_mesh_index_buffer_delete(int key) {
     static_sk_mesh_index_buffer[key].reset();
     static_sk_mesh_index_buffer.erase(key);
+    static_sk_mesh_index_buffer_available_keys.insert(key);
 }
 
 SkMesh::IndexBuffer *static_sk_mesh_index_buffer_get(int key) {

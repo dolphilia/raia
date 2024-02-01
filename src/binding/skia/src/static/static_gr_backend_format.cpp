@@ -4,13 +4,21 @@
 
 #include "static_gr_backend_format.h"
 
+static std::set<int> static_gr_backend_format_available_keys;
 static std::map<int, GrBackendFormat> static_gr_backend_format;
 static int static_gr_backend_format_index = 0;
 
 int static_gr_backend_format_make(GrBackendFormat value) {
-    static_gr_backend_format[static_gr_backend_format_index] = value;
-    static_gr_backend_format_index++;
-    return static_gr_backend_format_index - 1;
+    int key;
+    if (!static_gr_backend_format_available_keys.empty()) {
+        auto it = static_gr_backend_format_available_keys.begin();
+        key = *it;
+        static_gr_backend_format_available_keys.erase(it);
+    } else {
+        key = static_gr_backend_format_index++;
+    }
+    static_gr_backend_format[key] = value;
+    return key;
 }
 
 void static_gr_backend_format_delete(int key) {

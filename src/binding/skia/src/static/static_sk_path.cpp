@@ -4,17 +4,26 @@
 
 #include "static_sk_path.h"
 
+static std::set<int> static_sk_path_available_keys;
 static std::map<int , SkPath> static_sk_path;
 static int static_sk_path_index = 0;
 
 int static_sk_path_make(const SkPath& value) {
-    static_sk_path[static_sk_path_index] = value;
-    static_sk_path_index++;
-    return static_sk_path_index - 1;
+    int key;
+    if (!static_sk_path_available_keys.empty()) {
+        auto it = static_sk_path_available_keys.begin();
+        key = *it;
+        static_sk_path_available_keys.erase(it);
+    } else {
+        key = static_sk_path_index++;
+    }
+    static_sk_path[key] = value;
+    return key;
 }
 
 void static_sk_path_delete(int key) {
     static_sk_path.erase(key);
+    static_sk_path_available_keys.insert(key);
 }
 
 SkPath static_sk_path_get(int key) {

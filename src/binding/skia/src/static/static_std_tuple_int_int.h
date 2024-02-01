@@ -5,6 +5,7 @@
 #ifndef RAIA_SKIA_STATIC_STD_TUPLE_INT_INT_H
 #define RAIA_SKIA_STATIC_STD_TUPLE_INT_INT_H
 
+#include <set>
 #include <string>
 #include <map>
 #include <tuple>

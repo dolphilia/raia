@@ -6,18 +6,27 @@
 
 #include <utility>
 
+static std::set<int> static_sk_color_space_available_keys;
 static std::map<int , sk_sp<SkColorSpace>> static_sk_color_space;
 static int static_sk_color_space_index = 0;
 
 int static_sk_color_space_make(sk_sp<SkColorSpace> value) {
-    static_sk_color_space[static_sk_color_space_index] = std::move(value);
-    static_sk_color_space_index++;
-    return static_sk_color_space_index - 1;
+    int key;
+    if (!static_sk_color_space_available_keys.empty()) {
+        auto it = static_sk_color_space_available_keys.begin();
+        key = *it;
+        static_sk_color_space_available_keys.erase(it);
+    } else {
+        key = static_sk_color_space_index++;
+    }
+    static_sk_color_space[key] = std::move(value);
+    return key;
 }
 
 void static_sk_color_space_delete(int key) {
     static_sk_color_space[key].reset();
     static_sk_color_space.erase(key);
+    static_sk_color_space_available_keys.insert(key);
 }
 
 SkColorSpace *static_sk_color_space_get(int key) {

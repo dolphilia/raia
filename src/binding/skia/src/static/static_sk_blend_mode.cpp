@@ -4,18 +4,26 @@
 
 #include "static_sk_blend_mode.h"
 
+static std::set<int> static_optional_sk_blend_mode_available_keys;
 static std::map<int, std::optional<SkBlendMode>> static_optional_sk_blend_mode;
 static int static_optional_sk_blend_mode_index = 0;
 
 int static_optional_sk_blend_mode_make(std::optional<SkBlendMode> value) {
-    static_optional_sk_blend_mode[static_optional_sk_blend_mode_index] = value;
-    static_optional_sk_blend_mode_index++;
-    return static_optional_sk_blend_mode_index - 1;
+    int key;
+    if (!static_optional_sk_blend_mode_available_keys.empty()) {
+        auto it = static_optional_sk_blend_mode_available_keys.begin();
+        key = *it;
+        static_optional_sk_blend_mode_available_keys.erase(it);
+    } else {
+        key = static_optional_sk_blend_mode_index++;
+    }
+    static_optional_sk_blend_mode[key] = value;
 }
 
 void static_optional_sk_blend_mode_delete(int key) {
     static_optional_sk_blend_mode[key].reset();
     static_optional_sk_blend_mode.erase(key);
+    static_optional_sk_blend_mode_available_keys.insert(key);
 }
 
 SkBlendMode static_optional_sk_blend_mode_get(int key) {

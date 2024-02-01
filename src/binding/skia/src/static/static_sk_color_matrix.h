@@ -5,6 +5,7 @@
 #ifndef RAIA_SKIA_STATIC_SK_COLOR_MATRIX_H
 #define RAIA_SKIA_STATIC_SK_COLOR_MATRIX_H
 
+#include <set>
 #include <string>
 #include <map>
 #include "include/effects/SkColorMatrix.h"

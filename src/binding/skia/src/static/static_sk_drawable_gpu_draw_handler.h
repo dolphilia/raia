@@ -5,6 +5,7 @@
 #ifndef RAIA_SKIA_STATIC_SK_DRAWABLE_GPU_DRAW_HANDLER_H
 #define RAIA_SKIA_STATIC_SK_DRAWABLE_GPU_DRAW_HANDLER_H
 
+#include <set>
 #include <string>
 #include <map>
 #include "include/core/SkDrawable.h"

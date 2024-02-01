@@ -5,6 +5,7 @@
 #ifndef RAIA_SKIA_STATIC_GR_DIRECT_CONTEXT_DIRECT_CONTEXT_ID_H
 #define RAIA_SKIA_STATIC_GR_DIRECT_CONTEXT_DIRECT_CONTEXT_ID_H
 
+#include <set>
 #include <string>
 #include <map>
 #include "include/gpu/GrDirectContext.h"

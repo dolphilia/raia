@@ -5,6 +5,7 @@
 #ifndef RAIA_SKIA_STATIC_SK_CONTOUR_MEASURE_H
 #define RAIA_SKIA_STATIC_SK_CONTOUR_MEASURE_H
 
+#include <set>
 #include <string>
 #include <map>
 #include "include/core/SkContourMeasure.h"

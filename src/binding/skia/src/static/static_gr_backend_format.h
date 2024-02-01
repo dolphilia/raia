@@ -5,6 +5,7 @@
 #ifndef RAIA_SKIA_STATIC_GR_BACKEND_FORMAT_H
 #define RAIA_SKIA_STATIC_GR_BACKEND_FORMAT_H
 
+#include <set>
 #include <string>
 #include <map>
 #include "include/gpu/GrBackendSurface.h"

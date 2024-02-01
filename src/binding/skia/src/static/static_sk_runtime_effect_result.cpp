@@ -6,19 +6,28 @@
 
 #include <utility>
 
+static std::set<int> static_sk_runtime_effect_result_available_keys;
 static std::map<int , SkRuntimeEffect::Result> static_sk_runtime_effect_result;
 static int static_sk_runtime_effect_result_index = 0;
 
 int static_sk_runtime_effect_result_make(SkRuntimeEffect::Result value) {
-    static_sk_runtime_effect_result[static_sk_runtime_effect_result_index] = std::move(value);
-    static_sk_runtime_effect_result_index++;
-    return static_sk_runtime_effect_result_index - 1;
+    int key;
+    if (!static_sk_runtime_effect_result_available_keys.empty()) {
+        auto it = static_sk_runtime_effect_result_available_keys.begin();
+        key = *it;
+        static_sk_runtime_effect_result_available_keys.erase(it);
+    } else {
+        key = static_sk_runtime_effect_result_index++;
+    }
+    static_sk_runtime_effect_result[key] = std::move(value);
+    return key;
 }
 
 // const
 
 void static_sk_runtime_effect_result_delete(int key) {
     static_sk_runtime_effect_result.erase(key);
+    static_sk_runtime_effect_result_available_keys.insert(key);
 }
 
 SkRuntimeEffect::Result static_sk_runtime_effect_result_get(int key) {

@@ -6,18 +6,27 @@
 
 #include <utility>
 
+static std::set<int> static_sk_mesh_vertex_buffer_available_keys;
 static std::map<int , sk_sp<SkMesh::VertexBuffer>> static_sk_mesh_vertex_buffer;
 static int static_sk_mesh_vertex_buffer_index = 0;
 
 int static_sk_mesh_vertex_buffer_make(sk_sp<SkMesh::VertexBuffer> value) {
-    static_sk_mesh_vertex_buffer[static_sk_mesh_vertex_buffer_index] = std::move(value);
-    static_sk_mesh_vertex_buffer_index++;
-    return static_sk_mesh_vertex_buffer_index - 1;
+    int key;
+    if (!static_sk_mesh_vertex_buffer_available_keys.empty()) {
+        auto it = static_sk_mesh_vertex_buffer_available_keys.begin();
+        key = *it;
+        static_sk_mesh_vertex_buffer_available_keys.erase(it);
+    } else {
+        key = static_sk_mesh_vertex_buffer_index++;
+    }
+    static_sk_mesh_vertex_buffer[key] = std::move(value);
+    return key;
 }
 
 void static_sk_mesh_vertex_buffer_delete(int key) {
     static_sk_mesh_vertex_buffer[key].reset();
     static_sk_mesh_vertex_buffer.erase(key);
+    static_sk_mesh_vertex_buffer_available_keys.insert(key);
 }
 
 SkMesh::VertexBuffer *static_sk_mesh_vertex_buffer_get(int key) {

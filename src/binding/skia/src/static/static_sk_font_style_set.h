@@ -5,6 +5,7 @@
 #ifndef RAIA_SKIA_STATIC_SK_FONT_STYLE_SET_H
 #define RAIA_SKIA_STATIC_SK_FONT_STYLE_SET_H
 
+#include <set>
 #include <string>
 #include <map>
 #include "include/core/SkFontMgr.h"
