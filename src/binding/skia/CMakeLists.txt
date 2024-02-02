@@ -439,6 +439,46 @@ add_library(raia_skia SHARED
         src/binding/sk_encoder.h
         src/binding/sk_icc.cpp
         src/binding/sk_icc.h
+        src/binding/sk_android_codec.cpp
+        src/binding/sk_android_codec.h
+        src/static/static_sk_codec.cpp
+        src/static/static_sk_codec.h
+        src/static/static_sk_android_codec.cpp
+        src/static/static_sk_android_codec.h
+        src/binding/sk_avif_decoder.h.cpp
+        src/binding/sk_avif_decoder.h.h
+        src/static/static_sk_codecs_decoder.cpp
+        src/static/static_sk_codecs_decoder.h
+        src/binding/sk_bmp_decoder.h.cpp
+        src/binding/sk_bmp_decoder.h.h
+        src/binding/sk_codec.cpp
+        src/binding/sk_codec.h
+        src/binding/sk_codecs.cpp
+        src/binding/sk_codecs.h
+        src/static/static_std_tuple_sk_image_sk_codec_result.cpp
+        src/static/static_std_tuple_sk_image_sk_codec_result.h
+        src/static/static_std_vector_sk_codec_frame_info.cpp
+        src/static/static_std_vector_sk_codec_frame_info.h
+        src/binding/sk_encoded_origin.cpp
+        src/binding/sk_encoded_origin.h
+        src/binding/sk_gif_decoder.cpp
+        src/binding/sk_gif_decoder.h
+        src/binding/sk_ico_cecoder.cpp
+        src/binding/sk_ico_cecoder.h
+        src/binding/sk_jpeg_decoder.cpp
+        src/binding/sk_jpeg_decoder.h
+        src/binding/sk_jpegxl_decoder.cpp
+        src/binding/sk_jpegxl_decoder.h
+        src/binding/sk_pixmap_utils.cpp
+        src/binding/sk_pixmap_utils.h
+        src/binding/sk_png_decoder.cpp
+        src/binding/sk_png_decoder.h
+        src/binding/sk_raw_decoder.cpp
+        src/binding/sk_raw_decoder.h
+        src/binding/sk_wbmp_decoder.cpp
+        src/binding/sk_wbmp_decoder.h
+        src/binding/sk_webp_decoder.cpp
+        src/binding/sk_webp_decoder.h
 )
 
 get_property(CURRENT_RPATH TARGET raia_skia PROPERTY INSTALL_RPATH)
