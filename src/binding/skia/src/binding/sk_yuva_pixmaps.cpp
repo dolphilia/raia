@@ -33,7 +33,7 @@ SkYUVAPixmaps::DataType SkYUVAPixmaps_dataType(SkYUVAPixmaps *yuva_pixmaps) {
     return yuva_pixmaps->dataType();
 }
 
-int SkYUVAPixmaps_pixmapsInfo(SkYUVAPixmaps *yuva_pixmaps) {
+sk_yuva_pixmap_info_t SkYUVAPixmaps_pixmapsInfo(SkYUVAPixmaps *yuva_pixmaps) {
     return static_sk_yuva_pixmap_info_make(yuva_pixmaps->pixmapsInfo());
 }
 
@@ -63,25 +63,23 @@ SkColorType SkYUVAPixmaps_RecommendedRGBAColorType(SkYUVAPixmaps::DataType type)
     return SkYUVAPixmaps::RecommendedRGBAColorType(type);
 }
 
-int SkYUVAPixmaps_Allocate(const SkYUVAPixmapInfo *yuvaPixmapInfo) {
+sk_yuva_pixmaps_t SkYUVAPixmaps_Allocate(const SkYUVAPixmapInfo *yuvaPixmapInfo) {
     return static_sk_yuva_pixmaps_make(SkYUVAPixmaps::Allocate(*yuvaPixmapInfo));
 }
 
-int SkYUVAPixmaps_FromData(int sk_data_key_in,
-                            const SkYUVAPixmapInfo *yuvaPixmapInfo) {
-    return static_sk_yuva_pixmaps_make(SkYUVAPixmaps::FromData(*yuvaPixmapInfo, static_sk_data_move(sk_data_key_in)));
+sk_yuva_pixmaps_t SkYUVAPixmaps_FromData(const SkYUVAPixmapInfo *yuvaPixmapInfo, sk_data_t data) {
+    return static_sk_yuva_pixmaps_make(SkYUVAPixmaps::FromData(*yuvaPixmapInfo, static_sk_data_move(data)));
 }
 
-int SkYUVAPixmaps_MakeCopy(const SkYUVAPixmaps *src) {
+sk_yuva_pixmaps_t SkYUVAPixmaps_MakeCopy(const SkYUVAPixmaps *src) {
     return static_sk_yuva_pixmaps_make(SkYUVAPixmaps::MakeCopy(*src));
 }
 
-int SkYUVAPixmaps_FromExternalMemory(const SkYUVAPixmapInfo *yuvaPixmapInfo, void *memory) {
+sk_yuva_pixmaps_t SkYUVAPixmaps_FromExternalMemory(const SkYUVAPixmapInfo *yuvaPixmapInfo, void *memory) {
     return static_sk_yuva_pixmaps_make(SkYUVAPixmaps::FromExternalMemory(*yuvaPixmapInfo, memory));
 }
 
-int SkYUVAPixmaps_FromExternalPixmaps(const SkYUVAInfo *yuvaInfo,
-                                       const SkPixmap pixmaps[4]) {
+sk_yuva_pixmaps_t SkYUVAPixmaps_FromExternalPixmaps(const SkYUVAInfo *yuvaInfo, const SkPixmap pixmaps[4]) {
     return static_sk_yuva_pixmaps_make(SkYUVAPixmaps::FromExternalPixmaps(*yuvaInfo, pixmaps));
 }
 

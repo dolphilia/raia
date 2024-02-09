@@ -34,7 +34,7 @@ SkYUVAInfo::Subsampling SkYUVAInfo_subsampling(SkYUVAInfo * yuva_info) {
     return yuva_info->subsampling();
 }
 
-int SkYUVAInfo_planeSubsamplingFactors(SkYUVAInfo * yuva_info, int planeIdx) {
+tuple_int_int_t SkYUVAInfo_planeSubsamplingFactors(SkYUVAInfo * yuva_info, int planeIdx) {
     return static_tuple_int_int_make(yuva_info->planeSubsamplingFactors(planeIdx));
 }
 
@@ -66,7 +66,7 @@ SkEncodedOrigin SkYUVAInfo_origin(SkYUVAInfo * yuva_info) {
     return yuva_info->origin();
 }
 
-int SkYUVAInfo_originMatrix(SkYUVAInfo * yuva_info) {
+sk_matrix_t SkYUVAInfo_originMatrix(SkYUVAInfo * yuva_info) {
     return static_sk_matrix_make(yuva_info->originMatrix());
 }
 
@@ -94,11 +94,11 @@ int SkYUVAInfo_numChannelsInPlane(SkYUVAInfo * yuva_info, int i) {
 //    return yuva_info->toYUVALocations(channelFlags);
 //}
 
-int SkYUVAInfo_makeSubsampling(SkYUVAInfo * yuva_info, SkYUVAInfo::Subsampling subsampling) {
+sk_yuva_info_t SkYUVAInfo_makeSubsampling(SkYUVAInfo * yuva_info, SkYUVAInfo::Subsampling subsampling) {
     return static_sk_yuva_info_make(yuva_info->makeSubsampling(subsampling));
 }
 
-int SkYUVAInfo_makeDimensions(SkYUVAInfo * yuva_info, SkISize size) {
+sk_yuva_info_t SkYUVAInfo_makeDimensions(SkYUVAInfo * yuva_info, SkISize size) {
     return static_sk_yuva_info_make(yuva_info->makeDimensions(size));
 }
 
@@ -108,11 +108,11 @@ bool SkYUVAInfo_isValid(SkYUVAInfo * yuva_info) {
 
 // static
 
-int SkYUVAInfo_SubsamplingFactors(SkYUVAInfo::Subsampling subsampling) {
+tuple_int_int_t SkYUVAInfo_SubsamplingFactors(SkYUVAInfo::Subsampling subsampling) {
     return static_tuple_int_int_make(SkYUVAInfo::SubsamplingFactors(subsampling));
 }
 
-int SkYUVAInfo_PlaneSubsamplingFactors(SkYUVAInfo::PlaneConfig config, SkYUVAInfo::Subsampling subsampling, int planeIdx) {
+tuple_int_int_t SkYUVAInfo_PlaneSubsamplingFactors(SkYUVAInfo::PlaneConfig config, SkYUVAInfo::Subsampling subsampling, int planeIdx) {
     return static_tuple_int_int_make(SkYUVAInfo::PlaneSubsamplingFactors(config, subsampling, planeIdx));
 }
 

@@ -11,7 +11,7 @@
 extern "C" {
 void SkTrimPathEffect_delete(SkTrimPathEffect * trimPathEffect);
 // static
-int SkTrimPathEffect_Make(SkScalar startT, SkScalar stopT, SkTrimPathEffect::Mode mode);
+sk_path_effect_t SkTrimPathEffect_Make(SkScalar startT, SkScalar stopT, SkTrimPathEffect::Mode mode);
 }
 
 #endif //RAIA_SKIA_SK_TRIM_PATH_EFFECT_H

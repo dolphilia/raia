@@ -18,8 +18,7 @@ SkYUVAPixmapInfo *SkYUVAPixmapInfo_new_2(const SkYUVAInfo *info, const SkColorTy
     return new SkYUVAPixmapInfo(*info, type, rowBytes);
 }
 
-SkYUVAPixmapInfo *SkYUVAPixmapInfo_new_3(const SkYUVAInfo *info, SkYUVAPixmapInfo::DataType type,
-                                         const size_t rowBytes[4]) {
+SkYUVAPixmapInfo *SkYUVAPixmapInfo_new_3(const SkYUVAInfo *info, SkYUVAPixmapInfo::DataType type, const size_t rowBytes[4]) {
     return new SkYUVAPixmapInfo(*info, type, rowBytes);
 }
 
@@ -77,7 +76,7 @@ SkColorType SkYUVAPixmapInfo_DefaultColorTypeForDataType(SkYUVAPixmapInfo::DataT
     return SkYUVAPixmapInfo::DefaultColorTypeForDataType(dataType, numChannels);
 }
 
-int SkYUVAPixmapInfo_NumChannelsAndDataType(SkColorType type) {
+tuple_int_sk_yuva_pixmap_info_data_type_t SkYUVAPixmapInfo_NumChannelsAndDataType(SkColorType type) {
     return static_tuple_int_sk_yuva_pixmap_info_data_type_make(SkYUVAPixmapInfo::NumChannelsAndDataType(type));
 }
 

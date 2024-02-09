@@ -13,9 +13,9 @@
 
 extern "C" {
 bool SkWebpDecoder_IsWbmp(const void* ptr, size_t size);
-int SkWebpDecoder_Decode(int static_sk_stream_key_in, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
-int SkWebpDecoder_Decode_2(int static_sk_data_key_in, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
-int SkWebpDecoder_Decoder();
+sk_codec_t SkWebpDecoder_Decode(int static_stream, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
+sk_codec_t SkWebpDecoder_Decode_2(int static_data, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
+sk_codecs_decoder_t SkWebpDecoder_Decoder();
 }
 
 #endif //RAIA_SKIA_SK_WEBP_DECODER_H

@@ -52,11 +52,11 @@ bool SkVertices_refCntGreaterThan(SkVertices *vertices, int32_t threadIsolatedTe
 
 // static
 
-int SkVertices_MakeCopy(SkVertices::VertexMode mode, int vertexCount, const SkPoint positions[], const SkPoint texs[], const SkColor colors[], int indexCount, const uint16_t indices[]) {
+sk_vertices_t SkVertices_MakeCopy(SkVertices::VertexMode mode, int vertexCount, const SkPoint positions[], const SkPoint texs[], const SkColor colors[], int indexCount, const uint16_t indices[]) {
     return static_sk_vertices_make(SkVertices::MakeCopy(mode, vertexCount, positions, texs, colors, indexCount, indices));
 }
 
-int SkVertices_MakeCopy_2(SkVertices::VertexMode mode, int vertexCount, const SkPoint positions[], const SkPoint texs[], const SkColor colors[]) {
+sk_vertices_t SkVertices_MakeCopy_2(SkVertices::VertexMode mode, int vertexCount, const SkPoint positions[], const SkPoint texs[], const SkColor colors[]) {
     return static_sk_vertices_make(SkVertices::MakeCopy(mode, vertexCount, positions, texs, colors));
 }
 

@@ -12,7 +12,7 @@ void SkTrimPathEffect_delete(SkTrimPathEffect * trimPathEffect) {
 
 // static
 
-int SkTrimPathEffect_Make(SkScalar startT, SkScalar stopT, SkTrimPathEffect::Mode mode) {
+sk_path_effect_t SkTrimPathEffect_Make(SkScalar startT, SkScalar stopT, SkTrimPathEffect::Mode mode) {
     return static_sk_path_effect_make(SkTrimPathEffect::Make(startT, stopT, mode));
 }
 

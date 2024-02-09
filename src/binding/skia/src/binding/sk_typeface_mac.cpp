@@ -3,13 +3,12 @@
 //
 
 #include "sk_typeface_mac.h"
-#include "../static/static_sk_typeface.h"
 
 #ifdef __MACOS__
 
 extern "C" {
 
-int Mac_SkMakeTypefaceFromCTFont(CTFontRef fontRef) {
+sk_typeface_t Mac_SkMakeTypefaceFromCTFont(CTFontRef fontRef) {
     return static_sk_typeface_make(SkMakeTypefaceFromCTFont(fontRef));
 }
 

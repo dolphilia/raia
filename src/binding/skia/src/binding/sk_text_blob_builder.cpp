@@ -14,7 +14,7 @@ void SkTextBlobBuilder_delete(SkTextBlobBuilder *text_blob_builder) {
     delete text_blob_builder;
 }
 
-int SkTextBlobBuilder_make(SkTextBlobBuilder *text_blob_builder) {
+sk_text_blob_t SkTextBlobBuilder_make(SkTextBlobBuilder *text_blob_builder) {
     return static_sk_text_blob_make(text_blob_builder->make());
 }
 

@@ -11,7 +11,7 @@ void SkTypeface_delete(SkTypeface *typeface) {
     delete &typeface;
 }
 
-int SkTypeface_fontStyle(SkTypeface *typeface) {
+sk_font_style_t SkTypeface_fontStyle(SkTypeface *typeface) {
     return static_sk_font_style_make(typeface->fontStyle());
 }
 
@@ -39,7 +39,7 @@ SkTypefaceID SkTypeface_uniqueID(SkTypeface *typeface) {
     return typeface->uniqueID();
 }
 
-int SkTypeface_makeClone(SkTypeface *typeface, const SkFontArguments *arguments) {
+sk_typeface_t SkTypeface_makeClone(SkTypeface *typeface, const SkFontArguments *arguments) {
     return static_sk_typeface_make(typeface->makeClone(*arguments));
 }
 
@@ -47,7 +47,7 @@ void SkTypeface_serialize(SkTypeface *typeface, SkWStream *stream, SkTypeface::S
     typeface->serialize(stream, behavior);
 }
 
-int SkTypeface_serialize_2(SkTypeface *typeface, SkTypeface::SerializeBehavior behavior) {
+sk_data_t SkTypeface_serialize_2(SkTypeface *typeface, SkTypeface::SerializeBehavior behavior) {
     return static_sk_data_make(typeface->serialize(behavior));
 }
 
@@ -83,7 +83,7 @@ size_t SkTypeface_getTableData(SkTypeface *typeface, SkFontTableTag tag, size_t 
     return typeface->getTableData(tag, offset, length, data);
 }
 
-int SkTypeface_copyTableData(SkTypeface *typeface, SkFontTableTag tag) {
+sk_data_t SkTypeface_copyTableData(SkTypeface *typeface, SkFontTableTag tag) {
     return static_sk_data_make(typeface->copyTableData(tag));
 }
 
@@ -107,11 +107,11 @@ bool SkTypeface_getPostScriptName(SkTypeface *typeface, SkString *name) {
     return typeface->getPostScriptName(name);
 }
 
-int SkTypeface_openStream(SkTypeface *typeface, int *ttcIndex) {
+sk_stream_asset_t SkTypeface_openStream(SkTypeface *typeface, int *ttcIndex) {
     return static_sk_stream_asset_make(typeface->openStream(ttcIndex));
 }
 
-int SkTypeface_openExistingStream(SkTypeface *typeface, int *ttcIndex) {
+sk_stream_asset_t SkTypeface_openExistingStream(SkTypeface *typeface, int *ttcIndex) {
     return static_sk_stream_asset_make(typeface->openExistingStream(ttcIndex));
 }
 
@@ -120,7 +120,7 @@ int SkTypeface_openExistingStream(SkTypeface *typeface, int *ttcIndex) {
 //    return typeface->createScalerContext(effects, descriptor);
 //}
 
-int SkTypeface_getBounds(SkTypeface *typeface) {
+sk_rect_t SkTypeface_getBounds(SkTypeface *typeface) {
     return static_sk_rect_make(typeface->getBounds());
 }
 
@@ -142,12 +142,12 @@ bool SkTypeface_Equal(const SkTypeface *facea, const SkTypeface *faceb) {
     return SkTypeface::Equal(facea, faceb);
 }
 
-int SkTypeface_MakeEmpty() {
+sk_typeface_t SkTypeface_MakeEmpty() {
     return static_sk_typeface_make(SkTypeface::MakeEmpty());
 }
 
-int SkTypeface_MakeDeserialize(int sk_font_mgr_key_in, SkStream *stream) {
-    return static_sk_typeface_make(SkTypeface::MakeDeserialize(stream, static_sk_font_mgr_move(sk_font_mgr_key_in)));
+sk_typeface_t SkTypeface_MakeDeserialize(SkStream *stream, sk_font_mgr_t font_mgr) {
+    return static_sk_typeface_make(SkTypeface::MakeDeserialize(stream, static_sk_font_mgr_move(font_mgr)));
 }
 
 void SkTypeface_Register(SkTypeface::FactoryId id, sk_sp<SkTypeface>(*make)(std::unique_ptr<SkStreamAsset>, const SkFontArguments &)) {
@@ -156,27 +156,27 @@ void SkTypeface_Register(SkTypeface::FactoryId id, sk_sp<SkTypeface>(*make)(std:
 
 #if !defined(SK_DISABLE_LEGACY_FONTMGR_REFDEFAULT)
 
-int SkTypeface_MakeDefault() {
+sk_typeface_t SkTypeface_MakeDefault() {
     return static_sk_typeface_make(SkTypeface::MakeDefault());
 }
 
-int SkTypeface_MakeFromName(const char familyName[], SkFontStyle fontStyle) {
+sk_typeface_t SkTypeface_MakeFromName(const char familyName[], SkFontStyle fontStyle) {
     return static_sk_typeface_make(SkTypeface::MakeFromName(familyName, fontStyle));
 }
 
-int SkTypeface_MakeFromFile(const char path[], int index) {
+sk_typeface_t SkTypeface_MakeFromFile(const char path[], int index) {
     return static_sk_typeface_make(SkTypeface::MakeFromFile(path, index));
 }
 
-int SkTypeface_MakeFromStream(int sk_stream_asset_key_in, int index) {
-    return static_sk_typeface_make(SkTypeface::MakeFromStream(static_sk_stream_asset_move(sk_stream_asset_key_in), index));
+sk_typeface_t SkTypeface_MakeFromStream(sk_stream_asset_t stream_asset, int index) {
+    return static_sk_typeface_make(SkTypeface::MakeFromStream(static_sk_stream_asset_move(stream_asset), index));
 }
 
-int SkTypeface_MakeFromData(int sk_data_key_in, int index) {
-    return static_sk_typeface_make(SkTypeface::MakeFromData(static_sk_data_move(sk_data_key_in), index));
+sk_typeface_t SkTypeface_MakeFromData(sk_data_t data, int index) {
+    return static_sk_typeface_make(SkTypeface::MakeFromData(static_sk_data_move(data), index));
 }
 
-int SkTypeface_MakeDeserialize_2(SkStream *stream) {
+sk_typeface_t SkTypeface_MakeDeserialize_2(SkStream *stream) {
     return static_sk_typeface_make(SkTypeface::MakeDeserialize(stream));
 }
 

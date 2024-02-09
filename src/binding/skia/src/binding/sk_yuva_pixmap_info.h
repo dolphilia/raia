@@ -14,8 +14,7 @@ extern "C" {
 // bool operator!=(const SkYUVAPixmapInfo &that)
 SkYUVAPixmapInfo *SkYUVAPixmapInfo_new();
 SkYUVAPixmapInfo *SkYUVAPixmapInfo_new_2(const SkYUVAInfo *info, const SkColorType type[4], const size_t rowBytes[4]);
-SkYUVAPixmapInfo *SkYUVAPixmapInfo_new_3(const SkYUVAInfo *info, SkYUVAPixmapInfo::DataType type,
-                                         const size_t rowBytes[4]);
+SkYUVAPixmapInfo *SkYUVAPixmapInfo_new_3(const SkYUVAInfo *info, SkYUVAPixmapInfo::DataType type, const size_t rowBytes[4]);
 SkYUVAPixmapInfo *SkYUVAPixmapInfo_new_4(const SkYUVAPixmapInfo *info);
 void SkYUVAPixmapInfo_delete(SkYUVAPixmapInfo *yuvaPixmapInfo);
 const SkYUVAInfo * SkYUVAPixmapInfo_yuvaInfo(SkYUVAPixmapInfo *yuva_pixmap_info);
@@ -30,7 +29,7 @@ bool SkYUVAPixmapInfo_isValid(SkYUVAPixmapInfo *yuva_pixmap_info);
 bool SkYUVAPixmapInfo_isSupported(SkYUVAPixmapInfo *yuva_pixmap_info, const SkYUVAPixmapInfo::SupportedDataTypes *type);
 // static
 SkColorType SkYUVAPixmapInfo_DefaultColorTypeForDataType(SkYUVAPixmapInfo::DataType dataType, int numChannels);
-int SkYUVAPixmapInfo_NumChannelsAndDataType(SkColorType type);
+tuple_int_sk_yuva_pixmap_info_data_type_t SkYUVAPixmapInfo_NumChannelsAndDataType(SkColorType type);
 }
 
 #endif //RAIA_SKIA_SK_YUVA_PIXMAP_INFO_H
