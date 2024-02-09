@@ -13,9 +13,9 @@
 
 extern "C" {
 bool SkJpegDecoder_IsJpeg(const void* ptr, size_t size);
-int SkJpegDecoder_Decode(int static_sk_stream_key_in, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
-int SkJpegDecoder_Decode_2(int static_sk_data_key_in, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
-int SkJpegDecoder_Decoder();
+sk_codec_t SkJpegDecoder_Decode(int static_stream, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
+sk_codec_t SkJpegDecoder_Decode_2(int static_data, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
+sk_codecs_decoder_t SkJpegDecoder_Decoder();
 }
 
 #endif //RAIA_SKIA_SK_JPEG_DECODER_H

@@ -10,7 +10,7 @@ void SkStreamSeekable_delete(SkStreamSeekable *stream_seekable) {
     delete stream_seekable;
 }
 
-int SkStreamSeekable_duplicate(SkStreamSeekable *stream_seekable) {
+sk_stream_seekable_t SkStreamSeekable_duplicate(SkStreamSeekable *stream_seekable) {
     return static_sk_stream_seekable_make(stream_seekable->duplicate());
 }
 
@@ -30,7 +30,7 @@ bool SkStreamSeekable_move(SkStreamSeekable *stream_seekable, long offset) {
     return stream_seekable->move(offset);
 }
 
-int SkStreamSeekable_fork(SkStreamSeekable *stream_seekable) {
+sk_stream_seekable_t SkStreamSeekable_fork(SkStreamSeekable *stream_seekable) {
     return static_sk_stream_seekable_make(stream_seekable->fork());
 }
 
@@ -104,7 +104,7 @@ const void * SkStreamSeekable_getMemoryBase(SkStreamSeekable *stream_seekable) {
 
 // static
 
-int SkStreamSeekable_MakeFromFile(const char path[]) {
+sk_stream_asset_t SkStreamSeekable_MakeFromFile(const char path[]) {
     return static_sk_stream_asset_make(SkStreamSeekable::MakeFromFile(path));
 }
 

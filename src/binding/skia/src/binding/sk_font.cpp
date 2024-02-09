@@ -3,8 +3,6 @@
 //
 
 #include "sk_font.h"
-#include "../static/static_std_vector_sk_scalar.h"
-#include "../static/static_sk_font.h"
 
 extern "C" {
 
@@ -12,16 +10,16 @@ SkFont *SkFont_new() {
     return new SkFont();
 }
 
-SkFont *SkFont_new_2(int sk_typeface_key_in, SkScalar size) {
-    return new SkFont(static_sk_typeface_move(sk_typeface_key_in), size);
+SkFont *SkFont_new_2(sk_typeface_t typeface, SkScalar size) {
+    return new SkFont(static_sk_typeface_move(typeface), size);
 }
 
-SkFont *SkFont_new_3(int sk_typeface_key_in) {
-    return new SkFont(static_sk_typeface_move(sk_typeface_key_in));
+SkFont *SkFont_new_3(sk_typeface_t typeface) {
+    return new SkFont(static_sk_typeface_move(typeface));
 }
 
-SkFont *SkFont_new_4(int sk_typeface_key_in, SkScalar size, SkScalar scaleX, SkScalar skewX) {
-    return new SkFont(static_sk_typeface_move(sk_typeface_key_in), size, scaleX, skewX);
+SkFont *SkFont_new_4(sk_typeface_t typeface, SkScalar size, SkScalar scaleX, SkScalar skewX) {
+    return new SkFont(static_sk_typeface_move(typeface), size, scaleX, skewX);
 }
 
 void SkFont_delete(SkFont *font) {
@@ -92,7 +90,7 @@ SkFontHinting SkFont_getHinting(SkFont *font) {
     return font->getHinting();
 }
 
-int SkFont_makeWithSize(SkFont *font, SkScalar size) {
+sk_font_t SkFont_makeWithSize(SkFont *font, SkScalar size) {
     return static_sk_font_make(font->makeWithSize(size));
 }
 
@@ -112,12 +110,12 @@ SkScalar SkFont_getSkewX(SkFont *font) {
     return font->getSkewX();
 }
 
-int SkFont_refTypeface(SkFont *font) {
+sk_typeface_t SkFont_refTypeface(SkFont *font) {
     return static_sk_typeface_make(font->refTypeface());
 }
 
-void SkFont_setTypeface(int sk_typeface_key_in, SkFont *font) {
-    font->setTypeface(static_sk_typeface_move(sk_typeface_key_in));
+void SkFont_setTypeface(SkFont *font, sk_typeface_t typeface) {
+    font->setTypeface(static_sk_typeface_move(typeface));
 }
 
 void SkFont_setSize(SkFont *font, SkScalar textSize) {

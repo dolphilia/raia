@@ -120,7 +120,7 @@ void SkRRect_offset(SkRRect *rrect, SkScalar dx, SkScalar dy) {
     rrect->offset(dx, dy);
 }
 
-int SkRRect_makeOffset(SkRRect *rrect, SkScalar dx, SkScalar dy) {
+sk_r_rect_t SkRRect_makeOffset(SkRRect *rrect, SkScalar dx, SkScalar dy) {
     return static_sk_r_rect_make(rrect->makeOffset(dx, dy));
 }
 
@@ -148,7 +148,7 @@ void SkRRect_dump(SkRRect *rrect, bool asHex) {
     rrect->dump(asHex);
 }
 
-int SkRRect_dumpToString(SkRRect *rrect, bool asHex) {
+sk_string_t SkRRect_dumpToString(SkRRect *rrect, bool asHex) {
     return static_sk_string_make(rrect->dumpToString(asHex));
 }
 
@@ -162,19 +162,19 @@ void SkRRect_dumpHex(SkRRect *rrect) {
 
 // static
 
-int SkRRect_MakeEmpty() {
+sk_r_rect_t SkRRect_MakeEmpty() {
     return static_sk_r_rect_make(SkRRect::MakeEmpty());
 }
 
-int SkRRect_MakeRect(const SkRect *r) {
+sk_r_rect_t SkRRect_MakeRect(const SkRect *r) {
     return static_sk_r_rect_make(SkRRect::MakeRect(*r));
 }
 
-int SkRRect_MakeOval(const SkRect *oval) {
+sk_r_rect_t SkRRect_MakeOval(const SkRect *oval) {
     return static_sk_r_rect_make(SkRRect::MakeOval(*oval));
 }
 
-int SkRRect_MakeRectXY(const SkRect *rect, SkScalar xRad, SkScalar yRad) {
+sk_r_rect_t SkRRect_MakeRectXY(const SkRect *rect, SkScalar xRad, SkScalar yRad) {
     return static_sk_r_rect_make(SkRRect::MakeRectXY(*rect, xRad, yRad));
 }
 

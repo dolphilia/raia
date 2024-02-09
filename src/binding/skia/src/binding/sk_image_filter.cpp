@@ -10,7 +10,7 @@ void SkImageFilter_delete(SkImageFilter *image_filter) {
     delete image_filter;
 }
 
-int SkImageFilter_filterBounds(SkImageFilter *image_filter, const SkIRect *src, const SkMatrix *ctm, SkImageFilter::MapDirection direction, const SkIRect *inputRect) {
+sk_i_rect_t SkImageFilter_filterBounds(SkImageFilter *image_filter, const SkIRect *src, const SkMatrix *ctm, SkImageFilter::MapDirection direction, const SkIRect *inputRect) {
     return static_sk_i_rect_make(image_filter->filterBounds(*src, *ctm, direction, inputRect));
 }
 
@@ -34,7 +34,7 @@ const SkImageFilter * SkImageFilter_getInput(SkImageFilter *image_filter, int i)
     return image_filter->getInput(i);
 }
 
-int SkImageFilter_computeFastBounds(SkImageFilter *image_filter, const SkRect *bounds) {
+sk_rect_t SkImageFilter_computeFastBounds(SkImageFilter *image_filter, const SkRect *bounds) {
     return static_sk_rect_make(image_filter->computeFastBounds(*bounds));
 }
 
@@ -42,7 +42,7 @@ bool SkImageFilter_canComputeFastBounds(SkImageFilter *image_filter) {
     return image_filter->canComputeFastBounds();
 }
 
-int SkImageFilter_makeWithLocalMatrix(SkImageFilter *image_filter, const SkMatrix *matrix) {
+sk_image_filter_t SkImageFilter_makeWithLocalMatrix(SkImageFilter *image_filter, const SkMatrix *matrix) {
     return static_sk_image_filter_make(image_filter->makeWithLocalMatrix(*matrix));
 }
 
@@ -62,7 +62,7 @@ SkImageFilter::Type SkImageFilter_getFlattenableType(SkImageFilter *image_filter
     return image_filter->getFlattenableType();
 }
 
-int SkImageFilter_serialize(SkImageFilter *image_filter, const SkSerialProcs *procs) {
+sk_data_t SkImageFilter_serialize(SkImageFilter *image_filter, const SkSerialProcs *procs) {
     return static_sk_data_make(image_filter->serialize(procs));
 }
 
@@ -84,7 +84,7 @@ void SkImageFilter_unref(SkImageFilter *image_filter) {
 
 // static
 
-int SkImageFilter_Deserialize(const void *data, size_t size, const SkDeserialProcs *procs) {
+sk_image_filter_t SkImageFilter_Deserialize(const void *data, size_t size, const SkDeserialProcs *procs) {
     return static_sk_image_filter_make(SkImageFilter::Deserialize(data, size, procs));
 }
 

@@ -19,9 +19,9 @@ bool SkColorTable_unique(SkColorTable *color_table);
 void SkColorTable_ref(SkColorTable *color_table);
 void SkColorTable_unref(SkColorTable *color_table);
 // static
-int SkColorTable_Make(const uint8_t table[256]);
-int SkColorTable_Make_2(const uint8_t tableA[256], const uint8_t tableR[256], const uint8_t tableG[256], const uint8_t tableB[256]);
-int SkColorTable_Deserialize(SkReadBuffer *buffer);
+sk_color_table_t SkColorTable_Make(const uint8_t table[256]);
+sk_color_table_t SkColorTable_Make_2(const uint8_t tableA[256], const uint8_t tableR[256], const uint8_t tableG[256], const uint8_t tableB[256]);
+sk_color_table_t SkColorTable_Deserialize(SkReadBuffer *buffer);
 }
 
 #endif //RAIA_SKIA_SK_COLOR_TABLE_H

@@ -10,7 +10,7 @@ void SkCodec_delete(SkCodec* codec) {
     delete codec;
 }
 
-int SkCodec_getInfo(SkCodec* codec) {
+sk_image_info_t SkCodec_getInfo(SkCodec* codec) {
     return static_sk_image_info_make(codec->getInfo());
 }
 
@@ -18,7 +18,7 @@ SkISize SkCodec_dimensions(SkCodec* codec) {
     return codec->dimensions();
 }
 
-int SkCodec_bounds(SkCodec* codec) {
+sk_i_rect_t SkCodec_bounds(SkCodec* codec) {
     return static_sk_i_rect_make(codec->bounds());
 }
 
@@ -54,11 +54,11 @@ SkCodec::Result SkCodec_getPixels_3(SkCodec* codec, const SkPixmap* pm, const Sk
     return codec->getPixels(*pm, opts);
 }
 
-int SkCodec_getImage(SkCodec* codec, const SkImageInfo* info, const SkCodec::Options* opts) {
+tuple_sk_image_sk_codec_result_t SkCodec_getImage(SkCodec* codec, const SkImageInfo* info, const SkCodec::Options* opts) {
     return static_tuple_sk_image_sk_codec_result_make(codec->getImage(*info, opts));
 }
 
-int SkCodec_getImage_2(SkCodec* codec) {
+tuple_sk_image_sk_codec_result_t SkCodec_getImage_2(SkCodec* codec) {
     return static_tuple_sk_image_sk_codec_result_make(codec->getImage());
 }
 
@@ -118,7 +118,7 @@ bool SkCodec_getFrameInfo(SkCodec* codec, int index, SkCodec::FrameInfo* info) {
     return codec->getFrameInfo(index, info);
 }
 
-int SkCodec_getFrameInfo_2(SkCodec* codec) {
+vector_sk_codec_frame_into_t SkCodec_getFrameInfo_2(SkCodec* codec) {
     return static_vector_sk_codec_frame_into_make(codec->getFrameInfo());
 }
 
@@ -136,12 +136,12 @@ const char* SkCodec_ResultToString(SkCodec::Result result) {
     return SkCodec::ResultToString(result);
 }
 
-int SkCodec_MakeFromStream(int static_sk_stream_key_in, SkCodec::Result* result, SkPngChunkReader* pngChunkReader, SkCodec::SelectionPolicy selectionPolicy) {
-    return static_sk_codec_make(SkCodec::MakeFromStream(static_sk_stream_move(static_sk_stream_key_in), result, pngChunkReader, selectionPolicy));
+sk_codec_t SkCodec_MakeFromStream(sk_stream_t stream, SkCodec::Result* result, SkPngChunkReader* pngChunkReader, SkCodec::SelectionPolicy selectionPolicy) {
+    return static_sk_codec_make(SkCodec::MakeFromStream(static_sk_stream_move(stream), result, pngChunkReader, selectionPolicy));
 }
 
-int SkCodec_MakeFromData(int static_sk_data_key_in, SkPngChunkReader* pngChunkReader) {
-    return static_sk_codec_make(SkCodec::MakeFromData(static_sk_data_move(static_sk_data_key_in), pngChunkReader));
+sk_codec_t SkCodec_MakeFromData(sk_stream_t stream, SkPngChunkReader* pngChunkReader) {
+    return static_sk_codec_make(SkCodec::MakeFromData(static_sk_data_move(stream), pngChunkReader));
 }
 
 //void SkCodec_Register(bool (*peek)(const void*, size_t), std::unique_ptr<SkCodec> (*make)(std::unique_ptr<SkStream>, SkCodec::Result*)) {

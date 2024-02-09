@@ -60,55 +60,55 @@ bool SkData_refCntGreaterThan(SkData *sk_data, int32_t threadIsolatedTestCnt) {
 
 // static
 
-int SkData_MakeWithCopy(const void *data, size_t length) {
+sk_data_t SkData_MakeWithCopy(const void *data, size_t length) {
     return static_sk_data_make(SkData::MakeWithCopy(data, length));
 }
 
-int SkData_MakeUninitialized(size_t length) {
+sk_data_t SkData_MakeUninitialized(size_t length) {
     return static_sk_data_make(SkData::MakeUninitialized(length));
 }
 
-int SkData_MakeZeroInitialized(size_t length) {
+sk_data_t SkData_MakeZeroInitialized(size_t length) {
     return static_sk_data_make(SkData::MakeZeroInitialized(length));
 }
 
-int SkData_MakeWithCString(const char cstr[]) {
+sk_data_t SkData_MakeWithCString(const char cstr[]) {
     return static_sk_data_make(SkData::MakeWithCString(cstr));
 }
 
-int SkData_MakeWithProc(const void *ptr, size_t length, SkData::ReleaseProc proc, void *ctx) {
+sk_data_t SkData_MakeWithProc(const void *ptr, size_t length, SkData::ReleaseProc proc, void *ctx) {
     return static_sk_data_make(SkData::MakeWithProc(ptr, length, proc, ctx));
 }
 
-int SkData_MakeWithoutCopy(const void *data, size_t length) {
+sk_data_t SkData_MakeWithoutCopy(const void *data, size_t length) {
     return static_sk_data_make(SkData::MakeWithoutCopy(data, length));
 }
 
-int SkData_MakeFromMalloc(const void *data, size_t length) {
+sk_data_t SkData_MakeFromMalloc(const void *data, size_t length) {
     return static_sk_data_make(SkData::MakeFromMalloc(data, length));
 }
 
-int SkData_MakeFromFileName(const char path[]) {
+sk_data_t SkData_MakeFromFileName(const char path[]) {
     return static_sk_data_make(SkData::MakeFromFileName(path));
 }
 
-int SkData_MakeFromFILE(FILE *f) {
+sk_data_t SkData_MakeFromFILE(FILE *f) {
     return static_sk_data_make(SkData::MakeFromFILE(f));
 }
 
-int SkData_MakeFromFD(int fd) {
+sk_data_t SkData_MakeFromFD(int fd) {
     return static_sk_data_make(SkData::MakeFromFD(fd));
 }
 
-int SkData_MakeFromStream(SkStream *stream, size_t size) {
+sk_data_t SkData_MakeFromStream(SkStream *stream, size_t size) {
     return static_sk_data_make(SkData::MakeFromStream(stream, size));
 }
 
-int SkData_MakeSubset(const SkData *src, size_t offset, size_t length) {
+sk_data_t SkData_MakeSubset(const SkData *src, size_t offset, size_t length) {
     return static_sk_data_make(SkData::MakeSubset(src, offset, length));
 }
 
-int SkData_MakeEmpty() {
+sk_data_t SkData_MakeEmpty() {
     return static_sk_data_make(SkData::MakeEmpty());
 }
 

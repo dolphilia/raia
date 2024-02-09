@@ -11,7 +11,7 @@
 extern "C" {
 void SkCornerPathEffect_delete(SkCornerPathEffect * cornerPathEffect);
 // static
-int SkCornerPathEffect_Make(SkScalar radius);
+sk_path_effect_t SkCornerPathEffect_Make(SkScalar radius);
 void SkCornerPathEffect_RegisterFlattenables();
 }
 

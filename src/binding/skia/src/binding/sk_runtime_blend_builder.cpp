@@ -9,15 +9,15 @@ extern "C" {
 //SkRuntimeBlendBuilder(const SkRuntimeBlendBuilder &)=delete
 //SkRuntimeBlendBuilder & operator=(const SkRuntimeBlendBuilder &)=delete
 
-SkRuntimeBlendBuilder *SkRuntimeBlendBuilder_new(int sk_runtime_effect_key_in) {
-    return new SkRuntimeBlendBuilder(static_sk_runtime_effect_move(sk_runtime_effect_key_in));
+SkRuntimeBlendBuilder *SkRuntimeBlendBuilder_new(sk_runtime_effect_t runtime_effect) {
+    return new SkRuntimeBlendBuilder(static_sk_runtime_effect_move(runtime_effect));
 }
 
 void SkRuntimeBlendBuilder_delete(SkRuntimeBlendBuilder *runtime_blend_builder) {
     delete runtime_blend_builder;
 }
 
-int SkRuntimeBlendBuilder_makeBlender(SkRuntimeBlendBuilder *runtime_blend_builder) {
+sk_blender_t SkRuntimeBlendBuilder_makeBlender(SkRuntimeBlendBuilder *runtime_blend_builder) {
     return static_sk_blender_make(runtime_blend_builder->makeBlender());
 }
 
@@ -33,11 +33,11 @@ SkRuntimeBlendBuilder::BuilderChild SkRuntimeBlendBuilder_child(SkRuntimeBlendBu
     return runtime_blend_builder->child(name);
 }
 
-int SkRuntimeBlendBuilder_uniforms(SkRuntimeBlendBuilder *runtime_blend_builder) {
+const_sk_data_t SkRuntimeBlendBuilder_uniforms(SkRuntimeBlendBuilder *runtime_blend_builder) {
     return static_const_sk_data_make(runtime_blend_builder->uniforms());
 }
 
-int SkRuntimeBlendBuilder_children(SkRuntimeBlendBuilder *runtime_blend_builder) {
+const_sk_runtime_effect_child_ptr_t SkRuntimeBlendBuilder_children(SkRuntimeBlendBuilder *runtime_blend_builder) {
     return static_const_sk_runtime_effect_child_ptr_make(runtime_blend_builder->children());
 }
 

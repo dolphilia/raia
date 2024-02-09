@@ -11,7 +11,7 @@
 extern "C" {
 void SkOverdrawColorFilter_delete(SkOverdrawColorFilter * overdrawColorFilter);
 // static
-int SkOverdrawColorFilter_MakeWithSkColors(const SkColor color[SkOverdrawColorFilter::kNumColors]);
+sk_color_filter_t SkOverdrawColorFilter_MakeWithSkColors(const SkColor color[SkOverdrawColorFilter::kNumColors]);
 }
 
 #endif //RAIA_SKIA_SK_OVERDRAW_COLOR_FILTER_H

@@ -13,8 +13,7 @@ GrBackendTexture *GrBackendTexture_new() {
 }
 
 GrBackendTexture *
-GrBackendTexture_new_2(int width, int height, skgpu::Mipmapped midmapped, const GrMockTextureInfo *mockInfo,
-                       std::string_view label) {
+GrBackendTexture_new_2(int width, int height, skgpu::Mipmapped midmapped, const GrMockTextureInfo *mockInfo, std::string_view label) {
     return new GrBackendTexture(width, height, midmapped, *mockInfo, label);
 }
 
@@ -38,7 +37,7 @@ int GrBackendTexture_height(GrBackendTexture *backend_texture) {
     return backend_texture->height();
 }
 
-int GrBackendTexture_getLabel(GrBackendTexture *backend_texture) {
+string_view_t GrBackendTexture_getLabel(GrBackendTexture *backend_texture) {
     return static_string_view_make(backend_texture->getLabel());
 }
 
@@ -62,7 +61,7 @@ GrTextureType GrBackendTexture_textureType(GrBackendTexture *backend_texture) {
     return backend_texture->textureType();
 }
 
-int GrBackendTexture_getBackendFormat(GrBackendTexture *backend_texture) {
+gr_backend_format_t GrBackendTexture_getBackendFormat(GrBackendTexture *backend_texture) {
     return static_gr_backend_format_make(backend_texture->getBackendFormat());
 }
 

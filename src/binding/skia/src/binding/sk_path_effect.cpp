@@ -42,7 +42,7 @@ SkPathEffect::Type SkPathEffect_getFlattenableType(SkPathEffect *path_effect) {
     return path_effect->getFlattenableType();
 }
 
-int SkPathEffect_serialize(SkPathEffect *path_effect, const SkSerialProcs *procs) {
+sk_data_t SkPathEffect_serialize(SkPathEffect *path_effect, const SkSerialProcs *procs) {
     return static_sk_data_make(path_effect->serialize(procs));
 }
 
@@ -64,19 +64,19 @@ void SkPathEffect_unref(SkPathEffect *path_effect) {
 
 // static
 
-int SkPathEffect_MakeSum(int sk_path_effect_key_in, int sk_path_effect_key_in_2) {
-    return static_sk_path_effect_make(SkPathEffect::MakeSum(static_sk_path_effect_move(sk_path_effect_key_in), static_sk_path_effect_move(sk_path_effect_key_in_2)));
+sk_path_effect_t SkPathEffect_MakeSum(sk_path_effect_t first, sk_path_effect_t second) {
+    return static_sk_path_effect_make(SkPathEffect::MakeSum(static_sk_path_effect_move(first), static_sk_path_effect_move(second)));
 }
 
-int SkPathEffect_MakeCompose(int sk_path_effect_key_in, int sk_path_effect_key_in_2) {
-    return static_sk_path_effect_make(SkPathEffect::MakeCompose(static_sk_path_effect_move(sk_path_effect_key_in), static_sk_path_effect_move(sk_path_effect_key_in_2)));
+sk_path_effect_t SkPathEffect_MakeCompose(sk_path_effect_t outer, sk_path_effect_t inner) {
+    return static_sk_path_effect_make(SkPathEffect::MakeCompose(static_sk_path_effect_move(outer), static_sk_path_effect_move(inner)));
 }
 
 SkFlattenable::Type SkPathEffect_GetFlattenableType() {
     return SkPathEffect::GetFlattenableType();
 }
 
-int SkPathEffect_Deserialize(const void *data, size_t size, const SkDeserialProcs *procs) {
+sk_path_effect_t SkPathEffect_Deserialize(const void *data, size_t size, const SkDeserialProcs *procs) {
     return static_sk_path_effect_make(SkPathEffect::Deserialize(data, size, procs));
 }
 

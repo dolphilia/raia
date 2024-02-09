@@ -10,7 +10,7 @@
 
 extern "C" {
 void SkDiscretePathEffect_delete(SkDiscretePathEffect * discretePathEffect);
-int SkDiscretePathEffect_Make(SkScalar segLength, SkScalar dev, uint32_t seedAssist);
+sk_path_effect_t SkDiscretePathEffect_Make(SkScalar segLength, SkScalar dev, uint32_t seedAssist);
 void SkDiscretePathEffect_RegisterFlattenables();
 }
 

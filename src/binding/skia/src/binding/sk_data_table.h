@@ -21,10 +21,10 @@ bool SkDataTable_unique(SkDataTable *data_table);
 void SkDataTable_ref(SkDataTable *data_table);
 void SkDataTable_unref(SkDataTable *data_table);
 // static
-int SkDataTable_MakeEmpty();
-int SkDataTable_MakeCopyArrays(const void *const *ptrs, const size_t sizes[], int count);
-int SkDataTable_MakeCopyArray(const void *array, size_t elemSize, int count);
-int SkDataTable_MakeArrayProc(const void *array, size_t elemSize, int count, SkDataTable::FreeProc proc, void *context);
+sk_data_table_t SkDataTable_MakeEmpty();
+sk_data_table_t SkDataTable_MakeCopyArrays(const void *const *ptrs, const size_t sizes[], int count);
+sk_data_table_t SkDataTable_MakeCopyArray(const void *array, size_t elemSize, int count);
+sk_data_table_t SkDataTable_MakeArrayProc(const void *array, size_t elemSize, int count, SkDataTable::FreeProc proc, void *context);
 }
 
 #endif //RAIA_SKIA_SK_DATA_TABLE_H

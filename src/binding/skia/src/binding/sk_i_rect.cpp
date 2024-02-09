@@ -86,19 +86,19 @@ void SkIRect_setSize(SkIRect *i_rect, SkISize size) {
     i_rect->setSize(size);
 }
 
-int SkIRect_makeOffset(SkIRect *i_rect, int32_t dx, int32_t dy) {
+sk_i_rect_t SkIRect_makeOffset(SkIRect *i_rect, int32_t dx, int32_t dy) {
     return static_sk_i_rect_make(i_rect->makeOffset(dx, dy));
 }
 
-int SkIRect_makeOffset_2(SkIRect *i_rect, SkIVector offset) {
+sk_i_rect_t SkIRect_makeOffset_2(SkIRect *i_rect, SkIVector offset) {
     return static_sk_i_rect_make(i_rect->makeOffset(offset));
 }
 
-int SkIRect_makeInset(SkIRect *i_rect, int32_t dx, int32_t dy) {
+sk_i_rect_t SkIRect_makeInset(SkIRect *i_rect, int32_t dx, int32_t dy) {
     return static_sk_i_rect_make(i_rect->makeInset(dx, dy));
 }
 
-int SkIRect_makeOutset(SkIRect *i_rect, int32_t dx, int32_t dy) {
+sk_i_rect_t SkIRect_makeOutset(SkIRect *i_rect, int32_t dx, int32_t dy) {
     return static_sk_i_rect_make(i_rect->makeOutset(dx, dy));
 }
 
@@ -158,33 +158,33 @@ void SkIRect_sort(SkIRect *i_rect) {
     i_rect->sort();
 }
 
-int SkIRect_makeSorted(SkIRect *i_rect) {
+sk_i_rect_t SkIRect_makeSorted(SkIRect *i_rect) {
     return static_sk_i_rect_make(i_rect->makeSorted());
 }
 
 // static
 
-int SkIRect_MakeEmpty() {
+sk_i_rect_t SkIRect_MakeEmpty() {
     return static_sk_i_rect_make(SkIRect::MakeEmpty());
 }
 
-int SkIRect_MakeWH(int32_t w, int32_t h) {
+sk_i_rect_t SkIRect_MakeWH(int32_t w, int32_t h) {
     return static_sk_i_rect_make(SkIRect::MakeWH(w, h));
 }
 
-int SkIRect_MakeSize(const SkISize *size) {
+sk_i_rect_t SkIRect_MakeSize(const SkISize *size) {
     return static_sk_i_rect_make(SkIRect::MakeSize(*size));
 }
 
-int SkIRect_MakePtSize(SkIPoint pt, SkISize size) {
+sk_i_rect_t SkIRect_MakePtSize(SkIPoint pt, SkISize size) {
     return static_sk_i_rect_make(SkIRect::MakePtSize(pt, size));
 }
 
-int SkIRect_MakeLTRB(int32_t l, int32_t t, int32_t r, int32_t b) {
+sk_i_rect_t SkIRect_MakeLTRB(int32_t l, int32_t t, int32_t r, int32_t b) {
     return static_sk_i_rect_make(SkIRect::MakeLTRB(l, t, r, b));
 }
 
-int SkIRect_MakeXYWH(int32_t x, int32_t y, int32_t w, int32_t h) {
+sk_i_rect_t SkIRect_MakeXYWH(int32_t x, int32_t y, int32_t w, int32_t h) {
     return static_sk_i_rect_make(SkIRect::MakeXYWH(x, y, w, h));
 }
 

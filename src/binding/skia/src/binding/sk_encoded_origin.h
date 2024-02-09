@@ -10,7 +10,7 @@
 
 extern "C" {
 // static
-int SkEncodedOrigin_SkEncodedOriginToMatrix(SkEncodedOrigin origin, int w, int h);
+sk_matrix_t SkEncodedOrigin_SkEncodedOriginToMatrix(SkEncodedOrigin origin, int w, int h);
 bool SkEncodedOrigin_SkEncodedOriginSwapsWidthHeight(SkEncodedOrigin origin);
 }
 

@@ -9,9 +9,7 @@ namespace SkCodecs {
 
     using DecodeContext = void*;
     using IsFormatCallback = bool (*)(const void* data, size_t len);
-    using MakeFromStreamCallback = std::unique_ptr<SkCodec> (*)(std::unique_ptr<SkStream>,
-                                                                SkCodec::Result*,
-                                                                DecodeContext);
+    using MakeFromStreamCallback = std::unique_ptr<SkCodec> (*)(std::unique_ptr<SkStream>, SkCodec::Result*, DecodeContext);
 
     struct SK_API Decoder {
             // By convention, we use all lowercase letters and go with the primary filename extension.

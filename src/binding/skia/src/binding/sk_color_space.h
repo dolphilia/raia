@@ -17,11 +17,11 @@ bool SkColorSpace_gammaIsLinear(SkColorSpace *color_space);
 bool SkColorSpace_isNumericalTransferFn(SkColorSpace *color_space, skcms_TransferFunction *fn);
 bool SkColorSpace_toXYZD50(SkColorSpace *color_space, skcms_Matrix3x3 *toXYZD50);
 uint32_t SkColorSpace_toXYZD50Hash(SkColorSpace *color_space);
-int SkColorSpace_makeLinearGamma(SkColorSpace *color_space);
-int SkColorSpace_makeSRGBGamma(SkColorSpace *color_space);
-int SkColorSpace_makeColorSpin(SkColorSpace *color_space);
+sk_color_space_t SkColorSpace_makeLinearGamma(SkColorSpace *color_space);
+sk_color_space_t SkColorSpace_makeSRGBGamma(SkColorSpace *color_space);
+sk_color_space_t SkColorSpace_makeColorSpin(SkColorSpace *color_space);
 bool SkColorSpace_isSRGB(SkColorSpace *color_space);
-int SkColorSpace_serialize(SkColorSpace *color_space);
+sk_data_t SkColorSpace_serialize(SkColorSpace *color_space);
 size_t SkColorSpace_writeToMemory(SkColorSpace *color_space, void *memory);
 void SkColorSpace_transferFn(SkColorSpace *color_space, float gabcdef[7]);
 void SkColorSpace_transferFn_2(SkColorSpace *color_space, skcms_TransferFunction *fn);
@@ -35,11 +35,11 @@ void SkColorSpace_unref(SkColorSpace *color_space);
 void SkColorSpace_deref(SkColorSpace *color_space);
 bool SkColorSpace_refCntGreaterThan(SkColorSpace *color_space, int32_t threadIsolatedTestCnt);
 // static
-int SkColorSpace_MakeSRGB();
-int SkColorSpace_MakeSRGBLinear();
-int SkColorSpace_MakeRGB(const skcms_TransferFunction *transferFn, const skcms_Matrix3x3 *toXYZ);
-int SkColorSpace_Make(const skcms_ICCProfile * profile);
-int SkColorSpace_Deserialize(const void *data, size_t length);
+sk_color_space_t SkColorSpace_MakeSRGB();
+sk_color_space_t SkColorSpace_MakeSRGBLinear();
+sk_color_space_t SkColorSpace_MakeRGB(const skcms_TransferFunction *transferFn, const skcms_Matrix3x3 *toXYZ);
+sk_color_space_t SkColorSpace_Make(const skcms_ICCProfile * profile);
+sk_color_space_t SkColorSpace_Deserialize(const void *data, size_t length);
 bool SkColorSpace_Equals(SkColorSpace *color_space_1, const SkColorSpace *color_space_2);
 }
 

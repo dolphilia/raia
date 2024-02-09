@@ -47,19 +47,19 @@ void SkDataTable_unref(SkDataTable *data_table) {
 
 // static
 
-int SkDataTable_MakeEmpty() {
+sk_data_table_t SkDataTable_MakeEmpty() {
     return static_sk_data_table_make(SkDataTable::MakeEmpty());
 }
 
-int SkDataTable_MakeCopyArrays(const void *const *ptrs, const size_t sizes[], int count) {
+sk_data_table_t SkDataTable_MakeCopyArrays(const void *const *ptrs, const size_t sizes[], int count) {
     return static_sk_data_table_make(SkDataTable::MakeCopyArrays(ptrs, sizes, count));
 }
 
-int SkDataTable_MakeCopyArray(const void *array, size_t elemSize, int count) {
+sk_data_table_t SkDataTable_MakeCopyArray(const void *array, size_t elemSize, int count) {
     return static_sk_data_table_make(SkDataTable::MakeCopyArray(array, elemSize, count));
 }
 
-int SkDataTable_MakeArrayProc(const void *array, size_t elemSize, int count, SkDataTable::FreeProc proc, void *context) {
+sk_data_table_t SkDataTable_MakeArrayProc(const void *array, size_t elemSize, int count, SkDataTable::FreeProc proc, void *context) {
     return static_sk_data_table_make(SkDataTable::MakeArrayProc(array, elemSize, count, proc, context));
 }
 

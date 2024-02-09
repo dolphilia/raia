@@ -10,9 +10,9 @@
 
 extern "C" {
 void SkStrokeRec_delete(SkStrokeRec *stroke_rec);
-int SkStrokeRec_static(SkStrokeRec::InitStyle style);
-int SkStrokeRec_static_2(const SkPaint *paint, SkPaint::Style style, SkScalar resScale);
-int SkStrokeRec_static_3(const SkPaint *paint, SkScalar resScale);
+sk_stroke_rec_t SkStrokeRec_static(SkStrokeRec::InitStyle style);
+sk_stroke_rec_t SkStrokeRec_static_2(const SkPaint *paint, SkPaint::Style style, SkScalar resScale);
+sk_stroke_rec_t SkStrokeRec_static_3(const SkPaint *paint, SkScalar resScale);
 SkStrokeRec::Style SkStrokeRec_getStyle(SkStrokeRec *stroke_rec);
 SkScalar SkStrokeRec_getWidth(SkStrokeRec *stroke_rec);
 SkScalar SkStrokeRec_getMiter(SkStrokeRec *stroke_rec);

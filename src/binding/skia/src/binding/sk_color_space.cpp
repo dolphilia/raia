@@ -34,15 +34,15 @@ uint32_t SkColorSpace_toXYZD50Hash(SkColorSpace *color_space) {
     return color_space->toXYZD50Hash();
 }
 
-int SkColorSpace_makeLinearGamma(SkColorSpace *color_space) {
+sk_color_space_t SkColorSpace_makeLinearGamma(SkColorSpace *color_space) {
     return static_sk_color_space_make(color_space->makeLinearGamma());
 }
 
-int SkColorSpace_makeSRGBGamma(SkColorSpace *color_space) {
+sk_color_space_t SkColorSpace_makeSRGBGamma(SkColorSpace *color_space) {
     return static_sk_color_space_make(color_space->makeSRGBGamma());
 }
 
-int SkColorSpace_makeColorSpin(SkColorSpace *color_space) {
+sk_color_space_t SkColorSpace_makeColorSpin(SkColorSpace *color_space) {
     return static_sk_color_space_make(color_space->makeColorSpin());
 }
 
@@ -50,7 +50,7 @@ bool SkColorSpace_isSRGB(SkColorSpace *color_space) {
     return color_space->isSRGB();
 }
 
-int SkColorSpace_serialize(SkColorSpace *color_space) {
+sk_data_t SkColorSpace_serialize(SkColorSpace *color_space) {
     return static_sk_data_make(color_space->serialize());
 }
 
@@ -104,23 +104,23 @@ bool SkColorSpace_refCntGreaterThan(SkColorSpace *color_space, int32_t threadIso
 
 // static
 
-int SkColorSpace_MakeSRGB() {
+sk_color_space_t SkColorSpace_MakeSRGB() {
     return static_sk_color_space_make(SkColorSpace::MakeSRGB());
 }
 
-int SkColorSpace_MakeSRGBLinear() {
+sk_color_space_t SkColorSpace_MakeSRGBLinear() {
     return static_sk_color_space_make(SkColorSpace::MakeSRGBLinear());
 }
 
-int SkColorSpace_MakeRGB(const skcms_TransferFunction *transferFn, const skcms_Matrix3x3 *toXYZ) {
+sk_color_space_t SkColorSpace_MakeRGB(const skcms_TransferFunction *transferFn, const skcms_Matrix3x3 *toXYZ) {
     return static_sk_color_space_make(SkColorSpace::MakeRGB(*transferFn, *toXYZ));
 }
 
-int SkColorSpace_Make(const skcms_ICCProfile * profile) {
+sk_color_space_t SkColorSpace_Make(const skcms_ICCProfile * profile) {
     return static_sk_color_space_make(SkColorSpace::Make(*profile));
 }
 
-int SkColorSpace_Deserialize(const void *data, size_t length) {
+sk_color_space_t SkColorSpace_Deserialize(const void *data, size_t length) {
     return static_sk_color_space_make(SkColorSpace::Deserialize(data, length));
 }
 

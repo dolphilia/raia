@@ -26,7 +26,7 @@ void SkSurfaceProps_delete(SkSurfaceProps *surface_props) {
     delete surface_props;
 }
 
-int SkSurfaceProps_cloneWithPixelGeometry(SkSurfaceProps *surface_props, SkPixelGeometry newPixelGeometry) {
+sk_surface_props_t SkSurfaceProps_cloneWithPixelGeometry(SkSurfaceProps *surface_props, SkPixelGeometry newPixelGeometry) {
     return static_sk_surface_props_make(surface_props->cloneWithPixelGeometry(newPixelGeometry));
 }
 

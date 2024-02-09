@@ -17,7 +17,7 @@ int GrRecordingContext_maxRenderTargetSize(GrRecordingContext *recordingContext)
 bool GrRecordingContext_colorTypeSupportedAsImage(GrRecordingContext *recordingContext, SkColorType colorType);
 bool GrRecordingContext_supportsProtectedContent(GrRecordingContext *recordingContext);
 int GrRecordingContext_maxSurfaceSampleCountForColorType(GrRecordingContext *recordingContext, SkColorType colorType);
-int GrRecordingContext_skCapabilities(GrRecordingContext *recordingContext);
+const_sk_capabilities_t GrRecordingContext_skCapabilities(GrRecordingContext *recordingContext);
 //GrRecordingContextPriv GrRecordingContext_priv(GrRecordingContext *recordingContext);
 //const GrRecordingContextPriv GrRecordingContext_priv(GrRecordingContext *recordingContext);
 }

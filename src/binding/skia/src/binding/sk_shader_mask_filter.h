@@ -15,7 +15,7 @@
 extern "C" {
 void SkShaderMaskFilter_delete(SkShaderMaskFilter *shaderMaskFilter);
 // static
-int SkShaderMaskFilter_Make(int sk_shader_key_in);
+sk_mask_filter_t SkShaderMaskFilter_Make(sk_shader_t shader);
 }
 
 #endif //RAIA_SKIA_SK_SHADER_MASK_FILTER_H

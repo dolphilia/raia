@@ -19,7 +19,7 @@ const skcms_ICCProfile* SkAndroidCodec_getICCProfile(SkAndroidCodec *androidCode
 SkEncodedImageFormat SkAndroidCodec_getEncodedFormat(SkAndroidCodec *androidCodec);
 SkColorType SkAndroidCodec_computeOutputColorType(SkAndroidCodec *androidCodec, SkColorType requestedColorType);
 SkAlphaType SkAndroidCodec_computeOutputAlphaType(SkAndroidCodec *androidCodec, bool requestedUnpremul);
-int SkAndroidCodec_computeOutputColorSpace(int static_sk_color_space_key_in, SkAndroidCodec *androidCodec, SkColorType outputColorType);
+sk_color_space_t SkAndroidCodec_computeOutputColorSpace(SkAndroidCodec *androidCodec, SkColorType outputColorType, sk_color_space_t prefColorSpace);
 int SkAndroidCodec_computeSampleSize(SkAndroidCodec *androidCodec, SkISize* size);
 SkISize SkAndroidCodec_getSampledDimensions(SkAndroidCodec *androidCodec, int sampleSize);
 bool SkAndroidCodec_getSupportedSubset(SkAndroidCodec *androidCodec, SkIRect* desiredSubset);
@@ -30,9 +30,9 @@ SkCodec::Result SkAndroidCodec_getPixels(SkAndroidCodec *androidCodec, const SkI
 SkCodec* SkAndroidCodec_codec(SkAndroidCodec *androidCodec);
 bool SkAndroidCodec_getAndroidGainmap(SkAndroidCodec *androidCodec, SkGainmapInfo* outInfo, std::unique_ptr<SkStream>* outGainmapImageStream);
 // static
-int SkAndroidCodec_MakeFromCodec(int static_sk_codec_key_in);
-int SkAndroidCodec_MakeFromStream(int static_sk_stream_key_in, SkPngChunkReader* pngChunkReader);
-int SkAndroidCodec_MakeFromData(int static_sk_data_key_in, SkPngChunkReader* pngChunkReader);
+sk_android_codec_t SkAndroidCodec_MakeFromCodec(sk_codec_t codec);
+sk_android_codec_t SkAndroidCodec_MakeFromStream(sk_codec_t codec, SkPngChunkReader* pngChunkReader);
+sk_android_codec_t SkAndroidCodec_MakeFromData(sk_codec_t codec, SkPngChunkReader* pngChunkReader);
 }
 
 #endif //RAIA_SKIA_SK_ANDROID_CODEC_H

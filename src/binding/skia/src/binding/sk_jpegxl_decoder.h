@@ -13,8 +13,8 @@
 
 extern "C" {
 //bool SkJpegxlDecoder_IsIco(const void* ptr, size_t size);
-//int SkJpegxlDecoder_Decode(int static_sk_stream_key_in, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
-//int SkJpegxlDecoder_Decode_2(int static_sk_data_key_in, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
+//int SkJpegxlDecoder_Decode(int static_stream, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
+//int SkJpegxlDecoder_Decode_2(int static_data, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
 //int SkJpegxlDecoder_Decoder();
 }
 

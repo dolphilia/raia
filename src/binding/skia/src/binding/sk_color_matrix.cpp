@@ -3,7 +3,6 @@
 //
 
 #include "sk_color_matrix.h"
-#include "../static/static_sk_color_matrix.h"
 
 extern "C" {
 
@@ -57,11 +56,11 @@ void SkColorMatrix_getRowMajor(SkColorMatrix *color_matrix, float dst[20]) {
 
 // static
 
-int SkColorMatrix_RGBtoYUV(SkYUVColorSpace color_space) {
+sk_color_matrix_t SkColorMatrix_RGBtoYUV(SkYUVColorSpace color_space) {
     return static_sk_color_matrix_make(SkColorMatrix::RGBtoYUV(color_space));
 }
 
-int SkColorMatrix_YUVtoRGB(SkYUVColorSpace color_space) {
+sk_color_matrix_t SkColorMatrix_YUVtoRGB(SkYUVColorSpace color_space) {
     return static_sk_color_matrix_make(SkColorMatrix::YUVtoRGB(color_space));
 }
 

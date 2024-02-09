@@ -14,11 +14,11 @@ const void * SkStreamMemory_getMemoryBase(SkStreamMemory *stream_memory) {
     return stream_memory->getMemoryBase();
 }
 
-int SkStreamMemory_duplicate(SkStreamMemory *stream_memory) {
+sk_stream_memory_t SkStreamMemory_duplicate(SkStreamMemory *stream_memory) {
     return static_sk_stream_memory_make(stream_memory->duplicate());
 }
 
-int SkStreamMemory_fork(SkStreamMemory *stream_memory) {
+sk_stream_memory_t SkStreamMemory_fork(SkStreamMemory *stream_memory) {
     return static_sk_stream_memory_make(stream_memory->fork());
 }
 
@@ -104,7 +104,7 @@ bool SkStreamMemory_readPackedUInt(SkStreamMemory *stream_memory, size_t *size) 
 
 // static
 
-int SkStreamMemory_MakeFromFile(const char path[]) {
+sk_stream_asset_t SkStreamMemory_MakeFromFile(const char path[]) {
     return static_sk_stream_asset_make(SkStreamMemory::MakeFromFile(path));
 }
 

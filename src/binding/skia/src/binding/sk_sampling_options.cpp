@@ -3,7 +3,6 @@
 //
 
 #include "sk_sampling_options.h"
-#include "../static/static_sk_sampling_options.h"
 
 extern "C" {
 
@@ -43,7 +42,7 @@ bool SkSamplingOptions_isAniso(SkSamplingOptions *sampling_options) {
 
 // static
 
-int SkSamplingOptions_Aniso(int maxAniso) {
+sk_sampling_options_t SkSamplingOptions_Aniso(int maxAniso) {
     return static_sk_sampling_options_make(SkSamplingOptions::Aniso(maxAniso));
 }
 

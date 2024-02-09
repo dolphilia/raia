@@ -11,12 +11,12 @@
 
 extern "C" {
 void SkStreamSeekable_delete(SkStreamSeekable *stream_seekable);
-int SkStreamSeekable_duplicate(SkStreamSeekable *stream_seekable);
+sk_stream_seekable_t SkStreamSeekable_duplicate(SkStreamSeekable *stream_seekable);
 bool SkStreamSeekable_hasPosition(SkStreamSeekable *stream_seekable);
 size_t SkStreamSeekable_getPosition(SkStreamSeekable *stream_seekable);
 bool SkStreamSeekable_seek(SkStreamSeekable *stream_seekable, size_t position);
 bool SkStreamSeekable_move(SkStreamSeekable *stream_seekable, long offset);
-int SkStreamSeekable_fork(SkStreamSeekable *stream_seekable);
+sk_stream_seekable_t SkStreamSeekable_fork(SkStreamSeekable *stream_seekable);
 bool SkStreamSeekable_rewind(SkStreamSeekable *stream_seekable);
 size_t SkStreamSeekable_read(SkStreamSeekable *stream_seekable, void *buffer, size_t size);
 size_t SkStreamSeekable_skip(SkStreamSeekable *stream_seekable, size_t size);
@@ -35,7 +35,7 @@ bool SkStreamSeekable_hasLength(SkStreamSeekable *stream_seekable);
 size_t SkStreamSeekable_getLength(SkStreamSeekable *stream_seekable);
 const void * SkStreamSeekable_getMemoryBase(SkStreamSeekable *stream_seekable);
 // static
-int SkStreamSeekable_MakeFromFile(const char path[]);
+sk_stream_asset_t SkStreamSeekable_MakeFromFile(const char path[]);
 }
 
 #endif //RAIA_SKIA_SK_STREAM_SEEKABLE_H

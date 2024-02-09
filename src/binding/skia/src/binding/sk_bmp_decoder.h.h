@@ -13,9 +13,9 @@
 
 extern "C" {
 bool SkBmpDecoder_IsBmp(const void* ptr, size_t size);
-int SkBmpDecoder_Decode(int static_sk_stream_key_in, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
-int SkBmpDecoder_Decode_2(int static_sk_data_key_in, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
-int SkBmpDecoder_Decoder();
+sk_codec_t SkBmpDecoder_Decode(sk_stream_t stream, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
+sk_codec_t SkBmpDecoder_Decode_2(sk_stream_t stream, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
+sk_codecs_decoder_t SkBmpDecoder_Decoder();
 }
 
 #endif //RAIA_SKIA_SK_BMP_DECODER_H_H

@@ -3,7 +3,6 @@
 //
 
 #include "sk_drawable.h"
-#include "../static/static_sk_rect.h"
 
 extern "C" {
 
@@ -19,11 +18,11 @@ void SkDrawable_draw_2(SkDrawable *drawable, SkCanvas *canvas, SkScalar x, SkSca
     drawable->draw(canvas, x, y);
 }
 
-int SkDrawable_snapGpuDrawHandler(SkDrawable *drawable, GrBackendApi backendApi, const SkMatrix *matrix, const SkIRect *clipBounds, const SkImageInfo *bufferInfo) {
+sk_drawable_gpu_draw_handler_t SkDrawable_snapGpuDrawHandler(SkDrawable *drawable, GrBackendApi backendApi, const SkMatrix *matrix, const SkIRect *clipBounds, const SkImageInfo *bufferInfo) {
     return static_sk_drawable_gpu_draw_handler_make(drawable->snapGpuDrawHandler(backendApi, *matrix, *clipBounds, *bufferInfo));
 }
 
-int SkDrawable_makePictureSnapshot(SkDrawable *drawable) {
+sk_picture_t SkDrawable_makePictureSnapshot(SkDrawable *drawable) {
     return static_sk_picture_make(drawable->makePictureSnapshot());
 }
 
@@ -31,7 +30,7 @@ uint32_t SkDrawable_getGenerationID(SkDrawable *drawable) {
     return drawable->getGenerationID();
 }
 
-int SkDrawable_getBounds(SkDrawable *drawable) {
+sk_rect_t SkDrawable_getBounds(SkDrawable *drawable) {
     return static_sk_rect_make(drawable->getBounds());
 }
 
@@ -59,7 +58,7 @@ void SkDrawable_flatten(SkDrawable *drawable, SkWriteBuffer *write_buffer) {
     drawable->flatten(*write_buffer);
 }
 
-int SkDrawable_serialize(SkDrawable *drawable, const SkSerialProcs *serial_procs) {
+sk_data_t SkDrawable_serialize(SkDrawable *drawable, const SkSerialProcs *serial_procs) {
     return static_sk_data_make(drawable->serialize(serial_procs));
 }
 
@@ -85,7 +84,7 @@ SkFlattenable::Type SkDrawable_GetFlattenableType() {
     return SkDrawable::GetFlattenableType();
 }
 
-int SkDrawable_Deserialize(const void *data, size_t size, const SkDeserialProcs *procs) {
+sk_drawable_t SkDrawable_Deserialize(const void *data, size_t size, const SkDeserialProcs *procs) {
     return static_sk_drawable_make(SkDrawable::Deserialize(data, size, procs));
 }
 

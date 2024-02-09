@@ -15,7 +15,7 @@ SkFlattenable::Factory SkFlattenable_getFactory(SkFlattenable *flattenable);
 const char * SkFlattenable_getTypeName(SkFlattenable *flattenable);
 void SkFlattenable_flatten(SkFlattenable *flattenable, SkWriteBuffer *write_buffer);
 SkFlattenable::Type SkFlattenable_getFlattenableType(SkFlattenable *flattenable);
-int SkFlattenable_serialize(SkFlattenable *flattenable, const SkSerialProcs * serial_procs);
+sk_data_t SkFlattenable_serialize(SkFlattenable *flattenable, const SkSerialProcs * serial_procs);
 size_t SkFlattenable_serialize_2(SkFlattenable *flattenable, void *memory, size_t memory_size, const SkSerialProcs * serial_procs);
 bool SkFlattenable_unique(SkFlattenable *flattenable);
 void SkFlattenable_ref(SkFlattenable *flattenable);

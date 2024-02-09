@@ -10,15 +10,15 @@ void SkStrokeRec_delete(SkStrokeRec *stroke_rec) {
     delete stroke_rec;
 }
 
-int SkStrokeRec_static(SkStrokeRec::InitStyle style) {
+sk_stroke_rec_t SkStrokeRec_static(SkStrokeRec::InitStyle style) {
     return static_sk_stroke_rec_make(SkStrokeRec(style));
 }
 
-int SkStrokeRec_static_2(const SkPaint *paint, SkPaint::Style style, SkScalar resScale) {
+sk_stroke_rec_t SkStrokeRec_static_2(const SkPaint *paint, SkPaint::Style style, SkScalar resScale) {
     return static_sk_stroke_rec_make(SkStrokeRec(*paint, style, resScale));
 }
 
-int SkStrokeRec_static_3(const SkPaint *paint, SkScalar resScale) {
+sk_stroke_rec_t SkStrokeRec_static_3(const SkPaint *paint, SkScalar resScale) {
     return static_sk_stroke_rec_make(SkStrokeRec(*paint, resScale));
 }
 

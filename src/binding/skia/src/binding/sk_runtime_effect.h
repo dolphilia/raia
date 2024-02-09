@@ -16,22 +16,18 @@
 #include "../static/static_sk_runtime_effect_child_ptr.h"
 #include "../static/static_sk_runtime_effect_result.h"
 #include "../static/static_sk_runtime_effect_traced_shader.h"
+#include "../static/static_sk_data.h"
+#include "../static/static_sk_string.h"
+#include "../static/static_sk_runtime_effect_child_ptr.h"
 
 extern "C" {
 void SkRuntimeEffect_delete(SkRuntimeEffect *runtime_effect);
-int SkRuntimeEffect_makeShader(int sk_data_key_in, SkRuntimeEffect *runtime_effect, sk_sp<SkShader> children[], size_t childCount, const SkMatrix *localMatrix);
-int SkRuntimeEffect_makeShader_2(int sk_data_key_in,
-                             int sk_runtime_effect_child_ptr_key_in, SkRuntimeEffect *runtime_effect,
-                             const SkMatrix *localMatrix);
-int SkRuntimeEffect_makeColorFilter(int sk_data_key_in,
-                                     SkRuntimeEffect *runtime_effect);
-int SkRuntimeEffect_makeColorFilter_2(int sk_data_key_in,
-                                       SkRuntimeEffect *runtime_effect, sk_sp<SkColorFilter> children[],
-                                       size_t childCount);
-int SkRuntimeEffect_makeColorFilter_3(int sk_data_key_in,
-                                       int sk_runtime_effect_child_ptr_key_in, SkRuntimeEffect *runtime_effect);
-int SkRuntimeEffect_makeBlender(int sk_data_key_in,
-                            int sk_runtime_effect_child_ptr_key_in, SkRuntimeEffect *runtime_effect);
+sk_shader_t SkRuntimeEffect_makeShader(SkRuntimeEffect *runtime_effect, sk_data_t data, sk_sp<SkShader> children[], size_t childCount, const SkMatrix *localMatrix);
+sk_shader_t SkRuntimeEffect_makeShader_2(SkRuntimeEffect *runtime_effect, sk_data_t data, const_sk_runtime_effect_child_ptr_t runtime_effect_child_ptr, const SkMatrix *localMatrix);
+sk_color_filter_t SkRuntimeEffect_makeColorFilter(SkRuntimeEffect *runtime_effect, sk_data_t data);
+sk_color_filter_t SkRuntimeEffect_makeColorFilter_2(SkRuntimeEffect *runtime_effect, sk_data_t data, sk_sp<SkColorFilter> children[], size_t childCount);
+sk_color_filter_t SkRuntimeEffect_makeColorFilter_3(SkRuntimeEffect *runtime_effect, sk_data_t data, const_sk_runtime_effect_child_ptr_t runtime_effect_child_ptr);
+sk_blender_t SkRuntimeEffect_makeBlender(SkRuntimeEffect *runtime_effect, sk_data_t data, const_sk_runtime_effect_child_ptr_t runtime_effect_child_ptr);
 const std::string * SkRuntimeEffect_source(SkRuntimeEffect *runtime_effect);
 size_t SkRuntimeEffect_uniformSize(SkRuntimeEffect *runtime_effect);
 int SkRuntimeEffect_uniforms(SkRuntimeEffect *runtime_effect);
@@ -45,15 +41,13 @@ bool SkRuntimeEffect_unique(SkRuntimeEffect *runtime_effect);
 void SkRuntimeEffect_ref(SkRuntimeEffect *runtime_effect);
 void SkRuntimeEffect_unref(SkRuntimeEffect *runtime_effect);
 // static
-int SkRuntimeEffect_MakeForColorFilter(int sk_string_key_in,
-                                        const SkRuntimeEffect::Options *options);
-int SkRuntimeEffect_MakeForColorFilter_2(int sk_string_key_in);
-int SkRuntimeEffect_MakeForShader(int sk_string_key_in, const SkRuntimeEffect::Options *options);
-int SkRuntimeEffect_MakeForShader_2(int sk_string_key_in);
-int SkRuntimeEffect_MakeForBlender(int sk_string_key_in, const SkRuntimeEffect::Options *options);
-int SkRuntimeEffect_MakeForBlender_2(int sk_string_key_in);
-int SkRuntimeEffect_MakeTraced(int sk_shader_key_in,
-                                const SkIPoint *traceCoord);
+sk_runtime_effect_result_t SkRuntimeEffect_MakeForColorFilter(sk_string_t string, const SkRuntimeEffect::Options *options);
+sk_runtime_effect_result_t SkRuntimeEffect_MakeForColorFilter_2(sk_string_t string);
+sk_runtime_effect_result_t SkRuntimeEffect_MakeForShader(sk_string_t string, const SkRuntimeEffect::Options *options);
+sk_runtime_effect_result_t SkRuntimeEffect_MakeForShader_2(sk_string_t string);
+sk_runtime_effect_result_t SkRuntimeEffect_MakeForBlender(sk_string_t string, const SkRuntimeEffect::Options *options);
+sk_runtime_effect_result_t SkRuntimeEffect_MakeForBlender_2(sk_string_t string);
+sk_runtime_effect_result_t SkRuntimeEffect_MakeTraced(sk_shader_t shader, const SkIPoint *traceCoord);
 void SkRuntimeEffect_RegisterFlattenables();
 }
 

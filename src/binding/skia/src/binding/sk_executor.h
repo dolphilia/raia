@@ -13,8 +13,8 @@ void SkExecutor_delete(SkExecutor *executor);
 void SkExecutor_add(int function_void_void_key_in, SkExecutor *executor);
 void SkExecutor_borrow(SkExecutor *executor);
 // static
-int SkExecutor_MakeFIFOThreadPool(int threads, bool allowBorrowing);
-int SkExecutor_MakeLIFOThreadPool(int threads, bool allowBorrowing);
+sk_executor_t SkExecutor_MakeFIFOThreadPool(int threads, bool allowBorrowing);
+sk_executor_t SkExecutor_MakeLIFOThreadPool(int threads, bool allowBorrowing);
 SkExecutor *SkExecutor_GetDefault();
 void SkExecutor_SetDefault(SkExecutor * executor);
 }

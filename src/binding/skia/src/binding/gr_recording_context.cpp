@@ -38,7 +38,7 @@ int GrRecordingContext_maxSurfaceSampleCountForColorType(GrRecordingContext *rec
     return recordingContext->maxSurfaceSampleCountForColorType(colorType);
 }
 
-int GrRecordingContext_skCapabilities(GrRecordingContext *recordingContext) {
+const_sk_capabilities_t GrRecordingContext_skCapabilities(GrRecordingContext *recordingContext) {
     return static_const_sk_capabilities_make(recordingContext->skCapabilities());
 }
 

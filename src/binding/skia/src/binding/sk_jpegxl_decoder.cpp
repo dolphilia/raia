@@ -10,12 +10,12 @@ extern "C" {
 //    return SkJpegxlDecoder::IsJpegxl(ptr, size);
 //}
 //
-//int SkJpegxlDecoder_Decode(int static_sk_stream_key_in, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext) {
-//    return static_sk_codec_make(SkJpegxlDecoder::Decode(static_sk_stream_move(static_sk_stream_key_in), result, decodeContext));
+//int SkJpegxlDecoder_Decode(int static_stream, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext) {
+//    return static_sk_codec_make(SkJpegxlDecoder::Decode(static_sk_stream_move(static_stream), result, decodeContext));
 //}
 //
-//int SkJpegxlDecoder_Decode_2(int static_sk_data_key_in, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext) {
-//    return static_sk_codec_make(SkJpegxlDecoder::Decode(static_sk_data_move(static_sk_data_key_in), result, decodeContext));
+//int SkJpegxlDecoder_Decode_2(int static_data, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext) {
+//    return static_sk_codec_make(SkJpegxlDecoder::Decode(static_sk_data_move(static_data), result, decodeContext));
 //}
 //
 //int SkJpegxlDecoder_Decoder() {

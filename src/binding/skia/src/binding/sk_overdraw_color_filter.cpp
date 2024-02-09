@@ -11,7 +11,7 @@ void SkOverdrawColorFilter_delete(SkOverdrawColorFilter * overdrawColorFilter) {
 }
 
 // static
-int SkOverdrawColorFilter_MakeWithSkColors(const SkColor color[SkOverdrawColorFilter::kNumColors]) {
+sk_color_filter_t SkOverdrawColorFilter_MakeWithSkColors(const SkColor color[SkOverdrawColorFilter::kNumColors]) {
     return static_sk_color_filter_make(SkOverdrawColorFilter::MakeWithSkColors(color));
 }
 

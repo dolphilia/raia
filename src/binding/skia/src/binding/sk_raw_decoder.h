@@ -13,9 +13,9 @@
 
 extern "C" {
 bool SkRawDecoder_IsRaw(const void* ptr, size_t size);
-int SkRawDecoder_Decode(int static_sk_stream_key_in, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
-int SkRawDecoder_Decode_2(int static_sk_data_key_in, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
-int SkRawDecoder_Decoder();
+sk_codec_t SkRawDecoder_Decode(int static_stream, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
+sk_codec_t SkRawDecoder_Decode_2(int static_data, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
+sk_codecs_decoder_t SkRawDecoder_Decoder();
 }
 
 #endif //RAIA_SKIA_SK_RAW_DECODER_H

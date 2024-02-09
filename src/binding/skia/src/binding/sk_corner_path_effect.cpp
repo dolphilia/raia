@@ -12,7 +12,7 @@ void SkCornerPathEffect_delete(SkCornerPathEffect * cornerPathEffect) {
 
 // static
 
-int SkCornerPathEffect_Make(SkScalar radius) {
+sk_path_effect_t SkCornerPathEffect_Make(SkScalar radius) {
     return static_sk_path_effect_make(SkCornerPathEffect::Make(radius));
 }
 

@@ -6,6 +6,7 @@
 #define RAIA_SKIA_SK_SAMPLING_OPTIONS_H
 
 #include "include/core/SkSamplingOptions.h"
+#include "../static/static_sk_sampling_options.h"
 
 extern "C" {
 //bool operator==(const SkSamplingOptions &other)
@@ -21,7 +22,7 @@ SkSamplingOptions *SkSamplingOptions_new_5(const SkCubicResampler *c);
 void SkSamplingOptions_delete(SkSamplingOptions *sampling_options);
 bool SkSamplingOptions_isAniso(SkSamplingOptions *sampling_options);
 // static
-int SkSamplingOptions_Aniso(int maxAniso);
+sk_sampling_options_t SkSamplingOptions_Aniso(int maxAniso);
 }
 
 #endif //RAIA_SKIA_SK_SAMPLING_OPTIONS_H

@@ -10,7 +10,7 @@
 
 extern "C" {
 bool SkPixmapUtils_Orient(const SkPixmap* dst, const SkPixmap* src, SkEncodedOrigin origin);
-int SkPixmapUtils_SwapWidthHeight(const SkImageInfo* info);
+sk_image_info_t SkPixmapUtils_SwapWidthHeight(const SkImageInfo* info);
 }
 
 #endif //RAIA_SKIA_SK_PIXMAP_UTILS_H

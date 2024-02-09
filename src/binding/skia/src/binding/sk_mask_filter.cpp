@@ -10,7 +10,7 @@ void SkMaskFilter_delete(SkMaskFilter *maskFilter) {
     delete maskFilter;
 }
 
-int SkMaskFilter_approximateFilteredBounds(SkMaskFilter *mask_filter, const SkRect *src) {
+sk_rect_t SkMaskFilter_approximateFilteredBounds(SkMaskFilter *mask_filter, const SkRect *src) {
     return static_sk_rect_make(mask_filter->approximateFilteredBounds(*src));
 }
 
@@ -30,7 +30,7 @@ SkMaskFilter::Type SkMaskFilter_getFlattenableType(SkMaskFilter *mask_filter) {
     return mask_filter->getFlattenableType();
 }
 
-int SkMaskFilter_serialize(SkMaskFilter *mask_filter, const SkSerialProcs *procs) {
+sk_data_t SkMaskFilter_serialize(SkMaskFilter *mask_filter, const SkSerialProcs *procs) {
     return static_sk_data_make(mask_filter->serialize(procs));
 }
 
@@ -53,11 +53,11 @@ void SkMaskFilter_unref(SkMaskFilter *mask_filter) {
 
 // static
 
-int SkMaskFilter_MakeBlur(SkBlurStyle style, SkScalar sigma, bool respectCTM) {
+sk_mask_filter_t SkMaskFilter_MakeBlur(SkBlurStyle style, SkScalar sigma, bool respectCTM) {
     return static_sk_mask_filter_make(SkMaskFilter::MakeBlur(style, sigma, respectCTM));
 }
 
-int SkMaskFilter_Deserialize(const void *data, size_t size, const SkDeserialProcs *procs) {
+sk_mask_filter_t SkMaskFilter_Deserialize(const void *data, size_t size, const SkDeserialProcs *procs) {
     return static_sk_mask_filter_make(SkMaskFilter::Deserialize(data, size, procs));
 }
 

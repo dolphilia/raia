@@ -18,14 +18,14 @@ void SkShader_delete(SkShader *shader);
 bool SkShader_isOpaque(SkShader *shader);
 SkImage * SkShader_isAImage(SkShader *shader, SkMatrix *localMatrix, SkTileMode xy[2]);
 bool SkShader_isAImage_2(SkShader *shader);
-int SkShader_makeWithLocalMatrix(SkShader *shader, const SkMatrix *matrix);
-int SkShader_makeWithColorFilter(int sk_color_filter_key_in, SkShader *shader);
-int SkShader_makeWithWorkingColorSpace(int sk_color_space_key_in, SkShader *shader);
+sk_shader_t SkShader_makeWithLocalMatrix(SkShader *shader, const SkMatrix *matrix);
+sk_shader_t SkShader_makeWithColorFilter(SkShader *shader, sk_color_filter_t color_filter);
+sk_shader_t SkShader_makeWithWorkingColorSpace(SkShader *shader, sk_color_space_t color_space);
 SkShader::Factory SkShader_getFactory(SkShader *shader);
 const char * SkShader_getTypeName(SkShader *shader);
 void SkShader_flatten(SkShader *shader, SkWriteBuffer *buffer);
 SkShader::Type SkShader_getFlattenableType(SkShader *shader);
-int SkShader_serialize(SkShader *shader, const SkSerialProcs *procs);
+sk_data_t SkShader_serialize(SkShader *shader, const SkSerialProcs *procs);
 size_t SkShader_serialize_2(SkShader *shader, void *memory, size_t memory_size, const SkSerialProcs *procs);
 bool SkShader_unique(SkShader *shader);
 void SkShader_ref(SkShader *shader);
@@ -34,7 +34,7 @@ void SkShader_unref(SkShader *shader);
 SkShader::Factory SkShader_NameToFactory(const char name[]);
 const char * SkShader_FactoryToName(SkShader::Factory factory);
 void SkShader_Register(const char name[], SkShader::Factory factory);
-int SkShader_Deserialize(SkShader::Type type, const void *data, size_t length, const SkDeserialProcs *procs);
+sk_flattenable_t SkShader_Deserialize(SkShader::Type type, const void *data, size_t length, const SkDeserialProcs *procs);
 }
 
 #endif //RAIA_SKIA_SK_SHADER_H

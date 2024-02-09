@@ -9,8 +9,8 @@
 #include "../static/static_sk_data.h"
 
 extern "C" {
-int SkICC_SkWriteICCProfile(const skcms_TransferFunction* transferFunction, const skcms_Matrix3x3* toXYZD50);
-int SkICC_SkWriteICCProfile_2(const skcms_ICCProfile* iccProfile, const char* description);
+sk_data_t SkICC_SkWriteICCProfile(const skcms_TransferFunction* transferFunction, const skcms_Matrix3x3* toXYZD50);
+const_sk_data_t SkICC_SkWriteICCProfile_2(const skcms_ICCProfile* iccProfile, const char* description);
 void SkICC_SkICCFloatXYZD50ToGrid16Lab(const float* float_xyz, uint8_t* grid16_lab);
 void SkICC_SkICCFloatToTable16(const float f, uint8_t* table_16);
 }

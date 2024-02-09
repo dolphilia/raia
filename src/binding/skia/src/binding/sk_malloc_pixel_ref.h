@@ -13,8 +13,8 @@
 #include "../static/static_sk_data.h"
 
 extern "C" {
-int SkMallocPixelRef_MakeAllocate(const SkImageInfo *imageInfo, size_t rowBytes);
-int SkMallocPixelRef_MakeWithData(int sk_data_key_in, const SkImageInfo &imageInfo, size_t rowBytes);
+sk_pixel_ref_t SkMallocPixelRef_MakeAllocate(const SkImageInfo *imageInfo, size_t rowBytes);
+sk_pixel_ref_t SkMallocPixelRef_MakeWithData(const SkImageInfo &imageInfo, size_t rowBytes, sk_data_t data);
 }
 
 #endif //RAIA_SKIA_SK_MALLOC_PIXEL_REF_H

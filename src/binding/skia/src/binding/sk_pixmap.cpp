@@ -30,8 +30,8 @@ bool SkPixmap_reset_3(SkPixmap *pixmap, const SkMask *mask) {
     return pixmap->reset(*mask);
 }
 
-void SkPixmap_setColorSpace(int sk_color_space_key_in, SkPixmap *pixmap) {
-    return pixmap->setColorSpace(static_sk_color_space_move(sk_color_space_key_in));
+void SkPixmap_setColorSpace(SkPixmap *pixmap, sk_color_space_t color_space) {
+    return pixmap->setColorSpace(static_sk_color_space_move(color_space));
 }
 
 bool SkPixmap_extractSubset(SkPixmap *pixmap, SkPixmap *subset, const SkIRect *area) {
@@ -74,7 +74,7 @@ SkColorSpace * SkPixmap_colorSpace(SkPixmap *pixmap) {
     return pixmap->colorSpace();
 }
 
-int SkPixmap_refColorSpace(SkPixmap *pixmap) {
+sk_color_space_t SkPixmap_refColorSpace(SkPixmap *pixmap) {
     return static_sk_color_space_make(pixmap->refColorSpace());
 }
 
@@ -82,7 +82,7 @@ bool SkPixmap_isOpaque(SkPixmap *pixmap) {
     return pixmap->isOpaque();
 }
 
-int SkPixmap_bounds(SkPixmap *pixmap) {
+sk_i_rect_t SkPixmap_bounds(SkPixmap *pixmap) {
     return static_sk_i_rect_make(pixmap->bounds());
 }
 

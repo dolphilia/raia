@@ -14,7 +14,7 @@ void SkPicture_playback(SkPicture *picture, SkCanvas *canvas, SkPicture::AbortCa
     picture->playback(canvas, callback);
 }
 
-int SkPicture_cullRect(SkPicture *picture) {
+sk_rect_t SkPicture_cullRect(SkPicture *picture) {
     return static_sk_rect_make(picture->cullRect());
 }
 
@@ -22,7 +22,7 @@ uint32_t SkPicture_uniqueID(SkPicture *picture) {
     return picture->uniqueID();
 }
 
-int SkPicture_serialize(SkPicture *picture, const SkSerialProcs *procs) {
+sk_data_t SkPicture_serialize(SkPicture *picture, const SkSerialProcs *procs) {
     return static_sk_data_make(picture->serialize(procs));
 }
 
@@ -38,11 +38,11 @@ size_t SkPicture_approximateBytesUsed(SkPicture *picture) { //, SkPicture *pictu
     return picture->approximateBytesUsed();
 }
 
-int SkPicture_makeShader(SkPicture *picture, SkTileMode tmx, SkTileMode tmy, SkFilterMode mode, const SkMatrix *localMatrix, const SkRect *tileRect) {
+sk_shader_t SkPicture_makeShader(SkPicture *picture, SkTileMode tmx, SkTileMode tmy, SkFilterMode mode, const SkMatrix *localMatrix, const SkRect *tileRect) {
     return static_sk_shader_make(picture->makeShader(tmx, tmy, mode, localMatrix, tileRect));
 }
 
-int SkPicture_makeShader_2(SkPicture *picture, SkTileMode tmx, SkTileMode tmy, SkFilterMode mode) {
+sk_shader_t SkPicture_makeShader_2(SkPicture *picture, SkTileMode tmx, SkTileMode tmy, SkFilterMode mode) {
     return static_sk_shader_make(picture->makeShader(tmx, tmy, mode));
 }
 
@@ -60,19 +60,19 @@ void SkPicture_unref(SkPicture *picture) {
 
 // static
 
-int SkPicture_MakeFromStream(SkStream *stream, const SkDeserialProcs *procs) {
+sk_picture_t SkPicture_MakeFromStream(SkStream *stream, const SkDeserialProcs *procs) {
     return static_sk_picture_make(SkPicture::MakeFromStream(stream, procs));
 }
 
-int SkPicture_MakeFromData(const SkData *data, const SkDeserialProcs *procs) {
+sk_picture_t SkPicture_MakeFromData(const SkData *data, const SkDeserialProcs *procs) {
     return static_sk_picture_make(SkPicture::MakeFromData(data, procs));
 }
 
-int SkPicture_MakeFromData_2(const void *data, size_t size, const SkDeserialProcs *procs) {
+sk_picture_t SkPicture_MakeFromData_2(const void *data, size_t size, const SkDeserialProcs *procs) {
     return static_sk_picture_make(SkPicture::MakeFromData(data, size, procs));
 }
 
-int SkPicture_MakePlaceholder(SkRect cull) {
+sk_picture_t SkPicture_MakePlaceholder(SkRect cull) {
     return static_sk_picture_make(SkPicture::MakePlaceholder(cull));
 }
 

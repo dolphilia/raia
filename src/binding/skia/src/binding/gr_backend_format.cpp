@@ -34,7 +34,7 @@ uint32_t GrBackendFormat_channelMask(GrBackendFormat *backend_format) {
     return backend_format->channelMask();
 }
 
-int GrBackendFormat_desc(GrBackendFormat *backend_format) {
+gr_color_format_desc_t GrBackendFormat_desc(GrBackendFormat *backend_format) {
     return static_gr_color_format_desc_make(backend_format->desc());
 }
 
@@ -50,7 +50,7 @@ bool GrBackendFormat_isMockStencilFormat(GrBackendFormat *backend_format) {
     return backend_format->isMockStencilFormat();
 }
 
-int GrBackendFormat_makeTexture2D(GrBackendFormat *backend_format) {
+gr_backend_format_t GrBackendFormat_makeTexture2D(GrBackendFormat *backend_format) {
     return static_gr_backend_format_make(backend_format->makeTexture2D());
 }
 
@@ -60,7 +60,7 @@ bool GrBackendFormat_isValid(GrBackendFormat *backend_format) {
 
 // static
 
-int GrBackendFormat_MakeMock(GrColorType colorType, SkTextureCompressionType compression, bool isStencilFormat) {
+gr_backend_format_t GrBackendFormat_MakeMock(GrColorType colorType, SkTextureCompressionType compression, bool isStencilFormat) {
     return static_gr_backend_format_make(GrBackendFormat::MakeMock(colorType, compression, isStencilFormat));
 }
 

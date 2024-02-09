@@ -6,6 +6,7 @@
 #define RAIA_SKIA_SK_COLOR_MATRIX_H
 
 #include "include/effects/SkColorMatrix.h"
+#include "../static/static_sk_color_matrix.h"
 
 extern "C" {
 SkColorMatrix *SkColorMatrix_new();
@@ -21,8 +22,8 @@ void SkColorMatrix_setSaturation(SkColorMatrix *color_matrix, float sat);
 void SkColorMatrix_setRowMajor(SkColorMatrix *color_matrix, const float src[20]);
 void SkColorMatrix_getRowMajor(SkColorMatrix *color_matrix, float dst[20]);
 // static
-int SkColorMatrix_RGBtoYUV(SkYUVColorSpace color_space);
-int SkColorMatrix_YUVtoRGB(SkYUVColorSpace color_space);
+sk_color_matrix_t SkColorMatrix_RGBtoYUV(SkYUVColorSpace color_space);
+sk_color_matrix_t SkColorMatrix_YUVtoRGB(SkYUVColorSpace color_space);
 }
 
 #endif //RAIA_SKIA_SK_COLOR_MATRIX_H

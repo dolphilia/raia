@@ -7,12 +7,14 @@
 
 #include "include/core/SkFont.h"
 #include "../static/static_sk_typeface.h"
+#include "../static/static_std_vector_sk_scalar.h"
+#include "../static/static_sk_font.h"
 
 extern "C" {
 SkFont *SkFont_new();
-SkFont *SkFont_new_2(int sk_typeface_key_in, SkScalar size);
-SkFont *SkFont_new_3(int sk_typeface_key_in);
-SkFont *SkFont_new_4(int sk_typeface_key_in, SkScalar size, SkScalar scaleX, SkScalar skewX);
+SkFont *SkFont_new_2(sk_typeface_t typeface, SkScalar size);
+SkFont *SkFont_new_3(sk_typeface_t typeface);
+SkFont *SkFont_new_4(sk_typeface_t typeface, SkScalar size, SkScalar scaleX, SkScalar skewX);
 void SkFont_delete(SkFont *font);
 bool SkFont_isForceAutoHinting(SkFont *font);
 bool SkFont_isEmbeddedBitmaps(SkFont *font);
@@ -30,13 +32,13 @@ SkFont::Edging SkFont_getEdging(SkFont *font);
 void SkFont_setEdging(SkFont *font, SkFont::Edging edging);
 void SkFont_setHinting(SkFont *font, SkFontHinting hintingLevel);
 SkFontHinting SkFont_getHinting(SkFont *font);
-int SkFont_makeWithSize(SkFont *font, SkScalar size);
+sk_font_t SkFont_makeWithSize(SkFont *font, SkScalar size);
 SkTypeface * SkFont_getTypeface(SkFont *font);
 SkScalar SkFont_getSize(SkFont *font);
 SkScalar SkFont_getScaleX(SkFont *font);
 SkScalar SkFont_getSkewX(SkFont *font);
-int SkFont_refTypeface(SkFont *font);
-void SkFont_setTypeface(int sk_typeface_key_in, SkFont *font);
+sk_typeface_t SkFont_refTypeface(SkFont *font);
+void SkFont_setTypeface(SkFont *font, sk_typeface_t typeface);
 void SkFont_setSize(SkFont *font, SkScalar textSize);
 void SkFont_setScaleX(SkFont *font, SkScalar scaleX);
 void SkFont_setSkewX(SkFont *font, SkScalar skewX);

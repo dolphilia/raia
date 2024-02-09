@@ -13,9 +13,9 @@
 
 extern "C" {
 bool SkGifDecoder_IsGif(const void* ptr, size_t size);
-int SkGifDecoder_Decode(int static_sk_stream_key_in, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
-int SkGifDecoder_Decode_2(int static_sk_data_key_in, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
-int SkGifDecoder_Decoder();
+sk_codec_t SkGifDecoder_Decode(int static_stream, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
+sk_codec_t SkGifDecoder_Decode_2(int static_data, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
+sk_codecs_decoder_t SkGifDecoder_Decoder();
 }
 
 #endif //RAIA_SKIA_SK_GIF_DECODER_H

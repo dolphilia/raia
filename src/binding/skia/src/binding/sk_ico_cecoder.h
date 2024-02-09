@@ -13,9 +13,9 @@
 
 extern "C" {
 bool SkIcoDecoder_IsIco(const void* ptr, size_t size);
-int SkIcoDecoder_Decode(int static_sk_stream_key_in, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
-int SkIcoDecoder_Decode_2(int static_sk_data_key_in, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
-int SkIcoDecoder_Decoder();
+sk_codec_t SkIcoDecoder_Decode(int static_stream, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
+sk_codec_t SkIcoDecoder_Decode_2(int static_data, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
+sk_codecs_decoder_t SkIcoDecoder_Decoder();
 }
 
 #endif //RAIA_SKIA_SK_ICO_CECODER_H

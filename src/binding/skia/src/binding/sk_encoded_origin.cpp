@@ -8,7 +8,7 @@ extern "C" {
 
 // static
 
-int SkEncodedOrigin_SkEncodedOriginToMatrix(SkEncodedOrigin origin, int w, int h) {
+sk_matrix_t SkEncodedOrigin_SkEncodedOriginToMatrix(SkEncodedOrigin origin, int w, int h) {
     return static_sk_matrix_make(SkEncodedOriginToMatrix(origin, w, h));
 }
 

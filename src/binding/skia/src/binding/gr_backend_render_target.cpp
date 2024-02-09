@@ -52,7 +52,7 @@ bool GrBackendRenderTarget_isFramebufferOnly(GrBackendRenderTarget *backend_rend
     return backend_render_target->isFramebufferOnly();
 }
 
-int GrBackendRenderTarget_getBackendFormat(GrBackendRenderTarget *backend_render_target) {
+gr_backend_format_t GrBackendRenderTarget_getBackendFormat(GrBackendRenderTarget *backend_render_target) {
     return static_gr_backend_format_make(backend_render_target->getBackendFormat());
 }
 

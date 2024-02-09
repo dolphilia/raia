@@ -93,43 +93,43 @@ SkScalar SkMatrix_getPerspY(SkMatrix *matrix) {
     return matrix->getPerspY();
 }
 
-int SkMatrix_set(SkMatrix *matrix, int index, SkScalar value) {
+sk_matrix_t SkMatrix_set(SkMatrix *matrix, int index, SkScalar value) {
     return static_sk_matrix_make(matrix->set(index, value));
 }
 
-int SkMatrix_setScaleX(SkMatrix *matrix, SkScalar v) {
+sk_matrix_t SkMatrix_setScaleX(SkMatrix *matrix, SkScalar v) {
     return static_sk_matrix_make(matrix->setScaleX(v));
 }
 
-int SkMatrix_setScaleY(SkMatrix *matrix, SkScalar v) {
+sk_matrix_t SkMatrix_setScaleY(SkMatrix *matrix, SkScalar v) {
     return static_sk_matrix_make(matrix->setScaleY(v));
 }
 
-int SkMatrix_setSkewY(SkMatrix *matrix, SkScalar v) {
+sk_matrix_t SkMatrix_setSkewY(SkMatrix *matrix, SkScalar v) {
     return static_sk_matrix_make(matrix->setSkewY(v));
 }
 
-int SkMatrix_setSkewX(SkMatrix *matrix, SkScalar v) {
+sk_matrix_t SkMatrix_setSkewX(SkMatrix *matrix, SkScalar v) {
     return static_sk_matrix_make(matrix->setSkewX(v));
 }
 
-int SkMatrix_setTranslateX(SkMatrix *matrix, SkScalar v) {
+sk_matrix_t SkMatrix_setTranslateX(SkMatrix *matrix, SkScalar v) {
     return static_sk_matrix_make(matrix->setTranslateX(v));
 }
 
-int SkMatrix_setTranslateY(SkMatrix *matrix, SkScalar v) {
+sk_matrix_t SkMatrix_setTranslateY(SkMatrix *matrix, SkScalar v) {
     return static_sk_matrix_make(matrix->setTranslateY(v));
 }
 
-int SkMatrix_setPerspX(SkMatrix *matrix, SkScalar v) {
+sk_matrix_t SkMatrix_setPerspX(SkMatrix *matrix, SkScalar v) {
     return static_sk_matrix_make(matrix->setPerspX(v));
 }
 
-int SkMatrix_setPerspY(SkMatrix *matrix, SkScalar v) {
+sk_matrix_t SkMatrix_setPerspY(SkMatrix *matrix, SkScalar v) {
     return static_sk_matrix_make(matrix->setPerspY(v));
 }
 
-int SkMatrix_setAll(SkMatrix *matrix, SkScalar scaleX, SkScalar skewX, SkScalar transX, SkScalar skewY, SkScalar scaleY, SkScalar transY, SkScalar persp0, SkScalar persp1, SkScalar persp2) {
+sk_matrix_t SkMatrix_setAll(SkMatrix *matrix, SkScalar scaleX, SkScalar skewX, SkScalar transX, SkScalar skewY, SkScalar scaleY, SkScalar transY, SkScalar persp0, SkScalar persp1, SkScalar persp2) {
     return static_sk_matrix_make(matrix->setAll(scaleX, skewX, transX, skewY, scaleY, transY, persp0, persp1, persp2));
 }
 
@@ -137,127 +137,127 @@ void SkMatrix_get9(SkMatrix *matrix, SkScalar buffer[9]) {
     matrix->get9(buffer);
 }
 
-int SkMatrix_set9(SkMatrix *matrix, const SkScalar buffer[9]) {
+sk_matrix_t SkMatrix_set9(SkMatrix *matrix, const SkScalar buffer[9]) {
     return static_sk_matrix_make(matrix->set9(buffer));
 }
 
-int SkMatrix_reset(SkMatrix *matrix) {
+sk_matrix_t SkMatrix_reset(SkMatrix *matrix) {
     return static_sk_matrix_make(matrix->reset());
 }
 
-int SkMatrix_setIdentity(SkMatrix *matrix) {
+sk_matrix_t SkMatrix_setIdentity(SkMatrix *matrix) {
     return static_sk_matrix_make(matrix->setIdentity());
 }
 
-int SkMatrix_setTranslate(SkMatrix *matrix, SkScalar dx, SkScalar dy) {
+sk_matrix_t SkMatrix_setTranslate(SkMatrix *matrix, SkScalar dx, SkScalar dy) {
     return static_sk_matrix_make(matrix->setTranslate(dx, dy));
 }
 
-int SkMatrix_setTranslate_2(SkMatrix *matrix, const SkVector *v) {
+sk_matrix_t SkMatrix_setTranslate_2(SkMatrix *matrix, const SkVector *v) {
     return static_sk_matrix_make(matrix->setTranslate(*v));
 }
 
-int SkMatrix_setScale(SkMatrix *matrix, SkScalar sx, SkScalar sy, SkScalar px, SkScalar py) {
+sk_matrix_t SkMatrix_setScale(SkMatrix *matrix, SkScalar sx, SkScalar sy, SkScalar px, SkScalar py) {
     return static_sk_matrix_make(matrix->setScale(sx, sy, px, py));
 }
 
-int SkMatrix_setScale_2(SkMatrix *matrix, SkScalar sx, SkScalar sy) {
+sk_matrix_t SkMatrix_setScale_2(SkMatrix *matrix, SkScalar sx, SkScalar sy) {
     return static_sk_matrix_make(matrix->setScale(sx, sy));
 }
 
-int SkMatrix_setRotate(SkMatrix *matrix, SkScalar degrees, SkScalar px, SkScalar py) {
+sk_matrix_t SkMatrix_setRotate(SkMatrix *matrix, SkScalar degrees, SkScalar px, SkScalar py) {
     return static_sk_matrix_make(matrix->setRotate(degrees, px, py));
 }
 
-int SkMatrix_setRotate_2(SkMatrix *matrix, SkScalar degrees) {
+sk_matrix_t SkMatrix_setRotate_2(SkMatrix *matrix, SkScalar degrees) {
     return static_sk_matrix_make(matrix->setRotate(degrees));
 }
 
-int SkMatrix_setSinCos(SkMatrix *matrix, SkScalar sinValue, SkScalar cosValue, SkScalar px, SkScalar py) {
+sk_matrix_t SkMatrix_setSinCos(SkMatrix *matrix, SkScalar sinValue, SkScalar cosValue, SkScalar px, SkScalar py) {
     return static_sk_matrix_make(matrix->setSinCos(sinValue, cosValue, px, py));
 }
 
-int SkMatrix_setSinCos_2(SkMatrix *matrix, SkScalar sinValue, SkScalar cosValue) {
+sk_matrix_t SkMatrix_setSinCos_2(SkMatrix *matrix, SkScalar sinValue, SkScalar cosValue) {
     return static_sk_matrix_make(matrix->setSinCos(sinValue, cosValue));
 }
 
-int SkMatrix_setRSXform(SkMatrix *matrix, const SkRSXform *rsxForm) {
+sk_matrix_t SkMatrix_setRSXform(SkMatrix *matrix, const SkRSXform *rsxForm) {
     return static_sk_matrix_make(matrix->setRSXform(*rsxForm));
 }
 
-int SkMatrix_setSkew(SkMatrix *matrix, SkScalar kx, SkScalar ky, SkScalar px, SkScalar py) {
+sk_matrix_t SkMatrix_setSkew(SkMatrix *matrix, SkScalar kx, SkScalar ky, SkScalar px, SkScalar py) {
     return static_sk_matrix_make(matrix->setSkew(kx, ky, px, py));
 }
 
-int SkMatrix_setSkew_2(SkMatrix *matrix, SkScalar kx, SkScalar ky) {
+sk_matrix_t SkMatrix_setSkew_2(SkMatrix *matrix, SkScalar kx, SkScalar ky) {
     return static_sk_matrix_make(matrix->setSkew(kx, ky));
 }
 
-int SkMatrix_setConcat(SkMatrix *matrix, const SkMatrix *a, const SkMatrix *b) {
+sk_matrix_t SkMatrix_setConcat(SkMatrix *matrix, const SkMatrix *a, const SkMatrix *b) {
     return static_sk_matrix_make(matrix->setConcat(*a, *b));
 }
 
-int SkMatrix_preTranslate(SkMatrix *matrix, SkScalar dx, SkScalar dy) {
+sk_matrix_t SkMatrix_preTranslate(SkMatrix *matrix, SkScalar dx, SkScalar dy) {
     return static_sk_matrix_make(matrix->preTranslate(dx, dy));
 }
 
-int SkMatrix_preScale(SkMatrix *matrix, SkScalar sx, SkScalar sy, SkScalar px, SkScalar py) {
+sk_matrix_t SkMatrix_preScale(SkMatrix *matrix, SkScalar sx, SkScalar sy, SkScalar px, SkScalar py) {
     return static_sk_matrix_make(matrix->preScale(sx, sy, px, py));
 }
 
-int SkMatrix_preScale_2(SkMatrix *matrix, SkScalar sx, SkScalar sy) {
+sk_matrix_t SkMatrix_preScale_2(SkMatrix *matrix, SkScalar sx, SkScalar sy) {
     return static_sk_matrix_make(matrix->preScale(sx, sy));
 }
 
-int SkMatrix_preRotate(SkMatrix *matrix, SkScalar degrees, SkScalar px, SkScalar py) {
+sk_matrix_t SkMatrix_preRotate(SkMatrix *matrix, SkScalar degrees, SkScalar px, SkScalar py) {
     return static_sk_matrix_make(matrix->preRotate(degrees, px, py));
 }
 
-int SkMatrix_preRotate_2(SkMatrix *matrix, SkScalar degrees) {
+sk_matrix_t SkMatrix_preRotate_2(SkMatrix *matrix, SkScalar degrees) {
     return static_sk_matrix_make(matrix->preRotate(degrees));
 }
 
-int SkMatrix_preSkew(SkMatrix *matrix, SkScalar kx, SkScalar ky, SkScalar px, SkScalar py) {
+sk_matrix_t SkMatrix_preSkew(SkMatrix *matrix, SkScalar kx, SkScalar ky, SkScalar px, SkScalar py) {
     return static_sk_matrix_make(matrix->preSkew(kx, ky, px, py));
 }
 
-int SkMatrix_preSkew_2(SkMatrix *matrix, SkScalar kx, SkScalar ky) {
+sk_matrix_t SkMatrix_preSkew_2(SkMatrix *matrix, SkScalar kx, SkScalar ky) {
     return static_sk_matrix_make(matrix->preSkew(kx, ky));
 }
 
-int SkMatrix_preConcat(SkMatrix *matrix, const SkMatrix *other) {
+sk_matrix_t SkMatrix_preConcat(SkMatrix *matrix, const SkMatrix *other) {
     return static_sk_matrix_make(matrix->preConcat(*other));
 }
 
-int SkMatrix_postTranslate(SkMatrix *matrix, SkScalar dx, SkScalar dy) {
+sk_matrix_t SkMatrix_postTranslate(SkMatrix *matrix, SkScalar dx, SkScalar dy) {
     return static_sk_matrix_make(matrix->postTranslate(dx, dy));
 }
 
-int SkMatrix_postScale(SkMatrix *matrix, SkScalar sx, SkScalar sy, SkScalar px, SkScalar py) {
+sk_matrix_t SkMatrix_postScale(SkMatrix *matrix, SkScalar sx, SkScalar sy, SkScalar px, SkScalar py) {
     return static_sk_matrix_make(matrix->postScale(sx, sy, px, py));
 }
 
-int SkMatrix_postScale_2(SkMatrix *matrix, SkScalar sx, SkScalar sy) {
+sk_matrix_t SkMatrix_postScale_2(SkMatrix *matrix, SkScalar sx, SkScalar sy) {
     return static_sk_matrix_make(matrix->postScale(sx, sy));
 }
 
-int SkMatrix_postRotate(SkMatrix *matrix, SkScalar degrees, SkScalar px, SkScalar py) {
+sk_matrix_t SkMatrix_postRotate(SkMatrix *matrix, SkScalar degrees, SkScalar px, SkScalar py) {
     return static_sk_matrix_make(matrix->postRotate(degrees, px, py));
 }
 
-int SkMatrix_postRotate_2(SkMatrix *matrix, SkScalar degrees) {
+sk_matrix_t SkMatrix_postRotate_2(SkMatrix *matrix, SkScalar degrees) {
     return static_sk_matrix_make(matrix->postRotate(degrees));
 }
 
-int SkMatrix_postSkew(SkMatrix *matrix, SkScalar kx, SkScalar ky, SkScalar px, SkScalar py) {
+sk_matrix_t SkMatrix_postSkew(SkMatrix *matrix, SkScalar kx, SkScalar ky, SkScalar px, SkScalar py) {
     return static_sk_matrix_make(matrix->postSkew(kx, ky, px, py));
 }
 
-int SkMatrix_postSkew_2(SkMatrix *matrix, SkScalar kx, SkScalar ky) {
+sk_matrix_t SkMatrix_postSkew_2(SkMatrix *matrix, SkScalar kx, SkScalar ky) {
     return static_sk_matrix_make(matrix->postSkew(kx, ky));
 }
 
-int SkMatrix_postConcat(SkMatrix *matrix, const SkMatrix *other) {
+sk_matrix_t SkMatrix_postConcat(SkMatrix *matrix, const SkMatrix *other) {
     return static_sk_matrix_make(matrix->postConcat(*other));
 }
 
@@ -277,7 +277,7 @@ bool SkMatrix_asAffine(SkMatrix *matrix, SkScalar affine[6]) {
     return matrix->asAffine(affine);
 }
 
-int SkMatrix_setAffine(SkMatrix *matrix, const SkScalar affine[6]) {
+sk_matrix_t SkMatrix_setAffine(SkMatrix *matrix, const SkScalar affine[6]) {
     return static_sk_matrix_make(matrix->setAffine(affine));
 }
 
@@ -341,7 +341,7 @@ bool SkMatrix_mapRect_2(SkMatrix *matrix, SkRect *rect, SkApplyPerspectiveClip p
     return matrix->mapRect(rect, pc);
 }
 
-int SkMatrix_mapRect_3(SkMatrix *matrix, const SkRect *src, SkApplyPerspectiveClip pc) {
+sk_rect_t SkMatrix_mapRect_3(SkMatrix *matrix, const SkRect *src, SkApplyPerspectiveClip pc) {
     return static_sk_rect_make(matrix->mapRect(*src, pc));
 }
 
@@ -392,47 +392,47 @@ bool SkMatrix_isFinite(SkMatrix *matrix) {
 
 // static
 
-int SkMatrix_Scale(SkScalar sx, SkScalar sy) {
+sk_matrix_t SkMatrix_Scale(SkScalar sx, SkScalar sy) {
     return static_sk_matrix_make(SkMatrix::Scale(sx, sy));
 }
 
-int SkMatrix_Translate(SkScalar dx, SkScalar dy) {
+sk_matrix_t SkMatrix_Translate(SkScalar dx, SkScalar dy) {
     return static_sk_matrix_make(SkMatrix::Translate(dx, dy));
 }
 
-int SkMatrix_Translate_2(SkVector t) {
+sk_matrix_t SkMatrix_Translate_2(SkVector t) {
     return static_sk_matrix_make(SkMatrix::Translate(t));
 }
 
-int SkMatrix_Translate_3(SkIVector t) {
+sk_matrix_t SkMatrix_Translate_3(SkIVector t) {
     return static_sk_matrix_make(SkMatrix::Translate(t));
 }
 
-int SkMatrix_RotateDeg(SkScalar deg) {
+sk_matrix_t SkMatrix_RotateDeg(SkScalar deg) {
     return static_sk_matrix_make(SkMatrix::RotateDeg(deg));
 }
 
-int SkMatrix_RotateDeg_2(SkScalar deg, SkPoint pt) {
+sk_matrix_t SkMatrix_RotateDeg_2(SkScalar deg, SkPoint pt) {
     return static_sk_matrix_make(SkMatrix::RotateDeg(deg, pt));
 }
 
-int SkMatrix_RotateRad(SkScalar rad) {
+sk_matrix_t SkMatrix_RotateRad(SkScalar rad) {
     return static_sk_matrix_make(SkMatrix::RotateRad(rad));
 }
 
-int SkMatrix_Skew(SkScalar kx, SkScalar ky) {
+sk_matrix_t SkMatrix_Skew(SkScalar kx, SkScalar ky) {
     return static_sk_matrix_make(SkMatrix::Skew(kx, ky));
 }
 
-int SkMatrix_RectToRect(const SkRect *src, const SkRect *dst, SkMatrix::ScaleToFit mode) {
+sk_matrix_t SkMatrix_RectToRect(const SkRect *src, const SkRect *dst, SkMatrix::ScaleToFit mode) {
     return static_sk_matrix_make(SkMatrix::RectToRect(*src, *dst, mode));
 }
 
-int SkMatrix_MakeAll(SkScalar scaleX, SkScalar skewX, SkScalar transX, SkScalar skewY, SkScalar scaleY, SkScalar transY, SkScalar pers0, SkScalar pers1, SkScalar pers2) {
+sk_matrix_t SkMatrix_MakeAll(SkScalar scaleX, SkScalar skewX, SkScalar transX, SkScalar skewY, SkScalar scaleY, SkScalar transY, SkScalar pers0, SkScalar pers1, SkScalar pers2) {
     return static_sk_matrix_make(SkMatrix::MakeAll(scaleX, skewX, transX, skewY, scaleY, transY, pers0, pers1, pers2));
 }
 
-int SkMatrix_MakeRectToRect(const SkRect *src, const SkRect *dst, SkMatrix::ScaleToFit stf) {
+sk_matrix_t SkMatrix_MakeRectToRect(const SkRect *src, const SkRect *dst, SkMatrix::ScaleToFit stf) {
     return static_sk_matrix_make(SkMatrix::MakeRectToRect(*src, *dst, stf));
 }
 
@@ -440,15 +440,15 @@ void SkMatrix_SetAffineIdentity(SkScalar affine[6]) {
     SkMatrix::SetAffineIdentity(affine);
 }
 
-int SkMatrix_I() {
+sk_matrix_t SkMatrix_I() {
     return static_sk_matrix_make(SkMatrix::I());
 }
 
-int SkMatrix_InvalidMatrix() {
+sk_matrix_t SkMatrix_InvalidMatrix() {
     return static_sk_matrix_make(SkMatrix::InvalidMatrix());
 }
 
-int SkMatrix_Concat(const SkMatrix *a, const SkMatrix *b) {
+sk_matrix_t SkMatrix_Concat(const SkMatrix *a, const SkMatrix *b) {
     return static_sk_matrix_make(SkMatrix::Concat(*a, *b));
 }
 

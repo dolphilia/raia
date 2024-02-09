@@ -22,11 +22,11 @@ SkRuntimeEffectBuilder::BuilderChild SkRuntimeEffectBuilder_child(SkRuntimeEffec
     return runtime_effect_builder->child(name);
 }
 
-int SkRuntimeEffectBuilder_uniforms(SkRuntimeEffectBuilder *runtime_effect_builder) {
+const_sk_data_t SkRuntimeEffectBuilder_uniforms(SkRuntimeEffectBuilder *runtime_effect_builder) {
     return static_const_sk_data_make(runtime_effect_builder->uniforms());
 }
 
-int SkRuntimeEffectBuilder_children(SkRuntimeEffectBuilder *runtime_effect_builder) {
+const_sk_runtime_effect_child_ptr_t SkRuntimeEffectBuilder_children(SkRuntimeEffectBuilder *runtime_effect_builder) {
     return static_const_sk_runtime_effect_child_ptr_make(runtime_effect_builder->children());
 }
 

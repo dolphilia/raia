@@ -14,14 +14,13 @@
 extern "C" {
 SkPictureRecorder *SkPictureRecorder_new();
 void SkPictureRecorder_delete(SkPictureRecorder *picture_recorder);
-SkCanvas *SkPictureRecorder_beginRecording(int sk_b_box_hierarchy_key_in, SkPictureRecorder *picture_recorder,
-                                           const SkRect *bounds);
+SkCanvas *SkPictureRecorder_beginRecording(SkPictureRecorder *picture_recorder, const SkRect *bounds, sk_b_box_hierarchy_t b_box_hierarchy);
 SkCanvas * SkPictureRecorder_beginRecording_2(SkPictureRecorder *picture_recorder, const SkRect *bounds, SkBBHFactory *bbhFactory);
 SkCanvas * SkPictureRecorder_beginRecording_3(SkPictureRecorder *picture_recorder, SkScalar width, SkScalar height, SkBBHFactory *bbhFactory);
 SkCanvas * SkPictureRecorder_getRecordingCanvas(SkPictureRecorder *picture_recorder);
-int SkPictureRecorder_finishRecordingAsPicture(SkPictureRecorder *picture_recorder);
-int SkPictureRecorder_finishRecordingAsPictureWithCull(SkPictureRecorder *picture_recorder, const SkRect *cullRect);
-int SkPictureRecorder_finishRecordingAsDrawable(SkPictureRecorder *picture_recorder);
+sk_picture_t SkPictureRecorder_finishRecordingAsPicture(SkPictureRecorder *picture_recorder);
+sk_picture_t SkPictureRecorder_finishRecordingAsPictureWithCull(SkPictureRecorder *picture_recorder, const SkRect *cullRect);
+sk_picture_t SkPictureRecorder_finishRecordingAsDrawable(SkPictureRecorder *picture_recorder);
 }
 
 #endif //RAIA_SKIA_SK_PICTURE_RECORDER_H

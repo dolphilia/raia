@@ -16,8 +16,8 @@ void SkRuntimeEffectBuilder_delete(SkRuntimeEffectBuilder *runtime_effect_builde
 const SkRuntimeEffect * SkRuntimeEffectBuilder_effect(SkRuntimeEffectBuilder *runtime_effect_builder);
 SkRuntimeEffectBuilder::BuilderUniform SkRuntimeEffectBuilder_uniform(SkRuntimeEffectBuilder *runtime_effect_builder, std::string_view name);
 SkRuntimeEffectBuilder::BuilderChild SkRuntimeEffectBuilder_child(SkRuntimeEffectBuilder *runtime_effect_builder, std::string_view name);
-int SkRuntimeEffectBuilder_uniforms(SkRuntimeEffectBuilder *runtime_effect_builder);
-int SkRuntimeEffectBuilder_children(SkRuntimeEffectBuilder *runtime_effect_builder);
+const_sk_data_t SkRuntimeEffectBuilder_uniforms(SkRuntimeEffectBuilder *runtime_effect_builder);
+const_sk_runtime_effect_child_ptr_t SkRuntimeEffectBuilder_children(SkRuntimeEffectBuilder *runtime_effect_builder);
 // static
 // SkRuntimeEffectBuilder()=delete
 // SkRuntimeEffectBuilder(sk_sp<SkRuntimeEffect> effect)

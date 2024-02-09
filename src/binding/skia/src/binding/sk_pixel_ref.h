@@ -6,6 +6,7 @@
 #define RAIA_SKIA_SK_PIXEL_REF_H
 
 #include "include/core/SkPixelRef.h"
+#include "../static/static_sk_id_change_listener.h"
 
 extern "C" {
 SkPixelRef *SkPixelRef_new(int width, int height, void *addr, size_t rowBytes);
@@ -19,7 +20,7 @@ uint32_t SkPixelRef_getGenerationID(SkPixelRef *pixel_ref);
 void SkPixelRef_notifyPixelsChanged(SkPixelRef *pixel_ref);
 bool SkPixelRef_isImmutable(SkPixelRef *pixel_ref);
 void SkPixelRef_setImmutable(SkPixelRef *pixel_ref);
-void SkPixelRef_addGenIDChangeListener(int sk_id_change_listener_key_in, SkPixelRef *pixel_ref);
+void SkPixelRef_addGenIDChangeListener(SkPixelRef *pixel_ref, sk_id_change_listener_t id_change_listener);
 void SkPixelRef_notifyAddedToCache(SkPixelRef *pixel_ref);
 SkDiscardableMemory * SkPixelRef_diagnostic_only_getDiscardable(SkPixelRef *pixel_ref);
 bool SkPixelRef_unique(SkPixelRef *pixel_ref);

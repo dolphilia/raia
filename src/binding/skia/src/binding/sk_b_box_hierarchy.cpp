@@ -14,8 +14,7 @@ void SkBBoxHierarchy_insert(SkBBoxHierarchy *b_box_hierarchy, const SkRect rect[
     b_box_hierarchy->insert(rect, N);
 }
 
-void SkBBoxHierarchy_insert_2(SkBBoxHierarchy *b_box_hierarchy, const SkRect rect[],
-                              const SkBBoxHierarchy::Metadata metadata[], int N) {
+void SkBBoxHierarchy_insert_2(SkBBoxHierarchy *b_box_hierarchy, const SkRect rect[], const SkBBoxHierarchy::Metadata metadata[], int N) {
     b_box_hierarchy->insert(rect, metadata, N);
 }
 

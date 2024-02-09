@@ -6,12 +6,12 @@
 
 extern "C" {
 
-int SkMallocPixelRef_MakeAllocate(const SkImageInfo *imageInfo, size_t rowBytes) {
+sk_pixel_ref_t SkMallocPixelRef_MakeAllocate(const SkImageInfo *imageInfo, size_t rowBytes) {
     return static_sk_pixel_ref_make(SkMallocPixelRef::MakeAllocate(*imageInfo, rowBytes));
 }
 
-int SkMallocPixelRef_MakeWithData(int sk_data_key_in, const SkImageInfo &imageInfo, size_t rowBytes) {
-    return static_sk_pixel_ref_make(SkMallocPixelRef::MakeWithData(imageInfo, rowBytes, static_sk_data_move(sk_data_key_in)));
+sk_pixel_ref_t SkMallocPixelRef_MakeWithData(const SkImageInfo &imageInfo, size_t rowBytes, sk_data_t data) {
+    return static_sk_pixel_ref_make(SkMallocPixelRef::MakeWithData(imageInfo, rowBytes, static_sk_data_move(data)));
 }
 
 }

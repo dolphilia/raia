@@ -13,9 +13,9 @@
 
 extern "C" {
 bool SkPngDecoder_IsPng(const void* ptr, size_t size);
-int SkPngDecoder_Decode(int static_sk_stream_key_in, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
-int SkPngDecoder_Decode_2(int static_sk_data_key_in, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
-int SkPngDecoder_Decoder();
+sk_codec_t SkPngDecoder_Decode(int static_stream, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
+sk_codec_t SkPngDecoder_Decode_2(int static_data, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
+sk_codecs_decoder_t SkPngDecoder_Decoder();
 }
 
 #endif //RAIA_SKIA_SK_PNG_DECODER_H

@@ -18,8 +18,7 @@ void SkOverdrawCanvas_onDrawGlyphRunList(SkOverdrawCanvas *overdraw_canvas, cons
     overdraw_canvas->onDrawGlyphRunList(*glyphRunList, *paint);
 }
 
-void SkOverdrawCanvas_onDrawPatch(SkOverdrawCanvas *overdraw_canvas, const SkPoint point1[12], const SkColor color[4],
-                                  const SkPoint point2[4], SkBlendMode mode, const SkPaint *paint) {
+void SkOverdrawCanvas_onDrawPatch(SkOverdrawCanvas *overdraw_canvas, const SkPoint point1[12], const SkColor color[4], const SkPoint point2[4], SkBlendMode mode, const SkPaint *paint) {
     overdraw_canvas->onDrawPatch(point1, color, point2, mode, *paint);
 }
 
@@ -55,8 +54,7 @@ void SkOverdrawCanvas_onDrawRRect(SkOverdrawCanvas *overdraw_canvas, const SkRRe
     overdraw_canvas->onDrawRRect(*rect, *paint);
 }
 
-void SkOverdrawCanvas_onDrawPoints(SkOverdrawCanvas *overdraw_canvas, SkOverdrawCanvas::PointMode mode, size_t size,
-                                   const SkPoint point[], const SkPaint *paint) {
+void SkOverdrawCanvas_onDrawPoints(SkOverdrawCanvas *overdraw_canvas, SkOverdrawCanvas::PointMode mode, size_t size, const SkPoint point[], const SkPaint *paint) {
     overdraw_canvas->onDrawPoints(mode, size, point, *paint);
 }
 
@@ -80,8 +78,7 @@ void SkOverdrawCanvas_onDrawImageLattice2(SkOverdrawCanvas *overdraw_canvas, con
     overdraw_canvas->onDrawImageLattice2(image, *lattice, *rect, mode, paint);
 }
 
-void SkOverdrawCanvas_onDrawAtlas2(SkOverdrawCanvas *overdraw_canvas, const SkImage * image, const SkRSXform form[],
-                                   const SkRect rect1[], const SkColor color[], int v, SkBlendMode mode, const SkSamplingOptions *options, const SkRect *rect2, const SkPaint *paint) {
+void SkOverdrawCanvas_onDrawAtlas2(SkOverdrawCanvas *overdraw_canvas, const SkImage * image, const SkRSXform form[], const SkRect rect1[], const SkColor color[], int v, SkBlendMode mode, const SkSamplingOptions *options, const SkRect *rect2, const SkPaint *paint) {
     overdraw_canvas->onDrawAtlas2(image, form, rect1, color, v, mode, *options, rect2, paint);
 }
 
@@ -105,9 +102,7 @@ void SkOverdrawCanvas_onDrawEdgeAAQuad(SkOverdrawCanvas *overdraw_canvas, const 
     overdraw_canvas->onDrawEdgeAAQuad(*rect, point, flags, *color, mode);
 }
 
-void SkOverdrawCanvas_onDrawEdgeAAImageSet2(SkOverdrawCanvas *overdraw_canvas,
-                                            const SkOverdrawCanvas::ImageSetEntry entry[], int count,
-                                            const SkPoint point[], const SkMatrix matrix[], const SkSamplingOptions *options, const SkPaint *paint, SkOverdrawCanvas::SrcRectConstraint constraint) {
+void SkOverdrawCanvas_onDrawEdgeAAImageSet2(SkOverdrawCanvas *overdraw_canvas, const SkOverdrawCanvas::ImageSetEntry entry[], int count, const SkPoint point[], const SkMatrix matrix[], const SkSamplingOptions *options, const SkPaint *paint, SkOverdrawCanvas::SrcRectConstraint constraint) {
     overdraw_canvas->onDrawEdgeAAImageSet2(entry, count, point, matrix, *options, paint, constraint);
 }
 

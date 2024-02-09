@@ -124,7 +124,7 @@ void SkPath_updateBoundsCache(SkPath *path) {
     path->updateBoundsCache();
 }
 
-int SkPath_computeTightBounds(SkPath *path) {
+sk_rect_t SkPath_computeTightBounds(SkPath *path) {
     return static_sk_rect_make(path->computeTightBounds());
 }
 
@@ -312,11 +312,11 @@ void SkPath_transform_2(SkPath *path, const SkMatrix *matrix, SkApplyPerspective
     path->transform(*matrix, pc);
 }
 
-int SkPath_makeTransform(SkPath *path, const SkMatrix *m, SkApplyPerspectiveClip pc) {
+sk_path_t SkPath_makeTransform(SkPath *path, const SkMatrix *m, SkApplyPerspectiveClip pc) {
     return static_sk_path_make(path->makeTransform(*m, pc));
 }
 
-int SkPath_makeScale(SkPath *path, SkScalar sx, SkScalar sy) {
+sk_path_t SkPath_makeScale(SkPath *path, SkScalar sx, SkScalar sy) {
     return static_sk_path_make(path->makeScale(sx, sy));
 }
 
@@ -364,7 +364,7 @@ size_t SkPath_writeToMemory(SkPath *path, void *buffer) {
     return path->writeToMemory(buffer);
 }
 
-int SkPath_serialize(SkPath *path) {
+sk_data_t SkPath_serialize(SkPath *path) {
     return static_sk_data_make(path->serialize());
 }
 
@@ -383,47 +383,47 @@ bool SkPath_isValid(SkPath *path) {
 
 // static
 
-int SkPath_Make(const SkPoint point[], int pointCount, const uint8_t i[], int verbCount, const SkScalar v[], int conicWeightCount, SkPathFillType type, bool isVolatile) {
+sk_path_t SkPath_Make(const SkPoint point[], int pointCount, const uint8_t i[], int verbCount, const SkScalar v[], int conicWeightCount, SkPathFillType type, bool isVolatile) {
     return static_sk_path_make(SkPath::Make(point, pointCount, i, verbCount, v, conicWeightCount, type, isVolatile));
 }
 
-int SkPath_Rect(const SkRect *rect, SkPathDirection dir, unsigned startIndex) {
+sk_path_t SkPath_Rect(const SkRect *rect, SkPathDirection dir, unsigned startIndex) {
     return static_sk_path_make(SkPath::Rect(*rect, dir, startIndex));
 }
 
-int SkPath_Oval(const SkRect *rect, SkPathDirection dir) {
+sk_path_t SkPath_Oval(const SkRect *rect, SkPathDirection dir) {
     return static_sk_path_make(SkPath::Oval(*rect, dir));
 }
 
-int SkPath_Oval_2(const SkRect *rect, SkPathDirection dir, unsigned startIndex) {
+sk_path_t SkPath_Oval_2(const SkRect *rect, SkPathDirection dir, unsigned startIndex) {
     return static_sk_path_make(SkPath::Oval(*rect, dir, startIndex));
 }
 
-int SkPath_Circle(SkScalar center_x, SkScalar center_y, SkScalar radius, SkPathDirection dir) {
+sk_path_t SkPath_Circle(SkScalar center_x, SkScalar center_y, SkScalar radius, SkPathDirection dir) {
     return static_sk_path_make(SkPath::Circle(center_x, center_y, radius, dir));
 }
 
-int SkPath_RRect(const SkRRect *rrect, SkPathDirection dir) {
+sk_path_t SkPath_RRect(const SkRRect *rrect, SkPathDirection dir) {
     return static_sk_path_make(SkPath::RRect(*rrect, dir));
 }
 
-int SkPath_RRect_2(const SkRRect *rrect, SkPathDirection dir, unsigned startIndex) {
+sk_path_t SkPath_RRect_2(const SkRRect *rrect, SkPathDirection dir, unsigned startIndex) {
     return static_sk_path_make(SkPath::RRect(*rrect, dir, startIndex));
 }
 
-int SkPath_RRect_3(const SkRect *bounds, SkScalar rx, SkScalar ry, SkPathDirection dir) {
+sk_path_t SkPath_RRect_3(const SkRect *bounds, SkScalar rx, SkScalar ry, SkPathDirection dir) {
     return static_sk_path_make(SkPath::RRect(*bounds, rx, ry, dir));
 }
 
-int SkPath_Polygon(const SkPoint pts[], int count, bool isClosed, SkPathFillType type, bool isVolatile) {
+sk_path_t SkPath_Polygon(const SkPoint pts[], int count, bool isClosed, SkPathFillType type, bool isVolatile) {
     return static_sk_path_make(SkPath::Polygon(pts, count, isClosed, type, isVolatile));
 }
 
-int SkPath_Polygon_2(const std::initializer_list<SkPoint> *list, bool isClosed, SkPathFillType fillType, bool isVolatile) {
+sk_path_t SkPath_Polygon_2(const std::initializer_list<SkPoint> *list, bool isClosed, SkPathFillType fillType, bool isVolatile) {
     return static_sk_path_make(SkPath::Polygon(*list, isClosed, fillType, isVolatile));
 }
 
-int SkPath_Line(const SkPoint a, const SkPoint b) {
+sk_path_t SkPath_Line(const SkPoint a, const SkPoint b) {
     return static_sk_path_make(SkPath::Line(a, b));
 }
 

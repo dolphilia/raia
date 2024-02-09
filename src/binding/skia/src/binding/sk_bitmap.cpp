@@ -46,11 +46,11 @@ SkAlphaType SkBitmap_alphaType(SkBitmap *bitmap) { // inline
     return bitmap->alphaType();
 }
 
-int SkBitmap_asImage(SkBitmap *bitmap) {
+sk_image_t SkBitmap_asImage(SkBitmap *bitmap) {
     return static_sk_image_make(bitmap->asImage());
 }
 
-int SkBitmap_bounds(SkBitmap *bitmap) { // inline
+sk_i_rect_t SkBitmap_bounds(SkBitmap *bitmap) { // inline
     return static_sk_i_rect_make(bitmap->bounds());
 }
 
@@ -110,8 +110,7 @@ bool SkBitmap_extractAlpha(SkBitmap *bitmap, SkBitmap *dst) { // inline
     return bitmap->extractAlpha(dst);
 }
 
-bool SkBitmap_extractAlpha_2(SkBitmap *bitmap, SkBitmap *dst, const SkPaint *paint, SkBitmap::Allocator *allocator,
-                             SkIPoint *offset) {
+bool SkBitmap_extractAlpha_2(SkBitmap *bitmap, SkBitmap *dst, const SkPaint *paint, SkBitmap::Allocator *allocator, SkIPoint *offset) {
     return bitmap->extractAlpha(dst, paint, allocator, offset);
 }
 
@@ -167,7 +166,7 @@ void *SkBitmap_getPixels(SkBitmap *bitmap) { // inline
     return bitmap->getPixels();
 }
 
-int SkBitmap_getSubset(SkBitmap *bitmap) { // inline
+sk_i_rect_t SkBitmap_getSubset(SkBitmap *bitmap) { // inline
     return static_sk_i_rect_make(bitmap->getSubset());
 }
 
@@ -187,8 +186,7 @@ bool SkBitmap_installPixels(SkBitmap *bitmap, const SkImageInfo *info, void *pix
     return bitmap->installPixels(*info, pixels, rowBytes);
 }
 
-bool SkBitmap_installPixels_2(SkBitmap *bitmap, const SkImageInfo *info, void *pixels, size_t rowBytes,
-                              void(*releaseProc)(void *addr, void *context), void *context) {
+bool SkBitmap_installPixels_2(SkBitmap *bitmap, const SkImageInfo *info, void *pixels, size_t rowBytes, void(*releaseProc)(void *addr, void *context), void *context) {
     return bitmap->installPixels(*info, pixels, rowBytes, releaseProc, context);
 }
 
@@ -208,23 +206,19 @@ bool SkBitmap_isOpaque(SkBitmap *bitmap) {
     return bitmap->isOpaque();
 }
 
-int SkBitmap_makeShader(SkBitmap *bitmap, const SkSamplingOptions *sampling,
-                         const SkMatrix *lm) {
+sk_shader_t SkBitmap_makeShader(SkBitmap *bitmap, const SkSamplingOptions *sampling, const SkMatrix *lm) {
     return static_sk_shader_make(bitmap->makeShader(*sampling, *lm));
 }
 
-int SkBitmap_makeShader_2(SkBitmap *bitmap, const SkSamplingOptions *sampling,
-                           const SkMatrix *lm) {
+sk_shader_t SkBitmap_makeShader_2(SkBitmap *bitmap, const SkSamplingOptions *sampling, const SkMatrix *lm) {
     return static_sk_shader_make(bitmap->makeShader(*sampling, lm));
 }
 
-int SkBitmap_makeShader_3(SkBitmap *bitmap, SkTileMode tmx, SkTileMode tmy,
-                           const SkSamplingOptions *sampling, const SkMatrix *localMatrix) {
+sk_shader_t SkBitmap_makeShader_3(SkBitmap *bitmap, SkTileMode tmx, SkTileMode tmy, const SkSamplingOptions *sampling, const SkMatrix *localMatrix) {
     return static_sk_shader_make(bitmap->makeShader(tmx, tmy, *sampling, localMatrix));
 }
 
-int SkBitmap_makeShader_4(SkBitmap *bitmap, SkTileMode tmx, SkTileMode tmy,
-                           const SkSamplingOptions *sampling, const SkMatrix *lm) {
+sk_shader_t SkBitmap_makeShader_4(SkBitmap *bitmap, SkTileMode tmx, SkTileMode tmy, const SkSamplingOptions *sampling, const SkMatrix *lm) {
     return static_sk_shader_make(bitmap->makeShader(tmx, tmy, *sampling, *lm));
 }
 
@@ -248,8 +242,7 @@ int SkBitmap_pixmap(SkBitmap *bitmap) { // inline
     return static_sk_pixmap_make(bitmap->pixmap());
 }
 
-bool SkBitmap_readPixels(SkBitmap *bitmap, const SkImageInfo *dstInfo, void *dstPixels, size_t dstRowBytes, int srcX,
-                         int srcY) {
+bool SkBitmap_readPixels(SkBitmap *bitmap, const SkImageInfo *dstInfo, void *dstPixels, size_t dstRowBytes, int srcX, int srcY) {
     return bitmap->readPixels(*dstInfo, dstPixels, dstRowBytes, srcX, srcY);
 }
 
@@ -265,7 +258,7 @@ bool SkBitmap_readyToDraw(SkBitmap *bitmap) { // inline
     return bitmap->readyToDraw();
 }
 
-int SkBitmap_refColorSpace(SkBitmap *bitmap) {
+sk_color_space_t SkBitmap_refColorSpace(SkBitmap *bitmap) {
     return static_sk_color_space_make(bitmap->refColorSpace());
 }
 
@@ -293,8 +286,8 @@ bool SkBitmap_setInfo(SkBitmap *bitmap, const SkImageInfo *imageInfo, size_t row
     return bitmap->setInfo(*imageInfo, rowBytes);
 }
 
-void SkBitmap_setPixelRef(int sk_pixel_ref_key_in, SkBitmap *bitmap, int dx, int dy) {
-    bitmap->setPixelRef(static_sk_pixel_ref_move(sk_pixel_ref_key_in), dx, dy);
+void SkBitmap_setPixelRef(SkBitmap *bitmap, sk_pixel_ref_t pixelRef, int dx, int dy) {
+    bitmap->setPixelRef(static_sk_pixel_ref_move(pixelRef), dx, dy);
 }
 
 void SkBitmap_setPixels(SkBitmap *bitmap, void *pixels) {

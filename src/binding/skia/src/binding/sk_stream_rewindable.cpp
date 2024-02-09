@@ -14,7 +14,7 @@ bool SkStreamRewindable_rewind(SkStreamRewindable *stream_rewindable) {
     return stream_rewindable->rewind();
 }
 
-int SkStreamRewindable_duplicate(SkStreamRewindable *stream_rewindable) {
+sk_stream_rewindable_t SkStreamRewindable_duplicate(SkStreamRewindable *stream_rewindable) {
     return static_sk_stream_rewindable_make(stream_rewindable->duplicate());
 }
 
@@ -70,7 +70,7 @@ bool SkStreamRewindable_readPackedUInt(SkStreamRewindable *stream_rewindable, si
     return stream_rewindable->readPackedUInt(size);
 }
 
-int SkStreamRewindable_fork(SkStreamRewindable *stream_rewindable) {
+sk_stream_t SkStreamRewindable_fork(SkStreamRewindable *stream_rewindable) {
     return static_sk_stream_make(stream_rewindable->fork());
 }
 
@@ -104,7 +104,7 @@ const void * SkStreamRewindable_getMemoryBase(SkStreamRewindable *stream_rewinda
 
 // static
 
-int SkStreamRewindable_MakeFromFile(const char path[]) {
+sk_stream_asset_t SkStreamRewindable_MakeFromFile(const char path[]) {
     return static_sk_stream_asset_make(SkStreamRewindable::MakeFromFile(path));
 }
 

@@ -16,9 +16,9 @@
 
 extern "C" {
 void SkCodec_delete(SkCodec* codec);
-int SkCodec_getInfo(SkCodec* codec);
+sk_image_info_t SkCodec_getInfo(SkCodec* codec);
 SkISize SkCodec_dimensions(SkCodec* codec);
-int SkCodec_bounds(SkCodec* codec);
+sk_i_rect_t SkCodec_bounds(SkCodec* codec);
 const skcms_ICCProfile* SkCodec_getICCProfile(SkCodec* codec);
 SkEncodedOrigin SkCodec_getOrigin(SkCodec* codec);
 SkISize SkCodec_getScaledDimensions(SkCodec* codec, float desiredScale);
@@ -48,8 +48,8 @@ int SkCodec_getRepetitionCount(SkCodec* codec);
 // static
 size_t SkCodec_MinBufferedBytesNeeded();
 const char* SkCodec_ResultToString(SkCodec::Result result);
-int SkCodec_MakeFromStream(int static_sk_stream_key_in, SkCodec::Result* result, SkPngChunkReader* pngChunkReader, SkCodec::SelectionPolicy selectionPolicy);
-int SkCodec_MakeFromData(int static_sk_data_key_in, SkPngChunkReader* pngChunkReader);
+sk_codec_t SkCodec_MakeFromStream(sk_stream_t stream, SkCodec::Result* result, SkPngChunkReader* pngChunkReader, SkCodec::SelectionPolicy selectionPolicy);
+sk_codec_t SkCodec_MakeFromData(sk_stream_t stream, SkPngChunkReader* pngChunkReader);
 //void SkCodec_Register(bool (*peek)(const void*, size_t), std::unique_ptr<SkCodec> (*make)(std::unique_ptr<SkStream>, SkCodec::Result*));
 }
 

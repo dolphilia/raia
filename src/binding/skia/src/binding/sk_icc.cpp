@@ -6,11 +6,11 @@
 
 extern "C" {
 
-int SkICC_SkWriteICCProfile(const skcms_TransferFunction* transferFunction, const skcms_Matrix3x3* toXYZD50) {
+sk_data_t SkICC_SkWriteICCProfile(const skcms_TransferFunction* transferFunction, const skcms_Matrix3x3* toXYZD50) {
     return static_sk_data_make(SkWriteICCProfile(*transferFunction, *toXYZD50));
 }
 
-int SkICC_SkWriteICCProfile_2(const skcms_ICCProfile* iccProfile, const char* description) {
+const_sk_data_t SkICC_SkWriteICCProfile_2(const skcms_ICCProfile* iccProfile, const char* description) {
     return static_const_sk_data_make(SkWriteICCProfile(iccProfile, description));
 }
 

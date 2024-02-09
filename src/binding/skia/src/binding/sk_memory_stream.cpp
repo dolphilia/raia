@@ -18,8 +18,8 @@ SkMemoryStream *SkMemoryStream_new_3(const void *data, size_t length, bool copyD
     return new SkMemoryStream(data, length, copyData);
 }
 
-SkMemoryStream *SkMemoryStream_new_4(int sk_data_key_in) {
-    return new SkMemoryStream(static_sk_data_move(sk_data_key_in));
+SkMemoryStream *SkMemoryStream_new_4(sk_data_t data) {
+    return new SkMemoryStream(static_sk_data_move(data));
 }
 
 void SkMemoryStream_delete(SkMemoryStream *memoryStream) {
@@ -34,12 +34,12 @@ void SkMemoryStream_setMemoryOwned(SkMemoryStream *memory_stream, const void *da
     memory_stream->setMemoryOwned(data, length);
 }
 
-int SkMemoryStream_asData(SkMemoryStream *memory_stream) {
+sk_data_t SkMemoryStream_asData(SkMemoryStream *memory_stream) {
     return static_sk_data_make(memory_stream->asData());
 }
 
-void SkMemoryStream_setData(int sk_data_key_in, SkMemoryStream *memory_stream) {
-    memory_stream->setData(static_sk_data_move(sk_data_key_in));
+void SkMemoryStream_setData(SkMemoryStream *memory_stream, sk_data_t data) {
+    memory_stream->setData(static_sk_data_move(data));
 }
 
 void SkMemoryStream_skipToAlign4(SkMemoryStream *memory_stream) {
@@ -66,7 +66,7 @@ bool SkMemoryStream_rewind(SkMemoryStream *memory_stream) {
     return memory_stream->rewind();
 }
 
-int SkMemoryStream_duplicate(SkMemoryStream *memory_stream) {
+sk_memory_stream_t SkMemoryStream_duplicate(SkMemoryStream *memory_stream) {
     return static_sk_memory_stream_make(memory_stream->duplicate());
 }
 
@@ -82,7 +82,7 @@ bool SkMemoryStream_move(SkMemoryStream *memory_stream, long offset) {
     return memory_stream->move(offset);
 }
 
-int SkMemoryStream_fork(SkMemoryStream *memory_stream) {
+sk_memory_stream_t SkMemoryStream_fork(SkMemoryStream *memory_stream) {
     return static_sk_memory_stream_make(memory_stream->fork());
 }
 
@@ -144,16 +144,16 @@ bool SkMemoryStream_readPackedUInt(SkMemoryStream *memory_stream, size_t *size) 
 
 // static
 
-int SkMemoryStream_MakeCopy(const void *data, size_t length) {
+sk_memory_stream_t SkMemoryStream_MakeCopy(const void *data, size_t length) {
     return static_sk_memory_stream_make(SkMemoryStream::MakeCopy(data, length));
 }
 
-int SkMemoryStream_MakeDirect(const void *data, size_t length) {
+sk_memory_stream_t SkMemoryStream_MakeDirect(const void *data, size_t length) {
     return static_sk_memory_stream_make(SkMemoryStream::MakeDirect(data, length));
 }
 
-int SkMemoryStream_Make(int sk_data_key_in) {
-    return static_sk_memory_stream_make(SkMemoryStream::Make(static_sk_data_move(sk_data_key_in)));
+sk_memory_stream_t SkMemoryStream_Make(sk_data_t data) {
+    return static_sk_memory_stream_make(SkMemoryStream::Make(static_sk_data_move(data)));
 }
 
 }

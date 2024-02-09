@@ -14,10 +14,8 @@ size_t SkOpenTypeSVGDecoder_approximateSize(SkOpenTypeSVGDecoder *open_type_svg_
     return open_type_svg_decoder->approximateSize();
 }
 
-bool
-SkOpenTypeSVGDecoder_render(int sk_color_key_in, SkOpenTypeSVGDecoder *open_type_svg_decoder, SkCanvas *canvas,
-                            int upem, SkGlyphID glyphId, SkColor foregroundColor) {
-    return open_type_svg_decoder->render(*canvas, upem, glyphId, foregroundColor, static_sk_color_get(sk_color_key_in));
+bool SkOpenTypeSVGDecoder_render(SkOpenTypeSVGDecoder *open_type_svg_decoder, SkCanvas *canvas, int upem, SkGlyphID glyphId, SkColor foregroundColor, sk_color_t color) {
+    return open_type_svg_decoder->render(*canvas, upem, glyphId, foregroundColor, static_sk_color_get(color));
 }
 
 }

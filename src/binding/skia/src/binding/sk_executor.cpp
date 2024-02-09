@@ -21,11 +21,11 @@ void SkExecutor_borrow(SkExecutor *executor) {
 
 // static
 
-int SkExecutor_MakeFIFOThreadPool(int threads, bool allowBorrowing) {
+sk_executor_t SkExecutor_MakeFIFOThreadPool(int threads, bool allowBorrowing) {
     return static_sk_executor_make(SkExecutor::MakeFIFOThreadPool(threads, allowBorrowing));
 }
 
-int SkExecutor_MakeLIFOThreadPool(int threads, bool allowBorrowing) {
+sk_executor_t SkExecutor_MakeLIFOThreadPool(int threads, bool allowBorrowing) {
     return static_sk_executor_make(SkExecutor::MakeLIFOThreadPool(threads, allowBorrowing));
 }
 

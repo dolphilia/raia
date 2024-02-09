@@ -6,19 +6,21 @@
 
 extern "C" {
 
+// static
+
 bool SkBmpDecoder_IsBmp(const void* ptr, size_t size) {
     return SkBmpDecoder::IsBmp(ptr, size);
 }
 
-int SkBmpDecoder_Decode(int static_sk_stream_key_in, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext) {
-    return static_sk_codec_make(SkBmpDecoder::Decode(static_sk_stream_move(static_sk_stream_key_in), result, decodeContext));
+sk_codec_t SkBmpDecoder_Decode(sk_stream_t stream, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext) {
+    return static_sk_codec_make(SkBmpDecoder::Decode(static_sk_stream_move(stream), result, decodeContext));
 }
 
-int SkBmpDecoder_Decode_2(int static_sk_data_key_in, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext) {
-    return static_sk_codec_make(SkBmpDecoder::Decode(static_sk_data_move(static_sk_data_key_in), result, decodeContext));
+sk_codec_t SkBmpDecoder_Decode_2(sk_stream_t stream, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext) {
+    return static_sk_codec_make(SkBmpDecoder::Decode(static_sk_data_move(stream), result, decodeContext));
 }
 
-int SkBmpDecoder_Decoder() {
+sk_codecs_decoder_t SkBmpDecoder_Decoder() {
     return static_sk_codecs_decoder_make(SkBmpDecoder::Decoder());
 }
 

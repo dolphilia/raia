@@ -17,20 +17,20 @@ bool SkColorMatrixFilter_asAColorMatrix(SkColorMatrixFilter *color_matrix_filter
 bool SkColorMatrixFilter_isAlphaUnchanged(SkColorMatrixFilter *color_matrix_filter);
 SkColor SkColorMatrixFilter_filterColor(SkColorMatrixFilter *color_matrix_filter, SkColor color);
 SkColor4f SkColorMatrixFilter_filterColor4f(SkColorMatrixFilter *color_matrix_filter, const SkColor4f &srcColor, SkColorSpace *srcCS, SkColorSpace *dstCS);
-int SkColorMatrixFilter_makeComposed(int sk_color_filter_key_in, SkColorMatrixFilter *color_matrix_filter);
-int SkColorMatrixFilter_makeWithWorkingColorSpace(int sk_color_space_key_in, SkColorMatrixFilter *color_matrix_filter);
+sk_color_filter_t SkColorMatrixFilter_makeComposed(SkColorMatrixFilter *color_matrix_filter, sk_color_filter_t colorFilter);
+sk_color_filter_t SkColorMatrixFilter_makeWithWorkingColorSpace(SkColorMatrixFilter *color_matrix_filter, sk_color_space_t colorSpace);
 SkColorMatrixFilter::Factory SkColorMatrixFilter_getFactory(SkColorMatrixFilter *color_matrix_filter);
 const char * SkColorMatrixFilter_getTypeName(SkColorMatrixFilter *color_matrix_filter);
 void SkColorMatrixFilter_flatten(SkColorMatrixFilter *color_matrix_filter, SkWriteBuffer * write_buffer);
 SkColorMatrixFilter::Type SkColorMatrixFilter_getFlattenableType(SkColorMatrixFilter *color_matrix_filter);
-int SkColorMatrixFilter_serialize(SkColorMatrixFilter *color_matrix_filter, const SkSerialProcs *serial_procs);
+sk_data_t SkColorMatrixFilter_serialize(SkColorMatrixFilter *color_matrix_filter, const SkSerialProcs *serial_procs);
 size_t SkColorMatrixFilter_serialize_2(SkColorMatrixFilter *color_matrix_filter, void *memory, size_t memory_size, const SkSerialProcs *serial_procs);
 bool SkColorMatrixFilter_unique(SkColorMatrixFilter *color_matrix_filter);
 void SkColorMatrixFilter_ref(SkColorMatrixFilter *color_matrix_filter);
 void SkColorMatrixFilter_unref(SkColorMatrixFilter *color_matrix_filter);
 // static
-int SkColorMatrixFilter_MakeLightingFilter(SkColor mul, SkColor add);
-int SkColorMatrixFilter_Deserialize(const void *data, size_t size, const SkDeserialProcs *procs);
+sk_color_filter_t SkColorMatrixFilter_MakeLightingFilter(SkColor mul, SkColor add);
+sk_color_filter_t SkColorMatrixFilter_Deserialize(const void *data, size_t size, const SkDeserialProcs *procs);
 SkColorMatrixFilter::Factory SkColorMatrixFilter_NameToFactory(const char name[]);
 const char * SkColorMatrixFilter_FactoryToName(SkColorMatrixFilter::Factory factory);
 void SkColorMatrixFilter_Register(const char name[], SkColorMatrixFilter::Factory factory);

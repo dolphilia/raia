@@ -6,28 +6,28 @@
 
 extern "C" {
 
-int SkShaders_Empty() {
+sk_shader_t SkShaders_Empty() {
     return static_sk_shader_make(SkShaders::Empty());
 }
 
-int SkShaders_Color(SkColor color) {
+sk_shader_t SkShaders_Color(SkColor color) {
     return static_sk_shader_make(SkShaders::Color(color));
 }
 
-int SkShaders_Color_2(int sk_color_space_key_in, const SkColor4f &color4f) {
-    return static_sk_shader_make(SkShaders::Color(color4f, static_sk_color_space_move(sk_color_space_key_in)));
+sk_shader_t SkShaders_Color_2(const SkColor4f &color4f, sk_color_space_t color_space) {
+    return static_sk_shader_make(SkShaders::Color(color4f, static_sk_color_space_move(color_space)));
 }
 
-int SkShaders_Blend(int sk_shader_key_in, int sk_shader_key_in_2, SkBlendMode mode) {
-    return static_sk_shader_make(SkShaders::Blend(mode, static_sk_shader_move(sk_shader_key_in), static_sk_shader_move(sk_shader_key_in_2)));
+sk_shader_t SkShaders_Blend(SkBlendMode mode, sk_shader_t dst, sk_shader_t src) {
+    return static_sk_shader_make(SkShaders::Blend(mode, static_sk_shader_move(dst), static_sk_shader_move(src)));
 }
 
-int SkShaders_Blend_2(int sk_blender_key_in, int sk_shader_key_in, int sk_shader_key_in_2) {
-    return static_sk_shader_make(SkShaders::Blend(static_sk_blender_move(sk_blender_key_in), static_sk_shader_move(sk_shader_key_in), static_sk_shader_move(sk_shader_key_in_2)));
+sk_shader_t SkShaders_Blend_2(sk_blender_t value, sk_shader_t dst, sk_shader_t src) {
+    return static_sk_shader_make(SkShaders::Blend(static_sk_blender_move(value), static_sk_shader_move(dst), static_sk_shader_move(src)));
 }
 
-int SkShaders_CoordClamp(int sk_shader_key_in, const SkRect *subset) {
-    return static_sk_shader_make(SkShaders::CoordClamp(static_sk_shader_move(sk_shader_key_in), *subset));
+sk_shader_t SkShaders_CoordClamp(sk_shader_t shader, const SkRect *subset) {
+    return static_sk_shader_make(SkShaders::CoordClamp(static_sk_shader_move(shader), *subset));
 }
 
 //sk_sp< SkShader > SkShaders_MakeFractalNoise(SkScalar baseFrequencyX, SkScalar baseFrequencyY, int numOctaves, SkScalar seed, const SkISize *tileSize) {

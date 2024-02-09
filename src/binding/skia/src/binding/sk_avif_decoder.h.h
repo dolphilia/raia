@@ -13,8 +13,8 @@
 
 extern "C" {
 //bool SkAvifDecoder_IsAvif(const void* ptr, size_t size);
-//int SkAvifDecoder_Decode(int static_sk_stream_key_in, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
-//int SkAvifDecoder_Decode_2(int static_sk_data_key_in, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
+//int SkAvifDecoder_Decode(int static_stream, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
+//int SkAvifDecoder_Decode_2(int static_data, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
 //int SkAvifDecoder_Decoder();
 }
 

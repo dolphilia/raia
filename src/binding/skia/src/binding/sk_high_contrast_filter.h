@@ -11,7 +11,7 @@
 extern "C" {
 void SkHighContrastFilter_delete(SkHighContrastFilter * highContrastFilter);
 // static
-int SkHighContrastFilter_Make(const SkHighContrastConfig * config);
+sk_color_filter_t SkHighContrastFilter_Make(const SkHighContrastConfig * config);
 }
 
 #endif //RAIA_SKIA_SK_HIGH_CONTRAST_FILTER_H

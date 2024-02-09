@@ -26,20 +26,16 @@ SkColor SkColorFilter_filterColor(SkColorFilter *color_filter, SkColor color) {
     return color_filter->filterColor(color);
 }
 
-SkColor4f SkColorFilter_filterColor4f(SkColorFilter *color_filter, const SkColor4f *srcColor, SkColorSpace *srcCS,
-                                      SkColorSpace *dstCS) {
+SkColor4f SkColorFilter_filterColor4f(SkColorFilter *color_filter, const SkColor4f *srcColor, SkColorSpace *srcCS, SkColorSpace *dstCS) {
     return color_filter->filterColor4f(*srcColor, srcCS, dstCS);
 }
 
-int SkColorFilter_makeComposed(int sk_color_filter_key_in,
-                                SkColorFilter *color_filter) {
-    return static_sk_color_filter_make(color_filter->makeComposed(static_sk_color_filter_move(sk_color_filter_key_in)));
+sk_color_filter_t SkColorFilter_makeComposed(SkColorFilter *color_filter, sk_color_filter_t inner) {
+    return static_sk_color_filter_make(color_filter->makeComposed(static_sk_color_filter_move(inner)));
 }
 
-int SkColorFilter_makeWithWorkingColorSpace(int sk_color_space_key_in,
-                                             SkColorFilter *color_filter) {
-    return static_sk_color_filter_make(color_filter->makeWithWorkingColorSpace(
-            static_sk_color_space_move(sk_color_space_key_in)));
+sk_color_filter_t SkColorFilter_makeWithWorkingColorSpace(SkColorFilter *color_filter, sk_color_space_t colorSpace) {
+    return static_sk_color_filter_make(color_filter->makeWithWorkingColorSpace(static_sk_color_space_move(colorSpace)));
 }
 
 SkColorFilter::Factory SkColorFilter_getFactory(SkColorFilter *color_filter) {
@@ -58,12 +54,11 @@ SkColorFilter::Type SkColorFilter_getFlattenableType(SkColorFilter *color_filter
     return color_filter->getFlattenableType();
 }
 
-int SkColorFilter_serialize(SkColorFilter *color_filter, const SkSerialProcs *serial_procs) {
+sk_data_t SkColorFilter_serialize(SkColorFilter *color_filter, const SkSerialProcs *serial_procs) {
     return static_sk_data_make(color_filter->serialize(serial_procs));
 }
 
-size_t SkColorFilter_serialize_2(SkColorFilter *color_filter, void *memory, size_t memory_size,
-                                 const SkSerialProcs *serial_procs) {
+size_t SkColorFilter_serialize_2(SkColorFilter *color_filter, void *memory, size_t memory_size, const SkSerialProcs *serial_procs) {
     return color_filter->serialize(memory, memory_size, serial_procs);
 }
 
@@ -81,8 +76,7 @@ void SkColorFilter_unref(SkColorFilter *color_filter) {
 
 // static
 
-int SkColorFilter_Deserialize(const void *data, size_t size,
-                               const SkDeserialProcs *procs) {
+sk_color_filter_t SkColorFilter_Deserialize(const void *data, size_t size, const SkDeserialProcs *procs) {
     return static_sk_color_filter_make(SkColorFilter::Deserialize(data, size, procs));
 }
 

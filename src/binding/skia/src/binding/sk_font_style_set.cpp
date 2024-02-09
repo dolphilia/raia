@@ -18,11 +18,11 @@ void SkFontStyleSet_getStyle(SkFontStyleSet *font_style_set, int index, SkFontSt
     return font_style_set->getStyle(index, font_style, style);
 }
 
-int SkFontStyleSet_createTypeface(SkFontStyleSet *font_style_set, int index) {
+sk_typeface_t SkFontStyleSet_createTypeface(SkFontStyleSet *font_style_set, int index) {
     return static_sk_typeface_make(font_style_set->createTypeface(index));
 }
 
-int SkFontStyleSet_matchStyle(SkFontStyleSet *font_style_set, const SkFontStyle *pattern) {
+sk_typeface_t SkFontStyleSet_matchStyle(SkFontStyleSet *font_style_set, const SkFontStyle *pattern) {
     return static_sk_typeface_make(font_style_set->matchStyle(*pattern));
 }
 
@@ -40,7 +40,7 @@ void SkFontStyleSet_unref(SkFontStyleSet *font_style_set) {
 
 // static
 
-int SkFontStyleSet_CreateEmpty() {
+sk_font_style_set_t SkFontStyleSet_CreateEmpty() {
     return static_sk_font_style_set_make(SkFontStyleSet::CreateEmpty());
 }
 

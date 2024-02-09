@@ -9,15 +9,15 @@ extern "C" {
 //SkRuntimeColorFilterBuilder(const SkRuntimeColorFilterBuilder &)=delete
 //SkRuntimeColorFilterBuilder & operator=(const SkRuntimeColorFilterBuilder &)=delete
 
-SkRuntimeColorFilterBuilder *SkRuntimeColorFilterBuilder_new(int sk_runtime_effect_key_in) {
-    return new SkRuntimeColorFilterBuilder(static_sk_runtime_effect_move(sk_runtime_effect_key_in));
+SkRuntimeColorFilterBuilder *SkRuntimeColorFilterBuilder_new(sk_runtime_effect_t runtime_effect) {
+    return new SkRuntimeColorFilterBuilder(static_sk_runtime_effect_move(runtime_effect));
 }
 
 void SkRuntimeColorFilterBuilder_delete(SkRuntimeColorFilterBuilder *runtime_color_filter_builder) {
     delete runtime_color_filter_builder;
 }
 
-int SkRuntimeColorFilterBuilder_makeColorFilter(SkRuntimeColorFilterBuilder *runtime_color_filter_builder) {
+sk_color_filter_t SkRuntimeColorFilterBuilder_makeColorFilter(SkRuntimeColorFilterBuilder *runtime_color_filter_builder) {
     return static_sk_color_filter_make(runtime_color_filter_builder->makeColorFilter());
 }
 
@@ -33,11 +33,11 @@ SkRuntimeColorFilterBuilder::BuilderChild SkRuntimeColorFilterBuilder_child(SkRu
     return runtime_color_filter_builder->child(name);
 }
 
-int SkRuntimeColorFilterBuilder_uniforms(SkRuntimeColorFilterBuilder *runtime_color_filter_builder) {
+const_sk_data_t SkRuntimeColorFilterBuilder_uniforms(SkRuntimeColorFilterBuilder *runtime_color_filter_builder) {
     return static_const_sk_data_make(runtime_color_filter_builder->uniforms());
 }
 
-int SkRuntimeColorFilterBuilder_children(SkRuntimeColorFilterBuilder *runtime_color_filter_builder) {
+const_sk_runtime_effect_child_ptr_t SkRuntimeColorFilterBuilder_children(SkRuntimeColorFilterBuilder *runtime_color_filter_builder) {
     return static_const_sk_runtime_effect_child_ptr_make(runtime_color_filter_builder->children());
 }
 

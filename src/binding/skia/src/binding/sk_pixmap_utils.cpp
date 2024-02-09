@@ -10,7 +10,7 @@ bool SkPixmapUtils_Orient(const SkPixmap* dst, const SkPixmap* src, SkEncodedOri
     return SkPixmapUtils::Orient(*dst, *src, origin);
 }
 
-int SkPixmapUtils_SwapWidthHeight(const SkImageInfo* info) {
+sk_image_info_t SkPixmapUtils_SwapWidthHeight(const SkImageInfo* info) {
     return static_sk_image_info_make(SkPixmapUtils::SwapWidthHeight(*info));
 }
 

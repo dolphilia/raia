@@ -11,7 +11,7 @@
 extern "C" {
 void SkLumaColorFilter_delete(SkLumaColorFilter * lumaColorFilter);
 // static
-int SkLumaColorFilter_Make();
+sk_color_filter_t SkLumaColorFilter_Make();
 }
 
 #endif //RAIA_SKIA_SK_LUMA_COLOR_FILTER_H

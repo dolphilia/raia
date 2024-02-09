@@ -14,11 +14,11 @@ uint32_t SkImageGenerator_uniqueID(SkImageGenerator *image_generator) {
     return image_generator->uniqueID();
 }
 
-int SkImageGenerator_refEncodedData(SkImageGenerator *image_generator) {
+sk_data_t SkImageGenerator_refEncodedData(SkImageGenerator *image_generator) {
     return static_sk_data_make(image_generator->refEncodedData());
 }
 
-int SkImageGenerator_getInfo(SkImageGenerator *image_generator) {
+sk_image_info_t SkImageGenerator_getInfo(SkImageGenerator *image_generator) {
     return static_sk_image_info_make(image_generator->getInfo());
 }
 

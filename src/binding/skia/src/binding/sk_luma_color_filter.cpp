@@ -12,7 +12,7 @@ void SkLumaColorFilter_delete(SkLumaColorFilter * lumaColorFilter) {
 
 // static
 
-int SkLumaColorFilter_Make() {
+sk_color_filter_t SkLumaColorFilter_Make() {
     return static_sk_color_filter_make(SkLumaColorFilter::Make());
 }
 

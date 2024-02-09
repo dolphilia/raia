@@ -12,7 +12,7 @@ void SkHighContrastFilter_delete(SkHighContrastFilter * highContrastFilter) {
 
 // static
 
-int SkHighContrastFilter_Make(const SkHighContrastConfig * config) {
+sk_color_filter_t SkHighContrastFilter_Make(const SkHighContrastConfig * config) {
     return static_sk_color_filter_make(SkHighContrastFilter::Make(*config));
 }
 

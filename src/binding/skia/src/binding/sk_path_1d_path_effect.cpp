@@ -12,7 +12,7 @@ void SkPath1DPathEffect_delete(SkPath1DPathEffect * path1DPathEffect) {
 
 // static
 
-int SkPath1DPathEffect_Make(const SkPath *path, SkScalar advance, SkScalar phase, SkPath1DPathEffect::Style style) {
+sk_path_effect_t SkPath1DPathEffect_Make(const SkPath *path, SkScalar advance, SkScalar phase, SkPath1DPathEffect::Style style) {
     return static_sk_path_effect_make(SkPath1DPathEffect::Make(*path, advance, phase, style));
 }
 
