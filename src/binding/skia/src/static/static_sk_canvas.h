@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkCanvas.h"
 
+typedef int sk_canvas_t;
+
 int static_sk_canvas_make(std::unique_ptr<SkCanvas> value);
 extern "C" void static_sk_canvas_delete(int key);
 extern "C" SkCanvas *static_sk_canvas_get(int key);

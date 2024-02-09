@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkStream.h"
 
+typedef int sk_stream_rewindable_t;
+
 int static_sk_stream_rewindable_make(std::unique_ptr<SkStreamRewindable> value);
 extern "C" void static_sk_stream_rewindable_delete(int key);
 extern "C" SkStreamRewindable *static_sk_stream_rewindable_get(int key);

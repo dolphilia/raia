@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkDrawable.h"
 
+typedef int sk_drawable_gpu_draw_handler_t;
+
 int static_sk_drawable_gpu_draw_handler_make(std::unique_ptr<SkDrawable::GpuDrawHandler> value);
 extern "C" void static_sk_drawable_gpu_draw_handler_delete(int key);
 extern "C" SkDrawable::GpuDrawHandler *static_sk_drawable_gpu_draw_handler_get(int key);

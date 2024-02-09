@@ -11,6 +11,8 @@
 #include <utility>
 #include "include/core/SkImageInfo.h"
 
+typedef int sk_image_info_t;
+
 int static_sk_image_info_make(SkImageInfo value);
 extern "C" void static_sk_image_info_delete(int key);
 SkImageInfo static_sk_image_info_get(int key);

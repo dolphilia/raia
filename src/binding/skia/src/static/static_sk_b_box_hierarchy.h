@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkBBHFactory.h"
 
+typedef int sk_b_box_hierarchy_t;
+
 int static_sk_b_box_hierarchy_make(sk_sp<SkBBoxHierarchy> value);
 extern "C" void static_sk_b_box_hierarchy_delete(int key);
 extern "C" SkBBoxHierarchy *static_sk_b_box_hierarchy_get(int key);

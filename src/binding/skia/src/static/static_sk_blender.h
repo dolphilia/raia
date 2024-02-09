@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkBlender.h"
 
+typedef int sk_blender_t;
+
 int static_sk_blender_make(sk_sp<SkBlender> value);
 extern "C" void static_sk_blender_delete(int key);
 extern "C" SkBlender *static_sk_blender_get(int key);

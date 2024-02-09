@@ -10,6 +10,8 @@
 #include <map>
 #include "include/codec/SkAndroidCodec.h"
 
+typedef int sk_android_codec_t;
+
 int static_sk_android_codec_make(std::unique_ptr<SkAndroidCodec> value);
 extern "C" void static_sk_android_codec_delete(int key);
 extern "C" SkAndroidCodec *static_sk_android_codec_get(int key);

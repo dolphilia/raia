@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkStream.h"
 
+typedef int sk_stream_t;
+
 int static_sk_stream_make(std::unique_ptr<SkStream> value);
 extern "C" void static_sk_stream_delete(int key);
 extern "C" SkStream *static_sk_stream_get(int key);

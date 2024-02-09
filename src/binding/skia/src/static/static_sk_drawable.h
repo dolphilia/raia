@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkDrawable.h"
 
+typedef int sk_drawable_t;
+
 int static_sk_drawable_make(sk_sp<SkDrawable> value);
 extern "C" void static_sk_drawable_delete(int key);
 extern "C" SkDrawable *static_sk_drawable_get(int key);

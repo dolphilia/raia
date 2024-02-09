@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkImageInfo.h"
 
+typedef int sk_color_info_t;
+
 int static_sk_color_info_make(SkColorInfo value);
 extern "C" void static_sk_color_info_delete(int key);
 SkColorInfo static_sk_color_info_get(int key);

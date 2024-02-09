@@ -11,6 +11,8 @@
 #include <utility>
 #include "include/effects/SkRuntimeEffect.h"
 
+typedef int sk_runtime_effect_result_t;
+
 // const
 int static_sk_runtime_effect_result_make(SkRuntimeEffect::Result value);
 extern "C" void static_sk_runtime_effect_result_delete(int key);

@@ -10,6 +10,8 @@
 #include <map>
 #include "include/codec/SkCodec.h"
 
+typedef int sk_codec_t;
+
 int static_sk_codec_make(std::unique_ptr<SkCodec> value);
 extern "C" void static_sk_codec_delete(int key);
 extern "C" SkCodec *static_sk_codec_get(int key);

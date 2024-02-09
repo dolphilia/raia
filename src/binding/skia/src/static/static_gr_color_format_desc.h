@@ -10,6 +10,8 @@
 #include <map>
 #include "include/gpu/GrBackendSurface.h"
 
+typedef int gr_color_format_desc_t;
+
 int static_gr_color_format_desc_make(GrColorFormatDesc value);
 extern "C" void static_gr_color_format_desc_delete(int key);
 GrColorFormatDesc static_gr_color_format_desc_get(int key);

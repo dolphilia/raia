@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkMesh.h"
 
+typedef int sk_mesh_vertex_buffer_t;
+
 int static_sk_mesh_vertex_buffer_make(sk_sp<SkMesh::VertexBuffer> value);
 extern "C" void static_sk_mesh_vertex_buffer_delete(int key);
 extern "C" SkMesh::VertexBuffer *static_sk_mesh_vertex_buffer_get(int key);

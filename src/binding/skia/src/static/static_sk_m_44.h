@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkM44.h"
 
+typedef int sk_m_44_t;
+
 int static_sk_m_44_make(SkM44 value);
 extern "C" void static_sk_m_44_delete(int key);
 SkM44 static_sk_m_44_get(int key);

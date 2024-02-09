@@ -10,6 +10,8 @@
 #include <map>
 #include "include/effects/SkColorMatrix.h"
 
+typedef int sk_color_matrix_t;
+
 int static_sk_color_matrix_make(SkColorMatrix value);
 extern "C" void static_sk_color_matrix_delete(int key);
 SkColorMatrix static_sk_color_matrix_get(int key);

@@ -10,6 +10,8 @@
 #include <map>
 #include "include/effects/SkRuntimeEffect.h"
 
+typedef int sk_runtime_effect_t;
+
 int static_sk_runtime_effect_make(sk_sp<SkRuntimeEffect> value);
 extern "C" void static_sk_runtime_effect_delete(int key);
 extern "C" SkRuntimeEffect *static_sk_runtime_effect_get(int key);

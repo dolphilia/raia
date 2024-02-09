@@ -10,6 +10,8 @@
 #include <map>
 #include "include/effects/SkRuntimeEffect.h"
 
+typedef int const_sk_runtime_effect_uniform_t;
+
 // const
 int static_const_sk_runtime_effect_uniform_make(SkSpan<const SkRuntimeEffect::Uniform> value);
 extern "C" void static_const_sk_runtime_effect_uniform_delete(int key);

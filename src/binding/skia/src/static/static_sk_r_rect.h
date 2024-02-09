@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkRRect.h"
 
+typedef int sk_r_rect_t;
+
 int static_sk_r_rect_make(SkRRect value);
 extern "C" void static_sk_r_rect_delete(int key);
 SkRRect static_sk_r_rect_get(int key);

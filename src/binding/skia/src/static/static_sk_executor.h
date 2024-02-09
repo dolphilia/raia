@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkExecutor.h"
 
+typedef int sk_executor_t;
+
 int static_sk_executor_make(std::unique_ptr<SkExecutor> value);
 extern "C" void static_sk_executor_delete(int key);
 extern "C" SkExecutor *static_sk_executor_get(int key);

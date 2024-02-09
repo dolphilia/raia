@@ -10,6 +10,9 @@
 #include <map>
 #include "include/core/SkData.h"
 
+typedef int sk_data_t;
+typedef int const_sk_data_t;
+
 int static_sk_data_make(sk_sp<SkData> value);
 extern "C" void static_sk_data_delete(int key);
 extern "C" SkData *static_sk_data_get(int key);

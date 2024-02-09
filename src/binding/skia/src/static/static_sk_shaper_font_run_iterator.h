@@ -10,6 +10,8 @@
 #include <map>
 #include "modules/skshaper/include/SkShaper.h"
 
+typedef int sk_shaper_font_run_iterator_t;
+
 int static_sk_shaper_font_run_iterator_make(std::unique_ptr<SkShaper::FontRunIterator> value);
 extern "C" void static_sk_shaper_font_run_iterator_delete(int key);
 extern "C" SkShaper::FontRunIterator *static_sk_shaper_font_run_iterator_get(int key);

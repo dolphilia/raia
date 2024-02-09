@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkCapabilities.h"
 
+typedef int const_sk_capabilities_t;
+
 int static_const_sk_capabilities_make(sk_sp<const SkCapabilities> value);
 extern "C" void static_const_sk_capabilities_delete(int key);
 extern "C" const SkCapabilities *static_const_sk_capabilities_get(int key);

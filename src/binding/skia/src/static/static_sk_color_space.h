@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkColorSpace.h"
 
+typedef int sk_color_space_t;
+
 int static_sk_color_space_make(sk_sp<SkColorSpace> value);
 extern "C" void static_sk_color_space_delete(int key);
 extern "C" SkColorSpace *static_sk_color_space_get(int key);

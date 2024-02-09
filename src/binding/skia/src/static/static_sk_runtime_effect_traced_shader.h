@@ -10,6 +10,8 @@
 #include <map>
 #include "include/effects/SkRuntimeEffect.h"
 
+typedef int sk_runtime_effect_traced_shader_t;
+
 // const
 int static_sk_runtime_effect_traced_shader_make(SkRuntimeEffect::TracedShader value);
 extern "C" void static_sk_runtime_effect_traced_shader_delete(int key);

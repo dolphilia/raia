@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkPathEffect.h"
 
+typedef int sk_path_effect_t;
+
 int static_sk_path_effect_make(sk_sp<SkPathEffect> value);
 extern "C" void static_sk_path_effect_delete(int key);
 extern "C" SkPathEffect *static_sk_path_effect_get(int key);

@@ -10,6 +10,8 @@
 #include <map>
 #include "include/gpu/GrBackendSurface.h"
 
+typedef int gr_backend_format_t;
+
 extern "C" void static_gr_backend_format_delete(int key);
 int static_gr_backend_format_make(GrBackendFormat value);
 GrBackendFormat static_gr_backend_format_get(int key);

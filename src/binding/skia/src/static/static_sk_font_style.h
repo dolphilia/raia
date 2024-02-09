@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkFontStyle.h"
 
+typedef int sk_font_style_t;
+
 int static_sk_font_style_make(SkFontStyle value);
 extern "C" void static_sk_font_style_delete(int key);
 SkFontStyle static_sk_font_style_get(int key);

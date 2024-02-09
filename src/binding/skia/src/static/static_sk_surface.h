@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkSurface.h"
 
+typedef int sk_surface_t;
+
 int static_sk_surface_make(sk_sp<SkSurface> value);
 extern "C" void static_sk_surface_delete(int key);
 extern "C" SkSurface *static_sk_surface_get(int key);

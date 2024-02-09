@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkFlattenable.h"
 
+typedef int sk_flattenable_t;
+
 int static_sk_flattenable_make(sk_sp<SkFlattenable> value);
 extern "C" void static_sk_flattenable_delete(int key);
 extern "C" SkFlattenable *static_sk_flattenable_get(int key);

@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkDataTable.h"
 
+typedef int sk_data_table_t;
+
 int static_sk_data_table_make(sk_sp<SkDataTable> value);
 extern "C" void static_sk_data_table_delete(int key);
 extern "C" SkDataTable *static_sk_data_table_get(int key);

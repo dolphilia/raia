@@ -10,6 +10,8 @@
 #include <map>
 #include "include/private/SkIDChangeListener.h"
 
+typedef int sk_id_change_listener_t;
+
 int static_sk_id_change_listener_make(sk_sp<SkIDChangeListener> value);
 extern "C" void static_sk_id_change_listener_delete(int key);
 extern "C" SkIDChangeListener *static_sk_id_change_listener_get(int key);

@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkMaskFilter.h"
 
+typedef int sk_mask_filter_t;
+
 int static_sk_mask_filter_make(sk_sp<SkMaskFilter> value);
 extern "C" void static_sk_mask_filter_delete(int key);
 extern "C" SkMaskFilter *static_sk_mask_filter_get(int key);

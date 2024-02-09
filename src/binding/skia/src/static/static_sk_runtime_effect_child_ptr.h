@@ -10,6 +10,8 @@
 #include <map>
 #include "include/effects/SkRuntimeEffect.h"
 
+typedef int const_sk_runtime_effect_child_ptr_t;
+
 // const
 int static_const_sk_runtime_effect_child_ptr_make(SkSpan<const SkRuntimeEffect::ChildPtr> value);
 extern "C" void static_const_sk_runtime_effect_child_ptr_delete(int key);

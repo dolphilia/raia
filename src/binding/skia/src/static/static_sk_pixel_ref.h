@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkPixelRef.h"
 
+typedef int sk_pixel_ref_t;
+
 int static_sk_pixel_ref_make(sk_sp<SkPixelRef> value);
 extern "C" void static_sk_pixel_ref_delete(int key);
 extern "C" SkPixelRef *static_sk_pixel_ref_get(int key);

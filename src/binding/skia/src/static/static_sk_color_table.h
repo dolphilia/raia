@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkColorTable.h"
 
+typedef int sk_color_table_t;
+
 int static_sk_color_table_make(sk_sp<SkColorTable> value);
 extern "C" void static_sk_color_table_delete(int key);
 extern "C" SkColorTable *static_sk_color_table_get(int key);

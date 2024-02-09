@@ -10,6 +10,8 @@
 #include <map>
 #include "include/gpu/GrDirectContext.h"
 
+typedef int gr_direct_context_direct_context_id_t;
+
 int static_gr_direct_context_direct_context_id_make(GrDirectContext::DirectContextID value);
 extern "C" void static_gr_direct_context_direct_context_id_delete(int key);
 GrDirectContext::DirectContextID static_gr_direct_context_direct_context_id_get(int key);

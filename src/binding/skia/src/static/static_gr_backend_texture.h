@@ -10,6 +10,8 @@
 #include <map>
 #include "include/gpu/GrBackendSurface.h"
 
+typedef int gr_backend_texture_t;
+
 int static_gr_backend_texture_make(GrBackendTexture value);
 extern "C" void static_gr_backend_texture_delete(int key);
 GrBackendTexture static_gr_backend_texture_get(int key);

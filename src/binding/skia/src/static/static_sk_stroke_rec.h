@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkStrokeRec.h"
 
+typedef int sk_stroke_rec_t;
+
 int static_sk_stroke_rec_make(SkStrokeRec value);
 extern "C" void static_sk_stroke_rec_delete(int key);
 SkStrokeRec static_sk_stroke_rec_get(int key);

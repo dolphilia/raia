@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkBlendMode.h"
 
+typedef int optional_sk_blend_mode_t;
+
 int static_optional_sk_blend_mode_make(std::optional<SkBlendMode> value);
 extern "C" void static_optional_sk_blend_mode_delete(int key);
 extern "C" SkBlendMode static_optional_sk_blend_mode_get(int key);

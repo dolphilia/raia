@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkContourMeasure.h"
 
+typedef int sk_contour_measure_t;
+
 int static_sk_contour_measure_make(sk_sp<SkContourMeasure> value);
 extern "C" void static_sk_contour_measure_delete(int key);
 extern "C" SkContourMeasure *static_sk_contour_measure_get(int key);

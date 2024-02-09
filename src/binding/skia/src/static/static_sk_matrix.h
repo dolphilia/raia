@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkMatrix.h"
 
+typedef int sk_matrix_t;
+
 int static_sk_matrix_make(SkMatrix value);
 extern "C" void static_sk_matrix_delete(int key);
 SkMatrix static_sk_matrix_get(int key);

@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkStream.h"
 
+typedef int sk_stream_asset_t;
+
 int static_sk_stream_asset_make(std::unique_ptr<SkStreamAsset> value);
 extern "C" void static_sk_stream_asset_delete(int key);
 extern "C" SkStreamAsset *static_sk_stream_asset_get(int key);

@@ -11,6 +11,8 @@
 #include "include/private/base/SkSpan_impl.h"
 #include "include/encode/SkEncoder.h"
 
+typedef int const_sk_encoder_frame_t;
+
 int static_const_sk_encoder_frame_make(SkSpan<const SkEncoder::Frame> value);
 extern "C" void static_const_sk_encoder_frame_delete(int key);
 SkSpan<const SkEncoder::Frame> static_const_sk_encoder_frame_get(int key);

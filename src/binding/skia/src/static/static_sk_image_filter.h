@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkImageFilter.h"
 
+typedef int sk_image_filter_t;
+
 int static_sk_image_filter_make(sk_sp<SkImageFilter> value);
 extern "C" void static_sk_image_filter_delete(int key);
 extern "C" SkImageFilter *static_sk_image_filter_get(int key);

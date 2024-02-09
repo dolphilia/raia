@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkShader.h"
 
+typedef int sk_shader_t;
+
 int static_sk_shader_make(sk_sp<SkShader> value);
 extern "C" void static_sk_shader_delete(int key);
 extern "C" SkShader *static_sk_shader_get(int key);

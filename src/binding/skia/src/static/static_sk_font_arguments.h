@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkFontArguments.h"
 
+typedef int sk_font_arguments_t;
+
 int static_sk_font_arguments_make(SkFontArguments value);
 extern "C" void static_sk_font_arguments_delete(int key);
 SkFontArguments static_sk_font_arguments_get(int key);
