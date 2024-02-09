@@ -58,7 +58,7 @@ UTEST(cskia, drawRect) {
     SkPaint *paint = SkPaint_new();
     SkPaint_setColor(paint,SK_ColorRED);
     int rect_key = SkRect_MakeXYWH(100, 100, 300, 300); // 矩形の位置とサイズ
-    SkCanvas_drawRect(rect_key, canvas, paint);
+    SkCanvas_drawRect(canvas, rect_key, paint);
     static_sk_rect_delete(rect_key);
 
     int bitmap_width = SkBitmap_width(bitmap);
@@ -128,7 +128,7 @@ UTEST(cskia, drawRect_rotate) {
         int rect_key = SkRect_MakeXYWH(-90.5f, -90.5f, 181.0f, 181.0f);
         SkPaint *paint = SkPaint_new();
         SkPaint_setColor(paint, SK_ColorBLUE);
-        SkCanvas_drawRect(rect_key, canvas, paint);
+        SkCanvas_drawRect(canvas, rect_key, paint);
         static_sk_rect_delete(rect_key);
         SkPaint_delete(paint);
     }
@@ -179,8 +179,8 @@ UTEST(cskia, drawTextBlob_Installedfont) {
     int textblob_key = SkTextBlob_MakeFromString("Skia!", font, SkTextEncoding::kUTF8);
     SkCanvas_clear_2(canvas, SK_ColorWHITE);
 
-    SkFont_setTypeface(typeface_key, font);
-    SkCanvas_drawTextBlob(textblob_key, canvas, 1.0f, 64.0f, paint1);
+    SkFont_setTypeface(font, typeface_key);
+    SkCanvas_drawTextBlob(canvas, textblob_key, 1.0f, 64.0f, paint1);
     static_sk_text_blob_delete(textblob_key);
 
     int bitmap_width = SkBitmap_width(bitmap);
@@ -245,8 +245,8 @@ UTEST(cskia, drawTextBlob_fromFile) {
     int textblob_key = SkTextBlob_MakeFromString("Skia!", font, SkTextEncoding::kUTF8);
     SkCanvas_clear_2(canvas, SK_ColorWHITE);
 
-    SkFont_setTypeface(typeface_key, font);
-    SkCanvas_drawTextBlob(textblob_key, canvas, 1.0f, 64.0f, paint1);
+    SkFont_setTypeface(font, typeface_key);
+    SkCanvas_drawTextBlob(canvas, textblob_key, 1.0f, 64.0f, paint1);
     static_sk_text_blob_delete(textblob_key);
 
 
@@ -296,8 +296,8 @@ UTEST(cskia, SkTypeface_MakeFromFile) {
     int textblob_key = SkTextBlob_MakeFromString("Skia!", font, SkTextEncoding::kUTF8);
     SkCanvas_clear_2(canvas, SK_ColorWHITE);
 
-    SkFont_setTypeface(typeface_key, font);
-    SkCanvas_drawTextBlob(textblob_key, canvas, 1.0f, 64.0f, paint1);
+    SkFont_setTypeface(font, typeface_key);
+    SkCanvas_drawTextBlob(canvas, textblob_key, 1.0f, 64.0f, paint1);
     static_sk_text_blob_delete(textblob_key);
 
     int bitmap_width = SkBitmap_width(bitmap);
@@ -327,7 +327,7 @@ UTEST(cskia, SkGradientShader) {
     SkColor colors[2] = {SK_ColorBLUE, SK_ColorYELLOW};
     SkPaint *paint = SkPaint_new();
     int shader_key = SkGradientShader_MakeLinear(points, colors, nullptr, 2, SkTileMode::kClamp, 0, nullptr);
-    SkPaint_setShader(shader_key, paint);
+    SkPaint_setShader(paint, shader_key);
     SkCanvas_drawPaint(canvas, paint);
     static_sk_shader_delete(shader_key);
 
@@ -352,7 +352,7 @@ UTEST(cskia, FractalNoise) {
     SkCanvas_clear_2(canvas, SK_ColorWHITE);
     SkPaint *paint = SkPaint_new();
     int shader_key = SkPerlinNoiseShader_MakeFractalNoise(0.05f, 0.05f, 4, 0.0f, NULL);
-    SkPaint_setShader(shader_key, paint);
+    SkPaint_setShader(paint, shader_key);
     SkCanvas_drawPaint(canvas, paint);
     static_sk_shader_delete(shader_key);
 
