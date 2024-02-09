@@ -9,6 +9,8 @@
 #include <string>
 #include <map>
 
+typedef int function_void_void_t;
+
 int static_function_void_void_make(std::function<void(void)> value);
 extern "C" void static_function_void_void_delete(int key);
 std::function<void(void)> static_function_void_void_get(int key);

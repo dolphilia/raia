@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkVertices.h"
 
+typedef int sk_vertices_t;
+
 int static_sk_vertices_make(sk_sp<SkVertices> value);
 extern "C" void static_sk_vertices_delete(int key);
 extern "C" SkVertices *static_sk_vertices_get(int key);

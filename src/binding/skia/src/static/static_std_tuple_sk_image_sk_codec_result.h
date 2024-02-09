@@ -14,8 +14,10 @@
 #include "include/core/SkImage.h"
 #include "include/codec/SkCodec.h"
 
-int static_tuple_sk_image_sk_codec_result_make(std::tuple<sk_sp<SkImage>, SkCodec::Result> value);
+typedef int tuple_sk_image_sk_codec_result_t;
+
 extern "C" void static_tuple_sk_image_sk_codec_result_delete(int key);
+int static_tuple_sk_image_sk_codec_result_make(std::tuple<sk_sp<SkImage>, SkCodec::Result> value);
 std::tuple<sk_sp<SkImage>, SkCodec::Result> static_tuple_sk_image_sk_codec_result_get(int key, int index);
 void static_tuple_sk_image_sk_codec_result_set(int key, std::tuple<sk_sp<SkImage>, SkCodec::Result> value);
 

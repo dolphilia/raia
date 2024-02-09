@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkTextBlob.h"
 
+typedef int sk_text_blob_t;
+
 int static_sk_text_blob_make(sk_sp<SkTextBlob> value);
 extern "C" void static_sk_text_blob_delete(int key);
 extern "C" SkTextBlob *static_sk_text_blob_get(int key);

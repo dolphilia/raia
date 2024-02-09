@@ -4,7 +4,6 @@
 
 #include "static_std_string_view.h"
 
-#include <string>
 #include <map>
 
 static std::set<int> static_string_view_available_keys;

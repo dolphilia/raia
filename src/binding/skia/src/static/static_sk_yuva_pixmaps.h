@@ -10,6 +10,8 @@
 #include <map>
 #include "include/core/SkYUVAPixmaps.h"
 
+typedef int sk_yuva_pixmaps_t;
+
 int static_sk_yuva_pixmaps_make(SkYUVAPixmaps value);
 extern "C" void static_sk_yuva_pixmaps_delete(int key);
 SkYUVAPixmaps static_sk_yuva_pixmaps_get(int key);
