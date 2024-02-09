@@ -77,10 +77,8 @@ cd skia
 # git submodule update --init --recursive
 #
 # skia/BUILD.gn から以下の記述を削除またはコメントアウトすること
-#  defines = [
 #    "SK_DEFAULT_TYPEFACE_IS_EMPTY",
 #    "SK_DISABLE_LEGACY_DEFAULT_TYPEFACE",
-#  ]
 python3 tools/git-sync-deps
 bin/gn gen out/Shared --args='
 is_official_build = true
@@ -96,7 +94,7 @@ extra_ldflags = [ "-L/opt/homebrew/lib", "-L/opt/homebrew/opt/icu4c/lib" ]
 '
 # bin/gn gen out/Shared --args='
 # is_official_build = false
-# is_component_build = true
+# is_component_build = false
 # cc = "clang"
 # cxx = "clang++"
 # target_os = "mac"
