@@ -3,10 +3,11 @@ const lib = new Lib();
 
 import {Std} from "raia_std";
 const std = new Std();
+var handle;
 
 (function() {
     if (globalThis.__RAIA_DRAW__ === undefined) {
-        var handle = lib.open("raia_draw");
+        handle = lib.open("raia_draw");
         lib.add(handle, "raia_draw_noise_cpu");
         lib.add(handle, "raia_draw_noise_gpu");
         lib.add(handle, "raia_draw_blend_pixels_rgba_to_rgb");
@@ -25,8 +26,8 @@ const std = new Std();
         lib.add(handle, "raia_draw_filled_ellipse");
         lib.add(handle, "raia_draw_filled_ellipse_rgba");
         lib.add(handle, "raia_draw_filled_ellipse_smooth");
-        lib.add(handle, "raia_draw_load_and_blend_image_rgb");
-        lib.add(handle, "raia_draw_load_and_blend_image_rgba");
+        //lib.add(handle, "raia_draw_load_and_blend_image_rgb");
+        //lib.add(handle, "raia_draw_load_and_blend_image_rgba");
         lib.add(handle, "raia_draw_d3m_init");
         lib.add(handle, "raia_draw_d3m_set_camera");
         lib.add(handle, "raia_draw_d3m_calc_position");
@@ -50,7 +51,7 @@ export class Draw {
             "width": width,
             "height": height
         });
-        lib.call("raia_draw_noise_cpu", args);
+        lib.call(handle, "raia_draw_noise_cpu", args);
     }
     noiseRGB_GPU(pixels, width, height) {
         var args = JSON.stringify({
@@ -58,7 +59,7 @@ export class Draw {
             "width": width,
             "height": height
         });
-        lib.call("raia_draw_noise_gpu", args);
+        lib.call(handle, "raia_draw_noise_gpu", args);
     }
     /**
      * @param {ArrayBuffer} pixels_rgb
@@ -92,7 +93,7 @@ export class Draw {
             "trimming_x2": trimming_x2,
             "trimming_y2": trimming_y2
         });
-        lib.call("raia_draw_blend_pixels_rgba_to_rgb", args);
+        lib.call(handle, "raia_draw_blend_pixels_rgba_to_rgb", args);
     }
     /**
      * 
@@ -127,7 +128,7 @@ export class Draw {
             "trimming_x2": trimming_x2,
             "trimming_y2": trimming_y2
         });
-        lib.call("raia_draw_blend_pixels_rgba_to_rgba", args);
+        lib.call(handle, "raia_draw_blend_pixels_rgba_to_rgba", args);
     }
     /**
      * 
@@ -154,7 +155,7 @@ export class Draw {
             "canvas_width": canvas_width,
             "canvas_height": canvas_height
         });
-        lib.call("raia_draw_point", args);
+        lib.call(handle, "raia_draw_point", args);
     }
     /**
      * 
@@ -182,7 +183,7 @@ export class Draw {
             "color_blue": color_blue,
             "color_alpha": color_alpha,
         });
-        lib.call("raia_draw_point_rgba", args);
+        lib.call(handle, "raia_draw_point_rgba", args);
     }
     /**
      * 
@@ -210,7 +211,7 @@ export class Draw {
             "color_blue": color_blue,
             "color_alpha": color_alpha
         });
-        lib.call("raia_draw_point_alpha", args);
+        lib.call(handle, "raia_draw_point_alpha", args);
     }
     /**
      * 
@@ -240,7 +241,7 @@ export class Draw {
             "color_green": color_green,
             "color_blue": color_blue
         });
-        lib.call("raia_draw_line", args);
+        lib.call(handle, "raia_draw_line", args);
     }
     /**
      * 
@@ -272,7 +273,7 @@ export class Draw {
             "color_blue": color_blue,
             "color_alpha": color_alpha
         });
-        lib.call("raia_draw_line_rgba", args);
+        lib.call(handle, "raia_draw_line_rgba", args);
     }
     /**
      * 
@@ -302,7 +303,7 @@ export class Draw {
             "color_green": color_green,
             "color_blue": color_blue
         });
-        lib.call("raia_draw_fill_rect", args);
+        lib.call(handle, "raia_draw_fill_rect", args);
     }
     /**
      * 
@@ -332,7 +333,7 @@ export class Draw {
             "color_green": color_green,
             "color_blue": color_blue
         });
-        lib.call("raia_draw_fill_rect_fast", args);
+        lib.call(handle, "raia_draw_fill_rect_fast", args);
     }
     /**
      * 
@@ -364,7 +365,7 @@ export class Draw {
             "color_blue": color_blue,
             "color_alpha": color_alpha
         });
-        lib.call("raia_draw_fill_rect_rgba", args);
+        lib.call(handle, "raia_draw_fill_rect_rgba", args);
     }
     /**
      * 
@@ -396,7 +397,7 @@ export class Draw {
             "color_blue": color_blue,
             "color_alpha": color_alpha
         });
-        lib.call("raia_draw_fill_rect_alpha", args);
+        lib.call(handle, "raia_draw_fill_rect_alpha", args);
     }
     /**
      * 
@@ -426,7 +427,7 @@ export class Draw {
             "color_green": color_green,
             "color_blue": color_blue
         });
-        lib.call("raia_draw_ellipse", args);
+        lib.call(handle, "raia_draw_ellipse", args);
     }
     /**
      * 
@@ -458,7 +459,7 @@ export class Draw {
             "color_blue": color_blue,
             "color_alpha": color_alpha
         });
-        lib.call("raia_draw_ellipse_rgba", args);
+        lib.call(handle, "raia_draw_ellipse_rgba", args);
     }
     /**
      * 
@@ -488,7 +489,7 @@ export class Draw {
             "color_green": color_green,
             "color_blue": color_blue
         });
-        lib.call("raia_draw_filled_ellipse", args);
+        lib.call(handle, "raia_draw_filled_ellipse", args);
     }
     /**
      * 
@@ -520,7 +521,7 @@ export class Draw {
             "color_blue": color_blue,
             "color_alpha": color_alpha
         });
-        lib.call("raia_draw_filled_ellipse_rgba", args);
+        lib.call(handle, "raia_draw_filled_ellipse_rgba", args);
     }
     /**
      * 
@@ -550,7 +551,7 @@ export class Draw {
             "color_green": color_green,
             "color_blue": color_blue
         });
-        lib.call("raia_draw_filled_ellipse_smooth", args);
+        lib.call(handle, "raia_draw_filled_ellipse_smooth", args);
     }
     /**
      * 
@@ -562,7 +563,7 @@ export class Draw {
             "width": width,
             "height": height
         });
-        lib.call("raia_draw_d3m_init", args);
+        lib.call(handle, "raia_draw_d3m_init", args);
     }
     /**
      * 
@@ -582,7 +583,7 @@ export class Draw {
             "target_y": target_y,
             "target_z": target_z
         });
-        lib.call("raia_draw_d3m_set_camera", args);
+        lib.call(handle, "raia_draw_d3m_set_camera", args);
     }
     /**
      * 
@@ -597,7 +598,7 @@ export class Draw {
             "pos_y": pos_y,
             "pos_z": pos_z
         });
-        var ret = lib.call("raia_draw_d3m_calc_position", args);
+        var ret = lib.call(handle, "raia_draw_d3m_calc_position", args);
         return JSON.parse(ret);
     }
 }

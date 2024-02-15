@@ -6,63 +6,64 @@ const std = new Std();
 
 (function() {
     if (globalThis.__RAIA_IMGUI__ === undefined) {
-        const handle = lib.open("raia_imgui");
-        lib.add(handle, "raia_imgui_check_version");
-        lib.add(handle, "raia_imgui_create_context");
-        lib.add(handle, "raia_imgui_set_config_flags");
-        lib.add(handle, "raia_imgui_config_viewports_no_auto_merge");
-        lib.add(handle, "raia_imgui_config_viewports_no_task_bar_icon");
-        lib.add(handle, "raia_imgui_font_global_scale");
-        lib.add(handle, "raia_imgui_get_framerate");
-        lib.add(handle, "raia_imgui_style_colors_dark");
-        lib.add(handle, "raia_imgui_style_colors_light");
-        lib.add(handle, "raia_imgui_style_colors_classic");
-        lib.add(handle, "raia_imgui_set_style_window_border_size");
-        lib.add(handle, "raia_imgui_set_style_window_rounding");
-        lib.add(handle, "raia_imgui_set_style_scale_all_sizes");
-        lib.add(handle, "raia_imgui_set_style_colors");
-        lib.add(handle, "raia_imgui_col_window_bg");
-        lib.add(handle, "raia_imgui_col_text");
-        lib.add(handle, "raia_imgui_impl_glfw_init_for_opengl");
-        lib.add(handle, "raia_imgui_impl_opengl3_init");
-        lib.add(handle, "raia_imgui_add_font_default");
-        lib.add(handle, "raia_imgui_get_glyph_ranges_japanese");
-        lib.add(handle, "raia_imgui_add_font_from_file_ttf");
-        lib.add(handle, "raia_imgui_assert");
-        lib.add(handle, "raia_imgui_set_font_default");
-        lib.add(handle, "raia_imgui_init_font");
-        lib.add(handle, "raia_imgui_impl_opengl3_shutdown");
-        lib.add(handle, "raia_imgui_impl_glfw_shutdown");
-        lib.add(handle, "raia_imgui_destroy_context");
-        lib.add(handle, "raia_imgui_impl_opengl3_new_frame");
-        lib.add(handle, "raia_imgui_impl_glfw_new_frame");
-        lib.add(handle, "raia_imgui_new_frame");
-        lib.add(handle, "raia_imgui_render");
-        lib.add(handle, "raia_imgui_get_draw_data");
-        lib.add(handle, "raia_imgui_impl_opengl3_render_draw_data");
-        lib.add(handle, "raia_imgui_update_platform_windows");
-        lib.add(handle, "raia_imgui_render_platform_windows_default");
-        lib.add(handle, "raia_imgui_begin");
-        lib.add(handle, "raia_imgui_end");
-        lib.add(handle, "raia_imgui_text");
-        lib.add(handle, "raia_imgui_button");
-        lib.add(handle, "raia_imgui_image");
-        lib.add(handle, "raia_imgui_checkbox");
-        lib.add(handle, "raia_imgui_slider_float");
-        lib.add(handle, "raia_imgui_color_edit_3");
-        lib.add(handle, "raia_imgui_same_line");
-        lib.add(handle, "raia_imgui_push_style_var_float");
-        lib.add(handle, "raia_imgui_push_style_var_vec2");
-        lib.add(handle, "raia_imgui_pop_style_var");
-        lib.add(handle, "raia_imgui_push_style_color_u32");
-        lib.add(handle, "raia_imgui_push_style_color_vec4");
-        lib.add(handle, "raia_imgui_pop_style_color");
-        lib.add(handle, "raia_imgui_set_next_window_bg_alpha");
-        lib.add(handle, "raia_imgui_separator");
-        // 初期化
-        lib.call("raia_imgui_check_version");
-        lib.call("raia_imgui_create_context");
         globalThis.__RAIA_IMGUI__ = {};
+        globalThis.__RAIA_IMGUI__.handle = lib.open("raia_imgui");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_check_version");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_create_context");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_set_config_flags");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_config_viewports_no_auto_merge");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_config_viewports_no_task_bar_icon");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_font_global_scale");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_get_framerate");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_style_colors_dark");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_style_colors_light");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_style_colors_classic");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_set_style_window_border_size");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_set_style_window_rounding");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_set_style_scale_all_sizes");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_set_style_colors");
+        //lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_col_window_bg");
+        //lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_col_text");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_impl_glfw_init_for_opengl");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_impl_opengl3_init");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_add_font_default");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_get_glyph_ranges_japanese");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_add_font_from_file_ttf");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_assert");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_set_font_default");
+        //lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_init_font");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_impl_opengl3_shutdown");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_impl_glfw_shutdown");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_destroy_context");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_impl_opengl3_new_frame");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_impl_glfw_new_frame");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_new_frame");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_render");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_get_draw_data");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_impl_opengl3_render_draw_data");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_update_platform_windows");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_render_platform_windows_default");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_begin");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_end");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_text");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_button");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_image");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_checkbox");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_slider_float");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_color_edit_3");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_same_line");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_push_style_var_float");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_push_style_var_vec2");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_pop_style_var");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_push_style_color_u32");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_push_style_color_vec4");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_pop_style_color");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_set_next_window_bg_alpha");
+        lib.add(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_separator");
+        
+        // 初期化
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_check_version");
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_create_context");
     }
 })();
 
@@ -170,10 +171,10 @@ export class ImGui {
         this.WindowFlags.NoInputs     = this.WindowFlags.NoMouseInputs | this.WindowFlags.NoNavInputs | this.WindowFlags.NoNavFocus;
     }
     checkVersion() {
-        lib.call("raia_imgui_check_version");
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_check_version");
     }
     createContext() {
-        lib.call("raia_imgui_create_context");
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_create_context");
     }
     /**
      * 
@@ -183,7 +184,7 @@ export class ImGui {
         var args = JSON.stringify({
             "flag": flag
         });
-        lib.call("raia_imgui_config_viewports_no_auto_merge", args);
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_config_viewports_no_auto_merge", args);
     }
     /**
      * 
@@ -193,7 +194,7 @@ export class ImGui {
         var args = JSON.stringify({
             "flag": flag
         });
-        lib.call("raia_imgui_config_viewports_no_task_bar_icon", args);
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_config_viewports_no_task_bar_icon", args);
     }
     /**
      * 
@@ -203,7 +204,7 @@ export class ImGui {
         var args = JSON.stringify({
             "config_flags": config_flags
         });
-        lib.call("raia_imgui_set_config_flags", args);
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_set_config_flags", args);
     }
     /**
      * 
@@ -213,24 +214,24 @@ export class ImGui {
         var args = JSON.stringify({
             "scale": scale
         });
-        lib.call("raia_imgui_font_global_scale", args);
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_font_global_scale", args);
     }
     /**
      * 
      * @returns {real} framerate
      */
     getFramerate() {
-        var ret = lib.call("raia_imgui_get_framerate");
+        var ret = lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_get_framerate");
         return JSON.parse(ret).result;
     }
     styleColorsDark() {
-        lib.call("raia_imgui_style_colors_dark");
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_style_colors_dark");
     }
     styleColorsLight() {
-        lib.call("raia_imgui_style_colors_light");
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_style_colors_light");
     }
     styleColorsClassic() {
-        lib.call("raia_imgui_style_colors_classic");
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_style_colors_classic");
     }
     /**
      * 
@@ -240,7 +241,7 @@ export class ImGui {
         var args = JSON.stringify({
             "width": width
         });
-        lib.call("raia_imgui_set_style_window_border_size", args);
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_set_style_window_border_size", args);
     }
     /**
      * 
@@ -250,7 +251,7 @@ export class ImGui {
         var args = JSON.stringify({
             "radius": radius
         });
-        lib.call("raia_imgui_set_style_window_rounding", args);
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_set_style_window_rounding", args);
     }
     /**
      * 
@@ -260,7 +261,7 @@ export class ImGui {
         var args = JSON.stringify({
             "scale": scale
         });
-        lib.call("raia_imgui_set_style_scale_all_sizes", args);
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_set_style_scale_all_sizes", args);
     }
     /**
      * 
@@ -278,7 +279,7 @@ export class ImGui {
             "blue": blue,
             "alpha": alpha
         });
-        lib.call("raia_imgui_set_style_colors", args);
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_set_style_colors", args);
     }
     /**
      * 
@@ -290,7 +291,7 @@ export class ImGui {
             "window_id": window_id,
             "install_callbacks": install_callbacks
         });
-        lib.call("raia_imgui_impl_glfw_init_for_opengl", args);
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_impl_glfw_init_for_opengl", args);
     }
     /**
      * 
@@ -300,17 +301,17 @@ export class ImGui {
         var args = JSON.stringify({
             "glsl_version": glsl_version
         });
-        lib.call("raia_imgui_impl_opengl3_init", args);
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_impl_opengl3_init", args);
     }
     addFontDefault() {
-        lib.call("raia_imgui_add_font_default");
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_add_font_default");
     }
     /**
      * 
      * @returns {uintptr} glyph_ranges
      */
     getGlyphRangesJapanese() {
-        var ret = lib.call("raia_imgui_get_glyph_ranges_japanese");
+        var ret = lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_get_glyph_ranges_japanese");
         return JSON.parse(ret).result;
     }
     /**
@@ -328,7 +329,7 @@ export class ImGui {
             "font_cfg": font_cfg,
             "glyph_ranges": glyph_ranges
         });
-        var ret = lib.call("raia_imgui_add_font_from_file_ttf", args);
+        var ret = lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_add_font_from_file_ttf", args);
         return JSON.parse(ret).result;
     }
     /**
@@ -339,7 +340,7 @@ export class ImGui {
         var args = JSON.stringify({
             "expr": expr
         });
-        lib.call("raia_imgui_assert", args);
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_assert", args);
     }
     /**
      * 
@@ -349,38 +350,38 @@ export class ImGui {
         var args = JSON.stringify({
             "font": font
         });
-        lib.call("raia_imgui_set_font_default", args);
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_set_font_default", args);
     }
     initFont() {
-        lib.call("raia_imgui_init_font");
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_init_font");
     }
     implOpenGL3Shutdown() {
-        lib.call("raia_imgui_impl_opengl3_shutdown");
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_impl_opengl3_shutdown");
     }
     implGlfwShutdown() {
-        lib.call("raia_imgui_impl_glfw_shutdown");
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_impl_glfw_shutdown");
     }
     destroyContext() {
-        lib.call("raia_imgui_destroy_context");
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_destroy_context");
     }
     implOpenGL3NewFrame() {
-        lib.call("raia_imgui_impl_opengl3_new_frame");
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_impl_opengl3_new_frame");
     }
     implGlfwNewFrame() {
-        lib.call("raia_imgui_impl_glfw_new_frame");
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_impl_glfw_new_frame");
     }
     newFrame() {
-        lib.call("raia_imgui_new_frame");
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_new_frame");
     }
     render() {
-        lib.call("raia_imgui_render");
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_render");
     }
     /**
      * 
      * @returns {uintptr} draw_data
      */
     getDrawData() {
-        var ret = lib.call("raia_imgui_get_draw_data");
+        var ret = lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_get_draw_data");
         return JSON.parse(ret).result;
     }
     /**
@@ -391,13 +392,13 @@ export class ImGui {
         var args = JSON.stringify({
             "draw_data": draw_data
         });
-        lib.call("raia_imgui_impl_opengl3_render_draw_data", args);
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_impl_opengl3_render_draw_data", args);
     }
     updatePlatformWindows() {
-        lib.call("raia_imgui_update_platform_windows");
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_update_platform_windows");
     }
     renderPlatformWindowsDefault() {
-        lib.call("raia_imgui_render_platform_windows_default");
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_render_platform_windows_default");
     }
     /**
      * 
@@ -411,10 +412,10 @@ export class ImGui {
             "p_open": p_open,
             "flags": flags
         });
-        lib.call("raia_imgui_begin", args);
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_begin", args);
     }
     end() {
-        lib.call("raia_imgui_end");
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_end");
     }
     /**
      * 
@@ -424,7 +425,7 @@ export class ImGui {
         var args = JSON.stringify({
             "text": text
         });
-        lib.call("raia_imgui_text", args);
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_text", args);
     }
     /**
      * 
@@ -435,7 +436,7 @@ export class ImGui {
         var args = JSON.stringify({
             "label": label
         });
-        var ret = lib.call("raia_imgui_button", args);
+        var ret = lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_button", args);
         return JSON.parse(ret).result;
     }
     /**
@@ -450,7 +451,7 @@ export class ImGui {
             "width": width,
             "height": height
         });
-        lib.call("raia_imgui_image", args);
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_image", args);
     }
     /**
      * 
@@ -463,7 +464,7 @@ export class ImGui {
             "label": label,
             "v": v
         });
-        var ret = lib.call("raia_imgui_checkbox", args);
+        var ret = lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_checkbox", args);
         return JSON.parse(ret).result;
     }
     /**
@@ -481,7 +482,7 @@ export class ImGui {
             "v_min": v_min,
             "v_max": v_max
         });
-        var ret = lib.call("raia_imgui_slider_float", args);
+        var ret = lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_slider_float", args);
         return JSON.parse(ret).result;
     }
     /**
@@ -499,11 +500,11 @@ export class ImGui {
             "green": green,
             "blue": blue
         });
-        var ret = lib.call("raia_imgui_color_edit_3", args);
+        var ret = lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_color_edit_3", args);
         return JSON.parse(ret);
     }
     sameLine() {
-        lib.call("raia_imgui_same_line");
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_same_line");
     }
     /**
      * 
@@ -515,7 +516,7 @@ export class ImGui {
             "idx": idx,
             "val": val
         });
-        lib.call("raia_imgui_push_style_var_float", args);
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_push_style_var_float", args);
     }
     /**
      * 
@@ -529,7 +530,7 @@ export class ImGui {
             "x": x,
             "y": y
         });
-        lib.call("raia_imgui_push_style_var_vec2", args);
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_push_style_var_vec2", args);
     }
     /**
      * 
@@ -539,7 +540,7 @@ export class ImGui {
         var args = JSON.stringify({
             "count": count
         });
-        lib.call("raia_imgui_pop_style_var", args);
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_pop_style_var", args);
     }
     /**
      * 
@@ -551,7 +552,7 @@ export class ImGui {
             "idx": idx,
             "col": col
         });
-        lib.call("raia_imgui_push_style_color_u32", args);
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_push_style_color_u32", args);
     }
     /**
      * 
@@ -569,7 +570,7 @@ export class ImGui {
             "z": z,
             "w": w
         });
-        lib.call("raia_imgui_push_style_color_vec4", args);
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_push_style_color_vec4", args);
     }
     /**
      * 
@@ -579,7 +580,7 @@ export class ImGui {
         var args = JSON.stringify({
             "count": count
         });
-        lib.call("raia_imgui_pop_style_color", args);
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_pop_style_color", args);
     }
     /**
      * 
@@ -589,9 +590,9 @@ export class ImGui {
         var args = JSON.stringify({
             "alpha": alpha
         });
-        lib.call("raia_imgui_set_next_window_bg_alpha", args);
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_set_next_window_bg_alpha", args);
     }
     separator() {
-        lib.call("raia_imgui_separator");
+        lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_separator");
     }
 }

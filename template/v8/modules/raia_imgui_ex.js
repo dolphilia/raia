@@ -3,6 +3,7 @@ import {ImGui} from 'raia_imgui';
 /**
  * @extends ImGui
  */
+
 export class ImGuiEx extends ImGui {
     newFrame() {
         super.implOpenGL3NewFrame();

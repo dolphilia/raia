@@ -1,6 +1,7 @@
 import {Std} from "raia_std";
 let std = new Std();
 
+std.print("YEAAAAAAAHHHHH");
 
 var handle = __Raia__.Lib.open("libminilib");
 __Raia__.Lib.add(handle, "plus");
@@ -10,9 +11,11 @@ __Raia__.Lib.add(handle, "put");
 __Raia__.Lib.add(handle, "int_array");
 __Raia__.Lib.add(handle, "add_struct");
 
+std.print(handle);
 var ret;
 
 ret = __Raia__.Lib.ffi(
+    handle,
     "plus", // 関数名
     "sint", // 戻り値の型
     [
@@ -31,6 +34,7 @@ var num_struct = std.makeStruct(
 );
 
 var result_value =  __Raia__.Lib.ffi(
+    handle,
     "add_struct", // 関数名
     "sint", // 戻り値の型
     [
@@ -47,6 +51,7 @@ let int32Array = new Int32Array([1, 2, 3, 4, 5]);
 let int32pointer = __Raia__.Core.bufToPtr(int32Array.buffer);
 
 __Raia__.Lib.ffi(
+    handle,
     "int_array", // 関数名
     "void", // 戻り値の型
     [
@@ -60,6 +65,7 @@ std.print("---");
 
 
 ret = __Raia__.Lib.ffi(
+    handle,
     "minus", // 関数名
     "sint", // 戻り値の型
     [
@@ -71,6 +77,7 @@ ret = __Raia__.Lib.ffi(
 std.print("return value:" + ret);
 
 ret = __Raia__.Lib.ffi(
+    handle,
     "hello", // 関数名
     "void", // 戻り値の型
     null
@@ -79,6 +86,7 @@ ret = __Raia__.Lib.ffi(
 std.print("return value:" + ret);
 
 ret = __Raia__.Lib.ffi(
+    handle,
     "put", // 関数名
     "void", // 戻り値の型
     [
@@ -97,8 +105,6 @@ std.print("return value:" + ret);
 // vector dx, dy
 // 
 
-
-
 std.print("NEW");
 std.print("@:"+std.rand(-100.11, 100.323));
 
@@ -108,15 +114,23 @@ import {Font} from 'raia_font';
 
 import 'raia_gui';
 
+
+
 import {Window} from 'raia_window';
+
 import {Frame} from 'raia_frame';
 import {Texture} from 'raia_texture';
 import {Draw} from 'raia_draw';
 
-var draw = new Draw();
+
+
 var window = new Window("Raia v0.5", 800, 600);
+
+var draw = new Draw();
 var frame = new Frame(window.id);
 var texture = new Texture(240, 240);
+
+
 
 var image = new Image();
 image.loadPngBlendRGB(window.pixels, 800, 600, "bg2.png");

@@ -4,9 +4,10 @@ const lib = new Lib();
 import {Std} from "raia_std";
 const std = new Std();
 
+var handle;
 (function() {
     if (globalThis.__RAIA_FONT__ === undefined) {
-        var handle = lib.open("raia_font");
+        handle = lib.open("raia_font");
         lib.add(handle, "raia_font_open");
         lib.add(handle, "raia_font_init_buffer");
         lib.add(handle, "raia_font_draw_char_rgb");
@@ -38,7 +39,7 @@ export class Font {
         var args = JSON.stringify({
             "font_path": font_path
         });
-        var ret = lib.call("raia_font_open", args); // (window, title)
+        var ret = lib.call(handle, "raia_font_open", args); // (window, title)
         return JSON.parse(ret).result;
     }
     /**
@@ -52,7 +53,7 @@ export class Font {
             "font_path": font_path,
             "font_buffer": std.bufToPtr(font_buffer)
         });
-        var ret = lib.call("raia_font_init_buffer", args);
+        var ret = lib.call(handle, "raia_font_init_buffer", args);
         return JSON.parse(ret);
     }
     /**
@@ -65,7 +66,7 @@ export class Font {
         var args = this.font_info;
         args["text"] = text;
         args["font_size"] = font_size;
-        var ret = lib.call("raia_font_get_char_size", JSON.stringify(args));
+        var ret = lib.call(handle, "raia_font_get_char_size", JSON.stringify(args));
         return JSON.parse(ret);
     }
     /**
@@ -97,7 +98,7 @@ export class Font {
         args["color_blue"] = color_blue;
         args["pos_x"] = pos_x;
         args["pos_y"] = pos_y;
-        var ret = lib.call("raia_font_draw_char_rgb", JSON.stringify(args));
+        var ret = lib.call(handle, "raia_font_draw_char_rgb", JSON.stringify(args));
         return JSON.parse(ret);
     }
     /**
@@ -129,7 +130,7 @@ export class Font {
         args["color_blue"] = color_blue;
         args["pos_x"] = pos_x;
         args["pos_y"] = pos_y;
-        var ret = lib.call("raia_font_draw_char_rgba", JSON.stringify(args));
+        var ret = lib.call(handle, "raia_font_draw_char_rgba", JSON.stringify(args));
         return JSON.parse(ret);
     }
 }

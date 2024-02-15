@@ -4,9 +4,10 @@ const lib = new Lib();
 import {Std} from "raia_std";
 const std = new Std();
 
+var handle;
 (function() {
     if (globalThis.__RAIA_IMAGE__ === undefined) {
-        var handle = lib.open("raia_image");
+        handle = lib.open("raia_image");
         lib.add(handle, "raia_image_load");
         lib.add(handle, "raia_image_load_jpg_blend_rgb");
         lib.add(handle, "raia_image_load_jpg_blend_rgba");
@@ -38,7 +39,7 @@ export class Image {
             "pos_x": pos_x,
             "pos_y": pos_y
         });
-        var ret = lib.call("raia_image_load", json_str); // (window, title)
+        var ret = lib.call(handle, "raia_image_load", json_str); // (window, title)
         return JSON.parse(ret);
     }
     /**
@@ -69,7 +70,7 @@ export class Image {
             "trim_x2": trim_x2,
             "trim_y2": trim_y2
         });
-        var ret = lib.call("raia_image_load_jpg_blend_rgb", json_str); // (window, title)
+        var ret = lib.call(handle, "raia_image_load_jpg_blend_rgb", json_str); // (window, title)
         return JSON.parse(ret);
     }
     /**
@@ -102,7 +103,7 @@ export class Image {
             "trim_x2": trim_x2,
             "trim_y2": trim_y2
         });
-        var ret = lib.call("raia_image_load_jpg_blend_rgba", json_str); // (window, title)
+        var ret = lib.call(handle, "raia_image_load_jpg_blend_rgba", json_str); // (window, title)
         return JSON.parse(ret);
     }
     /**
@@ -133,7 +134,7 @@ export class Image {
             "trim_x2": trim_x2,
             "trim_y2": trim_y2
         });
-        var ret = lib.call("raia_image_load_png_blend_rgb", json_str); // (window, title)
+        var ret = lib.call(handle, "raia_image_load_png_blend_rgb", json_str); // (window, title)
         return JSON.parse(ret);
     }
     /**
@@ -164,7 +165,7 @@ export class Image {
             "trim_x2": trim_x2,
             "trim_y2": trim_y2
         });
-        var ret = lib.call("raia_image_load_png_blend_rgba", json_str); // (window, title)
+        var ret = lib.call(handle, "raia_image_load_png_blend_rgba", json_str); // (window, title)
         return JSON.parse(ret);
     }
 }

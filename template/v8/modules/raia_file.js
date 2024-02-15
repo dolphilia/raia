@@ -1,6 +1,7 @@
+var handle;
 (function() {
     if (globalThis.__Raia__.File === undefined) {
-        var handle = __Raia__.Lib.open("raia_file");
+        handle = __Raia__.Lib.open("raia_file");
         __Raia__.Lib.add(handle, "raia_file_exist");
         __Raia__.Lib.add(handle, "raia_file_load_string");
         __Raia__.Lib.add(handle, "raia_file_save_string");
@@ -26,7 +27,7 @@ export class File {
         const args = JSON.stringify({
             "path": path
         });
-        const rets = __Raia__.Lib.call("raia_file_exist", args);
+        const rets = __Raia__.Lib.call(handle, "raia_file_exist", args);
         return JSON.parse(rets)["exist"];
     }
 
@@ -40,7 +41,7 @@ export class File {
         const args = JSON.stringify({
             "path": path
         });
-        const rets = __Raia__.Lib.call("raia_file_load_string", args);
+        const rets = __Raia__.Lib.call(handle, "raia_file_load_string", args);
         return JSON.parse(rets)["str"];
     }
 
@@ -56,7 +57,7 @@ export class File {
             "path": path,
             "str": data
         });
-        const rets = __Raia__.Lib.call("raia_file_save_string", args);
+        const rets = __Raia__.Lib.call(handle, "raia_file_save_string", args);
         return JSON.parse(rets)["is_success"];
     }
 
@@ -70,7 +71,7 @@ export class File {
         const args = JSON.stringify({
             "path": path
         });
-        const rets = __Raia__.Lib.call("raia_file_load_binary", args);
+        const rets = __Raia__.Lib.call(handle, "raia_file_load_binary", args);
         return JSON.parse(rets)["binary"];
     }
 
@@ -88,12 +89,12 @@ export class File {
             "binary": __Raia__.Core.bufToPtr(binary),
             "size": size
         });
-        const ret = __Raia__.Lib.call("raia_file_save_binary", args);
+        const ret = __Raia__.Lib.call(handle, "raia_file_save_binary", args);
         return JSON.parse(ret)["is_success"];
     }
 
     getCurPath() {
-        const rets = __Raia__.Lib.call("raia_file_get_cur_path", "");
+        const rets = __Raia__.Lib.call(handle, "raia_file_get_cur_path", "");
         return JSON.parse(rets).result;
     }
 
@@ -101,7 +102,7 @@ export class File {
         const args = JSON.stringify({
             "path": path
         });
-        const rets = __Raia__.Lib.call("raia_file_get_dirs", args)
+        const rets = __Raia__.Lib.call(handle, "raia_file_get_dirs", args)
         return JSON.parse(rets).result;
     }
     
@@ -109,7 +110,7 @@ export class File {
         const args = JSON.stringify({
             "path": path
         });
-        const rets = __Raia__.Lib.call("raia_file_get_dirs_all", args);
+        const rets = __Raia__.Lib.call(handle, "raia_file_get_dirs_all", args);
         return JSON.parse(rets).result;
     }
 }
