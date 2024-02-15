@@ -6,413 +6,413 @@ const std = new Std();
 
 (function() {
     if (globalThis.__RAIA_GLES__ === undefined) {
-        var handle = lib.open("raia_gles");
+        globalThis.__RAIA_GLES__ = {};
+        globalThis.__RAIA_GLES__.handle = lib.open("raia_gles");
         //
         // GL ES 2.0
         //
-        lib.add(handle, "raia_gl_active_texture");
-        lib.add(handle, "raia_gl_attach_shader");
-        lib.add(handle, "raia_gl_bind_attrib_location");
-        lib.add(handle, "raia_gl_bind_buffer");
-        lib.add(handle, "raia_gl_bind_framebuffer");
-        lib.add(handle, "raia_gl_bind_renderbuffer");
-        lib.add(handle, "raia_gl_bind_texture");
-        lib.add(handle, "raia_gl_blend_color");
-        lib.add(handle, "raia_gl_blend_equation");
-        lib.add(handle, "raia_gl_blend_equation_separate");
-        lib.add(handle, "raia_gl_blend_func");
-        lib.add(handle, "raia_gl_blend_func_separate");
-        lib.add(handle, "raia_gl_buffer_data");
-        lib.add(handle, "raia_gl_buffer_sub_data");
-        lib.add(handle, "raia_gl_check_framebuffer_status");
-        lib.add(handle, "raia_gl_clear");
-        lib.add(handle, "raia_gl_clear_color");
-        lib.add(handle, "raia_gl_clear_depth_f");
-        lib.add(handle, "raia_gl_clear_stencil");
-        lib.add(handle, "raia_gl_color_mask");
-        lib.add(handle, "raia_gl_compile_shader");
-        lib.add(handle, "raia_gl_compressed_tex_image_2d");
-        lib.add(handle, "raia_gl_compressed_tex_sub_image_2d");
-        lib.add(handle, "raia_gl_copy_tex_image_2d");
-        lib.add(handle, "raia_gl_copy_tex_sub_image_2d");
-        lib.add(handle, "raia_gl_create_program");
-        lib.add(handle, "raia_gl_create_shader");
-        lib.add(handle, "raia_gl_cull_face");
-        lib.add(handle, "raia_gl_delete_buffers");
-        lib.add(handle, "raia_gl_delete_framebuffers");
-        lib.add(handle, "raia_gl_delete_program");
-        lib.add(handle, "raia_gl_delete_renderbuffers");
-        lib.add(handle, "raia_gl_delete_shader");
-        lib.add(handle, "raia_gl_delete_textures");
-        lib.add(handle, "raia_gl_depth_func");
-        lib.add(handle, "raia_gl_depth_mask");
-        lib.add(handle, "raia_gl_depth_range_f");
-        lib.add(handle, "raia_gl_detach_shader");
-        lib.add(handle, "raia_gl_disable");
-        lib.add(handle, "raia_gl_disable_vertex_attrib_array");
-        lib.add(handle, "raia_gl_draw_arrays");
-        lib.add(handle, "raia_gl_draw_elements");
-        lib.add(handle, "raia_gl_enable");
-        lib.add(handle, "raia_gl_enable_vertex_attrib_array");
-        lib.add(handle, "raia_gl_finish");
-        lib.add(handle, "raia_gl_flush");
-        lib.add(handle, "raia_gl_framebuffer_renderbuffer");
-        lib.add(handle, "raia_gl_framebuffer_texture_2d");
-        lib.add(handle, "raia_gl_front_face");
-        lib.add(handle, "raia_gl_gen_buffers");
-        lib.add(handle, "raia_gl_generate_mipmap");
-        lib.add(handle, "raia_gl_gen_framebuffers");
-        lib.add(handle, "raia_gl_gen_renderbuffers");
-        lib.add(handle, "raia_gl_gen_textures");
-        lib.add(handle, "raia_gl_get_active_attrib");
-        lib.add(handle, "raia_gl_get_active_uniform");
-        lib.add(handle, "raia_gl_get_attached_shaders");
-        lib.add(handle, "raia_gl_get_attrib_location");
-        lib.add(handle, "raia_gl_get_boolean_v");
-        lib.add(handle, "raia_gl_get_buffer_parameter_iv");
-        lib.add(handle, "raia_gl_get_error");
-        lib.add(handle, "raia_gl_get_float_v");
-        lib.add(handle, "raia_gl_get_framebuffer_attachment_parameter_iv");
-        lib.add(handle, "raia_gl_get_integer_v");
-        lib.add(handle, "raia_gl_get_program_iv");
-        lib.add(handle, "raia_gl_get_program_info_log");
-        lib.add(handle, "raia_gl_get_renderbuffer_parameter_iv");
-        lib.add(handle, "raia_gl_get_shader_iv");
-        lib.add(handle, "raia_gl_get_shader_info_log");
-        lib.add(handle, "raia_gl_get_shader_precision_format");
-        lib.add(handle, "raia_gl_get_shader_source");
-        lib.add(handle, "raia_gl_get_string");
-        lib.add(handle, "raia_gl_get_tex_parameter_fv");
-        lib.add(handle, "raia_gl_get_tex_parameter_iv");
-        lib.add(handle, "raia_gl_get_uniform_fv");
-        lib.add(handle, "raia_gl_get_uniform_iv");
-        lib.add(handle, "raia_gl_get_uniform_location");
-        lib.add(handle, "raia_gl_get_vertex_attrib_fv");
-        lib.add(handle, "raia_gl_get_vertex_attrib_iv");
-        lib.add(handle, "raia_gl_get_vertex_attrib_pointer_v");
-        lib.add(handle, "raia_gl_hint");
-        lib.add(handle, "raia_gl_is_buffer");
-        lib.add(handle, "raia_gl_is_enabled");
-        lib.add(handle, "raia_gl_is_framebuffer");
-        lib.add(handle, "raia_gl_is_program");
-        lib.add(handle, "raia_gl_is_renderbuffer");
-        lib.add(handle, "raia_gl_is_shader");
-        lib.add(handle, "raia_gl_is_texture");
-        lib.add(handle, "raia_gl_line_width");
-        lib.add(handle, "raia_gl_link_program");
-        lib.add(handle, "raia_gl_pixel_store_i");
-        lib.add(handle, "raia_gl_polygon_offset");
-        lib.add(handle, "raia_gl_read_pixels");
-        lib.add(handle, "raia_gl_release_shader_compiler");
-        lib.add(handle, "raia_gl_renderbuffer_storage");
-        lib.add(handle, "raia_gl_sample_coverage");
-        lib.add(handle, "raia_gl_scissor");
-        lib.add(handle, "raia_gl_shader_binary");
-        lib.add(handle, "raia_gl_shader_source");
-        lib.add(handle, "raia_gl_stencil_func");
-        lib.add(handle, "raia_gl_stencil_func_separate");
-        lib.add(handle, "raia_gl_stencil_mask");
-        lib.add(handle, "raia_gl_stencil_mask_separate");
-        lib.add(handle, "raia_gl_stencil_op");
-        lib.add(handle, "raia_gl_stencil_op_separate");
-        lib.add(handle, "raia_gl_tex_image_2d");
-        lib.add(handle, "raia_gl_tex_parameter_f");
-        lib.add(handle, "raia_gl_tex_parameter_fv");
-        lib.add(handle, "raia_gl_tex_parameter_i");
-        lib.add(handle, "raia_gl_tex_parameter_iv");
-        lib.add(handle, "raia_gl_tex_sub_image_2d");
-        lib.add(handle, "raia_gl_uniform_1f");
-        lib.add(handle, "raia_gl_uniform_1fv");
-        lib.add(handle, "raia_gl_uniform_1i");
-        lib.add(handle, "raia_gl_uniform_1iv");
-        lib.add(handle, "raia_gl_uniform_2f");
-        lib.add(handle, "raia_gl_uniform_2fv");
-        lib.add(handle, "raia_gl_uniform_2i");
-        lib.add(handle, "raia_gl_uniform_2iv");
-        lib.add(handle, "raia_gl_uniform_3f");
-        lib.add(handle, "raia_gl_uniform_3fv");
-        lib.add(handle, "raia_gl_uniform_3i");
-        lib.add(handle, "raia_gl_uniform_3iv");
-        lib.add(handle, "raia_gl_uniform_4f");
-        lib.add(handle, "raia_gl_uniform_4fv");
-        lib.add(handle, "raia_gl_uniform_4i");
-        lib.add(handle, "raia_gl_uniform4iv");
-        lib.add(handle, "raia_gl_uniform_matrix_2fv");
-        lib.add(handle, "raia_gl_uniform_matrix_3fv");
-        lib.add(handle, "raia_gl_uniform_matrix_4fv");
-        lib.add(handle, "raia_gl_use_program");
-        lib.add(handle, "raia_gl_validate_program");
-        lib.add(handle, "raia_gl_vertex_attrib_1f");
-        lib.add(handle, "raia_gl_vertex_attrib_1fv");
-        lib.add(handle, "raia_gl_vertex_attrib_2f");
-        lib.add(handle, "raia_gl_vertex_attrib_2fv");
-        lib.add(handle, "raia_gl_vertex_attrib_3f");
-        lib.add(handle, "raia_gl_vertex_attrib_3fv");
-        lib.add(handle, "raia_gl_vertex_attrib_4f");
-        lib.add(handle, "raia_gl_vertex_attrib_4fv");
-        lib.add(handle, "raia_gl_vertex_attrib_pointer");
-        lib.add(handle, "raia_gl_viewport");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_active_texture");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_attach_shader");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_bind_attrib_location");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_bind_buffer");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_bind_framebuffer");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_bind_renderbuffer");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_bind_texture");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_blend_color");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_blend_equation");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_blend_equation_separate");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_blend_func");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_blend_func_separate");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_buffer_data");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_buffer_sub_data");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_check_framebuffer_status");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_clear");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_clear_color");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_clear_depth_f");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_clear_stencil");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_color_mask");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_compile_shader");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_compressed_tex_image_2d");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_compressed_tex_sub_image_2d");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_copy_tex_image_2d");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_copy_tex_sub_image_2d");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_create_program");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_create_shader");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_cull_face");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_delete_buffers");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_delete_framebuffers");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_delete_program");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_delete_renderbuffers");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_delete_shader");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_delete_textures");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_depth_func");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_depth_mask");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_depth_range_f");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_detach_shader");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_disable");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_disable_vertex_attrib_array");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_draw_arrays");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_draw_elements");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_enable");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_enable_vertex_attrib_array");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_finish");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_flush");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_framebuffer_renderbuffer");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_framebuffer_texture_2d");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_front_face");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_gen_buffers");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_generate_mipmap");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_gen_framebuffers");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_gen_renderbuffers");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_gen_textures");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_active_attrib");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_active_uniform");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_attached_shaders");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_attrib_location");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_boolean_v");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_buffer_parameter_iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_error");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_float_v");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_framebuffer_attachment_parameter_iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_integer_v");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_program_iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_program_info_log");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_renderbuffer_parameter_iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_shader_iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_shader_info_log");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_shader_precision_format");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_shader_source");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_string");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_tex_parameter_fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_tex_parameter_iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_uniform_fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_uniform_iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_uniform_location");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_vertex_attrib_fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_vertex_attrib_iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_vertex_attrib_pointer_v");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_hint");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_is_buffer");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_is_enabled");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_is_framebuffer");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_is_program");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_is_renderbuffer");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_is_shader");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_is_texture");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_line_width");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_link_program");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_pixel_store_i");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_polygon_offset");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_read_pixels");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_release_shader_compiler");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_renderbuffer_storage");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_sample_coverage");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_scissor");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_shader_binary");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_shader_source");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_stencil_func");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_stencil_func_separate");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_stencil_mask");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_stencil_mask_separate");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_stencil_op");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_stencil_op_separate");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_tex_image_2d");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_tex_parameter_f");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_tex_parameter_fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_tex_parameter_i");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_tex_parameter_iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_tex_sub_image_2d");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_1f");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_1fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_1i");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_1iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_2f");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_2fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_2i");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_2iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_3f");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_3fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_3i");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_3iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_4f");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_4fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_4i");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform4iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_matrix_2fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_matrix_3fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_matrix_4fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_use_program");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_validate_program");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_vertex_attrib_1f");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_vertex_attrib_1fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_vertex_attrib_2f");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_vertex_attrib_2fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_vertex_attrib_3f");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_vertex_attrib_3fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_vertex_attrib_4f");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_vertex_attrib_4fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_vertex_attrib_pointer");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_viewport");
         //
         // GL ES 3.0
         //
-        lib.add(handle, "raia_gl_read_buffer");
-        lib.add(handle, "raia_gl_draw_range_elements");
-        lib.add(handle, "raia_gl_tex_image_3d");
-        lib.add(handle, "raia_gl_tex_sub_image_3d");
-        lib.add(handle, "raia_gl_copy_tex_sub_image_3d");
-        lib.add(handle, "raia_gl_compressed_tex_image_3d");
-        lib.add(handle, "raia_gl_compressed_tex_sub_image_3d");
-        lib.add(handle, "raia_gl_gen_queries");
-        lib.add(handle, "raia_gl_delete_queries");
-        lib.add(handle, "raia_gl_is_query");
-        lib.add(handle, "raia_gl_begin_query");
-        lib.add(handle, "raia_gl_end_query");
-        lib.add(handle, "raia_gl_get_query_iv");
-        lib.add(handle, "raia_gl_get_query_object_uiv");
-        lib.add(handle, "raia_gl_unmap_buffer");
-        lib.add(handle, "raia_gl_get_buffer_pointer_v");
-        lib.add(handle, "raia_gl_draw_buffers");
-        lib.add(handle, "raia_gl_uniform_matrix_2x3fv");
-        lib.add(handle, "raia_gl_uniform_matrix_3x2fv");
-        lib.add(handle, "raia_gl_uniform_matrix_2x4fv");
-        lib.add(handle, "raia_gl_uniform_matrix_4x2fv");
-        lib.add(handle, "raia_gl_uniform_matrix_3x4fv");
-        lib.add(handle, "raia_gl_uniform_matrix_4x3fv");
-        lib.add(handle, "raia_gl_blit_framebuffer");
-        lib.add(handle, "raia_gl_renderbuffer_storage_multisample");
-        lib.add(handle, "raia_gl_framebuffer_texture_layer");
-        lib.add(handle, "raia_gl_map_buffer_range");
-        lib.add(handle, "raia_gl_flush_mapped_buffer_range");
-        lib.add(handle, "raia_gl_bind_vertex_array");
-        lib.add(handle, "raia_gl_delete_vertex_arrays");
-        lib.add(handle, "raia_gl_gen_vertex_arrays");
-        lib.add(handle, "raia_gl_is_vertex_array");
-        lib.add(handle, "raia_gl_get_integer_i_v");
-        lib.add(handle, "raia_gl_begin_transform_feedback");
-        lib.add(handle, "raia_gl_end_transform_feedback");
-        lib.add(handle, "raia_gl_bind_buffer_range");
-        lib.add(handle, "raia_gl_bind_buffer_base");
-        lib.add(handle, "raia_gl_transform_feedback_varyings");
-        lib.add(handle, "raia_gl_get_transform_feedback_varying");
-        lib.add(handle, "raia_gl_vertex_attrib_i_pointer");
-        lib.add(handle, "raia_gl_get_vertex_attrib_iiv");
-        lib.add(handle, "raia_gl_get_vertex_attrib_iuiv");
-        lib.add(handle, "raia_gl_vertex_attrib_i4i");
-        lib.add(handle, "raia_gl_vertex_attrib_i4ui");
-        lib.add(handle, "raia_gl_vertex_attrib_i4iv");
-        lib.add(handle, "raia_gl_vertex_attrib_i4uiv");
-        lib.add(handle, "raia_gl_get_uniform_uiv");
-        lib.add(handle, "raia_gl_get_frag_data_location");
-        lib.add(handle, "raia_gl_uniform_1ui");
-        lib.add(handle, "raia_gl_uniform_2ui");
-        lib.add(handle, "raia_gl_uniform_3ui");
-        lib.add(handle, "raia_gl_uniform_4ui");
-        lib.add(handle, "raia_gl_uniform_1uiv");
-        lib.add(handle, "raia_gl_uniform_2uiv");
-        lib.add(handle, "raia_gl_uniform_3uiv");
-        lib.add(handle, "raia_gl_uniform_4uiv");
-        lib.add(handle, "raia_gl_clear_buffer_iv");
-        lib.add(handle, "raia_gl_clear_buffer_uiv");
-        lib.add(handle, "raia_gl_clear_buffer_fv");
-        lib.add(handle, "raia_gl_clear_buffer_fi");
-        lib.add(handle, "raia_gl_get_string_i");
-        lib.add(handle, "raia_gl_copy_buffer_sub_data");
-        lib.add(handle, "raia_gl_get_uniform_indices");
-        lib.add(handle, "raia_gl_get_active_uniforms_iv");
-        lib.add(handle, "raia_gl_get_uniform_block_index");
-        lib.add(handle, "raia_gl_get_active_uniform_block_iv");
-        lib.add(handle, "raia_gl_get_active_uniform_block_name");
-        lib.add(handle, "raia_gl_uniform_block_binding");
-        lib.add(handle, "raia_gl_draw_arrays_instanced");
-        lib.add(handle, "raia_gl_draw_elements_instanced");
-        lib.add(handle, "raia_gl_fence_sync");
-        lib.add(handle, "raia_gl_is_sync");
-        lib.add(handle, "raia_gl_delete_sync");
-        lib.add(handle, "raia_gl_client_wait_sync");
-        lib.add(handle, "raia_gl_wait_sync");
-        lib.add(handle, "raia_gl_get_integer_64v");
-        lib.add(handle, "raia_gl_get_sync_iv");
-        lib.add(handle, "raia_gl_get_integer_64i_v");
-        lib.add(handle, "raia_gl_get_buffer_parameter_i64v");
-        lib.add(handle, "raia_gl_gen_samplers");
-        lib.add(handle, "raia_gl_delete_samplers");
-        lib.add(handle, "raia_gl_is_sampler");
-        lib.add(handle, "raia_gl_bind_sampler");
-        lib.add(handle, "raia_gl_sampler_parameter_i");
-        lib.add(handle, "raia_gl_sampler_parameter_iv");
-        lib.add(handle, "raia_gl_sampler_parameter_f");
-        lib.add(handle, "raia_gl_sampler_parameter_fv");
-        lib.add(handle, "raia_gl_get_sampler_parameter_iv");
-        lib.add(handle, "raia_gl_get_sampler_parameter_fv");
-        lib.add(handle, "raia_gl_vertex_attrib_divisor");
-        lib.add(handle, "raia_gl_bind_transform_feedback");
-        lib.add(handle, "raia_gl_delete_transform_feedbacks");
-        lib.add(handle, "raia_gl_gen_transform_feedbacks");
-        lib.add(handle, "raia_gl_is_transform_feedback");
-        lib.add(handle, "raia_gl_pause_transform_feedback");
-        lib.add(handle, "raia_gl_resume_transform_feedback");
-        lib.add(handle, "raia_gl_get_program_binary");
-        lib.add(handle, "raia_gl_program_binary");
-        lib.add(handle, "raia_gl_program_parameter_i");
-        lib.add(handle, "raia_gl_invalidate_framebuffer");
-        lib.add(handle, "raia_gl_invalidate_sub_framebuffer");
-        lib.add(handle, "raia_gl_tex_storage_2d");
-        lib.add(handle, "raia_gl_tex_storage_3d");
-        lib.add(handle, "raia_gl_get_internal_format_iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_read_buffer");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_draw_range_elements");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_tex_image_3d");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_tex_sub_image_3d");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_copy_tex_sub_image_3d");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_compressed_tex_image_3d");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_compressed_tex_sub_image_3d");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_gen_queries");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_delete_queries");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_is_query");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_begin_query");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_end_query");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_query_iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_query_object_uiv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_unmap_buffer");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_buffer_pointer_v");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_draw_buffers");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_matrix_2x3fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_matrix_3x2fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_matrix_2x4fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_matrix_4x2fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_matrix_3x4fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_matrix_4x3fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_blit_framebuffer");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_renderbuffer_storage_multisample");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_framebuffer_texture_layer");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_map_buffer_range");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_flush_mapped_buffer_range");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_bind_vertex_array");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_delete_vertex_arrays");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_gen_vertex_arrays");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_is_vertex_array");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_integer_i_v");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_begin_transform_feedback");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_end_transform_feedback");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_bind_buffer_range");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_bind_buffer_base");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_transform_feedback_varyings");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_transform_feedback_varying");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_vertex_attrib_i_pointer");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_vertex_attrib_iiv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_vertex_attrib_iuiv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_vertex_attrib_i4i");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_vertex_attrib_i4ui");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_vertex_attrib_i4iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_vertex_attrib_i4uiv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_uniform_uiv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_frag_data_location");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_1ui");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_2ui");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_3ui");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_4ui");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_1uiv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_2uiv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_3uiv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_4uiv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_clear_buffer_iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_clear_buffer_uiv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_clear_buffer_fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_clear_buffer_fi");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_string_i");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_copy_buffer_sub_data");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_uniform_indices");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_active_uniforms_iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_uniform_block_index");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_active_uniform_block_iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_active_uniform_block_name");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_block_binding");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_draw_arrays_instanced");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_draw_elements_instanced");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_fence_sync");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_is_sync");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_delete_sync");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_client_wait_sync");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_wait_sync");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_integer_64v");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_sync_iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_integer_64i_v");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_buffer_parameter_i64v");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_gen_samplers");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_delete_samplers");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_is_sampler");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_bind_sampler");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_sampler_parameter_i");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_sampler_parameter_iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_sampler_parameter_f");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_sampler_parameter_fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_sampler_parameter_iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_sampler_parameter_fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_vertex_attrib_divisor");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_bind_transform_feedback");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_delete_transform_feedbacks");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_gen_transform_feedbacks");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_is_transform_feedback");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_pause_transform_feedback");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_resume_transform_feedback");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_program_binary");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_binary");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_parameter_i");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_invalidate_framebuffer");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_invalidate_sub_framebuffer");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_tex_storage_2d");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_tex_storage_3d");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_internal_format_iv");
         //
         // GL ES 3.1
         //
-        lib.add(handle, "raia_gl_dispatch_compute");
-        lib.add(handle, "raia_gl_dispatch_compute_indirect");
-        lib.add(handle, "raia_gl_draw_arrays_indirect");
-        lib.add(handle, "raia_gl_draw_elements_indirect");
-        lib.add(handle, "raia_gl_framebuffer_parameter_i");
-        lib.add(handle, "raia_gl_get_framebuffer_parameter_iv");
-        lib.add(handle, "raia_gl_get_program_interface_iv");
-        lib.add(handle, "raia_gl_get_program_resource_index");
-        lib.add(handle, "raia_gl_get_program_resource_name");
-        lib.add(handle, "raia_gl_get_program_resource_iv");
-        lib.add(handle, "raia_gl_get_program_resource_location");
-        lib.add(handle, "raia_gl_use_program_stages");
-        lib.add(handle, "raia_gl_active_shader_program");
-        lib.add(handle, "raia_gl_create_shader_program_v");
-        lib.add(handle, "raia_gl_bind_program_pipeline");
-        lib.add(handle, "raia_gl_delete_program_pipelines");
-        lib.add(handle, "raia_gl_gen_program_pipelines");
-        lib.add(handle, "raia_gl_is_program_pipeline");
-        lib.add(handle, "raia_gl_get_program_pipeline_iv");
-        lib.add(handle, "raia_gl_program_uniform_1i");
-        lib.add(handle, "raia_gl_program_uniform_2i");
-        lib.add(handle, "raia_gl_program_uniform_3i");
-        lib.add(handle, "raia_gl_program_uniform_4i");
-        lib.add(handle, "raia_gl_program_uniform_1ui");
-        lib.add(handle, "raia_gl_program_uniform_2ui");
-        lib.add(handle, "raia_gl_program_uniform_3ui");
-        lib.add(handle, "raia_gl_program_uniform_4ui");
-        lib.add(handle, "raia_gl_program_uniform_1f");
-        lib.add(handle, "raia_gl_program_uniform_2f");
-        lib.add(handle, "raia_gl_program_uniform_3f");
-        lib.add(handle, "raia_gl_program_uniform_4f");
-        lib.add(handle, "raia_gl_program_uniform_1iv");
-        lib.add(handle, "raia_gl_program_uniform_2iv");
-        lib.add(handle, "raia_gl_program_uniform_3iv");
-        lib.add(handle, "raia_gl_program_uniform_4iv");
-        lib.add(handle, "raia_gl_program_uniform_1uiv");
-        lib.add(handle, "raia_gl_program_uniform_2uiv");
-        lib.add(handle, "raia_gl_program_uniform_3uiv");
-        lib.add(handle, "raia_gl_program_uniform_4uiv");
-        lib.add(handle, "raia_gl_program_uniform_1fv");
-        lib.add(handle, "raia_gl_program_uniform_2fv");
-        lib.add(handle, "raia_gl_program_uniform_3fv");
-        lib.add(handle, "raia_gl_program_uniform_4fv");
-        lib.add(handle, "raia_gl_program_uniform_matrix_2fv");
-        lib.add(handle, "raia_gl_program_uniform_matrix_3fv");
-        lib.add(handle, "raia_gl_program_uniform_matrix_4fv");
-        lib.add(handle, "raia_gl_program_uniform_matrix_2x3fv");
-        lib.add(handle, "raia_gl_program_uniform_matrix_3x2fv");
-        lib.add(handle, "raia_gl_program_uniform_matrix_2x4fv");
-        lib.add(handle, "raia_gl_program_uniform_matrix_4x2fv");
-        lib.add(handle, "raia_gl_program_uniform_matrix_3x4fv");
-        lib.add(handle, "raia_gl_program_uniform_matrix_4x3fv");
-        lib.add(handle, "raia_gl_validate_program_pipeline");
-        lib.add(handle, "raia_gl_get_program_pipeline_info_log");
-        lib.add(handle, "raia_gl_bind_image_texture");
-        lib.add(handle, "raia_gl_get_boolean_i_v");
-        lib.add(handle, "raia_gl_memory_barrier");
-        lib.add(handle, "raia_gl_memory_barrier_by_region");
-        lib.add(handle, "raia_gl_tex_storage_2d_multisample");
-        lib.add(handle, "raia_gl_get_multisample_fv");
-        lib.add(handle, "raia_gl_sample_mask_i");
-        lib.add(handle, "raia_gl_get_tex_level_parameter_iv");
-        lib.add(handle, "raia_gl_get_tex_level_parameter_fv");
-        lib.add(handle, "raia_gl_bind_vertex_buffer");
-        lib.add(handle, "raia_gl_vertex_attrib_format");
-        lib.add(handle, "raia_gl_vertex_attrib_i_format");
-        lib.add(handle, "raia_gl_vertex_attrib_binding");
-        lib.add(handle, "raia_gl_vertex_binding_divisor");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_dispatch_compute");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_dispatch_compute_indirect");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_draw_arrays_indirect");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_draw_elements_indirect");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_framebuffer_parameter_i");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_framebuffer_parameter_iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_program_interface_iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_program_resource_index");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_program_resource_name");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_program_resource_iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_program_resource_location");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_use_program_stages");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_active_shader_program");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_create_shader_program_v");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_bind_program_pipeline");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_delete_program_pipelines");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_gen_program_pipelines");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_is_program_pipeline");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_program_pipeline_iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_1i");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_2i");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_3i");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_4i");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_1ui");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_2ui");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_3ui");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_4ui");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_1f");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_2f");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_3f");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_4f");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_1iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_2iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_3iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_4iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_1uiv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_2uiv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_3uiv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_4uiv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_1fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_2fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_3fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_4fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_matrix_2fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_matrix_3fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_matrix_4fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_matrix_2x3fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_matrix_3x2fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_matrix_2x4fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_matrix_4x2fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_matrix_3x4fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_program_uniform_matrix_4x3fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_validate_program_pipeline");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_program_pipeline_info_log");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_bind_image_texture");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_boolean_i_v");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_memory_barrier");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_memory_barrier_by_region");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_tex_storage_2d_multisample");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_multisample_fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_sample_mask_i");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_tex_level_parameter_iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_tex_level_parameter_fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_bind_vertex_buffer");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_vertex_attrib_format");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_vertex_attrib_i_format");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_vertex_attrib_binding");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_vertex_binding_divisor");
         //
         // GL ES 3.2
         //
-        lib.add(handle, "raia_gl_blend_barrier");
-        lib.add(handle, "raia_gl_copy_image_sub_data");
-        lib.add(handle, "raia_gl_debug_message_control");
-        lib.add(handle, "raia_gl_debug_message_insert");
-        lib.add(handle, "raia_gl_debug_message_callback");
-        lib.add(handle, "raia_gl_get_debug_message_log");
-        lib.add(handle, "raia_gl_push_debug_group");
-        lib.add(handle, "raia_gl_pop_debug_group");
-        lib.add(handle, "raia_gl_object_label");
-        lib.add(handle, "raia_gl_get_object_label");
-        lib.add(handle, "raia_gl_object_ptr_label");
-        lib.add(handle, "raia_gl_get_object_ptr_label");
-        lib.add(handle, "raia_gl_get_pointer_v");
-        lib.add(handle, "raia_gl_enable_i");
-        lib.add(handle, "raia_gl_disable_i");
-        lib.add(handle, "raia_gl_blend_equation_i");
-        lib.add(handle, "raia_gl_blend_equation_separate_i");
-        lib.add(handle, "raia_gl_blend_func_i");
-        lib.add(handle, "raia_gl_blend_func_separate_i");
-        lib.add(handle, "raia_gl_color_mask_i");
-        lib.add(handle, "raia_gl_is_enabled_i");
-        lib.add(handle, "raia_gl_draw_elements_base_vertex");
-        lib.add(handle, "raia_gl_draw_range_elements_base_vertex");
-        lib.add(handle, "raia_gl_draw_elements_instanced_base_vertex");
-        lib.add(handle, "raia_gl_framebuffer_texture");
-        lib.add(handle, "raia_gl_primitive_bounding_box");
-        lib.add(handle, "raia_gl_get_graphics_reset_status");
-        lib.add(handle, "raia_gl_read_n_pixels");
-        lib.add(handle, "raia_gl_get_n_uniform_fv");
-        lib.add(handle, "raia_gl_get_n_uniform_iv");
-        lib.add(handle, "raia_gl_get_n_uniform_uiv");
-        lib.add(handle, "raia_gl_min_sample_shading");
-        lib.add(handle, "raia_gl_patch_parameter_i");
-        lib.add(handle, "raia_gl_tex_parameter_iiv");
-        lib.add(handle, "raia_gl_tex_parameter_iuiv");
-        lib.add(handle, "raia_gl_get_tex_parameter_iiv");
-        lib.add(handle, "raia_gl_get_tex_parameter_iuiv");
-        lib.add(handle, "raia_gl_sampler_parameter_iiv");
-        lib.add(handle, "raia_gl_sampler_parameter_iuiv");
-        lib.add(handle, "raia_gl_get_sampler_parameter_iiv");
-        lib.add(handle, "raia_gl_get_sampler_parameter_iuiv");
-        lib.add(handle, "raia_gl_tex_buffer");
-        lib.add(handle, "raia_gl_tex_buffer_range");
-        lib.add(handle, "raia_gl_tex_storage_3d_multisample");        
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_blend_barrier");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_copy_image_sub_data");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_debug_message_control");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_debug_message_insert");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_debug_message_callback");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_debug_message_log");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_push_debug_group");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_pop_debug_group");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_object_label");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_object_label");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_object_ptr_label");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_object_ptr_label");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_pointer_v");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_enable_i");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_disable_i");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_blend_equation_i");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_blend_equation_separate_i");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_blend_func_i");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_blend_func_separate_i");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_color_mask_i");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_is_enabled_i");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_draw_elements_base_vertex");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_draw_range_elements_base_vertex");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_draw_elements_instanced_base_vertex");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_framebuffer_texture");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_primitive_bounding_box");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_graphics_reset_status");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_read_n_pixels");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_n_uniform_fv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_n_uniform_iv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_n_uniform_uiv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_min_sample_shading");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_patch_parameter_i");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_tex_parameter_iiv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_tex_parameter_iuiv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_tex_parameter_iiv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_tex_parameter_iuiv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_sampler_parameter_iiv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_sampler_parameter_iuiv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_sampler_parameter_iiv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_sampler_parameter_iuiv");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_tex_buffer");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_tex_buffer_range");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_tex_storage_3d_multisample");        
         //
         // (代替関数)
         //
-        lib.add(handle, "raia_gl_viewport_alt");
-        lib.add(handle, "raia_gl_clear_color_alt");
-        lib.add(handle, "raia_gl_clear_alt");
-        lib.add(handle, "raia_gl_use_program_alt");
-        lib.add(handle, "raia_gl_vertex_attrib_pointer_alt");
-        lib.add(handle, "raia_gl_enable_vertex_attrib_array_alt");
-        lib.add(handle, "raia_gl_tex_image_2d_alt");
-        lib.add(handle, "raia_gl_active_texture_alt");
-        lib.add(handle, "raia_gl_bind_texture_alt");
-        lib.add(handle, "raia_gl_uniform_1i_alt");
-        lib.add(handle, "raia_gl_draw_elements_alt");
-        lib.add(handle, "raia_gl_create_shader_alt");
-        lib.add(handle, "raia_gl_shader_source_alt");
-        lib.add(handle, "raia_gl_compile_shader_alt");
-        lib.add(handle, "raia_gl_get_shader_iv_alt");
-        lib.add(handle, "raia_gl_create_program_alt");
-        lib.add(handle, "raia_gl_attach_shader_alt");
-        lib.add(handle, "raia_gl_delete_shader_alt");
-        lib.add(handle, "raia_gl_link_program_alt");
-        lib.add(handle, "raia_gl_pixel_store_i_alt");
-        lib.add(handle, "raia_gl_gen_textures_alt");
-        lib.add(handle, "raia_gl_tex_parameter_i_alt");
-        lib.add(handle, "raia_gl_get_attrib_location_alt");
-        lib.add(handle, "raia_gl_get_uniform_location_alt");
-        lib.add(handle, "raia_gl_gen_vertex_arrays_alt");
-        lib.add(handle, "raia_gl_gen_buffers_alt");
-        lib.add(handle, "raia_gl_bind_vertex_array_alt");
-        lib.add(handle, "raia_gl_bind_buffer_alt");
-        lib.add(handle, "raia_gl_buffer_data_alt");
-        lib.add(handle, "raia_gl_delete_vertex_arrays_alt");
-        lib.add(handle, "raia_gl_delete_buffers_alt");
-        lib.add(handle, "raia_gl_delete_textures_alt");
-        globalThis.__RAIA_GLES__ = {};
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_viewport_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_clear_color_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_clear_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_use_program_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_vertex_attrib_pointer_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_enable_vertex_attrib_array_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_tex_image_2d_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_active_texture_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_bind_texture_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_1i_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_draw_elements_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_create_shader_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_shader_source_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_compile_shader_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_shader_iv_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_create_program_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_attach_shader_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_delete_shader_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_link_program_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_pixel_store_i_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_gen_textures_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_tex_parameter_i_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_attrib_location_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_get_uniform_location_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_gen_vertex_arrays_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_gen_buffers_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_bind_vertex_array_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_bind_buffer_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_buffer_data_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_delete_vertex_arrays_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_delete_buffers_alt");
+        lib.add(globalThis.__RAIA_GLES__.handle, "raia_gl_delete_textures_alt");
     }
 })();
 
@@ -1440,6 +1440,7 @@ export class GLES {
 
     activeTexture(texture) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_active_texture",
             "void",
             [
@@ -1449,6 +1450,7 @@ export class GLES {
     }
     attachShader(program, shader) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_attach_shader",
             "void",
             [
@@ -1459,6 +1461,7 @@ export class GLES {
     }
     bindAttribLocation(program, index, name) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_bind_attrib_location",
             "void",
             [
@@ -1470,6 +1473,7 @@ export class GLES {
     }
     bindBuffer(target, buffer) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_bind_buffer",
             "void",
             [
@@ -1480,6 +1484,7 @@ export class GLES {
     }
     bindFramebuffer(target, framebuffer) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_bind_framebuffer",
             "void",
             [
@@ -1490,6 +1495,7 @@ export class GLES {
     }
     bindRenderbuffer(target, renderbuffer) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_bind_renderbuffer",
             "void",
             [
@@ -1500,6 +1506,7 @@ export class GLES {
     }
     bindTexture(target, texture) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_bind_texture",
             "void",
             [
@@ -1510,6 +1517,7 @@ export class GLES {
     }
     blendColor(red, green, blue, alpha) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_blend_color",
             "void",
             [
@@ -1522,6 +1530,7 @@ export class GLES {
     }
     blendEquation(mode) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_blend_equation",
             "void",
             [
@@ -1531,6 +1540,7 @@ export class GLES {
     }
     blendEquationSeparate(modeRGB, modeAlpha) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_blend_equation_separate",
             "void",
             [
@@ -1541,6 +1551,7 @@ export class GLES {
     }
     blendFunc(sfactor, dfactor) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_blend_func",
             "void",
             [
@@ -1551,6 +1562,7 @@ export class GLES {
     }
     blendFuncSeparate(sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_blend_func_separate",
             "void",
             [
@@ -1563,6 +1575,7 @@ export class GLES {
     }
     bufferData(target, size, data, usage) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_buffer_data",
             "void",
             [
@@ -1575,6 +1588,7 @@ export class GLES {
     }
     bufferSubData(target, offset, size, data) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_buffer_sub_data",
             "void",
             [
@@ -1587,6 +1601,7 @@ export class GLES {
     }
     checkFramebufferStatus(target) {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_check_framebuffer_status",
             "uint",
             [
@@ -1596,6 +1611,7 @@ export class GLES {
     }
     clear(mask) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_clear",
             "void",
             [
@@ -1605,6 +1621,7 @@ export class GLES {
     }
     clearColor(red, green, blue, alpha) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_clear_color",
             "void",
             [
@@ -1617,6 +1634,7 @@ export class GLES {
     }
     clearDepthf(d) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_clear_depth_f",
             "void",
             [
@@ -1626,6 +1644,7 @@ export class GLES {
     }
     clearStencil(s) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_clear_stencil",
             "void",
             [
@@ -1635,6 +1654,7 @@ export class GLES {
     }
     colorMask(red, green, blue, alpha) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_color_mask",
             "void",
             [
@@ -1647,6 +1667,7 @@ export class GLES {
     }
     compileShader(shader) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_compile_shader",
             "void",
             [
@@ -1656,6 +1677,7 @@ export class GLES {
     }
     compressedTexImage2D(target, level, internalformat, width, height, border, imageSize, data) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_compressed_tex_image_2d",
             "void",
             [
@@ -1672,6 +1694,7 @@ export class GLES {
     }
     compressedTexSubImage2D(target, level, xoffset, yoffset, width, height, format, imageSize, data) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_compressed_tex_sub_image_2d",
             "void",
             [
@@ -1689,6 +1712,7 @@ export class GLES {
     }
     copyTexImage2D(target, level, internalformat, x, y, width, height, border) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_copy_tex_image_2d",
             "void",
             [
@@ -1705,6 +1729,7 @@ export class GLES {
     }
     copyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_copy_tex_sub_image_2d",
             "void",
             [
@@ -1721,6 +1746,7 @@ export class GLES {
     }
     createProgram() {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_create_program",
             "uint",
             null
@@ -1728,6 +1754,7 @@ export class GLES {
     }
     createShader(type) {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_create_shader",
             "uint",
             [
@@ -1737,6 +1764,7 @@ export class GLES {
     }
     cullFace(mode) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_cull_face",
             "void",
             [
@@ -1746,6 +1774,7 @@ export class GLES {
     }
     deleteBuffers(n, buffers) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_delete_buffers",
             "void",
             [
@@ -1756,6 +1785,7 @@ export class GLES {
     }
     deleteFramebuffers(n, framebuffers) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_delete_framebuffers",
             "void",
             [
@@ -1766,6 +1796,7 @@ export class GLES {
     }
     deleteProgram(program) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_delete_program",
             "void",
             [
@@ -1775,6 +1806,7 @@ export class GLES {
     }
     deleteRenderbuffers(n, renderbuffers) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_delete_renderbuffers",
             "void",
             [
@@ -1785,6 +1817,7 @@ export class GLES {
     }
     deleteShader(shader) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_delete_shader",
             "void",
             [
@@ -1794,6 +1827,7 @@ export class GLES {
     }
     deleteTextures(n, textures) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_delete_textures",
             "void",
             [
@@ -1804,6 +1838,7 @@ export class GLES {
     }
     depthFunc(func) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_depth_func",
             "void",
             [
@@ -1813,6 +1848,7 @@ export class GLES {
     }
     depthMask(flag) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_depth_mask",
             "void",
             [
@@ -1822,6 +1858,7 @@ export class GLES {
     }
     depthRangef(n, f) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_depth_range_f",
             "void",
             [
@@ -1832,6 +1869,7 @@ export class GLES {
     }
     detachShader(program, shader) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_detach_shader",
             "void",
             [
@@ -1842,6 +1880,7 @@ export class GLES {
     }
     disable(cap) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_disable",
             "void",
             [
@@ -1851,6 +1890,7 @@ export class GLES {
     }
     disableVertexAttribArray(index) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_disable_vertex_attrib_array",
             "void",
             [
@@ -1860,6 +1900,7 @@ export class GLES {
     }
     drawArrays(mode, first, count) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_draw_arrays",
             "void",
             [
@@ -1871,6 +1912,7 @@ export class GLES {
     }
     drawElements(mode, count, type, indices) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_draw_elements",
             "void",
             [
@@ -1883,6 +1925,7 @@ export class GLES {
     }
     enable(cap) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_enable",
             "void",
             [
@@ -1892,6 +1935,7 @@ export class GLES {
     }
     enableVertexAttribArray(index) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_enable_vertex_attrib_array",
             "void",
             [
@@ -1901,6 +1945,7 @@ export class GLES {
     }
     finish() {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_finish",
             "void",
             null
@@ -1908,6 +1953,7 @@ export class GLES {
     }
     flush() {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_flush",
             "void",
             null
@@ -1915,6 +1961,7 @@ export class GLES {
     }
     framebufferRenderbuffer(target, attachment, renderbuffertarget, renderbuffer) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_framebuffer_renderbuffer",
             "void",
             [
@@ -1927,6 +1974,7 @@ export class GLES {
     }
     framebufferTexture2D(target, attachment, textarget, texture, level) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_framebuffer_texture_2d",
             "void",
             [
@@ -1940,6 +1988,7 @@ export class GLES {
     }
     frontFace(mode) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_front_face",
             "void",
             [
@@ -1949,6 +1998,7 @@ export class GLES {
     }
     genBuffers(n, buffers) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_gen_buffers",
             "void",
             [
@@ -1959,6 +2009,7 @@ export class GLES {
     }
     generateMipmap(target) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_generate_mipmap",
             "void",
             [
@@ -1968,6 +2019,7 @@ export class GLES {
     }
     genFramebuffers(n, framebuffers) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_gen_framebuffers",
             "void",
             [
@@ -1978,6 +2030,7 @@ export class GLES {
     }
     genRenderbuffers(n, renderbuffers) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_gen_renderbuffers",
             "void",
             [
@@ -1988,6 +2041,7 @@ export class GLES {
     }
     genTextures(n, textures) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_gen_textures",
             "void",
             [
@@ -1998,6 +2052,7 @@ export class GLES {
     }
     getActiveAttrib(program, index, bufSize, length, size, type, name) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_active_attrib",
             "void",
             [
@@ -2013,6 +2068,7 @@ export class GLES {
     }
     getActiveUniform(program, index, bufSize, length, size, type, name) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_active_uniform",
             "void",
             [
@@ -2028,6 +2084,7 @@ export class GLES {
     }
     getAttachedShaders(program, maxCount, count, shaders) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_attached_shaders",
             "void",
             [
@@ -2040,6 +2097,7 @@ export class GLES {
     }
     getAttribLocation(program, name) {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_attrib_location",
             "sint",
             [
@@ -2050,6 +2108,7 @@ export class GLES {
     }
     getBooleanv(pname, data) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_boolean_v",
             "void",
             [
@@ -2060,6 +2119,7 @@ export class GLES {
     }
     getBufferParameteriv(target, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_buffer_parameter_iv",
             "void",
             [
@@ -2071,6 +2131,7 @@ export class GLES {
     }
     getError() {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_error",
             "uint",
             null
@@ -2078,6 +2139,7 @@ export class GLES {
     }
     getFloatv(pname, data) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_float_v",
             "void",
             [
@@ -2088,6 +2150,7 @@ export class GLES {
     }
     getFramebufferAttachmentParameteriv(target, attachment, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_framebuffer_attachment_parameter_iv",
             "void",
             [
@@ -2100,6 +2163,7 @@ export class GLES {
     }
     getIntegerv(pname, data) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_integer_v",
             "void",
             [
@@ -2110,6 +2174,7 @@ export class GLES {
     }
     getProgramiv(program, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_program_iv",
             "void",
             [
@@ -2121,6 +2186,7 @@ export class GLES {
     }
     getProgramInfoLog(program, bufSize, length, infoLog) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_program_info_log",
             "void",
             [
@@ -2133,6 +2199,7 @@ export class GLES {
     }
     getRenderbufferParameteriv(target, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_renderbuffer_parameter_iv",
             "void",
             [
@@ -2144,6 +2211,7 @@ export class GLES {
     }
     getShaderiv(shader, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_shader_iv",
             "void",
             [
@@ -2155,6 +2223,7 @@ export class GLES {
     }
     getShaderInfoLog(shader, bufSize, length, infoLog) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_shader_info_log",
             "void",
             [
@@ -2167,6 +2236,7 @@ export class GLES {
     }
     getShaderPrecisionFormat(shadertype, precisiontype, range, precision) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_shader_precision_format",
             "void",
             [
@@ -2179,6 +2249,7 @@ export class GLES {
     }
     getShaderSource(shader, bufSize, length, source) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_shader_source",
             "void",
             [
@@ -2191,6 +2262,7 @@ export class GLES {
     }
     getString(name) {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_string",
             "string",
             [
@@ -2200,6 +2272,7 @@ export class GLES {
     }
     getTexParameterfv(target, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_tex_parameter_fv",
             "void",
             [
@@ -2211,6 +2284,7 @@ export class GLES {
     }
     getTexParameteriv(target, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_tex_parameter_iv",
             "void",
             [
@@ -2222,6 +2296,7 @@ export class GLES {
     }
     getUniformfv(program, location, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_uniform_fv",
             "void",
             [
@@ -2233,6 +2308,7 @@ export class GLES {
     }
     getUniformiv(program, location, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_uniform_iv",
             "void",
             [
@@ -2244,6 +2320,7 @@ export class GLES {
     }
     getUniformLocation(program, name) {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_uniform_location",
             "sint",
             [
@@ -2254,6 +2331,7 @@ export class GLES {
     }
     getVertexAttribfv(index, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_vertex_attrib_fv",
             "void",
             [
@@ -2265,6 +2343,7 @@ export class GLES {
     }
     getVertexAttribiv(index, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_vertex_attrib_iv",
             "void",
             [
@@ -2276,6 +2355,7 @@ export class GLES {
     }
     getVertexAttribPointerv(index, pname, pointer) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_vertex_attrib_pointer_v",
             "void",
             [
@@ -2287,6 +2367,7 @@ export class GLES {
     }
     hint(target, mode) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_hint",
             "void",
             [
@@ -2297,6 +2378,7 @@ export class GLES {
     }
     isBuffer(buffer) {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_is_buffer",
             "uchar",
             [
@@ -2306,6 +2388,7 @@ export class GLES {
     }
     isEnabled(cap) {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_is_enabled",
             "uchar",
             [
@@ -2315,6 +2398,7 @@ export class GLES {
     }
     isFramebuffer(framebuffer) {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_is_framebuffer",
             "uchar",
             [
@@ -2324,6 +2408,7 @@ export class GLES {
     }
     isProgram(program) {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_is_program",
             "uchar",
             [
@@ -2333,6 +2418,7 @@ export class GLES {
     }
     isRenderbuffer(renderbuffer) {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_is_renderbuffer",
             "uchar",
             [
@@ -2342,6 +2428,7 @@ export class GLES {
     }
     isShader(shader) {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_is_shader",
             "uchar",
             [
@@ -2351,6 +2438,7 @@ export class GLES {
     }
     isTexture(texture) {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_is_texture",
             "uchar",
             [
@@ -2360,6 +2448,7 @@ export class GLES {
     }
     lineWidth(width) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_line_width",
             "void",
             [
@@ -2369,6 +2458,7 @@ export class GLES {
     }
     linkProgram(program) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_link_program",
             "void",
             [
@@ -2378,6 +2468,7 @@ export class GLES {
     }
     pixelStorei(pname, param) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_pixel_store_i",
             "void",
             [
@@ -2388,6 +2479,7 @@ export class GLES {
     }
     polygonOffset(factor, units) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_polygon_offset",
             "void",
             [
@@ -2398,6 +2490,7 @@ export class GLES {
     }
     readPixels(x, y, width, height, format, type, pixels) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_read_pixels",
             "void",
             [
@@ -2413,6 +2506,7 @@ export class GLES {
     }
     releaseShaderCompiler() {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_release_shader_compiler",
             "void",
             null
@@ -2420,6 +2514,7 @@ export class GLES {
     }
     renderbufferStorage(target, internalformat, width, height) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_renderbuffer_storage",
             "void",
             [
@@ -2432,6 +2527,7 @@ export class GLES {
     }
     sampleCoverage(value, invert) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_sample_coverage",
             "void",
             [
@@ -2442,6 +2538,7 @@ export class GLES {
     }
     scissor(x, y, width, height) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_scissor",
             "void",
             [
@@ -2454,6 +2551,7 @@ export class GLES {
     }
     shaderBinary(count, shaders, binaryformat, binary, length) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_shader_binary",
             "void",
             [
@@ -2467,6 +2565,7 @@ export class GLES {
     }
     shaderSource(shader, count, string, length) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_shader_source",
             "void",
             [
@@ -2479,6 +2578,7 @@ export class GLES {
     }
     stencilFunc(func, ref, mask) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_stencil_func",
             "void",
             [
@@ -2490,6 +2590,7 @@ export class GLES {
     }
     stencilFuncSeparate(face, func, ref, mask) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_stencil_func_separate",
             "void",
             [
@@ -2502,6 +2603,7 @@ export class GLES {
     }
     stencilMask(mask) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_stencil_mask",
             "void",
             [
@@ -2511,6 +2613,7 @@ export class GLES {
     }
     stencilMaskSeparate(face, mask) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_stencil_mask_separate",
             "void",
             [
@@ -2521,6 +2624,7 @@ export class GLES {
     }
     stencilOp(fail, zfail, zpass) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_stencil_op",
             "void",
             [
@@ -2532,6 +2636,7 @@ export class GLES {
     }
     stencilOpSeparate(face, sfail, dpfail, dppass) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_stencil_op_separate",
             "void",
             [
@@ -2544,6 +2649,7 @@ export class GLES {
     }
     texImage2D(target, level, internalformat, width, height, border, format, type, pixels) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_tex_image_2d",
             "void",
             [
@@ -2561,6 +2667,7 @@ export class GLES {
     }
     texParameterf(target, pname, param) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_tex_parameter_f",
             "void",
             [
@@ -2572,6 +2679,7 @@ export class GLES {
     }
     texParameterfv(target, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_tex_parameter_fv",
             "void",
             [
@@ -2583,6 +2691,7 @@ export class GLES {
     }
     texParameteri(target, pname, param) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_tex_parameter_i",
             "void",
             [
@@ -2594,6 +2703,7 @@ export class GLES {
     }
     texParameteriv(target, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_tex_parameter_iv",
             "void",
             [
@@ -2605,6 +2715,7 @@ export class GLES {
     }
     texSubImage2D(target, level, xoffset, yoffset, width, height, format, type, pixels) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_tex_sub_image_2d",
             "void",
             [
@@ -2622,6 +2733,7 @@ export class GLES {
     }
     uniform1f(location, v0) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_1f",
             "void",
             [
@@ -2632,6 +2744,7 @@ export class GLES {
     }
     uniform1fv(location, count, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_1fv",
             "void",
             [
@@ -2643,6 +2756,7 @@ export class GLES {
     }
     uniform1i(location, v0) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_1i",
             "void",
             [
@@ -2653,6 +2767,7 @@ export class GLES {
     }
     uniform1iv(location, count, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_1iv",
             "void",
             [
@@ -2664,6 +2779,7 @@ export class GLES {
     }
     uniform2f(location, v0, v1) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_2f",
             "void",
             [
@@ -2675,6 +2791,7 @@ export class GLES {
     }
     uniform2fv(location, count, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_2fv",
             "void",
             [
@@ -2686,6 +2803,7 @@ export class GLES {
     }
     uniform2i(location, v0, v1) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_2i",
             "void",
             [
@@ -2697,6 +2815,7 @@ export class GLES {
     }
     uniform2iv(location, count, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_2iv",
             "void",
             [
@@ -2708,6 +2827,7 @@ export class GLES {
     }
     uniform3f(location, v0, v1, v2) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_3f",
             "void",
             [
@@ -2720,6 +2840,7 @@ export class GLES {
     }
     uniform3fv(location, count, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_3fv",
             "void",
             [
@@ -2731,6 +2852,7 @@ export class GLES {
     }
     uniform3i(location, v0, v1, v2) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_3i",
             "void",
             [
@@ -2743,6 +2865,7 @@ export class GLES {
     }
     uniform3iv(location, count, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_3iv",
             "void",
             [
@@ -2754,6 +2877,7 @@ export class GLES {
     }
     uniform4f(location, v0, v1, v2, v3) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_4f",
             "void",
             [
@@ -2767,6 +2891,7 @@ export class GLES {
     }
     uniform4fv(location, count, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_4fv",
             "void",
             [
@@ -2778,6 +2903,7 @@ export class GLES {
     }
     uniform4i(location, v0, v1, v2, v3) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_4i",
             "void",
             [
@@ -2791,6 +2917,7 @@ export class GLES {
     }
     uniform4iv(location, count, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform4iv",
             "void",
             [
@@ -2802,6 +2929,7 @@ export class GLES {
     }
     uniformMatrix2fv(location, count, transpose, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_matrix_2fv",
             "void",
             [
@@ -2814,6 +2942,7 @@ export class GLES {
     }
     uniformMatrix3fv(location, count, transpose, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_matrix_3fv",
             "void",
             [
@@ -2826,6 +2955,7 @@ export class GLES {
     }
     uniformMatrix4fv(location, count, transpose, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_matrix_4fv",
             "void",
             [
@@ -2838,6 +2968,7 @@ export class GLES {
     }
     useProgram(program) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_use_program",
             "void",
             [
@@ -2847,6 +2978,7 @@ export class GLES {
     }
     validateProgram(program) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_validate_program",
             "void",
             [
@@ -2856,6 +2988,7 @@ export class GLES {
     }
     vertexAttrib1f(index, x) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_vertex_attrib_1f",
             "void",
             [
@@ -2866,6 +2999,7 @@ export class GLES {
     }
     vertexAttrib1fv(index, v) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_vertex_attrib_1fv",
             "void",
             [
@@ -2876,6 +3010,7 @@ export class GLES {
     }
     vertexAttrib2f(index, x, y) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_vertex_attrib_2f",
             "void",
             [
@@ -2887,6 +3022,7 @@ export class GLES {
     }
     vertexAttrib2fv(index, v) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_vertex_attrib_2fv",
             "void",
             [
@@ -2897,6 +3033,7 @@ export class GLES {
     }
     vertexAttrib3f(index, x, y, z) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_vertex_attrib_3f",
             "void",
             [
@@ -2909,6 +3046,7 @@ export class GLES {
     }
     vertexAttrib3fv(index, v) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_vertex_attrib_3fv",
             "void",
             [
@@ -2919,6 +3057,7 @@ export class GLES {
     }
     vertexAttrib4f(index, x, y, z, w) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_vertex_attrib_4f",
             "void",
             [
@@ -2932,6 +3071,7 @@ export class GLES {
     }
     vertexAttrib4fv(index, v) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_vertex_attrib_4fv",
             "void",
             [
@@ -2942,6 +3082,7 @@ export class GLES {
     }
     vertexAttribPointer(index, size, type, normalized, stride, pointer) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_vertex_attrib_pointer",
             "void",
             [
@@ -2956,6 +3097,7 @@ export class GLES {
     }
     viewport(x, y, width, height) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_viewport",
             "void",
             [
@@ -2973,6 +3115,7 @@ export class GLES {
 
     readBuffer(src) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_read_buffer",
             "void",
             [
@@ -2982,6 +3125,7 @@ export class GLES {
     }
     drawRangeElements(mode, start, end, count, type, indices) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_draw_range_elements",
             "void",
             [
@@ -2996,6 +3140,7 @@ export class GLES {
     }
     texImage3D(target, level, internalformat, width, height, depth, border, format, type, pixels) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_tex_image_3d",
             "void",
             [
@@ -3014,6 +3159,7 @@ export class GLES {
     }
     texSubImage3D(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_tex_sub_image_3d",
             "void",
             [
@@ -3033,6 +3179,7 @@ export class GLES {
     }
     copyTexSubImage3D(target, level, xoffset, yoffset, zoffset, x, y, width, height) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_copy_tex_sub_image_3d",
             "void",
             [
@@ -3050,6 +3197,7 @@ export class GLES {
     }
     compressedTexImage3D(target, level, internalformat, width, height, depth, border, imageSize, data) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_compressed_tex_image_3d",
             "void",
             [
@@ -3067,6 +3215,7 @@ export class GLES {
     }
     compressedTexSubImage3D(target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_compressed_tex_sub_image_3d",
             "void",
             [
@@ -3086,6 +3235,7 @@ export class GLES {
     }
     genQueries(n, ids) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_gen_queries",
             "void",
             [
@@ -3096,6 +3246,7 @@ export class GLES {
     }
     deleteQueries(n, ids) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_delete_queries",
             "void",
             [
@@ -3106,6 +3257,7 @@ export class GLES {
     }
     isQuery(id) {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_is_query",
             "uchar",
             [
@@ -3115,6 +3267,7 @@ export class GLES {
     }
     beginQuery(target, id) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_begin_query",
             "void",
             [
@@ -3125,6 +3278,7 @@ export class GLES {
     }
     endQuery(target) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_end_query",
             "void",
             [
@@ -3134,6 +3288,7 @@ export class GLES {
     }
     getQueryiv(target, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_query_iv",
             "void",
             [
@@ -3145,6 +3300,7 @@ export class GLES {
     }
     getQueryObjectuiv(id, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_query_object_uiv",
             "void",
             [
@@ -3156,6 +3312,7 @@ export class GLES {
     }
     unmapBuffer(target) {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_unmap_buffer",
             "uchar",
             [
@@ -3165,6 +3322,7 @@ export class GLES {
     }
     getBufferPointerv(target, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_buffer_pointer_v",
             "void",
             [
@@ -3176,6 +3334,7 @@ export class GLES {
     }
     drawBuffers(n, bufs) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_draw_buffers",
             "void",
             [
@@ -3186,6 +3345,7 @@ export class GLES {
     }
     uniformMatrix2x3fv(location, count, transpose, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_matrix_2x3fv",
             "void",
             [
@@ -3198,6 +3358,7 @@ export class GLES {
     }
     uniformMatrix3x2fv(location, count, transpose, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_matrix_3x2fv",
             "void",
             [
@@ -3210,6 +3371,7 @@ export class GLES {
     }
     uniformMatrix2x4fv(location, count, transpose, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_matrix_2x4fv",
             "void",
             [
@@ -3222,6 +3384,7 @@ export class GLES {
     }
     uniformMatrix4x2fv(location, count, transpose, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_matrix_4x2fv",
             "void",
             [
@@ -3234,6 +3397,7 @@ export class GLES {
     }
     uniformMatrix3x4fv(location, count, transpose, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_matrix_3x4fv",
             "void",
             [
@@ -3246,6 +3410,7 @@ export class GLES {
     }
     uniformMatrix4x3fv(location, count, transpose, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_matrix_4x3fv",
             "void",
             [
@@ -3258,6 +3423,7 @@ export class GLES {
     }
     blitFramebuffer(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_blit_framebuffer",
             "void",
             [
@@ -3276,6 +3442,7 @@ export class GLES {
     }
     renderbufferStorageMultisample(target, samples, internalformat, width, height) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_renderbuffer_storage_multisample",
             "void",
             [
@@ -3289,6 +3456,7 @@ export class GLES {
     }
     framebufferTextureLayer(target, attachment, texture, level, layer) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_framebuffer_texture_layer",
             "void",
             [
@@ -3302,6 +3470,7 @@ export class GLES {
     }
     mapBufferRange(target, offset, length, access) {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_map_buffer_range",
             "pointer",
             [
@@ -3314,6 +3483,7 @@ export class GLES {
     }
     flushMappedBufferRange(target, offset, length) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_flush_mapped_buffer_range",
             "void",
             [
@@ -3325,6 +3495,7 @@ export class GLES {
     }
     bindVertexArray(array) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_bind_vertex_array",
             "void",
             [
@@ -3334,6 +3505,7 @@ export class GLES {
     }
     deleteVertexArrays(n, arrays) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_delete_vertex_arrays",
             "void",
             [
@@ -3344,6 +3516,7 @@ export class GLES {
     }
     genVertexArrays(n, arrays) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_gen_vertex_arrays",
             "void",
             [
@@ -3354,6 +3527,7 @@ export class GLES {
     }
     isVertexArray(array) {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_is_vertex_array",
             "uchar",
             [
@@ -3363,6 +3537,7 @@ export class GLES {
     }
     getIntegeri_v(target, index, data) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_integer_i_v",
             "void",
             [
@@ -3374,6 +3549,7 @@ export class GLES {
     }
     beginTransformFeedback(primitiveMode) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_begin_transform_feedback",
             "void",
             [
@@ -3383,6 +3559,7 @@ export class GLES {
     }
     endTransformFeedback() {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_end_transform_feedback",
             "void",
             null
@@ -3390,6 +3567,7 @@ export class GLES {
     }
     bindBufferRange(target, index, buffer, offset, size) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_bind_buffer_range",
             "void",
             [
@@ -3403,6 +3581,7 @@ export class GLES {
     }
     bindBufferBase(target, index, buffer) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_bind_buffer_base",
             "void",
             [
@@ -3414,6 +3593,7 @@ export class GLES {
     }
     transformFeedbackVaryings(program, count, varyings, bufferMode) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_transform_feedback_varyings",
             "void",
             [
@@ -3426,6 +3606,7 @@ export class GLES {
     }
     getTransformFeedbackVarying(program, index, bufSize, length, size, type, name) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_transform_feedback_varying",
             "void",
             [
@@ -3441,6 +3622,7 @@ export class GLES {
     }
     vertexAttribIPointer(index, size, type, stride, pointer) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_vertex_attrib_i_pointer",
             "void",
             [
@@ -3454,6 +3636,7 @@ export class GLES {
     }
     getVertexAttribIiv(index, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_vertex_attrib_iiv",
             "void",
             [
@@ -3465,6 +3648,7 @@ export class GLES {
     }
     getVertexAttribIuiv(index, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_vertex_attrib_iuiv",
             "void",
             [
@@ -3476,6 +3660,7 @@ export class GLES {
     }
     vertexAttribI4i(index, x, y, z, w) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_vertex_attrib_i4i",
             "void",
             [
@@ -3489,6 +3674,7 @@ export class GLES {
     }
     vertexAttribI4ui(index, x, y, z, w) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_vertex_attrib_i4ui",
             "void",
             [
@@ -3502,6 +3688,7 @@ export class GLES {
     }
     vertexAttribI4iv(index, v) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_vertex_attrib_i4iv",
             "void",
             [
@@ -3512,6 +3699,7 @@ export class GLES {
     }
     vertexAttribI4uiv(index, v) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_vertex_attrib_i4uiv",
             "void",
             [
@@ -3522,6 +3710,7 @@ export class GLES {
     }
     getUniformuiv(program, location, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_uniform_uiv",
             "void",
             [
@@ -3533,6 +3722,7 @@ export class GLES {
     }
     getFragDataLocation(program, name) {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_frag_data_location",
             "sint",
             [
@@ -3543,6 +3733,7 @@ export class GLES {
     }
     uniform1ui(location, v0) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_1ui",
             "void",
             [
@@ -3553,6 +3744,7 @@ export class GLES {
     }
     uniform2ui(location, v0, v1) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_2ui",
             "void",
             [
@@ -3564,6 +3756,7 @@ export class GLES {
     }
     uniform3ui(location, v0, v1, v2) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_3ui",
             "void",
             [
@@ -3576,6 +3769,7 @@ export class GLES {
     }
     uniform4ui(location, v0, v1, v2, v3) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_4ui",
             "void",
             [
@@ -3589,6 +3783,7 @@ export class GLES {
     }
     uniform1uiv(location, count, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_1uiv",
             "void",
             [
@@ -3600,6 +3795,7 @@ export class GLES {
     }
     uniform2uiv(location, count, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_2uiv",
             "void",
             [
@@ -3611,6 +3807,7 @@ export class GLES {
     }
     uniform3uiv(location, count, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_3uiv",
             "void",
             [
@@ -3622,6 +3819,7 @@ export class GLES {
     }
     uniform4uiv(location, count, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_4uiv",
             "void",
             [
@@ -3633,6 +3831,7 @@ export class GLES {
     }
     clearBufferiv(buffer, drawbuffer, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_clear_buffer_iv",
             "void",
             [
@@ -3644,6 +3843,7 @@ export class GLES {
     }
     clearBufferuiv(buffer, drawbuffer, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_clear_buffer_uiv",
             "void",
             [
@@ -3655,6 +3855,7 @@ export class GLES {
     }
     clearBufferfv(buffer, drawbuffer, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_clear_buffer_fv",
             "void",
             [
@@ -3666,6 +3867,7 @@ export class GLES {
     }
     clearBufferfi(buffer, drawbuffer, depth, stencil) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_clear_buffer_fi",
             "void",
             [
@@ -3678,6 +3880,7 @@ export class GLES {
     }
     getStringi(name, index) {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_string_i",
             "string",
             [
@@ -3688,6 +3891,7 @@ export class GLES {
     }
     copyBufferSubData(readTarget, writeTarget, readOffset, writeOffset, size) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_copy_buffer_sub_data",
             "void",
             [
@@ -3701,6 +3905,7 @@ export class GLES {
     }
     getUniformIndices(program, uniformCount, uniformNames, uniformIndices) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_uniform_indices",
             "void",
             [
@@ -3713,6 +3918,7 @@ export class GLES {
     }
     getActiveUniformsiv(program, uniformCount, uniformIndices, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_active_uniforms_iv",
             "void",
             [
@@ -3726,6 +3932,7 @@ export class GLES {
     }
     getUniformBlockIndex(program, uniformBlockName) {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_uniform_block_index",
             "uint",
             [
@@ -3736,6 +3943,7 @@ export class GLES {
     }
     getActiveUniformBlockiv(program, uniformBlockIndex, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_active_uniform_block_iv",
             "void",
             [
@@ -3748,6 +3956,7 @@ export class GLES {
     }
     getActiveUniformBlockName(program, uniformBlockIndex, bufSize, length, uniformBlockName) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_active_uniform_block_name",
             "void",
             [
@@ -3761,6 +3970,7 @@ export class GLES {
     }
     uniformBlockBinding(program, uniformBlockIndex, uniformBlockBinding) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_uniform_block_binding",
             "void",
             [
@@ -3772,6 +3982,7 @@ export class GLES {
     }
     drawArraysInstanced(mode, first, count, instancecount) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_draw_arrays_instanced",
             "void",
             [
@@ -3784,6 +3995,7 @@ export class GLES {
     }
     drawElementsInstanced(mode, count, type, indices, instancecount) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_draw_elements_instanced",
             "void",
             [
@@ -3797,6 +4009,7 @@ export class GLES {
     }
     fenceSync(condition, flags) {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_fence_sync",
             "pointer",
             [
@@ -3807,6 +4020,7 @@ export class GLES {
     }
     isSync(sync) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_is_sync",
             "void",
             [
@@ -3816,6 +4030,7 @@ export class GLES {
     }
     deleteSync(sync) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_delete_sync",
             "void",
             [
@@ -3825,6 +4040,7 @@ export class GLES {
     }
     clientWaitSync(sync, flags, timeout) {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_client_wait_sync",
             "uint",
             [
@@ -3836,6 +4052,7 @@ export class GLES {
     }
     waitSync(sync, flags, timeout) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_wait_sync",
             "void",
             [
@@ -3847,6 +4064,7 @@ export class GLES {
     }
     getInteger64v(pname, data) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_integer_64v",
             "void",
             [
@@ -3857,6 +4075,7 @@ export class GLES {
     }
     getSynciv(sync, pname, bufSize, length, values) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_sync_iv",
             "void",
             [
@@ -3870,6 +4089,7 @@ export class GLES {
     }
     getInteger64i_v(target, index, data) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_integer_64i_v",
             "void",
             [
@@ -3881,6 +4101,7 @@ export class GLES {
     }
     getBufferParameteri64v(target, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_buffer_parameter_i64v",
             "void",
             [
@@ -3892,6 +4113,7 @@ export class GLES {
     }
     genSamplers(count, samplers) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_gen_samplers",
             "void",
             [
@@ -3902,6 +4124,7 @@ export class GLES {
     }
     deleteSamplers(count, samplers) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_delete_samplers",
             "void",
             [
@@ -3912,6 +4135,7 @@ export class GLES {
     }
     isSampler(sampler) {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_is_sampler",
             "uint",
             [
@@ -3921,6 +4145,7 @@ export class GLES {
     }
     bindSampler(unit, sampler) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_bind_sampler",
             "void",
             [
@@ -3931,6 +4156,7 @@ export class GLES {
     }
     samplerParameteri(sampler, pname, param) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_sampler_parameter_i",
             "void",
             [
@@ -3942,6 +4168,7 @@ export class GLES {
     }
     samplerParameteriv(sampler, pname, param) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_sampler_parameter_iv",
             "void",
             [
@@ -3953,6 +4180,7 @@ export class GLES {
     }
     samplerParameterf(sampler, pname, param) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_sampler_parameter_f",
             "void",
             [
@@ -3964,6 +4192,7 @@ export class GLES {
     }
     samplerParameterfv(sampler, pname, param) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_sampler_parameter_fv",
             "void",
             [
@@ -3975,6 +4204,7 @@ export class GLES {
     }
     getSamplerParameteriv(sampler, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_sampler_parameter_iv",
             "void",
             [
@@ -3986,6 +4216,7 @@ export class GLES {
     }
     getSamplerParameterfv(sampler, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_sampler_parameter_fv",
             "void",
             [
@@ -3997,6 +4228,7 @@ export class GLES {
     }
     vertexAttribDivisor(index, divisor) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_vertex_attrib_divisor",
             "void",
             [
@@ -4007,6 +4239,7 @@ export class GLES {
     }
     bindTransformFeedback(target, id) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_bind_transform_feedback",
             "void",
             [
@@ -4017,6 +4250,7 @@ export class GLES {
     }
     deleteTransformFeedbacks(n, ids) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_delete_transform_feedbacks",
             "void",
             [
@@ -4027,6 +4261,7 @@ export class GLES {
     }
     genTransformFeedbacks(n, ids) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_gen_transform_feedbacks",
             "void",
             [
@@ -4037,6 +4272,7 @@ export class GLES {
     }
     isTransformFeedback(id) {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_is_transform_feedback",
             "uint",
             [
@@ -4046,6 +4282,7 @@ export class GLES {
     }
     pauseTransformFeedback() {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_pause_transform_feedback",
             "void",
             null
@@ -4053,6 +4290,7 @@ export class GLES {
     }
     resumeTransformFeedback() {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_resume_transform_feedback",
             "void",
             null
@@ -4060,6 +4298,7 @@ export class GLES {
     }
     getProgramBinary(program, bufSize, length, binaryFormat, binary) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_program_binary",
             "void",
             [
@@ -4073,6 +4312,7 @@ export class GLES {
     }
     programBinary(program, binaryFormat, binary, length) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_binary",
             "void",
             [
@@ -4085,6 +4325,7 @@ export class GLES {
     }
     programParameteri(program, pname, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_parameter_i",
             "void",
             [
@@ -4096,6 +4337,7 @@ export class GLES {
     }
     invalidateFramebuffer(target, numAttachments, attachments) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_invalidate_framebuffer",
             "void",
             [
@@ -4107,6 +4349,7 @@ export class GLES {
     }
     invalidateSubFramebuffer(target, numAttachments, attachments, x, y, width, height) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_invalidate_sub_framebuffer",
             "void",
             [
@@ -4122,6 +4365,7 @@ export class GLES {
     }
     texStorage2D(target, levels, internalformat, width, height) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_tex_storage_2d",
             "void",
             [
@@ -4135,6 +4379,7 @@ export class GLES {
     }
     texStorage3D(target, levels, internalformat, width, height, depth) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_tex_storage_3d",
             "void",
             [
@@ -4149,6 +4394,7 @@ export class GLES {
     }
     getInternalformativ(target, internalformat, pname, bufSize, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_internal_format_iv",
             "void",
             [
@@ -4167,6 +4413,7 @@ export class GLES {
 
     dispatchCompute(num_groups_x, num_groups_y, num_groups_z) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_dispatch_compute",
             "void",
             [
@@ -4178,6 +4425,7 @@ export class GLES {
     }
     dispatchComputeIndirect(indirect) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_dispatch_compute_indirect",
             "void",
             [
@@ -4187,6 +4435,7 @@ export class GLES {
     }
     drawArraysIndirect(mode, indirect) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_draw_arrays_indirect",
             "void",
             [
@@ -4197,6 +4446,7 @@ export class GLES {
     }
     drawElementsIndirect(mode, type, indirect) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_draw_elements_indirect",
             "void",
             [
@@ -4208,6 +4458,7 @@ export class GLES {
     }
     framebufferParameteri(target, pname, param) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_framebuffer_parameter_i",
             "void",
             [
@@ -4219,6 +4470,7 @@ export class GLES {
     }
     getFramebufferParameteriv(target, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_framebuffer_parameter_iv",
             "void",
             [
@@ -4230,6 +4482,7 @@ export class GLES {
     }
     getProgramInterfaceiv(program, programInterface, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_program_interface_iv",
             "void",
             [
@@ -4242,6 +4495,7 @@ export class GLES {
     }
     getProgramResourceIndex(program, programInterface, name) {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_program_resource_index",
             "uint",
             [
@@ -4253,6 +4507,7 @@ export class GLES {
     }
     getProgramResourceName(program, programInterface, index, bufSize, length, name) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_program_resource_name",
             "void",
             [
@@ -4267,6 +4522,7 @@ export class GLES {
     }
     getProgramResourceiv(program, programInterface, index, propCount, props, bufSize, length, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_program_resource_iv",
             "void",
             [
@@ -4283,6 +4539,7 @@ export class GLES {
     }
     getProgramResourceLocation(program, programInterface, name) {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_program_resource_location",
             "sint",
             [
@@ -4294,6 +4551,7 @@ export class GLES {
     }
     useProgramStages(pipeline, stages, program) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_use_program_stages",
             "void",
             [
@@ -4305,6 +4563,7 @@ export class GLES {
     }
     activeShaderProgram(pipeline, program) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_active_shader_program",
             "void",
             [
@@ -4315,6 +4574,7 @@ export class GLES {
     }
     createShaderProgramv(type, count, strings) {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_create_shader_program_v",
             "uint",
             [
@@ -4326,6 +4586,7 @@ export class GLES {
     }
     bindProgramPipeline(pipeline) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_bind_program_pipeline",
             "void",
             [
@@ -4335,6 +4596,7 @@ export class GLES {
     }
     deleteProgramPipelines(n, pipelines) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_delete_program_pipelines",
             "void",
             [
@@ -4345,6 +4607,7 @@ export class GLES {
     }
     genProgramPipelines(n, pipelines) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_gen_program_pipelines",
             "void",
             [
@@ -4355,6 +4618,7 @@ export class GLES {
     }
     isProgramPipeline(pipeline) {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_is_program_pipeline",
             "uchar",
             [
@@ -4364,6 +4628,7 @@ export class GLES {
     }
     getProgramPipelineiv(pipeline, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_program_pipeline_iv",
             "void",
             [
@@ -4375,6 +4640,7 @@ export class GLES {
     }
     programUniform1i(program, location, v0) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_1i",
             "void",
             [
@@ -4386,6 +4652,7 @@ export class GLES {
     }
     programUniform2i(program, location, v0, v1) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_2i",
             "void",
             [
@@ -4398,6 +4665,7 @@ export class GLES {
     }
     programUniform3i(program, location, v0, v1, v2) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_3i",
             "void",
             [
@@ -4411,6 +4679,7 @@ export class GLES {
     }
     programUniform4i(program, location, v0, v1, v2, v3) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_4i",
             "void",
             [
@@ -4425,6 +4694,7 @@ export class GLES {
     }
     programUniform1ui(program, location, v0) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_1ui",
             "void",
             [
@@ -4436,6 +4706,7 @@ export class GLES {
     }
     programUniform2ui(program, location, v0, v1) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_2ui",
             "void",
             [
@@ -4448,6 +4719,7 @@ export class GLES {
     }
     programUniform3ui(program, location, v0, v1, v2) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_3ui",
             "void",
             [
@@ -4461,6 +4733,7 @@ export class GLES {
     }
     programUniform4ui(program, location, v0, v1, v2, v3) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_4ui",
             "void",
             [
@@ -4475,6 +4748,7 @@ export class GLES {
     }
     programUniform1f(program, location, v0) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_1f",
             "void",
             [
@@ -4486,6 +4760,7 @@ export class GLES {
     }
     programUniform2f(program, location, v0, v1) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_2f",
             "void",
             [
@@ -4498,6 +4773,7 @@ export class GLES {
     }
     programUniform3f(program, location, v0, v1, v2) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_3f",
             "void",
             [
@@ -4511,6 +4787,7 @@ export class GLES {
     }
     programUniform4f(program, location, v0, v1, v2, v3) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_4f",
             "void",
             [
@@ -4525,6 +4802,7 @@ export class GLES {
     }
     programUniform1iv(program, location, count, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_1iv",
             "void",
             [
@@ -4537,6 +4815,7 @@ export class GLES {
     }
     programUniform2iv(program, location, count, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_2iv",
             "void",
             [
@@ -4549,6 +4828,7 @@ export class GLES {
     }
     programUniform3iv(program, location, count, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_3iv",
             "void",
             [
@@ -4561,6 +4841,7 @@ export class GLES {
     }
     programUniform4iv(program, location, count, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_4iv",
             "void",
             [
@@ -4573,6 +4854,7 @@ export class GLES {
     }
     programUniform1uiv(program, location, count, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_1uiv",
             "void",
             [
@@ -4585,6 +4867,7 @@ export class GLES {
     }
     programUniform2uiv(program, location, count, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_2uiv",
             "void",
             [
@@ -4597,6 +4880,7 @@ export class GLES {
     }
     programUniform3uiv(program, location, count, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_3uiv",
             "void",
             [
@@ -4609,6 +4893,7 @@ export class GLES {
     }
     programUniform4uiv(program, location, count, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_4uiv",
             "void",
             [
@@ -4621,6 +4906,7 @@ export class GLES {
     }
     programUniform1fv(program, location, count, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_1fv",
             "void",
             [
@@ -4633,6 +4919,7 @@ export class GLES {
     }
     programUniform2fv(program, location, count, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_2fv",
             "void",
             [
@@ -4645,6 +4932,7 @@ export class GLES {
     }
     programUniform3fv(program, location, count, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_3fv",
             "void",
             [
@@ -4657,6 +4945,7 @@ export class GLES {
     }
     programUniform4fv(program, location, count, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_4fv",
             "void",
             [
@@ -4669,6 +4958,7 @@ export class GLES {
     }
     programUniformMatrix2fv(program, location, count, transpose, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_matrix_2fv",
             "void",
             [
@@ -4682,6 +4972,7 @@ export class GLES {
     }
     programUniformMatrix3fv(program, location, count, transpose, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_matrix_3fv",
             "void",
             [
@@ -4695,6 +4986,7 @@ export class GLES {
     }
     programUniformMatrix4fv(program, location, count, transpose, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_matrix_4fv",
             "void",
             [
@@ -4708,6 +5000,7 @@ export class GLES {
     }
     programUniformMatrix2x3fv(program, location, count, transpose, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_matrix_2x3fv",
             "void",
             [
@@ -4721,6 +5014,7 @@ export class GLES {
     }
     programUniformMatrix3x2fv(program, location, count, transpose, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_matrix_3x2fv",
             "void",
             [
@@ -4734,6 +5028,7 @@ export class GLES {
     }
     programUniformMatrix2x4fv(program, location, count, transpose, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_matrix_2x4fv",
             "void",
             [
@@ -4747,6 +5042,7 @@ export class GLES {
     }
     programUniformMatrix4x2fv(program, location, count, transpose, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_matrix_4x2fv",
             "void",
             [
@@ -4760,6 +5056,7 @@ export class GLES {
     }
     programUniformMatrix3x4fv(program, location, count, transpose, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_matrix_3x4fv",
             "void",
             [
@@ -4773,6 +5070,7 @@ export class GLES {
     }
     programUniformMatrix4x3fv(program, location, count, transpose, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_program_uniform_matrix_4x3fv",
             "void",
             [
@@ -4786,6 +5084,7 @@ export class GLES {
     }
     validateProgramPipeline(pipeline) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_validate_program_pipeline",
             "void",
             [
@@ -4795,6 +5094,7 @@ export class GLES {
     }
     getProgramPipelineInfoLog(pipeline, bufSize, length, infoLog) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_program_pipeline_info_log",
             "void",
             [
@@ -4807,6 +5107,7 @@ export class GLES {
     }
     bindImageTexture(unit, texture, level, layered, layer, access, format) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_bind_image_texture",
             "void",
             [
@@ -4822,6 +5123,7 @@ export class GLES {
     }
     getBooleani_v(target, index, data) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_boolean_i_v",
             "void",
             [
@@ -4833,6 +5135,7 @@ export class GLES {
     }
     memoryBarrier(barriers) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_memory_barrier",
             "void",
             [
@@ -4842,6 +5145,7 @@ export class GLES {
     }
     memoryBarrierByRegion(barriers) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_memory_barrier_by_region",
             "void",
             [
@@ -4851,6 +5155,7 @@ export class GLES {
     }
     texStorage2DMultisample(target, samples, internalformat, width, height, fixedsamplelocations) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_tex_storage_2d_multisample",
             "void",
             [
@@ -4865,6 +5170,7 @@ export class GLES {
     }
     getMultisamplefv(pname, index, val) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_multisample_fv",
             "void",
             [
@@ -4876,6 +5182,7 @@ export class GLES {
     }
     sampleMaski(maskNumber, mask) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_sample_mask_i",
             "void",
             [
@@ -4886,6 +5193,7 @@ export class GLES {
     }
     getTexLevelParameteriv(target, level, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_tex_level_parameter_iv",
             "void",
             [
@@ -4898,6 +5206,7 @@ export class GLES {
     }
     getTexLevelParameterfv(target, level, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_tex_level_parameter_fv",
             "void",
             [
@@ -4910,6 +5219,7 @@ export class GLES {
     }
     bindVertexBuffer(bindingindex, buffer, offset, stride) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_bind_vertex_buffer",
             "void",
             [
@@ -4922,6 +5232,7 @@ export class GLES {
     }
     vertexAttribFormat(attribindex, size, type, normalized, relativeoffset) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_vertex_attrib_format",
             "void",
             [
@@ -4935,6 +5246,7 @@ export class GLES {
     }
     vertexAttribIFormat(attribindex, size, type, relativeoffset) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_vertex_attrib_i_format",
             "void",
             [
@@ -4947,6 +5259,7 @@ export class GLES {
     }
     vertexAttribBinding(attribindex, bindingindex) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_vertex_attrib_binding",
             "void",
             [
@@ -4957,6 +5270,7 @@ export class GLES {
     }
     vertexBindingDivisor(bindingindex, divisor) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_vertex_binding_divisor",
             "void",
             [
@@ -4972,6 +5286,7 @@ export class GLES {
 
     blendBarrier() {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_blend_barrier",
             "void",
             null
@@ -4979,6 +5294,7 @@ export class GLES {
     }
     copyImageSubData(srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_copy_image_sub_data",
             "void",
             [
@@ -5002,6 +5318,7 @@ export class GLES {
     }
     debugMessageControl(source, type, severity, count, ids, enabled) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_debug_message_control",
             "void",
             [
@@ -5016,6 +5333,7 @@ export class GLES {
     }
     debugMessageInsert(source, type, id, severity, length, buf) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_debug_message_insert",
             "void",
             [
@@ -5030,6 +5348,7 @@ export class GLES {
     }
     debugMessageCallback(callback, userParam) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_debug_message_callback",
             "void",
             [
@@ -5040,6 +5359,7 @@ export class GLES {
     }
     getDebugMessageLog(count, bufSize, sources, types, ids, severities, lengths, messageLog) {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_debug_message_log",
             "uint",
             [
@@ -5056,6 +5376,7 @@ export class GLES {
     }
     pushDebugGroup(source, id, length, message) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_push_debug_group",
             "void",
             [
@@ -5068,6 +5389,7 @@ export class GLES {
     }
     popDebugGroup() {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_pop_debug_group",
             "void",
             null
@@ -5075,6 +5397,7 @@ export class GLES {
     }
     objectLabel(identifier, name, length, label) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_object_label",
             "void",
             [
@@ -5087,6 +5410,7 @@ export class GLES {
     }
     getObjectLabel(identifier, name, bufSize, length, label) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_object_label",
             "void",
             [
@@ -5100,6 +5424,7 @@ export class GLES {
     }
     objectPtrLabel(ptr, length, label) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_object_ptr_label",
             "void",
             [
@@ -5111,6 +5436,7 @@ export class GLES {
     }
     getObjectPtrLabel(ptr, bufSize, length, label) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_object_ptr_label",
             "void",
             [
@@ -5123,6 +5449,7 @@ export class GLES {
     }
     getPointerv(pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_pointer_v",
             "void",
             [
@@ -5133,6 +5460,7 @@ export class GLES {
     }
     enablei(target, index) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_enable_i",
             "void",
             [
@@ -5143,6 +5471,7 @@ export class GLES {
     }
     disablei(target, index) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_disable_i",
             "void",
             [
@@ -5153,6 +5482,7 @@ export class GLES {
     }
     blendEquationi(buf, mode) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_blend_equation_i",
             "void",
             [
@@ -5163,6 +5493,7 @@ export class GLES {
     }
     blendEquationSeparatei(buf, modeRGB, modeAlpha) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_blend_equation_separate_i",
             "void",
             [
@@ -5174,6 +5505,7 @@ export class GLES {
     }
     blendFunci(buf, src, dst) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_blend_func_i",
             "void",
             [
@@ -5185,6 +5517,7 @@ export class GLES {
     }
     blendFuncSeparatei(buf, srcRGB, dstRGB, srcAlpha, dstAlpha) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_blend_func_separate_i",
             "void",
             [
@@ -5198,6 +5531,7 @@ export class GLES {
     }
     colorMaski(index, r, g, b, a) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_color_mask_i",
             "void",
             [
@@ -5211,6 +5545,7 @@ export class GLES {
     }
     isEnabledi(target, index) {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_is_enabled_i",
             "uchar",
             [
@@ -5221,6 +5556,7 @@ export class GLES {
     }
     drawElementsBaseVertex(mode, count, type, indices, basevertex) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_draw_elements_base_vertex",
             "void",
             [
@@ -5234,6 +5570,7 @@ export class GLES {
     }
     drawRangeElementsBaseVertex(mode, start, end, count, type, indices, basevertex) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_draw_range_elements_base_vertex",
             "void",
             [
@@ -5249,6 +5586,7 @@ export class GLES {
     }
     drawElementsInstancedBaseVertex(mode, count, type, indices, instancecount, basevertex) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_draw_elements_instanced_base_vertex",
             "void",
             [
@@ -5263,6 +5601,7 @@ export class GLES {
     }
     framebufferTexture(target, attachment, texture, level) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_framebuffer_texture",
             "void",
             [
@@ -5275,6 +5614,7 @@ export class GLES {
     }
     primitiveBoundingBox(minX, minY, minZ, minW, maxX, maxY, maxZ, maxW) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_primitive_bounding_box",
             "void",
             [
@@ -5291,6 +5631,7 @@ export class GLES {
     }
     getGraphicsResetStatus() {
         return lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_graphics_reset_status",
             "uint",
             null
@@ -5298,6 +5639,7 @@ export class GLES {
     }
     readnPixels(x, y, width, height, format, type, bufSize, data) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_read_n_pixels",
             "void",
             [
@@ -5314,6 +5656,7 @@ export class GLES {
     }
     getnUniformfv(program, location, bufSize, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_n_uniform_fv",
             "void",
             [
@@ -5326,6 +5669,7 @@ export class GLES {
     }
     getnUniformiv(program, location, bufSize, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_n_uniform_iv",
             "void",
             [
@@ -5338,6 +5682,7 @@ export class GLES {
     }
     getnUniformuiv(program, location, bufSize, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_n_uniform_uiv",
             "void",
             [
@@ -5350,6 +5695,7 @@ export class GLES {
     }
     minSampleShading(value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_min_sample_shading",
             "void",
             [
@@ -5359,6 +5705,7 @@ export class GLES {
     }
     patchParameteri(pname, value) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_patch_parameter_i",
             "void",
             [
@@ -5369,6 +5716,7 @@ export class GLES {
     }
     texParameterIiv(target, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_tex_parameter_iiv",
             "void",
             [
@@ -5380,6 +5728,7 @@ export class GLES {
     }
     texParameterIuiv(target, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_tex_parameter_iuiv",
             "void",
             [
@@ -5391,6 +5740,7 @@ export class GLES {
     }
     getTexParameterIiv(target, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_tex_parameter_iiv",
             "void",
             [
@@ -5402,6 +5752,7 @@ export class GLES {
     }
     getTexParameterIuiv(target, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_tex_parameter_iuiv",
             "void",
             [
@@ -5413,6 +5764,7 @@ export class GLES {
     }
     samplerParameterIiv(sampler, pname, param) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_sampler_parameter_iiv",
             "void",
             [
@@ -5424,6 +5776,7 @@ export class GLES {
     }
     samplerParameterIuiv(sampler, pname, param) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_sampler_parameter_iuiv",
             "void",
             [
@@ -5435,6 +5788,7 @@ export class GLES {
     }
     getSamplerParameterIiv(sampler, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_sampler_parameter_iiv",
             "void",
             [
@@ -5446,6 +5800,7 @@ export class GLES {
     }
     getSamplerParameterIuiv(sampler, pname, params) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_get_sampler_parameter_iuiv",
             "void",
             [
@@ -5457,6 +5812,7 @@ export class GLES {
     }
     texBuffer(target, internalformat, buffer) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_tex_buffer",
             "void",
             [
@@ -5468,6 +5824,7 @@ export class GLES {
     }
     texBufferRange(target, internalformat, buffer, offset, size) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_tex_buffer_range",
             "void",
             [
@@ -5481,6 +5838,7 @@ export class GLES {
     }
     texStorage3DMultisample(target, samples, internalformat, width, height, depth, fixedsamplelocations) {
         lib.ffi(
+            globalThis.__RAIA_GLES__.handle,
             "raia_gl_tex_storage_3d_multisample",
             "void",
             [
@@ -5512,7 +5870,7 @@ export class GLES {
             "width": width,
             "height": height
         });
-        lib.call("raia_gl_viewport_alt", args);
+        lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_viewport_alt", args);
     }
     /**
      * @param {real} red 0.0 ~ 1.0
@@ -5527,7 +5885,7 @@ export class GLES {
             "blue": blue,
             "alpha": alpha
         });
-        lib.call("raia_gl_clear_color_alt", args);
+        lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_clear_color_alt", args);
     }
     /**
      * @param {uint} mask 
@@ -5536,7 +5894,7 @@ export class GLES {
         var args = JSON.stringify({
             "mask": mask
         });
-        lib.call("raia_gl_clear_alt", args);
+        lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_clear_alt", args);
     }
     /**
      * @param {uint} program 
@@ -5545,7 +5903,7 @@ export class GLES {
         var args = JSON.stringify({
             "program": program
         });
-        lib.call("raia_gl_use_program_alt", args);
+        lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_use_program_alt", args);
     }
     /**
      * @param {uint} index 
@@ -5564,7 +5922,7 @@ export class GLES {
             "stride": stride,
             "pointer": pointer
         });
-        lib.call("raia_gl_vertex_attrib_pointer_alt", args);
+        lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_vertex_attrib_pointer_alt", args);
     }
     /**
      * @param {uint} index 
@@ -5573,7 +5931,7 @@ export class GLES {
         var args = JSON.stringify({
             "index": index
         });
-        lib.call("raia_gl_enable_vertex_attrib_array_alt", args);
+        lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_enable_vertex_attrib_array_alt", args);
     }
     /**
      * @param {uint} target 
@@ -5598,7 +5956,7 @@ export class GLES {
             "type": type,
             "pixels": std.bufToPtr(pixels)
         });
-        lib.call("raia_gl_tex_image_2d_alt", args);
+        lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_tex_image_2d_alt", args);
     }
     /**
      * @param {uint} texture 
@@ -5607,7 +5965,7 @@ export class GLES {
         var args = JSON.stringify({
             "texture": texture
         });
-        lib.call("raia_gl_active_texture_alt", args);
+        lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_active_texture_alt", args);
     }
     /**
      * 
@@ -5619,7 +5977,7 @@ export class GLES {
             "target": target,
             "texture": texture
         });
-        lib.call("raia_gl_bind_texture_alt", args);
+        lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_bind_texture_alt", args);
     }
     /**
      * 
@@ -5631,7 +5989,7 @@ export class GLES {
             "location": location,
             "v0": v0
         });
-        lib.call("raia_gl_uniform_1i_alt", args);
+        lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_1i_alt", args);
     }
     /**
      * 
@@ -5647,7 +6005,7 @@ export class GLES {
             "type": type,
             "indices": indices
         });
-        lib.call("raia_gl_draw_elements_alt", args);
+        lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_draw_elements_alt", args);
     }
     /**
      * 
@@ -5658,7 +6016,7 @@ export class GLES {
         var args = JSON.stringify({
             "type": type
         });
-        var ret = lib.call("raia_gl_create_shader_alt", args);
+        var ret = lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_create_shader_alt", args);
         return JSON.parse(ret).result;
     }
     /**
@@ -5675,7 +6033,7 @@ export class GLES {
             "string": string,
             "length": length
         });
-        lib.call("raia_gl_shader_source_alt", args);
+        lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_shader_source_alt", args);
     }
     /**
      * 
@@ -5685,7 +6043,7 @@ export class GLES {
         var args = JSON.stringify({
             "shader": shader
         });
-        lib.call("raia_gl_compile_shader_alt", args);
+        lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_compile_shader_alt", args);
     }
     /**
      * 
@@ -5698,7 +6056,7 @@ export class GLES {
             "shader": shader,
             "pname": pname
         });
-        var ret = lib.call("raia_gl_get_shader_iv_alt", args);
+        var ret = lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_get_shader_iv_alt", args);
         return JSON.parse(ret).result;
     }
     /**
@@ -5706,7 +6064,7 @@ export class GLES {
      * @returns {uint} program
      */
     createProgramAlt() {
-        var ret = lib.call("raia_gl_create_program_alt");
+        var ret = lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_create_program_alt");
         return JSON.parse(ret).result;
     }
     /**
@@ -5719,7 +6077,7 @@ export class GLES {
             "program": program,
             "shader": shader
         });
-        lib.call("raia_gl_attach_shader_alt", args);
+        lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_attach_shader_alt", args);
     }
     /**
      * 
@@ -5729,7 +6087,7 @@ export class GLES {
         var args = JSON.stringify({
             "shader": shader
         });
-        lib.call("raia_gl_delete_shader_alt", args);
+        lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_delete_shader_alt", args);
     }
     /**
      * 
@@ -5739,7 +6097,7 @@ export class GLES {
         var args = JSON.stringify({
             "program": program
         });
-        lib.call("raia_gl_link_program_alt", args);
+        lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_link_program_alt", args);
     }
     /**
      * 
@@ -5751,7 +6109,7 @@ export class GLES {
             "pname": pname,
             "param": param
         });
-        lib.call("raia_gl_pixel_store_i_alt", args);
+        lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_pixel_store_i_alt", args);
     }
     /**
      * 
@@ -5762,7 +6120,7 @@ export class GLES {
         var args = JSON.stringify({
             "n": n
         });
-        var ret = lib.call("raia_gl_gen_textures_alt", args);
+        var ret = lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_gen_textures_alt", args);
         return JSON.parse(ret).result;
     }
     /**
@@ -5777,7 +6135,7 @@ export class GLES {
             "pname": pname,
             "param": param
         });
-        lib.call("raia_gl_tex_parameter_i_alt", args);
+        lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_tex_parameter_i_alt", args);
     }
     /**
      * 
@@ -5790,7 +6148,7 @@ export class GLES {
             "program": program,
             "name": name
         });
-        var ret = lib.call("raia_gl_get_attrib_location_alt", args);
+        var ret = lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_get_attrib_location_alt", args);
         return JSON.parse(ret).result;
     }
     /**
@@ -5804,7 +6162,7 @@ export class GLES {
             "program": program,
             "name": name
         });
-        var ret = lib.call("raia_gl_get_uniform_location_alt", args);
+        var ret = lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_get_uniform_location_alt", args);
         return JSON.parse(ret).result;
     }
     /**
@@ -5816,7 +6174,7 @@ export class GLES {
         var args = JSON.stringify({
             "n": n
         });
-        var ret = lib.call("raia_gl_gen_vertex_arrays_alt", args);
+        var ret = lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_gen_vertex_arrays_alt", args);
         return JSON.parse(ret).result;
     }
     /**
@@ -5828,7 +6186,7 @@ export class GLES {
         var args = JSON.stringify({
             "n": n
         });
-        var ret = lib.call("raia_gl_gen_buffers_alt", args);
+        var ret = lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_gen_buffers_alt", args);
         return JSON.parse(ret).result;
     }
     /**
@@ -5839,7 +6197,7 @@ export class GLES {
         var args = JSON.stringify({
             "array": array
         });
-        lib.call("raia_gl_bind_vertex_array_alt", args);
+        lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_bind_vertex_array_alt", args);
     }
     /**
      * 
@@ -5851,7 +6209,7 @@ export class GLES {
             "target": target,
             "buffer": buffer
         });
-        lib.call("raia_gl_bind_buffer_alt", args);
+        lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_bind_buffer_alt", args);
     }
     /**
      * 
@@ -5867,7 +6225,7 @@ export class GLES {
             "data": std.bufToPtr(data),
             "usage": usage
         });
-        lib.call("raia_gl_buffer_data_alt", args);
+        lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_buffer_data_alt", args);
     }
     /**
      * 
@@ -5877,7 +6235,7 @@ export class GLES {
         var args = JSON.stringify({
             "arrays": arrays
         });
-        lib.call("raia_gl_delete_vertex_arrays_alt", args);
+        lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_delete_vertex_arrays_alt", args);
     }
     /**
      * 
@@ -5887,7 +6245,7 @@ export class GLES {
         var args = JSON.stringify({
             "buffers": buffers
         });
-        lib.call("raia_gl_delete_buffers_alt", args);
+        lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_delete_buffers_alt", args);
     }
     /**
      * 
@@ -5897,6 +6255,6 @@ export class GLES {
         var args = JSON.stringify({
             "textures": textures
         });
-        lib.call("raia_gl_delete_textures_alt", args);
+        lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_delete_textures_alt", args);
     }
 }
