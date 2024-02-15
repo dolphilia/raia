@@ -13,7 +13,7 @@ void init_plugin_hash(void) {
 void free_plugin_hash() {
     raia_plugin_hash_t *current_entry, *tmp;
     HASH_ITER(hh, plugin_hash, current_entry, tmp) {
-        raia_dlclose(current_entry->handle);
+        RAIA_DLCLOSE(current_entry->handle);
         HASH_DEL(plugin_hash, current_entry);
         free(current_entry);
     }
@@ -23,9 +23,9 @@ void *add_plugin_hash(const char *name) {
 #ifdef __LINUX__
     char path[500];
     sprintf(path, "./%s\0", name);
-    void * handle = raia_dlopen(path);
+    void * handle = DLOPEN(path);
 #else
-    void *handle = raia_dlopen(name);
+    void *handle = RAIA_DLOPEN(name);
 #endif
     raia_plugin_hash_t *entry = (raia_plugin_hash_t *)malloc(sizeof(raia_plugin_hash_t));
     strncpy(entry->name, name, sizeof(entry->name));
@@ -44,7 +44,7 @@ void delete_plugin_hash(const char *name) {
     raia_plugin_hash_t *entry;
     HASH_FIND_STR(plugin_hash, name, entry);
     if (entry) {
-        raia_dlclose(entry->handle);
+        RAIA_DLCLOSE(entry->handle);
         HASH_DEL(plugin_hash, entry);
         free(entry);
     }

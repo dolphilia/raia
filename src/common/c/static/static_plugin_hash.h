@@ -23,9 +23,9 @@
 #define raia_dlclose(handle) FreeLibrary(handle)
 #else
 #define raia_handle_t void *
-#define raia_dlopen(file) dlopen(file, RTLD_LAZY)
-#define raia_dlsym(handle, name) dlsym(handle,name)
-#define raia_dlclose(handle) dlclose(handle)
+#define RAIA_DLOPEN(file) dlopen(file, RTLD_LAZY)
+#define RAIA_DLSYM(handle, name) dlsym(handle,name)
+#define RAIA_DLCLOSE(handle) dlclose(handle)
 #endif
 
 typedef struct raia_plugin_hash_t {
