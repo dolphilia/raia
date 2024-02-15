@@ -28,15 +28,12 @@ add_library(raia_v8 SHARED
         src/wrapper/wrapper_v8.cpp
         src/static/static_raia_config.cpp
         ../../common/c/utility/util_file.c
-        ../../common/c/static/static_func_hash.c
-        ../../common/c/static/static_plugin_hash.c
         ../../third_party/c/ibireme/yyjson/yyjson.c
         ../../common/c/wrapper/wrapper_yyjson.c
         ../../common/c/static/static_args_hash.c
         ../../common/c/static/static_args_hash.h
         ../../common/c/wrapper/wrapper_ffi.c
         ../../common/c/wrapper/wrapper_ffi.h
-        ../../common/cpp/static/dynamic_library_loader.cpp
         src/static/static_v8_platform.cpp
         src/static/static_v8_platform.h
         src/static/static_v8_isolate_create_params.cpp

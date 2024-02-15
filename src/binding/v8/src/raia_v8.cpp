@@ -3,15 +3,10 @@
 //
 
 #include "raia_v8.h"
-#include "static/static_v8_platform.h"
-#include "static/static_v8_isolate_create_params.h"
-extern "C" {
-#include "../../../common/c/static/shared_library_loader.h"
-}
 
 void raia_lib_open(const v8_args_t &args) {
-    auto lib_name = v8_args_to_str(args, 0) + "." + DYNAMIC_LIB_EXT;
-    v8_rets_to_sint(args, open_shared_library(lib_name.c_str()));
+    auto library_name = v8_args_to_str(args, 0) + "." + DYNAMIC_LIB_EXT;
+    v8_rets_to_sint(args, open_shared_library(library_name.c_str()));
 }
 
 void raia_lib_close(const v8_args_t &args) {

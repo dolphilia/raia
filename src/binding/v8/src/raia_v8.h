@@ -6,16 +6,15 @@
 #define RAIA_V8_RAIA_V8_H
 
 extern "C" {
+#include "ffi.h"
 #include "../../../common/c/utility/export_api.h"
 #include "../../../common/c/utility/platform.h"
 #include "../../../common/c/wrapper/wrapper_yyjson.h"
-//#include "../../../common/c/static/static_plugin_hash.h"
-//#include "../../../common/c/static/static_func_hash.h"
 #include "../../../common/c/static/static_entrust.h"
 #include "../../../common/c/utility/util_file.h"
 #include "../../../common/c/static/static_args_hash.h"
-#include "ffi.h"
 #include "../../../common/c/wrapper/wrapper_ffi.h"
+#include "../../../common/c/static/shared_library_loader.h"
 }
 #include <iostream>
 #include <fstream>
@@ -25,6 +24,8 @@ extern "C" {
 #include "v8.h"
 #include "wrapper/wrapper_v8.h"
 #include "static/static_raia_config.h"
+#include "static/static_v8_platform.h"
+#include "static/static_v8_isolate_create_params.h"
 
 #ifdef _WIN32
 #include "v8config.h"
@@ -53,30 +54,6 @@ extern "C" {
 #endif
 
 // macro
-
-/*
-    TYPE_UINT8,
-    TYPE_SINT8,
-    TYPE_UINT16,
-    TYPE_SINT16,
-    TYPE_UINT32,
-    TYPE_SINT32,
-    TYPE_UINT64,
-    TYPE_SINT64,
-    TYPE_FLOAT,
-    TYPE_DOUBLE,
-    TYPE_UCHAR,
-    TYPE_SCHAR,
-    TYPE_USHORT,
-    TYPE_SSHORT,
-    TYPE_UINT,
-    TYPE_SINT,
-    TYPE_ULONG,
-    TYPE_SLONG,
-    TYPE_LONGDOUBLE,
-    TYPE_POINTER,
-    TYPE_STRING
- */
 
 #define v8_args_t v8::FunctionCallbackInfo<v8::Value>
 #define v8_args_to_uint8(args, num) (uint8_t)args[num].As<v8::Uint32>()->Value()
