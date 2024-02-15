@@ -94,7 +94,7 @@ extra_ldflags = [ "-L/opt/homebrew/lib", "-L/opt/homebrew/opt/icu4c/lib" ]
 '
 # bin/gn gen out/Shared --args='
 # is_official_build = false
-# is_component_build = false
+# is_component_build = true
 # cc = "clang"
 # cxx = "clang++"
 # target_os = "mac"
