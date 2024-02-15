@@ -22,8 +22,8 @@ endif()
 # -DV8_COMPRESS_POINTERS
 # -DV8_ENABLE_SANDBOX
 
-#add_library(raia_v8 SHARED
-add_executable(raia_v8
+add_library(raia_v8 SHARED
+#add_executable(raia_v8
         src/raia_v8.cpp
         src/wrapper/wrapper_v8.cpp
         src/static/static_raia_config.cpp
@@ -36,12 +36,15 @@ add_executable(raia_v8
         ../../common/c/static/static_args_hash.h
         ../../common/c/wrapper/wrapper_ffi.c
         ../../common/c/wrapper/wrapper_ffi.h
+        ../../common/cpp/static/dynamic_library_loader.cpp
         src/static/static_v8_platform.cpp
         src/static/static_v8_platform.h
         src/static/static_v8_isolate_create_params.cpp
         src/static/static_v8_isolate_create_params.h
         src/binding/v8_platform.cpp
         src/binding/v8_platform.h
+        ../../common/c/static/shared_library_loader.c
+        ../../common/c/static/shared_library_loader.h
 )
 
 add_compile_options(-pthread -fno-rtti)
