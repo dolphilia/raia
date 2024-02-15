@@ -1,5 +1,5 @@
-#ifndef DYNAMIC_LIBRARY_LOADER_H
-#define DYNAMIC_LIBRARY_LOADER_H
+#ifndef SHARED_LIBRARY_LOADER_H
+#define SHARED_LIBRARY_LOADER_H
 
 #include <cstdio>
 #include <cstdlib>
@@ -49,4 +49,4 @@ CallableFunc findFuncSharedLibrary(int library_key, const char *func_name);
 void deleteFuncSharedLibrary(int library_key, const char *func_name);
 }
 
-#endif // DYNAMIC_LIBRARY_LOADER_H
+#endif // SHARED_LIBRARY_LOADER_H

@@ -1,4 +1,4 @@
-#include "dynamic_library_loader.hpp"
+#include "shared_library_loader.hpp"
 
 std::map<int, LibraryInfo> libraries;
 std::set<int> deletedKeys;
