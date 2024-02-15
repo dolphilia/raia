@@ -45,10 +45,10 @@ add_library(raia_lua SHARED
         src/list/list_iterator.c
         src/list/list_node.c
         ../../common/c/utility/util_file.c
-        ../../common/c/static/static_func_hash.c
-        ../../common/c/static/static_plugin_hash.c
+        ../../common/c/static/shared_library_loader.c
         ../../common/c/wrapper/wrapper_yyjson.c
         ../../third_party/c/ibireme/yyjson/yyjson.c
+        ../../common/c/static/static_args_hash.c
 )
 
 set_target_properties(raia_lua PROPERTIES PREFIX "")
