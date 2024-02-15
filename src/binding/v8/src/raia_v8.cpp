@@ -5,31 +5,35 @@
 #include "raia_v8.h"
 #include "static/static_v8_platform.h"
 #include "static/static_v8_isolate_create_params.h"
+extern "C" {
+#include "../../../common/c/static/shared_library_loader.h"
+}
 
 void raia_lib_open(const v8_args_t &args) {
     auto lib_name = v8_args_to_str(args, 0) + "." + DYNAMIC_LIB_EXT;
-    v8_rets_to_ptr(args, add_plugin_hash(lib_name.c_str()));
+    v8_rets_to_sint(args, open_shared_library(lib_name.c_str()));
 }
 
 void raia_lib_close(const v8_args_t &args) {
-    auto lib_name = v8_args_to_str(args, 0);
-    delete_plugin_hash(lib_name.c_str());
+    auto library_key = v8_args_to_sint(args, 0);
+    close_shared_library(library_key);
 }
 
 void raia_lib_close_all(const v8_args_t &args) {
-    free_plugin_hash();
+    close_all_shared_library();
 }
 
 void raia_lib_add(const v8_args_t &args) {
-    auto handle = v8_args_to_ptr(args, 0);
+    auto library_key = v8_args_to_sint(args, 0);
     auto func_name = v8_args_to_str(args, 1);
-    add_plugin_func_hash(handle, func_name.c_str());
+    add_func_shared_library(library_key, func_name.c_str());
 }
 
 void raia_lib_call(const v8_args_t &args) {
-    auto dll_func_name = v8_args_to_str(args, 0);
-    auto src = v8_args_to_str(args, 1);
-    auto rets = call_func_hash(dll_func_name.c_str(), src.c_str());
+    auto library_key = v8_args_to_sint(args, 0);
+    auto func_name = v8_args_to_str(args, 1);
+    auto src = v8_args_to_str(args, 2);
+    auto rets = call_func_shared_library(library_key, func_name.c_str(), src.c_str());
     if (rets) {
         v8_rets_to_str(args, rets);
         delete rets;
@@ -39,8 +43,9 @@ void raia_lib_call(const v8_args_t &args) {
 }
 
 void raia_lib_ffi(const v8_args_t &args) {
-    auto func_name = v8_args_to_str(args, 0);
-    auto ret_type = v8_args_to_str(args, 1);
+    auto library_key = v8_args_to_sint(args, 0);
+    auto func_name = v8_args_to_str(args, 1);
+    auto ret_type = v8_args_to_str(args, 2);
     ffi_type *ffi_args_type[512];
     void *ffi_args_values[512];
     args_key_t ffi_rets;
@@ -48,8 +53,8 @@ void raia_lib_ffi(const v8_args_t &args) {
     int args_len = 0;
     v8::Local<v8::Array> args_list;
     if(!args[2]->IsNull()) {
-        args_list = v8_args_to_array(args, 2);
-        args_len = args_list->Length();
+        args_list = v8_args_to_array(args, 3);
+        args_len = (int)args_list->Length();
         auto isolate = args.GetIsolate();
         for (int i = 0; i < args_list->Length(); i++) {
             auto arg_list = v8_array_to_array(args_list, i);
@@ -167,70 +172,70 @@ void raia_lib_ffi(const v8_args_t &args) {
     }
     // 戻り値の設定
     if (ret_type == "void") {
-        ffi_call_ext(find_func_hash(func_name.c_str()), args_len, &ffi_type_void, ffi_args_type, nullptr, ffi_args_values);
+        ffi_call_ext(find_func_shared_library(library_key, func_name.c_str()), args_len, &ffi_type_void, ffi_args_type, nullptr, ffi_args_values);
         v8_rets_to_null(args);
     } else if (ret_type == "uint8") {
-        ffi_call_ext(find_func_hash(func_name.c_str()), args_len, &ffi_type_uint8, ffi_args_type, &ffi_rets.data.value_uint8, ffi_args_values);
+        ffi_call_ext(find_func_shared_library(library_key, func_name.c_str()), args_len, &ffi_type_uint8, ffi_args_type, &ffi_rets.data.value_uint8, ffi_args_values);
         v8_rets_to_uint8(args, ffi_rets.data.value_uint8);
     } else if (ret_type == "sint8") {
-        ffi_call_ext(find_func_hash(func_name.c_str()), args_len, &ffi_type_sint8, ffi_args_type, &ffi_rets.data.value_sint8, ffi_args_values);
+        ffi_call_ext(find_func_shared_library(library_key, func_name.c_str()), args_len, &ffi_type_sint8, ffi_args_type, &ffi_rets.data.value_sint8, ffi_args_values);
         v8_rets_to_sint8(args, ffi_rets.data.value_sint8);
     } else if (ret_type == "uint16") {
-        ffi_call_ext(find_func_hash(func_name.c_str()), args_len, &ffi_type_uint16, ffi_args_type, &ffi_rets.data.value_uint16, ffi_args_values);
+        ffi_call_ext(find_func_shared_library(library_key, func_name.c_str()), args_len, &ffi_type_uint16, ffi_args_type, &ffi_rets.data.value_uint16, ffi_args_values);
         v8_rets_to_uint16(args, ffi_rets.data.value_uint16);
     } else if (ret_type == "sint16") {
-        ffi_call_ext(find_func_hash(func_name.c_str()), args_len, &ffi_type_sint16, ffi_args_type, &ffi_rets.data.value_sint16, ffi_args_values);
+        ffi_call_ext(find_func_shared_library(library_key, func_name.c_str()), args_len, &ffi_type_sint16, ffi_args_type, &ffi_rets.data.value_sint16, ffi_args_values);
         v8_rets_to_sint16(args, ffi_rets.data.value_sint16);
     } else if (ret_type == "uint32") {
-        ffi_call_ext(find_func_hash(func_name.c_str()), args_len, &ffi_type_uint32, ffi_args_type, &ffi_rets.data.value_uint32, ffi_args_values);
+        ffi_call_ext(find_func_shared_library(library_key, func_name.c_str()), args_len, &ffi_type_uint32, ffi_args_type, &ffi_rets.data.value_uint32, ffi_args_values);
         v8_rets_to_uint32(args, ffi_rets.data.value_uint32);
     } else if (ret_type == "sint32") {
-        ffi_call_ext(find_func_hash(func_name.c_str()), args_len, &ffi_type_sint32, ffi_args_type, &ffi_rets.data.value_sint32, ffi_args_values);
+        ffi_call_ext(find_func_shared_library(library_key, func_name.c_str()), args_len, &ffi_type_sint32, ffi_args_type, &ffi_rets.data.value_sint32, ffi_args_values);
         v8_rets_to_sint32(args, ffi_rets.data.value_sint32);
     } else if (ret_type == "uint64") {
-        ffi_call_ext(find_func_hash(func_name.c_str()), args_len, &ffi_type_uint64, ffi_args_type, &ffi_rets.data.value_uint64, ffi_args_values);
+        ffi_call_ext(find_func_shared_library(library_key, func_name.c_str()), args_len, &ffi_type_uint64, ffi_args_type, &ffi_rets.data.value_uint64, ffi_args_values);
         v8_rets_to_uint64(args, ffi_rets.data.value_uint64);
     } else if (ret_type == "sint64") {
-        ffi_call_ext(find_func_hash(func_name.c_str()), args_len, &ffi_type_sint64, ffi_args_type, &ffi_rets.data.value_sint64, ffi_args_values);
+        ffi_call_ext(find_func_shared_library(library_key, func_name.c_str()), args_len, &ffi_type_sint64, ffi_args_type, &ffi_rets.data.value_sint64, ffi_args_values);
         v8_rets_to_sint64(args, ffi_rets.data.value_sint64);
     } else if (ret_type == "float") {
-        ffi_call_ext(find_func_hash(func_name.c_str()), args_len, &ffi_type_float, ffi_args_type, &ffi_rets.data.value_float, ffi_args_values);
+        ffi_call_ext(find_func_shared_library(library_key, func_name.c_str()), args_len, &ffi_type_float, ffi_args_type, &ffi_rets.data.value_float, ffi_args_values);
         v8_rets_to_float(args, ffi_rets.data.value_float);
     } else if (ret_type == "double") {
-        ffi_call_ext(find_func_hash(func_name.c_str()), args_len, &ffi_type_double, ffi_args_type, &ffi_rets.data.value_double, ffi_args_values);
+        ffi_call_ext(find_func_shared_library(library_key, func_name.c_str()), args_len, &ffi_type_double, ffi_args_type, &ffi_rets.data.value_double, ffi_args_values);
         v8_rets_to_double(args, ffi_rets.data.value_double);
     } else if (ret_type == "uchar") {
-        ffi_call_ext(find_func_hash(func_name.c_str()), args_len, &ffi_type_uchar, ffi_args_type, &ffi_rets.data.value_uchar, ffi_args_values);
+        ffi_call_ext(find_func_shared_library(library_key, func_name.c_str()), args_len, &ffi_type_uchar, ffi_args_type, &ffi_rets.data.value_uchar, ffi_args_values);
         v8_rets_to_uchar(args, ffi_rets.data.value_uchar);
     } else if (ret_type == "schar") {
-        ffi_call_ext(find_func_hash(func_name.c_str()), args_len, &ffi_type_schar, ffi_args_type, &ffi_rets.data.value_schar, ffi_args_values);
+        ffi_call_ext(find_func_shared_library(library_key, func_name.c_str()), args_len, &ffi_type_schar, ffi_args_type, &ffi_rets.data.value_schar, ffi_args_values);
         v8_rets_to_schar(args, ffi_rets.data.value_schar);
     } else if (ret_type == "ushort") {
-        ffi_call_ext(find_func_hash(func_name.c_str()), args_len, &ffi_type_ushort, ffi_args_type, &ffi_rets.data.value_ushort, ffi_args_values);
+        ffi_call_ext(find_func_shared_library(library_key, func_name.c_str()), args_len, &ffi_type_ushort, ffi_args_type, &ffi_rets.data.value_ushort, ffi_args_values);
         v8_rets_to_ushort(args, ffi_rets.data.value_ushort);
     } else if (ret_type == "sshort") {
-        ffi_call_ext(find_func_hash(func_name.c_str()), args_len, &ffi_type_sshort, ffi_args_type, &ffi_rets.data.value_sshort, ffi_args_values);
+        ffi_call_ext(find_func_shared_library(library_key, func_name.c_str()), args_len, &ffi_type_sshort, ffi_args_type, &ffi_rets.data.value_sshort, ffi_args_values);
         v8_rets_to_sshort(args, ffi_rets.data.value_sshort);
     } else if (ret_type == "uint") {
-        ffi_call_ext(find_func_hash(func_name.c_str()), args_len, &ffi_type_uint, ffi_args_type, &ffi_rets.data.value_uint, ffi_args_values);
+        ffi_call_ext(find_func_shared_library(library_key, func_name.c_str()), args_len, &ffi_type_uint, ffi_args_type, &ffi_rets.data.value_uint, ffi_args_values);
         v8_rets_to_uint(args, ffi_rets.data.value_uint);
     } else if (ret_type == "sint") {
-        ffi_call_ext(find_func_hash(func_name.c_str()), args_len, &ffi_type_sint, ffi_args_type, &ffi_rets.data.value_sint, ffi_args_values);
+        ffi_call_ext(find_func_shared_library(library_key, func_name.c_str()), args_len, &ffi_type_sint, ffi_args_type, &ffi_rets.data.value_sint, ffi_args_values);
         v8_rets_to_sint(args, ffi_rets.data.value_sint);
     } else if (ret_type == "ulong") {
-        ffi_call_ext(find_func_hash(func_name.c_str()), args_len, &ffi_type_ulong, ffi_args_type, &ffi_rets.data.value_ulong, ffi_args_values);
+        ffi_call_ext(find_func_shared_library(library_key, func_name.c_str()), args_len, &ffi_type_ulong, ffi_args_type, &ffi_rets.data.value_ulong, ffi_args_values);
         v8_rets_to_ulong(args, ffi_rets.data.value_ulong);
     } else if (ret_type == "slong") {
-        ffi_call_ext(find_func_hash(func_name.c_str()), args_len, &ffi_type_slong, ffi_args_type, &ffi_rets.data.value_slong, ffi_args_values);
+        ffi_call_ext(find_func_shared_library(library_key, func_name.c_str()), args_len, &ffi_type_slong, ffi_args_type, &ffi_rets.data.value_slong, ffi_args_values);
         v8_rets_to_slong(args, ffi_rets.data.value_slong);
     } else if (ret_type == "longdouble") {
-        ffi_call_ext(find_func_hash(func_name.c_str()), args_len, &ffi_type_longdouble, ffi_args_type, &ffi_rets.data.value_longdouble, ffi_args_values);
+        ffi_call_ext(find_func_shared_library(library_key, func_name.c_str()), args_len, &ffi_type_longdouble, ffi_args_type, &ffi_rets.data.value_longdouble, ffi_args_values);
         v8_rets_to_longdouble(args, ffi_rets.data.value_longdouble);
     } else if (ret_type == "string") {
-        ffi_call_ext(find_func_hash(func_name.c_str()), args_len, &ffi_type_pointer, ffi_args_type, &ffi_rets.data.value_string, ffi_args_values);
+        ffi_call_ext(find_func_shared_library(library_key, func_name.c_str()), args_len, &ffi_type_pointer, ffi_args_type, &ffi_rets.data.value_string, ffi_args_values);
         v8_rets_to_str(args, ffi_rets.data.value_string);
     } else if (ret_type == "pointer") {
-        ffi_call_ext(find_func_hash(func_name.c_str()), args_len, &ffi_type_pointer, ffi_args_type, &ffi_rets.data.value_pointer, ffi_args_values);
+        ffi_call_ext(find_func_shared_library(library_key, func_name.c_str()), args_len, &ffi_type_pointer, ffi_args_type, &ffi_rets.data.value_pointer, ffi_args_values);
         v8_rets_to_ptr(args, ffi_rets.data.value_pointer);
     } else {
         fprintf(stderr, "Unknown type: %s\n", ret_type.c_str());
@@ -479,8 +484,6 @@ int raia_v8_main(int argc, char *argv[]) {
 }
 
 extern "C" RAIA_API char *init(int argc, char *argv[]) {
-    init_plugin_hash();
-    init_func_hash();
     init_startup_script();
     raia_v8_main(argc, argv);
     return nullptr;
@@ -589,23 +592,23 @@ v8::Local<v8::ObjectTemplate> v8_ObjectTemplate_New(v8::Isolate *isolate, v8::Lo
 }
 
 }
-
-int main(int argc, char *argv[]) {
-    int platform = v8_Platform_NewDefaultPlatform();
-    v8_V8_InitializePlatform(platform);
-    v8_V8_Initialize();
-    auto isolate_params = v8_Isolate_CreateParams_new();
-    static_v8_isolate_create_params_set_array_buffer_allocator(isolate_params, v8_ArrayBuffer_Allocator_NewDefaultAllocator());
-    auto isolate = v8_Isolate_New(isolate_params);
-    auto isolate_scope = v8_Isolate_Scope_new(isolate);
-    auto handle_scope = v8_HandleScope_new(isolate);
-    auto context = v8_Context_New(isolate, nullptr, v8_ObjectTemplate_New(isolate));
-    auto context_scope = v8_Context_ScopeScope_new(context);
-    v8_V8_Dispose();
-    v8_V8_DisposePlatform();
-    static_v8_platform_delete(platform);
-    static_v8_isolate_create_params_delete_array_buffer_allocator(isolate_params);
-    printf("Hello V8.");
-    //init(argc, argv);
-    return 0;
-}
+//
+//int main(int argc, char *argv[]) {
+//    //int platform = v8_Platform_NewDefaultPlatform();
+//    //v8_V8_InitializePlatform(platform);
+//    //v8_V8_Initialize();
+//    //auto isolate_params = v8_Isolate_CreateParams_new();
+//    //static_v8_isolate_create_params_set_array_buffer_allocator(isolate_params, v8_ArrayBuffer_Allocator_NewDefaultAllocator());
+//    //auto isolate = v8_Isolate_New(isolate_params);
+//    //auto isolate_scope = v8_Isolate_Scope_new(isolate);
+//    //auto handle_scope = v8_HandleScope_new(isolate);
+//    //auto context = v8_Context_New(isolate, nullptr, v8_ObjectTemplate_New(isolate));
+//    //auto context_scope = v8_Context_ScopeScope_new(context);
+//    //v8_V8_Dispose();
+//    //v8_V8_DisposePlatform();
+//    //static_v8_platform_delete(platform);
+//    //static_v8_isolate_create_params_delete_array_buffer_allocator(isolate_params);
+//    //printf("Hello V8.");
+//    //init(argc, argv);
+//    return 0;
+//}
