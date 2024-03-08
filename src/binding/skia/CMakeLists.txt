@@ -415,8 +415,6 @@ add_library(raia_skia SHARED
         src/static/static_std_tuple_int_sk_yuva_pixmap_info_data_type.h
         src/static/static_std_vector_sk_scalar.cpp
         src/static/static_std_vector_sk_scalar.h
-        test/test.cpp
-        test/test.h
         src/binding/sk_point.cpp
         src/binding/sk_point.h
         src/binding/sk_perlin_noise_shader.cpp
