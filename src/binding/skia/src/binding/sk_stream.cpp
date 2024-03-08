@@ -3,6 +3,7 @@
 //
 
 #include "sk_stream.h"
+#include "../static/static_sk_stream_asset.h"
 
 extern "C" {
 
@@ -104,8 +105,8 @@ const void * SkStream_getMemoryBase(SkStream *stream) {
 
 // static
 
-sk_stream_t SkStream_MakeFromFile(const char path[]) { // static
-    return static_sk_stream_make(SkStream::MakeFromFile(path));
+sk_stream_asset_t SkStream_MakeFromFile(const char path[]) { // static
+    return static_sk_stream_asset_make(SkStream::MakeFromFile(path));
 }
 
 }

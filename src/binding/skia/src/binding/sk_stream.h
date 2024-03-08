@@ -7,6 +7,7 @@
 
 #include "include/core/SkStream.h"
 #include "../static/static_sk_stream.h"
+#include "../static/static_sk_stream_asset.h"
 
 extern "C" {
 void SkStream_delete(SkStream *stream);
@@ -34,7 +35,7 @@ bool SkStream_hasLength(SkStream *stream);
 size_t SkStream_getLength(SkStream *stream);
 const void * SkStream_getMemoryBase(SkStream *stream);
 // static
-sk_stream_t SkStream_MakeFromFile(const char path[]);
+sk_stream_asset_t SkStream_MakeFromFile(const char path[]);
 }
 
 #endif //RAIA_SKIA_SK_STREAM_H
