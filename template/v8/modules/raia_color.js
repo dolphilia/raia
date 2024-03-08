@@ -1,12 +1,12 @@
-
-
 export class Color {
+    
     constructor() {
         this.r = 0.0;
         this.g = 0.0;
         this.b = 0.0;
         this.a = 1.0;
     }
+
     initRGBA(r, g, b, a = 255) {
         return {
             r: r,
@@ -15,14 +15,15 @@ export class Color {
             a: a
         };
     }
+
     /**
-     * 
-     * @param {int} r - (int) 0 ~ 255
-     * @param {int} g - (int) 0 ~ 255
-     * @param {int} b - (int) 0 ~ 255
-     * @param {int} a - (int) 0 ~ 255. default = 255
-     * @returns {{r:real, g:real, b:real, a:real}}
+     * @param {number} r - (int) 0 ~ 255
+     * @param {number} g - (int) 0 ~ 255
+     * @param {number} b - (int) 0 ~ 255
+     * @param {number} a - (int) 0 ~ 255. default = 255
+     * @returns {{r:number, g:number, b:number, a:number}} {real, real, real, real}
      */
+
     intToReal(r, g, b, a = 255) {
         return {
             r: r / 255.0,
@@ -31,14 +32,15 @@ export class Color {
             a: a / 255.0
         };
     }
+
     /**
-     * 
-     * @param {real} r - (real) 0.0 ~ 1.0
-     * @param {real} g - (real) 0.0 ~ 1.0
-     * @param {real} b - (real) 0.0 ~ 1.0
-     * @param {real} a - (real) 0.0 ~ 1.0. default = 1.0
-     * @returns {{r:int, g:int, b:int, a:int}}
+     * @param {number} r - (real) 0.0 ~ 1.0
+     * @param {number} g - (real) 0.0 ~ 1.0
+     * @param {number} b - (real) 0.0 ~ 1.0
+     * @param {number} a - (real) 0.0 ~ 1.0. default = 1.0
+     * @returns {{r:number, g:number, b:number, a:number}} {int, int, int, int}
      */
+
     realToInt(r, g, b, a = 1.0) {
         return {
             r: Math.round(r * 255),
@@ -47,13 +49,14 @@ export class Color {
             a: Math.round(a * 255)
         };
     }
+
     /**
-     * 
-     * @param {real} r - (real) 0.0 ~ 1.0
-     * @param {real} g - (real) 0.0 ~ 1.0
-     * @param {real} b - (real) 0.0 ~ 1.0
-     * @returns {{h:real, s:real, v:real}}
+     * @param {number} r - (real) 0.0 ~ 1.0
+     * @param {number} g - (real) 0.0 ~ 1.0
+     * @param {number} b - (real) 0.0 ~ 1.0
+     * @returns {{h:number, s:number, v:number}} {real, real, real}
      */
+
     rgbToHsv(r, g, b) {
         let max = Math.max(r, g, b), min = Math.min(r, g, b);
         let h, s, v = max;
@@ -73,13 +76,14 @@ export class Color {
         }
         return {h:h, s:s, v:v};
     }
+
     /**
-     * 
-     * @param {real} h - (real) 0.0 ~ 1.0
-     * @param {real} s - (real) 0.0 ~ 1.0
-     * @param {real} v - (real) 0.0 ~ 1.0
-     * @returns {{r:real, g:real, b:real}}
+     * @param {number} h - (real) 0.0 ~ 1.0
+     * @param {number} s - (real) 0.0 ~ 1.0
+     * @param {number} v - (real) 0.0 ~ 1.0
+     * @returns {{r:number, g:number, b:number}} {real, real, real}
      */
+    
     hsvToRgb(h, s, v) {
         let r, g, b;
         let i = Math.floor(h * 6);

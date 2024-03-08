@@ -36,15 +36,17 @@ var handle;
 }());
 
 export class Draw {
+    
     constructor() {
     }
+
     /**
-     * 
      * @param {ArrayBuffer} pixels 
-     * @param {int} width 
-     * @param {int} height 
+     * @param {number} width (int)
+     * @param {number} height (int)
      * @returns 
      */
+
     noiseRGB_CPU(pixels, width, height) {
         var args = JSON.stringify({
             "pixels": std.bufToPtr(pixels),
@@ -53,6 +55,7 @@ export class Draw {
         });
         lib.call(handle, "raia_draw_noise_cpu", args);
     }
+
     noiseRGB_GPU(pixels, width, height) {
         var args = JSON.stringify({
             "pixels": std.bufToPtr(pixels),
@@ -61,20 +64,22 @@ export class Draw {
         });
         lib.call(handle, "raia_draw_noise_gpu", args);
     }
+
     /**
      * @param {ArrayBuffer} pixels_rgb
-     * @param {int} pixels_rgb_width
-     * @param {int} pixels_rgb_height
+     * @param {number} pixels_rgb_width (int)
+     * @param {number} pixels_rgb_height (int)
      * @param {ArrayBuffer} pixels_rgba
-     * @param {int} pixels_rgba_width
-     * @param {int} pixels_rgba_height
-     * @param {int} position_x
-     * @param {int} position_y
-     * @param {int} trimming_x1
-     * @param {int} trimming_y1
-     * @param {int} trimming_x2
-     * @param {int} trimming_y2
+     * @param {number} pixels_rgba_width (int)
+     * @param {number} pixels_rgba_height (int)
+     * @param {number} position_x (int)
+     * @param {number} position_y (int)
+     * @param {number} trimming_x1 (int)
+     * @param {number} trimming_y1 (int)
+     * @param {number} trimming_x2 (int)
+     * @param {number} trimming_y2 (int)
      */
+
     blendPixelsRGBAtoRGB(pixels_rgb, pixels_rgb_width, pixels_rgb_height,
                          pixels_rgba, pixels_rgba_width, pixels_rgba_height,
                          position_x, position_y,
@@ -95,21 +100,22 @@ export class Draw {
         });
         lib.call(handle, "raia_draw_blend_pixels_rgba_to_rgb", args);
     }
+
     /**
-     * 
      * @param {ArrayBuffer} pixels_rgba_a 
-     * @param {int} pixels_rgba_a_width 
-     * @param {int} pixels_rgba_a_height 
+     * @param {number} pixels_rgba_a_width (int)
+     * @param {number} pixels_rgba_a_height (int)
      * @param {ArrayBuffer} pixels_rgba_b 
-     * @param {int} pixels_rgba_b_width 
-     * @param {int} pixels_rgba_b_height 
-     * @param {int} position_x 
-     * @param {int} position_y 
-     * @param {int} trimming_x1 
-     * @param {int} trimming_y1 
-     * @param {int} trimming_x2 
-     * @param {int} trimming_y2 
+     * @param {number} pixels_rgba_b_width (int)
+     * @param {number} pixels_rgba_b_height (int)
+     * @param {number} position_x (int)
+     * @param {number} position_y (int)
+     * @param {number} trimming_x1 (int)
+     * @param {number} trimming_y1 (int)
+     * @param {number} trimming_x2 (int)
+     * @param {number} trimming_y2 (int)
      */
+
     blendPixelsRGBAtoRGBA (pixels_rgba_a, pixels_rgba_a_width, pixels_rgba_a_height,
                            pixels_rgba_b, pixels_rgba_b_width, pixels_rgba_b_height,
                            position_x, position_y,
@@ -130,17 +136,18 @@ export class Draw {
         });
         lib.call(handle, "raia_draw_blend_pixels_rgba_to_rgba", args);
     }
+
     /**
-     * 
      * @param {ArrayBuffer} pixels 
-     * @param {int} point_x 
-     * @param {int} point_y 
-     * @param {int} color_red 
-     * @param {int} color_green 
-     * @param {int} color_blue 
-     * @param {int} canvas_width 
-     * @param {int} canvas_height 
+     * @param {number} point_x (int)
+     * @param {number} point_y (int)
+     * @param {number} color_red (int)
+     * @param {number} color_green (int)
+     * @param {number} color_blue (int)
+     * @param {number} canvas_width (int)
+     * @param {number} canvas_height (int)
      */
+
     pointRGB(pixels,
              point_x, point_y,
              color_red, color_green, color_blue,
@@ -157,18 +164,19 @@ export class Draw {
         });
         lib.call(handle, "raia_draw_point", args);
     }
+
     /**
-     * 
      * @param {ArrayBuffer} pixels 
-     * @param {int} canvas_width 
-     * @param {int} canvas_height 
-     * @param {int} point_x 
-     * @param {int} point_y 
-     * @param {int} color_red 
-     * @param {int} color_green 
-     * @param {int} color_blue 
-     * @param {int} color_alpha 
+     * @param {number} canvas_width (int)
+     * @param {number} canvas_height (int)
+     * @param {number} point_x (int)
+     * @param {number} point_y (int)
+     * @param {number} color_red (int)
+     * @param {number} color_green (int)
+     * @param {number} color_blue (int)
+     * @param {number} color_alpha (int)
      */
+
     pointRGBA(pixels, canvas_width, canvas_height,
               point_x, point_y,
               color_red, color_green, color_blue, color_alpha) {
@@ -185,18 +193,19 @@ export class Draw {
         });
         lib.call(handle, "raia_draw_point_rgba", args);
     }
+
     /**
-     * 
      * @param {ArrayBuffer} pixels 
-     * @param {int} canvas_width 
-     * @param {int} canvas_height 
-     * @param {int} point_x 
-     * @param {int} point_y 
-     * @param {int} color_red 
-     * @param {int} color_green 
-     * @param {int} color_blue 
-     * @param {int} color_alpha 
+     * @param {number} canvas_width (int)
+     * @param {number} canvas_height (int)
+     * @param {number} point_x (int)
+     * @param {number} point_y (int)
+     * @param {number} color_red (int)
+     * @param {number} color_green (int)
+     * @param {number} color_blue (int)
+     * @param {number} color_alpha (int)
      */
+
     pointRGBAtoRGB(pixels, canvas_width, canvas_height,
                    point_x, point_y,
                    color_red, color_green, color_blue, color_alpha) {
@@ -213,19 +222,20 @@ export class Draw {
         });
         lib.call(handle, "raia_draw_point_alpha", args);
     }
+
     /**
-     * 
      * @param {ArrayBuffer} pixels 
-     * @param {int} canvas_width 
-     * @param {int} canvas_height 
-     * @param {int} start_x 
-     * @param {int} start_y 
-     * @param {int} end_x 
-     * @param {int} end_y 
-     * @param {int} color_red 
-     * @param {int} color_green 
-     * @param {int} color_blue 
+     * @param {number} canvas_width (int)
+     * @param {number} canvas_height (int)
+     * @param {number} start_x (int)
+     * @param {number} start_y (int)
+     * @param {number} end_x (int)
+     * @param {number} end_y (int)
+     * @param {number} color_red (int)
+     * @param {number} color_green (int)
+     * @param {number} color_blue (int)
      */
+
     lineRGB(pixels, canvas_width, canvas_height,
             start_x, start_y, end_x, end_y,
             color_red, color_green, color_blue) {
@@ -243,20 +253,21 @@ export class Draw {
         });
         lib.call(handle, "raia_draw_line", args);
     }
+
     /**
-     * 
      * @param {ArrayBuffer} pixels 
-     * @param {int} canvas_width 
-     * @param {int} canvas_height 
-     * @param {int} start_x 
-     * @param {int} start_y 
-     * @param {int} end_x 
-     * @param {int} end_y 
-     * @param {int} color_red 
-     * @param {int} color_green 
-     * @param {int} color_blue 
-     * @param {int} color_alpha 
+     * @param {number} canvas_width (int)
+     * @param {number} canvas_height (int)
+     * @param {number} start_x (int)
+     * @param {number} start_y (int)
+     * @param {number} end_x (int)
+     * @param {number} end_y (int)
+     * @param {number} color_red (int)
+     * @param {number} color_green (int)
+     * @param {number} color_blue (int)
+     * @param {number} color_alpha (int)
      */
+
     lineRGBA(pixels, canvas_width, canvas_height,
              start_x, start_y, end_x, end_y,
              color_red, color_green, color_blue, color_alpha) {
@@ -275,19 +286,20 @@ export class Draw {
         });
         lib.call(handle, "raia_draw_line_rgba", args);
     }
+
     /**
-     * 
      * @param {ArrayBuffer} pixels 
-     * @param {int} canvas_width 
-     * @param {int} canvas_height 
-     * @param {int} start_x 
-     * @param {int} start_y 
-     * @param {int} end_x 
-     * @param {int} end_y 
-     * @param {int} color_red 
-     * @param {int} color_green 
-     * @param {int} color_blue 
+     * @param {number} canvas_width (int)
+     * @param {number} canvas_height (int)
+     * @param {number} start_x (int)
+     * @param {number} start_y (int)
+     * @param {number} end_x (int)
+     * @param {number} end_y (int)
+     * @param {number} color_red (int)
+     * @param {number} color_green (int)
+     * @param {number} color_blue (int)
      */
+
     fillRectRGB(pixels, canvas_width, canvas_height,
                 start_x, start_y, end_x, end_y,
                 color_red, color_green, color_blue) {
@@ -305,19 +317,20 @@ export class Draw {
         });
         lib.call(handle, "raia_draw_fill_rect", args);
     }
+
     /**
-     * 
      * @param {ArrayBuffer} pixels 
-     * @param {int} canvas_width 
-     * @param {int} canvas_height 
-     * @param {int} start_x 
-     * @param {int} start_y 
-     * @param {int} end_x 
-     * @param {int} end_y 
-     * @param {int} color_red 
-     * @param {int} color_green 
-     * @param {int} color_blue
+     * @param {number} canvas_width (int)
+     * @param {number} canvas_height (int)
+     * @param {number} start_x (int)
+     * @param {number} start_y (int)
+     * @param {number} end_x (int)
+     * @param {number} end_y (int)
+     * @param {number} color_red (int)
+     * @param {number} color_green (int)
+     * @param {number} color_blue(int)
      */
+
     fillRectFastRGB(pixels, canvas_width, canvas_height,
                     start_x, start_y, end_x, end_y,
                     color_red, color_green, color_blue) {
@@ -335,20 +348,21 @@ export class Draw {
         });
         lib.call(handle, "raia_draw_fill_rect_fast", args);
     }
+
     /**
-     * 
      * @param {ArrayBuffer} pixels 
-     * @param {int} canvas_width 
-     * @param {int} canvas_height 
-     * @param {int} start_x 
-     * @param {int} start_y 
-     * @param {int} end_x 
-     * @param {int} end_y 
-     * @param {int} color_red 
-     * @param {int} color_green 
-     * @param {int} color_blue 
-     * @param {int} color_alpha 
+     * @param {number} canvas_width (int)
+     * @param {number} canvas_height (int)
+     * @param {number} start_x (int)
+     * @param {number} start_y (int)
+     * @param {number} end_x (int)
+     * @param {number} end_y (int)
+     * @param {number} color_red (int)
+     * @param {number} color_green (int)
+     * @param {number} color_blue (int)
+     * @param {number} color_alpha (int)
      */
+
     fillRectRGBA(pixels, canvas_width, canvas_height,
                  start_x, start_y, end_x, end_y,
                  color_red, color_green, color_blue, color_alpha) {
@@ -367,20 +381,21 @@ export class Draw {
         });
         lib.call(handle, "raia_draw_fill_rect_rgba", args);
     }
+
     /**
-     * 
      * @param {ArrayBuffer} pixels 
-     * @param {int} canvas_width 
-     * @param {int} canvas_height 
-     * @param {int} start_x 
-     * @param {int} start_y 
-     * @param {int} end_x 
-     * @param {int} end_y 
-     * @param {int} color_red 
-     * @param {int} color_green 
-     * @param {int} color_blue 
-     * @param {int} color_alpha 
+     * @param {number} canvas_width (int)
+     * @param {number} canvas_height (int)
+     * @param {number} start_x (int)
+     * @param {number} start_y (int)
+     * @param {number} end_x (int)
+     * @param {number} end_y (int)
+     * @param {number} color_red (int)
+     * @param {number} color_green (int)
+     * @param {number} color_blue (int)
+     * @param {number} color_alpha (int)
      */
+
     fillRectRGBAtoRGB(pixels, canvas_width, canvas_height,
                       start_x, start_y, end_x, end_y,
                       color_red, color_green, color_blue, color_alpha) {
@@ -399,19 +414,20 @@ export class Draw {
         });
         lib.call(handle, "raia_draw_fill_rect_alpha", args);
     }
+
     /**
-     * 
      * @param {ArrayBuffer} pixels 
-     * @param {int} canvas_width 
-     * @param {int} canvas_height 
-     * @param {int} start_x 
-     * @param {int} start_y 
-     * @param {int} end_x 
-     * @param {int} end_y 
-     * @param {int} color_red 
-     * @param {int} color_green 
-     * @param {int} color_blue 
+     * @param {number} canvas_width (int)
+     * @param {number} canvas_height (int)
+     * @param {number} start_x (int)
+     * @param {number} start_y (int)
+     * @param {number} end_x (int)
+     * @param {number} end_y (int)
+     * @param {number} color_red (int)
+     * @param {number} color_green (int)
+     * @param {number} color_blue (int)
      */
+
     drawEllipseRGB(pixels, canvas_width, canvas_height,
                    start_x, start_y, end_x, end_y,
                    color_red, color_green, color_blue) {
@@ -429,20 +445,21 @@ export class Draw {
         });
         lib.call(handle, "raia_draw_ellipse", args);
     }
+
     /**
-     * 
      * @param {ArrayBuffer} pixels 
-     * @param {int} canvas_width 
-     * @param {int} canvas_height 
-     * @param {int} start_x 
-     * @param {int} start_y 
-     * @param {int} end_x 
-     * @param {int} end_y 
-     * @param {int} color_red 
-     * @param {int} color_green 
-     * @param {int} color_blue 
-     * @param {int} color_alpha 
+     * @param {number} canvas_width (int)
+     * @param {number} canvas_height (int)
+     * @param {number} start_x (int)
+     * @param {number} start_y (int)
+     * @param {number} end_x (int)
+     * @param {number} end_y (int)
+     * @param {number} color_red (int)
+     * @param {number} color_green (int)
+     * @param {number} color_blue (int)
+     * @param {number} color_alpha (int)
      */
+
     drawEllipseRGBA(pixels, canvas_width, canvas_height,
                     start_x, start_y, end_x, end_y,
                     color_red, color_green, color_blue, color_alpha) {
@@ -461,19 +478,20 @@ export class Draw {
         });
         lib.call(handle, "raia_draw_ellipse_rgba", args);
     }
+
     /**
-     * 
      * @param {ArrayBuffer} pixels 
-     * @param {int} canvas_width 
-     * @param {int} canvas_height 
-     * @param {int} start_x 
-     * @param {int} start_y 
-     * @param {int} end_x 
-     * @param {int} end_y 
-     * @param {int} color_red 
-     * @param {int} color_green 
-     * @param {int} color_blue 
+     * @param {number} canvas_width (int)
+     * @param {number} canvas_height (int)
+     * @param {number} start_x (int)
+     * @param {number} start_y (int)
+     * @param {number} end_x (int)
+     * @param {number} end_y (int)
+     * @param {number} color_red (int)
+     * @param {number} color_green (int)
+     * @param {number} color_blue (int)
      */
+
     drawFilledEllipseRGB(pixels, canvas_width, canvas_height,
                          start_x, start_y, end_x, end_y,
                          color_red, color_green, color_blue) {
@@ -491,20 +509,21 @@ export class Draw {
         });
         lib.call(handle, "raia_draw_filled_ellipse", args);
     }
+
     /**
-     * 
      * @param {ArrayBuffer} pixels 
-     * @param {int} canvas_width 
-     * @param {int} canvas_height 
-     * @param {int} start_x 
-     * @param {int} start_y 
-     * @param {int} end_x 
-     * @param {int} end_y 
-     * @param {int} color_red 
-     * @param {int} color_green 
-     * @param {int} color_blue 
-     * @param {int} color_alpha 
+     * @param {number} canvas_width (int)
+     * @param {number} canvas_height (int)
+     * @param {number} start_x (int)
+     * @param {number} start_y (int)
+     * @param {number} end_x (int)
+     * @param {number} end_y (int)
+     * @param {number} color_red (int)
+     * @param {number} color_green (int)
+     * @param {number} color_blue (int)
+     * @param {number} color_alpha (int)
      */
+
     drawFilledEllipseRGBA(pixels, canvas_width, canvas_height,
                           start_x, start_y, end_x, end_y,
                           color_red, color_green, color_blue, color_alpha) {
@@ -523,19 +542,20 @@ export class Draw {
         });
         lib.call(handle, "raia_draw_filled_ellipse_rgba", args);
     }
+
     /**
-     * 
      * @param {ArrayBuffer} pixels 
-     * @param {int} canvas_width 
-     * @param {int} canvas_height 
-     * @param {int} start_x 
-     * @param {int} start_y 
-     * @param {int} end_x 
-     * @param {int} end_y 
-     * @param {int} color_red 
-     * @param {int} color_green 
-     * @param {int} color_blue 
+     * @param {number} canvas_width (int)
+     * @param {number} canvas_height (int)
+     * @param {number} start_x (int)
+     * @param {number} start_y (int)
+     * @param {number} end_x (int)
+     * @param {number} end_y (int)
+     * @param {number} color_red (int)
+     * @param {number} color_green (int)
+     * @param {number} color_blue (int)
      */
+
     drawFilledEllipseSmooth(pixels, canvas_width, canvas_height,
                             start_x, start_y, end_x, end_y,
                             color_red, color_green, color_blue) {
@@ -553,11 +573,12 @@ export class Draw {
         });
         lib.call(handle, "raia_draw_filled_ellipse_smooth", args);
     }
+
     /**
-     * 
-     * @param {real} width 
-     * @param {real} height 
+     * @param {number} width (real)
+     * @param {number} height (real)
      */
+
     d3mInit(width, height) {
         var args = JSON.stringify({
             "width": width,
@@ -565,15 +586,16 @@ export class Draw {
         });
         lib.call(handle, "raia_draw_d3m_init", args);
     }
+
     /**
-     * 
-     * @param {real} pos_x 
-     * @param {real} pos_y 
-     * @param {real} pos_z 
-     * @param {real} target_x 
-     * @param {real} target_y 
-     * @param {real} target_z 
+     * @param {number} pos_x (real)
+     * @param {number} pos_y (real)
+     * @param {number} pos_z (real)
+     * @param {number} target_x (real)
+     * @param {number} target_y (real)
+     * @param {number} target_z (real)
      */
+
     d3mSetCamera(pos_x, pos_y, pos_z, target_x, target_y, target_z) {
         var args = JSON.stringify({
             "pos_x": pos_x,
@@ -585,13 +607,14 @@ export class Draw {
         });
         lib.call(handle, "raia_draw_d3m_set_camera", args);
     }
+
     /**
-     * 
-     * @param {real} pos_x 
-     * @param {real} pos_y 
-     * @param {real} pos_z 
-     * @returns {{x:int, y:int}}
+     * @param {number} pos_x (real)
+     * @param {number} pos_y (real)
+     * @param {number} pos_z (real)
+     * @returns {{x:number, y:number}} {int, int}
      */
+
     d3mTransform3Dto2D(pos_x, pos_y, pos_z) {
         var args = JSON.stringify({
             "pos_x": pos_x,

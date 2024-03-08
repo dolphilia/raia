@@ -1,17 +1,20 @@
 import {Std} from 'raia_std';
-const std = new Std();
 import {GlesEx} from 'raia_gles_ex';
+
+const std = new Std();
 
 /**
  * @extends GlesEx
  */
+
 export class Texture extends GlesEx {
+
     /**
-     * 
-     * @param {int} width 
-     * @param {int} height 
-     * @param {uint} depth 
+     * @param {number} width (int)
+     * @param {number} height (int)
+     * @param {number} depth (uint)
      */
+
     constructor(width = 32, height = 32, depth = 4) {
         super();
         this.width = width;

@@ -6,11 +6,13 @@ import {GLFW} from 'raia_glfw';
 /**
  * @extends GLFW
  */
+
 export class GlfwEx extends GLFW {
+
     /**
-     * 
-     * @param {uintptr} window 
+     * @param {number} window (uintptr)
      */
+
     setCallback(window) {
         super.setKeyCallbackAlt(window);
         super.setCursorPosCallbackAlt(window);
@@ -29,13 +31,14 @@ export class GlfwEx extends GLFW {
         super.setWindowFocusCallback(window);
         super.setWindowIconifyCallback(window);
     }
+
     /**
-     * 
-     * @param {int} width 
-     * @param {int} height 
+     * @param {number} width (int)
+     * @param {number} height (int)
      * @param {string} title 
-     * @returns {uintptr} window_id
+     * @returns {number} (uintptr) window_id
      */
+
     createMainWindow(width, height, title) {
         var window = super.createWindow(width, height, title);
         if(window === null) {
@@ -45,10 +48,11 @@ export class GlfwEx extends GLFW {
         }
         return window;
     }
+
     /**
-     * 
-     * @param {uintptr} window 
+     * @param {number} window (uintptr)
      */
+
     destroy(window) {
         super.destroyWindow(window);
         super.terminate();

@@ -68,6 +68,7 @@ const std = new Std();
 })();
 
 export class ImGui {
+
     constructor() {
         this.ConfigFlags = {
             None                    : 0,
@@ -170,107 +171,123 @@ export class ImGui {
         this.WindowFlags.NoDecoration = this.WindowFlags.NoTitleBar    | this.WindowFlags.NoResize    | this.WindowFlags.NoScrollbar | this.WindowFlags.NoCollapse;
         this.WindowFlags.NoInputs     = this.WindowFlags.NoMouseInputs | this.WindowFlags.NoNavInputs | this.WindowFlags.NoNavFocus;
     }
+
     checkVersion() {
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_check_version");
     }
+
     createContext() {
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_create_context");
     }
+
     /**
      * 
-     * @param {boolean} flag 
+     * @param {boolean} flag (int)
      */
+
     configViewportsNoAutoMerge(flag) {
         var args = JSON.stringify({
             "flag": flag
         });
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_config_viewports_no_auto_merge", args);
     }
+
     /**
      * 
-     * @param {boolean} flag 
+     * @param {boolean} flag (int)
      */
+
     configViewportsNoTaskBarIcon(flag) {
         var args = JSON.stringify({
             "flag": flag
         });
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_config_viewports_no_task_bar_icon", args);
     }
+
     /**
-     * 
-     * @param {int} config_flags 
+     * @param {number} config_flags (int)
      */
+
     setConfigFlags(config_flags) {
         var args = JSON.stringify({
             "config_flags": config_flags
         });
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_set_config_flags", args);
     }
+
     /**
-     * 
-     * @param {real} scale 
+     * @param {number} scale (real)
      */
+
     fontGlobalScale(scale) {
         var args = JSON.stringify({
             "scale": scale
         });
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_font_global_scale", args);
     }
+
     /**
-     * 
-     * @returns {real} framerate
+     * @returns {number} framerate (real)
      */
+
     getFramerate() {
         var ret = lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_get_framerate");
         return JSON.parse(ret).result;
     }
+
     styleColorsDark() {
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_style_colors_dark");
     }
+
     styleColorsLight() {
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_style_colors_light");
     }
+
     styleColorsClassic() {
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_style_colors_classic");
     }
+
     /**
-     * 
-     * @param {real} width 
+     * @param {number} width (real)
      */
+
     setStyleWindowBorderSize(width) {
         var args = JSON.stringify({
             "width": width
         });
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_set_style_window_border_size", args);
     }
+
     /**
-     * 
-     * @param {real} radius 
+     * @param {number} radius (real)
      */
+
     setStyleWindowRounding(radius) {
         var args = JSON.stringify({
             "radius": radius
         });
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_set_style_window_rounding", args);
     }
+
     /**
-     * 
-     * @param {real} scale 
+     * @param {number} scale (real)
      */
+
     setStyleScaleAllSizes(scale) {
         var args = JSON.stringify({
             "scale": scale
         });
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_set_style_scale_all_sizes", args);
     }
+
     /**
-     * 
-     * @param {int} col 
-     * @param {real} red 0.0 ~ 1.0
-     * @param {real} green 0.0 ~ 1.0
-     * @param {real} blue 0.0 ~ 1.0
-     * @param {real} alpha 0.0 ~ 1.0
+     * @param {number} col (int)
+     * @param {number} red (real) 0.0 ~ 1.0
+     * @param {number} green (real) 0.0 ~ 1.0
+     * @param {number} blue (real) 0.0 ~ 1.0
+     * @param {number} alpha (real) 0.0 ~ 1.0
      */
+
     setStyleColors(col, red, green, blue, alpha) {
         var args = JSON.stringify({
             "col": col,
@@ -281,11 +298,12 @@ export class ImGui {
         });
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_set_style_colors", args);
     }
+
     /**
-     * 
-     * @param {uintptr} window_id 
-     * @param {boolean} install_callbacks 
+     * @param {number} window_id (uintptr)
+     * @param {boolean} install_callbacks (int)
      */
+
     implGlfwInitForOpenGL(window_id, install_callbacks) {
         var args = JSON.stringify({
             "window_id": window_id,
@@ -293,35 +311,39 @@ export class ImGui {
         });
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_impl_glfw_init_for_opengl", args);
     }
+
     /**
-     * 
-     * @param {string} glsl_version 
+     * @param {string} glsl_version (string)
      */
+
     implOpenGL3Init(glsl_version) {
         var args = JSON.stringify({
             "glsl_version": glsl_version
         });
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_impl_opengl3_init", args);
     }
+
     addFontDefault() {
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_add_font_default");
     }
+
     /**
-     * 
-     * @returns {uintptr} glyph_ranges
+     * @returns {number} (uintptr) glyph_ranges
      */
+
     getGlyphRangesJapanese() {
         var ret = lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_get_glyph_ranges_japanese");
         return JSON.parse(ret).result;
     }
+
     /**
-     * 
-     * @param {string} filename 
-     * @param {real} size_pixels 
-     * @param {uintptr | null} font_cfg 
-     * @param {uintptr | null} glyph_ranges 
-     * @returns {uintptr} font
+     * @param {string} filename (string)
+     * @param {number} size_pixels (real)
+     * @param {number | null} font_cfg (uintptr | null)
+     * @param {number | null} glyph_ranges (uintptr | null)
+     * @returns {number} font (uintptr)
      */
+
     addFontFromFileTTF(filename, size_pixels, font_cfg = null, glyph_ranges = null) {
         var args = JSON.stringify({
             "filename": filename,
@@ -332,80 +354,95 @@ export class ImGui {
         var ret = lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_add_font_from_file_ttf", args);
         return JSON.parse(ret).result;
     }
+
     /**
-     * 
-     * @param {boolean} expr 
+     * @param {boolean} expr (boolean)
      */
+
     assert(expr) {
         var args = JSON.stringify({
             "expr": expr
         });
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_assert", args);
     }
+
     /**
-     * 
-     * @param {uintptr} font 
+     * @param {number} font (uintptr)
      */
+
     setFontDefault(font) {
         var args = JSON.stringify({
             "font": font
         });
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_set_font_default", args);
     }
+
     initFont() {
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_init_font");
     }
+
     implOpenGL3Shutdown() {
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_impl_opengl3_shutdown");
     }
+
     implGlfwShutdown() {
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_impl_glfw_shutdown");
     }
+
     destroyContext() {
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_destroy_context");
     }
+
     implOpenGL3NewFrame() {
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_impl_opengl3_new_frame");
     }
+
     implGlfwNewFrame() {
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_impl_glfw_new_frame");
     }
+
     newFrame() {
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_new_frame");
     }
+
     render() {
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_render");
     }
+
     /**
-     * 
-     * @returns {uintptr} draw_data
+     * @returns {number} draw_data (uintptr)
      */
+
     getDrawData() {
         var ret = lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_get_draw_data");
         return JSON.parse(ret).result;
     }
+
     /**
-     * 
-     * @param {uintptr} draw_data 
+     * @param {number} draw_data (uintptr)
      */
+
     implOpenGL3RenderDrawData(draw_data) {
         var args = JSON.stringify({
             "draw_data": draw_data
         });
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_impl_opengl3_render_draw_data", args);
     }
+
     updatePlatformWindows() {
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_update_platform_windows");
     }
+
     renderPlatformWindowsDefault() {
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_render_platform_windows_default");
     }
+
     /**
-     * 
-     * @param {string} name 
-     * @param {uintptr | null} p_open 
-     * @param {int} flags 
+     * @param {string} name (string)
+     * @param {number | null} p_open (uintptr)
+     * @param {number} flags (int)
      */
+
     begin(name = "Untitled", p_open = null, flags = 0) {
         var args = JSON.stringify({
             "name": name,
@@ -414,12 +451,13 @@ export class ImGui {
         });
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_begin", args);
     }
+
     end() {
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_end");
     }
+
     /**
-     * 
-     * @param {string} text 
+     * @param {string} text (string)
      */
     text(text) {
         var args = JSON.stringify({
@@ -427,11 +465,12 @@ export class ImGui {
         });
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_text", args);
     }
+
     /**
-     * 
-     * @param {string} label 
-     * @returns {boolean} pressed
+     * @param {string} label (string)
+     * @returns {boolean} (boolean) pressed
      */
+
     button(label) {
         var args = JSON.stringify({
             "label": label
@@ -439,12 +478,13 @@ export class ImGui {
         var ret = lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_button", args);
         return JSON.parse(ret).result;
     }
+
     /**
-     * 
-     * @param {int} texture_id 
-     * @param {real} width 
-     * @param {real} height 
+     * @param {number} texture_id (int)
+     * @param {number} width (real)
+     * @param {number} height (real)
      */
+
     image(texture_id, width, height) {
         var args = JSON.stringify({
             "texture_id": texture_id,
@@ -453,12 +493,13 @@ export class ImGui {
         });
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_image", args);
     }
+
     /**
-     * 
-     * @param {string} label 
-     * @param {boolean} v 
-     * @returns {boolean} checked
+     * @param {string} label (string)
+     * @param {boolean} v (boolean)
+     * @returns {boolean} (boolean) checked
      */
+
     checkbox(label, v) {
         var args = JSON.stringify({
             "label": label,
@@ -467,14 +508,15 @@ export class ImGui {
         var ret = lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_checkbox", args);
         return JSON.parse(ret).result;
     }
+
     /**
-     * 
-     * @param {string} label 
-     * @param {real} v 
-     * @param {real} v_min 
-     * @param {real} v_max 
-     * @returns {real} value
+     * @param {string} label (string)
+     * @param {number} v (real)
+     * @param {number} v_min (real)
+     * @param {number} v_max (real)
+     * @returns {number} (real) value
      */
+
     sliderFloat(label, v, v_min, v_max) {
         var args = JSON.stringify({
             "label": label,
@@ -485,14 +527,15 @@ export class ImGui {
         var ret = lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_slider_float", args);
         return JSON.parse(ret).result;
     }
+
     /**
-     * 
-     * @param {string} label 
-     * @param {real} red 
-     * @param {real} green 
-     * @param {real} blue 
+     * @param {string} label (string)
+     * @param {number} red (real)
+     * @param {number} green (real)
+     * @param {number} blue (real)
      * @returns {{red: real, gree: real, blue:real}}
      */
+
     colorEdit3(label, red, green, blue) {
         var args = JSON.stringify({
             "label": label,
@@ -503,14 +546,16 @@ export class ImGui {
         var ret = lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_color_edit_3", args);
         return JSON.parse(ret);
     }
+
     sameLine() {
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_same_line");
     }
+
     /**
-     * 
-     * @param {int} idx 
-     * @param {real} val 
+     * @param {number} idx (int)
+     * @param {number} val (real)
      */
+
     pushStyleVarFloat(idx, val) {
         var args = JSON.stringify({
             "idx": idx,
@@ -518,12 +563,13 @@ export class ImGui {
         });
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_push_style_var_float", args);
     }
+
     /**
-     * 
-     * @param {int} idx 
-     * @param {real} x 
-     * @param {real} y 
+     * @param {number} idx (int)
+     * @param {number} x (real)
+     * @param {number} y (real)
      */
+
     pushStyleVarVec2(idx, x, y) {
         var args = JSON.stringify({
             "idx": idx,
@@ -532,21 +578,23 @@ export class ImGui {
         });
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_push_style_var_vec2", args);
     }
+
     /**
-     * 
-     * @param {int} count 
+     * @param {number} count (int)
      */
+
     popStyleVar(count) {
         var args = JSON.stringify({
             "count": count
         });
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_pop_style_var", args);
     }
+
     /**
-     * 
-     * @param {int} idx 
-     * @param {uint} col 
+     * @param {number} idx (int)
+     * @param {number} col (uint)
      */
+
     pushStyleColorU32(idx, col) {
         var args = JSON.stringify({
             "idx": idx,
@@ -554,14 +602,15 @@ export class ImGui {
         });
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_push_style_color_u32", args);
     }
+
     /**
-     * 
-     * @param {int} idx 
-     * @param {real} x 
-     * @param {real} y 
-     * @param {real} z 
-     * @param {real} w 
+     * @param {number} idx (int)
+     * @param {number} x (real) 
+     * @param {number} y (real) 
+     * @param {number} z (real) 
+     * @param {number} w (real) 
      */
+
     pushStyleColorVec4(idx, x, y, z, w) {
         var args = JSON.stringify({
             "idx": idx,
@@ -572,26 +621,29 @@ export class ImGui {
         });
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_push_style_color_vec4", args);
     }
+
     /**
-     * 
-     * @param {int} count 
+     * @param {number} count (int)
      */
+
     popStyleColor(count = 1) {
         var args = JSON.stringify({
             "count": count
         });
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_pop_style_color", args);
     }
+
     /**
-     * 
-     * @param {real} alpha 
+     * @param {number} alpha (real)
      */
+
     setNextWindowBgAlpha(alpha = 1.0) {
         var args = JSON.stringify({
             "alpha": alpha
         });
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_set_next_window_bg_alpha", args);
     }
+    
     separator() {
         lib.call(globalThis.__RAIA_IMGUI__.handle, "raia_imgui_separator");
     }

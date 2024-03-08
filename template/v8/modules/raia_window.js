@@ -6,13 +6,15 @@ import {Std} from "raia_std";
 let std = new Std();
 
 export class Window {
+
     /**
      * メインウィンドウを作成する
-     * @constructor
-     * @param {string} title - タイトルバーに表示する文字列
-     * @param {int} width - ウィンドウの横幅
-     * @param {int} height - ウィンドウの高さ
+     * 
+     * @param {string} title (string) タイトルバーに表示する文字列
+     * @param {number} width (int) ウィンドウの横幅
+     * @param {number} height (int) ウィンドウの高さ
      */
+
     constructor(title, width, height) {
         this.gles = new GlesEx();
         this.glfw = new GlfwEx();
@@ -26,12 +28,15 @@ export class Window {
         this.glfw.setCallback(this.id);
         this.initShader();
     }
+
     /**
      * ウィンドウを破棄する
      */
+
     destroy() {
         this.glfw.destroy(this.id);
     }
+
     initShader() {
         var vbo = this.gles.genBuffersAlt(1);
         var ebo = this.gles.genBuffersAlt(1);
@@ -43,30 +48,34 @@ export class Window {
         this.texture = this.gles.genTexturesAlt(1);
         this.gles.bindTexture2D(this.texture);
     }
+
     onUpdate(f) {
         while(this.windowShouldClose() === 0) {
             f();
             this.poll();
         }
     }
+
     /**
-     * 
-     * @returns {uintptr} window_id
+     * @returns {number} (uintptr) window_id
      */
+
     windowShouldClose() {
         return this.glfw.windowShouldClose(this.id);
     }
+
     poll() {
         this.glfw.swapBuffers(this.id);
         this.glfw.pollEvents();
     }
+
     /**
-     * 
-     * @param {real} red 0.0 ~ 1.0
-     * @param {real} green 0.0 ~ 1.0
-     * @param {real} blue 0.0 ~ 1.0
-     * @param {real} alpha 0.0 ~ 1.0
+     * @param {number} red (real) 0.0 ~ 1.0
+     * @param {number} green (real) 0.0 ~ 1.0
+     * @param {number} blue (real) 0.0 ~ 1.0
+     * @param {number} alpha (real) 0.0 ~ 1.0
      */
+
     clear(red, green, blue, alpha) {
         var w_ptr = std.newPtr(4);
         var h_ptr = std.newPtr(4);
@@ -80,6 +89,7 @@ export class Window {
         this.gles.clearColorAlt(red, green, blue, alpha);
         this.gles.clearAlt(GLES.COLOR_BUFFER_BIT);
     }
+    
     draw() {
         this.gles.setTextureRGB(this.texture, this.width, this.height, this.pixels);
         this.gles.useProgramAlt(this.program);

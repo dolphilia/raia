@@ -449,6 +449,7 @@ void raia_gc_free(const v8_args_t &args) {
 }
 
 int raia_v8_main(int argc, char *argv[]) {
+    v8::V8::SetFlagsFromString("--expose-gc");
     v8_init();
     v8_isolate_init(isolate, isolate_params);
     v8_isolate_set_callback(isolate, import_dynamic_callback, import_meta);

@@ -23,12 +23,12 @@ export class Image {
     /**
      * 
      * @param {ArrayBuffer} pixels 
-     * @param {int} width 
-     * @param {int} height 
+     * @param {number} width (int)
+     * @param {number} height (int)
      * @param {string} filename 
-     * @param {int} pos_x 
-     * @param {int} pos_y 
-     * @returns {{width:int, height:int}}
+     * @param {number} pos_x (int)
+     * @param {number} pos_y (int)
+     * @returns {{width:number, height:number}} {int, int}
      */
     loadImage(pixels, width, height, filename, pos_x = 0, pos_y = 0) {
         var json_str = JSON.stringify({
@@ -45,16 +45,16 @@ export class Image {
     /**
      * 
      * @param {ArrayBuffer} pixels 
-     * @param {int} width 
-     * @param {int} height 
+     * @param {number} width (int)
+     * @param {number} height (int)
      * @param {string} filename 
-     * @param {int} pos_x 
-     * @param {int} pos_y 
-     * @param {int} trim_x1 
-     * @param {int} trim_y1 
-     * @param {int} trim_x2 
-     * @param {int} trim_y2 
-     * @returns {{width:int, height:int}}
+     * @param {number} pos_x (int)
+     * @param {number} pos_y (int)
+     * @param {number} trim_x1 (int)
+     * @param {number} trim_y1 (int)
+     * @param {number} trim_x2 (int)
+     * @param {number} trim_y2 (int)
+     * @returns {{width:number, height:number}} {int, int}
      */
     loadJpgBlendRGB(pixels, width, height, filename, pos_x = 0, pos_y = 0,
         trim_x1 = 0, trim_y1 = 0, trim_x2 = -1, trim_y2 = -1) {
@@ -73,20 +73,21 @@ export class Image {
         var ret = lib.call(handle, "raia_image_load_jpg_blend_rgb", json_str); // (window, title)
         return JSON.parse(ret);
     }
+
     /**
-     * 
      * @param {ArrayBuffer} pixels 
-     * @param {int} width 
-     * @param {int} height 
+     * @param {number} width (int)
+     * @param {number} height (int)
      * @param {string} filename 
-     * @param {int} pos_x 
-     * @param {int} pos_y 
-     * @param {int} trim_x1 
-     * @param {int} trim_y1 
-     * @param {int} trim_x2 
-     * @param {int} trim_y2 
-     * @returns {{width:int, height:int}}
+     * @param {number} pos_x (int)
+     * @param {number} pos_y (int)
+     * @param {number} trim_x1 (int)
+     * @param {number} trim_y1 (int)
+     * @param {number} trim_x2 (int)
+     * @param {number} trim_y2 (int)
+     * @returns {{width:number, height:number}} {int, int}
      */
+
     loadJpgBlendRGBA(pixels, width, height,
         filename,
         pos_x = 0, pos_y = 0,
@@ -106,20 +107,21 @@ export class Image {
         var ret = lib.call(handle, "raia_image_load_jpg_blend_rgba", json_str); // (window, title)
         return JSON.parse(ret);
     }
+
     /**
-     * 
      * @param {ArrayBuffer} pixels 
-     * @param {int} width 
-     * @param {int} height 
+     * @param {number} width (int)
+     * @param {number} height (int)
      * @param {string} filename 
-     * @param {int} pos_x 
-     * @param {int} pos_y 
-     * @param {int} trim_x1 
-     * @param {int} trim_y1 
-     * @param {int} trim_x2 
-     * @param {int} trim_y2 
-     * @returns {{width:int, height:int}}
+     * @param {number} pos_x (int)
+     * @param {number} pos_y (int)
+     * @param {number} trim_x1 (int)
+     * @param {number} trim_y1 (int)
+     * @param {number} trim_x2 (int)
+     * @param {number} trim_y2 (int)
+     * @returns {{width:number, height:number}} {int, int}
      */
+
     loadPngBlendRGB(pixels, width, height, filename, pos_x = 0, pos_y = 0,
         trim_x1 = 0, trim_y1 = 0, trim_x2 = -1, trim_y2 = -1) {
         var json_str = JSON.stringify({
@@ -137,20 +139,21 @@ export class Image {
         var ret = lib.call(handle, "raia_image_load_png_blend_rgb", json_str); // (window, title)
         return JSON.parse(ret);
     }
+
     /**
-     * 
      * @param {ArrayBuffer} pixels 
-     * @param {int} width 
-     * @param {int} height 
+     * @param {number} width (int)
+     * @param {number} height (int)
      * @param {string} filename 
-     * @param {int} pos_x 
-     * @param {int} pos_y 
-     * @param {int} trim_x1 
-     * @param {int} trim_y1 
-     * @param {int} trim_x2 
-     * @param {int} trim_y2 
-     * @returns {{width:int, height:int}}
+     * @param {number} pos_x (int)
+     * @param {number} pos_y (int)
+     * @param {number} trim_x1 (int)
+     * @param {number} trim_y1 (int)
+     * @param {number} trim_x2 (int)
+     * @param {number} trim_y2 (int)
+     * @returns {{width:number, height:number}} {int, int}
      */
+
     loadPngBlendRGBA(pixels, width, height, filename, pos_x = 0, pos_y = 0,
         trim_x1 = 0, trim_y1 = 0, trim_x2 = -1, trim_y2 = -1) {
         var json_str = JSON.stringify({

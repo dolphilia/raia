@@ -18,11 +18,12 @@ var handle;
 }());
 
 export class Font {
+
     /**
-     * 
      * @param {string} font_file 
-     * @param {int} font_size 
+     * @param {number} font_size (int)
      */
+
     constructor(font_file, font_size = 16) {
         this.font_file = font_file;
         this.font_size = font_size;
@@ -30,11 +31,12 @@ export class Font {
         this.font_buffer = new ArrayBuffer(this.font_buffer_length);
         this.font_info = this.initFontBuffer(font_file, this.font_buffer);
     }
+
     /**
-     * 
      * @param {string} font_path 
-     * @returns {int} font_size_in_bytes
+     * @returns {number} (int) font_size_in_bytes
      */
+
     openFont(font_path) {
         var args = JSON.stringify({
             "font_path": font_path
@@ -42,12 +44,13 @@ export class Font {
         var ret = lib.call(handle, "raia_font_open", args); // (window, title)
         return JSON.parse(ret).result;
     }
+
     /**
-     * 
      * @param {string} font_path 
      * @param {ArrayBuffer} font_buffer 
      * @returns {{userdata:uintptr,data:uintptr,fontstart:int,numGlyphs:int,loca:int,head:int,glyf:int,hhea:int,hmtx:int,kern:int,gpos:int,svg:int,index_map:int,indexToLocFormat:int,cff_data:uintptr,cff_cursor:int,cff_size:int,charstrings_data:uintptr,charstrings_curso:int,charstrings_size:int,gsubrs_data:uintptr,gsubrs_cursor:int,gsubrs_size:int,subrs_data:uintptr,subrs_cursor:int,subrs_size:int,fontdicts_data:uintptr,fontdicts_cursor:int,fontdicts_size:int,fdselect_data:uintptr,fdselect_cursor:int,fdselect_size:int}} font_info
      */
+
     initFontBuffer(font_path, font_buffer) {
         var args = JSON.stringify({
             "font_path": font_path,
@@ -56,12 +59,13 @@ export class Font {
         var ret = lib.call(handle, "raia_font_init_buffer", args);
         return JSON.parse(ret);
     }
+
     /**
-     * 
-     * @param {uintptr} text 
-     * @param {int} font_size 
-     * @returns {{width:int, height:int}}
+     * @param {number} text (uintptr)
+     * @param {number} font_size (int)
+     * @returns {{width:number, height:number}} {int, int}
      */
+
     getTextSize(text, font_size = this.font_size) {
         var args = this.font_info;
         args["text"] = text;
@@ -69,20 +73,21 @@ export class Font {
         var ret = lib.call(handle, "raia_font_get_char_size", JSON.stringify(args));
         return JSON.parse(ret);
     }
+
     /**
-     * 
      * @param {ArrayBuffer} pixels 
-     * @param {int} width 
-     * @param {int} height 
+     * @param {number} width (int)
+     * @param {number} height (int)
      * @param {string} text 
-     * @param {int} font_size 
-     * @param {int} color_red 
-     * @param {int} color_green 
-     * @param {int} color_blue 
-     * @param {int} pos_x 
-     * @param {int} pos_y 
-     * @returns {{width:int, height:int}}
+     * @param {number} font_size (int)
+     * @param {number} color_red (int)
+     * @param {number} color_green (int)
+     * @param {number} color_blue (int)
+     * @param {number} pos_x (int)
+     * @param {number} pos_y (int)
+     * @returns {{width:number, height:number}} {int, int}
      */
+
     drawCharRGB(pixels, width, height,
                 text, font_size = this.font_size,
                 color_red, color_green, color_blue,
@@ -101,20 +106,21 @@ export class Font {
         var ret = lib.call(handle, "raia_font_draw_char_rgb", JSON.stringify(args));
         return JSON.parse(ret);
     }
+
     /**
-     * 
      * @param {ArrayBuffer} pixels 
-     * @param {int} width 
-     * @param {int} height 
+     * @param {number} width (int)
+     * @param {number} height (int)
      * @param {string} text 
-     * @param {int} font_size 
-     * @param {int} color_red 
-     * @param {int} color_green 
-     * @param {int} color_blue 
-     * @param {int} pos_x 
-     * @param {int} pos_y 
-     * @returns {{width:int, height:int}}
+     * @param {number} font_size (int)
+     * @param {number} color_red (int)
+     * @param {number} color_green (int)
+     * @param {number} color_blue (int)
+     * @param {number} pos_x (int)
+     * @param {number} pos_y (int)
+     * @returns {{width:number, height:number}} {int, int}
      */
+
     drawCharRGBA(pixels, width, height,
                  text, font_size = this.font_size,
                  color_red, color_green, color_blue,

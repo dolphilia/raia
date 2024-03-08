@@ -1,26 +1,3 @@
-// sample code
-/*
-    import {GLFW} from 'raia_glfw';
-
-    const glfw = new GLFW();
-
-    glfw.init();
-    glfw.windowHint(GLFW.CLIENT_API, GLFW.OPENGL_ES_API);
-    glfw.windowHint(GLFW.CONTEXT_VERSION_MAJOR, 3);
-    glfw.windowHint(GLFW.CONTEXT_VERSION_MINOR, 0);
-    glfw.windowHint(GLFW.OPENGL_PROFILE, GLFW.OPENGL_CORE_PROFILE);
-    glfw.windowHint(GLFW.CONTEXT_CREATION_API, GLFW.EGL_CONTEXT_API);
-    glfw.setErrorCallbackAlt();
-    glfw.setJoystickCallbackAlt();
-
-    const window = glfw.createWindow(800, 600, "title");
-
-    while(glfw.windowShouldClose(window) === 0) {
-        glfw.swapBuffers(window);
-        glfw.pollEvents();
-    }
-*/
-
 import {Lib} from "raia_lib";
 const lib = new Lib();
 
@@ -42,7 +19,7 @@ const lib = new Lib();
         lib.add(globalThis.__RAIA_GLFW__.handle, "raia_glfw_get_version_string");
         lib.add(globalThis.__RAIA_GLFW__.handle, "raia_glfw_get_error");
         lib.add(globalThis.__RAIA_GLFW__.handle, "raia_glfw_set_error_callback");
-        //lib.add(globalThis.__RAIA_GLFW__.handle, "raia_glfw_get_error_alt");          // 代替
+        lib.add(globalThis.__RAIA_GLFW__.handle, "raia_glfw_get_error_callback_alt"); // 代替
         lib.add(globalThis.__RAIA_GLFW__.handle, "raia_glfw_set_error_callback_alt"); // 代替
         // 入力
         lib.add(globalThis.__RAIA_GLFW__.handle, "raia_glfw_get_input_mode");
@@ -169,7 +146,7 @@ const lib = new Lib();
         lib.add(globalThis.__RAIA_GLFW__.handle, "raia_glfw_set_window_content_scale_callback");        
         lib.add(globalThis.__RAIA_GLFW__.handle, "raia_glfw_poll_events");
         lib.add(globalThis.__RAIA_GLFW__.handle, "raia_glfw_wait_events");
-        //lib.add(globalThis.__RAIA_GLFW__.handle, "raia_glfw_wait_event_timeout");
+        lib.add(globalThis.__RAIA_GLFW__.handle, "raia_glfw_wait_events_timeout");
         lib.add(globalThis.__RAIA_GLFW__.handle, "raia_glfw_post_empty_event");
         lib.add(globalThis.__RAIA_GLFW__.handle, "raia_glfw_swap_buffers");
         lib.add(globalThis.__RAIA_GLFW__.handle, "raia_glfw_get_window_pos_alt");                    // 代替
@@ -534,8 +511,9 @@ export class GLFW {
 //
 
     /**
-     * @param {uintptr} window
+     * @param {number} window (uintptr)
      */
+
     makeContextCurrent(window) {
         lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -546,9 +524,11 @@ export class GLFW {
             ]
         );
     }
+
     /**
-     * @returns {uintptr} window
+     * @returns {number} window (uintptr)
      */
+
     getCurrentContext() {
         return lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -557,9 +537,11 @@ export class GLFW {
             null
         );
     }
+
     /**
-     * @param {int} interval 
+     * @param {number} interval (sint)
      */
+    
     swapInterval(interval) {
         lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -570,10 +552,12 @@ export class GLFW {
             ]
         );
     }
+
     /**
-     * @param {string} extension - 
-     * @return {sint}
+     * @param {string} extension
+     * @return {number} (sint)
      */
+
     extensionSupported(extension) {
         return lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -584,10 +568,12 @@ export class GLFW {
             ]
         );
     }
+
     /**
      * @param {string} procname
-     * @return {uintptr}
+     * @return {number} (uintptr)
      */
+
     getProcAddress(procname) {
         return lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -604,8 +590,9 @@ export class GLFW {
 //  
 
     /**
-     * @returns {boolean}
+     * @returns {boolean} (sint)
      */
+
     init() {
         return lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -614,9 +601,7 @@ export class GLFW {
             null
         );
     }
-    /**
-     * 
-     */
+
     terminate() {
         lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -676,9 +661,11 @@ export class GLFW {
             ]
         );
     }
+
     /**
-     * @returns {{error: int, message: string}}
+     * @returns {{error: number, message: string}} {int, string}
      */
+
     getErrorAlt() {
         const rets = lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -926,10 +913,12 @@ export class GLFW {
             ]
         );
     }
+    
     /**
-     * @param {int} jid
-     * @returns {int}
+     * @param {number} jid (int)
+     * @returns {number} (int)
      */
+
     joystickPresent(jid) {
         return lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -940,11 +929,13 @@ export class GLFW {
             ]
         );
     }
+
     /**
-     * @param {int} jid
-     * @param {uintptr} count
-     * @returns {pointer}
+     * @param {number} jid (int)
+     * @param {number} count (uintptr)
+     * @returns {number} (pointer)
      */
+
     getJoystickAxes(jid, count) {
         return lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -956,11 +947,13 @@ export class GLFW {
             ]
         );
     }
+
     /**
-     * @param {int} jid
-     * @param {pointer} count
-     * @returns {pointer}
+     * @param {number} jid (int)
+     * @param {number} count (pointer)
+     * @returns {number} (pointer)
      */
+
     getJoystickButtons(jid, count) {
         return lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -972,10 +965,12 @@ export class GLFW {
             ]
         );
     }
+
     /**
-     * @param {int} jid
-     * @returns {string}
+     * @param {number} jid (int)
+     * @returns {string} (string)
      */
+
     getJoystickName(jid) {
         return lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1089,9 +1084,11 @@ export class GLFW {
             ]
         );
     }
+
     /**
-     * @returns {real}
+     * @returns {number} (real)
      */
+    
     getTime() {
         return lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1100,9 +1097,11 @@ export class GLFW {
             null
         );
     }
+
     /**
-     * @param {real} time 
+     * @param {number} time (real)
      */
+
     setTime(time) {
         lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1113,9 +1112,11 @@ export class GLFW {
             ]
         );
     }
+
     /**
-     * @returns {uint}
+     * @returns {number} (uint)
      */
+    
     getTimerValue() {
         return lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1124,9 +1125,11 @@ export class GLFW {
             null
         );
     }
+    
     /**
-     * @returns {uint}
+     * @returns {number} (uint)
      */
+
     getTimerFrequency() {
         return lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1141,6 +1144,7 @@ export class GLFW {
     /**
      * @returns {{window: uintptr, key: int, scancode: int, action: int, mods: int}}
      */
+
     getKeyCallbackAlt() {
         const rets = lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1150,9 +1154,11 @@ export class GLFW {
         );
         return JSON.parse(rets);
     }
+
     /**
-     * @param {uintptr} window
+     * @param {number} window (uintptr)
      */
+
     setKeyCallbackAlt(window) {
         lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1163,9 +1169,11 @@ export class GLFW {
             ]
         );
     }
+
     /**
      * @returns {{window: uintptr, codepoint: uint}}
      */
+
     getCharCallbackAlt() {
         const rets = lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1175,9 +1183,11 @@ export class GLFW {
         );
         return JSON.parse(rets);
     }
+
     /**
-     * @param {uintptr} window
+     * @param {number} window (uintptr)
      */
+
     setCharCallbackAlt(window) {
         lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1188,9 +1198,11 @@ export class GLFW {
             ]
         );
     }
+
     /**
      * @returns {{window: uintptr, codepoint: uint, mods: int}}
      */
+
     getCharModsCallbackAlt() {
         const rets = lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1200,9 +1212,11 @@ export class GLFW {
         );
         return JSON.parse(rets);
     }
+
     /**
-     * @param {uintptr} window
+     * @param {number} window (uintptr)
      */
+
     setCharModsCallbackAlt(window) {
         lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1213,9 +1227,11 @@ export class GLFW {
             ]
         );
     }
+
     /**
      * @returns {{window: uintptr, button: int, action: int, mods: int}}
      */
+    
     getMouseButtonCallbackAlt() {
         const rets = lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1225,9 +1241,11 @@ export class GLFW {
         );
         return JSON.parse(rets);
     }
+
     /**
-     * @param {uintptr} window
+     * @param {number} window (uintptr)
      */
+    
     setMouseButtonCallbackAlt(window) {
         lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1238,9 +1256,11 @@ export class GLFW {
             ]
         );
     }
+
     /**
      * @returns {{window: uintptr, xpos: real, ypos: real}}
      */
+
     getCursorPosCallbackAlt() {
         const rets = lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1250,9 +1270,11 @@ export class GLFW {
         );
         return JSON.parse(rets);
     }
+
     /**
-     * @param {uintptr} window
+     * @param {number} window (uintptr)
      */
+    
     setCursorPosCallbackAlt(window) {
         lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1263,9 +1285,11 @@ export class GLFW {
             ]
         );
     }
+
     /**
      * @returns {{window: uintptr, enterd: int}}
      */
+    
     getCursorEnterCallback() {
         const rets = lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1275,9 +1299,11 @@ export class GLFW {
         );
         return JSON.parse(rets);
     }
+
     /**
-     * @param {uintptr} window
+     * @param {number} window (uintptr)
      */
+    
     setCorsorEnterCallbackAlt(window) {
         lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1288,9 +1314,11 @@ export class GLFW {
             ]
         );
     }
+
     /**
      * @returns {{window: uintptr, xoffset: real, yoffset: real}}
      */
+    
     getScrollCallbackAlt() {
         const rets = lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1300,9 +1328,11 @@ export class GLFW {
         );
         return JSON.parse(rets);
     }
+
     /**
-     * @param {uintptr} window
+     * @param {number} window (uintptr)
      */
+    
     setScrollCallbackAlt(window) {
         lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1313,9 +1343,11 @@ export class GLFW {
             ]
         );
     }
+
     /**
      * @returns {{window: uintptr, count: int, paths:string[]}}
      */
+    
     getDropCallbackAlt() {
         const rets = lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1325,9 +1357,11 @@ export class GLFW {
         );
         return JSON.parse(rets);
     }
+
     /**
-     * @param {uintptr} window
+     * @param {number} window uintptr
      */
+
     setDropCallbackAlt(window) {
         lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1338,9 +1372,11 @@ export class GLFW {
             ]
         );
     }
+
     /**
      * @returns {{jid: int, event: int}}
      */
+    
     getJoystickCallbackAlt() {
         const rets = lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1350,6 +1386,7 @@ export class GLFW {
         );
         return JSON.parse(rets);
     }
+
     setJoystickCallbackAlt() {
         lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1616,10 +1653,12 @@ export class GLFW {
             null
         );
     }
+
     /**
-     * @param {int} hint
-     * @param {int} value
+     * @param {number} hint (int)
+     * @param {number} value (int)
      */
+    
     windowHint(hint, value) {
         lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1631,12 +1670,14 @@ export class GLFW {
             ]
         );
     }
+    
     /**
-     * @param {int} width
-     * @param {int} height
-     * @param {string} title
-     * @returns {uintptr} window
+     * @param {number} width (int)
+     * @param {number} height (int)
+     * @param {string} title (string)
+     * @returns {number} (uintptr) Window ID
      */
+
     createWindow(width, height, title, monitor = null, share = null) {
         return lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1651,9 +1692,11 @@ export class GLFW {
             ]
         );
     }
+
     /**
-     * @param {uintptr} window
+     * @param {number} window (uintptr)
      */
+
     destroyWindow(window) {
         lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1664,10 +1707,12 @@ export class GLFW {
             ]
         );
     }
+
     /**
-     * @param {uintptr} window
-     * @returns {int}
+     * @param {number} window (uintptr)
+     * @returns {number} (int)
      */
+
     windowShouldClose(window) {
         return lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1678,6 +1723,7 @@ export class GLFW {
             ]
         );
     }
+
     setWindowShouldClose(window, value) {
         lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1689,10 +1735,12 @@ export class GLFW {
             ]
         );
     }
+
     /**
-     * @param {uintptr} window
-     * @param {string} title 
+     * @param {number} window (uintptr)
+     * @param {string} title (string) 
      */
+
     setWindowTitle(window, title) {
         lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1704,6 +1752,7 @@ export class GLFW {
             ]
         );
     }
+
     setWindowIcon(window, count, images) {
         lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1740,9 +1789,11 @@ export class GLFW {
             ]
         );
     }
+
     /**
-     * @param {uintptr} window
+     * @param {number} window (uintptr)
      */
+    
     getWindowSize(window, width, height) {
         lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -1794,7 +1845,7 @@ export class GLFW {
         );
     }
     /**
-     * @param {uintptr} window
+     * @param {number} window (uintptr)
      */
     getFramebufferSize(window, width, height) {
         lib.ffi(
@@ -2110,9 +2161,11 @@ export class GLFW {
             null
         );
     }
+
     /**
-     * @param {real} timeout
+     * @param {number} timeout (real)
      */
+    
     waitEventTimeout(timeout) {
         lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -2123,6 +2176,7 @@ export class GLFW {
             ]
         );
     }
+
     postEmptyEvent() {
         lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -2131,9 +2185,11 @@ export class GLFW {
             null
         );
     }
+
     /**
-     * @param {uintptr} window
+     * @param {number} window (uintptr)
      */
+
     swapBuffers(window) {
         lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -2150,6 +2206,7 @@ export class GLFW {
     /**
      * @returns {{window: uintptr, x: int, y: int}}
      */
+
     getWindowPosAlt() {
         var rets = lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -2159,9 +2216,11 @@ export class GLFW {
         );
         return JSON.parse(rets);
     }
+
     /**
-     * @param {uintptr} window
+     * @param {number} window (uintptr)
      */
+    
     setWindowPosCallbackAlt(window) {
         lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -2172,9 +2231,11 @@ export class GLFW {
             ]
         );
     }
+
     /**
      * @returns {{window: uintptr, width: int, height: int}}
      */
+    
     getWindowSizeAlt() {
         var rets = lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -2184,9 +2245,11 @@ export class GLFW {
         );
         return JSON.parse(rets);
     }
+
     /**
-     * @param {uintptr} window
+     * @param {number} window (uintptr)
      */
+
     setWindowSizeCallbackAlt(window) {
         lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -2197,9 +2260,11 @@ export class GLFW {
             ]
         );
     }
+
     /**
      * @returns {{window: uintptr}}
      */
+
     getWindowCloseAlt() {
         var rets = lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -2209,9 +2274,11 @@ export class GLFW {
         );
         return JSON.parse(rets);
     }
+
     /**
-     * @param {uintptr} window
+     * @param {number} window (uintptr)
      */
+
     setWindowCloseCallbackAlt(window) {
         lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -2222,9 +2289,11 @@ export class GLFW {
             ]
         );
     }
+
     /**
      * @returns {{window: uintptr}}
      */
+
     getWindowRefreshAlt() {
         var rets = lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -2234,9 +2303,11 @@ export class GLFW {
         );
         return JSON.parse(rets);
     }
+
     /**
-     * @param {uintptr} window
+     * @param {number} window (uintptr)
      */
+
     setWindowRefreshCallbackAlt(window) {
         lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -2247,9 +2318,11 @@ export class GLFW {
             ]
         );
     }
+
     /**
      * @returns {{window: uintptr, focused: int}}
      */
+
     getWindowFocusAlt() {
         var rets = lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -2259,9 +2332,11 @@ export class GLFW {
         );
         return JSON.parse(rets);
     }
+
     /**
-     * @param {uintptr} window
+     * @param {number} window (uintptr)
      */
+
     setWindowFocusCallbackAlt(window) {
         lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -2272,9 +2347,11 @@ export class GLFW {
             ]
         );
     }
+
     /**
      * @returns {{window: uintptr, iconified: int}}
      */
+
     getWindowIconifyAlt() {
         var rets = lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -2284,9 +2361,11 @@ export class GLFW {
         );
         return JSON.parse(rets);
     }
+
     /**
-     * @param {uintptr} window
+     * @param {number} window (uintptr)
      */
+
     setWindowIconifyCallbackAlt(window) {
         lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -2297,6 +2376,7 @@ export class GLFW {
             ]
         );
     }
+
     getWindowMaximizeAlt() {
         var rets = lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -2306,6 +2386,7 @@ export class GLFW {
         );
         return JSON.parse(rets);
     }
+
     setWindowMaximizeCallbackAlt(window) {
         lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -2316,9 +2397,11 @@ export class GLFW {
             ]
         );
     }
+
     /**
      * @returns {{window: uintptr, width: int, height: int}}
      */
+
     getFramebufferSizeAlt() {
         var rets = lib.ffi(
             globalThis.__RAIA_GLFW__.handle,
@@ -2328,9 +2411,11 @@ export class GLFW {
         );
         return JSON.parse(rets);
     }
+
     /**
-     * @param {uintptr} window
+     * @param {number} window (uintptr)
      */
+
     setFramebufferSizeCallbackAlt(window) {
         lib.ffi(
             globalThis.__RAIA_GLFW__.handle,

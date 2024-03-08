@@ -5858,11 +5858,12 @@ export class GLES {
     //
 
     /**
-     * @param {int} x 
-     * @param {int} y 
-     * @param {int} width 
-     * @param {int} height 
+     * @param {number} x (int)
+     * @param {number} y (int)
+     * @param {number} width (int)
+     * @param {number} height (int)
      */
+
     viewportAlt(x, y, width, height) {
         var args = JSON.stringify({
             "x": x,
@@ -5872,12 +5873,14 @@ export class GLES {
         });
         lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_viewport_alt", args);
     }
+
     /**
-     * @param {real} red 0.0 ~ 1.0
-     * @param {real} green 0.0 ~ 1.0
-     * @param {real} blue 0.0 ~ 1.0
-     * @param {real} alpha 0.0 ~ 1.0
+     * @param {number} red (real) 0.0 ~ 1.0
+     * @param {number} green (real) 0.0 ~ 1.0
+     * @param {number} blue (real) 0.0 ~ 1.0
+     * @param {number} alpha (real) 0.0 ~ 1.0
      */
+
     clearColorAlt(red, green, blue, alpha) {
         var args = JSON.stringify({
             "red": red,
@@ -5887,32 +5890,38 @@ export class GLES {
         });
         lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_clear_color_alt", args);
     }
+
     /**
-     * @param {uint} mask 
+     * @param {number} mask (uint) 
      */
+
     clearAlt(mask) {
         var args = JSON.stringify({
             "mask": mask
         });
         lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_clear_alt", args);
     }
+
     /**
-     * @param {uint} program 
+     * @param {number} program (uint)
      */
+
     useProgramAlt(program) {
         var args = JSON.stringify({
             "program": program
         });
         lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_use_program_alt", args);
     }
+
     /**
-     * @param {uint} index 
-     * @param {int} size 
-     * @param {uint} type 
-     * @param {uint} normalized 0 or 1
-     * @param {int} stride 
-     * @param {uintptr} pointer 
+     * @param {number} index (uint)
+     * @param {number} size (int)
+     * @param {number} type (uint)
+     * @param {number} normalized (uint) 0 or 1
+     * @param {number} stride (int)
+     * @param {number} pointer (uintptr)
      */
+
     vertexAttribPointerAlt(index, size, type, normalized, stride, pointer) {
         var args = JSON.stringify({
             "index": index,
@@ -5924,26 +5933,30 @@ export class GLES {
         });
         lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_vertex_attrib_pointer_alt", args);
     }
+
     /**
-     * @param {uint} index 
+     * @param {number} index (uint)
      */
+
     enableVertexAttribArrayAlt(index) {
         var args = JSON.stringify({
             "index": index
         });
         lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_enable_vertex_attrib_array_alt", args);
     }
+
     /**
-     * @param {uint} target 
-     * @param {int} level 
-     * @param {int} internalformat 
-     * @param {int} width 
-     * @param {int} height 
-     * @param {int} border 
-     * @param {uint} format 
-     * @param {uint} type 
+     * @param {number} target (uint)
+     * @param {number} level (int)
+     * @param {number} internalformat (int)
+     * @param {number} width (int)
+     * @param {number} height (int)
+     * @param {number} border (int)
+     * @param {number} format (uint)
+     * @param {number} type (uint)
      * @param {ArrayBuffer} pixels 
      */
+
     texImage2DAlt(target, level, internalformat, width, height, border, format, type, pixels) {
         var args = JSON.stringify({
             "target": target,
@@ -5954,24 +5967,27 @@ export class GLES {
             "border": border,
             "format": format,
             "type": type,
-            "pixels": std.bufToPtr(pixels)
+            "pixels": pixels
         });
         lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_tex_image_2d_alt", args);
     }
+
     /**
-     * @param {uint} texture 
+     * @param {number} texture (uint)
      */
+    
     activeTextureAlt(texture) {
         var args = JSON.stringify({
             "texture": texture
         });
         lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_active_texture_alt", args);
     }
+
     /**
-     * 
-     * @param {uint} target 
-     * @param {uint} texture 
+     * @param {number} target (uint)
+     * @param {number} texture (uint)
      */
+
     bindTextureAlt(target, texture) {
         var args = JSON.stringify({
             "target": target,
@@ -5979,11 +5995,12 @@ export class GLES {
         });
         lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_bind_texture_alt", args);
     }
+
     /**
-     * 
-     * @param {int} location 
-     * @param {int} v0 
+     * @param {number} location (int)
+     * @param {number} v0 (int)
      */
+
     uniform1iAlt(location, v0) {
         var args = JSON.stringify({
             "location": location,
@@ -5991,13 +6008,14 @@ export class GLES {
         });
         lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_uniform_1i_alt", args);
     }
+
     /**
-     * 
-     * @param {uint} mode 
-     * @param {int} count 
-     * @param {uint} type 
-     * @param {uintptr | null} indices 
+     * @param {number} mode (uint)
+     * @param {number} count (int)
+     * @param {number} type (uint)
+     * @param {number | null} indices (uintptr)
      */
+
     drawElementsAlt(mode, count, type, indices) {
         var args = JSON.stringify({
             "mode": mode,
@@ -6007,11 +6025,12 @@ export class GLES {
         });
         lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_draw_elements_alt", args);
     }
+
     /**
-     * 
-     * @param {uint} type 
-     * @returns {uint} shader
+     * @param {number} type (uint)
+     * @returns {number} (uint) shader
      */
+
     createShaderAlt(type) {
         var args = JSON.stringify({
             "type": type
@@ -6019,13 +6038,14 @@ export class GLES {
         var ret = lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_create_shader_alt", args);
         return JSON.parse(ret).result;
     }
+
     /**
-     * 
-     * @param {uint} shader 
-     * @param {int} count 
-     * @param {string} string 
-     * @param {int | null} length 
+     * @param {number} shader (uint)
+     * @param {number} count (int)
+     * @param {string} string (string)
+     * @param {number | null} length (int)
      */
+
     shaderSourceAlt(shader, count, string, length) {
         var args = JSON.stringify({
             "shader": shader,
@@ -6035,22 +6055,24 @@ export class GLES {
         });
         lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_shader_source_alt", args);
     }
+    
     /**
-     * 
-     * @param {uint} shader 
+     * @param {number} shader (uint)
      */
+
     compileShaderAlt(shader) {
         var args = JSON.stringify({
             "shader": shader
         });
         lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_compile_shader_alt", args);
     }
+
     /**
-     * 
-     * @param {uint} shader 
-     * @param {uint} pname 
-     * @returns {int} params
+     * @param {number} shader (uint)
+     * @param {number} pname (uint)
+     * @returns {number} (int) params
      */
+
     getShaderivAlt(shader, pname) {
         var args = JSON.stringify({
             "shader": shader,
@@ -6059,19 +6081,21 @@ export class GLES {
         var ret = lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_get_shader_iv_alt", args);
         return JSON.parse(ret).result;
     }
+
     /**
-     * 
-     * @returns {uint} program
+     * @returns {number} (uint) program
      */
+
     createProgramAlt() {
         var ret = lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_create_program_alt");
         return JSON.parse(ret).result;
     }
+
     /**
-     * 
-     * @param {uint} program 
-     * @param {uint} shader 
+     * @param {number} program (uint) 
+     * @param {number} shader (uint)
      */
+
     attachShaderAlt(program, shader) {
         var args = JSON.stringify({
             "program": program,
@@ -6079,31 +6103,34 @@ export class GLES {
         });
         lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_attach_shader_alt", args);
     }
+
     /**
-     * 
-     * @param {uint} shader 
+     * @param {number} shader (uint)
      */
+
     deleteShaderAlt(shader) {
         var args = JSON.stringify({
             "shader": shader
         });
         lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_delete_shader_alt", args);
     }
+
     /**
-     * 
-     * @param {uint} program 
+     * @param {number} program (uint)
      */
+
     linkProgramAlt(program) {
         var args = JSON.stringify({
             "program": program
         });
         lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_link_program_alt", args);
     }
+
     /**
-     * 
-     * @param {uint} pname 
-     * @param {int} param 
+     * @param {number} pname (uint)
+     * @param {number} param (int)
      */
+
     pixelStoreiAlt(pname, param) {
         var args = JSON.stringify({
             "pname": pname,
@@ -6111,11 +6138,12 @@ export class GLES {
         });
         lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_pixel_store_i_alt", args);
     }
+
     /**
-     * 
-     * @param {int} n 
-     * @returns {uint} textures
+     * @param {number} n (int)
+     * @returns {number} (uint) textures
      */
+
     genTexturesAlt(n) {
         var args = JSON.stringify({
             "n": n
@@ -6123,12 +6151,13 @@ export class GLES {
         var ret = lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_gen_textures_alt", args);
         return JSON.parse(ret).result;
     }
+
     /**
-     * 
-     * @param {uint} target 
-     * @param {uint} pname 
-     * @param {int} param 
+     * @param {number} target (uint)
+     * @param {number} pname (uint)
+     * @param {number} param (int)
      */
+
     texParameteriAlt(target, pname, param) {
         var args = JSON.stringify({
             "target": target,
@@ -6137,12 +6166,13 @@ export class GLES {
         });
         lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_tex_parameter_i_alt", args);
     }
+
     /**
-     * 
-     * @param {uint} program 
-     * @param {string} name 
-     * @returns {int} location
+     * @param {number} program (uint)
+     * @param {string} name (string)
+     * @returns {number} (int) location
      */
+
     getAttribLocationAlt(program, name) {
         var args = JSON.stringify({
             "program": program,
@@ -6151,12 +6181,13 @@ export class GLES {
         var ret = lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_get_attrib_location_alt", args);
         return JSON.parse(ret).result;
     }
+
     /**
-     * 
-     * @param {uint} program 
-     * @param {string} name 
-     * @returns {int} location
+     * @param {number} program (uint)
+     * @param {string} name (string)
+     * @returns {number} (int) location
      */
+
     getUniformLocationAlt(program, name) {
         var args = JSON.stringify({
             "program": program,
@@ -6165,11 +6196,12 @@ export class GLES {
         var ret = lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_get_uniform_location_alt", args);
         return JSON.parse(ret).result;
     }
+
     /**
-     * 
-     * @param {int} n 
-     * @returns {uint} arrays
+     * @param {number} n (int)
+     * @returns {number} (uint) arrays
      */
+
     genVertexArraysAlt(n) {
         var args = JSON.stringify({
             "n": n
@@ -6177,11 +6209,12 @@ export class GLES {
         var ret = lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_gen_vertex_arrays_alt", args);
         return JSON.parse(ret).result;
     }
+
     /**
-     * 
-     * @param {int} n 
-     * @returns {uint} buffers
+     * @param {number} n (int)
+     * @returns {number} (uint) buffers
      */
+
     genBuffersAlt(n) {
         var args = JSON.stringify({
             "n": n
@@ -6189,9 +6222,9 @@ export class GLES {
         var ret = lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_gen_buffers_alt", args);
         return JSON.parse(ret).result;
     }
+
     /**
-     * 
-     * @param {uint} array 
+     * @param {number} array (uint)
      */
     bindVertexArrayAlt(array) {
         var args = JSON.stringify({
@@ -6199,11 +6232,12 @@ export class GLES {
         });
         lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_bind_vertex_array_alt", args);
     }
+
     /**
-     * 
-     * @param {uint} target 
-     * @param {uint} buffer 
+     * @param {number} target (uint)
+     * @param {number} buffer (uint)
      */
+
     bindBufferAlt(target, buffer) {
         var args = JSON.stringify({
             "target": target,
@@ -6211,13 +6245,14 @@ export class GLES {
         });
         lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_bind_buffer_alt", args);
     }
+
     /**
-     * 
-     * @param {uint} target 
-     * @param {uint} size 
+     * @param {number} target (uint)
+     * @param {number} size (uint)
      * @param {ArrayBuffer} data 
-     * @param {uint} usage 
+     * @param {number} usage (uint)
      */
+
     bufferDataAlt(target, size, data, usage) {
         var args = JSON.stringify({
             "target": target,
@@ -6227,29 +6262,31 @@ export class GLES {
         });
         lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_buffer_data_alt", args);
     }
+
     /**
-     * 
-     * @param {uint} arrays 
+     * @param {number} arrays (uint)
      */
+
     deleteVertexArraysAlt(arrays) {
         var args = JSON.stringify({
             "arrays": arrays
         });
         lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_delete_vertex_arrays_alt", args);
     }
+
     /**
-     * 
-     * @param {uint} buffers 
+     * @param {number} buffers (uint)
      */
+
     deleteBuffersAlt(buffers) {
         var args = JSON.stringify({
             "buffers": buffers
         });
         lib.call(globalThis.__RAIA_GLES__.handle, "raia_gl_delete_buffers_alt", args);
     }
+
     /**
-     * 
-     * @param {uint} textures 
+     * @param {number} textures (uint)
      */
     deleteTexturesAlt(textures) {
         var args = JSON.stringify({

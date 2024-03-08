@@ -1,34 +1,37 @@
 import {GLES} from 'raia_gles';
 
 export class GlesEx extends GLES {
+
     /**
-     * 
      * @param {string} source 
-     * @returns {uint}
+     * @returns {number} (uint)
      */
+
     createVertexShader(source) {
         var vs = super.createShaderAlt(GLES.VERTEX_SHADER);
         super.shaderSourceAlt(vs, 1, source, null);
         super.compileShaderAlt(vs);
         return vs;
     }
+
     /**
-     * 
      * @param {string} source 
-     * @returns {uint}
+     * @returns {number} (uint)
      */
+
     createFragmentShader(source) {
         var fs = super.createShaderAlt(GLES.FRAGMENT_SHADER);
         super.shaderSourceAlt(fs, 1, source, null);
         super.compileShaderAlt(fs);
         return fs;
     }
+
     /**
-     * 
      * @param {string} vs_src 
      * @param {string} fs_src 
-     * @returns {uint} program
+     * @returns {number} (uint) program
      */
+
     createShaderProgram(vs_src, fs_src) {
         var vs = this.createVertexShader(vs_src);
         var fs = this.createFragmentShader(fs_src);
@@ -40,10 +43,11 @@ export class GlesEx extends GLES {
         super.linkProgramAlt(program);
         return program;
     }
+
     /**
-     * 
-     * @returns {uint} program
+     * @returns {number} (uint) program
      */
+
     createShaderProgram2D() {
         var vs_src = `
             attribute vec4 a_position;
@@ -64,28 +68,30 @@ export class GlesEx extends GLES {
         `;
         return this.createShaderProgram(vs_src, fs_src);
     }
+
     /**
-     * 
-     * @param {int} width 
-     * @param {int} height 
-     * @param {real} red 
-     * @param {real} green 
-     * @param {real} blue 
-     * @param {real} alpha 
+     * @param {number} width (int)
+     * @param {number} height (int)
+     * @param {number} red (real)
+     * @param {number} green (real)
+     * @param {number} blue (real)
+     * @param {number} alpha (real)
      */
+
     clearViewportColor(width, height, red, green, blue, alpha) {
         super.viewportAlt(0, 0, width, height);
         super.clearColorAlt(red, green, blue, alpha);
         super.clearAlt(GLES.COLOR_BUFFER_BIT);
     }
+
     /**
-     * 
-     * @param {uint} texture 
-     * @param {int} width 
-     * @param {int} height 
+     * @param {number} texture (uint)
+     * @param {number} width (int)
+     * @param {number} height (int)
      * @param {ArrayBuffer} pixels 
-     * @param {int} color_type 
+     * @param {number} color_type (int)
      */
+
     setTexture(texture, width, height, pixels, color_type) {
         super.pixelStoreiAlt(GLES.UNPACK_ALIGNMENT, 1);
         super.bindTextureAlt(GLES.TEXTURE_2D, texture);
@@ -93,32 +99,35 @@ export class GlesEx extends GLES {
         super.texParameteriAlt(GLES.TEXTURE_2D, GLES.TEXTURE_MIN_FILTER, GLES.LINEAR);
         super.texParameteriAlt(GLES.TEXTURE_2D, GLES.TEXTURE_MAG_FILTER, GLES.LINEAR);
     }
+
     /**
-     * 
-     * @param {uint} texture 
-     * @param {int} width 
-     * @param {int} height 
+     * @param {number} texture (uint)
+     * @param {number} width (int)
+     * @param {number} height (int)
      * @param {ArrayBuffer} pixels 
      */
+
     setTextureRGB(texture, width, height, pixels) {
         this.setTexture(texture, width, height, pixels, GLES.RGB);
     }
+
     /**
-     * 
-     * @param {uint} texture 
-     * @param {int} width 
-     * @param {int} height 
+     * @param {number} texture (uint)
+     * @param {number} width (int)
+     * @param {number} height (int)
      * @param {ArrayBuffer} pixels 
      */
+
     setTextureRGBA(texture, width, height, pixels) {
         this.setTexture(texture, width, height, pixels, GLES.RGBA);
     }
+
     /**
-     * 
-     * @param {uint} vao 
-     * @param {uint} vbo 
-     * @param {uint} ebo 
+     * @param {number} vao (uint)
+     * @param {number} vbo (uint)
+     * @param {number} ebo (uint)
      */
+
     setVertexArray2D(vao, vbo, ebo) {
         var vertices = new Float32Array([
             -1.0, 1.0,  0.0,   // Position 0
@@ -142,17 +151,19 @@ export class GlesEx extends GLES {
         super.enableVertexAttribArrayAlt(1);
         super.bindVertexArrayAlt(0);
     }
+
     /**
-     * 
-     * @returns {uint} textures
+     * @returns {number} textures (uint)
      */
+
     genTexture() {
         return super.genTexturesAlt(1);
     }
+
     /**
-     * 
-     * @param {uint} texture 
+     * @param {number} texture (uint)
      */
+
     bindTexture2D(texture) {
         super.bindTextureAlt(GLES.TEXTURE_2D, texture);
     }

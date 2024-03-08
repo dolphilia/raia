@@ -6,10 +6,11 @@ import {ImGuiEx} from 'raia_imgui_ex';
  * @extends GUI
  */
 export class Frame {
+
     /**
-     * 
-     * @param {uintptr} window_id 
+     * @param {number} window_id (uintptr)
      */
+
     constructor(window_id) {
         this.gles = new GlesEx();
         this.glfw = new GlfwEx();
@@ -20,9 +21,11 @@ export class Frame {
         this.imgui.setFontDefault(font);
         this.imgui.initImpl(window_id);
     }
+
     destroy() {
         this.imgui.destroy();
     }
+
     render() {
         this.imgui.render();
         const draw_data = this.imgui.getDrawData();
@@ -32,30 +35,35 @@ export class Frame {
         this.imgui.renderPlatformWindowsDefault();
         this.glfw.makeContextCurrent(ctx);
     }
+
     /**
-     * 
      * @param {string} title 
      * @param {function} f 
      */
+
     show(title, f) {
         this.imgui.begin(title);
         f();
         this.imgui.end();
     }
+
     start() {
         this.imgui.newFrame();
     }
+
     /**
-     * 
      * @param {string} text 
      */
+
     text(text) {
         this.imgui.text(text);
     }
+
     /**
      * 
-     * @param {Object} image 
+     * @param {object} image 
      */
+
     drawImage(image) {
         this.gles.setTextureRGBA(image.texture, image.width, image.height, image.pixels);
         this.imgui.image(image.texture, image.width, image.height);

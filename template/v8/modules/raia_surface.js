@@ -2,6 +2,7 @@ import {Draw} from "raia_draw";
 import {Image} from "raia_image";
 
 export class Surface {
+    
     constructor(width, height, pos_x = 0, pos_y = 0) {
         this.draw = new Draw();
         this.image = new Image();
@@ -21,12 +22,14 @@ export class Surface {
             y: pos_y
         }
     }
+
     setCurrentColor(red, green, blue, alpha) {
         this.color.red = red;
         this.color.green = green;
         this.color.blue = blue;
         this.color.alpha = alpha;
     }
+
     drawPoint(posx, posy,
               red = this.color.red,
               green = this.color.green,
@@ -36,6 +39,7 @@ export class Surface {
               height = this.size.height) {
         return this.draw.pointRGBA(this.pixels, posx, posy, red, green, blue, width, height);
     }
+
     drawLine(startx, starty, endx, endy,
              red = this.color.red,
              green = this.color.green,
@@ -45,6 +49,7 @@ export class Surface {
              height = this.size.height) {
         return this.draw.lineRGBA(this.pixels, startx, starty, endx, endy, red, green, blue, width, height);
     }
+
     drawRect(start_x, start_y, end_x, end_y,
              red = this.color.red,
              green = this.color.green,
@@ -57,6 +62,7 @@ export class Surface {
         this.draw.lineRGBA(this.pixels, end_x, end_y, start_x, end_y, red, green, blue, alpha, width, height);
         this.draw.lineRGBA(this.pixels, start_x, end_y, start_x, start_y, red, green, blue, alpha, width, height);
     }
+
     drawFilledRect(start_x, start_y, end_x, end_y,
                    red = this.color.red,
                    green = this.color.green,
@@ -66,6 +72,7 @@ export class Surface {
                    height = this.size.height) {
         return this.draw.fillRectRGBA(this.pixels, start_x, start_y, end_x, end_y, red, green, blue, alpha, width, height);
     }
+
     drawEllipse(start_x, start_y, end_x, end_y,
                 red = this.color.red,
                 green = this.color.green,
@@ -75,6 +82,7 @@ export class Surface {
                 height = this.size.height) {
         return this.draw.drawEllipseRGBA(this.pixels, start_x, start_y, end_x, end_y, red, green, blue, alpha, width, height);
     }
+
     drawFilledEllipse(start_x, start_y, end_x, end_y,
                       red = this.color.red,
                       green = this.color.green,
@@ -84,6 +92,7 @@ export class Surface {
                       height = this.size.height) {
         return this.draw.drawFilledEllipseRGBA(this.pixels, start_x, start_y, end_x, end_y, red, green, blue, alpha, width, height);
     }
+
     blendSurface(surface, pos_x = 0, pos_y = 0, trim_x1 = 0, trim_y1 = 0, trim_x2, trim_y2) {
         trim_x2 = (typeof trim_x2 !== 'undefined') ?  trim_x2 : surface.size.width;
         trim_y2 = (typeof trim_y2 !== 'undefined') ?  trim_y2 : surface.size.height;
@@ -94,6 +103,7 @@ export class Surface {
             trim_x1, trim_y1, trim_x2, trim_y2);
         //__Raia__.Draw.copyPixelsRGBAtoRGB(this.pixels, this.size.width, this.size.height, surface.pixels, surface.size.width, surface.size.height)
     }
+
     loadImage(filename, pos_x = 0, pos_y = 0, trim_x1 = 0, trim_y1 = 0, trim_x2 = -1, trim_y2 = -1) {
         this.image.loadImageRGBA(
             this.pixels, this.size.width, this.size.height,
@@ -101,6 +111,7 @@ export class Surface {
             pos_x, pos_y,
             trim_x1, trim_y1, trim_x2, trim_y2);
     }
+
     drawText(font, text, font_size, color_red = this.color.red, color_green = this.color.green, color_blue = this.color.blue, pos_x = this.position.x, pos_y = this.position.y) {
         font_size = (typeof font_size !== 'undefined') ?  font_size : font.font_size;
         return font.drawTextRGBA(
@@ -148,6 +159,7 @@ export class Surface {
             font.font_info.fdselect_cursor,//38
             font.font_info.fdselect_size)//39
     }
+
     getTextSize(font, text, font_size) {
         font_size = (typeof font_size !== 'undefined') ?  font_size : font.font_size;
         return font.getTextSize(
@@ -186,6 +198,7 @@ export class Surface {
             font.font_info.fdselect_cursor,//38
             font.font_info.fdselect_size)//39
     }
+
     drawString(font, str, font_size, color_red = this.color.red, color_green = this.color.green, color_blue = this.color.blue, pos_x = this.position.x, pos_y = this.position.y, wrap_width, wrap_height) {
         font_size = (typeof font_size !== 'undefined') ?  font_size : font.font_size;
         wrap_width = (typeof wrap_width !== 'undefined') ?  wrap_width : this.size.width - pos_x;

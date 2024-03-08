@@ -5,28 +5,33 @@ import {ImGui} from 'raia_imgui';
  */
 
 export class ImGuiEx extends ImGui {
+
     newFrame() {
         super.implOpenGL3NewFrame();
         super.implGlfwNewFrame();
         super.newFrame();
     }
+
     destroy() {
         super.implOpenGL3Shutdown();
         super.implGlfwShutdown();
         super.destroyContext();
     }
+
     init() {
         super.checkVersion();
         super.createContext();
     }
+
     /**
-     * 
-     * @param {uintptr} window 
+     * @param {number} window (uintptr)
      */
+
     initImpl(window) {
         super.implGlfwInitForOpenGL(window, true);
         super.implOpenGL3Init("#version 300 es");
     }
+
     setDefaultConfigFlags() {
         var config_flags = 0;
         config_flags |= this.ConfigFlags.NavEnableKeyboard;
@@ -35,13 +40,14 @@ export class ImGuiEx extends ImGui {
         config_flags |= this.ConfigFlags.ViewportsEnable;
         super.setConfigFlags(config_flags);
     }
+
     /**
-     * 
-     * @param {string} filename 
-     * @param {real} size_pixels 
-     * @param {uintptr} font_cfg 
-     * @returns {uint} font
+     * @param {string} filename
+     * @param {number} size_pixels (real)
+     * @param {number} font_cfg (uintptr)
+     * @returns {number} (uint) font
      */
+
     addJapaneseFontFromFileTTF(filename, size_pixels, font_cfg = null) {
         var glyph_ranges_japanese = super.getGlyphRangesJapanese();
         return super.addFontFromFileTTF(filename, size_pixels, font_cfg, glyph_ranges_japanese);

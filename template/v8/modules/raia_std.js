@@ -5,58 +5,70 @@
 })();
 
 export class Std {
+    
     constructor() {}
+    
     /**
-     * @param {string} message 
+     * @param {any} message 
      */
+    
     print(message) {
-        // @ts-ignore
         __Raia__.Core.print(message);
     }
+
     /**
-     * @param {int} status - (int) 0: 正常終了 , 1以上: エラー終了
+     * @param {number} status (sint) 0: 正常終了, 1以上: エラー終了
      */
+    
     exit(status) {
-        // @ts-ignore
         __Raia__.Core.exit(status);
     }
+    
     /**
-     * @param {uintptr} pointer 
+     * @param {any} pointer (uintptr)
+     * @param {number} size (int)
      * @returns {ArrayBuffer}
      */
-    ptrToBuf(pointer) {
-        // @ts-ignore
-        return __Raia__.Core.ptrToBuf(pointer);
+
+    ptrToBuf(pointer, size) {
+        return __Raia__.Core.ptrToBuf(pointer, size);
     }
+
     /**
-     * @param {ArrayBuffer} buffer 
-     * @returns {uintptr}
+     * @param {ArrayBuffer} buffer
+     * @returns {any} (uintptr)
      */
+
     bufToPtr(buffer) {
-        // @ts-ignore
         return __Raia__.Core.bufToPtr(buffer);
     }
+
     makeStruct(args_list) {
-        // @ts-ignore
         return __Raia__.Core.makeStruct(args_list);
     }
+
     delStruct(obj) {
         __Raia__.Core.delStruct(obj);
     }
+
     newPtr(size) {
         return __Raia__.Core.newPtr(size);
     }
+
     delPtr(ptr) {
         __Raia__.Core.delPtr(ptr);
     }
+
     ptrToInt(ptr) {
         return __Raia__.Core.ptrToInt(ptr);
     }
+
     /**
-     * @param {int} min 
-     * @param {int} max 
-     * @returns {int}
+     * @param {number} min (sint)
+     * @param {number} max (sint)
+     * @returns {number} (sint)
      */
+
     rand(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
