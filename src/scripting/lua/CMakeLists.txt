@@ -1,12 +1,15 @@
 cmake_minimum_required(VERSION 3.25)
-project(raia_lua C)
+project(raia_lua)
 
 include(${PROJECT_SOURCE_DIR}/../../setting.cmake)
 
-set(CMAKE_C_STANDARD 11)
+#set(CMAKE_C_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_FLAGS "")
 
-add_library(raia_lua SHARED
-        src/raia_lua.c
+add_executable(raia_lua
+#add_library(raia_lua SHARED
+        src/raia_lua.cpp
         src/lua/lapi.c
         src/lua/lauxlib.c
         src/lua/lbaselib.c
@@ -36,7 +39,7 @@ add_library(raia_lua SHARED
         src/lua/ltablib.c
         src/lua/ltm.c
         src/lua/lua.c
-        src/lua/luac.c
+        #src/lua/luac.c
         src/lua/lundump.c
         src/lua/lutf8lib.c
         src/lua/lvm.c
@@ -49,6 +52,13 @@ add_library(raia_lua SHARED
         ../../common/c/wrapper/wrapper_yyjson.c
         ../../third_party/c/ibireme/yyjson/yyjson.c
         ../../common/c/static/static_args_hash.c
+        ../../common/c/wrapper/wrapper_ffi.c
+)
+
+target_link_libraries(raia_lua
+        $<$<PLATFORM_ID:Darwin>: ffi>
+        $<$<PLATFORM_ID:Linux>: ffi>
+        $<$<PLATFORM_ID:Windows>: ffi>
 )
 
 set_target_properties(raia_lua PROPERTIES PREFIX "")
