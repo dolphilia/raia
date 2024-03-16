@@ -1,0 +1,11 @@
+{
+  "runtime": "raia_lua",
+  "root_dir": "./",
+  "startup_script": "main",
+  "preprocess_script": "preprocess",
+  "modules_dir": "modules",
+  "debug_mode": false,
+  "ts_mode": false,
+  "es2015_mode": false,
+  "preprocess": true
+}
