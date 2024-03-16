@@ -1,20 +1,17 @@
 #ifndef RAIA_LUA_RAIA_LUA_H
 #define RAIA_LUA_RAIA_LUA_H
 
-extern "C" {
 #include <stdio.h>
 #include "ffi.h"
-#include "lua/lua.h"
-#include "lua/lualib.h"
-#include "lua/lauxlib.h"
+#include "luajit/lua.h"
+#include "luajit/lualib.h"
+#include "luajit/lauxlib.h"
+#include "luajit/luajit.h"
 #include "../../../common/c/wrapper/wrapper_yyjson.h"
 #include "../../../common/c/wrapper/wrapper_ffi.h"
 #include "../../../common/c/utility/util_file.h"
 #include "../../../common/c/utility/export_api.h"
 #include "../../../common/c/utility/platform.h"
-#include "../../../common/c/static/shared_library_loader.h"
-#include "../../../common/c/static/static_args_hash.h"
-}
 
 #ifdef _WIN32
 #include <stdlib.h>
