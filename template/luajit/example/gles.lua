@@ -1,4 +1,3 @@
-
 local ffi = require("ffi")
 local gl = require("modules/gles")
 local glfw = require("modules/glfw")
@@ -13,7 +12,7 @@ glfw.windowHint(glfw.CONTEXT_VERSION_MINOR, 0)
 glfw.windowHint(glfw.OPENGL_PROFILE, glfw.OPENGL_CORE_PROFILE)
 glfw.windowHint(glfw.CONTEXT_CREATION_API, glfw.EGL_CONTEXT_API)
 
-local width, height = 800, 600
+local width, height = 640, 480
 local window = glfw.createWindow(width, height, "Random Noise")
 if window == nil then
     glfw.terminate()
@@ -85,21 +84,17 @@ gl.deleteShader(fragment_shader)
 
 local noiseTexture = ffi.new("GLuint[1]")
 gl.genTextures(1, noiseTexture)
+local noiseData = ffi.new("GLubyte[?]", width * height * 4)
+
 gl.bindTexture(gl.TEXTURE_2D, noiseTexture[0])
 gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.UNSIGNED_BYTE, noiseData)
 gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST)
 gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST)
 
-local frameCount = 0
-local noiseTable = {}
-local noiseData = ffi.new("GLubyte[?]", width * height * 4)
-local previousTime = glfw.getTime()
-
 while glfw.windowShouldClose(window) == 0 do
-    gl.viewport(0, 0, 800*2, 600*2)
-    gl.clearColor(1.0, 1.0, 1.0, 1.0)
-    gl.clear(gl.COLOR_BUFFER_BIT)
-
+    for i = 0, width * height * 4 - 1 do
+        noiseData[i] = math.random(0, 255)
+    end
     gl.bindTexture(gl.TEXTURE_2D, noiseTexture[0])
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.UNSIGNED_BYTE, noiseData)
     
@@ -108,22 +103,6 @@ while glfw.windowShouldClose(window) == 0 do
     gl.bindVertexArray(vao[0])
     gl.activeTexture(gl.TEXTURE0)
     gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_INT, nil)
-
-    for i = 0, width * height * 4 - 1 do
-        noiseData[i] = math.random(0, 255)
-    end
-
-    -- フレームレート
-    frameCount = frameCount + 1
-    local currentTime = glfw.getTime()
-    local elapsedTime = currentTime - previousTime
-
-    -- 1秒ごとにフレームレートを計算して表示
-    if elapsedTime >= 1.0 then
-        print(frameCount / elapsedTime);
-        previousTime = currentTime
-        frameCount = 0
-    end
 
     glfw.swapBuffers(window)
     glfw.pollEvents()

@@ -90,10 +90,7 @@ gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.UNSIGNED_
 gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST)
 gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST)
 
-local frameCount = 0
-local noiseTable = {}
 local noiseData = ffi.new("GLubyte[?]", width * height * 4)
-local previousTime = glfw.getTime()
 
 while glfw.windowShouldClose(window) == 0 do
     gl.viewport(0, 0, 800*2, 600*2)
@@ -111,18 +108,6 @@ while glfw.windowShouldClose(window) == 0 do
 
     for i = 0, width * height * 4 - 1 do
         noiseData[i] = math.random(0, 255)
-    end
-
-    -- フレームレート
-    frameCount = frameCount + 1
-    local currentTime = glfw.getTime()
-    local elapsedTime = currentTime - previousTime
-
-    -- 1秒ごとにフレームレートを計算して表示
-    if elapsedTime >= 1.0 then
-        print(frameCount / elapsedTime);
-        previousTime = currentTime
-        frameCount = 0
     end
 
     glfw.swapBuffers(window)
