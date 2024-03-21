@@ -118,23 +118,48 @@ std.delPtr(h_ptr);
 
 gc();
 
+var uint8 = new Uint8Array(800*600*4);
+for(var i = 0; i < 800*600*4; i++) {
+    uint8[i] = Math.ceil(Math.random()*255)
+}
+var pixels = std.bufToPtr(uint8.buffer);
+
+var previousTime = glfw.getTime();
+var frameCount = 0;
+
 while(glfw.windowShouldClose(window) === 0) {
     gl.viewport(0, 0, w, h);
     gl.clearColor(1.0, 1.0, 1.0, 1.0);
     gl.clear(GLES.COLOR_BUFFER_BIT);
+
+    for(var i = 0; i < 800*600*4; i++) {
+        //     uint8[i] = Math.ceil(Math.random()*255)
+    }
+    // pixels = std.bufToPtr(uint8.buffer);
     
     gl.pixelStorei(GLES.UNPACK_ALIGNMENT, 1);
     gl.bindTexture(GLES.TEXTURE_2D, texture);
     gl.texImage2D(GLES.TEXTURE_2D, 0, GLES.RGBA, width, height, 0, GLES.RGBA, GLES.UNSIGNED_BYTE, pixels); // uint8.buffer
-    gl.texParameteri(GLES.TEXTURE_2D, GLES.TEXTURE_MIN_FILTER, GLES.LINEAR);
-    gl.texParameteri(GLES.TEXTURE_2D, GLES.TEXTURE_MAG_FILTER, GLES.LINEAR);
+    gl.texParameteri(GLES.TEXTURE_2D, GLES.TEXTURE_MIN_FILTER, GLES.NEAREST);
+    gl.texParameteri(GLES.TEXTURE_2D, GLES.TEXTURE_MAG_FILTER, GLES.NEAREST);
     gl.useProgram(program);
     gl.bindVertexArray(vao);
     gl.drawElements(GLES.TRIANGLES, 6, GLES.UNSIGNED_INT, null);
 
+    // フレームレート
+    frameCount++;
+    var currentTime = glfw.getTime();
+    var elapsedTime = currentTime - previousTime;
+
+    // 1秒ごとにフレームレートを計算して表示
+    if (elapsedTime >= 1.0) {
+        std.print("FPS: " + (frameCount / elapsedTime));
+        previousTime = currentTime;
+        frameCount = 0;
+    }
+
     glfw.swapBuffers(window);
     glfw.pollEvents();
-
 }
 
 
