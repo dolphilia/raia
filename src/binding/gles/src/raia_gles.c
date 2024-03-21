@@ -382,7 +382,7 @@ RAIA_API void raia_gl_uniform_4fv (GLint location, GLsizei count, const GLfloat 
 RAIA_API void raia_gl_uniform_4i (GLint location, GLint v0, GLint v1, GLint v2, GLint v3) {
     glUniform4i(location, v0, v1, v2, v3);
 }
-RAIA_API void raia_gl_uniform4iv (GLint location, GLsizei count, const GLint *value) {
+RAIA_API void raia_gl_uniform_4iv (GLint location, GLsizei count, const GLint *value) {
     glUniform4iv(location, count, value);
 }
 RAIA_API void raia_gl_uniform_matrix_2fv (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value) {

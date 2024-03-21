@@ -37,4 +37,4 @@ set_target_properties(raia_gles PROPERTIES
         BUILD_WITH_INSTALL_RPATH TRUE
         INSTALL_RPATH "${CURRENT_RPATH}")
 
-set_target_properties(raia_gles PROPERTIES PREFIX "")
+#set_target_properties(raia_gles PROPERTIES PREFIX "")
