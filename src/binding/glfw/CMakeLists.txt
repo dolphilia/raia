@@ -38,7 +38,7 @@ target_link_libraries(raia_glfw
         $<$<PLATFORM_ID:Windows>: EGL glfw3 GLESv2>
         )
 
-set_target_properties(raia_glfw PROPERTIES PREFIX "")
+#set_target_properties(raia_glfw PROPERTIES PREFIX "")
 
 # ビルド後に実行する
 # install_name_tool -change /opt/homebrew/opt/glfw/lib/libglfw.3.dylib @executable_path/libglfw.3.dylib raia_glfw
