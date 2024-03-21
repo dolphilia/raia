@@ -541,6 +541,8 @@ RAIA_API const char *init(int argc, char *argv[]) {
 
     // 標準ライブラリをロード
     luaL_openlibs(L);
+    // JITを有効にする
+    //luaJIT_setmode(L, 0, LUAJIT_MODE_ENGINE | LUAJIT_MODE_ON);
 
     lua_newtable(L); // __Raia__ オブジェクト（テーブル）を作成
     lua_newtable(L); // __Raia__ テーブルの中に Lib オブジェクト（テーブル）を作成
@@ -569,6 +571,7 @@ RAIA_API const char *init(int argc, char *argv[]) {
     lua_setfield(L, -2, "Core");
 
     lua_setglobal(L, "__Raia__"); // __Raia__ テーブルをグローバル変数として登録
+
 
     // Luaスクリプトをロード・実行
     if (luaL_dofile(L, "main.lua") != LUA_OK) {
