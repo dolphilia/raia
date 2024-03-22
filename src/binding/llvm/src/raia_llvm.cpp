@@ -73,14 +73,19 @@ int main() {
         return 1;
     }
 
-    // 実行エンジンを使用して関数を実行
-    std::vector<GenericValue> argValues(3);
-    argValues[0].IntVal = APInt(32, 0); // x = 0
-    argValues[1].IntVal = APInt(32, 1); // y = 1
-    argValues[2].IntVal = APInt(32, 10); // z = 10
+    // 関数のアドレスを取得し、関数ポインタとしてキャスト
+    auto funcAddr = ee->getFunctionAddress("f");
+    if (!funcAddr) {
+        errs() << "Failed to get function address\n";
+        return 1;
+    }
 
-    GenericValue resultValue = ee->runFunction(function, argValues);
-    outs() << "Result of f(0, 1, 10): " << resultValue.IntVal << "\n";
+    // 関数ポインタ型にキャスト
+    int (*FP)(int, int, int) = (int (*)(int, int, int))funcAddr;
+
+    // 関数を実行
+    int _result = FP(0, 1, 10);
+    outs() << "Result of f(0, 1, 10): " << _result << "\n";
 
     return 0;
 }
