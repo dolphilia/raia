@@ -84,8 +84,10 @@ int main() {
     int (*FP)(int, int, int) = (int (*)(int, int, int))funcAddr;
 
     // 関数を実行
-    int _result = FP(0, 1, 10);
-    outs() << "Result of f(0, 1, 10): " << _result << "\n";
+    for (int i = 0; i<100; i++) {
+        int _result = FP(0, 1, 2000000);
+        outs() << i << ":Result of f(0, 1, 10): " << _result << "\n";
+    }
 
     return 0;
 }
