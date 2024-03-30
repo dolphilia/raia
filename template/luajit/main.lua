@@ -1,7 +1,22 @@
-
 local ffi = require("ffi")
 local gl = require("modules/gles")
 local glfw = require("modules/glfw")
+local prim = require("modules/primitive")
+local skia = require("modules/skia")
+
+-- Skia
+local bitmap = skia.SkBitmap_new();
+skia.SkBitmap_allocN32Pixels(bitmap, 800, 600, 0);
+local canvas = skia.SkCanvas_new_3(bitmap);
+local paint = skia.SkPaint_new();
+
+skia.SkPaint_setColor(paint, 0xffffffff);
+local rect = skia.SkRect_MakeXYWH(0, 0, 800, 600);
+skia.SkCanvas_drawRect(canvas, rect, paint);
+skia.static_sk_rect_delete(rect);
+--
+
+local pixels = skia.SkBitmap_getPixels(bitmap);
 
 if glfw.init() == 0 then
     error("Failed to initialize GLFW")
@@ -101,7 +116,7 @@ while glfw.windowShouldClose(window) == 0 do
     gl.clear(gl.COLOR_BUFFER_BIT)
 
     gl.bindTexture(gl.TEXTURE_2D, noiseTexture[0])
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.UNSIGNED_BYTE, noiseData)
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.UNSIGNED_BYTE, pixels)
     
     gl.clear(gl.COLOR_BUFFER_BIT)
     gl.useProgram(shader_program)
@@ -109,9 +124,7 @@ while glfw.windowShouldClose(window) == 0 do
     gl.activeTexture(gl.TEXTURE0)
     gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_INT, nil)
 
-    for i = 0, width * height * 4 - 1 do
-        noiseData[i] = math.random(0, 255)
-    end
+    prim.drawNoiseGPU(noiseData, width, height, 4)
 
     -- フレームレート
     frameCount = frameCount + 1
