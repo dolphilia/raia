@@ -24,8 +24,8 @@ void GrBackendRenderTarget_delete(GrBackendRenderTarget *backend_render_target) 
     delete backend_render_target;
 }
 
-SkISize GrBackendRenderTarget_dimensions(GrBackendRenderTarget *backend_render_target) {
-    return backend_render_target->dimensions();
+sk_i_size_t GrBackendRenderTarget_dimensions(GrBackendRenderTarget *backend_render_target) {
+    return static_sk_i_size_make(backend_render_target->dimensions());
 }
 
 int GrBackendRenderTarget_width(GrBackendRenderTarget *backend_render_target) {

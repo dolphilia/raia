@@ -61,8 +61,8 @@ SkColor SkPaint_getColor(SkPaint *paint) {
     return paint->getColor();
 }
 
-SkColor4f SkPaint_getColor4f(SkPaint *paint) {
-    return paint->getColor4f();
+sk_color_4f_t SkPaint_getColor4f(SkPaint *paint) {
+    return static_sk_color_4f_make(paint->getColor4f());
 }
 
 void SkPaint_setColor(SkPaint *paint, SkColor color) {

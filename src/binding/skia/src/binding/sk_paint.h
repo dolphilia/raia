@@ -13,6 +13,7 @@
 #include "../static/static_sk_mask_filter.h"
 #include "../static/static_sk_image_filter.h"
 #include "../static/static_sk_blend_mode.h"
+#include "../static/static_sk_color_4f.h"
 
 extern "C" {
 //SkPaint & operator=(const SkPaint &paint)
@@ -30,7 +31,7 @@ SkPaint::Style SkPaint_getStyle(SkPaint *paint);
 void SkPaint_setStyle(SkPaint *paint, SkPaint::Style style);
 void SkPaint_setStroke(SkPaint *paint, bool v);
 SkColor SkPaint_getColor(SkPaint *paint);
-SkColor4f SkPaint_getColor4f(SkPaint *paint);
+sk_color_4f_t SkPaint_getColor4f(SkPaint *paint);
 void SkPaint_setColor(SkPaint *paint, SkColor color);
 void SkPaint_setColor_2(SkPaint *paint, const SkColor4f *color, SkColorSpace *colorSpace);
 void SkPaint_setColor4f(SkPaint *paint, const SkColor4f *color, SkColorSpace *colorSpace);
@@ -69,7 +70,6 @@ void SkPaint_setMaskFilter(SkPaint *paint, sk_mask_filter_t mask_filter);
 SkImageFilter * SkPaint_getImageFilter(SkPaint *paint);
 sk_image_filter_t SkPaint_refImageFilter(SkPaint *paint);
 void SkPaint_setImageFilter(SkPaint *paint, sk_image_filter_t image_filter);
-
 bool SkPaint_nothingToDraw(SkPaint *paint);
 bool SkPaint_canComputeFastBounds(SkPaint *paint);
 const SkRect * SkPaint_computeFastBounds(SkPaint *paint, const SkRect *orig, SkRect *storage);

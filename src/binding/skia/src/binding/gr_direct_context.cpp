@@ -166,7 +166,7 @@ gr_backend_texture_t GrDirectContext_createBackendTexture_4(GrDirectContext *dir
     return static_gr_backend_texture_make(direct_context->createBackendTexture(width, height, type, *color, mipmapped, renderable, isProtected, finishedProc, finishedContext, label));
 }
 
-gr_backend_texture_t GrDirectContext_createBackendTexture_5(GrDirectContext *direct_context, const SkPixmap srcData[], gr_backend_texture_t numLevels, GrSurfaceOrigin textureOrigin, GrRenderable renderable, GrProtected isProtected, GrGpuFinishedProc finishedProc, GrGpuFinishedContext finishedContext, std::string_view label) {
+gr_backend_texture_t GrDirectContext_createBackendTexture_5(GrDirectContext *direct_context, const SkPixmap *srcData, gr_backend_texture_t numLevels, GrSurfaceOrigin textureOrigin, GrRenderable renderable, GrProtected isProtected, GrGpuFinishedProc finishedProc, GrGpuFinishedContext finishedContext, std::string_view label) {
     return static_gr_backend_texture_make(direct_context->createBackendTexture(srcData, numLevels, textureOrigin, renderable, isProtected, finishedProc, finishedContext, label));
 }
 
@@ -174,7 +174,7 @@ gr_backend_texture_t GrDirectContext_createBackendTexture_6(GrDirectContext *dir
     return static_gr_backend_texture_make(direct_context->createBackendTexture(*srcData, textureOrigin, renderable, isProtected, finishedProc, finishedContext, label));
 }
 
-gr_backend_texture_t GrDirectContext_createBackendTexture_7(GrDirectContext *direct_context, const SkPixmap srcData[], gr_backend_texture_t numLevels, GrRenderable renderable, GrProtected isProtected, GrGpuFinishedProc finishedProc, GrGpuFinishedContext finishedContext, std::string_view label) {
+gr_backend_texture_t GrDirectContext_createBackendTexture_7(GrDirectContext *direct_context, const SkPixmap *srcData, gr_backend_texture_t numLevels, GrRenderable renderable, GrProtected isProtected, GrGpuFinishedProc finishedProc, GrGpuFinishedContext finishedContext, std::string_view label) {
     return static_gr_backend_texture_make(direct_context->createBackendTexture(srcData, numLevels, renderable, isProtected, finishedProc, finishedContext, label));
 }
 
@@ -190,7 +190,7 @@ bool GrDirectContext_updateBackendTexture_2(GrDirectContext *direct_context, con
     return direct_context->updateBackendTexture(*texture, skColorType, *color, finishedProc, finishedContext);
 }
 
-bool GrDirectContext_updateBackendTexture_3(GrDirectContext *direct_context, const GrBackendTexture *texture, const SkPixmap srcData[], int numLevels, GrSurfaceOrigin textureOrigin, GrGpuFinishedProc finishedProc, GrGpuFinishedContext finishedContext) {
+bool GrDirectContext_updateBackendTexture_3(GrDirectContext *direct_context, const GrBackendTexture *texture, const SkPixmap *srcData, int numLevels, GrSurfaceOrigin textureOrigin, GrGpuFinishedProc finishedProc, GrGpuFinishedContext finishedContext) {
     return direct_context->updateBackendTexture(*texture, srcData, numLevels, textureOrigin, finishedProc, finishedContext);
 }
 
@@ -198,7 +198,7 @@ bool GrDirectContext_updateBackendTexture_4(GrDirectContext *direct_context, con
     return direct_context->updateBackendTexture(*texture, *srcData, textureOrigin, finishedProc, finishedContext);
 }
 
-bool GrDirectContext_updateBackendTexture_5(GrDirectContext *direct_context, const GrBackendTexture *texture, const SkPixmap srcData[], int numLevels, GrGpuFinishedProc finishedProc, GrGpuFinishedContext finishedContext) {
+bool GrDirectContext_updateBackendTexture_5(GrDirectContext *direct_context, const GrBackendTexture *texture, const SkPixmap *srcData, int numLevels, GrGpuFinishedProc finishedProc, GrGpuFinishedContext finishedContext) {
     return direct_context->updateBackendTexture(*texture, srcData, numLevels, finishedProc, finishedContext);
 }
 

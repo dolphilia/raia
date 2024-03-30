@@ -7,6 +7,7 @@
 
 #include "include/gpu/GrBackendSurface.h"
 #include "../static/static_gr_backend_format.h"
+#include "../static/static_sk_i_size.h"
 
 extern "C" {
 // GrBackendRenderTarget & 	operator= (const GrBackendRenderTarget &)
@@ -14,7 +15,7 @@ GrBackendRenderTarget *GrBackendRenderTarget_new();
 GrBackendRenderTarget *GrBackendRenderTarget_new_2(int width, int height, int sampleCnt, int stencilBits, const GrMockRenderTargetInfo *mockInfo);
 GrBackendRenderTarget *GrBackendRenderTarget_new_3(const GrBackendRenderTarget *that);
 void GrBackendRenderTarget_delete(GrBackendRenderTarget *backend_render_target);
-SkISize GrBackendRenderTarget_dimensions(GrBackendRenderTarget *backend_render_target);
+sk_i_size_t GrBackendRenderTarget_dimensions(GrBackendRenderTarget *backend_render_target);
 int GrBackendRenderTarget_width(GrBackendRenderTarget *backend_render_target);
 int GrBackendRenderTarget_height(GrBackendRenderTarget *backend_render_target);
 int GrBackendRenderTarget_sampleCnt(GrBackendRenderTarget *backend_render_target);

@@ -719,6 +719,14 @@ add_library(raia_skia SHARED
         src/static/static_gr_direct_context.h
         src/static/static_sk_svg_clip_path.cpp
         src/static/static_sk_svg_clip_path.h
+        src/static/static_sk_i_size.cpp
+        src/static/static_sk_i_size.h
+        src/static/static_sk_i_point.cpp
+        src/static/static_sk_i_point.h
+        src/static/static_sk_color_4f.cpp
+        src/static/static_sk_color_4f.h
+        src/static/static_sk_point.cpp
+        src/static/static_sk_point.h
 )
 
 get_property(CURRENT_RPATH TARGET raia_skia PROPERTY INSTALL_RPATH)
@@ -739,7 +747,7 @@ target_link_libraries(raia_skia
         $<$<PLATFORM_ID:Windows>: EGL glfw3 GLESv2>
         )
 
-set_target_properties(raia_skia PROPERTIES PREFIX "")
+#set_target_properties(raia_skia PROPERTIES PREFIX "")
 
 
 #--- test

@@ -14,7 +14,7 @@ typedef int optional_sk_blend_mode_t;
 
 int static_optional_sk_blend_mode_make(std::optional<SkBlendMode> value);
 extern "C" void static_optional_sk_blend_mode_delete(int key);
-extern "C" SkBlendMode static_optional_sk_blend_mode_get(int key);
+SkBlendMode static_optional_sk_blend_mode_get(int key);
 void static_optional_sk_blend_mode_set(int key, std::optional<SkBlendMode> value);
 std::optional<SkBlendMode> static_optional_sk_blend_mode_move(int key);
 

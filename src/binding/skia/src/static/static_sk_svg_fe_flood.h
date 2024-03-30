@@ -12,8 +12,8 @@
 typedef int sk_svg_fe_flood_t;
 
 int static_sk_svg_fe_flood_make(sk_sp<SkSVGFeFlood> value);
-void static_sk_svg_fe_flood_delete(int key);
-SkSVGFeFlood *static_sk_svg_fe_flood_get(int key);
+extern "C" void static_sk_svg_fe_flood_delete(int key);
+extern "C" SkSVGFeFlood *static_sk_svg_fe_flood_get(int key);
 void static_sk_svg_fe_flood_set(int key, sk_sp<SkSVGFeFlood> value);
 sk_sp<SkSVGFeFlood> static_sk_svg_fe_flood_move(int key);
 

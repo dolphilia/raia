@@ -127,8 +127,8 @@ void SkCanvas_drawAtlas(SkCanvas *canvas, const SkImage *atlas, const SkRSXform 
     canvas->drawAtlas(atlas, xform, tex, colors, count, mode, *sampling, cullRect, paint);
 }
 
-void SkCanvas_drawCircle(SkCanvas *canvas, SkPoint center, SkScalar radius, const SkPaint *paint) {
-    canvas->drawCircle(center, radius, *paint);
+void SkCanvas_drawCircle(SkCanvas *canvas, sk_point_t center, SkScalar radius, const SkPaint *paint) {
+    canvas->drawCircle(static_sk_point_get(center), radius, *paint);
 }
 
 void SkCanvas_drawCircle_2(SkCanvas *canvas, SkScalar cx, SkScalar cy, SkScalar radius, const SkPaint *paint) {
@@ -155,18 +155,18 @@ void SkCanvas_drawDRRect(SkCanvas *canvas, const SkRRect *outer, const SkRRect *
     canvas->drawDRRect(*outer, *inner, *paint);
 }
 
-void SkCanvas_drawGlyphs(SkCanvas *canvas, int count, const SkGlyphID glyphs[], const SkPoint positions[], const uint32_t clusters[], int textByteCount, const char utf8text[], SkPoint origin, const SkFont *font, const SkPaint *paint) {
-    canvas->drawGlyphs(count, glyphs, positions, clusters, textByteCount, utf8text, origin, *font, *paint);
+void SkCanvas_drawGlyphs(SkCanvas *canvas, int count, const SkGlyphID glyphs[], const SkPoint positions[], const uint32_t clusters[], int textByteCount, const char utf8text[], sk_point_t origin, const SkFont *font, const SkPaint *paint) {
+    canvas->drawGlyphs(count, glyphs, positions, clusters, textByteCount, utf8text, static_sk_point_get(origin), *font, *paint);
 }
 
 void
-SkCanvas_drawGlyphs_2(SkCanvas *canvas, int count, const SkGlyphID glyphs[], const SkPoint positions[], SkPoint origin, const SkFont *font, const SkPaint *paint) {
-    canvas->drawGlyphs(count, glyphs, positions, origin, *font, *paint);
+SkCanvas_drawGlyphs_2(SkCanvas *canvas, int count, const SkGlyphID glyphs[], const SkPoint positions[], sk_point_t origin, const SkFont *font, const SkPaint *paint) {
+    canvas->drawGlyphs(count, glyphs, positions, static_sk_point_get(origin), *font, *paint);
 }
 
 void
-SkCanvas_drawGlyphs_3(SkCanvas *canvas, int count, const SkGlyphID glyphs[], const SkRSXform xforms[], SkPoint origin, const SkFont *font, const SkPaint *paint) {
-    canvas->drawGlyphs(count, glyphs, xforms, origin, *font, *paint);
+SkCanvas_drawGlyphs_3(SkCanvas *canvas, int count, const SkGlyphID glyphs[], const SkRSXform xforms[], sk_point_t origin, const SkFont *font, const SkPaint *paint) {
+    canvas->drawGlyphs(count, glyphs, xforms, static_sk_point_get(origin), *font, *paint);
 }
 
 void SkCanvas_drawImage(SkCanvas *canvas, sk_image_t image, SkScalar left, SkScalar top) {
@@ -221,8 +221,8 @@ void SkCanvas_drawIRect(SkCanvas *canvas, const SkIRect *rect, const SkPaint *pa
     canvas->drawIRect(*rect, *paint);
 }
 
-void SkCanvas_drawLine(SkCanvas *canvas, SkPoint p0, SkPoint p1, const SkPaint *paint) {
-    canvas->drawLine(p0, p1, *paint);
+void SkCanvas_drawLine(SkCanvas *canvas, sk_point_t p0, sk_point_t p1, const SkPaint *paint) {
+    canvas->drawLine(static_sk_point_get(p0), static_sk_point_get(p1), *paint);
 }
 
 void SkCanvas_drawLine_2(SkCanvas *canvas, SkScalar x0, SkScalar y0, SkScalar x1, SkScalar y1, const SkPaint *paint) {
@@ -265,8 +265,8 @@ void SkCanvas_drawPicture_4(SkCanvas *canvas, const SkPicture *picture, const Sk
     canvas->drawPicture(picture, matrix, paint);
 }
 
-void SkCanvas_drawPoint(SkCanvas *canvas, SkPoint p, const SkPaint *paint) {
-    canvas->drawPoint(p, *paint);
+void SkCanvas_drawPoint(SkCanvas *canvas, sk_point_t p, const SkPaint *paint) {
+    canvas->drawPoint(static_sk_point_get(p), *paint);
 }
 
 void SkCanvas_drawPoint_2(SkCanvas *canvas, SkScalar x, SkScalar y, const SkPaint *paint) {
@@ -333,8 +333,8 @@ void SkCanvas_experimental_DrawEdgeAAQuad_2(SkCanvas *canvas, const SkRect *rect
     canvas->experimental_DrawEdgeAAQuad(*rect, clip, aaFlags, color, mode);
 }
 
-SkISize SkCanvas_getBaseLayerSize(SkCanvas *canvas) { // virtual
-    return canvas->getBaseLayerSize();
+sk_i_size_t SkCanvas_getBaseLayerSize(SkCanvas *canvas) { // virtual
+    return static_sk_i_size_make(canvas->getBaseLayerSize());
 }
 
 sk_surface_props_t SkCanvas_getBaseProps(SkCanvas *canvas) {

@@ -13,8 +13,8 @@ GrBackendTexture *GrBackendTexture_new() {
 }
 
 GrBackendTexture *
-GrBackendTexture_new_2(int width, int height, skgpu::Mipmapped midmapped, const GrMockTextureInfo *mockInfo, std::string_view label) {
-    return new GrBackendTexture(width, height, midmapped, *mockInfo, label);
+GrBackendTexture_new_2(int width, int height, skgpu::Mipmapped midmapped, const GrMockTextureInfo *mockInfo, string_view_t label) {
+    return new GrBackendTexture(width, height, midmapped, *mockInfo, static_string_view_get(label));
 }
 
 GrBackendTexture *GrBackendTexture_new_3(const GrBackendTexture *that) {
@@ -25,8 +25,8 @@ void GrBackendTexture_delete(GrBackendTexture *backend_texture) {
     delete backend_texture;
 }
 
-SkISize GrBackendTexture_dimensions(GrBackendTexture *backend_texture) {
-    return backend_texture->dimensions();
+sk_i_size_t GrBackendTexture_dimensions(GrBackendTexture *backend_texture) {
+    return static_sk_i_size_make(backend_texture->dimensions());
 }
 
 int GrBackendTexture_width(GrBackendTexture *backend_texture) {

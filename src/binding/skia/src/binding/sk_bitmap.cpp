@@ -70,8 +70,8 @@ size_t SkBitmap_computeByteSize(SkBitmap *bitmap) { // inline
     return bitmap->computeByteSize();
 }
 
-SkISize SkBitmap_dimensions(SkBitmap *bitmap) { // inline
-    return bitmap->dimensions();
+sk_i_size_t SkBitmap_dimensions(SkBitmap *bitmap) { // inline
+    return static_sk_i_size_make(bitmap->dimensions());
 }
 
 bool SkBitmap_drawsNothing(SkBitmap *bitmap) { // inline
@@ -86,8 +86,8 @@ void SkBitmap_erase(SkBitmap *bitmap, SkColor c, const SkIRect *area) {
     bitmap->erase(c, *area);
 }
 
-void SkBitmap_erase_2(SkBitmap *bitmap, SkColor4f c, const SkIRect *area) {
-    bitmap->erase(c, *area);
+void SkBitmap_erase_2(SkBitmap *bitmap, sk_color_4f_t c, const SkIRect *area) {
+    bitmap->erase(static_sk_color_4f_get(c), *area);
 }
 
 void SkBitmap_eraseArea(SkBitmap *bitmap, const SkIRect *area, SkColor c) { // inline
@@ -102,8 +102,8 @@ void SkBitmap_eraseColor(SkBitmap *bitmap, SkColor c) {
     bitmap->eraseColor(c);
 }
 
-void SkBitmap_eraseColor_2(SkBitmap *bitmap, SkColor4f c) {
-    bitmap->eraseColor(c);
+void SkBitmap_eraseColor_2(SkBitmap *bitmap, sk_color_4f_t c) {
+    bitmap->eraseColor(static_sk_color_4f_get(c));
 }
 
 bool SkBitmap_extractAlpha(SkBitmap *bitmap, SkBitmap *dst) { // inline
@@ -154,8 +154,8 @@ SkColor SkBitmap_getColor(SkBitmap *bitmap, int x, int y) { // inline
     return bitmap->getColor(x, y);
 }
 
-SkColor4f SkBitmap_getColor4f(SkBitmap *bitmap, int x, int y) { // inline
-    return bitmap->getColor4f(x, y);
+sk_color_4f_t SkBitmap_getColor4f(SkBitmap *bitmap, int x, int y) { // inline
+    return static_sk_color_4f_make(bitmap->getColor4f(x, y));
 }
 
 uint32_t SkBitmap_getGenerationID(SkBitmap *bitmap) {
@@ -234,8 +234,8 @@ SkPixelRef *SkBitmap_pixelRef(SkBitmap *bitmap) { // inline
     return bitmap->pixelRef();
 }
 
-SkIPoint SkBitmap_pixelRefOrigin(SkBitmap *bitmap) {
-    return bitmap->pixelRefOrigin();
+sk_i_point_t SkBitmap_pixelRefOrigin(SkBitmap *bitmap) {
+    return static_sk_i_point_make(bitmap->pixelRefOrigin());
 }
 
 int SkBitmap_pixmap(SkBitmap *bitmap) { // inline

@@ -12,8 +12,8 @@
 typedef int gr_direct_context_t;
 
 int static_gr_direct_context_make(sk_sp<GrDirectContext> value);
-void static_gr_direct_context_delete(int key);
-GrDirectContext *static_gr_direct_context_get(int key);
+extern "C" void static_gr_direct_context_delete(int key);
+extern "C" GrDirectContext *static_gr_direct_context_get(int key);
 void static_gr_direct_context_set(int key, sk_sp<GrDirectContext> value);
 sk_sp<GrDirectContext> static_gr_direct_context_move(int key);
 

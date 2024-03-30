@@ -13,6 +13,9 @@
 #include "../static/static_sk_shader.h"
 #include "../static/static_sk_color_space.h"
 #include "../static/static_sk_pixmap.h"
+#include "../static/static_sk_i_size.h"
+#include "../static/static_sk_i_point.h"
+#include "../static/static_sk_color_4f.h"
 
 extern "C" {
 SkBitmap *SkBitmap_new(void);
@@ -31,15 +34,15 @@ int SkBitmap_bytesPerPixel(SkBitmap *bitmap);
 SkColorSpace *SkBitmap_colorSpace(SkBitmap *bitmap);
 SkColorType SkBitmap_colorType(SkBitmap *bitmap);
 size_t SkBitmap_computeByteSize(SkBitmap *bitmap);
-SkISize SkBitmap_dimensions(SkBitmap *bitmap);
+sk_i_size_t SkBitmap_dimensions(SkBitmap *bitmap);
 bool SkBitmap_drawsNothing(SkBitmap *bitmap);
 bool SkBitmap_empty(SkBitmap *bitmap);
 void SkBitmap_erase(SkBitmap *bitmap, SkColor c, const SkIRect *area);
-void SkBitmap_erase_2(SkBitmap *bitmap, SkColor4f c, const SkIRect *area);
+void SkBitmap_erase_2(SkBitmap *bitmap, sk_color_4f_t c, const SkIRect *area);
 void SkBitmap_eraseArea(SkBitmap *bitmap, const SkIRect *area, SkColor c);
 void SkBitmap_eraseARGB(SkBitmap *bitmap, U8CPU a, U8CPU r, U8CPU g, U8CPU b);
 void SkBitmap_eraseColor(SkBitmap *bitmap, SkColor c);
-void SkBitmap_eraseColor_2(SkBitmap *bitmap, SkColor4f c);
+void SkBitmap_eraseColor_2(SkBitmap *bitmap, sk_color_4f_t c);
 bool SkBitmap_extractAlpha(SkBitmap *bitmap, SkBitmap *dst);
 bool SkBitmap_extractAlpha_2(SkBitmap *bitmap, SkBitmap *dst, const SkPaint *paint, SkBitmap::Allocator *allocator, SkIPoint *offset);
 bool SkBitmap_extractAlpha_3(SkBitmap *bitmap, SkBitmap *dst, const SkPaint *paint, SkIPoint *offset);
@@ -52,7 +55,7 @@ float SkBitmap_getAlphaf(SkBitmap *bitmap, int x, int y);
 void SkBitmap_getBounds(SkBitmap *bitmap, SkIRect *bounds);
 void SkBitmap_getBounds2(SkBitmap *bitmap, SkRect *bounds);
 SkColor SkBitmap_getColor(SkBitmap *bitmap, int x, int y);
-SkColor4f SkBitmap_getColor4f(SkBitmap *bitmap, int x, int y);
+sk_color_4f_t SkBitmap_getColor4f(SkBitmap *bitmap, int x, int y);
 uint32_t SkBitmap_getGenerationID(SkBitmap *bitmap);
 void *SkBitmap_getPixels(SkBitmap *bitmap);
 sk_i_rect_t SkBitmap_getSubset(SkBitmap *bitmap);
@@ -72,7 +75,7 @@ sk_shader_t SkBitmap_makeShader_4(SkBitmap *bitmap, SkTileMode tmx, SkTileMode t
 void SkBitmap_notifyPixelsChanged(SkBitmap *bitmap);
 bool SkBitmap_peekPixels(SkBitmap *bitmap, SkPixmap *pixmap);
 SkPixelRef *SkBitmap_pixelRef(SkBitmap *bitmap);
-SkIPoint SkBitmap_pixelRefOrigin(SkBitmap *bitmap);
+sk_i_point_t SkBitmap_pixelRefOrigin(SkBitmap *bitmap);
 int SkBitmap_pixmap(SkBitmap *bitmap);
 bool SkBitmap_readPixels(SkBitmap *bitmap, const SkImageInfo *dstInfo, void *dstPixels, size_t dstRowBytes, int srcX, int srcY);
 bool SkBitmap_readPixels_2(SkBitmap *bitmap, const SkPixmap *dst);

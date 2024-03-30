@@ -9,6 +9,7 @@
 #include "../static/static_sk_data.h"
 #include "../static/static_sk_rect.h"
 #include "../static/static_sk_path.h"
+#include "../static/static_sk_point.h"
 
 extern "C" {
 //SkPath & operator=(const SkPath &path)
@@ -33,7 +34,7 @@ bool SkPath_isVolatile(SkPath *path);
 SkPath * SkPath_setIsVolatile(SkPath *path, bool isVolatile);
 bool SkPath_isLine(SkPath *path, SkPoint line[2]);
 int SkPath_countPoints(SkPath *path);
-SkPoint SkPath_getPoint(SkPath *path, int index);
+sk_point_t SkPath_getPoint(SkPath *path, int index);
 int SkPath_getPoints(SkPath *path, SkPoint points[], int max);
 int SkPath_countVerbs(SkPath *path);
 int SkPath_getVerbs(SkPath *path, uint8_t verbs[], int max);
@@ -61,9 +62,9 @@ SkPath * SkPath_cubicTo_2(SkPath *path, const SkPoint *p1, const SkPoint *p2, co
 SkPath * SkPath_rCubicTo(SkPath *path, SkScalar dx1, SkScalar dy1, SkScalar dx2, SkScalar dy2, SkScalar dx3, SkScalar dy3);
 SkPath * SkPath_arcTo(SkPath *path, const SkRect *oval, SkScalar startAngle, SkScalar sweepAngle, bool forceMoveTo);
 SkPath * SkPath_arcTo_2(SkPath *path, SkScalar x1, SkScalar y1, SkScalar x2, SkScalar y2, SkScalar radius);
-SkPath * SkPath_arcTo_3(SkPath *path, SkPoint p1, SkPoint p2, SkScalar radius);
+SkPath * SkPath_arcTo_3(SkPath *path, sk_point_t p1, sk_point_t p2, SkScalar radius);
 SkPath * SkPath_arcTo_4(SkPath *path, SkScalar rx, SkScalar ry, SkScalar xAxisRotate, SkPath::ArcSize largeArc, SkPathDirection sweep, SkScalar x, SkScalar y);
-SkPath * SkPath_arcTo_5(SkPath *path, SkPoint r, SkScalar xAxisRotate, SkPath::ArcSize largeArc, SkPathDirection sweep, SkPoint xy);
+SkPath * SkPath_arcTo_5(SkPath *path, sk_point_t r, SkScalar xAxisRotate, SkPath::ArcSize largeArc, SkPathDirection sweep, sk_point_t xy);
 SkPath * SkPath_rArcTo(SkPath *path, SkScalar rx, SkScalar ry, SkScalar xAxisRotate, SkPath::ArcSize largeArc, SkPathDirection sweep, SkScalar dx, SkScalar dy);
 SkPath * SkPath_close(SkPath *path);
 bool SkPath_isRect(SkPath *path, SkRect *rect, bool *isClosed, SkPathDirection *direction);
@@ -116,7 +117,7 @@ sk_path_t SkPath_RRect_2(const SkRRect *rrect, SkPathDirection dir, unsigned sta
 sk_path_t SkPath_RRect_3(const SkRect *bounds, SkScalar rx, SkScalar ry, SkPathDirection dir);
 sk_path_t SkPath_Polygon(const SkPoint pts[], int count, bool isClosed, SkPathFillType type, bool isVolatile);
 sk_path_t SkPath_Polygon_2(const std::initializer_list<SkPoint> *list, bool isClosed, SkPathFillType fillType, bool isVolatile);
-sk_path_t SkPath_Line(SkPoint a, SkPoint b);
+sk_path_t SkPath_Line(sk_point_t a, sk_point_t b);
 bool SkPath_IsLineDegenerate(const SkPoint *p1, const SkPoint *p2, bool exact);
 bool SkPath_IsQuadDegenerate(const SkPoint *p1, const SkPoint *p2, const SkPoint *p3, bool exact);
 bool SkPath_IsCubicDegenerate(const SkPoint *p1, const SkPoint *p2, const SkPoint *p3, const SkPoint *p4, bool exact);

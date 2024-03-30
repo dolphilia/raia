@@ -92,8 +92,8 @@ int SkPath_countPoints(SkPath *path) {
     return path->countPoints();
 }
 
-SkPoint SkPath_getPoint(SkPath *path, int index) {
-    return path->getPoint(index);
+sk_point_t SkPath_getPoint(SkPath *path, int index) {
+    return static_sk_point_make(path->getPoint(index));
 }
 
 int SkPath_getPoints(SkPath *path, SkPoint points[], int max) {
@@ -204,16 +204,16 @@ SkPath * SkPath_arcTo_2(SkPath *path, SkScalar x1, SkScalar y1, SkScalar x2, SkS
     return &path->arcTo(x1, y1, x2, y2, radius);
 }
 
-SkPath * SkPath_arcTo_3(SkPath *path, const SkPoint p1, const SkPoint p2, SkScalar radius) {
-    return &path->arcTo(p1, p2, radius);
+SkPath * SkPath_arcTo_3(SkPath *path, sk_point_t p1, sk_point_t p2, SkScalar radius) {
+    return &path->arcTo(static_sk_point_get(p1), static_sk_point_get(p2), radius);
 }
 
 SkPath * SkPath_arcTo_4(SkPath *path, SkScalar rx, SkScalar ry, SkScalar xAxisRotate, SkPath::ArcSize largeArc, SkPathDirection sweep, SkScalar x, SkScalar y) {
     return &path->arcTo(rx, ry, xAxisRotate, largeArc, sweep, x, y);
 }
 
-SkPath * SkPath_arcTo_5(SkPath *path, const SkPoint r, SkScalar xAxisRotate, SkPath::ArcSize largeArc, SkPathDirection sweep, const SkPoint xy) {
-    return &path->arcTo(r, xAxisRotate, largeArc, sweep, xy);
+SkPath * SkPath_arcTo_5(SkPath *path, sk_point_t r, SkScalar xAxisRotate, SkPath::ArcSize largeArc, SkPathDirection sweep, sk_point_t xy) {
+    return &path->arcTo(static_sk_point_get(r), xAxisRotate, largeArc, sweep, static_sk_point_get(xy));
 }
 
 SkPath * SkPath_rArcTo(SkPath *path, SkScalar rx, SkScalar ry, SkScalar xAxisRotate, SkPath::ArcSize largeArc, SkPathDirection sweep, SkScalar dx, SkScalar dy) {
@@ -423,8 +423,8 @@ sk_path_t SkPath_Polygon_2(const std::initializer_list<SkPoint> *list, bool isCl
     return static_sk_path_make(SkPath::Polygon(*list, isClosed, fillType, isVolatile));
 }
 
-sk_path_t SkPath_Line(const SkPoint a, const SkPoint b) {
-    return static_sk_path_make(SkPath::Line(a, b));
+sk_path_t SkPath_Line(sk_point_t a, sk_point_t b) {
+    return static_sk_path_make(SkPath::Line(static_sk_point_get(a), static_sk_point_get(b)));
 }
 
 bool SkPath_IsLineDegenerate(const SkPoint *p1, const SkPoint *p2, bool exact) {
