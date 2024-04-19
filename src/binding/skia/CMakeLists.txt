@@ -727,6 +727,38 @@ add_library(raia_skia SHARED
         src/static/static_sk_color_4f.h
         src/static/static_sk_point.cpp
         src/static/static_sk_point.h
+        src/static/static_std_chrono_milliseconds.cpp
+        src/static/static_std_chrono_milliseconds.h
+        src/static/static_sk_flattenable_factory.cpp
+        src/static/static_sk_flattenable_factory.h
+        src/static/static_sk_cubic_resampler.cpp
+        src/static/static_sk_cubic_resampler.h
+        src/static/static_sk_image_read_pixels_callback.cpp
+        src/static/static_sk_image_read_pixels_callback.h
+        src/static/static_sk_image_required_properties.cpp
+        src/static/static_sk_image_required_properties.h
+        src/static/static_sk_font_arguments_variation_position.cpp
+        src/static/static_sk_font_arguments_variation_position.h
+        src/static/static_sk_font_arguments_palette.cpp
+        src/static/static_sk_font_arguments_palette.h
+        src/static/static_sk_v4.cpp
+        src/static/static_sk_v4.h
+        src/static/static_sk_v3.cpp
+        src/static/static_sk_v3.h
+        src/static/static_sk_v2.cpp
+        src/static/static_sk_v2.h
+        src/static/static_sk_point_3.cpp
+        src/static/static_sk_point_3.h
+        src/static/static_sk_rsx_form.cpp
+        src/static/static_sk_rsx_form.h
+        src/static/static_sk_runtime_effect_builder_builder_uniform.cpp
+        src/static/static_sk_runtime_effect_builder_builder_uniform.h
+        src/static/static_sk_runtime_effect_builder_builder_child.cpp
+        src/static/static_sk_runtime_effect_builder_builder_child.h
+        src/static/static_sk_size_t.cpp
+        src/static/static_sk_size_t.h
+        src/static/static_sk_shaper_run_handler_buffer.cpp
+        src/static/static_sk_shaper_run_handler_buffer.h
 )
 
 get_property(CURRENT_RPATH TARGET raia_skia PROPERTY INSTALL_RPATH)
