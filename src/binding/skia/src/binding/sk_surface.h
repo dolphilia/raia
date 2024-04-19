@@ -16,7 +16,7 @@
 
 extern "C" {
 void SkSurface_delete(SkSurface *surface);
-bool SkSurface_isCompatible(SkSurface *surface, const GrSurfaceCharacterization &characterization);
+bool SkSurface_isCompatible(SkSurface *surface, const GrSurfaceCharacterization *characterization);
 int SkSurface_width(SkSurface *surface);
 int SkSurface_height(SkSurface *surface);
 sk_image_info_t SkSurface_imageInfo(SkSurface *surface);

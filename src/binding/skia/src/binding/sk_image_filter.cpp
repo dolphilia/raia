@@ -46,8 +46,8 @@ sk_image_filter_t SkImageFilter_makeWithLocalMatrix(SkImageFilter *image_filter,
     return static_sk_image_filter_make(image_filter->makeWithLocalMatrix(*matrix));
 }
 
-SkImageFilter::Factory SkImageFilter_getFactory(SkImageFilter *image_filter) {
-    return image_filter->getFactory();
+sk_flattenable_factory_t SkImageFilter_getFactory(SkImageFilter *image_filter) {
+    return static_sk_flattenable_factory_make(image_filter->getFactory());
 }
 
 const char * SkImageFilter_getTypeName(SkImageFilter *image_filter) {
@@ -88,16 +88,16 @@ sk_image_filter_t SkImageFilter_Deserialize(const void *data, size_t size, const
     return static_sk_image_filter_make(SkImageFilter::Deserialize(data, size, procs));
 }
 
-SkImageFilter::Factory SkImageFilter_NameToFactory(const char name[]) {
-    return SkImageFilter::NameToFactory(name);
+sk_flattenable_factory_t SkImageFilter_NameToFactory(const char name[]) {
+    return static_sk_flattenable_factory_make(SkImageFilter::NameToFactory(name));
 }
 
-const char * SkImageFilter_FactoryToName(SkImageFilter::Factory factory) {
-    return SkImageFilter::FactoryToName(factory);
+const char * SkImageFilter_FactoryToName(sk_flattenable_factory_t factory) {
+    return SkImageFilter::FactoryToName(static_sk_flattenable_factory_get(factory));
 }
 
-void SkImageFilter_Register(const char name[], SkImageFilter::Factory factory) {
-    return SkImageFilter::Register(name, factory);
+void SkImageFilter_Register(const char name[], sk_flattenable_factory_t factory) {
+    return SkImageFilter::Register(name, static_sk_flattenable_factory_get(factory));
 }
 
 }

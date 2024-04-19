@@ -8,10 +8,11 @@
 #include "include/core/SkFlattenable.h"
 #include "../static/static_sk_flattenable.h"
 #include "../static/static_sk_data.h"
+#include "../static/static_sk_flattenable_factory.h"
 
 extern "C" {
 void SkFlattenable_delete(SkFlattenable *flattenable);
-SkFlattenable::Factory SkFlattenable_getFactory(SkFlattenable *flattenable);
+sk_flattenable_factory_t SkFlattenable_getFactory(SkFlattenable *flattenable);
 const char * SkFlattenable_getTypeName(SkFlattenable *flattenable);
 void SkFlattenable_flatten(SkFlattenable *flattenable, SkWriteBuffer *write_buffer);
 SkFlattenable::Type SkFlattenable_getFlattenableType(SkFlattenable *flattenable);
@@ -21,9 +22,9 @@ bool SkFlattenable_unique(SkFlattenable *flattenable);
 void SkFlattenable_ref(SkFlattenable *flattenable);
 void SkFlattenable_unref(SkFlattenable *flattenable);
 // static
-SkFlattenable::Factory SkFlattenable_NameToFactory(const char name[]);
-const char * SkFlattenable_FactoryToName(SkFlattenable::Factory factory);
-void SkFlattenable_Register(const char name[], SkFlattenable::Factory factory);
+sk_flattenable_factory_t SkFlattenable_NameToFactory(const char name[]);
+const char * SkFlattenable_FactoryToName(sk_flattenable_factory_t factory);
+void SkFlattenable_Register(const char name[], sk_flattenable_factory_t factory);
 int SkFlattenable_Deserialize(SkFlattenable::Type type, const void *data, size_t length, const SkDeserialProcs *procs);
 }
 

@@ -174,8 +174,8 @@ void SkFont_getBounds(SkFont *font, const SkGlyphID glyphs[], int count, SkRect 
     font->getBounds(glyphs, count, bounds, paint);
 }
 
-void SkFont_getPos(SkFont *font, const SkGlyphID glyphs[], int count, SkPoint pos[], SkPoint origin) {
-    font->getPos(glyphs, count, pos, origin);
+void SkFont_getPos(SkFont *font, const SkGlyphID glyphs[], int count, SkPoint pos[], sk_point_t origin) {
+    font->getPos(glyphs, count, pos, static_sk_point_get(origin));
 }
 
 void SkFont_getXPos(SkFont *font, const SkGlyphID glyphs[], int count, SkScalar xpos[], SkScalar origin) {

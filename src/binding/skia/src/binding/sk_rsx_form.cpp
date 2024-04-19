@@ -36,13 +36,12 @@ void SkRSXform_toTriStrip(SkRSXform *rsx_form, SkScalar width, SkScalar height, 
 
 // static
 
-SkRSXform SkRSXform_Make(SkScalar scos, SkScalar ssin, SkScalar tx, SkScalar ty) {
-    return SkRSXform::Make(scos, ssin, tx, ty);
+sk_rsx_form_t SkRSXform_Make(SkScalar scos, SkScalar ssin, SkScalar tx, SkScalar ty) {
+    return static_sk_rsx_form_make(SkRSXform::Make(scos, ssin, tx, ty));
 }
 
-SkRSXform
-SkRSXform_MakeFromRadians(SkScalar scale, SkScalar radians, SkScalar tx, SkScalar ty, SkScalar ax, SkScalar ay) {
-    return SkRSXform::MakeFromRadians(scale, radians, tx, ty, ax, ay);
+sk_rsx_form_t SkRSXform_MakeFromRadians(SkScalar scale, SkScalar radians, SkScalar tx, SkScalar ty, SkScalar ax, SkScalar ay) {
+    return static_sk_rsx_form_make(SkRSXform::MakeFromRadians(scale, radians, tx, ty, ax, ay));
 }
 
 }

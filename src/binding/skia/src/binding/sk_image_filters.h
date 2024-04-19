@@ -13,6 +13,7 @@
 #include "../static/static_sk_picture.h"
 #include "../static/static_sk_shader.h"
 #include "../static/static_sk_blender.h"
+#include "../static/static_std_string_view.h"
 
 extern "C" {
 void SkImageFilters_delete(SkImageFilters * imageFilters);
@@ -40,8 +41,8 @@ sk_image_filter_t SkImageFilters_Merge_2(sk_image_filter_t first, sk_image_filte
 sk_image_filter_t SkImageFilters_Offset(SkScalar dx, SkScalar dy, sk_image_filter_t input, const SkImageFilters::CropRect *cropRect);
 sk_image_filter_t SkImageFilters_Picture(sk_picture_t picture, const SkRect *targetRect);
 sk_image_filter_t SkImageFilters_Picture_2(sk_picture_t picture);
-sk_image_filter_t SkImageFilters_RuntimeShader(const SkRuntimeShaderBuilder *builder, std::string_view childShaderName, sk_image_filter_t input);
-sk_image_filter_t SkImageFilters_RuntimeShader_2(const SkRuntimeShaderBuilder *builder, SkScalar sampleRadius, std::string_view childShaderName, sk_image_filter_t input);
+sk_image_filter_t SkImageFilters_RuntimeShader(const SkRuntimeShaderBuilder *builder, string_view_t childShaderName, sk_image_filter_t input);
+sk_image_filter_t SkImageFilters_RuntimeShader_2(const SkRuntimeShaderBuilder *builder, SkScalar sampleRadius, string_view_t childShaderName, sk_image_filter_t input);
 sk_image_filter_t SkImageFilters_RuntimeShader_3(const SkRuntimeShaderBuilder *builder, std::string_view childShaderNames[], const sk_sp<SkImageFilter> *inputs, int inputCount);
 sk_image_filter_t SkImageFilters_RuntimeShader_4(const SkRuntimeShaderBuilder *builder, SkScalar maxSampleRadius, std::string_view childShaderNames[], const sk_sp<SkImageFilter> *inputs, int inputCount);
 sk_image_filter_t SkImageFilters_Shader(sk_shader_t shader, const SkImageFilters::CropRect *cropRect);

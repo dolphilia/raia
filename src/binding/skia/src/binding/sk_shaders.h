@@ -16,7 +16,7 @@
 extern "C" {
 sk_shader_t SkShaders_Empty();
 sk_shader_t SkShaders_Color(SkColor color);
-sk_shader_t SkShaders_Color_2(const SkColor4f &color4f, sk_color_space_t color_space);
+sk_shader_t SkShaders_Color_2(const SkColor4f *color4f, sk_color_space_t color_space);
 sk_shader_t SkShaders_Blend(SkBlendMode mode, sk_shader_t dst, sk_shader_t src);
 sk_shader_t SkShaders_Blend_2(sk_blender_t value, sk_shader_t dst, sk_shader_t src);
 sk_shader_t SkShaders_CoordClamp(sk_shader_t shader, const SkRect *subset);

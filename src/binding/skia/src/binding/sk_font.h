@@ -9,6 +9,7 @@
 #include "../static/static_sk_typeface.h"
 #include "../static/static_std_vector_sk_scalar.h"
 #include "../static/static_sk_font.h"
+#include "../static/static_sk_point.h"
 
 extern "C" {
 SkFont *SkFont_new();
@@ -54,7 +55,7 @@ void SkFont_getWidths_2(SkFont *font, const SkGlyphID glyphs[], int count, SkSca
 void SkFont_getWidths_3(SkFont *font, const SkGlyphID glyphs[], int count, SkScalar widths[]);
 void SkFont_getWidthsBounds(SkFont *font, const SkGlyphID glyphs[], int count, SkScalar widths[], SkRect bounds[], const SkPaint *paint);
 void SkFont_getBounds(SkFont *font, const SkGlyphID glyphs[], int count, SkRect bounds[], const SkPaint *paint);
-void SkFont_getPos(SkFont *font, const SkGlyphID glyphs[], int count, SkPoint pos[], SkPoint origin);
+void SkFont_getPos(SkFont *font, const SkGlyphID glyphs[], int count, SkPoint pos[], sk_point_t origin);
 void SkFont_getXPos(SkFont *font, const SkGlyphID glyphs[], int count, SkScalar xpos[], SkScalar origin);
 int SkFont_getIntercepts(SkFont *font, const SkGlyphID glyphs[], int count, const SkPoint pos[], SkScalar top, SkScalar bottom, const SkPaint *paint);
 bool SkFont_getPath(SkFont *font, SkGlyphID glyphID, SkPath *path);

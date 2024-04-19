@@ -11,6 +11,7 @@
 #include "../static/static_sk_typeface.h"
 #include "../static/static_sk_data.h"
 #include "../static/static_sk_stream_asset.h"
+#include "../static/static_sk_font_style.h"
 
 extern "C" {
 void SkFontMgr_delete(SkFontMgr *font_mgr);
@@ -24,7 +25,7 @@ sk_typeface_t SkFontMgr_makeFromData(SkFontMgr *font_mgr, sk_data_t data, int tt
 sk_typeface_t SkFontMgr_makeFromStream(SkFontMgr *font_mgr, sk_stream_asset_t stream_asset, int ttcIndex);
 sk_typeface_t SkFontMgr_makeFromStream_2(SkFontMgr *font_mgr, sk_stream_asset_t stream_asset, const SkFontArguments *font_argments);
 sk_typeface_t SkFontMgr_makeFromFile(SkFontMgr *font_mgr, const char path[], int ttcIndex);
-sk_typeface_t SkFontMgr_legacyMakeTypeface(SkFontMgr *font_mgr, const char familyName[], SkFontStyle style);
+sk_typeface_t SkFontMgr_legacyMakeTypeface(SkFontMgr *font_mgr, const char familyName[], sk_font_style_t style);
 bool SkFontMgr_unique(SkFontMgr *font_mgr);
 void SkFontMgr_ref(SkFontMgr *font_mgr);
 void SkFontMgr_unref(SkFontMgr *font_mgr);

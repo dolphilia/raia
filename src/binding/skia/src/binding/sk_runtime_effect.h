@@ -19,6 +19,7 @@
 #include "../static/static_sk_data.h"
 #include "../static/static_sk_string.h"
 #include "../static/static_sk_runtime_effect_child_ptr.h"
+#include "../static/static_std_string_view.h"
 
 extern "C" {
 void SkRuntimeEffect_delete(SkRuntimeEffect *runtime_effect);
@@ -32,8 +33,8 @@ const std::string * SkRuntimeEffect_source(SkRuntimeEffect *runtime_effect);
 size_t SkRuntimeEffect_uniformSize(SkRuntimeEffect *runtime_effect);
 int SkRuntimeEffect_uniforms(SkRuntimeEffect *runtime_effect);
 int SkRuntimeEffect_children(SkRuntimeEffect *runtime_effect);
-const SkRuntimeEffect::Uniform * SkRuntimeEffect_findUniform(SkRuntimeEffect *runtime_effect, std::string_view name);
-const SkRuntimeEffect::Child * SkRuntimeEffect_findChild(SkRuntimeEffect *runtime_effect, std::string_view name);
+const SkRuntimeEffect::Uniform * SkRuntimeEffect_findUniform(SkRuntimeEffect *runtime_effect, string_view_t name);
+const SkRuntimeEffect::Child * SkRuntimeEffect_findChild(SkRuntimeEffect *runtime_effect, string_view_t name);
 bool SkRuntimeEffect_allowShader(SkRuntimeEffect *runtime_effect);
 bool SkRuntimeEffect_allowColorFilter(SkRuntimeEffect *runtime_effect);
 bool SkRuntimeEffect_allowBlender(SkRuntimeEffect *runtime_effect);

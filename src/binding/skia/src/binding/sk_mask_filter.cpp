@@ -14,8 +14,8 @@ sk_rect_t SkMaskFilter_approximateFilteredBounds(SkMaskFilter *mask_filter, cons
     return static_sk_rect_make(mask_filter->approximateFilteredBounds(*src));
 }
 
-SkMaskFilter::Factory SkMaskFilter_getFactory(SkMaskFilter *mask_filter) {
-    return mask_filter->getFactory();
+sk_flattenable_factory_t SkMaskFilter_getFactory(SkMaskFilter *mask_filter) {
+    return static_sk_flattenable_factory_make(mask_filter->getFactory());
 }
 
 const char * SkMaskFilter_getTypeName(SkMaskFilter *mask_filter) {
@@ -61,16 +61,16 @@ sk_mask_filter_t SkMaskFilter_Deserialize(const void *data, size_t size, const S
     return static_sk_mask_filter_make(SkMaskFilter::Deserialize(data, size, procs));
 }
 
-SkMaskFilter::Factory SkMaskFilter_NameToFactory(const char name[]) {
-    return SkMaskFilter::NameToFactory(name);
+sk_flattenable_factory_t SkMaskFilter_NameToFactory(const char name[]) {
+    return static_sk_flattenable_factory_make(SkMaskFilter::NameToFactory(name));
 }
 
-const char * SkMaskFilter_FactoryToName(SkMaskFilter::Factory factory) {
-    return SkMaskFilter::FactoryToName(factory);
+const char * SkMaskFilter_FactoryToName(sk_flattenable_factory_t factory) {
+    return SkMaskFilter::FactoryToName(static_sk_flattenable_factory_get(factory));
 }
 
-void SkMaskFilter_Register(const char name[], SkMaskFilter::Factory factory) {
-    SkMaskFilter::Register(name, factory);
+void SkMaskFilter_Register(const char name[], sk_flattenable_factory_t factory) {
+    SkMaskFilter::Register(name, static_sk_flattenable_factory_get(factory));
 }
 
 }

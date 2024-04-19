@@ -8,6 +8,7 @@
 #include "include/core/SkRRect.h"
 #include "../static/static_sk_string.h"
 #include "../static/static_sk_r_rect.h"
+#include "../static/static_sk_point.h"
 
 extern "C" {
 //SkRRect & operator=(const SkRRect &rrect)
@@ -24,7 +25,7 @@ bool SkRRect_isNinePatch(SkRRect *rrect);
 bool SkRRect_isComplex(SkRRect *rrect);
 SkScalar SkRRect_width(SkRRect *rrect);
 SkScalar SkRRect_height(SkRRect *rrect);
-SkVector SkRRect_getSimpleRadii(SkRRect *rrect);
+sk_point_t SkRRect_getSimpleRadii(SkRRect *rrect);
 void SkRRect_setEmpty(SkRRect *rrect);
 void SkRRect_setRect(SkRRect *rrect, const SkRect *rect);
 void SkRRect_setOval(SkRRect *rrect, const SkRect *oval);
@@ -32,7 +33,7 @@ void SkRRect_setRectXY(SkRRect *rrect, const SkRect *rect, SkScalar xRad, SkScal
 void SkRRect_setNinePatch(SkRRect *rrect, const SkRect *rect, SkScalar leftRad, SkScalar topRad, SkScalar rightRad, SkScalar bottomRad);
 void SkRRect_setRectRadii(SkRRect *rrect, const SkRect *rect, const SkVector radii[4]);
 const SkRect * SkRRect_rect(SkRRect *rrect);
-SkVector SkRRect_radii(SkRRect *rrect, SkRRect::Corner corner);
+sk_point_t SkRRect_radii(SkRRect *rrect, SkRRect::Corner corner);
 const SkRect * SkRRect_getBounds(SkRRect *rrect);
 void SkRRect_inset(SkRRect *rrect, SkScalar dx, SkScalar dy, SkRRect *dst);
 void SkRRect_inset_2(SkRRect *rrect, SkScalar dx, SkScalar dy);

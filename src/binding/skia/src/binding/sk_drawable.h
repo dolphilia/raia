@@ -11,6 +11,7 @@
 #include "../static/static_sk_data.h"
 #include "../static/static_sk_drawable.h"
 #include "../static/static_sk_rect.h"
+#include "../static/static_sk_flattenable_factory.h"
 
 extern "C" {
 void SkDrawable_delete(SkDrawable *drawable);
@@ -23,7 +24,7 @@ sk_rect_t SkDrawable_getBounds(SkDrawable *drawable);
 size_t SkDrawable_approximateBytesUsed(SkDrawable *drawable);
 void SkDrawable_notifyDrawingChanged(SkDrawable *drawable);
 SkFlattenable::Type SkDrawable_getFlattenableType(SkDrawable *drawable);
-SkDrawable::Factory SkDrawable_getFactory(SkDrawable *drawable);
+sk_flattenable_factory_t SkDrawable_getFactory(SkDrawable *drawable);
 const char * SkDrawable_getTypeName(SkDrawable *drawable);
 void SkDrawable_flatten(SkDrawable *drawable, SkWriteBuffer *write_buffer);
 sk_data_t SkDrawable_serialize(SkDrawable *drawable, const SkSerialProcs *serial_procs);
@@ -34,9 +35,9 @@ void SkDrawable_unref(SkDrawable *drawable);
 // static
 SkFlattenable::Type SkDrawable_GetFlattenableType();
 sk_drawable_t SkDrawable_Deserialize(const void *data, size_t size, const SkDeserialProcs *procs);
-SkDrawable::Factory SkDrawable_NameToFactory(const char name[]);
-const char * SkDrawable_FactoryToName(SkDrawable::Factory factory);
-void SkDrawable_Register(const char name[], SkDrawable::Factory factory);
+sk_flattenable_factory_t SkDrawable_NameToFactory(const char name[]);
+const char * SkDrawable_FactoryToName(sk_flattenable_factory_t factory);
+void SkDrawable_Register(const char name[], sk_flattenable_factory_t factory);
 }
 
 #endif //RAIA_SKIA_SK_DRAWABLE_H

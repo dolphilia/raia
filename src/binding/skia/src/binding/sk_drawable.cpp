@@ -46,8 +46,8 @@ SkFlattenable::Type SkDrawable_getFlattenableType(SkDrawable *drawable) {
     return drawable->getFlattenableType();
 }
 
-SkDrawable::Factory SkDrawable_getFactory(SkDrawable *drawable) {
-    return drawable->getFactory();
+sk_flattenable_factory_t SkDrawable_getFactory(SkDrawable *drawable) {
+    return static_sk_flattenable_factory_make(drawable->getFactory());
 }
 
 const char * SkDrawable_getTypeName(SkDrawable *drawable) {
@@ -88,16 +88,16 @@ sk_drawable_t SkDrawable_Deserialize(const void *data, size_t size, const SkDese
     return static_sk_drawable_make(SkDrawable::Deserialize(data, size, procs));
 }
 
-SkDrawable::Factory SkDrawable_NameToFactory(const char name[]) {
-    return SkDrawable::NameToFactory(name);
+sk_flattenable_factory_t SkDrawable_NameToFactory(const char name[]) {
+    return static_sk_flattenable_factory_make(SkDrawable::NameToFactory(name));
 }
 
-const char * SkDrawable_FactoryToName(SkDrawable::Factory factory) {
-    return SkDrawable::FactoryToName(factory);
+const char * SkDrawable_FactoryToName(sk_flattenable_factory_t factory) {
+    return SkDrawable::FactoryToName(static_sk_flattenable_factory_get(factory));
 }
 
-void SkDrawable_Register(const char name[], SkDrawable::Factory factory) {
-    SkDrawable::Register(name, factory);
+void SkDrawable_Register(const char name[], sk_flattenable_factory_t factory) {
+    SkDrawable::Register(name, static_sk_flattenable_factory_get(factory));
 }
 
 }

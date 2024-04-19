@@ -10,8 +10,8 @@ void SkBlender_delete(SkBlender *blender) {
     delete blender;
 }
 
-SkBlender::Factory SkBlender_getFactory(SkBlender *blender) {
-    return blender->getFactory();
+sk_flattenable_factory_t SkBlender_getFactory(SkBlender *blender) {
+    return static_sk_flattenable_factory_make(blender->getFactory());
 }
 
 const char *SkBlender_getTypeName(SkBlender *blender) {
@@ -52,16 +52,16 @@ sk_blender_t SkBlender_Mode(SkBlendMode mode) {
     return static_sk_blender_make(SkBlender::Mode(mode));
 }
 
-SkBlender::Factory SkBlender_NameToFactory(const char name[]) {
-    return SkBlender::NameToFactory(name);
+sk_flattenable_factory_t SkBlender_NameToFactory(const char name[]) {
+    return static_sk_flattenable_factory_make(SkBlender::NameToFactory(name));
 }
 
-const char *SkBlender_FactoryToName(SkBlender::Factory factory) {
-    return SkBlender::FactoryToName(factory);
+const char *SkBlender_FactoryToName(sk_flattenable_factory_t factory) {
+    return SkBlender::FactoryToName(static_sk_flattenable_factory_get(factory));
 }
 
-void SkBlender_Register(const char name[], SkBlender::Factory factory) {
-    SkBlender::Register(name, factory);
+void SkBlender_Register(const char name[], sk_flattenable_factory_t factory) {
+    SkBlender::Register(name, static_sk_flattenable_factory_get(factory));
 }
 
 sk_flattenable_t SkBlender_Deserialize(SkBlender::Type type, const void *data, size_t length, const SkDeserialProcs *procs) {

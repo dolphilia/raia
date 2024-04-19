@@ -14,6 +14,8 @@
 #include "../static/static_sk_capabilities.h"
 #include "../static/static_gr_direct_context_direct_context_id.h"
 #include "../static/static_gr_direct_context.h"
+#include "../static/static_std_string_view.h"
+#include "../static/static_std_chrono_milliseconds.h"
 
 extern "C" {
 void GrDirectContext_delete(GrDirectContext *direct_context);
@@ -32,8 +34,8 @@ size_t GrDirectContext_getResourceCachePurgeableBytes(GrDirectContext *direct_co
 void GrDirectContext_setResourceCacheLimits(GrDirectContext *direct_context, int maxResources, size_t maxResourceBytes);
 void GrDirectContext_setResourceCacheLimit(GrDirectContext *direct_context, size_t maxResourceBytes);
 void GrDirectContext_freeGpuResources(GrDirectContext *direct_context);
-void GrDirectContext_performDeferredCleanup(GrDirectContext *direct_context, std::chrono::milliseconds msNotUsed, GrPurgeResourceOptions opts);
-void GrDirectContext_purgeResourcesNotUsedInMs(GrDirectContext *direct_context, std::chrono::milliseconds msNotUsed);
+void GrDirectContext_performDeferredCleanup(GrDirectContext *direct_context, chrono_milliseconds_t msNotUsed, GrPurgeResourceOptions opts);
+void GrDirectContext_purgeResourcesNotUsedInMs(GrDirectContext *direct_context, chrono_milliseconds_t msNotUsed);
 void GrDirectContext_purgeUnlockedResources(GrDirectContext *direct_context, size_t bytesToPurge, bool preferScratchResources);
 void GrDirectContext_purgeUnlockedResources_2(GrDirectContext *direct_context, GrPurgeResourceOptions opts);
 bool GrDirectContext_wait(GrDirectContext *direct_context, int numSemaphores, const GrBackendSemaphore *waitSemaphores, bool deleteSemaphoresAfterWait);
@@ -52,14 +54,14 @@ void GrDirectContext_checkAsyncWorkCompletion(GrDirectContext *direct_context);
 void GrDirectContext_dumpMemoryStatistics(GrDirectContext *direct_context, SkTraceMemoryDump *traceMemoryDump);
 bool GrDirectContext_supportsDistanceFieldText(GrDirectContext *direct_context);
 void GrDirectContext_storeVkPipelineCacheData(GrDirectContext *direct_context);
-gr_backend_texture_t GrDirectContext_createBackendTexture(GrDirectContext *direct_context, int width, int height, const GrBackendFormat *format, skgpu::Mipmapped mipmapped, GrRenderable renderable, GrProtected isProtected, std::string_view label);
-gr_backend_texture_t GrDirectContext_createBackendTexture_2(GrDirectContext *direct_context, int width, int height, SkColorType type, skgpu::Mipmapped mipmapped, GrRenderable renderable, GrProtected isProtected, std::string_view label);
-gr_backend_texture_t GrDirectContext_createBackendTexture_3(GrDirectContext *direct_context, int width, int height, const GrBackendFormat *format, const SkColor4f *color, skgpu::Mipmapped mipmapped, GrRenderable renderable, GrProtected isProtected, GrGpuFinishedProc finishedProc, GrGpuFinishedContext finishedContext, std::string_view label);
-gr_backend_texture_t GrDirectContext_createBackendTexture_4(GrDirectContext *direct_context, int width, int height, SkColorType type, const SkColor4f *color, skgpu::Mipmapped mipmapped, GrRenderable renderable, GrProtected isProtected, GrGpuFinishedProc finishedProc, GrGpuFinishedContext finishedContext, std::string_view label);
-gr_backend_texture_t GrDirectContext_createBackendTexture_5(GrDirectContext *direct_context, const SkPixmap *srcData, int numLevels, GrSurfaceOrigin textureOrigin, GrRenderable renderable, GrProtected isProtected, GrGpuFinishedProc finishedProc, GrGpuFinishedContext finishedContext, std::string_view label);
-gr_backend_texture_t GrDirectContext_createBackendTexture_6(GrDirectContext *direct_context, const SkPixmap *srcData, GrSurfaceOrigin textureOrigin, GrRenderable renderable, GrProtected isProtected, GrGpuFinishedProc finishedProc, GrGpuFinishedContext finishedContext, std::string_view label);
-gr_backend_texture_t GrDirectContext_createBackendTexture_7(GrDirectContext *direct_context, const SkPixmap *srcData, int numLevels, GrRenderable renderable, GrProtected isProtected, GrGpuFinishedProc finishedProc, GrGpuFinishedContext finishedContext, std::string_view label);
-gr_backend_texture_t GrDirectContext_createBackendTexture_8(GrDirectContext *direct_context, const SkPixmap *srcData, GrRenderable renderable, GrProtected isProtected, GrGpuFinishedProc finishedProc, GrGpuFinishedContext finishedContext, std::string_view label);
+gr_backend_texture_t GrDirectContext_createBackendTexture(GrDirectContext *direct_context, int width, int height, const GrBackendFormat *format, skgpu::Mipmapped mipmapped, GrRenderable renderable, GrProtected isProtected, string_view_t label);
+gr_backend_texture_t GrDirectContext_createBackendTexture_2(GrDirectContext *direct_context, int width, int height, SkColorType type, skgpu::Mipmapped mipmapped, GrRenderable renderable, GrProtected isProtected, string_view_t label);
+gr_backend_texture_t GrDirectContext_createBackendTexture_3(GrDirectContext *direct_context, int width, int height, const GrBackendFormat *format, const SkColor4f *color, skgpu::Mipmapped mipmapped, GrRenderable renderable, GrProtected isProtected, GrGpuFinishedProc finishedProc, GrGpuFinishedContext finishedContext, string_view_t label);
+gr_backend_texture_t GrDirectContext_createBackendTexture_4(GrDirectContext *direct_context, int width, int height, SkColorType type, const SkColor4f *color, skgpu::Mipmapped mipmapped, GrRenderable renderable, GrProtected isProtected, GrGpuFinishedProc finishedProc, GrGpuFinishedContext finishedContext, string_view_t label);
+gr_backend_texture_t GrDirectContext_createBackendTexture_5(GrDirectContext *direct_context, const SkPixmap *srcData, int numLevels, GrSurfaceOrigin textureOrigin, GrRenderable renderable, GrProtected isProtected, GrGpuFinishedProc finishedProc, GrGpuFinishedContext finishedContext, string_view_t label);
+gr_backend_texture_t GrDirectContext_createBackendTexture_6(GrDirectContext *direct_context, const SkPixmap *srcData, GrSurfaceOrigin textureOrigin, GrRenderable renderable, GrProtected isProtected, GrGpuFinishedProc finishedProc, GrGpuFinishedContext finishedContext, string_view_t label);
+gr_backend_texture_t GrDirectContext_createBackendTexture_7(GrDirectContext *direct_context, const SkPixmap *srcData, int numLevels, GrRenderable renderable, GrProtected isProtected, GrGpuFinishedProc finishedProc, GrGpuFinishedContext finishedContext, string_view_t label);
+gr_backend_texture_t GrDirectContext_createBackendTexture_8(GrDirectContext *direct_context, const SkPixmap *srcData, GrRenderable renderable, GrProtected isProtected, GrGpuFinishedProc finishedProc, GrGpuFinishedContext finishedContext, string_view_t label);
 bool GrDirectContext_updateBackendTexture(GrDirectContext *direct_context, const GrBackendTexture *texture, const SkColor4f *color, GrGpuFinishedProc finishedProc, GrGpuFinishedContext finishedContext);
 bool GrDirectContext_updateBackendTexture_2(GrDirectContext *direct_context, const GrBackendTexture *texture, SkColorType skColorType, const SkColor4f *color, GrGpuFinishedProc finishedProc, GrGpuFinishedContext finishedContext);
 bool GrDirectContext_updateBackendTexture_3(GrDirectContext *direct_context, const GrBackendTexture *texture, const SkPixmap *srcData, int numLevels, GrSurfaceOrigin textureOrigin, GrGpuFinishedProc finishedProc, GrGpuFinishedContext finishedContext);

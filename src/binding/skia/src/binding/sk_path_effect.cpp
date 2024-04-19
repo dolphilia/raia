@@ -26,8 +26,8 @@ bool SkPathEffect_needsCTM(SkPathEffect *path_effect) {
     return path_effect->needsCTM();
 }
 
-SkPathEffect::Factory SkPathEffect_getFactory(SkPathEffect *path_effect) {
-    return path_effect->getFactory();
+sk_flattenable_factory_t SkPathEffect_getFactory(SkPathEffect *path_effect) {
+    return static_sk_flattenable_factory_make(path_effect->getFactory());
 }
 
 const char * SkPathEffect_getTypeName(SkPathEffect *path_effect) {
@@ -80,16 +80,16 @@ sk_path_effect_t SkPathEffect_Deserialize(const void *data, size_t size, const S
     return static_sk_path_effect_make(SkPathEffect::Deserialize(data, size, procs));
 }
 
-SkPathEffect::Factory SkPathEffect_NameToFactory(const char name[]) {
-    return SkPathEffect::NameToFactory(name);
+sk_flattenable_factory_t SkPathEffect_NameToFactory(const char name[]) {
+    return static_sk_flattenable_factory_make(SkPathEffect::NameToFactory(name));
 }
 
-const char * SkPathEffect_FactoryToName(SkPathEffect::Factory factory) {
-    return SkPathEffect::FactoryToName(factory);
+const char * SkPathEffect_FactoryToName(sk_flattenable_factory_t factory) {
+    return SkPathEffect::FactoryToName(static_sk_flattenable_factory_get(factory));
 }
 
-void SkPathEffect_Register(const char name[], SkPathEffect::Factory factory) {
-    SkPathEffect::Register(name, factory);
+void SkPathEffect_Register(const char name[], sk_flattenable_factory_t factory) {
+    SkPathEffect::Register(name, static_sk_flattenable_factory_get(factory));
 }
 
 }

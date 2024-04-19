@@ -22,8 +22,8 @@ sk_image_t SkImages_DeferredFromGenerator(sk_image_generator_t image_generator) 
     return static_sk_image_make(SkImages::DeferredFromGenerator(static_sk_image_generator_move(image_generator)));
 }
 
-sk_image_t SkImages_DeferredFromPicture(sk_picture_t picture, const SkISize *dimensions, const SkMatrix *matrix, const SkPaint *paint, SkImages::BitDepth bitDepth, sk_color_space_t color_space, SkSurfaceProps props) {
-    return static_sk_image_make(SkImages::DeferredFromPicture(static_sk_picture_move(picture), *dimensions, matrix, paint, bitDepth, static_sk_color_space_move(color_space), props));
+sk_image_t SkImages_DeferredFromPicture(sk_picture_t picture, const SkISize *dimensions, const SkMatrix *matrix, const SkPaint *paint, SkImages::BitDepth bitDepth, sk_color_space_t color_space, sk_surface_props_t props) {
+    return static_sk_image_make(SkImages::DeferredFromPicture(static_sk_picture_move(picture), *dimensions, matrix, paint, bitDepth, static_sk_color_space_move(color_space), static_sk_surface_props_get(props)));
 }
 
 sk_image_t SkImages_DeferredFromPicture_2(sk_picture_t picture, const SkISize *dimensions, const SkMatrix *matrix, const SkPaint *paint, SkImages::BitDepth bitDepth, sk_color_space_t color_space) {

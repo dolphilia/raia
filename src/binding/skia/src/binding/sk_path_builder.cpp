@@ -57,24 +57,24 @@ SkPathBuilder * SkPathBuilder_reset(SkPathBuilder *path_builder) {
     return &path_builder->reset();
 }
 
-SkPathBuilder * SkPathBuilder_moveTo(SkPathBuilder *path_builder, SkPoint pt) {
-    return &path_builder->moveTo(pt);
+SkPathBuilder * SkPathBuilder_moveTo(SkPathBuilder *path_builder, sk_point_t pt) {
+    return &path_builder->moveTo(static_sk_point_get(pt));
 }
 
 SkPathBuilder * SkPathBuilder_moveTo_2(SkPathBuilder *path_builder, SkScalar x, SkScalar y) {
     return &path_builder->moveTo(x, y);
 }
 
-SkPathBuilder * SkPathBuilder_lineTo(SkPathBuilder *path_builder, SkPoint pt) {
-    return &path_builder->lineTo(pt);
+SkPathBuilder * SkPathBuilder_lineTo(SkPathBuilder *path_builder, sk_point_t pt) {
+    return &path_builder->lineTo(static_sk_point_get(pt));
 }
 
 SkPathBuilder * SkPathBuilder_lineTo_2(SkPathBuilder *path_builder, SkScalar x, SkScalar y) {
     return &path_builder->lineTo(x, y);
 }
 
-SkPathBuilder * SkPathBuilder_quadTo(SkPathBuilder *path_builder, SkPoint pt1, SkPoint pt2) {
-    return &path_builder->quadTo(pt1, pt2);
+SkPathBuilder * SkPathBuilder_quadTo(SkPathBuilder *path_builder, sk_point_t pt1, sk_point_t pt2) {
+    return &path_builder->quadTo(static_sk_point_get(pt1), static_sk_point_get(pt2));
 }
 
 SkPathBuilder * SkPathBuilder_quadTo_2(SkPathBuilder *path_builder, SkScalar x1, SkScalar y1, SkScalar x2, SkScalar y2) {
@@ -85,8 +85,8 @@ SkPathBuilder * SkPathBuilder_quadTo_3(SkPathBuilder *path_builder, const SkPoin
     return &path_builder->quadTo(pts);
 }
 
-SkPathBuilder * SkPathBuilder_conicTo(SkPathBuilder *path_builder, SkPoint pt1, SkPoint pt2, SkScalar w) {
-    return &path_builder->conicTo(pt1, pt2, w);
+SkPathBuilder * SkPathBuilder_conicTo(SkPathBuilder *path_builder, sk_point_t pt1, sk_point_t pt2, SkScalar w) {
+    return &path_builder->conicTo(static_sk_point_get(pt1), static_sk_point_get(pt2), w);
 }
 
 SkPathBuilder * SkPathBuilder_conicTo_2(SkPathBuilder *path_builder, SkScalar x1, SkScalar y1, SkScalar x2, SkScalar y2, SkScalar w) {
@@ -97,8 +97,8 @@ SkPathBuilder * SkPathBuilder_conicTo_3(SkPathBuilder *path_builder, const SkPoi
     return &path_builder->conicTo(pts, w);
 }
 
-SkPathBuilder * SkPathBuilder_cubicTo(SkPathBuilder *path_builder, SkPoint pt1, SkPoint pt2, SkPoint pt3) {
-    return &path_builder->cubicTo(pt1, pt2, pt3);
+SkPathBuilder * SkPathBuilder_cubicTo(SkPathBuilder *path_builder, sk_point_t pt1, sk_point_t pt2, sk_point_t pt3) {
+    return &path_builder->cubicTo(static_sk_point_get(pt1), static_sk_point_get(pt2), static_sk_point_get(pt3));
 }
 
 SkPathBuilder * SkPathBuilder_cubicTo_2(SkPathBuilder *path_builder, SkScalar x1, SkScalar y1, SkScalar x2, SkScalar y2, SkScalar x3, SkScalar y3) {
@@ -121,32 +121,32 @@ SkPathBuilder * SkPathBuilder_polylineTo_2(SkPathBuilder *path_builder, const st
     return &path_builder->polylineTo(*list);
 }
 
-SkPathBuilder * SkPathBuilder_rLineTo(SkPathBuilder *path_builder, SkPoint pt) {
-    return &path_builder->rLineTo(pt);
+SkPathBuilder * SkPathBuilder_rLineTo(SkPathBuilder *path_builder, sk_point_t pt) {
+    return &path_builder->rLineTo(static_sk_point_get(pt));
 }
 
 SkPathBuilder * SkPathBuilder_rLineTo_2(SkPathBuilder *path_builder, SkScalar x, SkScalar y) {
     return &path_builder->rLineTo(x, y);
 }
 
-SkPathBuilder * SkPathBuilder_rQuadTo(SkPathBuilder *path_builder, SkPoint pt1, SkPoint pt2) {
-    return &path_builder->rQuadTo(pt1, pt2);
+SkPathBuilder * SkPathBuilder_rQuadTo(SkPathBuilder *path_builder, sk_point_t pt1, sk_point_t pt2) {
+    return &path_builder->rQuadTo(static_sk_point_get(pt1), static_sk_point_get(pt2));
 }
 
 SkPathBuilder * SkPathBuilder_rQuadTo_2(SkPathBuilder *path_builder, SkScalar x1, SkScalar y1, SkScalar x2, SkScalar y2) {
     return &path_builder->rQuadTo(x1, y1, x2, y2);
 }
 
-SkPathBuilder * SkPathBuilder_rConicTo(SkPathBuilder *path_builder, SkPoint p1, SkPoint p2, SkScalar w) {
-    return &path_builder->rConicTo(p1, p2, w);
+SkPathBuilder * SkPathBuilder_rConicTo(SkPathBuilder *path_builder, sk_point_t p1, sk_point_t p2, SkScalar w) {
+    return &path_builder->rConicTo(static_sk_point_get(p1), static_sk_point_get(p2), w);
 }
 
 SkPathBuilder * SkPathBuilder_rConicTo_2(SkPathBuilder *path_builder, SkScalar x1, SkScalar y1, SkScalar x2, SkScalar y2, SkScalar w) {
     return &path_builder->rConicTo(x1, y1, x2, y2, w);
 }
 
-SkPathBuilder * SkPathBuilder_rCubicTo(SkPathBuilder *path_builder, SkPoint pt1, SkPoint pt2, SkPoint pt3) {
-    return &path_builder->rCubicTo(pt1, pt2, pt3);
+SkPathBuilder * SkPathBuilder_rCubicTo(SkPathBuilder *path_builder, sk_point_t pt1, sk_point_t pt2, sk_point_t pt3) {
+    return &path_builder->rCubicTo(static_sk_point_get(pt1), static_sk_point_get(pt2), static_sk_point_get(pt3));
 }
 
 SkPathBuilder * SkPathBuilder_rCubicTo_2(SkPathBuilder *path_builder, SkScalar x1, SkScalar y1, SkScalar x2, SkScalar y2, SkScalar x3, SkScalar y3) {
@@ -157,12 +157,12 @@ SkPathBuilder * SkPathBuilder_arcTo(SkPathBuilder *path_builder, const SkRect *o
     return &path_builder->arcTo(*oval, startAngleDeg, sweepAngleDeg, forceMoveTo);
 }
 
-SkPathBuilder * SkPathBuilder_arcTo_2(SkPathBuilder *path_builder, SkPoint p1, SkPoint p2, SkScalar radius) {
-    return &path_builder->arcTo(p1, p2, radius);
+SkPathBuilder * SkPathBuilder_arcTo_2(SkPathBuilder *path_builder, sk_point_t p1, sk_point_t p2, SkScalar radius) {
+    return &path_builder->arcTo(static_sk_point_get(p1), static_sk_point_get(p2), radius);
 }
 
-SkPathBuilder * SkPathBuilder_arcTo_3(SkPathBuilder *path_builder, SkPoint r, SkScalar xAxisRotate, SkPathBuilder::ArcSize largeArc, SkPathDirection sweep, SkPoint xy) {
-    return &path_builder->arcTo(r, xAxisRotate, largeArc, sweep, xy);
+SkPathBuilder * SkPathBuilder_arcTo_3(SkPathBuilder *path_builder, sk_point_t r, SkScalar xAxisRotate, SkPathBuilder::ArcSize largeArc, SkPathDirection sweep, sk_point_t xy) {
+    return &path_builder->arcTo(static_sk_point_get(r), xAxisRotate, largeArc, sweep, static_sk_point_get(xy));
 }
 
 SkPathBuilder * SkPathBuilder_addArc(SkPathBuilder *path_builder, const SkRect *oval, SkScalar startAngleDeg, SkScalar sweepAngleDeg) {

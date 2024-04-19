@@ -25,12 +25,12 @@ const SkRuntimeEffect * SkRuntimeBlendBuilder_effect(SkRuntimeBlendBuilder *runt
     return runtime_blend_builder->effect();
 }
 
-SkRuntimeBlendBuilder::BuilderUniform SkRuntimeBlendBuilder_uniform(SkRuntimeBlendBuilder *runtime_blend_builder, std::string_view name) {
-    return runtime_blend_builder->uniform(name);
+sk_runtime_effect_builder_builder_uniform_t SkRuntimeBlendBuilder_uniform(SkRuntimeBlendBuilder *runtime_blend_builder, string_view_t name) {
+    return static_sk_runtime_effect_builder_builder_uniform_make(runtime_blend_builder->uniform(static_string_view_get(name)));
 }
 
-SkRuntimeBlendBuilder::BuilderChild SkRuntimeBlendBuilder_child(SkRuntimeBlendBuilder *runtime_blend_builder, std::string_view name) {
-    return runtime_blend_builder->child(name);
+sk_runtime_effect_builder_builder_child_t SkRuntimeBlendBuilder_child(SkRuntimeBlendBuilder *runtime_blend_builder, string_view_t name) {
+    return static_sk_runtime_effect_builder_builder_child_make(runtime_blend_builder->child(static_string_view_get(name)));
 }
 
 const_sk_data_t SkRuntimeBlendBuilder_uniforms(SkRuntimeBlendBuilder *runtime_blend_builder) {

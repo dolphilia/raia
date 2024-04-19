@@ -10,12 +10,12 @@ void SkCubicResampler_delete(SkCubicResampler *cubicResampler) {
     delete cubicResampler;
 }
 
-SkCubicResampler SkCubicResampler_Mitchell() {
-    return SkCubicResampler::Mitchell();
+sk_cubic_resampler_t SkCubicResampler_Mitchell() {
+    return static_sk_cubic_resampler_make(SkCubicResampler::Mitchell());
 }
 
-SkCubicResampler SkCubicResampler_CatmullRom() {
-    return SkCubicResampler::CatmullRom();
+sk_cubic_resampler_t SkCubicResampler_CatmullRom() {
+    return static_sk_cubic_resampler_make(SkCubicResampler::CatmullRom());
 }
 
 }

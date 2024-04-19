@@ -39,8 +39,8 @@ SkString *SkString_new_6(const std::string *str) {
     return new SkString(*str);
 }
 
-SkString *SkString_new_7(std::string_view view) {
-    return new SkString(view);
+SkString *SkString_new_7(string_view_t view) {
+    return new SkString(static_string_view_get(view));
 }
 
 void SkString_delete(SkString *string) {
@@ -130,8 +130,8 @@ void SkString_set_3(SkString *string, const char text[], size_t len) {
     string->set(text, len);
 }
 
-void SkString_set_4(SkString *string, std::string_view str) {
-    string->set(str);
+void SkString_set_4(SkString *string, string_view_t str) {
+    string->set(static_string_view_get(str));
 }
 
 void SkString_insert(SkString *string, size_t offset, const char text[]) {
@@ -146,8 +146,8 @@ void SkString_insert_3(SkString *string, size_t offset, const SkString *str) {
     string->insert(offset, *str);
 }
 
-void SkString_insert_4(SkString *string, size_t offset, std::string_view str) {
-    string->insert(offset, str);
+void SkString_insert_4(SkString *string, size_t offset, string_view_t str) {
+    string->insert(offset, static_string_view_get(str));
 }
 
 void SkString_insertUnichar(SkString *string, size_t offset, SkUnichar unichar) {
@@ -190,8 +190,8 @@ void SkString_append_3(SkString *string, const SkString *str) {
     string->append(*str);
 }
 
-void SkString_append_4(SkString *string, std::string_view str) {
-    string->append(str);
+void SkString_append_4(SkString *string, string_view_t str) {
+    string->append(static_string_view_get(str));
 }
 
 void SkString_appendUnichar(SkString *string, SkUnichar uni) {
@@ -234,8 +234,8 @@ void SkString_prepend_3(SkString *string, const SkString *str) {
     string->prepend(*str);
 }
 
-void SkString_prepend_4(SkString *string, std::string_view str) {
-    string->prepend(str);
+void SkString_prepend_4(SkString *string, string_view_t str) {
+    string->prepend(static_string_view_get(str));
 }
 
 void SkString_prependUnichar(SkString *string, SkUnichar uni) {

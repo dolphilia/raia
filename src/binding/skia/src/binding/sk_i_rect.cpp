@@ -34,8 +34,8 @@ int32_t SkIRect_y(SkIRect *i_rect) {
     return i_rect->y();
 }
 
-SkIPoint SkIRect_topLeft(SkIRect *i_rect) {
-    return i_rect->topLeft();
+sk_i_point_t SkIRect_topLeft(SkIRect *i_rect) {
+    return static_sk_i_point_make(i_rect->topLeft());
 }
 
 int32_t SkIRect_width(SkIRect *i_rect) {
@@ -46,8 +46,8 @@ int32_t SkIRect_height(SkIRect *i_rect) {
     return i_rect->height();
 }
 
-SkISize SkIRect_size(SkIRect *i_rect) {
-    return i_rect->size();
+sk_i_size_t SkIRect_size(SkIRect *i_rect) {
+    return static_sk_i_size_make(i_rect->size());
 }
 
 int64_t SkIRect_width64(SkIRect *i_rect) {
@@ -82,16 +82,16 @@ void SkIRect_setWH(SkIRect *i_rect, int32_t width, int32_t height) {
     i_rect->setWH(width, height);
 }
 
-void SkIRect_setSize(SkIRect *i_rect, SkISize size) {
-    i_rect->setSize(size);
+void SkIRect_setSize(SkIRect *i_rect, sk_i_size_t size) {
+    i_rect->setSize(static_sk_i_size_get(size));
 }
 
 sk_i_rect_t SkIRect_makeOffset(SkIRect *i_rect, int32_t dx, int32_t dy) {
     return static_sk_i_rect_make(i_rect->makeOffset(dx, dy));
 }
 
-sk_i_rect_t SkIRect_makeOffset_2(SkIRect *i_rect, SkIVector offset) {
-    return static_sk_i_rect_make(i_rect->makeOffset(offset));
+sk_i_rect_t SkIRect_makeOffset_2(SkIRect *i_rect, sk_i_point_t offset) {
+    return static_sk_i_rect_make(i_rect->makeOffset(static_sk_i_point_get(offset)));
 }
 
 sk_i_rect_t SkIRect_makeInset(SkIRect *i_rect, int32_t dx, int32_t dy) {
@@ -176,8 +176,8 @@ sk_i_rect_t SkIRect_MakeSize(const SkISize *size) {
     return static_sk_i_rect_make(SkIRect::MakeSize(*size));
 }
 
-sk_i_rect_t SkIRect_MakePtSize(SkIPoint pt, SkISize size) {
-    return static_sk_i_rect_make(SkIRect::MakePtSize(pt, size));
+sk_i_rect_t SkIRect_MakePtSize(sk_i_point_t pt, sk_i_size_t size) {
+    return static_sk_i_rect_make(SkIRect::MakePtSize(static_sk_i_point_get(pt), static_sk_i_size_get(size)));
 }
 
 sk_i_rect_t SkIRect_MakeLTRB(int32_t l, int32_t t, int32_t r, int32_t b) {

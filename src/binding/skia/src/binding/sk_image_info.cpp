@@ -53,8 +53,8 @@ bool SkImageInfo_isOpaque(SkImageInfo *image_info) {
     return image_info->isOpaque();
 }
 
-SkISize SkImageInfo_dimensions(SkImageInfo *image_info) {
-    return image_info->dimensions();
+sk_i_size_t SkImageInfo_dimensions(SkImageInfo *image_info) {
+    return static_sk_i_size_make(image_info->dimensions());
 }
 
 sk_i_rect_t SkImageInfo_bounds(SkImageInfo *image_info) {
@@ -69,8 +69,8 @@ sk_image_info_t SkImageInfo_makeWH(SkImageInfo *image_info, int newWidth, int ne
     return static_sk_image_info_make(image_info->makeWH(newWidth, newHeight));
 }
 
-sk_image_info_t SkImageInfo_makeDimensions(SkImageInfo *image_info, SkISize newSize) {
-    return static_sk_image_info_make(image_info->makeDimensions(newSize));
+sk_image_info_t SkImageInfo_makeDimensions(SkImageInfo *image_info, sk_i_size_t newSize) {
+    return static_sk_image_info_make(image_info->makeDimensions(static_sk_i_size_get(newSize)));
 }
 
 sk_image_info_t SkImageInfo_makeAlphaType(SkImageInfo *image_info, SkAlphaType newAlphaType) {
@@ -131,16 +131,16 @@ sk_image_info_t SkImageInfo_Make_2(int width, int height, SkColorType ct, SkAlph
     return static_sk_image_info_make(SkImageInfo::Make(width, height, ct, at, static_sk_color_space_move(color_space)));
 }
 
-sk_image_info_t SkImageInfo_Make_3(SkISize dimensions, SkColorType ct, SkAlphaType at) {
-    return static_sk_image_info_make(SkImageInfo::Make(dimensions, ct, at));
+sk_image_info_t SkImageInfo_Make_3(sk_i_size_t dimensions, SkColorType ct, SkAlphaType at) {
+    return static_sk_image_info_make(SkImageInfo::Make(static_sk_i_size_get(dimensions), ct, at));
 }
 
-sk_image_info_t SkImageInfo_Make_4(SkISize dimensions, SkColorType ct, SkAlphaType at, sk_color_space_t color_space) {
-    return static_sk_image_info_make(SkImageInfo::Make(dimensions, ct, at, static_sk_color_space_move(color_space)));
+sk_image_info_t SkImageInfo_Make_4(sk_i_size_t dimensions, SkColorType ct, SkAlphaType at, sk_color_space_t color_space) {
+    return static_sk_image_info_make(SkImageInfo::Make(static_sk_i_size_get(dimensions), ct, at, static_sk_color_space_move(color_space)));
 }
 
-sk_image_info_t SkImageInfo_Make_5(SkISize dimensions, const SkColorInfo *colorInfo) {
-    return static_sk_image_info_make(SkImageInfo::Make(dimensions, *colorInfo));
+sk_image_info_t SkImageInfo_Make_5(sk_i_size_t dimensions, const SkColorInfo *colorInfo) {
+    return static_sk_image_info_make(SkImageInfo::Make(static_sk_i_size_get(dimensions), *colorInfo));
 }
 
 
@@ -164,20 +164,20 @@ sk_image_info_t SkImageInfo_MakeN32Premul_2(int width, int height, sk_color_spac
     return static_sk_image_info_make(SkImageInfo::MakeN32Premul(width, height, static_sk_color_space_move(color_space)));
 }
 
-sk_image_info_t SkImageInfo_MakeN32Premul_3(SkISize dimensions) {
-    return static_sk_image_info_make(SkImageInfo::MakeN32Premul(dimensions));
+sk_image_info_t SkImageInfo_MakeN32Premul_3(sk_i_size_t dimensions) {
+    return static_sk_image_info_make(SkImageInfo::MakeN32Premul(static_sk_i_size_get(dimensions)));
 }
 
-sk_image_info_t SkImageInfo_MakeN32Premul_4(SkISize dimensions, sk_color_space_t color_space) {
-    return static_sk_image_info_make(SkImageInfo::MakeN32Premul(dimensions, static_sk_color_space_move(color_space)));
+sk_image_info_t SkImageInfo_MakeN32Premul_4(sk_i_size_t dimensions, sk_color_space_t color_space) {
+    return static_sk_image_info_make(SkImageInfo::MakeN32Premul(static_sk_i_size_get(dimensions), static_sk_color_space_move(color_space)));
 }
 
 sk_image_info_t SkImageInfo_MakeA8(int width, int height) {
     return static_sk_image_info_make(SkImageInfo::MakeA8(width, height));
 }
 
-sk_image_info_t SkImageInfo_MakeA8_2(SkISize dimensions) {
-    return static_sk_image_info_make(SkImageInfo::MakeA8(dimensions));
+sk_image_info_t SkImageInfo_MakeA8_2(sk_i_size_t dimensions) {
+    return static_sk_image_info_make(SkImageInfo::MakeA8(static_sk_i_size_get(dimensions)));
 }
 
 sk_image_info_t SkImageInfo_MakeUnknown(int width, int height) {

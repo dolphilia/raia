@@ -52,12 +52,12 @@ void SkM44_setRC(SkM44 *m44, int r, int c, SkScalar value) {
     m44->setRC(r, c, value);
 }
 
-SkV4 SkM44_row(SkM44 *m44, int i) {
-    return m44->row(i);
+sk_v4_t SkM44_row(SkM44 *m44, int i) {
+    return static_sk_v4_make(m44->row(i));
 }
 
-SkV4 SkM44_col(SkM44 *m44, int i) {
-    return m44->col(i);
+sk_v4_t SkM44_col(SkM44 *m44, int i) {
+    return static_sk_v4_make(m44->col(i));
 }
 
 void SkM44_setRow(SkM44 *m44, int i, const SkV4 *v) {
@@ -80,16 +80,16 @@ sk_m_44_t SkM44_setScale(SkM44 *m44, SkScalar x, SkScalar y, SkScalar z) {
     return static_sk_m_44_make(m44->setScale(x, y, z));
 }
 
-sk_m_44_t SkM44_setRotateUnitSinCos(SkM44 *m44, SkV3 axis, SkScalar sinAngle, SkScalar cosAngle) {
-    return static_sk_m_44_make(m44->setRotateUnitSinCos(axis, sinAngle, cosAngle));
+sk_m_44_t SkM44_setRotateUnitSinCos(SkM44 *m44, sk_v3_t axis, SkScalar sinAngle, SkScalar cosAngle) {
+    return static_sk_m_44_make(m44->setRotateUnitSinCos(static_sk_v3_get(axis), sinAngle, cosAngle));
 }
 
-sk_m_44_t SkM44_setRotateUnit(SkM44 *m44, SkV3 axis, SkScalar radians) {
-    return static_sk_m_44_make(m44->setRotateUnit(axis, radians));
+sk_m_44_t SkM44_setRotateUnit(SkM44 *m44, sk_v3_t axis, SkScalar radians) {
+    return static_sk_m_44_make(m44->setRotateUnit(static_sk_v3_get(axis), radians));
 }
 
-sk_m_44_t SkM44_setRotate(SkM44 *m44, SkV3 axis, SkScalar radians) {
-    return static_sk_m_44_make(m44->setRotate(axis, radians));
+sk_m_44_t SkM44_setRotate(SkM44 *m44, sk_v3_t axis, SkScalar radians) {
+    return static_sk_m_44_make(m44->setRotate(static_sk_v3_get(axis), radians));
 }
 
 sk_m_44_t SkM44_setConcat(SkM44 *m44, const SkM44 *a, const SkM44 *b) {
@@ -128,8 +128,8 @@ void SkM44_dump(SkM44 *m44) {
     m44->dump();
 }
 
-SkV4 SkM44_map(SkM44 *m44, float x, float y, float z, float w) {
-    return m44->map(x, y, z, w);
+sk_v4_t SkM44_map(SkM44 *m44, float x, float y, float z, float w) {
+    return static_sk_v4_make(m44->map(x, y, z, w));
 }
 
 sk_matrix_t SkM44_asM33(SkM44 *m44) {
@@ -178,8 +178,8 @@ sk_m_44_t SkM44_Scale(SkScalar x, SkScalar y, SkScalar z) {
     return static_sk_m_44_make(SkM44::Scale(x, y, z));
 }
 
-sk_m_44_t SkM44_Rotate(SkV3 axis, SkScalar radians) {
-    return static_sk_m_44_make(SkM44::Rotate(axis, radians));
+sk_m_44_t SkM44_Rotate(sk_v3_t axis, SkScalar radians) {
+    return static_sk_m_44_make(SkM44::Rotate(static_sk_v3_get(axis), radians));
 }
 
 sk_m_44_t SkM44_RectToRect(const SkRect *src, const SkRect *dst) {

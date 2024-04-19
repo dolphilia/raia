@@ -14,12 +14,12 @@ const SkRuntimeEffect * SkRuntimeEffectBuilder_effect(SkRuntimeEffectBuilder *ru
     return runtime_effect_builder->effect();
 }
 
-SkRuntimeEffectBuilder::BuilderUniform SkRuntimeEffectBuilder_uniform(SkRuntimeEffectBuilder *runtime_effect_builder, std::string_view name) {
-    return runtime_effect_builder->uniform(name);
+sk_runtime_effect_builder_builder_uniform_t SkRuntimeEffectBuilder_uniform(SkRuntimeEffectBuilder *runtime_effect_builder, string_view_t name) {
+    return static_sk_runtime_effect_builder_builder_uniform_make(runtime_effect_builder->uniform(static_string_view_get(name)));
 }
 
-SkRuntimeEffectBuilder::BuilderChild SkRuntimeEffectBuilder_child(SkRuntimeEffectBuilder *runtime_effect_builder, std::string_view name) {
-    return runtime_effect_builder->child(name);
+sk_runtime_effect_builder_builder_child_t SkRuntimeEffectBuilder_child(SkRuntimeEffectBuilder *runtime_effect_builder, string_view_t name) {
+    return static_sk_runtime_effect_builder_builder_child_make(runtime_effect_builder->child(static_string_view_get(name)));
 }
 
 const_sk_data_t SkRuntimeEffectBuilder_uniforms(SkRuntimeEffectBuilder *runtime_effect_builder) {

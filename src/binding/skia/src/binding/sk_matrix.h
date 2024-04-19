@@ -8,6 +8,8 @@
 #include "include/core/SkMatrix.h"
 #include "../static/static_sk_matrix.h"
 #include "../static/static_sk_rect.h"
+#include "../static/static_sk_point.h"
+#include "../static/static_sk_i_point.h"
 
 extern "C" {
 // SkScalar operator[](int index)
@@ -85,14 +87,14 @@ void SkMatrix_mapPoints(SkMatrix *matrix, SkPoint dst[], const SkPoint src[], in
 void SkMatrix_mapPoints_2(SkMatrix *matrix, SkPoint pts[], int count);
 void SkMatrix_mapHomogeneousPoints(SkMatrix *matrix, SkPoint3 dst[], const SkPoint3 src[], int count);
 void SkMatrix_mapHomogeneousPoints_2(SkMatrix *matrix, SkPoint3 dst[], const SkPoint src[], int count);
-SkPoint SkMatrix_mapPoint(SkMatrix *matrix, SkPoint pt);
+sk_point_t SkMatrix_mapPoint(SkMatrix *matrix, sk_point_t pt);
 void SkMatrix_mapXY(SkMatrix *matrix, SkScalar x, SkScalar y, SkPoint *result);
-SkPoint SkMatrix_mapXY_2(SkMatrix *matrix, SkScalar x, SkScalar y);
-SkPoint SkMatrix_mapOrigin(SkMatrix *matrix);
+sk_point_t SkMatrix_mapXY_2(SkMatrix *matrix, SkScalar x, SkScalar y);
+sk_point_t SkMatrix_mapOrigin(SkMatrix *matrix);
 void SkMatrix_mapVectors(SkMatrix *matrix, SkVector dst[], const SkVector src[], int count);
 void SkMatrix_mapVectors_2(SkMatrix *matrix, SkVector vecs[], int count);
 void SkMatrix_mapVector(SkMatrix *matrix, SkScalar dx, SkScalar dy, SkVector *result);
-SkVector SkMatrix_mapVector_2(SkMatrix *matrix, SkScalar dx, SkScalar dy);
+sk_point_t SkMatrix_mapVector_2(SkMatrix *matrix, SkScalar dx, SkScalar dy);
 bool SkMatrix_mapRect(SkMatrix *matrix, SkRect *dst, const SkRect *src, SkApplyPerspectiveClip pc);
 bool SkMatrix_mapRect_2(SkMatrix *matrix, SkRect *rect, SkApplyPerspectiveClip pc);
 sk_matrix_t SkMatrix_mapRect_3(SkMatrix *matrix, const SkRect *src, SkApplyPerspectiveClip pc);
@@ -110,10 +112,10 @@ bool SkMatrix_isFinite(SkMatrix *matrix);
 // static
 sk_matrix_t SkMatrix_Scale(SkScalar sx, SkScalar sy);
 sk_matrix_t SkMatrix_Translate(SkScalar dx, SkScalar dy);
-sk_matrix_t SkMatrix_Translate_2(SkVector t);
-sk_matrix_t SkMatrix_Translate_3(SkIVector t);
+sk_matrix_t SkMatrix_Translate_2(sk_point_t t);
+sk_matrix_t SkMatrix_Translate_3(sk_i_point_t t);
 sk_matrix_t SkMatrix_RotateDeg(SkScalar deg);
-sk_matrix_t SkMatrix_RotateDeg_2(SkScalar deg, SkPoint pt);
+sk_matrix_t SkMatrix_RotateDeg_2(SkScalar deg, sk_point_t pt);
 sk_matrix_t SkMatrix_RotateRad(SkScalar rad);
 sk_matrix_t SkMatrix_Skew(SkScalar kx, SkScalar ky);
 sk_matrix_t SkMatrix_RectToRect(const SkRect *src, const SkRect *dst, SkMatrix::ScaleToFit mode);

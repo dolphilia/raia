@@ -30,16 +30,16 @@ SkScalar SkV2_length(SkV2 *v2) {
     return v2->length();
 }
 
-SkScalar SkV2_dot(SkV2 *v2, SkV2 v) {
-    return v2->dot(v);
+SkScalar SkV2_dot(SkV2 *v2, sk_v2_t v) {
+    return v2->dot(static_sk_v2_get(v));
 }
 
-SkScalar SkV2_cross(SkV2 *v2, SkV2 v) {
-    return v2->cross(v);
+SkScalar SkV2_cross(SkV2 *v2, sk_v2_t v) {
+    return v2->cross(static_sk_v2_get(v));
 }
 
-SkV2 SkV2_normalize(SkV2 *v2) {
-    return v2->normalize();
+sk_v2_t SkV2_normalize(SkV2 *v2) {
+    return static_sk_v2_make(v2->normalize());
 }
 
 const float * SkV2_ptr(SkV2 *v2) {
@@ -52,16 +52,16 @@ float * SkV2_ptr_2(SkV2 *v2) {
 
 // static
 
-SkScalar SkV2_Dot(SkV2 a, SkV2 b) {
-    return SkV2::Dot(a, b);
+SkScalar SkV2_Dot(sk_v2_t a, sk_v2_t b) {
+    return SkV2::Dot(static_sk_v2_get(a), static_sk_v2_get(b));
 }
 
-SkScalar SkV2_Cross(SkV2 a, SkV2 b) {
-    return SkV2::Cross(a, b);
+SkScalar SkV2_Cross(sk_v2_t a, sk_v2_t b) {
+    return SkV2::Cross(static_sk_v2_get(a), static_sk_v2_get(b));
 }
 
-SkV2 SkV2_Normalize(SkV2 v) {
-    return SkV2::Normalize(v);
+sk_v2_t SkV2_Normalize(sk_v2_t v) {
+    return static_sk_v2_make(SkV2::Normalize(static_sk_v2_get(v)));
 }
 
 }

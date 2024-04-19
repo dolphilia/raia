@@ -72,8 +72,8 @@ sk_picture_t SkPicture_MakeFromData_2(const void *data, size_t size, const SkDes
     return static_sk_picture_make(SkPicture::MakeFromData(data, size, procs));
 }
 
-sk_picture_t SkPicture_MakePlaceholder(SkRect cull) {
-    return static_sk_picture_make(SkPicture::MakePlaceholder(cull));
+sk_picture_t SkPicture_MakePlaceholder(sk_rect_t cull) {
+    return static_sk_picture_make(SkPicture::MakePlaceholder(static_sk_rect_get(cull)));
 }
 
 }

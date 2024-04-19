@@ -14,8 +14,8 @@ sk_shader_t SkShaders_Color(SkColor color) {
     return static_sk_shader_make(SkShaders::Color(color));
 }
 
-sk_shader_t SkShaders_Color_2(const SkColor4f &color4f, sk_color_space_t color_space) {
-    return static_sk_shader_make(SkShaders::Color(color4f, static_sk_color_space_move(color_space)));
+sk_shader_t SkShaders_Color_2(const SkColor4f *color4f, sk_color_space_t color_space) {
+    return static_sk_shader_make(SkShaders::Color(*color4f, static_sk_color_space_move(color_space)));
 }
 
 sk_shader_t SkShaders_Blend(SkBlendMode mode, sk_shader_t dst, sk_shader_t src) {

@@ -62,8 +62,8 @@ float SkRect_centerY(SkRect *rect) {
     return rect->centerY();
 }
 
-SkPoint SkRect_center(SkRect *rect) {
-    return rect->center();
+sk_point_t SkRect_center(SkRect *rect) {
+    return static_sk_point_make(rect->center());
 }
 
 void SkRect_toQuad(SkRect *rect, SkPoint quad[4]) {
@@ -114,8 +114,8 @@ sk_rect_t SkRect_makeOffset(SkRect *rect, float dx, float dy) {
     return static_sk_rect_make(rect->makeOutset(dx, dy));
 }
 
-sk_rect_t SkRect_makeOffset_2(SkRect *rect, SkVector v) {
-    return static_sk_rect_make(rect->makeOffset(v));
+sk_rect_t SkRect_makeOffset_2(SkRect *rect, sk_point_t v) {
+    return static_sk_rect_make(rect->makeOffset(static_sk_point_get(v)));
 }
 
 sk_rect_t SkRect_makeInset(SkRect *rect, float dx, float dy) {

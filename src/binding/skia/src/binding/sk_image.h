@@ -11,13 +11,15 @@
 #include "../static/static_sk_data.h"
 #include "../static/static_sk_color_space.h"
 #include "../static/static_sk_i_rect.h"
+#include "../static/static_sk_image_required_properties.h"
+#include "../static/static_sk_i_size.h"
 
 extern "C" {
 void SkImage_delete(SkImage *image);
 const SkImageInfo * SkImage_imageInfo(SkImage *image);
 int SkImage_width(SkImage *image);
 int SkImage_height(SkImage *image);
-SkISize SkImage_dimensions(SkImage *image);
+sk_i_size_t SkImage_dimensions(SkImage *image);
 sk_i_rect_t SkImage_bounds(SkImage *image);
 uint32_t SkImage_uniqueID(SkImage *image);
 SkAlphaType SkImage_alphaType(SkImage *image);
@@ -48,7 +50,7 @@ void SkImage_asyncRescaleAndReadPixelsYUVA420(SkImage *image, SkYUVColorSpace yu
 bool SkImage_scalePixels(SkImage *image, const SkPixmap *dst, const SkSamplingOptions *sampling, SkImage::CachingHint cachingHint);
 sk_data_t SkImage_refEncodedData(SkImage *image);
 sk_image_t SkImage_makeSubset(SkImage *image, GrDirectContext *direct, const SkIRect *subset);
-sk_image_t SkImage_makeSubset_2(SkImage *image, skgpu::graphite::Recorder *recorder, const SkIRect *subset, SkImage::RequiredProperties properties);
+sk_image_t SkImage_makeSubset_2(SkImage *image, skgpu::graphite::Recorder *recorder, const SkIRect *subset, sk_image_required_properties_t properties);
 bool SkImage_hasMipmaps(SkImage *image);
 bool SkImage_isProtected(SkImage *image);
 sk_image_t SkImage_withDefaultMipmaps(SkImage *image);
@@ -58,9 +60,9 @@ sk_image_t SkImage_makeRasterImage_2(SkImage *image, SkImage::CachingHint cachin
 bool SkImage_asLegacyBitmap(SkImage *image, SkBitmap *bitmap, SkImage::LegacyBitmapMode legacyBitmapMode);
 bool SkImage_isLazyGenerated(SkImage *image);
 sk_image_t SkImage_makeColorSpace(SkImage *image, GrDirectContext *direct, sk_color_space_t color_space);
-sk_image_t SkImage_makeColorSpace_2(SkImage *image, skgpu::graphite::Recorder *recorder, sk_color_space_t color_space, SkImage::RequiredProperties properties);
+sk_image_t SkImage_makeColorSpace_2(SkImage *image, skgpu::graphite::Recorder *recorder, sk_color_space_t color_space, sk_image_required_properties_t properties);
 sk_image_t SkImage_makeColorTypeAndColorSpace(SkImage *image, GrDirectContext *direct, SkColorType targetColorType, sk_color_space_t color_space);
-sk_image_t SkImage_makeColorTypeAndColorSpace_2(SkImage *image, skgpu::graphite::Recorder *recorder, SkColorType targetColorType, sk_color_space_t color_space, SkImage::RequiredProperties properties);
+sk_image_t SkImage_makeColorTypeAndColorSpace_2(SkImage *image, skgpu::graphite::Recorder *recorder, SkColorType targetColorType, sk_color_space_t color_space, sk_image_required_properties_t properties);
 sk_image_t SkImage_reinterpretColorSpace(SkImage *image, sk_color_space_t color_space);
 bool SkImage_unique(SkImage *image);
 void SkImage_ref(SkImage *image);

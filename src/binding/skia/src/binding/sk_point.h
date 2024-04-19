@@ -6,29 +6,30 @@
 #define RAIA_SKIA_SK_POINT_H
 
 #include "include/core/SkPoint.h"
+#include "../static/static_sk_point.h"
 
 extern "C" {
 void SkPoint_delete(SkPoint *point);
-float SkPoint_x(SkPoint point);
-float SkPoint_y(SkPoint point);
-float SkPoint_dot(SkPoint point, const SkVector *vec);
-float SkPoint_length(SkPoint point);
-float SkPoint_cross(SkPoint point, const SkVector *vec);
-void SkPoint_set(SkPoint point, float x, float y);
-bool SkPoint_equals(SkPoint point, float x, float y);
-bool SkPoint_isZero(SkPoint point);
-void SkPoint_scale(SkPoint point, float value);
-void SkPoint_scale_2(SkPoint point, float scale, SkPoint *dst);
-bool SkPoint_isFinite(SkPoint point);
-float SkPoint_distanceToOrigin(SkPoint point);
-void SkPoint_iset(SkPoint point, const SkIPoint *p);
-void SkPoint_iset_2(SkPoint point, int32_t x, int32_t y);
-void SkPoint_negate(SkPoint point);
-void SkPoint_setAbs(SkPoint point, const SkPoint *pt);
-bool SkPoint_setLength(SkPoint point, float length);
-bool SkPoint_setNormalize(SkPoint point, float x, float y);
+float SkPoint_x(sk_point_t point);
+float SkPoint_y(sk_point_t point);
+float SkPoint_dot(sk_point_t point, const SkVector *vec);
+float SkPoint_length(sk_point_t point);
+float SkPoint_cross(sk_point_t point, const SkVector *vec);
+void SkPoint_set(sk_point_t point, float x, float y);
+bool SkPoint_equals(sk_point_t point, float x, float y);
+bool SkPoint_isZero(sk_point_t point);
+void SkPoint_scale(sk_point_t point, float value);
+void SkPoint_scale_2(sk_point_t point, float scale, SkPoint *dst);
+bool SkPoint_isFinite(sk_point_t point);
+float SkPoint_distanceToOrigin(sk_point_t point);
+void SkPoint_iset(sk_point_t point, const SkIPoint *p);
+void SkPoint_iset_2(sk_point_t point, int32_t x, int32_t y);
+void SkPoint_negate(sk_point_t point);
+void SkPoint_setAbs(sk_point_t point, const SkPoint *pt);
+bool SkPoint_setLength(sk_point_t point, float length);
+bool SkPoint_setNormalize(sk_point_t point, float x, float y);
 // static
-SkPoint SkPoint_Make(float x, float y);
+sk_point_t SkPoint_Make(float x, float y);
 float SkPoint_Normalize(SkVector *vec);
 float SkPoint_Length(float x, float y);
 float SkPoint_CrossProduct(const SkVector *a, const SkVector *b);

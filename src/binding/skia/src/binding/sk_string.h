@@ -6,6 +6,7 @@
 #define RAIA_SKIA_SK_STRING_H
 
 #include "include/core/SkString.h"
+#include "../static/static_std_string_view.h"
 
 extern "C" {
 // SkString & operator=(const SkString &)
@@ -22,7 +23,7 @@ SkString *SkString_new_3(const char text[]);
 SkString *SkString_new_4(const char text[], size_t len);
 SkString *SkString_new_5(const SkString *str);
 SkString *SkString_new_6(const std::string *str);
-SkString *SkString_new_7(std::string_view view);
+SkString *SkString_new_7(string_view_t view);
 void SkString_delete(SkString *string);
 bool SkString_isEmpty(SkString *string);
 size_t SkString_size(SkString *string);
@@ -45,11 +46,11 @@ void SkString_resize(SkString *string, size_t len);
 void SkString_set(SkString *string, const SkString *src);
 void SkString_set_2(SkString *string, const char text[]);
 void SkString_set_3(SkString *string, const char text[], size_t len);
-void SkString_set_4(SkString *string, std::string_view str);
+void SkString_set_4(SkString *string, string_view_t str);
 void SkString_insert(SkString *string, size_t offset, const char text[]);
 void SkString_insert_2(SkString *string, size_t offset, const char text[], size_t len);
 void SkString_insert_3(SkString *string, size_t offset, const SkString *str);
-void SkString_insert_4(SkString *string, size_t offset, std::string_view str);
+void SkString_insert_4(SkString *string, size_t offset, string_view_t str);
 void SkString_insertUnichar(SkString *string, size_t offset, SkUnichar unichar);
 void SkString_insertS32(SkString *string, size_t offset, int32_t value);
 void SkString_insertS64(SkString *string, size_t offset, int64_t value, int minDigits);
@@ -60,7 +61,7 @@ void SkString_insertScalar(SkString *string, size_t offset, SkScalar v);
 void SkString_append(SkString *string, const char text[]);
 void SkString_append_2(SkString *string, const char text[], size_t len);
 void SkString_append_3(SkString *string, const SkString *str);
-void SkString_append_4(SkString *string, std::string_view str);
+void SkString_append_4(SkString *string, string_view_t str);
 void SkString_appendUnichar(SkString *string, SkUnichar uni);
 void SkString_appendS32(SkString *string, int32_t value);
 void SkString_appendS64(SkString *string, int64_t value, int minDigits);
@@ -71,7 +72,7 @@ void SkString_appendScalar(SkString *string, SkScalar value);
 void SkString_prepend(SkString *string, const char text[]);
 void SkString_prepend_2(SkString *string, const char text[], size_t len);
 void SkString_prepend_3(SkString *string, const SkString *str);
-void SkString_prepend_4(SkString *string, std::string_view str);
+void SkString_prepend_4(SkString *string, string_view_t str);
 void SkString_prependUnichar(SkString *string, SkUnichar uni);
 void SkString_prependS32(SkString *string, int32_t value);
 void SkString_prependS64(SkString *string, int32_t value, int minDigits);

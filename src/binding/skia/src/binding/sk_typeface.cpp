@@ -160,8 +160,8 @@ sk_typeface_t SkTypeface_MakeDefault() {
     return static_sk_typeface_make(SkTypeface::MakeDefault());
 }
 
-sk_typeface_t SkTypeface_MakeFromName(const char familyName[], SkFontStyle fontStyle) {
-    return static_sk_typeface_make(SkTypeface::MakeFromName(familyName, fontStyle));
+sk_typeface_t SkTypeface_MakeFromName(const char familyName[], sk_font_style_t fontStyle) {
+    return static_sk_typeface_make(SkTypeface::MakeFromName(familyName, static_sk_font_style_get(fontStyle)));
 }
 
 sk_typeface_t SkTypeface_MakeFromFile(const char path[], int index) {

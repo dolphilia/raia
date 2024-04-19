@@ -13,15 +13,16 @@
 #include "../static/static_sk_i_rect.h"
 #include "../static/static_std_tuple_sk_image_sk_codec_result.h"
 #include "../static/static_std_vector_sk_codec_frame_info.h"
+#include "../static/static_sk_i_size.h"
 
 extern "C" {
 void SkCodec_delete(SkCodec* codec);
 sk_image_info_t SkCodec_getInfo(SkCodec* codec);
-SkISize SkCodec_dimensions(SkCodec* codec);
+sk_i_size_t SkCodec_dimensions(SkCodec* codec);
 sk_i_rect_t SkCodec_bounds(SkCodec* codec);
 const skcms_ICCProfile* SkCodec_getICCProfile(SkCodec* codec);
 SkEncodedOrigin SkCodec_getOrigin(SkCodec* codec);
-SkISize SkCodec_getScaledDimensions(SkCodec* codec, float desiredScale);
+sk_i_size_t SkCodec_getScaledDimensions(SkCodec* codec, float desiredScale);
 bool SkCodec_getValidSubset(SkCodec* codec, SkIRect* desiredSubset);
 SkEncodedImageFormat SkCodec_getEncodedFormat(SkCodec* codec);
 SkCodec::Result SkCodec_getPixels(SkCodec* codec, const SkImageInfo* info, void* pixels, size_t rowBytes, const SkCodec::Options* options);

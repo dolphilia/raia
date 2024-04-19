@@ -10,8 +10,8 @@ void SkFlattenable_delete(SkFlattenable *flattenable) {
     delete flattenable;
 }
 
-SkFlattenable::Factory SkFlattenable_getFactory(SkFlattenable *flattenable) {
-    return flattenable->getFactory();
+sk_flattenable_factory_t SkFlattenable_getFactory(SkFlattenable *flattenable) {
+    return static_sk_flattenable_factory_make(flattenable->getFactory());
 }
 
 const char * SkFlattenable_getTypeName(SkFlattenable *flattenable) {
@@ -48,15 +48,16 @@ void SkFlattenable_unref(SkFlattenable *flattenable) {
 
 // static
 
-SkFlattenable::Factory SkFlattenable_NameToFactory(const char name[]) {
-    return SkFlattenable::NameToFactory(name);
-}
-const char * SkFlattenable_FactoryToName(SkFlattenable::Factory factory) {
-    return SkFlattenable::FactoryToName(factory);
+sk_flattenable_factory_t SkFlattenable_NameToFactory(const char name[]) {
+    return static_sk_flattenable_factory_make(SkFlattenable::NameToFactory(name));
 }
 
-void SkFlattenable_Register(const char name[], SkFlattenable::Factory factory) {
-    SkFlattenable::Register(name, factory);
+const char * SkFlattenable_FactoryToName(sk_flattenable_factory_t factory) {
+    return SkFlattenable::FactoryToName(static_sk_flattenable_factory_get(factory));
+}
+
+void SkFlattenable_Register(const char name[], sk_flattenable_factory_t factory) {
+    SkFlattenable::Register(name, static_sk_flattenable_factory_get(factory));
 }
 
 sk_flattenable_t SkFlattenable_Deserialize(SkFlattenable::Type type, const void *data, size_t length, const SkDeserialProcs *procs) {

@@ -56,7 +56,7 @@ sk_typeface_t SkTypeface_MakeDeserialize(SkStream *stream, sk_font_mgr_t font_mg
 void SkTypeface_Register(SkTypeface::FactoryId id, sk_sp<SkTypeface>(*make)(std::unique_ptr<SkStreamAsset>, const SkFontArguments &));
 #if !defined(SK_DISABLE_LEGACY_FONTMGR_REFDEFAULT)
 sk_typeface_t SkTypeface_MakeDefault();
-sk_typeface_t SkTypeface_MakeFromName(const char familyName[], SkFontStyle fontStyle);
+sk_typeface_t SkTypeface_MakeFromName(const char familyName[], sk_font_style_t fontStyle);
 sk_typeface_t SkTypeface_MakeFromFile(const char path[], int index);
 sk_typeface_t SkTypeface_MakeFromStream(sk_stream_asset_t stream_asset, int index);
 sk_typeface_t SkTypeface_MakeFromData(sk_data_t data, int index);

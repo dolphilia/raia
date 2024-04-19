@@ -14,8 +14,8 @@ sk_image_info_t SkCodec_getInfo(SkCodec* codec) {
     return static_sk_image_info_make(codec->getInfo());
 }
 
-SkISize SkCodec_dimensions(SkCodec* codec) {
-    return codec->dimensions();
+sk_i_size_t SkCodec_dimensions(SkCodec* codec) {
+    return static_sk_i_size_make(codec->dimensions());
 }
 
 sk_i_rect_t SkCodec_bounds(SkCodec* codec) {
@@ -30,8 +30,8 @@ SkEncodedOrigin SkCodec_getOrigin(SkCodec* codec) {
     return codec->getOrigin();
 }
 
-SkISize SkCodec_getScaledDimensions(SkCodec* codec, float desiredScale) {
-    return codec->getScaledDimensions(desiredScale);
+sk_i_size_t SkCodec_getScaledDimensions(SkCodec* codec, float desiredScale) {
+    return static_sk_i_size_make(codec->getScaledDimensions(desiredScale));
 }
 
 bool SkCodec_getValidSubset(SkCodec* codec, SkIRect* desiredSubset) {

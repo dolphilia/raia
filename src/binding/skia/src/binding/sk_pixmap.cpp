@@ -58,8 +58,8 @@ int SkPixmap_height(SkPixmap *pixmap) {
     return pixmap->height();
 }
 
-SkISize SkPixmap_dimensions(SkPixmap *pixmap) {
-    return pixmap->dimensions();
+sk_i_size_t SkPixmap_dimensions(SkPixmap *pixmap) {
+    return static_sk_i_size_make(pixmap->dimensions());
 }
 
 SkColorType SkPixmap_colorType(SkPixmap *pixmap) {
@@ -106,8 +106,8 @@ SkColor SkPixmap_getColor(SkPixmap *pixmap, int x, int y) {
     return pixmap->getColor(x, y);
 }
 
-SkColor4f SkPixmap_getColor4f(SkPixmap *pixmap, int x, int y) {
-    return pixmap->getColor4f(x, y);
+sk_color_4f_t SkPixmap_getColor4f(SkPixmap *pixmap, int x, int y) {
+    return static_sk_color_4f_make(pixmap->getColor4f(x, y));
 }
 
 float SkPixmap_getAlphaf(SkPixmap *pixmap, int x, int y) {

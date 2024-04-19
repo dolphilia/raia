@@ -26,8 +26,8 @@ SkColor SkColorFilter_filterColor(SkColorFilter *color_filter, SkColor color) {
     return color_filter->filterColor(color);
 }
 
-SkColor4f SkColorFilter_filterColor4f(SkColorFilter *color_filter, const SkColor4f *srcColor, SkColorSpace *srcCS, SkColorSpace *dstCS) {
-    return color_filter->filterColor4f(*srcColor, srcCS, dstCS);
+sk_color_4f_t SkColorFilter_filterColor4f(SkColorFilter *color_filter, const SkColor4f *srcColor, SkColorSpace *srcCS, SkColorSpace *dstCS) {
+    return static_sk_color_4f_make(color_filter->filterColor4f(*srcColor, srcCS, dstCS));
 }
 
 sk_color_filter_t SkColorFilter_makeComposed(SkColorFilter *color_filter, sk_color_filter_t inner) {
@@ -38,8 +38,8 @@ sk_color_filter_t SkColorFilter_makeWithWorkingColorSpace(SkColorFilter *color_f
     return static_sk_color_filter_make(color_filter->makeWithWorkingColorSpace(static_sk_color_space_move(colorSpace)));
 }
 
-SkColorFilter::Factory SkColorFilter_getFactory(SkColorFilter *color_filter) {
-    return color_filter->getFactory();
+sk_flattenable_factory_t SkColorFilter_getFactory(SkColorFilter *color_filter) {
+    return static_sk_flattenable_factory_make(color_filter->getFactory());
 }
 
 const char *SkColorFilter_getTypeName(SkColorFilter *color_filter) {
@@ -80,16 +80,16 @@ sk_color_filter_t SkColorFilter_Deserialize(const void *data, size_t size, const
     return static_sk_color_filter_make(SkColorFilter::Deserialize(data, size, procs));
 }
 
-SkColorFilter::Factory SkColorFilter_NameToFactory(const char name[]) {
-    return SkColorFilter::NameToFactory(name);
+sk_flattenable_factory_t SkColorFilter_NameToFactory(const char name[]) {
+    return static_sk_flattenable_factory_make(SkColorFilter::NameToFactory(name));
 }
 
-const char *SkColorFilter_FactoryToName(SkColorFilter::Factory factory) {
-    return SkColorFilter::FactoryToName(factory);
+const char *SkColorFilter_FactoryToName(sk_flattenable_factory_t factory) {
+    return SkColorFilter::FactoryToName(static_sk_flattenable_factory_get(factory));
 }
 
-void SkColorFilter_Register(const char name[], SkColorFilter::Factory factory) {
-    SkColorFilter::Register(name, factory);
+void SkColorFilter_Register(const char name[], sk_flattenable_factory_t factory) {
+    SkColorFilter::Register(name, static_sk_flattenable_factory_get(factory));
 }
 
 }

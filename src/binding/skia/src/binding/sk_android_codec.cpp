@@ -38,16 +38,16 @@ int SkAndroidCodec_computeSampleSize(SkAndroidCodec *androidCodec, SkISize* size
     return androidCodec->computeSampleSize(size);
 }
 
-SkISize SkAndroidCodec_getSampledDimensions(SkAndroidCodec *androidCodec, int sampleSize) {
-    return androidCodec->getSampledDimensions(sampleSize);
+sk_i_size_t SkAndroidCodec_getSampledDimensions(SkAndroidCodec *androidCodec, int sampleSize) {
+    return static_sk_i_size_make(androidCodec->getSampledDimensions(sampleSize));
 }
 
 bool SkAndroidCodec_getSupportedSubset(SkAndroidCodec *androidCodec, SkIRect* desiredSubset) {
     return androidCodec->getSupportedSubset(desiredSubset);
 }
 
-SkISize SkAndroidCodec_getSampledSubsetDimensions(SkAndroidCodec *androidCodec, int sampleSize, const SkIRect* subset) {
-    return androidCodec->getSampledSubsetDimensions(sampleSize, *subset);
+sk_i_size_t SkAndroidCodec_getSampledSubsetDimensions(SkAndroidCodec *androidCodec, int sampleSize, const SkIRect* subset) {
+    return static_sk_i_size_make(androidCodec->getSampledSubsetDimensions(sampleSize, *subset));
 }
 
 SkCodec::Result SkAndroidCodec_getAndroidPixels(SkAndroidCodec *androidCodec, const SkImageInfo* info, void* pixels, size_t rowBytes, const SkAndroidCodec::AndroidOptions* options) {

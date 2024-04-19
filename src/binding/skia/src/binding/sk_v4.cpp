@@ -31,8 +31,8 @@ SkScalar SkV4_dot(SkV4 *v4, const SkV4 *v) {
     return v4->dot(*v);
 }
 
-SkV4 SkV4_normalize(SkV4 *v4) {
-    return v4->normalize();
+sk_v4_t SkV4_normalize(SkV4 *v4) {
+    return static_sk_v4_make(v4->normalize());
 }
 
 const float * SkV4_ptr(SkV4 *v4) {
@@ -49,8 +49,8 @@ SkScalar SkV4_Dot(const SkV4 *a, const SkV4 *b) {
     return SkV4::Dot(*a, *b);
 }
 
-SkV4 SkV4_Normalize(const SkV4 *v) {
-    return SkV4::Normalize(*v);
+sk_v4_t SkV4_Normalize(const SkV4 *v) {
+    return static_sk_v4_make(SkV4::Normalize(*v));
 }
 
 }

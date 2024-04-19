@@ -104,12 +104,12 @@ sk_image_filter_t SkImageFilters_Picture_2(sk_picture_t picture) {
     return static_sk_image_filter_make(SkImageFilters::Picture(static_sk_picture_move(picture)));
 }
 
-sk_image_filter_t SkImageFilters_RuntimeShader(const SkRuntimeShaderBuilder *builder, std::string_view childShaderName, sk_image_filter_t input) {
-    return static_sk_image_filter_make(SkImageFilters::RuntimeShader(*builder, childShaderName, static_sk_image_filter_move(input)));
+sk_image_filter_t SkImageFilters_RuntimeShader(const SkRuntimeShaderBuilder *builder, string_view_t childShaderName, sk_image_filter_t input) {
+    return static_sk_image_filter_make(SkImageFilters::RuntimeShader(*builder, static_string_view_get(childShaderName), static_sk_image_filter_move(input)));
 }
 
-sk_image_filter_t SkImageFilters_RuntimeShader_2(const SkRuntimeShaderBuilder *builder, SkScalar sampleRadius, std::string_view childShaderName, sk_image_filter_t input) {
-    return static_sk_image_filter_make(SkImageFilters::RuntimeShader(*builder, sampleRadius, childShaderName, static_sk_image_filter_move(input)));
+sk_image_filter_t SkImageFilters_RuntimeShader_2(const SkRuntimeShaderBuilder *builder, SkScalar sampleRadius, string_view_t childShaderName, sk_image_filter_t input) {
+    return static_sk_image_filter_make(SkImageFilters::RuntimeShader(*builder, sampleRadius, static_string_view_get(childShaderName), static_sk_image_filter_move(input)));
 }
 
 sk_image_filter_t SkImageFilters_RuntimeShader_3(const SkRuntimeShaderBuilder *builder, std::string_view childShaderNames[], const sk_sp<SkImageFilter> *inputs, int inputCount) {

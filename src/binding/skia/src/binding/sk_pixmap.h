@@ -9,6 +9,8 @@
 #include "include/core/SkColorSpace.h"
 #include "../static/static_sk_color_space.h"
 #include "../static/static_sk_i_rect.h"
+#include "../static/static_sk_i_size.h"
+#include "../static/static_sk_color_4f.h"
 
 extern "C" {
 SkPixmap *SkPixmap_new();
@@ -24,7 +26,7 @@ size_t SkPixmap_rowBytes(SkPixmap *pixmap);
 const void * SkPixmap_addr(SkPixmap *pixmap);
 int SkPixmap_width(SkPixmap *pixmap);
 int SkPixmap_height(SkPixmap *pixmap);
-SkISize SkPixmap_dimensions(SkPixmap *pixmap);
+sk_i_size_t SkPixmap_dimensions(SkPixmap *pixmap);
 SkColorType SkPixmap_colorType(SkPixmap *pixmap);
 SkAlphaType SkPixmap_alphaType(SkPixmap *pixmap);
 SkColorSpace * SkPixmap_colorSpace(SkPixmap *pixmap);
@@ -36,7 +38,7 @@ int SkPixmap_shiftPerPixel(SkPixmap *pixmap);
 size_t SkPixmap_computeByteSize(SkPixmap *pixmap);
 bool SkPixmap_computeIsOpaque(SkPixmap *pixmap);
 SkColor SkPixmap_getColor(SkPixmap *pixmap, int x, int y);
-SkColor4f SkPixmap_getColor4f(SkPixmap *pixmap, int x, int y);
+sk_color_4f_t SkPixmap_getColor4f(SkPixmap *pixmap, int x, int y);
 float SkPixmap_getAlphaf(SkPixmap *pixmap, int x, int y);
 const void * SkPixmap_addr_2(SkPixmap *pixmap, int x, int y);
 const uint8_t * SkPixmap_addr8(SkPixmap *pixmap);

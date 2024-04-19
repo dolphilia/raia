@@ -60,8 +60,8 @@ SkScalar SkRRect_height(SkRRect *rrect) {
     return rrect->height();
 }
 
-SkVector SkRRect_getSimpleRadii(SkRRect *rrect) {
-    return rrect->getSimpleRadii();
+sk_point_t SkRRect_getSimpleRadii(SkRRect *rrect) {
+    return static_sk_point_make(rrect->getSimpleRadii());
 }
 
 void SkRRect_setEmpty(SkRRect *rrect) {
@@ -92,8 +92,8 @@ const SkRect * SkRRect_rect(SkRRect *rrect) {
     return &rrect->rect();
 }
 
-SkVector SkRRect_radii(SkRRect *rrect, SkRRect::Corner corner) {
-    return rrect->radii(corner);
+sk_point_t SkRRect_radii(SkRRect *rrect, SkRRect::Corner corner) {
+    return static_sk_point_make(rrect->radii(corner));
 }
 
 const SkRect * SkRRect_getBounds(SkRRect *rrect) {

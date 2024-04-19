@@ -15,8 +15,8 @@ void SkPixelRef_delete(SkPixelRef *pixel_ref) {
     delete pixel_ref;
 }
 
-SkISize SkPixelRef_dimensions(SkPixelRef *pixel_ref) {
-    return pixel_ref->dimensions();
+sk_i_size_t SkPixelRef_dimensions(SkPixelRef *pixel_ref) {
+    return static_sk_i_size_make(pixel_ref->dimensions());
 }
 
 int SkPixelRef_width(SkPixelRef *pixel_ref) {

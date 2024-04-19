@@ -52,12 +52,12 @@ const_sk_runtime_effect_child_t SkRuntimeEffect_children(SkRuntimeEffect *runtim
     return static_const_sk_runtime_effect_child_make(runtime_effect->children());
 }
 
-const SkRuntimeEffect::Uniform * SkRuntimeEffect_findUniform(SkRuntimeEffect *runtime_effect, std::string_view name) {
-    return runtime_effect->findUniform(name);
+const SkRuntimeEffect::Uniform * SkRuntimeEffect_findUniform(SkRuntimeEffect *runtime_effect, string_view_t name) {
+    return runtime_effect->findUniform(static_string_view_get(name));
 }
 
-const SkRuntimeEffect::Child * SkRuntimeEffect_findChild(SkRuntimeEffect *runtime_effect, std::string_view name) {
-    return runtime_effect->findChild(name);
+const SkRuntimeEffect::Child * SkRuntimeEffect_findChild(SkRuntimeEffect *runtime_effect, string_view_t name) {
+    return runtime_effect->findChild(static_string_view_get(name));
 }
 
 bool SkRuntimeEffect_allowShader(SkRuntimeEffect *runtime_effect) {

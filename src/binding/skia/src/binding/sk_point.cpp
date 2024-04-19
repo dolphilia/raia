@@ -10,82 +10,82 @@ void SkPoint_delete(SkPoint *point) {
     delete point;
 }
 
-float SkPoint_x(SkPoint point) {
-    return point.x();
+float SkPoint_x(sk_point_t point) {
+    return static_sk_point_get(point).x();
 }
 
-float SkPoint_y(SkPoint point) {
-    return point.y();
+float SkPoint_y(sk_point_t point) {
+    return static_sk_point_get(point).y();
 }
 
-float SkPoint_dot(SkPoint point, const SkVector *vec) {
-    return point.dot(*vec);
+float SkPoint_dot(sk_point_t point, const SkVector *vec) {
+    return static_sk_point_get(point).dot(*vec);
 }
 
-float SkPoint_length(SkPoint point) {
-    return point.length();
+float SkPoint_length(sk_point_t point) {
+    return static_sk_point_get(point).length();
 }
 
-float SkPoint_cross(SkPoint point, const SkVector *vec) {
-    return point.cross(*vec);
+float SkPoint_cross(sk_point_t point, const SkVector *vec) {
+    return static_sk_point_get(point).cross(*vec);
 }
 
-void SkPoint_set(SkPoint point, float x, float y) {
-    point.set(x, y);
+void SkPoint_set(sk_point_t point, float x, float y) {
+    static_sk_point_get(point).set(x, y);
 }
 
-bool SkPoint_equals(SkPoint point, float x, float y) {
-    return point.equals(x, y);
+bool SkPoint_equals(sk_point_t point, float x, float y) {
+    return static_sk_point_get(point).equals(x, y);
 }
 
-bool SkPoint_isZero(SkPoint point) {
-    return point.isZero();
+bool SkPoint_isZero(sk_point_t point) {
+    return static_sk_point_get(point).isZero();
 }
 
-void SkPoint_scale(SkPoint point, float value) {
-    point.scale(value);
+void SkPoint_scale(sk_point_t point, float value) {
+    static_sk_point_get(point).scale(value);
 }
 
-void SkPoint_scale_2(SkPoint point, float scale, SkPoint *dst) {
-    point.scale(scale, dst);
+void SkPoint_scale_2(sk_point_t point, float scale, SkPoint *dst) {
+    static_sk_point_get(point).scale(scale, dst);
 }
 
-bool SkPoint_isFinite(SkPoint point) {
-    return point.isFinite();
+bool SkPoint_isFinite(sk_point_t point) {
+    return static_sk_point_get(point).isFinite();
 }
 
-float SkPoint_distanceToOrigin(SkPoint point) {
-    return point.distanceToOrigin();
+float SkPoint_distanceToOrigin(sk_point_t point) {
+    return static_sk_point_get(point).distanceToOrigin();
 }
 
-void SkPoint_iset(SkPoint point, const SkIPoint *p) {
-    point.iset(*p);
+void SkPoint_iset(sk_point_t point, const SkIPoint *p) {
+    static_sk_point_get(point).iset(*p);
 }
 
-void SkPoint_iset_2(SkPoint point, int32_t x, int32_t y) {
-    point.iset(x, y);
+void SkPoint_iset_2(sk_point_t point, int32_t x, int32_t y) {
+    static_sk_point_get(point).iset(x, y);
 }
 
-void SkPoint_negate(SkPoint point) {
-    point.negate();
+void SkPoint_negate(sk_point_t point) {
+    static_sk_point_get(point).negate();
 }
 
-void SkPoint_setAbs(SkPoint point, const SkPoint *pt) {
-    point.setAbs(*pt);
+void SkPoint_setAbs(sk_point_t point, const SkPoint *pt) {
+    static_sk_point_get(point).setAbs(*pt);
 }
 
-bool SkPoint_setLength(SkPoint point, float length) {
-    return point.setLength(length);
+bool SkPoint_setLength(sk_point_t point, float length) {
+    return static_sk_point_get(point).setLength(length);
 }
 
-bool SkPoint_setNormalize(SkPoint point, float x, float y) {
-    return point.setNormalize(x, y);
+bool SkPoint_setNormalize(sk_point_t point, float x, float y) {
+    return static_sk_point_get(point).setNormalize(x, y);
 }
 
 // static
 
-SkPoint SkPoint_Make(float x, float y) {
-    return SkPoint::Make(x, y);
+sk_point_t SkPoint_Make(float x, float y) {
+    return static_sk_point_make(SkPoint::Make(x, y));
 }
 
 float SkPoint_Normalize(SkVector *vec) {

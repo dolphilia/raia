@@ -50,8 +50,8 @@ sk_typeface_t SkFontMgr_makeFromFile(SkFontMgr *font_mgr, const char path[], int
     return static_sk_typeface_make(font_mgr->makeFromFile(path, ttcIndex));
 }
 
-sk_typeface_t SkFontMgr_legacyMakeTypeface(SkFontMgr *font_mgr, const char familyName[], SkFontStyle style) {
-    return static_sk_typeface_make(font_mgr->legacyMakeTypeface(familyName, style));
+sk_typeface_t SkFontMgr_legacyMakeTypeface(SkFontMgr *font_mgr, const char familyName[], sk_font_style_t style) {
+    return static_sk_typeface_make(font_mgr->legacyMakeTypeface(familyName, static_sk_font_style_get(style)));
 }
 
 bool SkFontMgr_unique(SkFontMgr *font_mgr) {

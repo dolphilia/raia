@@ -8,6 +8,7 @@
 #include "include/core/SkRect.h"
 #include "../static/static_sk_rect.h"
 #include "../static/static_sk_i_rect.h"
+#include "../static/static_sk_point.h"
 
 extern "C" {
 void SkRect_delete(SkRect *rect);
@@ -24,7 +25,7 @@ float SkRect_width(SkRect *rect);
 float SkRect_height(SkRect *rect);
 float SkRect_centerX(SkRect *rect);
 float SkRect_centerY(SkRect *rect);
-SkPoint SkRect_center(SkRect *rect);
+sk_point_t SkRect_center(SkRect *rect);
 void SkRect_toQuad(SkRect *rect, SkPoint quad[4]);
 void SkRect_setEmpty(SkRect *rect);
 void SkRect_set(SkRect *rect, const SkIRect *src);
@@ -37,7 +38,7 @@ void SkRect_setXYWH(SkRect *rect, float x, float y, float width, float height);
 void SkRect_setWH(SkRect *rect, float width, float height);
 void SkRect_setIWH(SkRect *rect, int32_t width, int32_t height);
 sk_rect_t SkRect_makeOffset(SkRect *rect, float dx, float dy);
-sk_rect_t SkRect_makeOffset_2(SkRect *rect, SkVector v);
+sk_rect_t SkRect_makeOffset_2(SkRect *rect, sk_point_t v);
 sk_rect_t SkRect_makeInset(SkRect *rect, float dx, float dy);
 sk_rect_t SkRect_makeOutset(SkRect *rect, float dx, float dy);
 void SkRect_offset(SkRect *rect, float dx, float dy);

@@ -22,8 +22,8 @@ int SkImage_height(SkImage *image) {
     return image->height();
 }
 
-SkISize SkImage_dimensions(SkImage *image) {
-    return image->dimensions();
+sk_i_size_t SkImage_dimensions(SkImage *image) {
+    return static_sk_i_size_make(image->dimensions());
 }
 
 sk_i_rect_t SkImage_bounds(SkImage *image) {
@@ -146,8 +146,8 @@ sk_image_t SkImage_makeSubset(SkImage *image, GrDirectContext *direct, const SkI
     return static_sk_image_make(image->makeSubset(direct, *subset));
 }
 
-sk_image_t SkImage_makeSubset_2(SkImage *image, skgpu::graphite::Recorder *recorder, const SkIRect *subset, SkImage::RequiredProperties properties) {
-    return static_sk_image_make(image->makeSubset(recorder, *subset, properties));
+sk_image_t SkImage_makeSubset_2(SkImage *image, skgpu::graphite::Recorder *recorder, const SkIRect *subset, sk_image_required_properties_t properties) {
+    return static_sk_image_make(image->makeSubset(recorder, *subset, static_sk_image_required_properties_get(properties)));
 }
 
 bool SkImage_hasMipmaps(SkImage *image) {
@@ -186,16 +186,16 @@ sk_image_t SkImage_makeColorSpace(SkImage *image, GrDirectContext *direct, sk_co
     return static_sk_image_make(image->makeColorSpace(direct, static_sk_color_space_move(color_space)));
 }
 
-sk_image_t SkImage_makeColorSpace_2(SkImage *image, skgpu::graphite::Recorder *recorder, sk_color_space_t color_space, SkImage::RequiredProperties properties) {
-    return static_sk_image_make(image->makeColorSpace(recorder, static_sk_color_space_move(color_space), properties));
+sk_image_t SkImage_makeColorSpace_2(SkImage *image, skgpu::graphite::Recorder *recorder, sk_color_space_t color_space, sk_image_required_properties_t properties) {
+    return static_sk_image_make(image->makeColorSpace(recorder, static_sk_color_space_move(color_space), static_sk_image_required_properties_get(properties)));
 }
 
 sk_image_t SkImage_makeColorTypeAndColorSpace(SkImage *image, GrDirectContext *direct, SkColorType targetColorType, sk_color_space_t color_space) {
     return static_sk_image_make(image->makeColorTypeAndColorSpace(direct, targetColorType, static_sk_color_space_move(color_space)));
 }
 
-sk_image_t SkImage_makeColorTypeAndColorSpace_2(SkImage *image, skgpu::graphite::Recorder *recorder, SkColorType targetColorType, sk_color_space_t color_space, SkImage::RequiredProperties properties) {
-    return static_sk_image_make(image->makeColorTypeAndColorSpace(recorder, targetColorType, static_sk_color_space_move(color_space), properties));
+sk_image_t SkImage_makeColorTypeAndColorSpace_2(SkImage *image, skgpu::graphite::Recorder *recorder, SkColorType targetColorType, sk_color_space_t color_space, sk_image_required_properties_t properties) {
+    return static_sk_image_make(image->makeColorTypeAndColorSpace(recorder, targetColorType, static_sk_color_space_move(color_space), static_sk_image_required_properties_get(properties)));
 }
 
 sk_image_t SkImage_reinterpretColorSpace(SkImage *image, sk_color_space_t color_space) {

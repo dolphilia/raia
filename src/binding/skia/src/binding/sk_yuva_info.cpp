@@ -18,8 +18,8 @@ SkYUVAInfo *SkYUVAInfo_new_2(const SkYUVAInfo *info) {
     return new SkYUVAInfo(*info);
 }
 
-SkYUVAInfo *SkYUVAInfo_new_3(SkISize dimensions, SkYUVAInfo::PlaneConfig config, SkYUVAInfo::Subsampling subsampling, SkYUVColorSpace space, SkEncodedOrigin origin, SkYUVAInfo::Siting sitingX, SkYUVAInfo::Siting sitingY) {
-    return new SkYUVAInfo(dimensions, config, subsampling, space, origin, sitingX, sitingY);
+SkYUVAInfo *SkYUVAInfo_new_3(sk_i_size_t dimensions, SkYUVAInfo::PlaneConfig config, SkYUVAInfo::Subsampling subsampling, SkYUVColorSpace space, SkEncodedOrigin origin, SkYUVAInfo::Siting sitingX, SkYUVAInfo::Siting sitingY) {
+    return new SkYUVAInfo(static_sk_i_size_get(dimensions), config, subsampling, space, origin, sitingX, sitingY);
 }
 
 void SkYUVAInfo_delete(SkYUVAInfo *yuvaInfo) {
@@ -38,8 +38,8 @@ tuple_int_int_t SkYUVAInfo_planeSubsamplingFactors(SkYUVAInfo * yuva_info, int p
     return static_tuple_int_int_make(yuva_info->planeSubsamplingFactors(planeIdx));
 }
 
-SkISize SkYUVAInfo_dimensions(SkYUVAInfo * yuva_info) {
-    return yuva_info->dimensions();
+sk_i_size_t SkYUVAInfo_dimensions(SkYUVAInfo * yuva_info) {
+    return static_sk_i_size_make(yuva_info->dimensions());
 }
 
 int SkYUVAInfo_width(SkYUVAInfo * yuva_info) {
@@ -98,8 +98,8 @@ sk_yuva_info_t SkYUVAInfo_makeSubsampling(SkYUVAInfo * yuva_info, SkYUVAInfo::Su
     return static_sk_yuva_info_make(yuva_info->makeSubsampling(subsampling));
 }
 
-sk_yuva_info_t SkYUVAInfo_makeDimensions(SkYUVAInfo * yuva_info, SkISize size) {
-    return static_sk_yuva_info_make(yuva_info->makeDimensions(size));
+sk_yuva_info_t SkYUVAInfo_makeDimensions(SkYUVAInfo * yuva_info, sk_i_size_t size) {
+    return static_sk_yuva_info_make(yuva_info->makeDimensions(static_sk_i_size_get(size)));
 }
 
 bool SkYUVAInfo_isValid(SkYUVAInfo * yuva_info) {
@@ -116,8 +116,8 @@ tuple_int_int_t SkYUVAInfo_PlaneSubsamplingFactors(SkYUVAInfo::PlaneConfig confi
     return static_tuple_int_int_make(SkYUVAInfo::PlaneSubsamplingFactors(config, subsampling, planeIdx));
 }
 
-int SkYUVAInfo_PlaneDimensions(SkISize imageDimensions, SkYUVAInfo::PlaneConfig plane, SkYUVAInfo::Subsampling subsampling, SkEncodedOrigin origin, SkISize planeDimensions[SkYUVAInfo::kMaxPlanes]) {
-    return SkYUVAInfo::PlaneDimensions(imageDimensions, plane, subsampling, origin, planeDimensions);
+int SkYUVAInfo_PlaneDimensions(sk_i_size_t imageDimensions, SkYUVAInfo::PlaneConfig plane, SkYUVAInfo::Subsampling subsampling, SkEncodedOrigin origin, SkISize planeDimensions[SkYUVAInfo::kMaxPlanes]) {
+    return SkYUVAInfo::PlaneDimensions(static_sk_i_size_get(imageDimensions), plane, subsampling, origin, planeDimensions);
 }
 
 int SkYUVAInfo_NumPlanes(SkYUVAInfo::PlaneConfig config) {

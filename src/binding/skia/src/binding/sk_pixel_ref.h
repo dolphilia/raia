@@ -7,11 +7,12 @@
 
 #include "include/core/SkPixelRef.h"
 #include "../static/static_sk_id_change_listener.h"
+#include "../static/static_sk_i_size.h"
 
 extern "C" {
 SkPixelRef *SkPixelRef_new(int width, int height, void *addr, size_t rowBytes);
 void SkPixelRef_delete(SkPixelRef *pixel_ref);
-SkISize SkPixelRef_dimensions(SkPixelRef *pixel_ref);
+sk_i_size_t SkPixelRef_dimensions(SkPixelRef *pixel_ref);
 int SkPixelRef_width(SkPixelRef *pixel_ref);
 int SkPixelRef_height(SkPixelRef *pixel_ref);
 void * SkPixelRef_pixels(SkPixelRef *pixel_ref);

@@ -6,14 +6,15 @@
 #define RAIA_SKIA_SK_CUBIC_MAP_H
 
 #include "include/core/SkCubicMap.h"
+#include "../static/static_sk_point.h"
 
 extern "C" {
+SkCubicMap *SkCubicMap_new(sk_point_t p1, sk_point_t p2);
 void SkCubicMap_delete(SkCubicMap * cubic_map);
-SkCubicMap *SkCubicMap_new(SkPoint p1, SkPoint p2);
 float SkCubicMap_computeYFromX(SkCubicMap * cubic_map, float x);
-SkPoint SkCubicMap_computeFromT(SkCubicMap * cubic_map, float t);
+sk_point_t SkCubicMap_computeFromT(SkCubicMap * cubic_map, float t);
 // static
-bool SkCubicMap_IsLinear(SkPoint p1, SkPoint p2);
+bool SkCubicMap_IsLinear(sk_point_t p1, sk_point_t p2);
 }
 
 #endif //RAIA_SKIA_SK_CUBIC_MAP_H

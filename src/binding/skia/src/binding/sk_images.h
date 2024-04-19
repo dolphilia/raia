@@ -12,13 +12,14 @@
 #include "../static/static_sk_picture.h"
 #include "../static/static_sk_color_space.h"
 #include "../static/static_sk_image_generator.h"
+#include "../static/static_sk_surface_props.h"
 
 extern "C" {
 sk_image_t SkImages_RasterFromBitmap(const SkBitmap *bitmap);
 sk_image_t SkImages_RasterFromCompressedTextureData(sk_data_t data, int width, int height, SkTextureCompressionType type);
 sk_image_t SkImages_DeferredFromEncodedData(sk_data_t data);
 sk_image_t SkImages_DeferredFromGenerator(sk_image_generator_t image_generator);
-sk_image_t SkImages_DeferredFromPicture(sk_picture_t picture, const SkISize *dimensions, const SkMatrix *matrix, const SkPaint *paint, SkImages::BitDepth bitDepth, sk_color_space_t color_space, SkSurfaceProps props);
+sk_image_t SkImages_DeferredFromPicture(sk_picture_t picture, const SkISize *dimensions, const SkMatrix *matrix, const SkPaint *paint, SkImages::BitDepth bitDepth, sk_color_space_t color_space, sk_surface_props_t props);
 sk_image_t SkImages_DeferredFromPicture_2(sk_picture_t picture, const SkISize *dimensions, const SkMatrix *matrix, const SkPaint *paint, SkImages::BitDepth bitDepth, sk_color_space_t color_space);
 sk_image_t SkImages_RasterFromPixmapCopy(const SkPixmap *pixmap);
 sk_image_t SkImages_RasterFromPixmap(const SkPixmap *pixmap, SkImages::RasterReleaseProc rasterReleaseProc, SkImages::ReleaseContext releaseContext);

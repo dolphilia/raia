@@ -29,7 +29,7 @@ void SkPicture_unref(SkPicture *picture);
 sk_picture_t SkPicture_MakeFromStream(SkStream *stream, const SkDeserialProcs *procs);
 sk_picture_t SkPicture_MakeFromData(const SkData *data, const SkDeserialProcs *procs);
 sk_picture_t SkPicture_MakeFromData_2(const void *data, size_t size, const SkDeserialProcs *procs);
-sk_picture_t SkPicture_MakePlaceholder(SkRect cull);
+sk_picture_t SkPicture_MakePlaceholder(sk_rect_t cull);
 }
 
 #endif //RAIA_SKIA_SK_PICTURE_H

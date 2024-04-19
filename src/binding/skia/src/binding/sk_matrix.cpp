@@ -301,20 +301,20 @@ void SkMatrix_mapHomogeneousPoints_2(SkMatrix *matrix, SkPoint3 dst[], const SkP
     matrix->mapHomogeneousPoints(dst, src, count);
 }
 
-SkPoint SkMatrix_mapPoint(SkMatrix *matrix, SkPoint pt) {
-    return matrix->mapPoint(pt);
+sk_point_t SkMatrix_mapPoint(SkMatrix *matrix, sk_point_t pt) {
+    return static_sk_point_make(matrix->mapPoint(static_sk_point_get(pt)));
 }
 
 void SkMatrix_mapXY(SkMatrix *matrix, SkScalar x, SkScalar y, SkPoint *result) {
     matrix->mapXY(x, y, result);
 }
 
-SkPoint SkMatrix_mapXY_2(SkMatrix *matrix, SkScalar x, SkScalar y) {
-    return matrix->mapXY(x, y);
+sk_point_t SkMatrix_mapXY_2(SkMatrix *matrix, SkScalar x, SkScalar y) {
+    return static_sk_point_make(matrix->mapXY(x, y));
 }
 
-SkPoint SkMatrix_mapOrigin(SkMatrix *matrix) {
-    return matrix->mapOrigin();
+sk_point_t SkMatrix_mapOrigin(SkMatrix *matrix) {
+    return static_sk_point_make(matrix->mapOrigin());
 }
 
 void SkMatrix_mapVectors(SkMatrix *matrix, SkVector dst[], const SkVector src[], int count) {
@@ -329,8 +329,8 @@ void SkMatrix_mapVector(SkMatrix *matrix, SkScalar dx, SkScalar dy, SkVector *re
     matrix->mapVector(dx, dy, result);
 }
 
-SkVector SkMatrix_mapVector_2(SkMatrix *matrix, SkScalar dx, SkScalar dy) {
-    return matrix->mapVector(dx, dy);
+sk_point_t SkMatrix_mapVector_2(SkMatrix *matrix, SkScalar dx, SkScalar dy) {
+    return static_sk_point_make(matrix->mapVector(dx, dy));
 }
 
 bool SkMatrix_mapRect(SkMatrix *matrix, SkRect *dst, const SkRect *src, SkApplyPerspectiveClip pc) {
@@ -400,20 +400,20 @@ sk_matrix_t SkMatrix_Translate(SkScalar dx, SkScalar dy) {
     return static_sk_matrix_make(SkMatrix::Translate(dx, dy));
 }
 
-sk_matrix_t SkMatrix_Translate_2(SkVector t) {
-    return static_sk_matrix_make(SkMatrix::Translate(t));
+sk_matrix_t SkMatrix_Translate_2(sk_point_t t) {
+    return static_sk_matrix_make(SkMatrix::Translate(static_sk_point_get(t)));
 }
 
-sk_matrix_t SkMatrix_Translate_3(SkIVector t) {
-    return static_sk_matrix_make(SkMatrix::Translate(t));
+sk_matrix_t SkMatrix_Translate_3(sk_i_point_t t) {
+    return static_sk_matrix_make(SkMatrix::Translate(static_sk_i_point_get(t)));
 }
 
 sk_matrix_t SkMatrix_RotateDeg(SkScalar deg) {
     return static_sk_matrix_make(SkMatrix::RotateDeg(deg));
 }
 
-sk_matrix_t SkMatrix_RotateDeg_2(SkScalar deg, SkPoint pt) {
-    return static_sk_matrix_make(SkMatrix::RotateDeg(deg, pt));
+sk_matrix_t SkMatrix_RotateDeg_2(SkScalar deg, sk_point_t pt) {
+    return static_sk_matrix_make(SkMatrix::RotateDeg(deg, static_sk_point_get(pt)));
 }
 
 sk_matrix_t SkMatrix_RotateRad(SkScalar rad) {

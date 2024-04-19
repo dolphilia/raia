@@ -26,12 +26,12 @@ const SkRuntimeEffect * SkRuntimeShaderBuilder_effect(SkRuntimeShaderBuilder *ru
     return runtime_shader_builder->effect();
 }
 
-SkRuntimeShaderBuilder::BuilderUniform SkRuntimeShaderBuilder_uniform(SkRuntimeShaderBuilder *runtime_shader_builder, std::string_view name) {
-    return runtime_shader_builder->uniform(name);
+sk_runtime_effect_builder_builder_uniform_t SkRuntimeShaderBuilder_uniform(SkRuntimeShaderBuilder *runtime_shader_builder, string_view_t name) {
+    return static_sk_runtime_effect_builder_builder_uniform_make(runtime_shader_builder->uniform(static_string_view_get(name)));
 }
 
-SkRuntimeShaderBuilder::BuilderChild SkRuntimeShaderBuilder_child(SkRuntimeShaderBuilder *runtime_shader_builder, std::string_view name) {
-    return runtime_shader_builder->child(name);
+sk_runtime_effect_builder_builder_child_t SkRuntimeShaderBuilder_child(SkRuntimeShaderBuilder *runtime_shader_builder, string_view_t name) {
+    return static_sk_runtime_effect_builder_builder_child_make(runtime_shader_builder->child(static_string_view_get(name)));
 }
 
 const_sk_data_t SkRuntimeShaderBuilder_uniforms(SkRuntimeShaderBuilder *runtime_shader_builder) {

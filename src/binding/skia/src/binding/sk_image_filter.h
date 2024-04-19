@@ -10,6 +10,7 @@
 #include "../static/static_sk_image_filter.h"
 #include "../static/static_sk_i_rect.h"
 #include "../static/static_sk_rect.h"
+#include "../static/static_sk_flattenable_factory.h"
 
 extern "C" {
 void SkImageFilter_delete(SkImageFilter *image_filter);
@@ -22,7 +23,7 @@ const SkImageFilter * SkImageFilter_getInput(SkImageFilter *image_filter, int i)
 sk_rect_t SkImageFilter_computeFastBounds(SkImageFilter *image_filter, const SkRect *bounds);
 bool SkImageFilter_canComputeFastBounds(SkImageFilter *image_filter);
 sk_image_filter_t SkImageFilter_makeWithLocalMatrix(SkImageFilter *image_filter, const SkMatrix *matrix);
-SkImageFilter::Factory SkImageFilter_getFactory(SkImageFilter *image_filter);
+sk_flattenable_factory_t SkImageFilter_getFactory(SkImageFilter *image_filter);
 const char * SkImageFilter_getTypeName(SkImageFilter *image_filter);
 void SkImageFilter_flatten(SkImageFilter *image_filter, SkWriteBuffer *buffer);
 SkImageFilter::Type SkImageFilter_getFlattenableType(SkImageFilter *image_filter);
@@ -33,9 +34,9 @@ void SkImageFilter_ref(SkImageFilter *image_filter);
 void SkImageFilter_unref(SkImageFilter *image_filter);
 // static
 sk_image_filter_t SkImageFilter_Deserialize(const void *data, size_t size, const SkDeserialProcs *procs);
-SkImageFilter::Factory SkImageFilter_NameToFactory(const char name[]);
-const char * SkImageFilter_FactoryToName(SkImageFilter::Factory factory);
-void SkImageFilter_Register(const char name[], SkImageFilter::Factory factory);
+sk_flattenable_factory_t SkImageFilter_NameToFactory(const char name[]);
+const char * SkImageFilter_FactoryToName(sk_flattenable_factory_t factory);
+void SkImageFilter_Register(const char name[], sk_flattenable_factory_t factory);
 }
 
 #endif //RAIA_SKIA_SK_IMAGE_FILTER_H

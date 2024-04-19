@@ -44,12 +44,12 @@ bool SkISize_equals(SkISize *i_size, int32_t w, int32_t h) {
 
 // static
 
-SkISize SkISize_Make(int32_t w, int32_t h) {
-    return SkISize::Make(w, h);
+sk_i_size_t SkISize_Make(int32_t w, int32_t h) {
+    return static_sk_i_size_make(SkISize::Make(w, h));
 }
 
-SkISize SkISize_MakeEmpty() {
-    return SkISize::MakeEmpty();
+sk_i_size_t SkISize_MakeEmpty() {
+    return static_sk_i_size_make(SkISize::MakeEmpty());
 }
 
 }

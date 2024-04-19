@@ -11,6 +11,7 @@
 #include "../static/static_sk_android_codec.h"
 #include "../static/static_sk_stream.h"
 #include "../static/static_sk_data.h"
+#include "../static/static_sk_i_size.h"
 
 extern "C" {
 void SkAndroidCodec_delete(SkAndroidCodec *androidCodec);
@@ -21,9 +22,9 @@ SkColorType SkAndroidCodec_computeOutputColorType(SkAndroidCodec *androidCodec, 
 SkAlphaType SkAndroidCodec_computeOutputAlphaType(SkAndroidCodec *androidCodec, bool requestedUnpremul);
 sk_color_space_t SkAndroidCodec_computeOutputColorSpace(SkAndroidCodec *androidCodec, SkColorType outputColorType, sk_color_space_t prefColorSpace);
 int SkAndroidCodec_computeSampleSize(SkAndroidCodec *androidCodec, SkISize* size);
-SkISize SkAndroidCodec_getSampledDimensions(SkAndroidCodec *androidCodec, int sampleSize);
+sk_i_size_t SkAndroidCodec_getSampledDimensions(SkAndroidCodec *androidCodec, int sampleSize);
 bool SkAndroidCodec_getSupportedSubset(SkAndroidCodec *androidCodec, SkIRect* desiredSubset);
-SkISize SkAndroidCodec_getSampledSubsetDimensions(SkAndroidCodec *androidCodec, int sampleSize, const SkIRect* subset);
+sk_i_size_t SkAndroidCodec_getSampledSubsetDimensions(SkAndroidCodec *androidCodec, int sampleSize, const SkIRect* subset);
 SkCodec::Result SkAndroidCodec_getAndroidPixels(SkAndroidCodec *androidCodec, const SkImageInfo* info, void* pixels, size_t rowBytes, const SkAndroidCodec::AndroidOptions* options);
 SkCodec::Result SkAndroidCodec_getAndroidPixels_2(SkAndroidCodec *androidCodec, const SkImageInfo* info, void* pixels, size_t rowBytes);
 SkCodec::Result SkAndroidCodec_getPixels(SkAndroidCodec *androidCodec, const SkImageInfo* info, void* pixels, size_t rowBytes);

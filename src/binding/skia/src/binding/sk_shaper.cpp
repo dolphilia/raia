@@ -41,8 +41,8 @@ sk_shaper_font_run_iterator_t SkShaper_MakeFontMgrRunIterator(const char *utf8, 
     return static_sk_shaper_font_run_iterator_make(SkShaper::MakeFontMgrRunIterator(utf8, utf8Bytes, *font, static_sk_font_mgr_move(font_mgr)));
 }
 
-sk_shaper_font_run_iterator_t SkShaper_MakeFontMgrRunIterator_2(const char *utf8, size_t utf8Bytes, const SkFont *font, sk_font_mgr_t font_mgr, const char *requestName, SkFontStyle requestStyle, const SkShaper::LanguageRunIterator *language_run_iterator) {
-    return static_sk_shaper_font_run_iterator_make(SkShaper::MakeFontMgrRunIterator(utf8, utf8Bytes, *font, static_sk_font_mgr_move(font_mgr), requestName, requestStyle, language_run_iterator));
+sk_shaper_font_run_iterator_t SkShaper_MakeFontMgrRunIterator_2(const char *utf8, size_t utf8Bytes, const SkFont *font, sk_font_mgr_t font_mgr, const char *requestName, sk_font_style_t requestStyle, const SkShaper::LanguageRunIterator *language_run_iterator) {
+    return static_sk_shaper_font_run_iterator_make(SkShaper::MakeFontMgrRunIterator(utf8, utf8Bytes, *font, static_sk_font_mgr_move(font_mgr), requestName, static_sk_font_style_get(requestStyle), language_run_iterator));
 }
 
 sk_shaper_bi_di_run_iterator_t SkShaper_MakeBiDiRunIterator(const char *utf8, size_t utf8Bytes, uint8_t bidiLevel) {

@@ -25,12 +25,12 @@ const SkRuntimeEffect * SkRuntimeColorFilterBuilder_effect(SkRuntimeColorFilterB
     return runtime_color_filter_builder->effect();
 }
 
-SkRuntimeColorFilterBuilder::BuilderUniform SkRuntimeColorFilterBuilder_uniform(SkRuntimeColorFilterBuilder *runtime_color_filter_builder, std::string_view name) {
-    return runtime_color_filter_builder->uniform(name);
+sk_runtime_effect_builder_builder_uniform_t SkRuntimeColorFilterBuilder_uniform(SkRuntimeColorFilterBuilder *runtime_color_filter_builder, string_view_t name) {
+    return static_sk_runtime_effect_builder_builder_uniform_make(runtime_color_filter_builder->uniform(static_string_view_get(name)));
 }
 
-SkRuntimeColorFilterBuilder::BuilderChild SkRuntimeColorFilterBuilder_child(SkRuntimeColorFilterBuilder *runtime_color_filter_builder, std::string_view name) {
-    return runtime_color_filter_builder->child(name);
+sk_runtime_effect_builder_builder_child_t SkRuntimeColorFilterBuilder_child(SkRuntimeColorFilterBuilder *runtime_color_filter_builder, string_view_t name) {
+    return static_sk_runtime_effect_builder_builder_child_make(runtime_color_filter_builder->child(static_string_view_get(name)));
 }
 
 const_sk_data_t SkRuntimeColorFilterBuilder_uniforms(SkRuntimeColorFilterBuilder *runtime_color_filter_builder) {

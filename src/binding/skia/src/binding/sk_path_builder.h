@@ -8,6 +8,7 @@
 #include "include/core/SkPathBuilder.h"
 #include "../static/static_sk_rect.h"
 #include "../static/static_sk_path.h"
+#include "../static/static_sk_point.h"
 
 extern "C" {
 // SkPathBuilder & operator=(const SkPath &)
@@ -24,33 +25,33 @@ sk_path_t SkPathBuilder_detach(SkPathBuilder *path_builder);
 SkPathBuilder * SkPathBuilder_setFillType(SkPathBuilder *path_builder, SkPathFillType ft);
 SkPathBuilder * SkPathBuilder_setIsVolatile(SkPathBuilder *path_builder, bool isVolatile);
 SkPathBuilder * SkPathBuilder_reset(SkPathBuilder *path_builder);
-SkPathBuilder * SkPathBuilder_moveTo(SkPathBuilder *path_builder, SkPoint pt);
+SkPathBuilder * SkPathBuilder_moveTo(SkPathBuilder *path_builder, sk_point_t pt);
 SkPathBuilder * SkPathBuilder_moveTo_2(SkPathBuilder *path_builder, SkScalar x, SkScalar y);
-SkPathBuilder * SkPathBuilder_lineTo(SkPathBuilder *path_builder, SkPoint pt);
+SkPathBuilder * SkPathBuilder_lineTo(SkPathBuilder *path_builder, sk_point_t pt);
 SkPathBuilder * SkPathBuilder_lineTo_2(SkPathBuilder *path_builder, SkScalar x, SkScalar y);
-SkPathBuilder * SkPathBuilder_quadTo(SkPathBuilder *path_builder, SkPoint pt1, SkPoint pt2);
+SkPathBuilder * SkPathBuilder_quadTo(SkPathBuilder *path_builder, sk_point_t pt1, sk_point_t pt2);
 SkPathBuilder * SkPathBuilder_quadTo_2(SkPathBuilder *path_builder, SkScalar x1, SkScalar y1, SkScalar x2, SkScalar y2);
 SkPathBuilder * SkPathBuilder_quadTo_3(SkPathBuilder *path_builder, const SkPoint pts[2]);
-SkPathBuilder * SkPathBuilder_conicTo(SkPathBuilder *path_builder, SkPoint pt1, SkPoint pt2, SkScalar w);
+SkPathBuilder * SkPathBuilder_conicTo(SkPathBuilder *path_builder, sk_point_t pt1, sk_point_t pt2, SkScalar w);
 SkPathBuilder * SkPathBuilder_conicTo_2(SkPathBuilder *path_builder, SkScalar x1, SkScalar y1, SkScalar x2, SkScalar y2, SkScalar w);
 SkPathBuilder * SkPathBuilder_conicTo_3(SkPathBuilder *path_builder, const SkPoint pts[2], SkScalar w);
-SkPathBuilder * SkPathBuilder_cubicTo(SkPathBuilder *path_builder, SkPoint pt1, SkPoint pt2, SkPoint pt3);
+SkPathBuilder * SkPathBuilder_cubicTo(SkPathBuilder *path_builder, sk_point_t pt1, sk_point_t pt2, sk_point_t pt3);
 SkPathBuilder * SkPathBuilder_cubicTo_2(SkPathBuilder *path_builder, SkScalar x1, SkScalar y1, SkScalar x2, SkScalar y2, SkScalar x3, SkScalar y3);
 SkPathBuilder * SkPathBuilder_cubicTo_3(SkPathBuilder *path_builder, const SkPoint pts[3]);
 SkPathBuilder * SkPathBuilder_close(SkPathBuilder *path_builder);
 SkPathBuilder * SkPathBuilder_polylineTo(SkPathBuilder *path_builder, const SkPoint pts[], int count);
 SkPathBuilder * SkPathBuilder_polylineTo_2(SkPathBuilder *path_builder, const std::initializer_list<SkPoint> *list);
-SkPathBuilder * SkPathBuilder_rLineTo(SkPathBuilder *path_builder, SkPoint pt);
+SkPathBuilder * SkPathBuilder_rLineTo(SkPathBuilder *path_builder, sk_point_t pt);
 SkPathBuilder * SkPathBuilder_rLineTo_2(SkPathBuilder *path_builder, SkScalar x, SkScalar y);
-SkPathBuilder * SkPathBuilder_rQuadTo(SkPathBuilder *path_builder, SkPoint pt1, SkPoint pt2);
+SkPathBuilder * SkPathBuilder_rQuadTo(SkPathBuilder *path_builder, sk_point_t pt1, sk_point_t pt2);
 SkPathBuilder * SkPathBuilder_rQuadTo_2(SkPathBuilder *path_builder, SkScalar x1, SkScalar y1, SkScalar x2, SkScalar y2);
-SkPathBuilder * SkPathBuilder_rConicTo(SkPathBuilder *path_builder, SkPoint p1, SkPoint p2, SkScalar w);
+SkPathBuilder * SkPathBuilder_rConicTo(SkPathBuilder *path_builder, sk_point_t p1, sk_point_t p2, SkScalar w);
 SkPathBuilder * SkPathBuilder_rConicTo_2(SkPathBuilder *path_builder, SkScalar x1, SkScalar y1, SkScalar x2, SkScalar y2, SkScalar w);
-SkPathBuilder * SkPathBuilder_rCubicTo(SkPathBuilder *path_builder, SkPoint pt1, SkPoint pt2, SkPoint pt3);
+SkPathBuilder * SkPathBuilder_rCubicTo(SkPathBuilder *path_builder, sk_point_t pt1, sk_point_t pt2, sk_point_t pt3);
 SkPathBuilder * SkPathBuilder_rCubicTo_2(SkPathBuilder *path_builder, SkScalar x1, SkScalar y1, SkScalar x2, SkScalar y2, SkScalar x3, SkScalar y3);
 SkPathBuilder * SkPathBuilder_arcTo(SkPathBuilder *path_builder, const SkRect *oval, SkScalar startAngleDeg, SkScalar sweepAngleDeg, bool forceMoveTo);
-SkPathBuilder * SkPathBuilder_arcTo_2(SkPathBuilder *path_builder, SkPoint p1, SkPoint p2, SkScalar radius);
-SkPathBuilder * SkPathBuilder_arcTo_3(SkPathBuilder *path_builder, SkPoint r, SkScalar xAxisRotate, SkPathBuilder::ArcSize largeArc, SkPathDirection sweep, SkPoint xy);
+SkPathBuilder * SkPathBuilder_arcTo_2(SkPathBuilder *path_builder, sk_point_t p1, sk_point_t p2, SkScalar radius);
+SkPathBuilder * SkPathBuilder_arcTo_3(SkPathBuilder *path_builder, sk_point_t r, SkScalar xAxisRotate, SkPathBuilder::ArcSize largeArc, SkPathDirection sweep, sk_point_t xy);
 SkPathBuilder * SkPathBuilder_addArc(SkPathBuilder *path_builder, const SkRect *oval, SkScalar startAngleDeg, SkScalar sweepAngleDeg);
 SkPathBuilder * SkPathBuilder_addRect(SkPathBuilder *path_builder, const SkRect *rect, SkPathDirection dir, unsigned startIndex);
 SkPathBuilder * SkPathBuilder_addRect_2(SkPathBuilder *path_builder, const SkRect *rect, SkPathDirection dir);

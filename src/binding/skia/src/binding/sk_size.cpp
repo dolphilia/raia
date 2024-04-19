@@ -38,30 +38,30 @@ bool SkSize_equals(SkSize *size, SkScalar w, SkScalar h) {
     return size->equals(w, h);
 }
 
-SkISize SkSize_toRound(SkSize *size) {
-    return size->toRound();
+sk_i_size_t SkSize_toRound(SkSize *size) {
+    return static_sk_i_size_make(size->toRound());
 }
 
-SkISize SkSize_toCeil(SkSize *size) {
-    return size->toCeil();
+sk_i_size_t SkSize_toCeil(SkSize *size) {
+    return static_sk_i_size_make(size->toCeil());
 }
 
-SkISize SkSize_toFloor(SkSize *size) {
-    return size->toFloor();
+sk_i_size_t SkSize_toFloor(SkSize *size) {
+    return static_sk_i_size_make(size->toFloor());
 }
 
 // static
 
-SkSize SkSize_Make(SkScalar w, SkScalar h) {
-    return SkSize::Make(w, h);
+sk_size_t SkSize_Make(SkScalar w, SkScalar h) {
+    return static_sk_size_make(SkSize::Make(w, h));
 }
 
-SkSize SkSize_Make_2(const SkISize *src) {
-    return SkSize::Make(*src);
+sk_size_t SkSize_Make_2(const SkISize *src) {
+    return static_sk_size_make(SkSize::Make(*src));
 }
 
-SkSize SkSize_MakeEmpty() {
-    return SkSize::MakeEmpty();
+sk_size_t SkSize_MakeEmpty() {
+    return static_sk_size_make(SkSize::MakeEmpty());
 }
 
 }
