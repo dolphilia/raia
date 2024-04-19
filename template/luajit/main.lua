@@ -4,19 +4,28 @@ local glfw = require("modules/glfw")
 local prim = require("modules/primitive")
 local skia = require("modules/skia")
 
+--終了処理のテスト
+
+
+
 -- Skia
-local bitmap = skia.SkBitmap_new();
-skia.SkBitmap_allocN32Pixels(bitmap, 800, 600, 0);
-local canvas = skia.SkCanvas_new_3(bitmap);
-local paint = skia.SkPaint_new();
+local bitmap = skia.Bitmap.new();
+skia.Bitmap.allocN32Pixels(bitmap, 800, 600, 0);
+local canvas = skia.Canvas.new_3(bitmap);
+local paint = skia.Paint.new();
 
-skia.SkPaint_setColor(paint, 0xffffffff);
-local rect = skia.SkRect_MakeXYWH(0, 0, 800, 600);
-skia.SkCanvas_drawRect(canvas, rect, paint);
-skia.static_sk_rect_delete(rect);
+skia.Paint.setColor(paint, 0xffffffff);
+local rect = skia.Rect.MakeXYWH(0, 0, 800, 600);
+skia.Canvas.drawRect(canvas, rect, paint);
+
+
+local pixels = skia.Bitmap.getPixels(bitmap);
+
+bitmap = nil
+rect = nil
+collectgarbage("collect")
+
 --
-
-local pixels = skia.SkBitmap_getPixels(bitmap);
 
 if glfw.init() == 0 then
     error("Failed to initialize GLFW")
