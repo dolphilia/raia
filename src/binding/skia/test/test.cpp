@@ -340,8 +340,8 @@ UTEST(cskia, SkGradientShader) {
     SkBitmap_allocN32Pixels(bitmap, image_width, image_height, false);
     SkCanvas *canvas = SkCanvas_new_3(bitmap);
 
-    SkPoint point1 = SkPoint_Make(0.0f, 0.0f);
-    SkPoint point2 = SkPoint_Make(500.0f, 500.0f);
+    SkPoint point1 = static_sk_point_get(SkPoint_Make(0.0f, 0.0f));
+    SkPoint point2 = static_sk_point_get(SkPoint_Make(500.0f, 500.0f));
     SkPoint points[2] = {point1, point2};
     SkColor colors[2] = {SK_ColorBLUE, SK_ColorYELLOW};
     SkPaint *paint = SkPaint_new();
