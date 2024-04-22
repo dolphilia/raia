@@ -24,7 +24,7 @@ sk_i_rect_t SkImage_bounds(SkImage *image);
 uint32_t SkImage_uniqueID(SkImage *image);
 SkAlphaType SkImage_alphaType(SkImage *image);
 SkColorType SkImage_colorType(SkImage *image);
-SkColorSpace * cSkImage_olorSpace(SkImage *image);
+SkColorSpace * SkImage_colorSpace(SkImage *image);
 sk_color_space_t SkImage_refColorSpace(SkImage *image);
 bool SkImage_isAlphaOnly(SkImage *image);
 bool SkImage_isOpaque(SkImage *image);

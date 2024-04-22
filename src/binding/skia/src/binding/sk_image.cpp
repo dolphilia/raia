@@ -42,7 +42,7 @@ SkColorType SkImage_colorType(SkImage *image) {
     return image->colorType();
 }
 
-SkColorSpace * cSkImage_olorSpace(SkImage *image) {
+SkColorSpace * SkImage_colorSpace(SkImage *image) {
     return image->colorSpace();
 }
 
