@@ -1521,7 +1521,7 @@ ffi.cdef[[
     uint32_t SkImage_uniqueID(void *image);
     int SkImage_alphaType(void *image);
     int SkImage_colorType(void *image);
-    void * cSkImage_olorSpace(void *image);
+    void * SkImage_colorSpace(void *image);
     int SkImage_refColorSpace(void *image);
     bool SkImage_isAlphaOnly(void *image);
     bool SkImage_isOpaque(void *image);
@@ -1561,6 +1561,9 @@ ffi.cdef[[
     int SkImage_makeColorTypeAndColorSpace(void *image, void *direct, int targetColorType, int color_space);
     int SkImage_makeColorTypeAndColorSpace_2(void *image, void *recorder, int targetColorType, int color_space, int properties);
     int SkImage_reinterpretColorSpace(void *image, int color_space);
+    bool SkImage_unique(void *image);
+    void SkImage_ref(void *image);
+    void SkImage_unref(void *image);
     // ## sk_image_filter
     void SkImageFilter_delete(void *image_filter);
     int SkImageFilter_filterBounds(void *image_filter, const void *src, const void *ctm, int direction, const void *inputRect);
@@ -8550,11 +8553,15 @@ function Skia.FontStyleSet.getStyle(font_style_set, index, font_style, style)
 end
 
 function Skia.FontStyleSet.createTypeface(font_style_set, index)
-    return lib.SkFontStyleSet_createTypeface(font_style_set, index)
+    local obj = lib.SkFontStyleSet_createTypeface(font_style_set, index)
+    setFinalizer(obj, lib.static_sk_typeface_delete)
+    return obj
 end
 
 function Skia.FontStyleSet.matchStyle(font_style_set, pattern)
-    return lib.SkFontStyleSet_matchStyle(font_style_set, pattern)
+    local obj = lib.SkFontStyleSet_matchStyle(font_style_set, pattern)
+    setFinalizer(obj, lib.static_sk_typeface_delete)
+    return obj
 end
 
 function Skia.FontStyleSet.unique(font_style_set)
@@ -8581,15 +8588,21 @@ function Skia.GifDecoder.IsGif(ptr, size)
 end
 
 function Skia.GifDecoder.Decode(static_stream, result, decodeContext)
-    return lib.SkGifDecoder_Decode(static_stream, result, decodeContext)
+    local obj = lib.SkGifDecoder_Decode(static_stream, result, decodeContext)
+    setFinalizer(obj, lib.static_sk_codec_delete)
+    return obj
 end
 
 function Skia.GifDecoder.Decode_2(static_data, result, decodeContext)
-    return lib.SkGifDecoder_Decode_2(static_data, result, decodeContext)
+    local obj = lib.SkGifDecoder_Decode_2(static_data, result, decodeContext)
+    setFinalizer(obj, lib.static_sk_codec_delete)
+    return obj
 end
 
 function Skia.GifDecoder.Decoder()
-    return lib.SkGifDecoder_Decoder()
+    local obj = lib.SkGifDecoder_Decoder()
+    setFinalizer(obj, lib.static_sk_codecs_decoder_delete)
+    return obj
 end
 
 -- ## sk_gradient_shader
@@ -8600,59 +8613,87 @@ function Skia.GradientShader.delete(gradientShader)
 end
 
 function Skia.GradientShader.MakeLinear(pts, colors, pos, count, mode, flags, localMatrix)
-    return lib.SkGradientShader_MakeLinear(pts, colors, pos, count, mode, flags, localMatrix)
+    local obj = lib.SkGradientShader_MakeLinear(pts, colors, pos, count, mode, flags, localMatrix)
+    setFinalizer(obj, lib.static_sk_shader_delete)
+    return obj
 end
 
 function Skia.GradientShader.MakeLinear_2(pts, colors, color_space, pos, count, mode, interpolation, localMatrix)
-    return lib.SkGradientShader_MakeLinear_2(pts, colors, color_space, pos, count, mode, interpolation, localMatrix)
+    local obj = lib.SkGradientShader_MakeLinear_2(pts, colors, color_space, pos, count, mode, interpolation, localMatrix)
+    setFinalizer(obj, lib.static_sk_shader_delete)
+    return obj
 end
 
 function Skia.GradientShader.MakeLinear_3(pts, colors, color_space, pos, count, mode, flags, localMatrix)
-    return lib.SkGradientShader_MakeLinear_3(pts, colors, color_space, pos, count, mode, flags, localMatrix)
+    local obj = lib.SkGradientShader_MakeLinear_3(pts, colors, color_space, pos, count, mode, flags, localMatrix)
+    setFinalizer(obj, lib.static_sk_shader_delete)
+    return obj
 end
 
 function Skia.GradientShader.MakeRadial(center, radius, colors, pos, count, mode, flags, localMatrix)
-    return lib.SkGradientShader_MakeRadial(center, radius, colors, pos, count, mode, flags, localMatrix)
+    local obj = lib.SkGradientShader_MakeRadial(center, radius, colors, pos, count, mode, flags, localMatrix)
+    setFinalizer(obj, lib.static_sk_shader_delete)
+    return obj
 end
 
 function Skia.GradientShader.MakeRadial_2(center, radius, colors, color_space, pos, count, mode, interpolation, localMatrix)
-    return lib.SkGradientShader_MakeRadial_2(center, radius, colors, color_space, pos, count, mode, interpolation, localMatrix)
+    local obj = lib.SkGradientShader_MakeRadial_2(center, radius, colors, color_space, pos, count, mode, interpolation, localMatrix)
+    setFinalizer(obj, lib.static_sk_shader_delete)
+    return obj
 end
 
 function Skia.GradientShader.MakeRadial_3(center, radius, colors, color_space, pos, count, mode, flags, localMatrix)
-    return lib.SkGradientShader_MakeRadial_3(center, radius, colors, color_space, pos, count, mode, flags, localMatrix)
+    local obj = lib.SkGradientShader_MakeRadial_3(center, radius, colors, color_space, pos, count, mode, flags, localMatrix)
+    setFinalizer(obj, lib.static_sk_shader_delete)
+    return obj
 end
 
 function Skia.GradientShader.MakeTwoPointConical(start, startRadius, end_, endRadius, colors, pos, count, mode, flags, localMatrix)
-    return lib.SkGradientShader_MakeTwoPointConical(start, startRadius, end_, endRadius, colors, pos, count, mode, flags, localMatrix)
+    local obj = lib.SkGradientShader_MakeTwoPointConical(start, startRadius, end_, endRadius, colors, pos, count, mode, flags, localMatrix)
+    setFinalizer(obj, lib.static_sk_shader_delete)
+    return obj
 end
 
 function Skia.GradientShader.MakeTwoPointConical_2(start, startRadius, end_, endRadius, colors, color_space, pos, count, mode, interpolation, localMatrix)
-    return lib.SkGradientShader_MakeTwoPointConical_2(start, startRadius, end_, endRadius, colors, color_space, pos, count, mode, interpolation, localMatrix)
+    local obj = lib.SkGradientShader_MakeTwoPointConical_2(start, startRadius, end_, endRadius, colors, color_space, pos, count, mode, interpolation, localMatrix)
+    setFinalizer(obj, lib.static_sk_shader_delete)
+    return obj
 end
 
 function Skia.GradientShader.MakeTwoPointConical_3(start, startRadius, end_, endRadius, colors, color_space, pos, count, mode, flags, localMatrix)
-    return lib.SkGradientShader_MakeTwoPointConical_3(start, startRadius, end_, endRadius, colors, color_space, pos, count, mode, flags, localMatrix)
+    local obj = lib.SkGradientShader_MakeTwoPointConical_3(start, startRadius, end_, endRadius, colors, color_space, pos, count, mode, flags, localMatrix)
+    setFinalizer(obj, lib.static_sk_shader_delete)
+    return obj
 end
 
 function Skia.GradientShader.MakeSweep(cx, cy, colors, pos, count, mode, startAngle, endAngle, flags, localMatrix)
-    return lib.SkGradientShader_MakeSweep(cx, cy, colors, pos, count, mode, startAngle, endAngle, flags, localMatrix)
+    local obj = lib.SkGradientShader_MakeSweep(cx, cy, colors, pos, count, mode, startAngle, endAngle, flags, localMatrix)
+    setFinalizer(obj, lib.static_sk_shader_delete)
+    return obj
 end
 
 function Skia.GradientShader.MakeSweep_2(cx, cy, colors, pos, count, flags, localMatrix)
-    return lib.SkGradientShader_MakeSweep_2(cx, cy, colors, pos, count, flags, localMatrix)
+    local obj = lib.SkGradientShader_MakeSweep_2(cx, cy, colors, pos, count, flags, localMatrix)
+    setFinalizer(obj, lib.static_sk_shader_delete)
+    return obj
 end
 
 function Skia.GradientShader.MakeSweep_3(cx, cy, colors, color_space, pos, count, mode, startAngle, endAngle, interpolation, localMatrix)
-    return lib.SkGradientShader_MakeSweep_3(cx, cy, colors, color_space, pos, count, mode, startAngle, endAngle, interpolation, localMatrix)
+    local obj = lib.SkGradientShader_MakeSweep_3(cx, cy, colors, color_space, pos, count, mode, startAngle, endAngle, interpolation, localMatrix)
+    setFinalizer(obj, lib.static_sk_shader_delete)
+    return obj
 end
 
 function Skia.GradientShader.MakeSweep_4(cx, cy, colors, color_space, pos, count, mode, startAngle, endAngle, flags, localMatrix)
-    return lib.SkGradientShader_MakeSweep_4(cx, cy, colors, color_space, pos, count, mode, startAngle, endAngle, flags, localMatrix)
+    local obj = lib.SkGradientShader_MakeSweep_4(cx, cy, colors, color_space, pos, count, mode, startAngle, endAngle, flags, localMatrix)
+    setFinalizer(obj, lib.static_sk_shader_delete)
+    return obj
 end
 
 function Skia.GradientShader.MakeSweep_5(cx, cy, colors, color_space, pos, count, flags, localMatrix)
-    return lib.SkGradientShader_MakeSweep_5(cx, cy, colors, color_space, pos, count, flags, localMatrix)
+    local obj = lib.SkGradientShader_MakeSweep_5(cx, cy, colors, color_space, pos, count, flags, localMatrix)
+    setFinalizer(obj, lib.static_sk_shader_delete)
+    return obj
 end
 
 -- ## sk_graphics
@@ -8733,6 +8774,7 @@ end
 --SkGraphics::ImageGeneratorFromEncodedDataFactory SkGraphics_SetImageGeneratorFromEncodedDataFactory(SkGraphics::ImageGeneratorFromEncodedDataFactory factory)
 --SkGraphics::OpenTypeSVGDecoderFactory SkGraphics_SetOpenTypeSVGDecoderFactory(SkGraphics::OpenTypeSVGDecoderFactory factory)
 --SkGraphics::OpenTypeSVGDecoderFactory SkGraphics_GetOpenTypeSVGDecoderFactory()
+
 -- ## sk_high_contrast_config
 Skia.HighContrastConfig = {}
 
@@ -8760,7 +8802,9 @@ function Skia.HighContrastFilter.delete(highContrastFilter)
 end
 
 function Skia.HighContrastFilter.Make(config)
-    return lib.SkHighContrastFilter_Make(config)
+    local obj = lib.SkHighContrastFilter_Make(config)
+    setFinalizer(obj, lib.static_sk_color_filter_delete)
+    return obj
 end
 
 -- ## sk_i_rect
@@ -8795,7 +8839,9 @@ function Skia.IRect.y(i_rect)
 end
 
 function Skia.IRect.topLeft(i_rect)
-    return lib.SkIRect_topLeft(i_rect)
+    local obj = lib.SkIRect_topLeft(i_rect)
+    setFinalizer(obj, lib.static_sk_i_point_delete)
+    return obj
 end
 
 function Skia.IRect.width(i_rect)
@@ -8807,7 +8853,9 @@ function Skia.IRect.height(i_rect)
 end
 
 function Skia.IRect.size(i_rect)
-    return lib.SkIRect_size(i_rect)
+    local obj = lib.SkIRect_size(i_rect)
+    setFinalizer(obj, lib.static_sk_i_size_delete)
+    return obj
 end
 
 function Skia.IRect.width64(i_rect)
@@ -8847,19 +8895,27 @@ function Skia.IRect.setSize(i_rect, size)
 end
 
 function Skia.IRect.makeOffset(i_rect, dx, dy)
-    return lib.SkIRect_makeOffset(i_rect, dx, dy)
+    local obj = lib.SkIRect_makeOffset(i_rect, dx, dy)
+    setFinalizer(obj, lib.static_sk_i_rect_delete)
+    return obj
 end
 
 function Skia.IRect.makeOffset_2(i_rect, offset)
-    return lib.SkIRect_makeOffset_2(i_rect, offset)
+    local obj = lib.SkIRect_makeOffset_2(i_rect, offset)
+    setFinalizer(obj, lib.static_sk_i_rect_delete)
+    return obj
 end
 
 function Skia.IRect.makeInset(i_rect, dx, dy)
-    return lib.SkIRect_makeInset(i_rect, dx, dy)
+    local obj = lib.SkIRect_makeInset(i_rect, dx, dy)
+    setFinalizer(obj, lib.static_sk_i_rect_delete)
+    return obj
 end
 
 function Skia.IRect.makeOutset(i_rect, dx, dy)
-    return lib.SkIRect_makeOutset(i_rect, dx, dy)
+    local obj = lib.SkIRect_makeOutset(i_rect, dx, dy)
+    setFinalizer(obj, lib.static_sk_i_rect_delete)
+    return obj
 end
 
 function Skia.IRect.offset(i_rect, dx, dy)
@@ -8919,31 +8975,45 @@ function Skia.IRect.sort(i_rect)
 end
 
 function Skia.IRect.makeSorted(i_rect)
-    return lib.SkIRect_makeSorted(i_rect)
+    local obj = lib.SkIRect_makeSorted(i_rect)
+    setFinalizer(obj, lib.static_sk_i_rect_delete)
+    return obj
 end
 
 function Skia.IRect.MakeEmpty()
-    return lib.SkIRect_MakeEmpty()
+    local obj = lib.SkIRect_MakeEmpty()
+    setFinalizer(obj, lib.static_sk_i_rect_delete)
+    return obj
 end
 
 function Skia.IRect.MakeWH(w, h)
-    return lib.SkIRect_MakeWH(w, h)
+    local obj = lib.SkIRect_MakeWH(w, h)
+    setFinalizer(obj, lib.static_sk_i_rect_delete)
+    return obj
 end
 
 function Skia.IRect.MakeSize(size)
-    return lib.SkIRect_MakeSize(size)
+    local obj = lib.SkIRect_MakeSize(size)
+    setFinalizer(obj, lib.static_sk_i_rect_delete)
+    return obj
 end
 
 function Skia.IRect.MakePtSize(pt, size)
-    return lib.SkIRect_MakePtSize(pt, size)
+    local obj = lib.SkIRect_MakePtSize(pt, size)
+    setFinalizer(obj, lib.static_sk_i_rect_delete)
+    return obj
 end
 
 function Skia.IRect.MakeLTRB(l, t, r, b)
-    return lib.SkIRect_MakeLTRB(l, t, r, b)
+    local obj = lib.SkIRect_MakeLTRB(l, t, r, b)
+    setFinalizer(obj, lib.static_sk_i_rect_delete)
+    return obj
 end
 
 function Skia.IRect.MakeXYWH(x, y, w, h)
-    return lib.SkIRect_MakeXYWH(x, y, w, h)
+    local obj = lib.SkIRect_MakeXYWH(x, y, w, h)
+    setFinalizer(obj, lib.static_sk_i_rect_delete)
+    return obj
 end
 
 function Skia.IRect.Intersects(a, b)
@@ -8990,22 +9060,30 @@ function Skia.ISize.equals(i_size, w, h)
 end
 
 function Skia.ISize.Make(w, h)
-    return lib.SkISize_Make(w, h)
+    local obj = lib.SkISize_Make(w, h)
+    setFinalizer(obj, lib.static_sk_i_size_delete)
+    return obj
 end
 
 function Skia.ISize.MakeEmpty()
-    return lib.SkISize_MakeEmpty()
+    local obj = lib.SkISize_MakeEmpty()
+    setFinalizer(obj, lib.static_sk_i_size_delete)
+    return obj
 end
 
 -- ## sk_icc
 Skia.ICC = {}
 
 function Skia.ICC.SkWriteICCProfile(transferFunction, toXYZD50)
-    return lib.SkICC_SkWriteICCProfile(transferFunction, toXYZD50)
+    local obj = lib.SkICC_SkWriteICCProfile(transferFunction, toXYZD50)
+    setFinalizer(obj, lib.static_sk_data_delete)
+    return obj
 end
 
 function Skia.ICC.SkWriteICCProfile_2(iccProfile, description)
-    return lib.SkICC_SkWriteICCProfile_2(iccProfile, description)
+    local obj = lib.SkICC_SkWriteICCProfile_2(iccProfile, description)
+    setFinalizer(obj, lib.static_const_sk_data_delete)
+    return obj
 end
 
 function Skia.ICC.SkICCFloatXYZD50ToGrid16Lab(float_xyz, grid16_lab)
@@ -9024,15 +9102,21 @@ function Skia.IcoDecoder.IsIco(ptr, size)
 end
 
 function Skia.IcoDecoder.Decode(static_stream, result, decodeContext)
-    return lib.SkIcoDecoder_Decode(static_stream, result, decodeContext)
+    local obj = lib.SkIcoDecoder_Decode(static_stream, result, decodeContext)
+    setFinalizer(obj, lib.static_sk_codec_delete)
+    return obj
 end
 
 function Skia.IcoDecoder.Decode_2(static_data, result, decodeContext)
-    return lib.SkIcoDecoder_Decode_2(static_data, result, decodeContext)
+    local obj = lib.SkIcoDecoder_Decode_2(static_data, result, decodeContext)
+    setFinalizer(obj, lib.static_sk_codec_delete)
+    return obj
 end
 
 function Skia.IcoDecoder.Decoder()
-    return lib.SkIcoDecoder_Decoder()
+    local obj = lib.SkIcoDecoder_Decoder()
+    setFinalizer(obj, lib.static_sk_codecs_decoder_delete)
+    return obj
 end
 
 -- ## sk_image
@@ -9055,11 +9139,15 @@ function Skia.Image.height(image)
 end
 
 function Skia.Image.dimensions(image)
-    return lib.SkImage_dimensions(image)
+    local obj = lib.SkImage_dimensions(image)
+    setFinalizer(obj, lib.static_sk_i_size_delete)
+    return obj
 end
 
 function Skia.Image.bounds(image)
-    return lib.SkImage_bounds(image)
+    local obj = lib.SkImage_bounds(image)
+    setFinalizer(obj, lib.static_sk_i_rect_delete)
+    return obj
 end
 
 function Skia.Image.uniqueID(image)
@@ -9074,12 +9162,14 @@ function Skia.Image.colorType(image)
     return lib.SkImage_colorType(image)
 end
 
-function cSkImage_olorSpace(image)
-    return lib. cSkImage_olorSpace(image)
+function SkImage_colorSpace(image)
+    return lib.SkImage_colorSpace(image)
 end
 
 function Skia.Image.refColorSpace(image)
-    return lib.SkImage_refColorSpace(image)
+    local obj = lib.SkImage_refColorSpace(image)
+    setFinalizer(obj, lib.static_sk_color_space_delete)
+    return obj
 end
 
 function Skia.Image.isAlphaOnly(image)
@@ -9091,35 +9181,51 @@ function Skia.Image.isOpaque(image)
 end
 
 function Skia.Image.makeShader(image, tmx, tmy, sampling, localMatrix)
-    return lib.SkImage_makeShader(image, tmx, tmy, sampling, localMatrix)
+    local obj = lib.SkImage_makeShader(image, tmx, tmy, sampling, localMatrix)
+    setFinalizer(obj, lib.static_sk_shader_delete)
+    return obj
 end
 
 function Skia.Image.makeShader_2(image, tmx, tmy, sampling, lm)
-    return lib.SkImage_makeShader_2(image, tmx, tmy, sampling, lm)
+    local obj = lib.SkImage_makeShader_2(image, tmx, tmy, sampling, lm)
+    setFinalizer(obj, lib.static_sk_shader_delete)
+    return obj
 end
 
 function Skia.Image.makeShader_3(image, sampling, lm)
-    return lib.SkImage_makeShader_3(image, sampling, lm)
+    local obj = lib.SkImage_makeShader_3(image, sampling, lm)
+    setFinalizer(obj, lib.static_sk_shader_delete)
+    return obj
 end
 
 function Skia.Image.makeShader_4(image, sampling, lm)
-    return lib.SkImage_makeShader_4(image, sampling, lm)
+    local obj = lib.SkImage_makeShader_4(image, sampling, lm)
+    setFinalizer(obj, lib.static_sk_shader_delete)
+    return obj
 end
 
 function Skia.Image.makeRawShader(image, tmx, tmy, sampling, localMatrix)
-    return lib.SkImage_makeRawShader(image, tmx, tmy, sampling, localMatrix)
+    local obj = lib.SkImage_makeRawShader(image, tmx, tmy, sampling, localMatrix)
+    setFinalizer(obj, lib.static_sk_shader_delete)
+    return obj
 end
 
 function Skia.Image.makeRawShader_2(image, tmx, tmy, sampling, lm)
-    return lib.SkImage_makeRawShader_2(image, tmx, tmy, sampling, lm)
+    local obj = lib.SkImage_makeRawShader_2(image, tmx, tmy, sampling, lm)
+    setFinalizer(obj, lib.static_sk_shader_delete)
+    return obj
 end
 
 function Skia.Image.makeRawShader_3(image, sampling, lm)
-    return lib.SkImage_makeRawShader_3(image, sampling, lm)
+    local obj = lib.SkImage_makeRawShader_3(image, sampling, lm)
+    setFinalizer(obj, lib.static_sk_shader_delete)
+    return obj
 end
 
 function Skia.Image.makeRawShader_4(image, sampling, lm)
-    return lib.SkImage_makeRawShader_4(image, sampling, lm)
+    local obj = lib.SkImage_makeRawShader_4(image, sampling, lm)
+    setFinalizer(obj, lib.static_sk_shader_delete)
+    return obj
 end
 
 function Skia.Image.peekPixels(image, pixmap)
@@ -9162,15 +9268,21 @@ function Skia.Image.scalePixels(image, dst, sampling, cachingHint)
 end
 
 function Skia.Image.refEncodedData(image)
-    return lib.SkImage_refEncodedData(image)
+    local obj = lib.SkImage_refEncodedData(image)
+    setFinalizer(obj, lib.static_sk_data_delete)
+    return obj
 end
 
 function Skia.Image.makeSubset(image, direct, subset)
-    return lib.SkImage_makeSubset(image, direct, subset)
+    local obj = lib.SkImage_makeSubset(image, direct, subset)
+    setFinalizer(obj, lib.static_sk_image_delete)
+    return obj
 end
 
 function Skia.Image.makeSubset_2(image, recorder, subset, properties)
-    return lib.SkImage_makeSubset_2(image, recorder, subset, properties)
+    local obj = lib.SkImage_makeSubset_2(image, recorder, subset, properties)
+    setFinalizer(obj, lib.static_sk_image_delete)
+    return obj
 end
 
 function Skia.Image.hasMipmaps(image)
@@ -9182,19 +9294,27 @@ function Skia.Image.isProtected(image)
 end
 
 function Skia.Image.withDefaultMipmaps(image)
-    return lib.SkImage_withDefaultMipmaps(image)
+    local obj = lib.SkImage_withDefaultMipmaps(image)
+    setFinalizer(obj, lib.static_sk_image_delete)
+    return obj
 end
 
 function Skia.Image.makeNonTextureImage(image, context)
-    return lib.SkImage_makeNonTextureImage(image, context)
+    local obj = lib.SkImage_makeNonTextureImage(image, context)
+    setFinalizer(obj, lib.static_sk_image_delete)
+    return obj
 end
 
 function Skia.Image.makeRasterImage(image, context, cachingHint)
-    return lib.SkImage_makeRasterImage(image, context, cachingHint)
+    local obj = lib.SkImage_makeRasterImage(image, context, cachingHint)
+    setFinalizer(obj, lib.static_sk_image_delete)
+    return obj
 end
 
 function Skia.Image.makeRasterImage_2(image, cachingHint)
-    return lib.SkImage_makeRasterImage_2(image, cachingHint)
+    local obj = lib.SkImage_makeRasterImage_2(image, cachingHint)
+    setFinalizer(obj, lib.static_sk_image_delete)
+    return obj
 end
 
 function Skia.Image.asLegacyBitmap(image, bitmap, legacyBitmapMode)
@@ -9206,23 +9326,45 @@ function Skia.Image.isLazyGenerated(image)
 end
 
 function Skia.Image.makeColorSpace(image, direct, color_space)
-    return lib.SkImage_makeColorSpace(image, direct, color_space)
+    local obj = lib.SkImage_makeColorSpace(image, direct, color_space)
+    setFinalizer(obj, lib.static_sk_image_delete)
+    return obj
 end
 
 function Skia.Image.makeColorSpace_2(image, recorder, color_space, properties)
-    return lib.SkImage_makeColorSpace_2(image, recorder, color_space, properties)
+    local obj = lib.SkImage_makeColorSpace_2(image, recorder, color_space, properties)
+    setFinalizer(obj, lib.static_sk_image_delete)
+    return obj
 end
 
 function Skia.Image.makeColorTypeAndColorSpace(image, direct, targetColorType, color_space)
-    return lib.SkImage_makeColorTypeAndColorSpace(image, direct, targetColorType, color_space)
+    local obj = lib.SkImage_makeColorTypeAndColorSpace(image, direct, targetColorType, color_space)
+    setFinalizer(obj, lib.static_sk_image_delete)
+    return obj
 end
 
 function Skia.Image.makeColorTypeAndColorSpace_2(image, recorder, targetColorType, color_space, properties)
-    return lib.SkImage_makeColorTypeAndColorSpace_2(image, recorder, targetColorType, color_space, properties)
+    local obj = lib.SkImage_makeColorTypeAndColorSpace_2(image, recorder, targetColorType, color_space, properties)
+    setFinalizer(obj, lib.static_sk_image_delete)
+    return obj
 end
 
 function Skia.Image.reinterpretColorSpace(image, color_space)
-    return lib.SkImage_reinterpretColorSpace(image, color_space)
+    local obj = lib.SkImage_reinterpretColorSpace(image, color_space)
+    setFinalizer(obj, lib.static_sk_image_delete)
+    return obj
+end
+
+function Skia.Image.unique(image)
+    return lib.SkImage_unique(image)
+end
+
+function Skia.Image.ref(image)
+    lib.SkImage_ref(image)
+end
+
+function Skia.Image.unref(image)
+    lib.SkImage_unref(image)
 end
 
 -- ## sk_image_filter
@@ -9233,7 +9375,9 @@ function Skia.ImageFilter.delete(image_filter)
 end
 
 function Skia.ImageFilter.filterBounds(image_filter, src, ctm, direction, inputRect)
-    return lib.SkImageFilter_filterBounds(image_filter, src, ctm, direction, inputRect)
+    local obj = lib.SkImageFilter_filterBounds(image_filter, src, ctm, direction, inputRect)
+    setFinalizer(obj, lib.static_sk_i_rect_delete)
+    return obj
 end
 
 function Skia.ImageFilter.isColorFilterNode(image_filter, filterPtr)
@@ -9257,7 +9401,9 @@ function Skia.ImageFilter.getInput(image_filter, i)
 end
 
 function Skia.ImageFilter.computeFastBounds(image_filter, bounds)
-    return lib.SkImageFilter_computeFastBounds(image_filter, bounds)
+    local obj = lib.SkImageFilter_computeFastBounds(image_filter, bounds)
+    setFinalizer(obj, lib.static_sk_i_rect_delete)
+    return obj
 end
 
 function Skia.ImageFilter.canComputeFastBounds(image_filter)
@@ -9265,11 +9411,15 @@ function Skia.ImageFilter.canComputeFastBounds(image_filter)
 end
 
 function Skia.ImageFilter.makeWithLocalMatrix(image_filter, matrix)
-    return lib.SkImageFilter_makeWithLocalMatrix(image_filter, matrix)
+    local obj = lib.SkImageFilter_makeWithLocalMatrix(image_filter, matrix)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilter.getFactory(image_filter)
-    return lib.SkImageFilter_getFactory(image_filter)
+    local obj = lib.SkImageFilter_getFactory(image_filter)
+    setFinalizer(obj, lib.static_sk_flattenable_factory_delete)
+    return obj
 end
 
 function Skia.ImageFilter.getTypeName(image_filter)
@@ -9285,7 +9435,9 @@ function Skia.ImageFilter.getFlattenableType(image_filter)
 end
 
 function Skia.ImageFilter.serialize(image_filter, procs)
-    return lib.SkImageFilter_serialize(image_filter, procs)
+    local obj = lib.SkImageFilter_serialize(image_filter, procs)
+    setFinalizer(obj, lib.static_sk_data_delete)
+    return obj
 end
 
 function Skia.ImageFilter.serialize_2(image_filter, memory, memory_size, procs)
@@ -9305,11 +9457,15 @@ function Skia.ImageFilter.unref(image_filter)
 end
 
 function Skia.ImageFilter.Deserialize(data, size, procs)
-    return lib.SkImageFilter_Deserialize(data, size, procs)
+    local obj = lib.SkImageFilter_Deserialize(data, size, procs)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilter.NameToFactory(name)
-    return lib.SkImageFilter_NameToFactory(name)
+    local obj = lib.SkImageFilter_NameToFactory(name)
+    setFinalizer(obj, lib.static_sk_flattenable_factory_delete)
+    return obj
 end
 
 function Skia.ImageFilter.FactoryToName(factory)
@@ -9328,155 +9484,231 @@ function Skia.ImageFilters.delete(imageFilters)
 end
 
 function Skia.ImageFilters.Arithmetic(k1, k2, k3, k4, enforcePMColor, background, foreground, cropRect)
-    return lib.SkImageFilters_Arithmetic(k1, k2, k3, k4, enforcePMColor, background, foreground, cropRect)
+    local obj = lib.SkImageFilters_Arithmetic(k1, k2, k3, k4, enforcePMColor, background, foreground, cropRect)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.Blend(mode, background, foreground, cropRect)
-    return lib.SkImageFilters_Blend(mode, background, foreground, cropRect)
+    local obj = lib.SkImageFilters_Blend(mode, background, foreground, cropRect)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.Blend_2(blender, background, foreground, cropRect)
-    return lib.SkImageFilters_Blend_2(blender, background, foreground, cropRect)
+    local obj = lib.SkImageFilters_Blend_2(blender, background, foreground, cropRect)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.Blur(sigmaX, sigmaY, tileMode, input, cropRect)
-    return lib.SkImageFilters_Blur(sigmaX, sigmaY, tileMode, input, cropRect)
+    local obj = lib.SkImageFilters_Blur(sigmaX, sigmaY, tileMode, input, cropRect)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.Blur_2(sigmaX, sigmaY, input, cropRect)
-    return lib.SkImageFilters_Blur_2(sigmaX, sigmaY, input, cropRect)
+    local obj = lib.SkImageFilters_Blur_2(sigmaX, sigmaY, input, cropRect)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.ColorFilter(cf, input, cropRect)
-    return lib.SkImageFilters_ColorFilter(cf, input, cropRect)
+    local obj = lib.SkImageFilters_ColorFilter(cf, input, cropRect)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.Compose(outer, inner)
-    return lib.SkImageFilters_Compose(outer, inner)
+    local obj = lib.SkImageFilters_Compose(outer, inner)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.Crop(rect, tileMode, input)
-    return lib.SkImageFilters_Crop(rect, tileMode, input)
+    local obj = lib.SkImageFilters_Crop(rect, tileMode, input)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.Crop_2(rect, input)
-    return lib.SkImageFilters_Crop_2(rect, input)
+    local obj = lib.SkImageFilters_Crop_2(rect, input)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.DisplacementMap(xChannelSelector, yChannelSelector, scale, displacement, color, cropRect)
-    return lib.SkImageFilters_DisplacementMap(xChannelSelector, yChannelSelector, scale, displacement, color, cropRect)
+    local obj = lib.SkImageFilters_DisplacementMap(xChannelSelector, yChannelSelector, scale, displacement, color, cropRect)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.DropShadow(dx, dy, sigmaX, sigmaY, color, input, cropRect)
-    return lib.SkImageFilters_DropShadow(dx, dy, sigmaX, sigmaY, color, input, cropRect)
+    local obj = lib.SkImageFilters_DropShadow(dx, dy, sigmaX, sigmaY, color, input, cropRect)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.DropShadowOnly(dx, dy, sigmaX, sigmaY, color, input, cropRect)
-    return lib.SkImageFilters_DropShadowOnly(dx, dy, sigmaX, sigmaY, color, input, cropRect)
+    local obj = lib.SkImageFilters_DropShadowOnly(dx, dy, sigmaX, sigmaY, color, input, cropRect)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.Empty()
-    return lib.SkImageFilters_Empty()
+    local obj = lib.SkImageFilters_Empty()
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.Image(image, srcRect, dstRect, sampling)
-    return lib.SkImageFilters_Image(image, srcRect, dstRect, sampling)
+    local obj = lib.SkImageFilters_Image(image, srcRect, dstRect, sampling)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.Image_2(image, sampling)
-    return lib.SkImageFilters_Image_2(image, sampling)
+    local obj = lib.SkImageFilters_Image_2(image, sampling)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.Magnifier(lensBounds, zoomAmount, inset, sampling, input, cropRect)
-    return lib.SkImageFilters_Magnifier(lensBounds, zoomAmount, inset, sampling, input, cropRect)
+    local obj = lib.SkImageFilters_Magnifier(lensBounds, zoomAmount, inset, sampling, input, cropRect)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.MatrixConvolution(kernelSize, kernel, gain, bias, kernelOffset, tileMode, convolveAlpha, input, cropRect)
-    return lib.SkImageFilters_MatrixConvolution(kernelSize, kernel, gain, bias, kernelOffset, tileMode, convolveAlpha, input, cropRect)
+    local obj = lib.SkImageFilters_MatrixConvolution(kernelSize, kernel, gain, bias, kernelOffset, tileMode, convolveAlpha, input, cropRect)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.MatrixTransform(matrix, sampling, input)
-    return lib.SkImageFilters_MatrixTransform(matrix, sampling, input)
+    local obj = lib.SkImageFilters_MatrixTransform(matrix, sampling, input)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.Merge(filters, count, cropRect)
-    return lib.SkImageFilters_Merge(filters, count, cropRect)
+    local obj = lib.SkImageFilters_Merge(filters, count, cropRect)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.Merge_2(first, second, cropRect)
-    return lib.SkImageFilters_Merge_2(first, second, cropRect)
+    local obj = lib.SkImageFilters_Merge_2(first, second, cropRect)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.Offset(dx, dy, input, cropRect)
-    return lib.SkImageFilters_Offset(dx, dy, input, cropRect)
+    local obj = lib.SkImageFilters_Offset(dx, dy, input, cropRect)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.Picture(picture, targetRect)
-    return lib.SkImageFilters_Picture(picture, targetRect)
+    local obj = lib.SkImageFilters_Picture(picture, targetRect)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.Picture_2(picture)
-    return lib.SkImageFilters_Picture_2(picture)
+    local obj = lib.SkImageFilters_Picture_2(picture)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.RuntimeShader(builder, childShaderName, input)
-    return lib.SkImageFilters_RuntimeShader(builder, childShaderName, input)
+    local obj = lib.SkImageFilters_RuntimeShader(builder, childShaderName, input)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.RuntimeShader_2(builder, sampleRadius, childShaderName, input)
-    return lib.SkImageFilters_RuntimeShader_2(builder, sampleRadius, childShaderName, input)
+    local obj = lib.SkImageFilters_RuntimeShader_2(builder, sampleRadius, childShaderName, input)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.RuntimeShader_3(builder, childShaderNames, inputs, inputCount)
-    return lib.SkImageFilters_RuntimeShader_3(builder, childShaderNames, inputs, inputCount)
+    local obj = lib.SkImageFilters_RuntimeShader_3(builder, childShaderNames, inputs, inputCount)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.RuntimeShader_4(builder, maxSampleRadius, childShaderNames, inputs, inputCount)
-    return lib.SkImageFilters_RuntimeShader_4(builder, maxSampleRadius, childShaderNames, inputs, inputCount)
+    local obj = lib.SkImageFilters_RuntimeShader_4(builder, maxSampleRadius, childShaderNames, inputs, inputCount)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.Shader(shader, cropRect)
-    return lib.SkImageFilters_Shader(shader, cropRect)
+    local obj = lib.SkImageFilters_Shader(shader, cropRect)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.Shader_2(shader, dither, cropRect)
-    return lib.SkImageFilters_Shader_2(shader, dither, cropRect)
+    local obj = lib.SkImageFilters_Shader_2(shader, dither, cropRect)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.Tile(src, dst, input)
-    return lib.SkImageFilters_Tile(src, dst, input)
+    local obj = lib.SkImageFilters_Tile(src, dst, input)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.Dilate(radiusX, radiusY, input, cropRect)
-    return lib.SkImageFilters_Dilate(radiusX, radiusY, input, cropRect)
+    local obj = lib.SkImageFilters_Dilate(radiusX, radiusY, input, cropRect)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.Erode(radiusX, radiusY, input, cropRect)
-    return lib.SkImageFilters_Erode(radiusX, radiusY, input, cropRect)
+    local obj = lib.SkImageFilters_Erode(radiusX, radiusY, input, cropRect)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.DistantLitDiffuse(direction, lightColor, surfaceScale, kd, input, cropRect)
-    return lib.SkImageFilters_DistantLitDiffuse(direction, lightColor, surfaceScale, kd, input, cropRect)
+    local obj = lib.SkImageFilters_DistantLitDiffuse(direction, lightColor, surfaceScale, kd, input, cropRect)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.PointLitDiffuse(location, lightColor, surfaceScale, kd, input, cropRect)
-    return lib.SkImageFilters_PointLitDiffuse(location, lightColor, surfaceScale, kd, input, cropRect)
+    local obj = lib.SkImageFilters_PointLitDiffuse(location, lightColor, surfaceScale, kd, input, cropRect)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.SpotLitDiffuse(location, target, falloffExponent, cutoffAngle, lightColor, surfaceScale, kd, input, cropRect)
-    return lib.SkImageFilters_SpotLitDiffuse(location, target, falloffExponent, cutoffAngle, lightColor, surfaceScale, kd, input, cropRect)
+    local obj = lib.SkImageFilters_SpotLitDiffuse(location, target, falloffExponent, cutoffAngle, lightColor, surfaceScale, kd, input, cropRect)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.DistantLitSpecular(direction, lightColor, surfaceScale, ks, shininess, input, cropRect)
-    return lib.SkImageFilters_DistantLitSpecular(direction, lightColor, surfaceScale, ks, shininess, input, cropRect)
+    local obj = lib.SkImageFilters_DistantLitSpecular(direction, lightColor, surfaceScale, ks, shininess, input, cropRect)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.PointLitSpecular(location, lightColor, surfaceScale, ks, shininess, input, cropRect)
-    return lib.SkImageFilters_PointLitSpecular(location, lightColor, surfaceScale, ks, shininess, input, cropRect)
+    local obj = lib.SkImageFilters_PointLitSpecular(location, lightColor, surfaceScale, ks, shininess, input, cropRect)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 function Skia.ImageFilters.SpotLitSpecular(location, target, falloffExponent, cutoffAngle, lightColor, surfaceScale, ks, shininess, input, cropRect)
-    return lib.SkImageFilters_SpotLitSpecular(location, target, falloffExponent, cutoffAngle, lightColor, surfaceScale, ks, shininess, input, cropRect)
+    local obj = lib.SkImageFilters_SpotLitSpecular(location, target, falloffExponent, cutoffAngle, lightColor, surfaceScale, ks, shininess, input, cropRect)
+    setFinalizer(obj, lib.static_sk_image_filter_delete)
+    return obj
 end
 
 -- ## sk_image_generator
@@ -9491,11 +9723,15 @@ function Skia.ImageGenerator.uniqueID(image_generator)
 end
 
 function Skia.ImageGenerator.refEncodedData(image_generator)
-    return lib.SkImageGenerator_refEncodedData(image_generator)
+    local obj = lib.SkImageGenerator_refEncodedData(image_generator)
+    setFinalizer(obj, lib.static_sk_data_delete)
+    return obj
 end
 
 function Skia.ImageGenerator.getInfo(image_generator)
-    return lib.SkImageGenerator_getInfo(image_generator)
+    local obj = lib.SkImageGenerator_getInfo(image_generator)
+    setFinalizer(obj, lib.static_sk_image_info_delete)
+    return obj
 end
 
 function Skia.ImageGenerator.isValid(image_generator, context)
@@ -9558,7 +9794,9 @@ function Skia.ImageInfo.colorSpace(image_info)
 end
 
 function Skia.ImageInfo.refColorSpace(image_info)
-    return lib.SkImageInfo_refColorSpace(image_info)
+    local obj = lib.SkImageInfo_refColorSpace(image_info)
+    setFinalizer(obj, lib.static_sk_color_space_delete)
+    return obj
 end
 
 function Skia.ImageInfo.isEmpty(image_info)
@@ -9566,7 +9804,9 @@ function Skia.ImageInfo.isEmpty(image_info)
 end
 
 function Skia.ImageInfo.colorInfo(image_info)
-    return lib.SkImageInfo_colorInfo(image_info)
+    local obj = lib.SkImageInfo_colorInfo(image_info)
+    setFinalizer(obj, lib.static_sk_color_info_delete)
+    return obj
 end
 
 function Skia.ImageInfo.isOpaque(image_info)
@@ -9574,11 +9814,15 @@ function Skia.ImageInfo.isOpaque(image_info)
 end
 
 function Skia.ImageInfo.dimensions(image_info)
-    return lib.SkImageInfo_dimensions(image_info)
+    local obj = lib.SkImageInfo_dimensions(image_info)
+    setFinalizer(obj, lib.static_sk_i_size_delete)
+    return obj
 end
 
 function Skia.ImageInfo.bounds(image_info)
-    return lib.SkImageInfo_bounds(image_info)
+    local obj = lib.SkImageInfo_bounds(image_info)
+    setFinalizer(obj, lib.static_sk_i_rect_delete)
+    return obj
 end
 
 function Skia.ImageInfo.gammaCloseToSRGB(image_info)
@@ -9586,23 +9830,33 @@ function Skia.ImageInfo.gammaCloseToSRGB(image_info)
 end
 
 function Skia.ImageInfo.makeWH(image_info, newWidth, newHeight)
-    return lib.SkImageInfo_makeWH(image_info, newWidth, newHeight)
+    local obj = lib.SkImageInfo_makeWH(image_info, newWidth, newHeight)
+    setFinalizer(obj, lib.static_sk_image_info_delete)
+    return obj
 end
 
 function Skia.ImageInfo.makeDimensions(image_info, newSize)
-    return lib.SkImageInfo_makeDimensions(image_info, newSize)
+    local obj = lib.SkImageInfo_makeDimensions(image_info, newSize)
+    setFinalizer(obj, lib.static_sk_image_info_delete)
+    return obj
 end
 
 function Skia.ImageInfo.makeAlphaType(image_info, newAlphaType)
-    return lib.SkImageInfo_makeAlphaType(image_info, newAlphaType)
+    local obj = lib.SkImageInfo_makeAlphaType(image_info, newAlphaType)
+    setFinalizer(obj, lib.static_sk_image_info_delete)
+    return obj
 end
 
 function Skia.ImageInfo.makeColorType(image_info, newColorType)
-    return lib.SkImageInfo_makeColorType(image_info, newColorType)
+    local obj = lib.SkImageInfo_makeColorType(image_info, newColorType)
+    setFinalizer(obj, lib.static_sk_image_info_delete)
+    return obj
 end
 
 function Skia.ImageInfo.makeColorSpace(image_info, color_space)
-    return lib.SkImageInfo_makeColorSpace(image_info, color_space)
+    local obj = lib.SkImageInfo_makeColorSpace(image_info, color_space)
+    setFinalizer(obj, lib.static_sk_image_info_delete)
+    return obj
 end
 
 function Skia.ImageInfo.bytesPerPixel(image_info)
@@ -9642,67 +9896,99 @@ function Skia.ImageInfo.reset(image_info)
 end
 
 function Skia.ImageInfo.Make(width, height, ct, at)
-    return lib.SkImageInfo_Make(width, height, ct, at)
+    local obj = lib.SkImageInfo_Make(width, height, ct, at)
+    setFinalizer(obj, lib.static_sk_image_info_delete)
+    return obj
 end
 
 function Skia.ImageInfo.Make_2(width, height, ct, at, color_space)
-    return lib.SkImageInfo_Make_2(width, height, ct, at, color_space)
+    local obj = lib.SkImageInfo_Make_2(width, height, ct, at, color_space)
+    setFinalizer(obj, lib.static_sk_image_info_delete)
+    return obj
 end
 
 function Skia.ImageInfo.Make_3(dimensions, ct, at)
-    return lib.SkImageInfo_Make_3(dimensions, ct, at)
+    local obj = lib.SkImageInfo_Make_3(dimensions, ct, at)
+    setFinalizer(obj, lib.static_sk_image_info_delete)
+    return obj
 end
 
 function Skia.ImageInfo.Make_4(dimensions, ct, at, color_space)
-    return lib.SkImageInfo_Make_4(dimensions, ct, at, color_space)
+    local obj = lib.SkImageInfo_Make_4(dimensions, ct, at, color_space)
+    setFinalizer(obj, lib.static_sk_image_info_delete)
+    return obj
 end
 
 function Skia.ImageInfo.Make_5(dimensions, colorInfo)
-    return lib.SkImageInfo_Make_5(dimensions, colorInfo)
+    local obj = lib.SkImageInfo_Make_5(dimensions, colorInfo)
+    setFinalizer(obj, lib.static_sk_image_info_delete)
+    return obj
 end
 
 function Skia.ImageInfo.MakeN32(width, height, at)
-    return lib.SkImageInfo_MakeN32(width, height, at)
+    local obj = lib.SkImageInfo_MakeN32(width, height, at)
+    setFinalizer(obj, lib.static_sk_image_info_delete)
+    return obj
 end
 
 function Skia.ImageInfo.MakeN32_2(width, height, at, color_space)
-    return lib.SkImageInfo_MakeN32_2(width, height, at, color_space)
+    local obj = lib.SkImageInfo_MakeN32_2(width, height, at, color_space)
+    setFinalizer(obj, lib.static_sk_image_info_delete)
+    return obj
 end
 
 function Skia.ImageInfo.MakeS32(width, height, at)
-    return lib.SkImageInfo_MakeS32(width, height, at)
+    local obj = lib.SkImageInfo_MakeS32(width, height, at)
+    setFinalizer(obj, lib.static_sk_image_info_delete)
+    return obj
 end
 
 function Skia.ImageInfo.MakeN32Premul(width, height)
-    return lib.SkImageInfo_MakeN32Premul(width, height)
+    local obj = lib.SkImageInfo_MakeN32Premul(width, height)
+    setFinalizer(obj, lib.static_sk_image_info_delete)
+    return obj
 end
 
 function Skia.ImageInfo.MakeN32Premul_2(width, height, color_space)
-    return lib.SkImageInfo_MakeN32Premul_2(width, height, color_space)
+    local obj = lib.SkImageInfo_MakeN32Premul_2(width, height, color_space)
+    setFinalizer(obj, lib.static_sk_image_info_delete)
+    return obj
 end
 
 function Skia.ImageInfo.MakeN32Premul_3(dimensions)
-    return lib.SkImageInfo_MakeN32Premul_3(dimensions)
+    local obj = lib.SkImageInfo_MakeN32Premul_3(dimensions)
+    setFinalizer(obj, lib.static_sk_image_info_delete)
+    return obj
 end
 
 function Skia.ImageInfo.MakeN32Premul_4(dimensions, color_space)
-    return lib.SkImageInfo_MakeN32Premul_4(dimensions, color_space)
+    local obj = lib.SkImageInfo_MakeN32Premul_4(dimensions, color_space)
+    setFinalizer(obj, lib.static_sk_image_info_delete)
+    return obj
 end
 
 function Skia.ImageInfo.MakeA8(width, height)
-    return lib.SkImageInfo_MakeA8(width, height)
+    local obj = lib.SkImageInfo_MakeA8(width, height)
+    setFinalizer(obj, lib.static_sk_image_info_delete)
+    return obj
 end
 
 function Skia.ImageInfo.MakeA8_2(dimensions)
-    return lib.SkImageInfo_MakeA8_2(dimensions)
+    local obj = lib.SkImageInfo_MakeA8_2(dimensions)
+    setFinalizer(obj, lib.static_sk_image_info_delete)
+    return obj
 end
 
 function Skia.ImageInfo.MakeUnknown(width, height)
-    return lib.SkImageInfo_MakeUnknown(width, height)
+    local obj = lib.SkImageInfo_MakeUnknown(width, height)
+    setFinalizer(obj, lib.static_sk_image_info_delete)
+    return obj
 end
 
 function Skia.ImageInfo.MakeUnknown_2()
-    return lib.SkImageInfo_MakeUnknown_2()
+    local obj = lib.SkImageInfo_MakeUnknown_2()
+    setFinalizer(obj, lib.static_sk_image_info_delete)
+    return obj
 end
 
 function Skia.ImageInfo.ByteSizeOverflowed(byteSize)
@@ -9713,43 +9999,63 @@ end
 Skia.Images = {}
 
 function Skia.Images.RasterFromBitmap(bitmap)
-    return lib.SkImages_RasterFromBitmap(bitmap)
+    local obj = lib.SkImages_RasterFromBitmap(bitmap)
+    setFinalizer(obj, lib.static_sk_image_delete)
+    return obj
 end
 
 function Skia.Images.RasterFromCompressedTextureData(data, width, height, type)
-    return lib.SkImages_RasterFromCompressedTextureData(data, width, height, type)
+    local obj = lib.SkImages_RasterFromCompressedTextureData(data, width, height, type)
+    setFinalizer(obj, lib.static_sk_image_delete)
+    return obj
 end
 
 function Skia.Images.DeferredFromEncodedData(data)
-    return lib.SkImages_DeferredFromEncodedData(data)
+    local obj = lib.SkImages_DeferredFromEncodedData(data)
+    setFinalizer(obj, lib.static_sk_image_delete)
+    return obj
 end
 
 function Skia.Images.DeferredFromGenerator(image_generator)
-    return lib.SkImages_DeferredFromGenerator(image_generator)
+    local obj = lib.SkImages_DeferredFromGenerator(image_generator)
+    setFinalizer(obj, lib.static_sk_image_delete)
+    return obj
 end
 
 function Skia.Images.DeferredFromPicture(picture, dimensions, matrix, paint, bitDepth, color_space, props)
-    return lib.SkImages_DeferredFromPicture(picture, dimensions, matrix, paint, bitDepth, color_space, props)
+    local obj = lib.SkImages_DeferredFromPicture(picture, dimensions, matrix, paint, bitDepth, color_space, props)
+    setFinalizer(obj, lib.static_sk_image_delete)
+    return obj
 end
 
 function Skia.Images.DeferredFromPicture_2(picture, dimensions, matrix, paint, bitDepth, color_space)
-    return lib.SkImages_DeferredFromPicture_2(picture, dimensions, matrix, paint, bitDepth, color_space)
+    local obj = lib.SkImages_DeferredFromPicture_2(picture, dimensions, matrix, paint, bitDepth, color_space)
+    setFinalizer(obj, lib.static_sk_image_delete)
+    return obj
 end
 
 function Skia.Images.RasterFromPixmapCopy(pixmap)
-    return lib.SkImages_RasterFromPixmapCopy(pixmap)
+    local obj = lib.SkImages_RasterFromPixmapCopy(pixmap)
+    setFinalizer(obj, lib.static_sk_image_delete)
+    return obj
 end
 
 function Skia.Images.RasterFromPixmap(pixmap, rasterReleaseProc, releaseContext)
-    return lib.SkImages_RasterFromPixmap(pixmap, rasterReleaseProc, releaseContext)
+    local obj = lib.SkImages_RasterFromPixmap(pixmap, rasterReleaseProc, releaseContext)
+    setFinalizer(obj, lib.static_sk_image_delete)
+    return obj
 end
 
 function Skia.Images.RasterFromData(info, data, rowBytes)
-    return lib.SkImages_RasterFromData(info, data, rowBytes)
+    local obj = lib.SkImages_RasterFromData(info, data, rowBytes)
+    setFinalizer(obj, lib.static_sk_image_delete)
+    return obj
 end
 
 function Skia.Images.MakeWithFilter(image, filter, subset, clipBounds, outSubset, offset)
-    return lib.SkImages_MakeWithFilter(image, filter, subset, clipBounds, outSubset, offset)
+    local obj = lib.SkImages_MakeWithFilter(image, filter, subset, clipBounds, outSubset, offset)
+    setFinalizer(obj, lib.static_sk_image_delete)
+    return obj
 end
 
 -- ## sk_jpeg_decoder
