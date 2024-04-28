@@ -15794,241 +15794,241 @@ function Skia.Surfaces.WrapPixels_3(imageInfo, pixels, rowBytes, pixelsReleasePr
 end
 
 -- ## sk_svg_attribute_parser
-Skia.SVG = {}
+Skia.SVGAttributeParser = {}
 
 -- ## sk_svg_circle
-Skia.SVG = {}
+Skia.SVGCircle = {}
 
 -- ## sk_svg_clip_path
-Skia.SVG = {}
+Skia.SVGClipPath = {}
 
 -- ## sk_svg_color
-Skia.SVG = {}
+Skia.SVGColor = {}
 
 -- ## sk_svg_container
-Skia.SVG = {}
+Skia.SVGContainer = {}
 
 -- ## sk_svg_dash_array
-Skia.SVG = {}
+Skia.SVGDashArray = {}
 
 -- ## sk_svg_defs
-Skia.SVG = {}
+Skia.SVGDefs = {}
 
 -- ## sk_svg_dom
-Skia.SVG = {}
+Skia.SVGDOM = {}
 
 -- ## sk_svg_ellipse
-Skia.SVG = {}
+Skia.SVGEllipse = {}
 
 -- ## sk_svg_fe
-Skia.SVG = {}
+Skia.SVGFe = {}
 
 -- ## sk_svg_fe_blend
-Skia.SVG = {}
+Skia.SVGFeBlend = {}
 
 -- ## sk_svg_fe_color_matrix
-Skia.SVG = {}
+Skia.SVGFeColorMatrix = {}
 
 -- ## sk_svg_fe_composite
-Skia.SVG = {}
+Skia.SVGFeComposite = {}
 
 -- ## sk_svg_fe_diffuse_lighting
-Skia.SVG = {}
+Skia.SVGFeDiffuseLighting = {}
 
 -- ## sk_svg_fe_displacement_map
-Skia.SVG = {}
+Skia.SVGFeDisplacementMap = {}
 
 -- ## sk_svg_fe_distant_light
-Skia.SVG = {}
+Skia.SVGFeDistantLight = {}
 
 -- ## sk_svg_fe_flood
-Skia.SVG = {}
+Skia.SVGFeFlood = {}
 
 -- ## sk_svg_fe_gaussian_blur
-Skia.SVG = {}
+Skia.SVGFeGaussianBlur = {}
 
 -- ## sk_svg_fe_image
-Skia.SVG = {}
+Skia.SVGFeImage = {}
 
 -- ## sk_svg_fe_input_type
-Skia.SVG = {}
+Skia.SVGFeInputType = {}
 
 -- ## sk_svg_fe_light_source
-Skia.SVG = {}
+Skia.SVGFeLightSource = {}
 
 -- ## sk_svg_fe_lighting
-Skia.SVG = {}
+Skia.SVGFeLighting = {}
 
 -- ## sk_svg_fe_morphology
-Skia.SVG = {}
+Skia.SVGFeMorphology = {}
 
 -- ## sk_svg_fe_offset
-Skia.SVG = {}
+Skia.SVGFeOffset = {}
 
 -- ## sk_svg_fe_point_light
-Skia.SVG = {}
+Skia.SVGFePointLight = {}
 
 -- ## sk_svg_fe_specular_lighting
-Skia.SVG = {}
+Skia.SVGFeSpecularLighting = {}
 
 -- ## sk_svg_fe_spot_light
-Skia.SVG = {}
+Skia.SVGFeSpotLight = {}
 
 -- ## sk_svg_fe_turbulence
-Skia.SVG = {}
+Skia.SVGFeTurbulence = {}
 
 -- ## sk_svg_fe_turbulence_base_frequency
-Skia.SVG = {}
+Skia.SVGFeTurbulenceBaseFrequency = {}
 
 -- ## sk_svg_fe_turbulence_type
-Skia.SVG = {}
+Skia.SVGFeTurbulenceType = {}
 
 -- ## sk_svg_fill_rule
-Skia.SVG = {}
+Skia.SVGFillRule = {}
 
 -- ## sk_svg_filter
-Skia.SVG = {}
+Skia.SVGFilter = {}
 
 -- ## sk_svg_filter_context
-Skia.SVG = {}
+Skia.SVGFilterContext = {}
 
 -- ## sk_svg_font_family
-Skia.SVG = {}
+Skia.SVGFontFamily = {}
 
 -- ## sk_svg_font_size
-Skia.SVG = {}
+Skia.SVGFontSize = {}
 
 -- ## sk_svg_font_style
-Skia.SVG = {}
+Skia.SVGFontStyle = {}
 
 -- ## sk_svg_font_weight
-Skia.SVG = {}
+Skia.SVGFontWeight = {}
 
 -- ## sk_svg_func_iri
-Skia.SVG = {}
+Skia.SVGFuncIRI = {}
 
 -- ## sk_svg_g
-Skia.SVG = {}
+Skia.SVGG = {}
 
 -- ## sk_svg_gradient
-Skia.SVG = {}
+Skia.SVGGradient = {}
 
 -- ## sk_svg_hidden_container
-Skia.SVG = {}
+Skia.SVGHiddenContainer = {}
 
 -- ## sk_svg_image
-Skia.SVG = {}
+Skia.SVGImage = {}
 
 -- ## sk_svg_iri
-Skia.SVG = {}
+Skia.SVGIRI = {}
 
 -- ## sk_svg_length
-Skia.SVG = {}
+Skia.SVGlength = {}
 
 -- ## sk_svg_length_context
-Skia.SVG = {}
+Skia.SVGLengthContext = {}
 
 -- ## sk_svg_line
-Skia.SVG = {}
+Skia.SVGLine = {}
 
 -- ## sk_svg_line_join
-Skia.SVG = {}
+Skia.SVGLineJoin = {}
 
 -- ## sk_svg_linear_gradient
-Skia.SVG = {}
+Skia.SVGLinearGradient = {}
 
 -- ## sk_svg_mask
-Skia.SVG = {}
+Skia.SVGMask = {}
 
 -- ## sk_svg_node
-Skia.SVG = {}
+Skia.SVGNode = {}
 
 -- ## sk_svg_object_bounding_box_units
-Skia.SVG = {}
+Skia.SVGObjectBoundingBoxUnits = {}
 
 -- ## sk_svg_open_type_svg_decoder
-Skia.SVG = {}
+Skia.SVGOpenTypeSVGDecoder = {}
 
 -- ## sk_svg_paint
-Skia.SVG = {}
+Skia.SVGPaint = {}
 
 -- ## sk_svg_path
-Skia.SVG = {}
+Skia.SVGPath = {}
 
 -- ## sk_svg_pattern
-Skia.SVG = {}
+Skia.SVGPattern = {}
 
 -- ## sk_svg_poly
-Skia.SVG = {}
+Skia.SVGPoly = {}
 
 -- ## sk_svg_presentation_attributes
-Skia.SVG = {}
+Skia.SVGPresentationAttributes = {}
 
 -- ## sk_svg_presentation_context
-Skia.SVG = {}
+Skia.SVGPresentationContext = {}
 
 -- ## sk_svg_property
-Skia.SVG = {}
+Skia.SVGProperty = {}
 
 -- ## sk_svg_radial_gradient
-Skia.SVG = {}
+Skia.SVGRadialGradient = {}
 
 -- ## sk_svg_rect
-Skia.SVG = {}
+Skia.SVGRect = {}
 
 -- ## sk_svg_render_context
-Skia.SVG = {}
+Skia.SVGRenderContext = {}
 
 -- ## sk_svg_shape
-Skia.SVG = {}
+Skia.SVGShape = {}
 
 -- ## sk_svg_spread_method
-Skia.SVG = {}
+Skia.SVGSpreadMethod = {}
 
 -- ## sk_svg_stop
-Skia.SVG = {}
+Skia.SVGStop = {}
 
 -- ## sk_svg_stop_color
-Skia.SVG = {}
+Skia.SVGStopColor = {}
 
 -- ## sk_svg_svg
-Skia.SVG = {}
+Skia.SVGSVG = {}
 
 -- ## sk_svg_t_span
-Skia.SVG = {}
+Skia.SVGTSpan = {}
 
 -- ## sk_svg_text
-Skia.SVG = {}
+Skia.SVGText = {}
 
 -- ## sk_svg_text_anchor
-Skia.SVG = {}
+Skia.SVGTextAnchor = {}
 
 -- ## sk_svg_text_container
-Skia.SVG = {}
+Skia.SVGTextContainer = {}
 
 -- ## sk_svg_text_fragment
-Skia.SVG = {}
+Skia.SVGTextFragment = {}
 
 -- ## sk_svg_text_literal
-Skia.SVG = {}
+Skia.SVGTextLiteral = {}
 
 -- ## sk_svg_text_path
-Skia.SVG = {}
+Skia.SVGTextPath = {}
 
 -- ## sk_svg_transformable_node
-Skia.SVG = {}
+Skia.SVGTransformableNode = {}
 
 -- ## sk_svg_use
-Skia.SVG = {}
+Skia.SVGUse = {}
 
 -- ## sk_svg_value
-Skia.SVG = {}
+Skia.SVGValue= {}
 
 -- ## sk_svg_visibility
-Skia.SVG = {}
+Skia.SVGVisibility = {}
 
 -- ## sk_svg_wrapper_value
-Skia.SVG = {}
+Skia.SVGWrapperValue = {}
 
 -- ## sk_table_mask_filter
 Skia.TableMaskFilter = {}
