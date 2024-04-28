@@ -1,31 +1,25 @@
 local ffi = require("ffi")
-local gl = require("modules/gles")
-local glfw = require("modules/glfw")
+local gl = require("modules/bindings/gles")
+local glfw = require("modules/bindings/glfw")
+local skia = require("modules/bindings/skia")
 local prim = require("modules/primitive")
-local skia = require("modules/skia")
+local raia = require("modules/raia")
 
---終了処理のテスト
+print(raia.system.getOS())
+local state, percent, seconds = raia.system.getPowerInfo()
 
+-- 結果を出力
+print("Power State: " .. state)  -- 数値での状態が表示されます。適宜、対応する文字列に変換することも可能です。
+print("Battery Percent: " .. percent .. "%")
+print("Remaining Time: " .. seconds .. " seconds")
+print("Processer count:" .. raia.system.getProcessorCount())
+--raia.system.openURL("https://dolphilia.com")
 
+raia.window.setTitle("Hello")
+raia.window.setMode(160, 90)
+raia.window.show()
 
--- Skia
-local bitmap = skia.Bitmap.new();
-skia.Bitmap.allocN32Pixels(bitmap, 800, 600, 0);
-local canvas = skia.Canvas.new_3(bitmap);
-local paint = skia.Paint.new();
-
-skia.Paint.setColor(paint, 0xffffffff);
-local rect = skia.Rect.MakeXYWH(0, 0, 800, 600);
-skia.Canvas.drawRect(canvas, rect, paint);
-
-
-local pixels = skia.Bitmap.getPixels(bitmap);
-
-bitmap = nil
-rect = nil
-collectgarbage("collect")
-
---
+-- 初期化処理
 
 if glfw.init() == 0 then
     error("Failed to initialize GLFW")
@@ -36,6 +30,27 @@ glfw.windowHint(glfw.CONTEXT_VERSION_MAJOR, 3)
 glfw.windowHint(glfw.CONTEXT_VERSION_MINOR, 0)
 glfw.windowHint(glfw.OPENGL_PROFILE, glfw.OPENGL_CORE_PROFILE)
 glfw.windowHint(glfw.CONTEXT_CREATION_API, glfw.EGL_CONTEXT_API)
+glfw.windowHint(glfw.VISIBLE, glfw.TRUE)
+
+
+-- Skia
+
+local bitmap = skia.Bitmap.new();
+skia.Bitmap.allocN32Pixels(bitmap, 800, 600, 0);
+local canvas = skia.Canvas.new_3(bitmap);
+local paint = skia.Paint.new();
+
+skia.Paint.setColor(paint, 0xffffffff);
+local rect = skia.Rect.MakeXYWH(0, 0, 800, 600);
+skia.Canvas.drawRect(canvas, rect, paint);
+
+local pixels = skia.Bitmap.getPixels(bitmap);
+
+bitmap = nil
+rect = nil
+collectgarbage("collect")
+
+--
 
 local width, height = 800, 600
 local window = glfw.createWindow(width, height, "Random Noise")
@@ -120,6 +135,10 @@ local noiseData = ffi.new("GLubyte[?]", width * height * 4)
 local previousTime = glfw.getTime()
 
 while glfw.windowShouldClose(window) == 0 do
+    local deltaTime = raia.timer.step()  -- デルタタイムを更新
+
+    print(string.format("Delta Time: %.5f seconds", deltaTime))
+
     gl.viewport(0, 0, 800*2, 600*2)
     gl.clearColor(1.0, 1.0, 1.0, 1.0)
     gl.clear(gl.COLOR_BUFFER_BIT)
