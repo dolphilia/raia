@@ -196,7 +196,14 @@ end
 -- Raia.filesystem
 
 --- 既存ファイルへデータを追記します。
-function Raia.filesystem.append()
+function Raia.filesystem.append(name, data, size)
+    local file, err = io.open(filename, "a")
+    if not file then
+        return false, err
+    end
+    file:write(data)
+    file:close()
+    return true
 end
 --- Raia.filesystem がシンボリック・リンクを辿るかどうかを取得します。
 function Raia.filesystem.areSymlinksEnabled()
@@ -563,6 +570,7 @@ function Raia.mouse.getCursor()
 end
 --- マウスの現在座標を返します。
 function Raia.mouse.getPosition()
+    return glfw.getCursorPos(Raia.window.id)
 end
 --- マウスに対する相対方式が有効かどうかを取得します。
 function Raia.mouse.getRelativeMode()
@@ -572,9 +580,13 @@ function Raia.mouse.getSystemCursor()
 end
 --- マウスの現在の X 位置を返します。
 function Raia.mouse.getX()
+    local mouse_x, mouse_y = glfw.getCursorPos(Raia.window.id)
+    return mouse_x
 end
 --- マウスの現在の Y 位置を返します。
 function Raia.mouse.getY()
+    local mouse_x, mouse_y = glfw.getCursorPos(Raia.window.id)
+    return mouse_y
 end
 --- （廃止）カーソルの機能性に対応しているかどうかを取得します。
 function Raia.mouse.hasCursor()
@@ -583,10 +595,10 @@ end
 function Raia.mouse.isCursorSupported()
 end
 --- 特定のマウスボタンが押されたかどうか検出します。	
-function Raia.mouse.isDown()	
+function Raia.mouse.isDown()
 end
 --- マウスが捕獲されているか確認します。	
-function Raia.mouse.isGrabbed()	
+function Raia.mouse.isGrabbed()
 end
 --- カーソルが表示されているか確認します。		
 function Raia.mouse.isVisible()
@@ -604,7 +616,8 @@ end
 function Raia.mouse.setGrabbed()
 end
 --- マウスの現在位置を設定します。
-function Raia.mouse.setPosition()
+function Raia.mouse.setPosition(x, y)
+    glfw.setCursorPos(Raia.window.id, x, y)
 end
 --- マウスの相対方式を有効にするかどうかを設定します。
 function Raia.mouse.setRelativeMode()
@@ -613,10 +626,14 @@ end
 function Raia.mouse.setVisible()
 end
 --- マウスの現在の X 位置を設定します。
-function Raia.mouse.setX()
+function Raia.mouse.setX(x)
+    local mouse_x, mouse_y = glfw.getCursorPos(Raia.window.id)
+    glfw.setCursorPos(Raia.window.id, x, mouse_y)
 end
 --- マウスの現在の Y 位置を設定します。
-function Raia.mouse.setY()
+function Raia.mouse.setY(y)
+    local mouse_x, mouse_y = glfw.getCursorPos(Raia.window.id)
+    glfw.setCursorPos(Raia.window.id, mouse_x, y)
 end
 
 -- Raia.physics
