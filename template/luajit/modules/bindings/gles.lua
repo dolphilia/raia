@@ -1,5 +1,12 @@
 local ffi = require("ffi")
 
+-- 汎用ファイナライザ設定関数
+local function setFinalizer(key, deleteFunction)
+    ffi.gc(ffi.new("int[1]", key), function(k)
+        deleteFunction(k[0])
+    end)
+end
+
 ffi.cdef[[
     typedef int32_t                khronos_int32_t;
     typedef uint32_t               khronos_uint32_t;
@@ -3026,6 +3033,28 @@ end
 
 function GLES.deleteTexturesAlt(textures)
     return lib.raia_gl_delete_textures_alt(textures)
+end
+
+-- 拡張
+
+-- テクスチャを生成し、破棄時に自動的に削除する関数をセットアップ
+function GLES.createTexture()
+    local texture = ffi.new("GLuint[1]")
+    lib.raia_gl_gen_textures(1, texture)
+    ffi.gc(texture, function(t)
+        lib.raia_gl_delete_textures(1, t)
+    end)
+    return texture
+end
+
+-- シェーダープログラムを生成し、破棄時に自動的に削除する関数をセットアップ
+function GLES.createShaderProgram()
+    local program = lib.raia_gl_create_program()
+    if program == 0 then
+        error("Failed to create shader program")
+    end
+    setFinalizer(program, lib.raia_gl_delete_program)
+    return program
 end
 
 return GLES

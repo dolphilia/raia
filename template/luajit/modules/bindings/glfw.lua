@@ -1,5 +1,12 @@
 local ffi = require("ffi")
 
+-- 汎用ファイナライザ設定関数
+local function setFinalizer(key, deleteFunction)
+    ffi.gc(ffi.new("int[1]", key), function(k)
+        deleteFunction(k[0])
+    end)
+end
+
 ffi.cdef[[
     typedef void (*GLFWglproc)(void);
     typedef void (*GLFWvkproc)(void);
@@ -1039,7 +1046,9 @@ function GLFW.windowHintString(hint, value)
 end
 
 function GLFW.createWindow(width, height, title, monitor, share)
-    return lib.raia_glfw_create_window(width, height, title, monitor, share)
+    local obj = lib.raia_glfw_create_window(width, height, title, monitor, share)
+    ffi.gc(obj, lib.raia_glfw_destroy_window)
+    return obj
 end
 
 function GLFW.destroyWindow(window)

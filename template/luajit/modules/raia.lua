@@ -5,21 +5,6 @@ local skia = require("modules/bindings/skia")
 local prim = require("modules/primitive")
 local System = require("modules/raia/system")
 
---
-
-if glfw.init() == 0 then
-    error("Failed to initialize GLFW")
-end
-
-glfw.windowHint(glfw.CLIENT_API, glfw.OPENGL_ES_API)
-glfw.windowHint(glfw.CONTEXT_VERSION_MAJOR, 3)
-glfw.windowHint(glfw.CONTEXT_VERSION_MINOR, 0)
-glfw.windowHint(glfw.OPENGL_PROFILE, glfw.OPENGL_CORE_PROFILE)
-glfw.windowHint(glfw.CONTEXT_CREATION_API, glfw.EGL_CONTEXT_API)
-glfw.windowHint(glfw.VISIBLE, glfw.FALSE)
-
---
-
 local Raia = {}
 Raia.audio = {}
 Raia.data = {}
@@ -40,11 +25,60 @@ Raia.timer = {}
 Raia.touch = {}
 Raia.video = {}
 Raia.window = {}
-Raia.window.id = glfw.createWindow(500, 500, "Untitled")
+Raia.window.id = nil
+Raia.window.x = 0
+Raia.window.y = 0
 Raia.window.width = 500
 Raia.window.height = 500
 Raia.window.title = "Untitled"
 Raia.window.visible = false
+Raia.shader = {}
+Raia.shader.program = nil
+Raia.shader.vao = nil
+Raia.shader.texture = nil
+Raia.shader.pixels = nil
+Raia.surface = {}
+Raia.surface[0] = {}
+Raia.surface[0].bitmap = nil
+Raia.surface[0].canvas = nil
+Raia.surface[0].paint = nil
+Raia.surface[0].pixels = nil
+
+-- window テーブルの初期設定
+local window = {
+    _title = "Initial Title"  -- 実際のタイトル値をプライベートプロパティとして保持
+}
+
+-- メタテーブルの設定
+
+local mt = {
+    __index = function(t, key)
+        if key == "title" then
+            return t._title
+        else
+            return nil
+        end
+    end,
+    __newindex = function(t, key, value)
+        if key == "title" then
+            t._title = value
+            t.setTitle(value)  -- title が変更されたら setTitle を呼び出す
+        else
+            rawset(t, key, value)  -- それ以外のプロパティは通常通り設定
+        end
+    end
+}
+
+-- setTitle 関数の定義
+function window.setTitle(newTitle)
+    print("Setting new title to: " .. newTitle)
+    -- 実際にタイトルを設定するロジックをここに追加
+end
+
+-- window テーブルにメタテーブルを設定
+setmetatable(window, mt)
+
+window.title = "aiueo"
 
 -- Raia.audio
 
@@ -896,6 +930,7 @@ end
 
 --- （廃止）ウィンドウの幅と高さを取得します。
 function Raia.window.getDimensions()
+    return Raia.window.width, Raia.window.height
 end
 
 --- 接続されているモニターの台数を取得します。
@@ -920,6 +955,7 @@ end
 
 --- （廃止）ウィンドウの高さを取得します。
 function Raia.window.getHeight()
+    return Raia.window.height
 end
 
 --- ウィンドウのアイコンを取得します。
@@ -936,6 +972,8 @@ end
 
 --- 画面上にあるウィンドウの位置を取得します。
 function Raia.window.getPosition()
+    local x, y = glfw.getWindowPos(Raia.window.id)
+    return x, y
 end
 
 --- ノッチなどで隠されないウィンドウ領域範囲を取得します。
@@ -953,6 +991,7 @@ end
 
 --- （廃止）ウィンドウの幅を取得します。
 function Raia.window.getWidth()
+    return Raia.window.width
 end
 
 --- ゲームのウィンドウにキーボードのフォーカスがあるか確認します。
@@ -981,6 +1020,7 @@ end
 
 --- ゲームのウィンドウが表示されているか確認します。
 function Raia.window.isVisible()
+    return Raia.window.visible
 end
 
 --- ウィンドウを可能な限り最大化します。
@@ -1004,7 +1044,15 @@ function Raia.window.setDisplaySleepEnabled()
 end
 
 --- フルスクリーンへ入るか出ます。
-function Raia.window.setFullscreen()
+function Raia.window.setFullscreen(fullscreen, monitor)
+    if fullscreen then
+        -- 現在のモニターの解像度を取得
+        local mode = glfw.getVideoMode(monitor or glfw.getPrimaryMonitor())
+        glfw.setWindowMonitor(Raia.window.id, monitor or glfw.getPrimaryMonitor(), 0, 0, mode.width, mode.height, mode.refreshRate)
+    else
+        -- ウィンドウモードに戻す
+        glfw.setWindowMonitor(Raia.window.id, nil, Raia.window.x, Raia.window.y, Raia.window.width, Raia.window.height, glfw.DONT_CARE)
+    end
 end
 
 --- ウィンドウのアイコンを設定します。
@@ -1039,7 +1087,10 @@ function Raia.window.setMode(width, height, flags)
 end
 
 --- 画面上にあるウィンドウの位置を設定します。
-function Raia.window.setPosition()
+function Raia.window.setPosition(x, y)
+    Raia.window.x = x
+    Raia.window.y = y
+    glfw.setWindowPos(Raia.window.id, x, y)
 end
 
 --- ウィンドウのタイトルを設定します。
@@ -1075,5 +1126,164 @@ function Raia.window.hide()
     glfw.hideWindow(Raia.window.id)
     Raia.window.visible = false
 end
+
+--- （拡張）ウィンドウを中央に配置する
+function Raia.window.center(width, height)
+    -- プライマリモニタのビデオモードを取得
+    local monitor = glfw.getPrimaryMonitor()
+    local mode = glfw.getVideoMode(monitor)
+    if not mode then
+        error("Failed to get video mode.")
+    end
+
+    -- 新しいウィンドウ位置を計算
+    local x = (mode.width - width) / 2
+    local y = (mode.height - height) / 2
+
+    -- ウィンドウ位置を設定
+    glfw.setWindowPos(Raia.window.id, x, y)
+end
+
+--- （拡張）
+function Raia.window.shouldClose()
+    return glfw.windowShouldClose(Raia.window.id) ~= 0  -- CのAPIは通常0以外をtrueとして扱う
+end
+
+--- （拡張）
+function Raia.window.setPixels(pixels)
+    Raia.shader.pixels = pixels
+end
+
+--- (拡張) 再描画する
+function Raia.window.redraw(isSwap, isPollEvents)
+    gl.viewport(0, 0, Raia.window.width * 2, Raia.window.height * 2)
+    gl.clearColor(1.0, 1.0, 1.0, 1.0)
+    gl.clear(gl.COLOR_BUFFER_BIT)
+
+    gl.bindTexture(gl.TEXTURE_2D, Raia.shader.texture[0])
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, Raia.window.width, Raia.window.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, Raia.shader.pixels)
+    
+    gl.useProgram(Raia.shader.program)
+    gl.bindVertexArray(Raia.shader.vao[0])
+    gl.activeTexture(gl.TEXTURE0)
+    gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_INT, nil)
+
+    if isSwap or true then
+        glfw.swapBuffers(Raia.window.id)
+    end
+    if isPollEvents or true then
+        glfw.pollEvents()
+    end
+end
+
+function Raia.window.pollEvents()
+    glfw.pollEvents()
+end
+
+-- 拡張
+
+-- オーバーライド
+
+local original_exit = os.exit
+
+-- os.exitをオーバーライド
+os.exit = function(...)
+    glfw.terminate()
+    original_exit(...)
+end
+
+-- Initialize
+
+if glfw.init() == 0 then
+    error("Failed to initialize GLFW")
+end
+
+glfw.windowHint(glfw.CLIENT_API, glfw.OPENGL_ES_API)
+glfw.windowHint(glfw.CONTEXT_VERSION_MAJOR, 3)
+glfw.windowHint(glfw.CONTEXT_VERSION_MINOR, 0)
+glfw.windowHint(glfw.OPENGL_PROFILE, glfw.OPENGL_CORE_PROFILE)
+glfw.windowHint(glfw.CONTEXT_CREATION_API, glfw.EGL_CONTEXT_API)
+glfw.windowHint(glfw.VISIBLE, glfw.FALSE)
+
+Raia.window.id = glfw.createWindow(500, 500, "Untitled")
+if Raia.window.id == nil then
+    glfw.terminate()
+    error("Failed to create GLFW window")
+end
+Raia.window.x = 0
+Raia.window.y = 0
+Raia.window.width = 500
+Raia.window.height = 500
+Raia.window.title = "Untitled"
+Raia.window.visible = true
+glfw.makeContextCurrent(Raia.window.id)
+glfw.swapInterval(1)
+
+local vertices = ffi.new("float[32]", {
+    -1.0, 1.0, 0.0,  0.0, 0.0,  -- Position 0, TexCoord 0
+    -1.0, -1.0, 0.0,  0.0, 1.0, -- Position 1, TexCoord 1
+     1.0, -1.0, 0.0,  1.0, 1.0, -- Position 2, TexCoord 2
+     1.0, 1.0, 0.0,  1.0, 0.0   -- Position 3, TexCoord 3
+})
+
+local indices = ffi.new("unsigned int[6]", {0, 1, 2, 0, 2, 3})
+Raia.shader.vao = ffi.new("GLuint[1]")
+local vbo = ffi.new("GLuint[1]")
+local ebo = ffi.new("GLuint[1]")
+
+gl.genVertexArrays(1, Raia.shader.vao)
+gl.genBuffers(1, vbo)
+gl.genBuffers(1, ebo)
+
+gl.bindVertexArray(Raia.shader.vao[0])
+gl.bindBuffer(gl.ARRAY_BUFFER, vbo[0])
+gl.bufferData(gl.ARRAY_BUFFER, ffi.sizeof(vertices), vertices, gl.STATIC_DRAW)
+gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ebo[0])
+gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, ffi.sizeof(indices), indices, gl.STATIC_DRAW)
+
+gl.vertexAttribPointer(0, 3, gl.FLOAT, gl.FALSE, 5 * ffi.sizeof("float"), ffi.cast("void *", 0))
+gl.enableVertexAttribArray(0)
+gl.vertexAttribPointer(1, 2, gl.FLOAT, gl.FALSE, 5 * ffi.sizeof("float"), ffi.cast("void *", 3 * ffi.sizeof("float")))
+gl.enableVertexAttribArray(1)
+gl.bindVertexArray(0)
+
+local vertex_shader_source = [[
+    attribute vec4 a_position;
+    attribute vec2 a_texCoord;
+    varying vec2 v_texCoord;
+    void main() {
+        gl_Position = a_position;
+        v_texCoord = a_texCoord;
+    }
+]]
+
+local fragment_shader_source = [[
+    precision mediump float;
+    varying vec2 v_texCoord;
+    uniform sampler2D s_texture;
+    void main() {
+        gl_FragColor = texture2D(s_texture, v_texCoord);
+    }
+]]
+
+local vertex_shader = gl.createShader(gl.VERTEX_SHADER)
+gl.shaderSource(vertex_shader, 1, ffi.new("const char*[1]", {vertex_shader_source}), nil)
+gl.compileShader(vertex_shader)
+local fragment_shader = gl.createShader(gl.FRAGMENT_SHADER)
+gl.shaderSource(fragment_shader, 1, ffi.new("const char*[1]", {fragment_shader_source}), nil)
+gl.compileShader(fragment_shader)
+Raia.shader.program = gl.createShaderProgram()  -- 自動解放される
+gl.attachShader(Raia.shader.program, vertex_shader)
+gl.attachShader(Raia.shader.program, fragment_shader)
+gl.linkProgram(Raia.shader.program)
+gl.deleteShader(vertex_shader)
+gl.deleteShader(fragment_shader)
+
+Raia.shader.pixels = ffi.new("GLubyte[?]", Raia.window.width * Raia.window.height * 4)
+Raia.shader.texture = gl.createTexture() -- 自動解放される
+gl.bindTexture(gl.TEXTURE_2D, Raia.shader.texture[0])
+gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, Raia.window.width, Raia.window.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, Raia.shader.pixels)
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST)
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST)
 
 return Raia
