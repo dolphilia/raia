@@ -36,7 +36,6 @@ RAIA_API PowerInfo get_power_info() {
 
 #ifdef __APPLE__
 RAIA_API PowerInfo get_power_info() {
-    printf("Power!");
     PowerInfo result = {POWER_UNKNOWN, -1, -1};
     CFTypeRef blob = IOPSCopyPowerSourcesInfo();
     CFArrayRef sources = IOPSCopyPowerSourcesList(blob);
