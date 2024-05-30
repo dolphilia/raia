@@ -115,7 +115,7 @@ sk_typeface_t SkFont_refTypeface(SkFont *font) {
 }
 
 void SkFont_setTypeface(SkFont *font, sk_typeface_t typeface) {
-    font->setTypeface(static_sk_typeface_move(typeface));
+    //font->setTypeface(static_sk_typeface_move(typeface));
 }
 
 void SkFont_setSize(SkFont *font, SkScalar textSize) {

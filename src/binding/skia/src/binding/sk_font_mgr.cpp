@@ -74,7 +74,7 @@ sk_font_mgr_t SkFontMgr_RefEmpty() {
 
 #if !defined(SK_DISABLE_LEGACY_FONTMGR_REFDEFAULT)
 sk_font_mgr_t SkFontMgr_RefDefault() {
-    return static_sk_font_mgr_make(SkFontMgr::RefDefault());
+//    return static_sk_font_mgr_make(SkFontMgr::RefDefault());
 }
 #endif
 
