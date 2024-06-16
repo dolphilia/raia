@@ -9,6 +9,7 @@ end
 
 ffi.cdef[[
     // # static
+    /*
     // ## static_gr_backend_format
     void static_gr_backend_format_delete(int key);
     // ## static_gr_backend_texture
@@ -23,6 +24,7 @@ ffi.cdef[[
     void *static_gr_direct_context_get(int key);
     // ## static_gr_direct_context_direct_context_id
     void static_gr_direct_context_direct_context_id_delete(int key);
+    */
     // ## static_sk_android_codec
     void static_sk_android_codec_delete(int key);
     void *static_sk_android_codec_get(int key);
@@ -245,6 +247,7 @@ ffi.cdef[[
     void *static_sk_surface_get(int key);
     // ## static_sk_surface_props
     void static_sk_surface_props_delete(int key);
+    /*
     // ## static_sk_svg_circle
     void static_sk_svg_circle_delete(int key);
     void *static_sk_svg_circle_get(int key);
@@ -359,6 +362,7 @@ ffi.cdef[[
     // ## static_sk_svg_use
     void static_sk_svg_use_delete(int key);
     void *static_sk_svg_use_get(int key);
+    */
     // ## static_sk_text_blob
     void static_sk_text_blob_delete(int key);
     void *static_sk_text_blob_get(int key);
@@ -403,12 +407,15 @@ ffi.cdef[[
     void static_vector_sk_scalar_insert(int key, int index, float value);
     void static_vector_sk_scalar_pop_back(int key);
     void static_vector_sk_scalar_erase(int key, int index);
+    /*
     // ## static_std_vector_sk_svg_length
     void static_vector_sk_svg_length_delete(int key);
     void static_vector_sk_svg_length_pop_back(int key);
     void static_vector_sk_svg_length_erase(int key, int index);
+    */
     //
     // # binding
+    /*
     // ## gr_backend_drawable_info
     void *GrBackendDrawableInfo_new();
     void *GrBackendDrawableInfo_new_2(const void *info);
@@ -589,6 +596,7 @@ ffi.cdef[[
     int GrYUVABackendTextures_numPlanes(void *yuvaBackendTextures);
     int GrYUVABackendTextures_textureOrigin(void *yuvaBackendTextures);
     bool GrYUVABackendTextures_isValid(void *yuvaBackendTextures);
+    */
     // ## sk_alpha_type
     bool SkAlphaType_SkAlphaTypeIsOpaque(int at);
     // ## sk_android_codec
@@ -1391,11 +1399,13 @@ ffi.cdef[[
     void SkFontStyleSet_ref(void *font_style_set);
     void SkFontStyleSet_unref(void *font_style_set);
     int SkFontStyleSet_CreateEmpty();
+    /*
     // ## sk_gif_decoder
     bool SkGifDecoder_IsGif(const void* ptr, size_t size);
     int SkGifDecoder_Decode(int static_stream, void* result, void *decodeContext);
     int SkGifDecoder_Decode_2(int static_data, void* result, void *decodeContext);
     int SkGifDecoder_Decoder();
+    */
     // ## sk_gradient_shader
     void SkGradientShader_delete(void * gradientShader);
     int SkGradientShader_MakeLinear(const void *pts, const void *colors, const float *pos, int count, int mode, uint32_t flags, const void *localMatrix);
@@ -1702,12 +1712,14 @@ ffi.cdef[[
     int SkJpegDecoder_Decode(int static_stream, void *result, void *decodeContext);
     int SkJpegDecoder_Decode_2(int static_data, void *result, void *decodeContext);
     int SkJpegDecoder_Decoder();
+    /*
     // ## sk_jpeg_encoder
     bool SkJpegEncoder_Encode(void* dst, const void* src, const void* options);
     bool SkJpegEncoder_Encode_2(void* dst, const void* src, const void* srcColorSpace, const void *options);
     int SkJpegEncoder_Encode_3(void* ctx, const void* img, const void* options);
     int SkJpegEncoder_Make(void* dst, const void* src, const void* options);
     int SkJpegEncoder_Make_2(void* dst, const void* src, const void* srcColorSpace, const void *options);
+    */
     // ## sk_jpegxl_decoder
     // ## sk_line_2d_path_effect
     void SkLine2DPathEffect_delete(void *line2DPathEffect);
@@ -1940,10 +1952,12 @@ ffi.cdef[[
     void SkOpBuilder_delete(void *opBuilder);
     void SkOpBuilder_add(void *op_builder, const void *path, int path_operator);
     bool SkOpBuilder_resolve(void *op_builder, void *result);
+    /*
     // ## sk_open_type_svg_decoder
     void SkOpenTypeSVGDecoder_delete(void *open_type_svg_decoder);
     size_t SkOpenTypeSVGDecoder_approximateSize(void *open_type_svg_decoder);
     bool SkOpenTypeSVGDecoder_render(void *open_type_svg_decoder, void *canvas, int upem, uint16_t glyphId, uint32_t foregroundColor, int color);
+    */
     // ## sk_overdraw_canvas
     void SkOverdrawCanvas_delete(void *overdraw_canvas);
     void SkOverdrawCanvas_onDrawTextBlob(void *overdraw_canvas, const void *blob, float scalar1, float scalar2, const void *paint);
@@ -2236,10 +2250,12 @@ ffi.cdef[[
     bool SkPathMeasure_getSegment(void *path_measure, float startD, float stopD, void *dst, bool startWithMoveTo);
     bool SkPathMeasure_isClosed(void *path_measure);
     bool SkPathMeasure_nextContour(void *path_measure);
+    /*
     // ## sk_pdf
     void SkPDF_SetNodeId(void *dst, int nodeID);
     int SkPDF_MakeDocument(void *stream, const void *metadata);
     int SkPDF_MakeDocument_2(void *stream);
+    */
     // ## sk_perlin_noise_shader
     int SkPerlinNoiseShader_MakeFractalNoise(float baseFrequencyX, float baseFrequencyY, int numOctaves, float seed, const void *tileSize);
     int SkPerlinNoiseShader_MakeTurbulence(float baseFrequencyX, float baseFrequencyY, int numOctaves, float seed, const void *tileSize);
@@ -2443,6 +2459,7 @@ ffi.cdef[[
     int SkRRect_MakeRect(const void *r);
     int SkRRect_MakeOval(const void *oval);
     int SkRRect_MakeRectXY(const void *rect, float xRad, float yRad);
+    /*
     // ## sk_raster_handle_allocator
     void SkRasterHandleAllocator_delete(void *raster_handle_allocator);
     bool SkRasterHandleAllocator_allocHandle(void *raster_handle_allocator, const void *info, void *rec);
@@ -2452,6 +2469,7 @@ ffi.cdef[[
     int SkRawDecoder_Decode(int static_stream, void *result, void *decodeContext);
     int SkRawDecoder_Decode_2(int static_data, void *result, void *decodeContext);
     int SkRawDecoder_Decoder();
+    */
     // ## sk_rect
     void SkRect_delete(void *rect);
     bool SkRect_isEmpty(void *rect);
@@ -3089,6 +3107,7 @@ ffi.cdef[[
     const void * SkTextBlobBuilder_allocRunTextPosH(void *text_blob_builder, const void *font, int count, float y, int textByteCount, const void *bounds);
     const void * SkTextBlobBuilder_allocRunTextPos(void *text_blob_builder, const void *font, int count, int textByteCount, const void *bounds);
     const void * SkTextBlobBuilder_allocRunTextRSXform(void *text_blob_builder, const void *font, int count, int textByteCount, const void *bounds);
+    /*
     // ## sk_text_blob_builder_run_handler
     void *SkTextBlobBuilderRunHandler_new(const char *utf8Text, int offset);
     void SkTextBlobBuilderRunHandler_delete(void *text_blob_builder_run_handler);
@@ -3100,6 +3119,7 @@ ffi.cdef[[
     int SkTextBlobBuilderRunHandler_runBuffer(void *text_blob_builder_run_handler, const void *run_info);
     void SkTextBlobBuilderRunHandler_commitRunBuffer(void *text_blob_builder_run_handler, const void *run_info);
     void SkTextBlobBuilderRunHandler_commitLine(void *text_blob_builder_run_handler);
+    */
     // ## sk_tiled_image_utils
     void SkTiledImageUtils_DrawImageRect(void *canvas, const void *image, const void *src, const void *dst, const void *sampling, const void *paint, int constraint);
     void SkTiledImageUtils_DrawImageRect_2(void *canvas, const void *image, const void *src, const void *dst, const void *sampling, const void *paint, int constraint);
@@ -3247,10 +3267,12 @@ ffi.cdef[[
     int SkWebpDecoder_Decode(int static_stream, void *result, void *decodeContext);
     int SkWebpDecoder_Decode_2(int static_data, void *result, void *decodeContext);
     int SkWebpDecoder_Decoder();
+    /*
     // ## sk_webp_encoder
     bool SkWebpEncoder_Encode(void *dst, const void *src, const void *options);
     int SkWebpEncoder_Encode_2(void *ctx, const void *img, const void *options);
     bool SkWebpEncoder_EncodeAnimated(void *dst, int encoderFrame, const void *options);
+    */
     // ## sk_yuva_info
     void *SkYUVAInfo_new();
     void *SkYUVAInfo_new_2(const void *info);
@@ -3321,7 +3343,7 @@ ffi.cdef[[
     //
 ]]
 
-local lib = ffi.load("raia_skia")
+local lib = ffi.load("reskia")
 local Skia = {}
 
 -- # static
@@ -3344,6 +3366,8 @@ Skia.Static = {}
 -- void static_sk_v3_delete(int key);
 -- void static_sk_v4_delete(int key);
 -- void static_chrono_milliseconds_delete(int key);
+
+--[[
 
 function Skia.Static.deleteGrBackendFormat(key)
     lib.static_gr_backend_format_delete(key)
@@ -3376,6 +3400,8 @@ end
 function Skia.Static.deleteGrDirectContextDirectContextId(key)
     lib.static_gr_direct_context_direct_context_id_delete(key)
 end
+
+]]
 
 function Skia.Static.deleteSkAndroidCodec(key)
     lib.static_sk_android_codec_delete(key)
@@ -3761,6 +3787,8 @@ function Skia.Static.getSkShader(key)
     return lib.static_sk_shader_get(key)
 end
 
+--[[
+
 function Skia.Static.deleteSkShaper(key)
     lib.static_sk_shaper_delete(key)
 end
@@ -3800,6 +3828,8 @@ end
 function Skia.Static.getSkShaperScriptRunIterator(key)
     return lib.static_sk_shaper_script_run_iterator_get(key)
 end
+
+]]
 
 function Skia.Static.deleteSkStream(key)
     lib.static_sk_stream_delete(key)
@@ -3864,6 +3894,8 @@ end
 function Skia.Static.deleteSkSurfaceProps(key)
     lib.static_sk_surface_props_delete(key)
 end
+
+--[[
 
 function Skia.Static.deleteSkSvgCircle(key)
     lib.static_sk_svg_circle_delete(key)
@@ -4165,6 +4197,8 @@ function Skia.Static.getSkSVGUse(key)
     return lib.static_sk_svg_use_get(key)
 end
 
+]]
+
 function Skia.Static.deleteSkTextBlob(key)
     lib.static_sk_text_blob_delete(key)
 end
@@ -4257,6 +4291,7 @@ function Skia.Static.eraseVectorSkScalar(key, index)
     lib.static_vector_sk_scalar_erase(key, index)
 end
 
+--[[
 function Skia.Static.deleteVectorSkSVGLength(key)
     lib.static_vector_sk_svg_length_delete(key)
 end
@@ -4268,8 +4303,11 @@ end
 function Skia.Static.eraseVectorSkSVGLength(key, index)
     lib.static_vector_sk_svg_length_erase(key, index)
 end
+]]
 
 -- # binding
+
+--[[
 
 -- ## gr_backend_drawable_info
 Skia.BackendDrawableInfo = {}
@@ -5073,6 +5111,7 @@ end
 function Skia.YUVABackendTextures.isValid(yuvaBackendTextures)
     return lib.GrYUVABackendTextures_isValid(yuvaBackendTextures)
 end
+]]
 
 -- ## sk_alpha_type
 Skia.AlphaType = {}
@@ -8580,6 +8619,7 @@ function Skia.FontStyleSet.CreateEmpty()
     return lib.SkFontStyleSet_CreateEmpty()
 end
 
+--[[
 -- ## sk_gif_decoder
 Skia.GifDecoder = {}
 
@@ -8604,6 +8644,7 @@ function Skia.GifDecoder.Decoder()
     setFinalizer(obj, lib.static_sk_codecs_decoder_delete)
     return obj
 end
+]]
 
 -- ## sk_gradient_shader
 Skia.GradientShader = {}
@@ -10083,6 +10124,7 @@ function Skia.JpegDecoder.Decoder()
     return obj
 end
 
+--[[
 -- ## sk_jpeg_encoder
 Skia.JpegEncoder = {}
 
@@ -10111,6 +10153,7 @@ function Skia.JpegEncoder.Make_2(dst, src, srcColorSpace, options)
     setFinalizer(obj, lib.static_sk_encoder_delete)
     return obj
 end
+]]
 
 -- ## sk_jpegxl_decoder
 Skia.JpegXLDecoder = {}
@@ -11270,6 +11313,7 @@ function Skia.OpBuilder.resolve(op_builder, result)
     return lib.SkOpBuilder_resolve(op_builder, result)
 end
 
+--[[
 -- ## sk_open_type_svg_decoder
 Skia.OpenTypeSVGDecoder = {}
 
@@ -11284,6 +11328,7 @@ end
 function Skia.OpenTypeSVGDecoder.render(open_type_svg_decoder, canvas, upem, glyphId, foregroundColor, color)
     return lib.SkOpenTypeSVGDecoder_render(open_type_svg_decoder, canvas, upem, glyphId, foregroundColor, color)
 end
+]]
 
 -- ## sk_overdraw_canvas
 Skia.OverdrawCanvas = {}
@@ -12536,6 +12581,7 @@ function Skia.PathMeasure.nextContour(path_measure)
     return lib.SkPathMeasure_nextContour(path_measure)
 end
 
+--[[
 -- ## sk_pdf
 Skia.PDF = {}
 
@@ -12554,6 +12600,7 @@ function Skia.PDF.MakeDocument_2(stream)
     setFinalizer(obj, lib.static_sk_document_delete)
     return obj
 end
+]]
 
 -- ## sk_perlin_noise_shader
 Skia.PerlinNoiseShader = {}
@@ -13440,6 +13487,8 @@ function Skia.RRect.MakeRectXY(rect, xRad, yRad)
     return obj
 end
 
+--[[
+
 -- ## sk_raster_handle_allocator
 Skia.RasterHandleAllocator = {}
 
@@ -13479,6 +13528,7 @@ function Skia.RawDecoder.Decoder()
     setFinalizer(obj, lib.static_sk_codecs_decoder_delete)
     return obj
 end
+]]
 
 -- ## sk_rect
 Skia.Rect = {}
@@ -16193,6 +16243,7 @@ function Skia.TextBlobBuilder.allocRunTextRSXform(text_blob_builder, font, count
     return lib. SkTextBlobBuilder_allocRunTextRSXform(text_blob_builder, font, count, textByteCount, bounds)
 end
 
+--[[
 -- ## sk_text_blob_builder_run_handler
 Skia.TextBlobBuilderRunHandler = {}
 
@@ -16243,6 +16294,7 @@ end
 function Skia.TextBlobBuilderRunHandler.commitLine(text_blob_builder_run_handler)
     lib.SkTextBlobBuilderRunHandler_commitLine(text_blob_builder_run_handler)
 end
+]]
 
 -- ## sk_tiled_image_utils
 Skia.TiledImageUtils = {}
@@ -16879,6 +16931,7 @@ function Skia.WebpDecoder.Decoder()
     return obj
 end
 
+--[[
 -- ## sk_webp_encoder
 Skia.WebpEncoder = {}
 
@@ -16895,6 +16948,7 @@ end
 function Skia.WebpEncoder.EncodeAnimated(dst, encoderFrame, options)
     return lib.SkWebpEncoder_EncodeAnimated(dst, encoderFrame, options)
 end
+]]
 
 -- ## sk_yuva_info
 Skia.YUVAInfo = {}
