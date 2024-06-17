@@ -26,11 +26,11 @@ local paint = skia.Paint.new();
 
 local rect
 
-skia.Paint.setColor(paint, 0xffffffff);
+skia.Paint.setARGB(paint, 255, 255, 255, 255);
 rect = skia.Rect.MakeXYWH(0, 0, 800, 600);
 skia.Canvas.drawRect(canvas, rect, paint);
 
-skia.Paint.setColor(paint, 0xff0000ff);
+skia.Paint.setARGB(paint, 255, 255, 0, 0);
 rect = skia.Rect.MakeXYWH(100, 100, 600, 400);
 skia.Canvas.drawRect(canvas, rect, paint);
 
@@ -125,7 +125,7 @@ local noiseData = ffi.new("GLubyte[?]", width * height * 4)
 local previousTime = glfw.getTime()
 
 while glfw.windowShouldClose(window) == 0 do
-    gl.viewport(0, 0, 800, 600)
+    gl.viewport(0, 0, 800*2, 600*2)
     gl.clearColor(1.0, 1.0, 1.0, 1.0)
     gl.clear(gl.COLOR_BUFFER_BIT)
 
