@@ -136,16 +136,12 @@ local previousTime = glfw.getTime()
 
 -- ピクセルデータの確認用
 -- RGBAデータを格納するバッファのサイズ
+--[[
 local pixel_size = 4 -- RGBAは4バイト
 local buffer_size = width * height * pixel_size
 
--- Cのuint8_t型の配列を定義
-ffi.cdef[[
-typedef uint8_t uint8;
-]]
-
 -- uint8_t配列を作成
-local buffer = ffi.new("uint8[?]", buffer_size)
+local buffer = ffi.new("uint8_t[?]", buffer_size)
 
 -- バッファを赤色（RGBA: 255, 0, 0, 255）で初期化
 for i = 0, buffer_size - 1, pixel_size do
@@ -155,6 +151,7 @@ for i = 0, buffer_size - 1, pixel_size do
     buffer[i + 3] = 255  -- A
 end
 --
+]]
 
 while glfw.windowShouldClose(window) == 0 do
     gl.viewport(0, 0, 800*2, 600*2)
@@ -162,7 +159,7 @@ while glfw.windowShouldClose(window) == 0 do
     gl.clear(gl.COLOR_BUFFER_BIT)
 
     gl.bindTexture(gl.TEXTURE_2D, noiseTexture[0])
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.UNSIGNED_BYTE, buffer)
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.UNSIGNED_BYTE, pixels)
     
     gl.clear(gl.COLOR_BUFFER_BIT)
     gl.useProgram(shader_program)
