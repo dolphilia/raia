@@ -33,6 +33,7 @@ ffi.cdef[[
     void *static_sk_b_box_hierarchy_get(int key);
     // ## static_sk_blend_mode
     void static_optional_sk_blend_mode_delete(int key);
+    int static_optional_sk_blend_mode_get(int key);
     // ## static_sk_blender
     void static_sk_blender_delete(int key);
     void *static_sk_blender_get(int key);
@@ -47,17 +48,22 @@ ffi.cdef[[
     void *static_sk_codec_get(int key);
     // ## static_sk_codecs_decoder
     void static_sk_codecs_decoder_delete(int key);
+    void * static_sk_codecs_decoder_get_ptr(int key);
     // ## static_sk_color
     void static_sk_color_delete(int key);
+    uint32_t static_sk_color_get_value(int key, int index);
     // // static_sk_color_4f
     void static_sk_color_4f_delete(int key);
+    void * static_sk_color_4f_get_ptr(int key);
     // ## static_sk_color_filter
     void static_sk_color_filter_delete(int key);
     void *static_sk_color_filter_get(int key);
     // ## static_sk_color_info
     void static_sk_color_info_delete(int key);
+    void * static_sk_color_info_get_ptr(int key);
     // ## static_sk_color_matrix
     void static_sk_color_matrix_delete(int key);
+    void * static_sk_color_matrix_get_ptr(int key);
     // ## static_sk_color_space
     void static_sk_color_space_delete(int key);
     void *static_sk_color_space_get(int key);
@@ -69,6 +75,7 @@ ffi.cdef[[
     void *static_sk_contour_measure_get(int key);
     // ## static_sk_cubic_resampler
     void static_sk_cubic_resampler_delete(int key);
+    void * static_sk_cubic_resampler_get_ptr(int key);
     // ## static_sk_data
     void static_sk_data_delete(int key);
     void *static_sk_data_get(int key);
@@ -91,6 +98,7 @@ ffi.cdef[[
     void *static_sk_encoder_get(int key);
     // ## static_sk_encoder_frame
     void static_const_sk_encoder_frame_delete(int key);
+    const void * static_const_sk_encoder_frame_get_ptr(int key, int index);
     // ## static_sk_executor
     void static_sk_executor_delete(int key);
     void *static_sk_executor_get(int key);
@@ -104,26 +112,34 @@ ffi.cdef[[
     void static_sk_flattenable_factory_delete(int key);
     // ## static_sk_font
     void static_sk_font_delete(int key);
+    void * static_sk_font_get_ptr(int key);
     // ## static_sk_font_arguments
     void static_sk_font_arguments_delete(int key);
+    void * static_sk_font_arguments_get_ptr(int key);
     // ## static_sk_font_arguments_pallete
     void static_sk_font_arguments_palette_delete(int key);
+    void * static_sk_font_arguments_palette_get_ptr(int key);
     // ## static_sk_font_arguments_variation_position
     void static_sk_font_arguments_variation_position_delete(int key);
+    void * static_sk_font_arguments_variation_position_get_ptr(int key);
     // ## static_sk_font_mgr
     void static_sk_font_mgr_delete(int key);
     void *static_sk_font_mgr_get(int key);
     // ## static_sk_font_style
     void static_sk_font_style_delete(int key);
+    void * static_sk_font_style_get_ptr(int key);
     // ## static_sk_font_style_set
     void static_sk_font_style_set_delete(int key);
     void *static_sk_font_style_set_get(int key);
     // ## static_sk_i_point
     void static_sk_i_point_delete(int key);
+    void * static_sk_i_point_get_ptr(int key);
     // ## static_sk_i_rect
     void static_sk_i_rect_delete(int key);
+    void* static_sk_i_rect_get_ptr(int key);
     // ## static_sk_i_size
     void static_sk_i_size_delete(int key);
+    void *static_sk_i_size_get_ptr(int key);
     // ## static_sk_id_change_listener
     void static_sk_id_change_listener_delete(int key);
     void *static_sk_id_change_listener_get(int key);
@@ -141,13 +157,16 @@ ffi.cdef[[
     void *static_sk_image_info_get_ptr(int key);
     // ## static_sk_image_required_properties
     void static_sk_image_required_properties_delete(int key);
+    void * static_sk_image_required_properties_get_ptr(int key);
     // ## static_sk_m_44
     void static_sk_m_44_delete(int key);
+    void * static_sk_m_44_get_ptr(int key);
     // ## static_sk_mask_filter
     void static_sk_mask_filter_delete(int key);
     void *static_sk_mask_filter_get(int key);
     // ## static_sk_matrix
     void static_sk_matrix_delete(int key);
+    void * static_sk_matrix_get_ptr(int key);
     // ## static_sk_memory_stream
     void static_sk_memory_stream_delete(int key);
     void *static_sk_memory_stream_get(int key);
@@ -160,6 +179,7 @@ ffi.cdef[[
     void *static_sk_mesh_vertex_buffer_get(int key);
     // ## static_sk_path
     void static_sk_path_delete(int key);
+    void * static_sk_path_get_ptr(int key);
     // ## static_sk_path_effect
     void static_sk_path_effect_delete(int key);
     void *static_sk_path_effect_get(int key);
@@ -171,36 +191,49 @@ ffi.cdef[[
     void *static_sk_pixel_ref_get(int key);
     // ## static_sk_pixmap
     void static_sk_pixmap_delete(int key);
+    void * static_sk_pixmap_get_ptr(int key);
     // ## static_sk_point
     void static_sk_point_delete(int key);
+    void * static_sk_point_get_ptr(int key);
     // ## static_sk_point_3
     void static_sk_point_3_delete(int key);
+    void * static_sk_point_3_get_ptr(int key);
     // ## static_sk_r_rect
     void static_sk_r_rect_delete(int key);
+    void * static_sk_r_rect_get_ptr(int key);
     // ## static_sk_rect
     void static_sk_rect_delete(int key);
     void *static_sk_rect_get_ptr(int key);
     // ## static_sk_rsx_form
     void static_sk_rsx_form_delete(int key);
+    void * static_sk_rsx_form_get_ptr(int key);
     // ## static_sk_runtime_effect
     void static_sk_runtime_effect_delete(int key);
     void *static_sk_runtime_effect_get(int key);
     //
     void static_sk_runtime_effect_builder_builder_child_delete(int key);
+    void * static_sk_runtime_effect_builder_builder_child_get_ptr(int key);
     //
     void static_sk_runtime_effect_builder_builder_uniform_delete(int key);
+    void * static_sk_runtime_effect_builder_builder_uniform_get_ptr(int key);
     // ## static_sk_runtime_effect_child
     void static_const_sk_runtime_effect_child_delete(int key);
+    const void * static_const_sk_runtime_effect_child_get_ptr(int key, int index);
     // ## static_sk_runtime_effect_child_ptr
     void static_const_sk_runtime_effect_child_ptr_delete(int key);
+    const void * static_const_sk_runtime_effect_child_ptr_get_ptr(int key, int index);
     // ## static_sk_runtime_effect_result
     void static_sk_runtime_effect_result_delete(int key);
+    void * static_sk_runtime_effect_result_get_ptr(int key);
     // ## static_sk_runtime_effect_traced_shader
     void static_sk_runtime_effect_traced_shader_delete(int key);
+    void * static_sk_runtime_effect_traced_shader_get_ptr(int key);
     // ## static_sk_runtime_effect_uniform
     void static_const_sk_runtime_effect_uniform_delete(int key);
+    const void * static_const_sk_runtime_effect_uniform_get(int key, int index);
     // ## static_sk_sampling_options
     void static_sk_sampling_options_delete(int key);
+    void * static_sk_sampling_options_get_ptr(int key);
     // ## static_sk_shader
     void static_sk_shader_delete(int key);
     void *static_sk_shader_get(int key);
@@ -223,6 +256,7 @@ ffi.cdef[[
     void *static_sk_shaper_script_run_iterator_get(int key);
     //
     void static_sk_size_delete(int key);
+    void * static_sk_size_get_ptr(int key);
     // ## static_sk_stream
     void static_sk_stream_delete(int key);
     void *static_sk_stream_get(int key);
@@ -240,14 +274,18 @@ ffi.cdef[[
     void *static_sk_stream_seekable_get(int key);
     // ## static_sk_string
     void static_sk_string_delete(int key);
+    void * static_sk_string_get_ptr(int key);
     void static_sk_span_sk_string_delete(int key);
+    void * static_sk_span_sk_string_get_ptr(int key, int index);
     // ## static_sk_stroke_rec
     void static_sk_stroke_rec_delete(int key);
+    void * static_sk_stroke_rec_get_ptr(int key);
     // ## static_sk_surface
     void static_sk_surface_delete(int key);
     void *static_sk_surface_get(int key);
     // ## static_sk_surface_props
     void static_sk_surface_props_delete(int key);
+    void * static_sk_surface_props_get_ptr(int key);
     /*
     // ## static_sk_svg_circle
     void static_sk_svg_circle_delete(int key);
@@ -372,19 +410,25 @@ ffi.cdef[[
     void *static_sk_typeface_get(int key);
     //
     void static_sk_v2_delete(int key);
+    void * static_sk_v2_get_ptr(int key);
     //
     void static_sk_v3_delete(int key);
+    void * static_sk_v3_get_ptr(int key);
     //
     void static_sk_v4_delete(int key);
+    void * static_sk_v4_get_ptr(int key);
     // ## static_sk_vertices
     void static_sk_vertices_delete(int key);
     void *static_sk_vertices_get(int key);
     // ## static_sk_yuva_info
     void static_sk_yuva_info_delete(int key);
+    void * static_sk_yuva_info_get_ptr(int key);
     // ## static_sk_yuva_pixmap_info
     void static_sk_yuva_pixmap_info_delete(int key);
+    void * static_sk_yuva_pixmap_info_get_ptr(int key);
     // ## static_sk_yuva_pixmaps
     void static_sk_yuva_pixmaps_delete(int key);
+    void * static_sk_yuva_pixmaps_get_ptr(int key);
     //
     void static_chrono_milliseconds_delete(int key);
     // ## static_std_function_void_void
@@ -3404,391 +3448,710 @@ end
 
 ]]
 
-function Skia.Static.deleteSkAndroidCodec(key)
+Skia.Static.SkAndroidCodec = {}
+
+function Skia.Static.SkAndroidCodec.delete(key)
     lib.static_sk_android_codec_delete(key)
 end
 
-function Skia.Static.getSkAndroidCodec(key)
+function Skia.Static.SkAndroidCodec.get(key)
     return lib.static_sk_android_codec_get(key)
 end
 
-function Skia.Static.deleteSkBBoxHierarchy(key)
+Skia.Static.SkBBoxHierarchy = {}
+
+function Skia.Static.SkBBoxHierarchy.delete(key)
     lib.static_sk_b_box_hierarchy_delete(key)
 end
 
-function Skia.Static.getSkBBoxHierarchy(key)
+function Skia.Static.SkBBoxHierarchy.get(key)
     return lib.static_sk_b_box_hierarchy_get(key)
 end
 
-function Skia.Static.deleteOptionalSkBlendMode(key)
+Skia.Static.SkBlendMode = {}
+Skia.Static.SkBlendMode.Optional = {}
+
+function Skia.Static.SkBlendMode.Optional.delete(key)
     lib.static_optional_sk_blend_mode_delete(key)
 end
 
-function Skia.Static.deleteSkBlender(key)
+function Skia.Static.SkBlendMode.Optional.get(key)
+    return lib.static_optional_sk_blend_mode_get(key)
+end
+
+Skia.Static.SkBlender = {}
+
+function Skia.Static.SkBlender.delete(key)
     lib.static_sk_blender_delete(key)
 end
 
-function Skia.Static.getSkBlender(key)
+function Skia.Static.SkBlender.get(key)
     return lib.static_sk_blender_get(key)
 end
 
-function Skia.Static.deleteSkCanvas(key)
+Skia.Static.SkCanvas = {}
+
+function Skia.Static.SkCanvas.delete(key)
     lib.static_sk_canvas_delete(key)
 end
 
-function Skia.Static.getSkCanvas(key)
+function Skia.Static.SkCanvas.get(key)
     return lib.static_sk_canvas_get(key)
 end
 
-function Skia.Static.deleteConstSkCapabilities(key)
+Skia.Static.SkCapabilities = {}
+Skia.Static.SkCapabilities.Const = {}
+
+function Skia.Static.SkCapabilities.Const.delete(key)
     lib.static_const_sk_capabilities_delete(key)
 end
 
-function Skia.Static.getConstSkCapabilities(key)
+function Skia.Static.SkCapabilities.Const.get(key)
     return lib.static_const_sk_capabilities_get(key)
 end
 
-function Skia.Static.deleteSkCodec(key)
+Skia.Static.SkCodec = {}
+
+function Skia.Static.SkCodec.delete(key)
     lib.static_sk_codec_delete(key)
 end
 
-function Skia.Static.getSkCodec(key)
+function Skia.Static.SkCodec.get(key)
     return lib.static_sk_codec_get(key)
 end
 
-function Skia.Static.deleteSkCodecsDecoder(key)
+Skia.Static.SkCodecsDecoder = {}
+
+function Skia.Static.SkCodecsDecoder.delete(key)
     lib.static_sk_codecs_decoder_delete(key)
 end
 
-function Skia.Static.deleteSkColor(key)
+function Skia.Static.SkCodecsDecoder.get(key)
+    return lib.static_sk_codecs_decoder_get_ptr(key)
+end
+
+Skia.Static.SkColor = {}
+
+function Skia.Static.SkColor.delete(key)
     lib.static_sk_color_delete(key)
 end
 
-function Skia.Static.deleteSkColor4f(key)
+function Skia.Static.SkColor.get(key, index)
+    return lib.static_sk_color_get_value(key, index)
+end
+
+Skia.Static.SkColor4f = {}
+
+function Skia.Static.SkColor4f.delete(key)
     lib.static_sk_color_4f_delete(key)
 end
 
-function Skia.Static.deleteSkColorFilter(key)
+function Skia.Static.SkColor4f.get(key)
+    return lib.static_sk_color_4f_get_ptr(key)
+end
+
+Skia.Static.SkColorFilter = {}
+
+function Skia.Static.SkColorFilter.delete(key)
     lib.static_sk_color_filter_delete(key)
 end
 
-function Skia.Static.getSkColorFilter(key)
+function Skia.Static.SkColorFilter.get(key)
     return lib.static_sk_color_filter_get(key)
 end
 
-function Skia.Static.deleteSkColorInfo(key)
+Skia.Static.SkColorInfo = {}
+
+function Skia.Static.SkColorInfo.delete(key)
     lib.static_sk_color_info_delete(key)
 end
 
-function Skia.Static.deleteSkColorMatrix(key)
+function Skia.Static.SkColorInfo.get(key)
+    return lib.static_sk_color_info_get_ptr(key)
+end
+
+Skia.Static.SkColorMatrix = {}
+
+function Skia.Static.SkColorMatrix.delete(key)
     lib.static_sk_color_matrix_delete(key)
 end
 
-function Skia.Static.deleteSkColorSpace(key)
+function Skia.Static.SkColorMatrix.get(key)
+    return lib.static_sk_color_matrix_get_ptr(key)
+end
+
+Skia.Static.SkColorSpace = {}
+
+function Skia.Static.SkColorSpace.delete(key)
     lib.static_sk_color_space_delete(key)
 end
 
-function Skia.Static.getSkColorSpace(key)
+function Skia.Static.SkColorSpace.get(key)
     return lib.static_sk_color_space_get(key)
 end
 
-function Skia.Static.deleteSkColorTable(key)
+Skia.Static.SkColorTable = {}
+
+function Skia.Static.SkColorTable.delete(key)
     lib.static_sk_color_table_delete(key)
 end
 
-function Skia.Static.getSkColorTable(key)
+function Skia.Static.SkColorTable.get(key)
     return lib.static_sk_color_table_get(key)
 end
 
-function Skia.Static.deleteSkContourMeasure(key)
+Skia.Static.SkContourMeasure = {}
+
+function Skia.Static.SkContourMeasure.delete(key)
     lib.static_sk_contour_measure_delete(key)
 end
 
-function Skia.Static.getSkContourMeasure(key)
+function Skia.Static.SkContourMeasure.get(key)
     return lib.static_sk_contour_measure_get(key)
 end
 
-function Skia.Static.deleteSkCubicResampler(key)
+Skia.Static.SkCubicResampler = {}
+
+function Skia.Static.SkCubicResampler.delete(key)
     lib.static_sk_cubic_resampler_delete(key)
 end
 
-function Skia.Static.deleteSkData(key)
+function Skia.Static.SkCubicResampler.get(key)
+    return lib.static_sk_cubic_resampler_get_ptr(key)
+end
+
+Skia.Static.SkData = {}
+
+function Skia.Static.SkData.delete(key)
     lib.static_sk_data_delete(key)
 end
 
-function Skia.Static.getSkData(key)
+function Skia.Static.SkData.get(key)
     return lib.static_sk_data_get(key)
 end
 
-function Skia.Static.deleteConstSkData(key)
+Skia.Static.SkData.Const = {}
+
+function Skia.Static.SkData.Const.delete(key)
     lib.static_const_sk_data_delete(key)
 end
 
-function Skia.Static.getConstSkData(key)
+function Skia.Static.SkData.Const.get(key)
     return lib.static_const_sk_data_get(key)
 end
 
-function Skia.Static.deleteSkDataTable(key)
+Skia.Static.SkDataTable = {}
+
+function Skia.Static.SkDataTable.delete(key)
     lib.static_sk_data_table_delete(key)
 end
 
-function Skia.Static.getSkDataTable(key)
+function Skia.Static.SkDataTable.get(key)
     return lib.static_sk_data_table_get(key)
 end
 
-function Skia.Static.deleteSkDocument(key)
+Skia.Static.SkDocument = {}
+
+function Skia.Static.SkDocument.delete(key)
     lib.static_sk_document_delete(key)
 end
 
-function Skia.Static.getSkDocument(key)
+function Skia.Static.SkDocument.get(key)
     return lib.static_sk_document_get(key)
 end
 
-function Skia.Static.deleteSkDrawable(key)
+Skia.Static.SkDrawable = {}
+
+function Skia.Static.SkDrawable.delete(key)
     lib.static_sk_drawable_delete(key)
 end
 
-function Skia.Static.getSkDrawable(key)
+function Skia.Static.SkDrawable.get(key)
     return lib.static_sk_drawable_get(key)
 end
 
-function Skia.Static.deleteSkDrawableGpuDrawHandler(key)
+Skia.Static.SkDrawableGpuDrawHandler = {}
+
+function Skia.Static.SkDrawableGpuDrawHandler.delete(key)
     lib.static_sk_drawable_gpu_draw_handler_delete(key)
 end
 
-function Skia.Static.getSkDrawableGpuDrawHandler(key)
+function Skia.Static.SkDrawableGpuDrawHandler.get(key)
     return lib.static_sk_drawable_gpu_draw_handler_get(key)
 end
 
-function Skia.Static.deleteSkEncoder(key)
+Skia.Static.SkEncoder = {}
+
+function Skia.Static.SkEncoder.delete(key)
     lib.static_sk_encoder_delete(key)
 end
 
-function Skia.Static.getSkEncoder(key)
+function Skia.Static.SkEncoder.get(key)
     return lib.static_sk_encoder_get(key)
 end
 
-function Skia.Static.deleteConstSkEncoderFrame(key)
+Skia.Static.SkEncoderFrame = {}
+Skia.Static.SkEncoderFrame.Const = {}
+
+function Skia.Static.SkEncoderFrame.Const.delete(key)
     lib.static_const_sk_encoder_frame_delete(key)
 end
 
-function Skia.Static.deleteSkExecutor(key)
+function Skia.Static.SkEncoderFrame.Const.get(key, index)
+    return lib.static_const_sk_encoder_frame_get_ptr(key, index)
+end
+
+Skia.Static.SkExecutor = {}
+
+function Skia.Static.SkExecutor.delete(key)
     lib.static_sk_executor_delete(key)
 end
 
-function Skia.Static.getSkExecutor(key)
+function Skia.Static.SkExecutor.get(key)
     return lib.static_sk_executor_get(key)
 end
 
-function Skia.Static.deleteSkFileStream(key)
+Skia.Static.SkFileStream = {}
+
+function Skia.Static.SkFileStream.delete(key)
     lib.static_sk_file_stream_delete(key)
 end
 
-function Skia.Static.getSkFileStream(key)
+function Skia.Static.SkFileStream.get(key)
     return lib.static_sk_file_stream_get(key)
 end
 
-function Skia.Static.deleteSkFlattenable(key)
+Skia.Static.SkFlattenable = {}
+
+function Skia.Static.SkFlattenable.delete(key)
     lib.static_sk_flattenable_delete(key)
 end
 
-function Skia.Static.getSkFlattenable(key)
+function Skia.Static.SkFlattenable.get(key)
     return lib.static_sk_flattenable_get(key)
 end
 
-function Skia.Static.deleteSkFont(key)
+Skia.Static.SkFont = {}
+
+function Skia.Static.SkFont.delete(key)
     lib.static_sk_font_delete(key)
 end
 
-function Skia.Static.deleteSkFontArguments(key)
+function Skia.Static.SkFont.get(key)
+    return lib.static_sk_font_get_ptr(key)
+end
+
+Skia.Static.SkFontArguments = {}
+
+function Skia.Static.SkFontArguments.delete(key)
     lib.static_sk_font_arguments_delete(key)
 end
 
-function Skia.Static.deleteSkFontMgr(key)
+function Skia.Static.SkFontArguments.get(key)
+    return lib.static_sk_font_arguments_get_ptr(key)
+end
+
+Skia.Static.SkFontArgumentsPalette = {}
+
+function Skia.Static.SkFontArgumentsPalette.delete(key)
+    lib.static_sk_font_arguments_palette_delete(key)
+end
+
+function Skia.Static.SkFontArgumentsPalette.get(key)
+    return lib.static_sk_font_arguments_palette_get_ptr(key)
+end
+
+Skia.Static.SkFontArgumentsVariationPosition = {}
+
+function Skia.Static.SkFontArgumentsVariationPosition.delete(key)
+    lib.static_sk_font_arguments_variation_position_delete(key)
+end
+
+function Skia.Static.SkFontArgumentsVariationPosition.get(key)
+    return lib.static_sk_font_arguments_variation_position_get_ptr(key)
+end
+
+Skia.Static.SkFontMgr = {}
+
+function Skia.Static.SkFontMgr.delete(key)
     lib.static_sk_font_mgr_delete(key)
 end
 
-function Skia.Static.getSkFontMgr(key)
+function Skia.Static.SkFontMgr.get(key)
     return lib.static_sk_font_mgr_get(key)
 end
 
-function Skia.Static.deleteSkFontStyle(key)
+Skia.Static.SkFontStyle = {}
+
+function Skia.Static.SkFontStyle.delete(key)
     lib.static_sk_font_style_delete(key)
 end
 
-function Skia.Static.deleteSkFontStyleSet(key)
+function Skia.Static.SkFontStyle.get(key)
+    return lib.static_sk_font_style_get_ptr(key)
+end
+
+Skia.Static.SkFontStyleSet = {}
+
+function Skia.Static.SkFontStyleSet.delete(key)
     lib.static_sk_font_style_set_delete(key)
 end
 
-function Skia.Static.getSkFontStyleSet(key)
+function Skia.Static.SkFontStyleSet.get(key)
     return lib.static_sk_font_style_set_get(key)
 end
 
-function Skia.Static.deleteSkIRect(key)
+Skia.Static.SkIPoint = {}
+
+function Skia.Static.SkIPoint.delete(key)
+    lib.static_sk_i_point_delete(key)
+end
+
+function Skia.Static.SkIPoint.get(key)
+    return lib.static_sk_i_point_get_ptr(key)
+end
+
+Skia.Static.SkIRect = {}
+
+function Skia.Static.SkIRect.delete(key)
     lib.static_sk_i_rect_delete(key)
 end
 
-function Skia.Static.deleteSkIdChangeListener(key)
+function Skia.Static.SkIRect.get(key)
+    return lib.static_sk_i_rect_get_ptr(key)
+end
+
+Skia.Static.SkISize = {}
+
+function Skia.Static.SkISize.delete(key)
+    lib.static_sk_i_size_delete(key)
+end
+
+function Skia.Static.SkISize.get(key)
+    return lib.static_sk_i_size_get_ptr(key)
+end
+
+Skia.Static.SkIdChangeListener = {}
+
+function Skia.Static.SkIdChangeListener.delete(key)
     lib.static_sk_id_change_listener_delete(key)
 end
 
-function Skia.Static.getSkIdChangeListener(key)
+function Skia.Static.SkIdChangeListener.get(key)
     return lib.static_sk_id_change_listener_get(key)
 end
 
-function Skia.Static.deleteSkImage(key)
+Skia.Static.SkImage = {}
+
+function Skia.Static.SkImage.delete(key)
     lib.static_sk_image_delete(key)
 end
 
-function Skia.Static.getSkImage(key)
+function Skia.Static.SkImage.get(key)
     return lib.static_sk_image_get(key)
 end
 
-function Skia.Static.deleteSkImageFilter(key)
+Skia.Static.SkImageFilter = {}
+
+function Skia.Static.SkImageFilter.delete(key)
     lib.static_sk_image_filter_delete(key)
 end
 
-function Skia.Static.getSkImageFilter(key)
+function Skia.Static.SkImageFilter.get(key)
     return lib.static_sk_image_filter_get(key)
 end
 
-function Skia.Static.deleteSkImageGenerator(key)
+Skia.Static.SkImageGenerator = {}
+
+function Skia.Static.SkImageGenerator.delete(key)
     lib.static_sk_image_generator_delete(key)
 end
 
-function Skia.Static.getSkImageGenerator(key)
+function Skia.Static.SkImageGenerator.get(key)
     return lib.static_sk_image_generator_get(key)
 end
 
-function Skia.Static.deleteSkImageInfo(key)
+Skia.Static.SkImageInfo = {}
+
+function Skia.Static.SkImageInfo.delete(key)
     lib.static_sk_image_info_delete(key)
 end
 
-function Skia.Static.getPtrSkImageInfo(key)
+function Skia.Static.SkImageInfo.get(key)
     return lib.static_sk_image_info_get_ptr(key)
 end
 
-function Skia.Static.deleteSkM44(key)
+Skia.Static.SkImageRequiredProperties = {}
+
+function Skia.Static.SkImageRequiredProperties.delete(key)
+    lib.static_sk_image_required_properties_delete(key)
+end
+
+function Skia.Static.SkImageRequiredProperties.get(key)
+    return lib.static_sk_image_required_properties_get_ptr(key)
+end
+
+Skia.Static.SkM44 = {}
+
+function Skia.Static.SkM44.delete(key)
     lib.static_sk_m_44_delete(key)
 end
 
-function Skia.Static.deleteSkMaskFilter(key)
+function Skia.Static.SkM44.get(key)
+    return lib.static_sk_m_44_get_ptr(key)
+end
+
+Skia.Static.SkMaskFilter = {}
+
+function Skia.Static.SkMaskFilter.delete(key)
     lib.static_sk_mask_filter_delete(key)
 end
 
-function Skia.Static.getSkMaskFilter(key)
+function Skia.Static.SkMaskFilter.get(key)
     return lib.static_sk_mask_filter_get(key)
 end
 
-function Skia.Static.deleteSkMatrix(key)
+Skia.Static.SkMatrix = {}
+
+function Skia.Static.SkMatrix.delete(key)
     lib.static_sk_matrix_delete(key)
 end
 
-function Skia.Static.deleteSkMemoryStream(key)
+function Skia.Static.SkMatrix.get(key)
+    return lib.static_sk_matrix_get_ptr(key)
+end
+
+Skia.Static.SkMemoryStream = {}
+
+function Skia.Static.SkMemoryStream.delete(key)
     lib.static_sk_memory_stream_delete(key)
 end
 
-function Skia.Static.getSkMemoryStream(key)
+function Skia.Static.SkMemoryStream.get(key)
     return lib.static_sk_memory_stream_get(key)
 end
 
-function Skia.Static.deleteSkMeshIndexBuffer(key)
+Skia.Static.SkMeshIndexBuffer = {}
+
+function Skia.Static.SkMeshIndexBuffer.delete(key)
     lib.static_sk_mesh_index_buffer_delete(key)
 end
 
-function Skia.Static.getSkMeshIndexBuffer(key)
+function Skia.Static.SkMeshIndexBuffer.get(key)
     return lib.static_sk_mesh_index_buffer_get(key)
 end
 
-function Skia.Static.deleteSkMeshVertexBuffer(key)
+Skia.Static.SkMeshVertexBuffer = {}
+
+function Skia.Static.SkMeshVertexBuffer.delete(key)
     lib.static_sk_mesh_vertex_buffer_delete(key)
 end
 
-function Skia.Static.getSkMeshVertexBuffer(key)
+function Skia.Static.SkMeshVertexBuffer.get(key)
     return lib.static_sk_mesh_vertex_buffer_get(key)
 end
 
-function Skia.Static.deleteSkPath(key)
+Skia.Static.SkPath = {}
+
+function Skia.Static.SkPath.delete(key)
     lib.static_sk_path_delete(key)
 end
 
-function Skia.Static.deleteSkPathEffect(key)
+function Skia.Static.SkPath.get(key)
+    return lib.static_sk_path_get_ptr(key)
+end
+
+Skia.Static.SkPathEffect = {}
+
+function Skia.Static.SkPathEffect.delete(key)
     lib.static_sk_path_effect_delete(key)
 end
 
-function Skia.Static.getSkPathEffect(key)
+function Skia.Static.SkPathEffect.get(key)
     return lib.static_sk_path_effect_get(key)
 end
 
-function Skia.Static.deleteSkPicture(key)
+Skia.Static.SkPicture = {}
+
+function Skia.Static.SkPicture.delete(key)
     lib.static_sk_picture_delete(key)
 end
 
-function Skia.Static.getSkPicture(key)
+function Skia.Static.SkPicture.get(key)
     return lib.static_sk_picture_get(key)
 end
 
-function Skia.Static.deleteSkPixelRef(key)
+Skia.Static.SkPixelRef = {}
+
+function Skia.Static.SkPixelRef.delete(key)
     lib.static_sk_pixel_ref_delete(key)
 end
 
-function Skia.Static.getSkPixelRef(key)
+function Skia.Static.SkPixelRef.get(key)
     return lib.static_sk_pixel_ref_get(key)
 end
 
-function Skia.Static.deleteSkPixmap(key)
+Skia.Static.SkPixmap = {}
+
+function Skia.Static.SkPixmap.delete(key)
     lib.static_sk_pixmap_delete(key)
 end
 
-function Skia.Static.deleteSkRRect(key)
+function Skia.Static.SkPixmap.get(key)
+    return lib.static_sk_pixmap_get_ptr(key)
+end
+
+Skia.Static.SkPoint = {}
+
+function Skia.Static.SkPoint.delete(key)
+    lib.static_sk_point_delete(key)
+end
+
+function Skia.Static.SkPoint.get(key)
+    return lib.static_sk_point_get_ptr(key)
+end
+
+Skia.Static.SkPoint3 = {}
+
+function Skia.Static.SkPoint3.delete(key)
+    lib.static_sk_point_3_delete(key)
+end
+
+function Skia.Static.SkPoint3.get(key)
+    return lib.static_sk_point_3_get_ptr(key)
+end
+
+Skia.Static.SkRRect = {}
+
+function Skia.Static.SkRRect.delete(key)
     lib.static_sk_r_rect_delete(key)
 end
 
-function Skia.Static.deleteSkRect(key)
+function Skia.Static.SkRRect.get(key)
+    return lib.static_sk_r_rect_get_ptr(key)
+end
+
+Skia.Static.SkRect = {}
+
+function Skia.Static.SkRect.delete(key)
     lib.static_sk_rect_delete(key)
 end
 
-function Skia.Static.getSkRectPtr(key)
+function Skia.Static.SkRect.get(key)
     return lib.static_sk_rect_get_ptr(key)
 end
 
-function Skia.Static.deleteSkRuntimeEffect(key)
+Skia.Static.SkRSXForm = {}
+
+function Skia.Static.SkRSXForm.delete(key)
+    lib.static_sk_rsx_form_delete(key)
+end
+
+function Skia.Static.SkRSXForm.get(key)
+    return lib.static_sk_rsx_form_get_ptr(key)
+end
+
+Skia.Static.SkRuntimeEffect = {}
+
+function Skia.Static.SkRuntimeEffect.delete(key)
     lib.static_sk_runtime_effect_delete(key)
 end
 
-function Skia.Static.getSkRuntimeEffect(key)
+function Skia.Static.SkRuntimeEffect.get(key)
     return lib.static_sk_runtime_effect_get(key)
 end
 
-function Skia.Static.deleteConstSkruntimeEffectChild(key)
+Skia.Static.SkRuntimeEffectBuilderBuilderChild = {}
+
+function Skia.Static.SkRuntimeEffectBuilderBuilderChild.delete(key)
+    lib.static_sk_runtime_effect_builder_builder_child_delete(key)
+end
+
+function Skia.Static.SkRuntimeEffectBuilderBuilderChild.get(key)
+    return lib.static_sk_runtime_effect_builder_builder_child_get_ptr(key)
+end
+
+Skia.Static.SkRuntimeEffectBuilderBuilderUniform = {}
+
+function Skia.Static.SkRuntimeEffectBuilderBuilderUniform.delete(key)
+    lib.static_sk_runtime_effect_builder_builder_uniform_delete(key)
+end
+
+function Skia.Static.SkRuntimeEffectBuilderBuilderUniform.get(key)
+    return lib.static_sk_runtime_effect_builder_builder_uniform_get_ptr(key)
+end
+
+Skia.Static.SkRuntimeEffectChild = {}
+Skia.Static.SkRuntimeEffectChild.Const = {}
+
+
+function Skia.Static.SkRuntimeEffectChild.Const.delete(key)
     lib.static_const_sk_runtime_effect_child_delete(key)
 end
 
-function Skia.Static.deleteConstSkRuntimeEffectChildPtr(key)
+function Skia.Static.SkRuntimeEffectChild.Const.get(key)
+    return lib.static_const_sk_runtime_effect_child_get_ptr(key)
+end
+
+Skia.Static.SkRuntimeEffectChildPtr = {}
+Skia.Static.SkRuntimeEffectChildPtr.Const = {}
+
+function Skia.Static.SkRuntimeEffectChildPtr.Const.delete(key)
     lib.static_const_sk_runtime_effect_child_ptr_delete(key)
 end
 
-function Skia.Static.deleteSkRuntimeEffectResult(key)
+function Skia.Static.SkRuntimeEffectChildPtr.Const.get(key, index)
+    return lib.static_const_sk_runtime_effect_child_ptr_get_ptr(key, index)
+end
+
+Skia.Static.SkRuntimeEffectResult = {}
+
+function Skia.Static.SkRuntimeEffectResult.delete(key)
     lib.static_sk_runtime_effect_result_delete(key)
 end
 
-function Skia.Static.deleteSkRuntimeEffectTracedShader(key)
+function Skia.Static.SkRuntimeEffectResult.get(key)
+    return lib.static_sk_runtime_effect_result_get_ptr(key)
+end
+
+Skia.Static.SkRuntimeEffectTracedShader = {}
+
+function Skia.Static.SkRuntimeEffectTracedShader.delete(key)
     lib.static_sk_runtime_effect_traced_shader_delete(key)
 end
 
-function Skia.Static.deleteConstSkRuntimeEffectUniform(key)
+function Skia.Static.SkRuntimeEffectTracedShader.get(key)
+    return lib.static_sk_runtime_effect_traced_shader_get_ptr(key)
+end
+
+Skia.Static.SkRuntimeEffectUniform = {}
+Skia.Static.SkRuntimeEffectUniform.Const = {}
+
+function Skia.Static.SkRuntimeEffectUniform.Const.delete(key)
     lib.static_const_sk_runtime_effect_uniform_delete(key)
 end
 
-function Skia.Static.deleteSkSamplingOptions(key)
+function Skia.Static.SkRuntimeEffectUniform.Const.get(key, index)
+    return lib.static_const_sk_runtime_effect_uniform_get(key, index)
+end
+
+Skia.Static.SkSamplingOptions = {}
+
+function Skia.Static.SkSamplingOptions.delete(key)
     lib.static_sk_sampling_options_delete(key)
 end
 
-function Skia.Static.deleteSkShader(key)
+function Skia.Static.SkSamplingOptions.get(key)
+    return lib.static_sk_sampling_options_get_ptr(key)
+end
+
+Skia.Static.SkShader = {}
+
+function Skia.Static.SkShader.delete(key)
     lib.static_sk_shader_delete(key)
 end
 
-function Skia.Static.getSkShader(key)
+function Skia.Static.SkShader.get(key)
     return lib.static_sk_shader_get(key)
 end
 
@@ -3836,68 +4199,114 @@ end
 
 ]]
 
-function Skia.Static.deleteSkStream(key)
+Skia.Static.SkSize = {}
+
+function Skia.Static.SkSize.delete(key)
+    lib.static_sk_size_delete(key)
+end
+
+function Skia.Static.SkSize.get(key)
+    return lib.static_sk_size_get_ptr(key)
+end
+
+Skia.Static.SkStream = {}
+
+function Skia.Static.SkStream.delete(key)
     lib.static_sk_stream_delete(key)
 end
 
-function Skia.Static.getSkStream(key)
+function Skia.Static.SkStream.get(key)
     return lib.static_sk_stream_get(key)
 end
 
-function Skia.Static.deleteSkStreamAsset(key)
+Skia.Static.SkStreamAsset = {}
+
+function Skia.Static.SkStreamAsset.delete(key)
     lib.static_sk_stream_asset_delete(key)
 end
 
-function Skia.Static.getSkStreamAsset(key)
+function Skia.Static.SkStreamAsset.get(key)
     return lib.static_sk_stream_asset_get(key)
 end
 
-function Skia.Static.deleteSkStreamMemory(key)
+Skia.Static.SkStreamMemory = {}
+
+function Skia.Static.SkStreamMemory.delete(key)
     lib.static_sk_stream_memory_delete(key)
 end
 
-function Skia.Static.getSkStreamMemory(key)
+function Skia.Static.SkStreamMemory.get(key)
     return lib.static_sk_stream_memory_get(key)
 end
 
-function Skia.Static.deleteSkStreamRewindable(key)
+Skia.Static.SkStreamRewindable = {}
+
+function Skia.Static.SkStreamRewindable.delete(key)
     lib.static_sk_stream_rewindable_delete(key)
 end
 
-function Skia.Static.getSkStreamRewindable(key)
+function Skia.Static.SkStreamRewindable.get(key)
     return lib.static_sk_stream_rewindable_get(key)
 end
 
-function Skia.Static.deleteSkStreamSeekable(key)
+Skia.Static.SkStreamSeekable = {}
+
+function Skia.Static.SkStreamSeekable.delete(key)
     lib.static_sk_stream_seekable_delete(key)
 end
 
-function Skia.Static.getSkStreamSeekable(key)
+function Skia.Static.SkStreamSeekable.get(key)
     return lib.static_sk_stream_seekable_get(key)
 end
 
-function Skia.Static.deleteSkString(key)
+Skia.Static.SkString = {}
+
+function Skia.Static.SkString.delete(key)
     lib.static_sk_string_delete(key)
 end
 
-function Skia.Static.deleteSkSpanSkString(key)
+function Skia.Static.SkString.get(key)
+    return lib.static_sk_string_get_ptr(key)
+end
+
+Skia.Static.SkString.SkSpan = {}
+
+function Skia.Static.SkString.SkSpan.delete(key)
     lib.static_sk_span_sk_string_delete(key)
 end
 
-function Skia.Static.deleteSkStrokeRec(key)
+function Skia.Static.SkString.SkSpan.get(key, index)
+    return lib.static_sk_span_sk_string_get_ptr(key, index)
+end
+
+Skia.Static.SkStrokeRec = {}
+
+function Skia.Static.SkStrokeRec.delete(key)
     lib.static_sk_stroke_rec_delete(key)
 end
 
-function Skia.Static.deleteSkSurface(key)
+function Skia.Static.SkStrokeRec.get(key)
+    return lib.static_sk_stroke_rec_get_ptr(key)
+end
+
+Skia.Static.SkSurface = {}
+
+function Skia.Static.SkSurface.delete(key)
     lib.static_sk_surface_delete(key)
 end
 
-function Skia.Static.getSkSurface(key)
+function Skia.Static.SkSurface.get(key)
     return lib.static_sk_surface_get(key)
 end
 
-function Skia.Static.deleteSkSurfaceProps(key)
+Skia.Static.SkSurfaceProps = {}
+
+function Skia.Static.SkSurfaceProps.delete(key)
     lib.static_sk_surface_props_delete(key)
+end
+
+function Skia.Static.SkSurfaceProps.get(key)
+    return lib.static_sk_surface_props_get_ptr(key)
 end
 
 --[[
@@ -4204,95 +4613,163 @@ end
 
 ]]
 
-function Skia.Static.deleteSkTextBlob(key)
+Skia.Static.SkTextBlob = {}
+
+function Skia.Static.SkTextBlob.delete(key)
     lib.static_sk_text_blob_delete(key)
 end
 
-function Skia.Static.getSkTextBlob(key)
+function Skia.Static.SkTextBlob.get(key)
     return lib.static_sk_text_blob_get(key)
 end
 
-function Skia.Static.deleteSkTypeface(key)
+Skia.Static.SkTypeface = {}
+
+function Skia.Static.SkTypeface.delete(key)
     lib.static_sk_typeface_delete(key)
 end
 
-function Skia.Static.getSkTypeface(key)
+function Skia.Static.SkTypeface.get(key)
     return lib.static_sk_typeface_get(key)
 end
 
-function Skia.Static.deleteSkVertices(key)
+Skia.Static.SkV2 = {}
+
+function Skia.Static.SkV2.delete(key)
+    lib.static_sk_v2_delete(key)
+end
+
+function Skia.Static.SkV2.get(key)
+    return lib.static_sk_v2_get_ptr(key)
+end
+
+Skia.Static.SkV3 = {}
+
+function Skia.Static.SkV3.delete(key)
+    lib.static_sk_v3_delete(key)
+end
+
+function Skia.Static.SkV3.get(key)
+    return lib.static_sk_v3_get_ptr(key)
+end
+
+Skia.Static.SkV4 = {}
+
+function Skia.Static.SkV4.delete(key)
+    lib.static_sk_v4_delete(key)
+end
+
+function Skia.Static.SkV4.get(key)
+    return lib.static_sk_v4_get_ptr(key)
+end
+
+Skia.Static.SkVertices = {}
+
+function Skia.Static.SkVertices.delete(key)
     lib.static_sk_vertices_delete(key)
 end
 
-function Skia.Static.getSkVertices(key)
+function Skia.Static.SkVertices.get(key)
     return lib.static_sk_vertices_get(key)
 end
 
-function Skia.Static.deleteSkYUVAInfo(key)
+Skia.Static.SkYUVAInfo = {}
+
+function Skia.Static.SkYUVAInfo.delete(key)
     lib.static_sk_yuva_info_delete(key)
 end
 
-function Skia.Static.deleteSkYUVAPixmapInfo(key)
+function Skia.Static.SkYUVAInfo.get(key)
+    return lib.static_sk_yuva_info_get_ptr(key)
+end
+
+Skia.Static.SkYUVAPixmapInfo = {}
+
+function Skia.Static.SkYUVAPixmapInfo.delete(key)
     lib.static_sk_yuva_pixmap_info_delete(key)
 end
 
-function Skia.Static.deleteSkYUVAPixmaps(key)
+function Skia.Static.SkYUVAPixmapInfo.get(key)
+    return lib.static_sk_yuva_pixmap_info_get_ptr(key)
+end
+
+Skia.Static.SkYUVAPixmaps = {}
+
+function Skia.Static.SkYUVAPixmaps.delete(key)
     lib.static_sk_yuva_pixmaps_delete(key)
 end
 
-function Skia.Static.deleteFunctionVoidVoid(key)
+function Skia.Static.SkYUVAPixmaps.get(key)
+    return lib.static_sk_yuva_pixmaps_get_ptr(key)
+end
+
+Skia.Static.FunctionVoidVoid = {}
+
+function Skia.Static.FunctionVoidVoid.delete(key)
     lib.static_function_void_void_delete(key)
 end
 
-function Skia.Static.deleteStringView(key)
+Skia.Static.StringView = {}
+
+function Skia.Static.StringView.delete(key)
     lib.static_string_view_delete(key)
 end
 
-function Skia.Static.deleteTupleIntInt(key)
+Skia.Static.TupleIntInt = {}
+
+function Skia.Static.TupleIntInt.delete(key)
     lib.static_tuple_int_int_delete(key)
 end
 
-function Skia.Static.deleteTupleIntSkYUVAPixmapInfoDataType(key)
+Skia.Static.TupleIntSkYUVAPixmapInfoDataType = {}
+
+function Skia.Static.TupleIntSkYUVAPixmapInfoDataType.delete(key)
     lib.static_tuple_int_sk_yuva_pixmap_info_data_type_delete(key)
 end
 
-function Skia.Static.deleteTupleSkImageSkCodecResult(key)
+Skia.Static.TupleSkImageSkCodecResult = {}
+
+function Skia.Static.TupleSkImageSkCodecResult.delete(key)
     lib.static_tuple_sk_image_sk_codec_result_delete(key)
 end
 
-function Skia.Static.deleteVectorSkCodecFrameInto(key)
+Skia.Static.VectorSkCodecFrameInto = {}
+
+function Skia.Static.VectorSkCodecFrameInto.delete(key)
     lib.static_vector_sk_codec_frame_into_delete(key)
 end
 
-function Skia.Static.popBackVectorSkCodecFrameInto(key)
+function Skia.Static.VectorSkCodecFrameInto.popBack(key)
     lib.static_vector_sk_codec_frame_into_pop_back(key)
 end
 
-function Skia.Static.eraseVectorSkCodecFrameInto(key, index)
+function Skia.Static.VectorSkCodecFrameInto.erase(key, index)
     lib.static_vector_sk_codec_frame_into_erase(key, index)
 end
 
-function Skia.Static.deleteVectorSkScalar(key)
+Skia.Static.VectorSkScalar = {}
+
+function Skia.Static.VectorSkScalar.delete(key)
     lib.static_vector_sk_scalar_delete(key)
 end
 
-function Skia.Static.getVectorSkScalar(key, index)
+function Skia.Static.VectorSkScalar.get(key, index)
     return lib.static_vector_sk_scalar_get(key, index)
 end
 
-function Skia.Static.pushBackVectorSkScalar(key, value)
+function Skia.Static.VectorSkScalar.pushBack(key, value)
     lib.static_vector_sk_scalar_push_back(key, value)
 end
 
-function Skia.Static.insertVectorSkScalar(key, index, value)
+function Skia.Static.VectorSkScalar.insert(key, index, value)
     lib.static_vector_sk_scalar_insert(key, index, value)
 end
 
-function Skia.Static.popBackVectorSkScalar(key)
+function Skia.Static.VectorSkScalar.popBack(key)
     lib.static_vector_sk_scalar_pop_back(key)
 end
 
-function Skia.Static.eraseVectorSkScalar(key, index)
+function Skia.Static.VectorSkScalar.erase(key, index)
     lib.static_vector_sk_scalar_erase(key, index)
 end
 

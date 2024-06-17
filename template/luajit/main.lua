@@ -21,7 +21,7 @@ glfw.windowHint(glfw.VISIBLE, glfw.TRUE)
 
 local info = skia.ImageInfo.Make(800, 600, 4, 1);
 local bitmap = skia.Bitmap.new();
-skia.Bitmap.allocPixels_3(bitmap, skia.Static.getPtrSkImageInfo(info));
+skia.Bitmap.allocPixels_3(bitmap, skia.Static.SkImageInfo.get(info));
 --local canvas = skia.Canvas.new_3(bitmap);
 --local paint = skia.Paint.new();
 --Skia.Paint.setARGB(paint, 255, 255, 0, 0);
