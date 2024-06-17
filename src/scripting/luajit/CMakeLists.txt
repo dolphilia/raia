@@ -8,8 +8,8 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -O0")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O0")
 
-#add_executable(raia_luajit
-add_library(raia_luajit SHARED
+add_executable(raia_luajit
+#add_library(raia_luajit SHARED
         src/raia_luajit.c
         ../../common/c/utility/util_file.c
         ../../common/c/static/shared_library_loader.c

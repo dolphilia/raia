@@ -1,33 +1,7 @@
---[[
-local gd = require("modules/bindings/libgd")
-local raia = require("modules/raia")
-local ffi = require("ffi")
-
-raia.window.setTitle("Hello")
-raia.window.setMode(160, 90)
-raia.window.center(160, 90)
-raia.window.show()
-
-local im = gd.imageCreateTrueColor(160, 90)
-gd.imageFilledRectangle(im, 0, 0, 159, 89, 0x00FFFFFF)
-gd.imageLine(im, 0, 0, 159, 89, 0x00000000)
-
-local pixels = ffi.new("GLubyte[?]", 160 * 90 * 4)
-gd.getPixelsRGBA(im, pixels)
-
-while not raia.window.shouldClose() do
-    raia.window.setPixels(pixels)
-    raia.window.redraw()
-end
-
-os.exit()
-]]
-
 local ffi = require("ffi")
 local gl = require("modules/bindings/gles")
 local glfw = require("modules/bindings/glfw")
 local skia = require("modules/bindings/skia")
---local prim = require("modules/primitive")
 
 -- 初期化処理
 
@@ -50,8 +24,14 @@ skia.Bitmap.allocN32Pixels(bitmap, 800, 600, 0);
 local canvas = skia.Canvas.new_3(bitmap);
 local paint = skia.Paint.new();
 
+local rect
+
 skia.Paint.setColor(paint, 0xffffffff);
-local rect = skia.Rect.MakeXYWH(0, 0, 800, 600);
+rect = skia.Rect.MakeXYWH(0, 0, 800, 600);
+skia.Canvas.drawRect(canvas, rect, paint);
+
+skia.Paint.setColor(paint, 0xff0000ff);
+rect = skia.Rect.MakeXYWH(100, 100, 600, 400);
 skia.Canvas.drawRect(canvas, rect, paint);
 
 local pixels = skia.Bitmap.getPixels(bitmap);
@@ -63,7 +43,7 @@ collectgarbage("collect")
 --
 
 local width, height = 800, 600
-local window = glfw.createWindow(width, height, "Random Noise")
+local window = glfw.createWindow(width, height, "RaiaEngine")
 if window == nil then
     glfw.terminate()
     error("Failed to create GLFW window")
@@ -145,7 +125,7 @@ local noiseData = ffi.new("GLubyte[?]", width * height * 4)
 local previousTime = glfw.getTime()
 
 while glfw.windowShouldClose(window) == 0 do
-    gl.viewport(0, 0, 800*2, 600*2)
+    gl.viewport(0, 0, 800, 600)
     gl.clearColor(1.0, 1.0, 1.0, 1.0)
     gl.clear(gl.COLOR_BUFFER_BIT)
 
@@ -157,8 +137,6 @@ while glfw.windowShouldClose(window) == 0 do
     gl.bindVertexArray(vao[0])
     gl.activeTexture(gl.TEXTURE0)
     gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_INT, nil)
-
-    --prim.drawNoiseGPU(noiseData, width, height, 4)
 
     -- フレームレート
     frameCount = frameCount + 1

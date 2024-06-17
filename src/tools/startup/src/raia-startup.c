@@ -41,11 +41,38 @@ static raia_runtime_func_t get_raia_runtime_func(void *handle, const char *func_
 }
 
 static void raia_alert_exec(const char *caption, const char *text) {
+#ifdef __WINDOWS__
+    STARTUPINFO si;
+    PROCESS_INFORMATION pi;
+    char cmdline[1024];
+
+    // STARTUPINFO構造体とPROCESS_INFORMATION構造体の初期化
+    ZeroMemory(&si, sizeof(si));
+    si.cb = sizeof(si);
+    ZeroMemory(&pi, sizeof(pi));
+
+    // コマンドライン引数を作成
+    snprintf(cmdline, sizeof(cmdline), "./raia_alert -c \"%s\" -t \"%s\"", caption, text);
+
+    // プロセスの作成
+    if (!CreateProcess(NULL, cmdline, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi)) {
+        fprintf(stderr, "CreateProcess failed (%d).\n", GetLastError());
+        return;
+    }
+
+    // 子プロセスの終了を待つ
+    WaitForSingleObject(pi.hProcess, INFINITE);
+
+    // 子プロセスのハンドルを閉じる
+    CloseHandle(pi.hProcess);
+    CloseHandle(pi.hThread);
+#else
     if (fork() == 0) {
         execlp("./raia_alert", "", "-c", caption, "-t", text, NULL);
     } else {
         wait(NULL);
     }
+#endif
 }
 
 int main(int argc, char *argv[]) {

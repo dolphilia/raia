@@ -7,11 +7,12 @@
 #include "luajit/lualib.h"
 #include "luajit/lauxlib.h"
 #include "luajit/luajit.h"
+#include "../../../common/c/utility/export_api.h"
+#include "../../../common/c/utility/platform.h"
 #include "../../../common/c/wrapper/wrapper_yyjson.h"
 #include "../../../common/c/wrapper/wrapper_ffi.h"
 #include "../../../common/c/utility/util_file.h"
-#include "../../../common/c/utility/export_api.h"
-#include "../../../common/c/utility/platform.h"
+
 
 #ifdef _WIN32
 #include <stdlib.h>

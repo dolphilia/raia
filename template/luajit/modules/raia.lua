@@ -2,8 +2,8 @@ local ffi = require("ffi")
 local gl = require("modules/bindings/gles")
 local glfw = require("modules/bindings/glfw")
 local skia = require("modules/bindings/skia")
-local prim = require("modules/primitive")
-local System = require("modules/raia/system")
+--local prim = require("modules/primitive")
+--local System = require("modules/raia/system")
 
 local Raia = {}
 Raia.audio = {}

@@ -11,7 +11,7 @@
 #include "../../../third_party/c/troydhanson/uthash/uthash.h"
 #include "../../../third_party/c/troydhanson/uthash/utlist.h"
 #include "../../../third_party/c/troydhanson/uthash/utstring.h"
-
+#include "../../../common/c/utility/platform.h"
 #ifdef __WINDOWS__
 #include <windows.h>
 #else

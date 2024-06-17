@@ -590,5 +590,6 @@ RAIA_API const char *init(int argc, char *argv[]) {
 }
 
 int main(int argc, char *argv[]) {
+    printf("now test");
     const char *result = init(argc, argv);
 }

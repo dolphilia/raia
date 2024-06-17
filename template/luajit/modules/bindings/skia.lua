@@ -3343,7 +3343,7 @@ ffi.cdef[[
     //
 ]]
 
-local lib = ffi.load("reskia")
+local lib = ffi.load("libreskia")
 local Skia = {}
 
 -- # static
