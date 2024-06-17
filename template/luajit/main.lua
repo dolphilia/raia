@@ -19,8 +19,17 @@ glfw.windowHint(glfw.VISIBLE, glfw.TRUE)
 
 -- Skia
 
+local info = skia.ImageInfo.Make(800, 600, 4, 1);
 local bitmap = skia.Bitmap.new();
-skia.Bitmap.allocN32Pixels(bitmap, 800, 600, 0);
+skia.Bitmap.allocPixels_3(bitmap, skia.Static.getPtrSkImageInfo(info));
+--local canvas = skia.Canvas.new_3(bitmap);
+--local paint = skia.Paint.new();
+--Skia.Paint.setARGB(paint, 255, 255, 0, 0);
+
+
+
+--local bitmap = skia.Bitmap.new();
+--skia.Bitmap.allocN32Pixels(bitmap, 800, 600, 0);
 local canvas = skia.Canvas.new_3(bitmap);
 local paint = skia.Paint.new();
 
@@ -39,6 +48,7 @@ local pixels = skia.Bitmap.getPixels(bitmap);
 bitmap = nil
 rect = nil
 collectgarbage("collect")
+
 
 --
 

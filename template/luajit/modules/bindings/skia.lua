@@ -138,6 +138,7 @@ ffi.cdef[[
     void *static_sk_image_generator_get(int key);
     // ## static_sk_image_info
     void static_sk_image_info_delete(int key);
+    void *static_sk_image_info_get_ptr(int key);
     // ## static_sk_image_required_properties
     void static_sk_image_required_properties_delete(int key);
     // ## static_sk_m_44
@@ -3661,6 +3662,10 @@ end
 
 function Skia.Static.deleteSkImageInfo(key)
     lib.static_sk_image_info_delete(key)
+end
+
+function Skia.Static.getPtrSkImageInfo(key)
+    return lib.static_sk_image_info_get_ptr(key)
 end
 
 function Skia.Static.deleteSkM44(key)
