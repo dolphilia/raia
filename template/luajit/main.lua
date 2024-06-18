@@ -46,13 +46,13 @@ rect = skia.Rect.MakeXYWH(100, 100, 600, 400)
 skia.Canvas.drawRoundRect(canvas, skia.Static.SkRect.get(rect), 10, 10, paint)
 
 -- 文字を描画
--- skia.Paint.setStyle(paint, skia.Paint.Style.Fill)
--- skia.Paint.setARGB(paint, 255, 255, 255, 0)
--- local typeface_key = skia.Typeface.MakeDefault()--MakeFromFile("Mplus1-Regular.ttf", 0)
--- local font = skia.Font.new_4(typeface_key, 64.0, 1.0, 0.0)
--- local textblob_key = skia.TextBlob.MakeFromString("Skia!", font, 0) -- SkTextEncoding::kUTF8 = 0
--- skia.Font.setTypeface(font, typeface_key)
--- skia.Canvas.drawTextBlob(canvas, textblob_key, 1.0, 1.0, paint)
+skia.Paint.setStyle(paint, skia.Paint.Style.Fill)
+skia.Paint.setARGB(paint, 255, 0, 0, 0)
+local typeface_key = skia.Typeface.MakeFromFile("Mplus1-Regular.ttf", 0)
+local font = skia.Font.new_4(typeface_key, 64.0, 1.0, 0.0)
+local textblob_key = skia.TextBlob.MakeFromString("Skia!", font, 0) -- SkTextEncoding::kUTF8 = 0
+skia.Font.setTypeface(font, typeface_key)
+skia.Canvas.drawTextBlob(canvas, textblob_key, 1.0, 64.0, paint)
 
 local pixels = skia.Bitmap.getPixels(bitmap);
 
