@@ -5596,7 +5596,13 @@ end
 ]]
 
 -- ## sk_alpha_type
-Skia.AlphaType = {}
+Skia.AlphaType = {
+    Unknown = 0,
+    Opaque = 1,
+    Premul = 2,
+    Unpremul = 3,
+    LastEnum = 3
+}
 
 function Skia.AlphaType.SkAlphaTypeIsOpaque(at)
     return lib.SkAlphaType_SkAlphaTypeIsOpaque(at)
@@ -7681,6 +7687,37 @@ function Skia.ColorTable.Deserialize(buffer)
     setFinalizer(obj, lib.static_sk_color_table_delete)
     return obj
 end
+
+-- ##
+
+Skia.ColorType = {
+    Unknown = 0,
+    Alpha8 = 1,
+    RGB565 = 2,
+    ARGB4444 = 3,
+    RGBA8888 = 4,
+    RGB888x = 5,
+    BGRA8888 = 6,
+    RGBA1010102 = 7,
+    BGRA1010102 = 8,
+    RGB101010x = 9,
+    BGR101010x = 10,
+    BGR101010xXR = 11,
+    RGBA10x6 = 12,
+    Gray8 = 13,
+    RGBAF16Norm = 14,
+    RGBAF16 = 15,
+    RGBAF32 = 16,
+    R8G8unorm = 17,
+    A16float = 18,
+    R16G16float = 19,
+    A16unorm = 20,
+    R16G16unorm = 21,
+    R16G16B16A16unorm = 22,
+    SRGBA8888 = 23,
+    R8unorm = 24,
+    LastEnum = 24
+}
 
 -- ## sk_contour_measure
 Skia.ContourMeasure = {}
@@ -11930,6 +11967,11 @@ end
 
 -- ## sk_paint
 Skia.Paint = {}
+Skia.Paint.Style = {
+    Fill = 0,
+    Stroke = 1,
+    StrokeAndFill = 2
+}
 
 function Skia.Paint.new()
     local obj = lib.SkPaint_new()
