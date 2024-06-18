@@ -33,24 +33,26 @@ rect = skia.Rect.MakeXYWH(0, 0, 800, 600)
 skia.Canvas.drawRect(canvas, rect, paint)
 
 -- 角丸矩形を描画
-skia.Paint.setARGB(paint, 255, 255, 0, 0)
+skia.Paint.setARGB(paint, 128, 0, 0, 0)
 skia.Paint.setAntiAlias(paint, true) -- アンチエイリアシングをオンにする
 rect = skia.Rect.MakeXYWH(100, 100, 600, 400)
 skia.Canvas.drawRoundRect(canvas, skia.Static.SkRect.get(rect), 10, 10, paint)
 
 -- 枠線を描画
 skia.Paint.setStyle(paint, skia.Paint.Style.Stroke)  -- スタイルを枠線に設定
-skia.Paint.setStrokeWidth(paint, 5);  -- 枠線の太さを設定
+skia.Paint.setStrokeWidth(paint, 5)  -- 枠線の太さを設定
 skia.Paint.setARGB(paint, 255, 0, 0, 0)
 rect = skia.Rect.MakeXYWH(100, 100, 600, 400)
 skia.Canvas.drawRoundRect(canvas, skia.Static.SkRect.get(rect), 10, 10, paint)
 
 -- 文字を描画
-skia.Paint.setStyle(paint, skia.Paint.Style.Fill)
+--skia.Paint.setStyle(paint, skia.Paint.Style.Fill)
 skia.Paint.setARGB(paint, 255, 0, 0, 0)
+skia.Paint.setStyle(paint, skia.Paint.Style.Stroke)  -- スタイルを枠線に設定
+skia.Paint.setStrokeWidth(paint, 2)
 local typeface_key = skia.Typeface.MakeFromFile("Mplus1-Regular.ttf", 0)
 local font = skia.Font.new_4(typeface_key, 64.0, 1.0, 0.0)
-local textblob_key = skia.TextBlob.MakeFromString("Skia!", font, 0) -- SkTextEncoding::kUTF8 = 0
+local textblob_key = skia.TextBlob.MakeFromString("Hello! Skia!", font, 0) -- SkTextEncoding::kUTF8 = 0
 skia.Font.setTypeface(font, typeface_key)
 skia.Canvas.drawTextBlob(canvas, textblob_key, 1.0, 64.0, paint)
 
@@ -165,7 +167,7 @@ end
 ]]
 
 while glfw.windowShouldClose(window) == 0 do
-    gl.viewport(0, 0, 800*2, 600*2)
+    gl.viewport(0, 0, 800, 600)
     gl.clearColor(1.0, 1.0, 1.0, 1.0)
     gl.clear(gl.COLOR_BUFFER_BIT)
 
