@@ -12,8 +12,8 @@ set(CMAKE_C_STANDARD 11)
 add_library(raia_stb SHARED
         src/raia_stb_image.c
         src/raia_stb_image_write.c
-        stb/stb_image_write.c
-        stb/stb_image.c
+        src/stb/stb_image_write.c
+        src/stb/stb_image.c
 )
 
 #set_target_properties(raia_stb PROPERTIES PREFIX "")

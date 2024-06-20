@@ -8,7 +8,7 @@
 #include "export_api.h"
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
-#include "../stb/stb_image_write.h"
+#include "stb/stb_image_write.h"
 
 #ifndef STB_IMAGE_WRITE_STATIC  // C++ forbids static forward declarations
 RAIA_API int raia_stbi_write_tga_with_rle;
