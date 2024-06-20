@@ -2,6 +2,7 @@ local ffi = require("ffi")
 local gl = require("modules/bindings/gles")
 local glfw = require("modules/bindings/glfw")
 local skia = require("modules/bindings/skia")
+local stb = require("modules/bindings/stb")
 
 -- 初期化処理
 
@@ -68,7 +69,60 @@ local textblob_key = skia.TextBlob.MakeFromString("こんにちは! Raia!", font
 skia.Font.setTypeface(font, typeface_key)
 skia.Canvas.drawTextBlob(canvas, textblob_key, 120.0, 200.0, paint)
 
+-- グラデーションを描画する
+local points = skia.Static.SkPointTwo.make(0, 0, 0, 500)
 
+ffi.cdef[[
+typedef uint32_t SkColor;
+]]
+
+local SK_ColorBLUE = 0xFF0000EE  -- A=255, R=0, G=0, B=255
+local SK_ColorYELLOW = 0xFF000055  -- A=255, R=255, G=255, B=0
+local colors = ffi.new("SkColor[2]", {SK_ColorBLUE, SK_ColorYELLOW})
+local shader_key = skia.GradientShader.MakeLinear(skia.Static.SkPointTwo.get(points), colors, nil, 2, skia.TileMode.Clamp, 0, nil)
+skia.Paint.setShader(paint, shader_key)
+skia.Paint.setBlendMode(paint, skia.BlendMode.Overlay)
+skia.Canvas.drawPaint(canvas, paint)
+
+-- 画像を読み込む
+
+ffi.cdef[[
+    void* memcpy(void* dest, const void* src, size_t n);
+]]
+
+local filePath = "miga.png"
+local width = ffi.new("int[1]")
+local height = ffi.new("int[1]")
+local channels = ffi.new("int[1]")
+
+local image_data = stb.Image.load(filePath, width, height, channels, stb.Image.ColorMode.RGBA)
+if image_data == nil then
+    local reason = ffi.string(stb.Image.failureReason())
+    io.stderr:write("Error loading PNG file: ", reason, "\n")
+    os.exit(1)
+end
+
+local image_info = skia.ImageInfo.Make(width[0], height[0], skia.ColorType.RGBA8888, skia.AlphaType.Unpremul) -- Unpremul
+local image_info_ptr = skia.Static.SkImageInfo.get(image_info);
+
+local image_bitmap = skia.Bitmap.new()
+skia.Bitmap.allocPixels_3(image_bitmap, image_info_ptr)
+local image_pixels = skia.Bitmap.getPixels(image_bitmap)
+
+ffi.C.memcpy(image_pixels, image_data, width[0] * height[0] * 4)
+stb.Image.imageFree(image_data)
+
+skia.Paint.setBlendMode(paint, skia.BlendMode.SrcOver) -- skia.BlendMode.SrcOver
+local samplingOptions = skia.SamplingOptions.new_4(1)
+
+local image = skia.Bitmap.asImage(image_bitmap)
+skia.Canvas.drawImage_2(canvas, image, 250, 240, samplingOptions, paint)
+
+image = skia.Bitmap.asImage(image_bitmap)
+skia.Canvas.drawImage_2(canvas, image, 50, 0, samplingOptions, paint)
+
+
+--
 
 local pixels = skia.Bitmap.getPixels(bitmap);
 
@@ -181,7 +235,7 @@ end
 ]]
 
 while glfw.windowShouldClose(window) == 0 do
-    gl.viewport(0, 0, 800, 600)
+    gl.viewport(0, 0, 800 * 2, 600 * 2)
     gl.clearColor(1.0, 1.0, 1.0, 1.0)
     gl.clear(gl.COLOR_BUFFER_BIT)
 

@@ -198,6 +198,10 @@ ffi.cdef[[
     // ## static_sk_point_3
     void static_sk_point_3_delete(int key);
     void * static_sk_point_3_get_ptr(int key);
+    // ## static_sk_point_two
+    int static_sk_point_two_make_float(float fx1, float fy1, float fx2, float fy2);
+    void static_sk_point_two_delete(int key);
+    void * static_sk_point_two_get_ptr(int key);
     // ## static_sk_r_rect
     void static_sk_r_rect_delete(int key);
     void * static_sk_r_rect_get_ptr(int key);
@@ -4021,6 +4025,20 @@ function Skia.Static.SkPoint3.get(key)
     return lib.static_sk_point_3_get_ptr(key)
 end
 
+Skia.Static.SkPointTwo = {}
+
+function Skia.Static.SkPointTwo.make(fx1, fy1, fx2, fy2)
+    return lib.static_sk_point_two_make_float(fx1, fy1, fx2, fy2)
+end
+
+function Skia.Static.SkPointTwo.delete(key)
+    lib.static_sk_point_two_delete(key)
+end
+
+function Skia.Static.SkPointTwo.get(key)
+    return lib.static_sk_point_two_get_ptr(key)
+end
+
 Skia.Static.SkRRect = {}
 
 function Skia.Static.SkRRect.delete(key)
@@ -6131,7 +6149,40 @@ function Skia.Bitmap.ComputeIsOpaque(bm)
 end
 
 -- ## sk_blend_mode
-Skia.BlendMode = {}
+Skia.BlendMode = {
+    Clear = 0,
+    Src = 1,
+    Dst = 2,
+    SrcOver = 3,
+    DstOver = 4,
+    SrcIn = 5,
+    DstIn = 6,
+    SrcOut = 7,
+    DstOut = 8,
+    SrcATop = 9,
+    DstATop = 10,
+    Xor = 11,
+    Plus = 12,
+    Modulate = 13,
+    Screen = 14,
+    Overlay = 15,
+    Darken = 16,
+    Lighten = 17,
+    ColorDodge = 18,
+    ColorBurn = 19,
+    HardLight = 20,
+    SoftLight = 21,
+    Difference = 22,
+    Exclusion = 23,
+    Multiply = 24,
+    Hue = 25,
+    Saturation = 26,
+    Color = 27,
+    Luminosity = 28,
+    LastCoeffMode = 14,
+    LastSeparableMode = 24,
+    LastMode = 28,
+}
 
 function Skia.BlendMode.SkBlendMode_AsCoeff(mode, src, dst)
     return lib.SkBlendMode_SkBlendMode_AsCoeff(mode, src, dst)
@@ -16819,6 +16870,14 @@ function Skia.TextBlobBuilderRunHandler.commitLine(text_blob_builder_run_handler
     lib.SkTextBlobBuilderRunHandler_commitLine(text_blob_builder_run_handler)
 end
 ]]
+
+Skia.TileMode = {
+    Clamp = 0,
+    Repeat = 1,
+    Mirror = 2,
+    Decal = 3,
+    LastTileMode = 2
+}
 
 -- ## sk_tiled_image_utils
 Skia.TiledImageUtils = {}
