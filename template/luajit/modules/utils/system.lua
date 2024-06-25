@@ -18,6 +18,8 @@ ffi.cdef[[
     PowerInfo get_power_info();
     int get_processor_count();
     int open_url(const char* url);
+    void print_memory_usage();
+    double get_memory_usage();
 ]]
 
 local lib = ffi.load("raia_system")
@@ -38,6 +40,14 @@ end
 
 function System.openURL(url)
     return lib.open_url(url)
+end
+
+function System.printMemoryUsage()
+    lib.print_memory_usage()
+end
+
+function System.getMemoryUsage()
+    return lib.get_memory_usage()
 end
 
 return System

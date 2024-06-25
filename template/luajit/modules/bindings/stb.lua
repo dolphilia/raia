@@ -8,6 +8,7 @@ local function setFinalizer(key, deleteFunction)
 end
 
 ffi.cdef[[
+    // stb_image
     void *raia_stbi_load_from_memory(void const *buffer, int len, int *x, int *y, int *channels_in_file, int desired_channels);
     void *raia_stbi_load_from_callbacks(void const *clbk, void *user, int *x, int *y, int *channels_in_file, int desired_channels);
     void *raia_stbi_load(char const *filename, int *x, int *y, int *channels_in_file, int desired_channels);
@@ -52,6 +53,19 @@ ffi.cdef[[
     int raia_stbi_zlib_decode_buffer(char *obuffer, int olen, const char *ibuffer, int ilen);
     char *raia_stbi_zlib_decode_noheader_malloc(const char *buffer, int len, int *outlen);
     int raia_stbi_zlib_decode_noheader_buffer(char *obuffer, int olen, const char *ibuffer, int ilen);
+    // stb_image_write
+    int raia_stbi_write_png(char const *filename, int w, int h, int comp, const void  *data, int stride_in_bytes);
+    int raia_stbi_write_bmp(char const *filename, int w, int h, int comp, const void  *data);
+    int raia_stbi_write_tga(char const *filename, int w, int h, int comp, const void  *data);
+    int raia_stbi_write_hdr(char const *filename, int w, int h, int comp, const float *data);
+    int raia_stbi_write_jpg(char const *filename, int x, int y, int comp, const void  *data, int quality);
+    int raia_stbiw_convert_wchar_to_utf8(char *buffer, size_t bufferlen, const wchar_t* input); // windows only
+    int raia_stbi_write_png_to_func(void *func, void *context, int w, int h, int comp, const void  *data, int stride_in_bytes);
+    int raia_stbi_write_bmp_to_func(void *func, void *context, int w, int h, int comp, const void  *data);
+    int raia_stbi_write_tga_to_func(void *func, void *context, int w, int h, int comp, const void  *data);
+    int raia_stbi_write_hdr_to_func(void *func, void *context, int w, int h, int comp, const float *data);
+    int raia_stbi_write_jpg_to_func(void *func, void *context, int x, int y, int comp, const void  *data, int quality);
+    void raia_stbi_flip_vertically_on_write(int flip_boolean);
 ]]
 
 local lib = ffi.load("raia_stb")
@@ -243,5 +257,55 @@ function STB.Image.zlibDecodeNoHeaderBuffer(obuffer, olen, ibuffer, ilen)
     return lib.raia_stbi_zlib_decode_noheader_buffer(obuffer, olen, ibuffer, ilen)
 end
 
+STB.ImageWrite = {}
+
+function STB.ImageWrite.png(filename, w, h, comp, data, stride_in_bytes)
+    return lib.raia_stbi_write_png(filename, w, h, comp, data, stride_in_bytes)
+end
+
+function STB.ImageWrite.bmp(filename, w, h, comp, data)
+    return lib.raia_stbi_write_bmp(filename, w, h, comp, data)
+end
+
+function STB.ImageWrite.tga(filename, w, h, comp, data)
+    return lib.raia_stbi_write_tga(filename, w, h, comp, data)
+end
+
+function STB.ImageWrite.hdr(filename, w, h, comp, data)
+    return lib.raia_stbi_write_hdr(filename, w, h, comp, data)
+end
+
+function STB.ImageWrite.jpg(filename, x, y, comp, data, quality)
+    return lib.raia_stbi_write_jpg(filename, x, y, comp, data, quality)
+end
+
+-- windows only
+function STB.ImageWrite.convertWcharToUTF8(buffer, bufferlen, input)
+    return lib.raia_stbiw_convert_wchar_to_utf8(buffer, bufferlen, input);
+end
+
+function STB.ImageWrite.pngToFunc(func, context, w, h, comp, data, stride_in_bytes)
+    return lib.raia_stbi_write_png_to_func(func, context, w, h, comp, data, stride_in_bytes)
+end
+
+function STB.ImageWrite.bmpToFunc(func, context, w, h, comp, data)
+    return lib.raia_stbi_write_bmp_to_func(func, context, w, h, comp, data)
+end
+
+function STB.ImageWrite.tgaToFunc(func, context, w, h, comp, data)
+    return lib.raia_stbi_write_tga_to_func(func, context, w, h, comp, data)
+end
+
+function STB.ImageWrite.hdrToFunc(func, context, w, h, comp, data)
+    return lib.raia_stbi_write_hdr_to_func(func, context, w, h, comp, data)
+end
+
+function STB.ImageWrite.jpgToFunc(func, context, x, y, comp, data, quality)
+    return lib.raia_stbi_write_jpg_to_func(func, context, x, y, comp, data, quality)
+end
+
+function STB.ImageWrite.flipVerticallyOnWrite(flip_boolean)
+    lib.raia_stbi_flip_vertically_on_write(flip_boolean)
+end
 
 return STB

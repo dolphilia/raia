@@ -2,7 +2,6 @@ local ffi = require("ffi")
 local skia = require("modules/bindings/skia")
 local stb = require("modules/bindings/stb")
 local Raia = require("modules/raia")
-local im = require("modules/bindings/imgui")
 
 -- Skia
 
@@ -117,51 +116,11 @@ collectgarbage("collect")
 
 --
 
-local system = Raia.System:new()
 local timer = Raia.Timer:new()
 local window = Raia.Window:new("Title", 800, 600)
 
---
--- ImGui
--- init
-im.checkVersion()
-local ctx = im.createContext()
--- config
-local bit = require("bit")
-local config_flags = 0
-config_flags = bit.bor(config_flags, im.ConfigFlags.NavEnableKeyboard)
-config_flags = bit.bor(config_flags, im.ConfigFlags.NavEnableGamepad)
-config_flags = bit.bor(config_flags, im.ConfigFlags.DockingEnable)
-config_flags = bit.bor(config_flags, im.ConfigFlags.ViewportsEnable)
-im.getIO_configFlags(config_flags)
--- initImpl
-im.initForOpenGLImplGLFW(window.id, true);
-im.initImplOpenGL3("#version 300 es");
-print("")
---
-
---
-
 window:setPixels(pixels)
 while window:shouldClose() == false do
-    im.newFrameImplOpenGL3()
-    im.newFrameImplGLFW()
-    im.newFrame()
-    im.Begin("Hello")
-    im.text("aiueo")
-    im.End()
-    im.showDemoWindow()
-    --window:setTitle("FPS:"..timer:getFPS().."|"..(system:getMemoryUsage()/1000/1000).."MB")
-    --
-    window:redraw(false, false)
-    im.render()
-    im.renderDrawDataImplOpenGL3(im.getDrawData())
-    local backup_current_context = window:getCurrentContext()
-    print(backup_current_context)
-    im.updatePlatformWindows()
-    im.renderPlatformWindowsDefault()
-    print(backup_current_context)
-    window:makeContextCurrent(backup_current_context)
-    window:swapBuffers()
-    window:pollEvents()
+    window:setTitle("FPS:"..timer:getFPS())
+    window:redraw()
 end

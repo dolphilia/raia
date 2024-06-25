@@ -3,8 +3,9 @@ local gl = require("modules/bindings/gles")
 local glfw = require("modules/bindings/glfw")
 local skia = require("modules/bindings/skia")
 --local prim = require("modules/primitive")
---local System = require("modules/raia/system")
+local System = require("modules/utils/system")
 
+--[[
 local Raia = {}
 Raia.audio = {}
 Raia.data = {}
@@ -43,42 +44,6 @@ Raia.surface[0].bitmap = nil
 Raia.surface[0].canvas = nil
 Raia.surface[0].paint = nil
 Raia.surface[0].pixels = nil
-
--- window テーブルの初期設定
-local window = {
-    _title = "Initial Title"  -- 実際のタイトル値をプライベートプロパティとして保持
-}
-
--- メタテーブルの設定
-
-local mt = {
-    __index = function(t, key)
-        if key == "title" then
-            return t._title
-        else
-            return nil
-        end
-    end,
-    __newindex = function(t, key, value)
-        if key == "title" then
-            t._title = value
-            t.setTitle(value)  -- title が変更されたら setTitle を呼び出す
-        else
-            rawset(t, key, value)  -- それ以外のプロパティは通常通り設定
-        end
-    end
-}
-
--- setTitle 関数の定義
-function window.setTitle(newTitle)
-    print("Setting new title to: " .. newTitle)
-    -- 実際にタイトルを設定するロジックをここに追加
-end
-
--- window テーブルにメタテーブルを設定
-setmetatable(window, mt)
-
-window.title = "aiueo"
 
 -- Raia.audio
 
@@ -748,47 +713,6 @@ end
 function Raia.sound.newSoundData()
 end
 
--- Raia.system
-
---- クリップボードからテキストを取得します。
-function Raia.system.getClipboardText()
-    return glfw.getClipboardString(Raia.window.id)
-end
-
---- 現在のオペレーティングシステムを取得します。
-function Raia.system.getOS()
-    return System.getOS()
-end
-
---- システムの電源供給についての情報を取得します。
-function Raia.system.getPowerInfo()
-    return System.getPowerInfo()
-end
-
---- システムに搭載されている論理プロセッサ数を取得します。
-function Raia.system.getProcessorCount()
-    return System.getProcessorCount()
-end
-
---- ほかのアプリケーションがシステムで音楽をバックグラウンド再生しているかどうかを取得します。
-function Raia.system.hasBackgroundMusic()
-    return false
-end
-
---- 利用者のウェブまたはファイルブラウザで URL を開きます。
-function Raia.system.openURL(url)
-    return System.openURL(url)
-end
-
---- クリップボードへテキストを出力します。
-function Raia.system.setClipboardText(string)
-    glfw.setClipboardString(Raia.window.id, string)
-end
-
---- 利用可能であれば、デバイスを振動させます。
-function Raia.system.vibrate()
-end
-
 -- Raia.thread
 
 --- 名前ありスレッドのチャンネルを作成または検索します。
@@ -807,259 +731,130 @@ end
 function Raia.thread.newThread()
 end
 
--- Raia.timer
+]]
 
-Raia.timer.frameTimes = {}
-Raia.timer.frameTimeIndex = 1
-Raia.timer.maxFrameSamples = 100
-Raia.timer.lastTime = glfw.getTime()  -- 最初の時間を設定
-Raia.timer.startTime = glfw.getTime() -- アプリケーションの開始時刻を取得
 
---- 最近の秒間における平均デルタ時間を返します。
-function Raia.timer.getAverageDelta()
-    local currentTime = glfw.getTime()
-    local frameTime = currentTime - Raia.timer.lastTime
-    Raia.timer.frameTimes[Raia.timer.frameTimeIndex] = frameTime
-    Raia.timer.frameTimeIndex = (Raia.timer.frameTimeIndex % Raia.timer.maxFrameSamples) + 1
-
-    local sum = 0
-    for _, time in ipairs(Raia.timer.frameTimes) do
-        sum = sum + time
-    end
-    Raia.timer.lastTime = currentTime  -- 最後の時間を更新
-
-    return #Raia.timer.frameTimes > 0 and (sum / #Raia.timer.frameTimes) or 0
-end
-
---- 最近の２フレーム間における時間を返します。
-function Raia.timer.getDelta()
-    local currentTime = glfw.getTime()
-    local deltaTime = currentTime - Raia.timer.lastTime
-    Raia.timer.lastTime = currentTime  -- 現在の時間を記録
-    return deltaTime
-end
-
---- 毎秒ごとに現在のフレーム数を返します。	
-function Raia.timer.getFPS()
-    local currentTime = glfw.getTime()
-    Raia.timer.frameTimes[#Raia.timer.frameTimes + 1] = currentTime
-    -- 過去1秒間にどれだけフレームがあったかカウント
-    local count = 0
-    for i = #Raia.timer.frameTimes, 1, -1 do
-        if currentTime - Raia.timer.frameTimes[i] > 1.0 then
-            table.remove(Raia.timer.frameTimes, i)  -- 1秒以上前のフレームタイムはリストから削除
-        else
-            count = count + 1
-        end
-    end
-    return count
-end
-
---- （廃止）タイマーの値を精密マイクロ秒で返します。
-function Raia.timer.getMicroTime()
-end
-
---- 過去の無指定による開始時間からの経過時間を返します。
-function Raia.timer.getTime() -- getTimeSinceStart()
-    local currentTime = glfw.getTime()
-    return currentTime - Raia.timer.startTime
-end
-
---- 指定された時間になるまで現在のスレッドを一時停止します。
-function Raia.timer.sleep(seconds) -- wait()
-    local startTime = glfw.getTime()
-    while glfw.getTime() - startTime < seconds do
-        glfw.pollEvents() -- 応答性を保持するためにイベントをポーリング
-    end
-end
-
---- ２フレームの間にある時間を計測します。
-function Raia.timer.step()
-    local currentTime = glfw.getTime()
-    local deltaTime = currentTime - Raia.timer.lastTime
-    Raia.timer.lastTime = currentTime  -- 現在の時間を最後のフレーム時間として更新
-    return deltaTime
-end
-
+--[[
 -- Raia.touch
 
---- ピクセル単位にて、指定されたタッチ打鍵の現在位置を取得します。
+--- ピクセル単位にて、指定されたタッチ打鍵の現在位置を取得する
 function Raia.touch.getPosition()
 end
---- 指定されたタッチ打鍵における現在の筆圧を取得します。
+
+--- 指定されたタッチ打鍵における現在の筆圧を取得する
 function Raia.touch.getPressure()
 end
---- 全ての有効なタッチ打鍵 ID 値の一覧を取得します。
+
+--- 全ての有効なタッチ打鍵 ID 値の一覧を取得する
 function Raia.touch.getTouches()
 end
 
 -- Raia.video
 
---- VideoStream を新規作成します。
+--- VideoStream を新規作成する
 function Raia.video.newVideoStream()
 end
 
 
 -- Raia.window
 
---- ウィンドウを閉じます。
-function Raia.window.close()
-    glfw.destroyWindow(Raia.window.id)
-end
-
---- 数値をピクセルから密度非依存単位へ変換します。
+--- 数値をピクセルから密度非依存単位へ変換する
 function Raia.window.fromPixels()
 end
 
---- ウィンドウに関連づけられた DPI 縮尺係数を取得します。
+--- ウィンドウに関連づけられた DPI 縮尺係数を取得する
 function Raia.window.getDPIScale()
 end
 
---- デスクトップの幅と高さを取得します。
-function Raia.window.getDesktopDimensions()
-    local primaryMonitor = glfw.getPrimaryMonitor()
-    if not primaryMonitor then
-        error("Failed to get primary monitor")
-    end
-    local mode = glfw.getVideoMode(primaryMonitor)
-    if not mode then
-        error("Failed to get video mode")
-    end
-    return mode
-end
-
---- （廃止）ウィンドウの幅と高さを取得します。
-function Raia.window.getDimensions()
-    return Raia.window.width, Raia.window.height
-end
-
---- 接続されているモニターの台数を取得します。
+--- 接続されているモニターの台数を取得する
 function Raia.window.getDisplayCount()
 end
 
---- ディスプレイの名称を取得します。
+--- ディスプレイの名称を取得する
 function Raia.window.getDisplayName()
 end
 
---- 現在のデバイスにおけるディスプレイの表示方向を取得します。
+--- 現在のデバイスにおけるディスプレイの表示方向を取得する
 function Raia.window.getDisplayOrientation()
 end
 
---- ウィンドウがフルスクリーン化されているか取得します。
+--- ウィンドウがフルスクリーン化されているか取得する
 function Raia.window.getFullscreen()
 end
 
---- 対応しているフルスクリーンモードの一覧を取得します。
+--- 対応しているフルスクリーンモードの一覧を取得する
 function Raia.window.getFullscreenModes()
 end
 
---- （廃止）ウィンドウの高さを取得します。
-function Raia.window.getHeight()
-    return Raia.window.height
-end
-
---- ウィンドウのアイコンを取得します。
+--- ウィンドウのアイコンを取得する
 function Raia.window.getIcon()
 end
 
---- ディスプレイ・モードとウィンドウのプロパティを取得します。
+--- ディスプレイ・モードとウィンドウのプロパティを取得する
 function Raia.window.getMode()
 end
 
---- （廃止）ウィンドウに関連づけられた DPI 縮尺係数を取得します。
+--- （廃止）ウィンドウに関連づけられた DPI 縮尺係数を取得する
 function Raia.window.getPixelScale()
 end
 
---- 画面上にあるウィンドウの位置を取得します。
-function Raia.window.getPosition()
-    local x, y = glfw.getWindowPos(Raia.window.id)
-    return x, y
-end
-
---- ノッチなどで隠されないウィンドウ領域範囲を取得します。
+--- ノッチなどで隠されないウィンドウ領域範囲を取得する
 function Raia.window.getSafeArea()
 end
 
---- ウィンドウのタイトルを取得します。
-function Raia.window.getTitle()
-    return Raia.window.title
-end
-
---- 現在の垂直同期方法 (vsync) を取得します。
+--- 現在の垂直同期方法 (vsync) を取得する
 function Raia.window.getVSync()
 end
 
---- （廃止）ウィンドウの幅を取得します。
-function Raia.window.getWidth()
-    return Raia.window.width
-end
-
---- ゲームのウィンドウにキーボードのフォーカスがあるか確認します。
+--- ゲームのウィンドウにキーボードのフォーカスがあるか確認する
 function Raia.window.hasFocus()
 end
 
---- ゲームのウィンドウにマウスのフォーカスがあるか確認します。
+--- ゲームのウィンドウにマウスのフォーカスがあるか確認する
 function Raia.window.hasMouseFocus()
 end
 
---- ウィンドウが作成されているか確認します。
+--- ウィンドウが作成されているか確認する
 function Raia.window.isCreated()
 end
 
---- プログラム実行中に画面の休止を有効にするかどうかを取得します。
+--- プログラム実行中に画面の休止を有効にするかどうかを取得する
 function Raia.window.isDisplaySleepEnabled()
 end
 
---- 現在のウィンドウが最大化されているかどうかを取得します。
+--- 現在のウィンドウが最大化されているかどうかを取得する
 function Raia.window.isMaximized()
 end
 
---- 現在のウィンドウが最小化されているかどうかを取得します。
+--- 現在のウィンドウが最小化されているかどうかを取得する
 function Raia.window.isMinimized()
 end
 
---- ゲームのウィンドウが表示されているか確認します。
-function Raia.window.isVisible()
-    return Raia.window.visible
-end
-
---- ウィンドウを可能な限り最大化します。
+--- ウィンドウを可能な限り最大化する
 function Raia.window.maximize()
 end
 
---- ウィンドウをシステムのタスクバー / ドックへ最小化します。
+--- ウィンドウをシステムのタスクバー / ドックへ最小化する
 function Raia.window.minimize()
 end
 
---- ウィンドウがフォアグラウンドではない場合に利用者へ注意を促します。
+--- ウィンドウがフォアグラウンドではない場合に利用者へ注意を促す
 function Raia.window.requestAttention()
 end
 
---- ウィンドウが最小化、または最大化状態ならば、ウィンドウの大きさと位置を元の状態に戻します。	
+--- ウィンドウが最小化、または最大化状態ならば、ウィンドウの大きさと位置を元の状態に戻す	
 function Raia.window.restore()
 end
 
---- プログラム実行中に画面の休止を有効にするかどうかを設定します。
+--- プログラム実行中に画面の休止を有効にするかどうかを設定する
 function Raia.window.setDisplaySleepEnabled()
 end
 
---- フルスクリーンへ入るか出ます。
-function Raia.window.setFullscreen(fullscreen, monitor)
-    if fullscreen then
-        -- 現在のモニターの解像度を取得
-        local mode = glfw.getVideoMode(monitor or glfw.getPrimaryMonitor())
-        glfw.setWindowMonitor(Raia.window.id, monitor or glfw.getPrimaryMonitor(), 0, 0, mode.width, mode.height, mode.refreshRate)
-    else
-        -- ウィンドウモードに戻す
-        glfw.setWindowMonitor(Raia.window.id, nil, Raia.window.x, Raia.window.y, Raia.window.width, Raia.window.height, glfw.DONT_CARE)
-    end
-end
-
---- ウィンドウのアイコンを設定します。
+--- ウィンドウのアイコンを設定する
 function Raia.window.setIcon()
 end
 
---- ディスプレイ・モードとウィンドウのプロパティを設定します。
+--- ディスプレイ・モードとウィンドウのプロパティを設定する
 function Raia.window.setMode(width, height, flags)
     width = width or Raia.window.width
     height = height or Raia.window.height
@@ -1086,204 +881,494 @@ function Raia.window.setMode(width, height, flags)
     Raia.window.height = height
 end
 
---- 画面上にあるウィンドウの位置を設定します。
-function Raia.window.setPosition(x, y)
-    Raia.window.x = x
-    Raia.window.y = y
-    glfw.setWindowPos(Raia.window.id, x, y)
-end
-
---- ウィンドウのタイトルを設定します。
-function Raia.window.setTitle(title)
-    glfw.setWindowTitle(Raia.window.id, title)
-    Raia.window.title = title
-end
-
---- 現在の垂直同期方法 (vsync) を設定します。
+--- 現在の垂直同期方法 (vsync) を設定する
 function Raia.window.setVSync()
 end
 
---- LÖVE ウィンドウに重ねてメッセージボックスを表示します。
+--- ウィンドウに重ねてメッセージボックスを表示する
 function Raia.window.showMessageBox()
 end
 
---- 数値を密度非依存単位からピクセルへ変換します。
+--- 数値を密度非依存単位からピクセルへ変換する
 function Raia.window.toPixels()
 end
 
---- 未指定のプロパティを変更せずにディスプレイモードとウィンドウのを設定します。
+--- 未指定のプロパティを変更せずにディスプレイモードとウィンドウのを設定する
 function Raia.window.updateMode()
 end
 
---- （拡張）ウィンドウを表示する。
-function Raia.window.show()
-    glfw.showWindow(Raia.window.id)
-    Raia.window.visible = true
-end
+]]
 
---- （拡張）ウィンドウを非表示にする。
-function Raia.window.hide()
-    glfw.hideWindow(Raia.window.id)
-    Raia.window.visible = false
-end
-
---- （拡張）ウィンドウを中央に配置する
-function Raia.window.center(width, height)
-    -- プライマリモニタのビデオモードを取得
-    local monitor = glfw.getPrimaryMonitor()
-    local mode = glfw.getVideoMode(monitor)
-    if not mode then
-        error("Failed to get video mode.")
-    end
-
-    -- 新しいウィンドウ位置を計算
-    local x = (mode.width - width) / 2
-    local y = (mode.height - height) / 2
-
-    -- ウィンドウ位置を設定
-    glfw.setWindowPos(Raia.window.id, x, y)
-end
-
---- （拡張）
-function Raia.window.shouldClose()
-    return glfw.windowShouldClose(Raia.window.id) ~= 0  -- CのAPIは通常0以外をtrueとして扱う
-end
-
---- （拡張）
-function Raia.window.setPixels(pixels)
-    Raia.shader.pixels = pixels
-end
-
---- (拡張) 再描画する
-function Raia.window.redraw(isSwap, isPollEvents)
-    gl.viewport(0, 0, Raia.window.width * 2, Raia.window.height * 2)
-    gl.clearColor(1.0, 1.0, 1.0, 1.0)
-    gl.clear(gl.COLOR_BUFFER_BIT)
-
-    gl.bindTexture(gl.TEXTURE_2D, Raia.shader.texture[0])
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, Raia.window.width, Raia.window.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, Raia.shader.pixels)
-    
-    gl.useProgram(Raia.shader.program)
-    gl.bindVertexArray(Raia.shader.vao[0])
-    gl.activeTexture(gl.TEXTURE0)
-    gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_INT, nil)
-
-    if isSwap or true then
-        glfw.swapBuffers(Raia.window.id)
-    end
-    if isPollEvents or true then
-        glfw.pollEvents()
-    end
-end
-
-function Raia.window.pollEvents()
-    glfw.pollEvents()
-end
-
--- 拡張
-
--- オーバーライド
-
+--- os.exitをオーバーライド
 local original_exit = os.exit
-
--- os.exitをオーバーライド
 os.exit = function(...)
     glfw.terminate()
     original_exit(...)
 end
 
 -- Initialize
+-- local Raia = {
+--     currentWindow = 0,
+--     currentWindowIndex = 0,
+--     Window = {
+--         id = nil,
+--         x = nil,
+--         y = nil,
+--         width = 500,
+--         height = 500,
+--         title = "Untitled",
+--         visible = false,
+--         pixels = nil,
+--         isFullscreen = false,
+--     },
+--     Shader = {
+--         program = nil,
+--         vao = nil,
+--         texture = nil,
+--     },
+--     -- Surface = {
+--     --     {
+--     --         bitmap = nil,
+--     --         canvas = nil,
+--     --         paint = nil,
+--     --         pixels = nil,
+--     --     }
+--     -- }
+-- }
 
-if glfw.init() == 0 then
-    error("Failed to initialize GLFW")
+-- クラス定義
+
+if Raia == nil then -- 初めて読み込んだとき
+    Raia = {}
+    if glfw.init() == 0 then
+        error("Failed to initialize GLFW")
+        os.exit()
+    end
 end
 
-glfw.windowHint(glfw.CLIENT_API, glfw.OPENGL_ES_API)
-glfw.windowHint(glfw.CONTEXT_VERSION_MAJOR, 3)
-glfw.windowHint(glfw.CONTEXT_VERSION_MINOR, 0)
-glfw.windowHint(glfw.OPENGL_PROFILE, glfw.OPENGL_CORE_PROFILE)
-glfw.windowHint(glfw.CONTEXT_CREATION_API, glfw.EGL_CONTEXT_API)
-glfw.windowHint(glfw.VISIBLE, glfw.FALSE)
+-- Raia.system
 
-Raia.window.id = glfw.createWindow(500, 500, "Untitled")
-if Raia.window.id == nil then
-    glfw.terminate()
-    error("Failed to create GLFW window")
+Raia.System = {}
+Raia.System.__index = Raia.System
+
+function Raia.System:new()
+    local self = setmetatable({}, Raia.System)
+    return self
 end
-Raia.window.x = 0
-Raia.window.y = 0
-Raia.window.width = 500
-Raia.window.height = 500
-Raia.window.title = "Untitled"
-Raia.window.visible = true
-glfw.makeContextCurrent(Raia.window.id)
-glfw.swapInterval(1)
 
-local vertices = ffi.new("float[32]", {
-    -1.0, 1.0, 0.0,  0.0, 0.0,  -- Position 0, TexCoord 0
-    -1.0, -1.0, 0.0,  0.0, 1.0, -- Position 1, TexCoord 1
-     1.0, -1.0, 0.0,  1.0, 1.0, -- Position 2, TexCoord 2
-     1.0, 1.0, 0.0,  1.0, 0.0   -- Position 3, TexCoord 3
-})
+--- クリップボードからテキストを取得します。
+function Raia.System:getClipboardText(windowID)
+    return glfw.getClipboardString(windowID)
+end
 
-local indices = ffi.new("unsigned int[6]", {0, 1, 2, 0, 2, 3})
-Raia.shader.vao = ffi.new("GLuint[1]")
-local vbo = ffi.new("GLuint[1]")
-local ebo = ffi.new("GLuint[1]")
+--- 現在のオペレーティングシステムを取得します。
+function Raia.System:getOS()
+    return System.getOS()
+end
 
-gl.genVertexArrays(1, Raia.shader.vao)
-gl.genBuffers(1, vbo)
-gl.genBuffers(1, ebo)
+--- システムの電源供給についての情報を取得します。
+function Raia.System:getPowerInfo()
+    return System.getPowerInfo()
+end
 
-gl.bindVertexArray(Raia.shader.vao[0])
-gl.bindBuffer(gl.ARRAY_BUFFER, vbo[0])
-gl.bufferData(gl.ARRAY_BUFFER, ffi.sizeof(vertices), vertices, gl.STATIC_DRAW)
-gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ebo[0])
-gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, ffi.sizeof(indices), indices, gl.STATIC_DRAW)
+--- システムに搭載されている論理プロセッサ数を取得します。
+function Raia.System:getProcessorCount()
+    return System.getProcessorCount()
+end
 
-gl.vertexAttribPointer(0, 3, gl.FLOAT, gl.FALSE, 5 * ffi.sizeof("float"), ffi.cast("void *", 0))
-gl.enableVertexAttribArray(0)
-gl.vertexAttribPointer(1, 2, gl.FLOAT, gl.FALSE, 5 * ffi.sizeof("float"), ffi.cast("void *", 3 * ffi.sizeof("float")))
-gl.enableVertexAttribArray(1)
-gl.bindVertexArray(0)
+--- ほかのアプリケーションがシステムで音楽をバックグラウンド再生しているかどうかを取得します。
+function Raia.System:hasBackgroundMusic()
+    return false
+end
 
-local vertex_shader_source = [[
-    attribute vec4 a_position;
-    attribute vec2 a_texCoord;
-    varying vec2 v_texCoord;
-    void main() {
-        gl_Position = a_position;
-        v_texCoord = a_texCoord;
-    }
-]]
+--- 利用者のウェブまたはファイルブラウザで URL を開きます。
+function Raia.System:openURL(url)
+    return System.openURL(url)
+end
 
-local fragment_shader_source = [[
-    precision mediump float;
-    varying vec2 v_texCoord;
-    uniform sampler2D s_texture;
-    void main() {
-        gl_FragColor = texture2D(s_texture, v_texCoord);
-    }
-]]
+--- クリップボードへテキストを出力します。
+function Raia.System:setClipboardText(windowID, string)
+    glfw.setClipboardString(windowID, string)
+end
 
-local vertex_shader = gl.createShader(gl.VERTEX_SHADER)
-gl.shaderSource(vertex_shader, 1, ffi.new("const char*[1]", {vertex_shader_source}), nil)
-gl.compileShader(vertex_shader)
-local fragment_shader = gl.createShader(gl.FRAGMENT_SHADER)
-gl.shaderSource(fragment_shader, 1, ffi.new("const char*[1]", {fragment_shader_source}), nil)
-gl.compileShader(fragment_shader)
-Raia.shader.program = gl.createShaderProgram()  -- 自動解放される
-gl.attachShader(Raia.shader.program, vertex_shader)
-gl.attachShader(Raia.shader.program, fragment_shader)
-gl.linkProgram(Raia.shader.program)
-gl.deleteShader(vertex_shader)
-gl.deleteShader(fragment_shader)
+--- 利用可能であれば、デバイスを振動させます。
+function Raia.System:vibrate()
+end
 
-Raia.shader.pixels = ffi.new("GLubyte[?]", Raia.window.width * Raia.window.height * 4)
-Raia.shader.texture = gl.createTexture() -- 自動解放される
-gl.bindTexture(gl.TEXTURE_2D, Raia.shader.texture[0])
-gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, Raia.window.width, Raia.window.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, Raia.shader.pixels)
-gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST)
-gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST)
+function Raia.System:printMemoryUsage()
+    System.printMemoryUsage()
+end
+
+function Raia.System:getMemoryUsage()
+    return System.getMemoryUsage()
+end
+
+-- Raia.timer
+
+Raia.Timer = {}
+Raia.Timer.__index = Raia.Timer
+
+function Raia.Timer:new()
+    local self = setmetatable({}, Raia.Timer)
+    --
+    self.frameTimes = {}
+    self.frameTimeIndex = 1
+    self.maxFrameSamples = 100
+    self.lastTime = glfw.getTime()  -- 最初の時間を設定
+    self.startTime = glfw.getTime() -- アプリケーションの開始時刻を取得
+    return self
+end
+
+--- 最近の秒間における平均デルタ時間を返す
+function Raia.Timer:getAverageDelta()
+    local currentTime = glfw.getTime()
+    local frameTime = currentTime - self.lastTime
+
+    self.frameTimes[self.frameTimeIndex] = frameTime
+    self.frameTimeIndex = (self.frameTimeIndex % self.maxFrameSamples) + 1
+
+    local sum = 0
+    for _, time in ipairs(self.frameTimes) do
+        sum = sum + time
+    end
+    self.lastTime = currentTime  -- 最後の時間を更新
+
+    return #self.frameTimes > 0 and (sum / #self.frameTimes) or 0
+end
+
+--- 最近の２フレーム間における時間を返します。
+function Raia.Timer:getDelta()
+    local currentTime = glfw.getTime()
+    local deltaTime = currentTime - self.lastTime
+    self.lastTime = currentTime  -- 現在の時間を記録
+    return deltaTime
+end
+
+--- 毎秒ごとに現在のフレーム数を返します。	
+function Raia.Timer:getFPS()
+    local currentTime = glfw.getTime()
+    self.frameTimes[#self.frameTimes + 1] = currentTime
+    -- 過去1秒間にどれだけフレームがあったかカウント
+    local count = 0
+    for i = #self.frameTimes, 1, -1 do
+        if currentTime - self.frameTimes[i] > 1.0 then
+            table.remove(self.frameTimes, i)  -- 1秒以上前のフレームタイムはリストから削除
+        else
+            count = count + 1
+        end
+    end
+    return count
+end
+
+--- （廃止）タイマーの値を精密マイクロ秒で返します。
+function Raia.Timer:getMicroTime()
+end
+
+--- 過去の無指定による開始時間からの経過時間を返します。
+function Raia.Timer:getTime() -- getTimeSinceStart()
+    local currentTime = glfw.getTime()
+    return currentTime - self.startTime
+end
+
+--- 指定された時間になるまで現在のスレッドを一時停止します。
+function Raia.Timer:sleep(seconds) -- wait()
+    local startTime = glfw.getTime()
+    while glfw.getTime() - startTime < seconds do
+        glfw.pollEvents() -- 応答性を保持するためにイベントをポーリング
+    end
+end
+
+--- ２フレームの間にある時間を計測する
+function Raia.Timer:step()
+    local currentTime = glfw.getTime()
+    local deltaTime = currentTime - self.lastTime
+    self.lastTime = currentTime  -- 現在の時間を最後のフレーム時間として更新
+    return deltaTime
+end
+
+
+-- Window
+
+Raia.Window = {}
+Raia.Window.__index = Raia.Window
+
+function Raia.Window:new(title, width, height)
+    local self = setmetatable({}, Raia.Window)
+    --
+    title = title or "Untitled"
+    width = width or 500
+    height = height or 500
+    --
+    glfw.windowHint(glfw.CLIENT_API, glfw.OPENGL_ES_API)
+    glfw.windowHint(glfw.CONTEXT_VERSION_MAJOR, 3)
+    glfw.windowHint(glfw.CONTEXT_VERSION_MINOR, 0)
+    glfw.windowHint(glfw.OPENGL_PROFILE, glfw.OPENGL_CORE_PROFILE)
+    glfw.windowHint(glfw.CONTEXT_CREATION_API, glfw.EGL_CONTEXT_API)
+    --glfw.windowHint(glfw.VISIBLE, glfw.FALSE)
+    local windowID = glfw.createWindow(width, height, title)
+    if windowID == nil then
+        glfw.terminate()
+        error("Failed to create GLFW window")
+    end
+    glfw.makeContextCurrent(windowID)
+    glfw.swapInterval(1)
+    local vertices = ffi.new("float[32]", {
+        -1.0, 1.0, 0.0,  0.0, 0.0,  -- Position 0, TexCoord 0
+        -1.0, -1.0, 0.0,  0.0, 1.0, -- Position 1, TexCoord 1
+        1.0, -1.0, 0.0,  1.0, 1.0,  -- Position 2, TexCoord 2
+        1.0, 1.0, 0.0,  1.0, 0.0    -- Position 3, TexCoord 3
+    })
+    local indices = ffi.new("unsigned int[6]", {0, 1, 2, 0, 2, 3})
+    local vao = ffi.new("GLuint[1]")
+    local vbo = ffi.new("GLuint[1]")
+    local ebo = ffi.new("GLuint[1]")
+    gl.genVertexArrays(1, vao)
+    gl.genBuffers(1, vbo)
+    gl.genBuffers(1, ebo)
+    gl.bindVertexArray(vao[0])
+    gl.bindBuffer(gl.ARRAY_BUFFER, vbo[0])
+    gl.bufferData(gl.ARRAY_BUFFER, ffi.sizeof(vertices), vertices, gl.STATIC_DRAW)
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ebo[0])
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, ffi.sizeof(indices), indices, gl.STATIC_DRAW)
+    gl.vertexAttribPointer(0, 3, gl.FLOAT, gl.FALSE, 5 * ffi.sizeof("float"), ffi.cast("void *", 0))
+    gl.enableVertexAttribArray(0)
+    gl.vertexAttribPointer(1, 2, gl.FLOAT, gl.FALSE, 5 * ffi.sizeof("float"), ffi.cast("void *", 3 * ffi.sizeof("float")))
+    gl.enableVertexAttribArray(1)
+    gl.bindVertexArray(0)
+    local vertexShaderSource = [[
+        attribute vec4 a_position;
+        attribute vec2 a_texCoord;
+        varying vec2 v_texCoord;
+        void main() {
+            gl_Position = a_position;
+            v_texCoord = a_texCoord;
+        }
+    ]]
+    local fragmentShaderSource = [[
+        precision mediump float;
+        varying vec2 v_texCoord;
+        uniform sampler2D s_texture;
+        void main() {
+            gl_FragColor = texture2D(s_texture, v_texCoord);
+        }
+    ]]
+    local vertex_shader = gl.createShader(gl.VERTEX_SHADER)
+    gl.shaderSource(vertex_shader, 1, ffi.new("const char*[1]", {vertexShaderSource}), nil)
+    gl.compileShader(vertex_shader)
+    local fragment_shader = gl.createShader(gl.FRAGMENT_SHADER)
+    gl.shaderSource(fragment_shader, 1, ffi.new("const char*[1]", {fragmentShaderSource}), nil)
+    gl.compileShader(fragment_shader)
+    local program = gl.createShaderProgram()  -- 自動解放される
+    gl.attachShader(program, vertex_shader)
+    gl.attachShader(program, fragment_shader)
+    gl.linkProgram(program)
+    gl.deleteShader(vertex_shader)
+    gl.deleteShader(fragment_shader)
+    local pixels = ffi.new("GLubyte[?]", width * height * 4)
+    local texture = gl.createTexture() -- 自動解放される
+    gl.bindTexture(gl.TEXTURE_2D, texture[0])
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.UNSIGNED_BYTE, pixels)
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST)
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST)
+    --
+    self.id = windowID
+    self.title = title
+    self.width = width
+    self.height = height
+    self.x = nil
+    self.y = nil
+    self.isVisible = true
+    self.pixels = pixels
+    self.program = program
+    self.texture = texture
+    self.vao = vao
+    return self
+end
+
+--- (拡張) 再描画する
+function Raia.Window:redraw(isSwap, isPollEvents)
+    local width = self.width
+    local height = self.height
+    local windowID = self.id
+    local pixels = self.pixels
+    local texture = self.texture[0]
+    local program = self.program
+    local vao = self.vao[0]
+    gl.viewport(0, 0, width * 2, height * 2)
+    gl.clearColor(1.0, 1.0, 1.0, 1.0)
+    gl.clear(gl.COLOR_BUFFER_BIT)
+    gl.bindTexture(gl.TEXTURE_2D, texture)
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.UNSIGNED_BYTE, pixels)
+    --gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST)
+    gl.useProgram(program)
+    gl.bindVertexArray(vao)
+    --gl.activeTexture(gl.TEXTURE0)
+    gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_INT, nil)
+    if isSwap == true then
+        glfw.swapBuffers(windowID)
+    end
+    if isPollEvents == true then
+        glfw.pollEvents()
+    end
+end
+
+-- イベントをプールする
+function Raia.Window:pollEvents()
+    glfw.pollEvents()
+end
+
+-- バッファをスワップする
+function Raia.Window:swapBuffers(windowID)
+    windowID = windowID or self.id
+    glfw.swapBuffers(windowID)
+end
+
+-- 現在のコンテキストを取得する
+function Raia.Window:getCurrentContext()
+    return glfw.getCurrentContext()
+end
+
+-- 現在のコンテキストを設定する
+function Raia.Window:makeContextCurrent(window)
+    glfw.makeContextCurrent(window)
+end
+
+--- （拡張）ウィンドウを中央に配置する
+function Raia.Window:center(width, height)
+    width = width or self.width
+    height = height or self.height
+    local windowID = self.id
+    --
+    local monitor = glfw.getPrimaryMonitor()
+    local mode = glfw.getVideoMode(monitor)
+    if not mode then
+        error("Failed to get video mode.")
+    end
+    local x = (mode.width - width) / 2
+    local y = (mode.height - height) / 2
+    glfw.setWindowPos(windowID, x, y)
+    --
+    self.x = x
+    self.y = y
+end
+
+--- （拡張）ウィンドウを非表示状態にする
+function Raia.Window:hide()
+    local windowID = self.id
+    glfw.hideWindow(windowID)
+    --
+    self.isVisible = false
+end
+
+--- （拡張）ウィンドウを表示状態にする
+function Raia.Window:show()
+    local windowID = self.id
+    glfw.showWindow(windowID)
+    --
+    self.isVisible = true
+end
+
+--- ウィンドウを閉じる
+function Raia.Window:close()
+    local windowID = self.id
+    glfw.destroyWindow(windowID)
+end
+
+-- ## Get
+
+--- ウィンドウのタイトルを取得する
+function Raia.Window:getTitle()
+    return self.title
+end
+
+--- デスクトップの幅と高さを取得する
+function Raia.Window:getDesktopDimensions()
+    local primaryMonitor = glfw.getPrimaryMonitor()
+    if not primaryMonitor then
+        error("Failed to get primary monitor")
+    end
+    local mode = glfw.getVideoMode(primaryMonitor)
+    if not mode then
+        error("Failed to get video mode")
+    end
+    return mode
+end
+
+--- ウィンドウの位置を取得する
+function Raia.Window:getPosition()
+    local windowID = self.id
+    local x, y = glfw.getWindowPos(windowID)
+    return x, y
+end
+
+--- （廃止）ウィンドウの幅と高さを取得する
+function Raia.Window:getDimensions()
+    return self.width, self.height
+end
+
+--- （廃止）ウィンドウの幅を取得する
+function Raia.Window:getWidth()
+    return self.width
+end
+
+--- （廃止）ウィンドウの高さを取得する
+function Raia.Window:getHeight()
+    return self.height
+end
+
+--- ウィンドウが表示されているか
+function Raia.Window:getVisible()
+   return Raia.Window.isVisible
+end
+
+-- ## Set
+
+--- ウィンドウのタイトルを設定する
+function Raia.Window:setTitle(title)
+    local windowID = self.id
+    glfw.setWindowTitle(windowID, title)
+    --
+    self.title = title
+end
+
+--- 画面上にあるウィンドウの位置を設定する
+function Raia.Window:setPosition(x, y)
+    local windowID = self.id
+    glfw.setWindowPos(windowID, x, y)
+    --
+    self.x = x
+    self.y = y
+end
+
+--- フルスクリーンの設定をする
+function Raia.Window:setFullscreen(fullscreen, monitor)
+    monitor = monitor or glfw.getPrimaryMonitor()
+    local windowID = self.id
+    local x = self.x
+    local y = self.y
+    local width = self.width
+    local height = self.height
+    if fullscreen then
+        local mode = glfw.getVideoMode(monitor) -- 現在のモニターの解像度を取得
+        glfw.setWindowMonitor(windowID, monitor, 0, 0, mode.width, mode.height, mode.refreshRate)
+    else
+        glfw.setWindowMonitor(windowID, nil, x, y, width, height, glfw.DONT_CARE) -- ウィンドウモードに戻す
+    end
+    --
+    self.isFullscreen = fullscreen
+end
+
+--- （拡張）ピクセルデータを設定する
+function Raia.Window:setPixels(pixels)
+    self.pixels = pixels
+end
+
+-- ## is
+
+--- （拡張）ウィンドウを閉じるボタンが押されたか
+function Raia.Window:shouldClose()
+    local windowID = self.id
+    return glfw.windowShouldClose(windowID) ~= 0  -- CのAPIは通常0以外をtrueとして扱う
+end
 
 return Raia

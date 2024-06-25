@@ -7,14 +7,16 @@
 #include "../../../common/c/utility/export_api.h"
 #include "../../../common/c/utility/platform.h"
 
-#ifdef _WIN32
+#ifdef __WINDOWS__
 #include <windows.h>
-#elif __APPLE__
+#include <psapi.h>
+#elifdef __MACOS__
 #include <IOKit/ps/IOPowerSources.h>
 #include <IOKit/ps/IOPSKeys.h>
+#include <mach/mach.h>
 #include <sys/param.h>
 #include <sys/sysctl.h>
-#elif __linux__
+#elifdef __LINUX__
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #include <unistd.h>
@@ -37,5 +39,8 @@ const char* get_os_name();
 PowerInfo get_power_info();
 int get_processor_count();
 int open_url(const char* url);
+void print_memory_usage();
+double get_memory_usage();
+
 
 #endif //SYSTEM_LIBRARY_H

@@ -3,7 +3,7 @@ project(raia_system C)
 
 include(${PROJECT_SOURCE_DIR}/../../setting.cmake)
 
-set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD 23)
 
 add_library(raia_system SHARED raia_system.c)
 

@@ -14,9 +14,7 @@ add_library(raia_imgui SHARED
         ../../third_party/cpp/ocornut/imgui/imgui_draw.cpp
         ../../third_party/cpp/ocornut/imgui/imgui_widgets.cpp
         ../../third_party/cpp/ocornut/imgui/imgui_tables.cpp
-        ../../third_party/cpp/ocornut/imgui/imgui_demo.cpp
-        ../../third_party/c/ibireme/yyjson/yyjson.c
-        ../../common/c/wrapper/wrapper_yyjson.c)
+        ../../third_party/cpp/ocornut/imgui/imgui_demo.cpp)
 
 # 現在のRPATH設定を取得（もしあれば）
 get_property(CURRENT_RPATH TARGET raia_imgui PROPERTY INSTALL_RPATH)
@@ -56,4 +54,4 @@ target_link_libraries(raia_imgui
 #                INSTALL_RPATH "@loader_path")
 #endif()
 
-set_target_properties(raia_imgui PROPERTIES PREFIX "")
+#set_target_properties(raia_imgui PROPERTIES PREFIX "")

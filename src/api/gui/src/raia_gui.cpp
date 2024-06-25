@@ -746,179 +746,113 @@ void _raia_gui_imgui_end() {
     ImGui::End();
 }
 
-extern "C" {
-
-RAIA_API const char* raia_gui_init_imgui(const char *s) {
-    joint_t *joint = joint_init_with_str(s);
-    GLFWwindow* window = (GLFWwindow*)(uintptr_t)joint_get_in_uint(joint, "window_id");
-
-    _raia_gui_init_imgui(window);
-
-    joint_add_out_bool(joint, "result", true);
-    return joint_out_write(joint);
-}
-
-RAIA_API const char* raia_gui_imgui_cleanup(const char *s) {
-    _raia_gui_imgui_cleanup();
-
-    joint_t *joint = joint_init_out();
-    joint_add_out_bool(joint, "result", true);
-    return joint_out_write(joint);
-}
-
-RAIA_API const char* raia_gui_test(const char *s) {
-    printf("test\n");
-    joint_t *joint = joint_init_out();
-    return joint_out_write(joint);
-}
-
-RAIA_API const char* raia_gui_glfw_get_framebuffer_size(const char *s) {
-    joint_t *joint = joint_init_with_str(s);
-    GLFWwindow* window = (GLFWwindow*)(uintptr_t)joint_get_in_uint(joint, "window_id");
-
-    int width, height;
-    glfwGetFramebufferSize(window, &width, &height);
-
-    joint_add_out_int(joint, "width", width);
-    joint_add_out_int(joint, "height", height);
-    return joint_out_write(joint);
-}
-
-RAIA_API const char* raia_gui_gl_viewport(const char *s) {
-    joint_t *joint = joint_init_with_str(s);
-    int x = joint_get_in_int(joint, "x");
-    int y = joint_get_in_int(joint, "y");
-    GLsizei width = joint_get_in_int(joint, "width");
-    GLsizei height = joint_get_in_int(joint, "height");
-
-    glViewport(x, y, width, height);
-
-    joint_add_out_bool(joint, "result", true);
-    return joint_out_write(joint);
-}
-
-RAIA_API const char* raia_gui_gl_clear_color(const char *s) {
-    joint_t *joint = joint_init_with_str(s);
-    GLfloat red = (GLfloat)joint_get_in_real(joint, "red");
-    GLfloat green = (GLfloat)joint_get_in_real(joint, "green");
-    GLfloat blue = (GLfloat)joint_get_in_real(joint, "blue");
-    GLfloat alpha = (GLfloat)joint_get_in_real(joint, "alpha");
-
-    glClearColor(red, green, blue, alpha);
-
-    joint_add_out_bool(joint, "result", true);
-    return joint_out_write(joint);
-}
-
-RAIA_API const char* raia_gui_gl_clear(const char *s) {
-    glClear(GL_COLOR_BUFFER_BIT);
-    joint_t *joint = joint_init_out();
-    joint_add_out_bool(joint, "result", true);
-    return joint_out_write(joint);
-}
-
-RAIA_API const char* raia_gui_glfw_swap_buffers(const char *s) {
-    joint_t *joint = joint_init_with_str(s);
-    GLFWwindow* window = (GLFWwindow*)(uintptr_t)joint_get_in_uint(joint, "window_id");
-
-    glfwSwapBuffers(window);
-
-    joint_add_out_bool(joint, "result", true);
-    return joint_out_write(joint);
-}
-
-RAIA_API const char* raia_gui_imgui_new_frame(const char *s) {
-    raia_gui_new_frame();
-    joint_t *joint = joint_init_out();
-    joint_add_out_bool(joint, "result", true);
-    return joint_out_write(joint);
-}
-
-RAIA_API const char* raia_gui_imgui_render(const char *s) {
-    _raia_gui_imgui_render();
-    joint_t *joint = joint_init_out();
-    joint_add_out_bool(joint, "result", true);
-    return joint_out_write(joint);
-}
-
-RAIA_API const char* raia_gui_imgui_show_test(const char *s) {
-    show_test_window();
-    joint_t *joint = joint_init_out();
-    joint_add_out_bool(joint, "result", true);
-    return joint_out_write(joint);
-}
-
-RAIA_API const char* raia_gui_imgui_begin(const char *s) {
-    joint_t *joint = joint_init_with_str(s);
-    const char* name = joint_get_in_str(joint, "name");
-
-    _raia_gui_imgui_begin(name);
-
-    joint_add_out_bool(joint, "result", true);
-    return joint_out_write(joint);
-}
-
-RAIA_API const char* raia_gui_imgui_end(const char *s) {
-    _raia_gui_imgui_end();
-
-    joint_t *joint = joint_init_out();
-    joint_add_out_bool(joint, "result", true);
-    return joint_out_write(joint);
-}
-
-}
-
 int main(int argc, char* argv[]) {
-    const char* result = raia_gui_init_glfw("");
-    std::cout << json::parse(result)["result"] << std::endl;
+    if (glfwInit() != GL_TRUE) {
+        fprintf(stderr, "Initialization of GLFW failed.\n");
+        exit(EXIT_FAILURE);
+    }
+    glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // 2
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+    glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_EGL_CONTEXT_API);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);  // 3.2+ only
 
-    const char* result_window = raia_gui_create_window(R"(
-        {
-            "width": 800,
-            "height": 600,
-            "title": "RaiaEngine v0.3"
-        }
-    )");
-    GLFWwindow *main_window = (GLFWwindow *)(uintptr_t)json::parse(result_window)["id"];
+    //init_raia_callback();
 
-    std::string arg = std::to_string((int64_t)(uintptr_t)main_window);
-    std::cout << arg << std::endl;
-    arg = "{\"window_id\":" + arg + "}";
-    raia_gui_init_imgui(arg.c_str());
+    //glfwSetErrorCallback(event_error_callback);
+    //glfwSetJoystickCallback(event_joystick_callback);
 
     //
+    int width = 800;
+    int height = 600;
+    const char *title = "RaiaEngine";
+    GLFWwindow* window = glfwCreateWindow(width, height, title, NULL, NULL);
+    if (!window) {
+        fprintf(stderr, "Window creation failed.\n");
+        glfwTerminate();
+        exit(EXIT_FAILURE);
+    }
+    glfwMakeContextCurrent(window);
+    glfwSwapInterval(1);
 
-//    // ウィンドウ内の頂点データとシェーダー
-    vertex_t main_window_vertex = _raia_gui_window_init_vertex();
-    GLuint main_window_program = _raia_gui_window_create_program();
-//
-//    // ウィンドウ内ピクセル描画
-    int main_window_width = 800;
-    int main_window_height = 600;
-    int main_window_channels = 0;
+    // HiDPI
+//    int res_width = width;
+//    int res_height = height;
+//    int now_width, now_height;
+//    glfwGetFramebufferSize(window, &now_width, &now_height);
+//    if (now_width > width) {
+//        res_width = width * 2;
+//        res_height = height * 2;
+//    }
+
+    //#ifdef __APPLE__
+    //    int windowWidth, windowHeight;
+    //    int framebufferWidth, framebufferHeight;
+    //    glfwGetWindowSize(window, &windowWidth, &windowHeight);
+    //    glfwGetFramebufferSize(window, &framebufferWidth, &framebufferHeight);
+    //    float scaleX = (float)framebufferWidth / windowWidth;
+    //    float scaleY = (float)framebufferHeight / windowHeight;
+    //#endif
+
+//    glfwSetKeyCallback(window, event_key_callback);
+//    glfwSetFramebufferSizeCallback(window, event_framebuffer_size_callback);
+//    glfwSetWindowPosCallback(window, event_window_pos_callback);
+//    glfwSetWindowSizeCallback(window, event_window_size_callback);
+//    glfwSetWindowCloseCallback(window, event_window_close_callback);
+//    glfwSetWindowRefreshCallback(window, event_window_refresh_callback);
+//    glfwSetWindowFocusCallback(window, event_window_focus_callback);
+//    glfwSetWindowIconifyCallback(window, event_window_iconify_callback);
+//    glfwSetCursorPosCallback(window, event_cursor_position_callback);
+//    glfwSetMouseButtonCallback(window, event_mouse_button_callback);
+//    glfwSetCharCallback(window, event_character_callback);
+//    glfwSetCharModsCallback(window, event_character_mods_callback);
+//    glfwSetCursorEnterCallback(window, event_cursor_enter_callback);
+//    glfwSetScrollCallback(window, event_scroll_callback);
+//    glfwSetDropCallback(window, event_drop_callback);
+
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO();
+    raia_gui_set_imgui_io(io);
+    raia_gui_set_imgui_style(io);
+
+    const char* glsl_version = "#version 300 es";
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init(glsl_version);
+
+    raia_gui_set_imgui_font(io);
+
+    // ウィンドウ内の頂点データとシェーダー
+    vertex_t vertex = _raia_gui_window_init_vertex();
+    GLuint program = _raia_gui_window_create_program();
+
+    // ウィンドウ内ピクセル描画
+    int image_width = 800;
+    int image_height = 600;
+    int channels = 0;
     //int width, height, nrChannels;
-    GLubyte* main_window_pixels = stbi_load("adv_sample_image.png", &main_window_width, &main_window_height, &main_window_channels, 0);
+    GLubyte* pixels = stbi_load("adv_sample_image.png", &image_width, &image_height, &channels, 0);
     //glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // Use tightly packed data
-    GLuint main_window_texture;
-    glGenTextures(1, &main_window_texture);
+    GLuint texture;
+    glGenTextures(1, &texture);
 
-//    // フレーム内ピクセルデータ
-    const int frame_width = 320;
-    const int frame_height = 240;
-    GLubyte* frame_pixels = (GLubyte*)malloc(sizeof(GLubyte) * frame_width * frame_height * 4);
-    GLuint frame_texture;
-    glGenTextures(1, &frame_texture);
+    // フレーム内ピクセルデータ
+//    const int frame_width = 320;
+//    const int frame_height = 240;
+//    GLubyte* frame_pixels = (GLubyte*)malloc(sizeof(GLubyte) * frame_width * frame_height * 4);
+    //GLuint frame_texture;
+    //glGenTextures(1, &frame_texture);
 
-    bool is_multi_viewport = true;
+//    bool is_multi_viewport = true;
 //    bool show_demo_window = true;
 //    bool show_another_window = true;
-    ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+//    ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 //
 //    double time_old = 0.0;
 //    double time_new = 0.0;
 //    float fps = 0.0;
 
-    while (!glfwWindowShouldClose(main_window)) {
+    while (!glfwWindowShouldClose(window)) {
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
@@ -947,37 +881,45 @@ int main(int argc, char* argv[]) {
 
         //int display_w, display_h;
         //glfwGetFramebufferSize(main_window, &display_w, &display_h);
-        //glViewport(0, 0, display_w, display_h);
-        //glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w);
-        //glClear(GL_COLOR_BUFFER_BIT);
+        glViewport(0, 0, width, height);
+        glClearColor(1,1,1,1);
+        glClear(GL_COLOR_BUFFER_BIT);
 
-        glBindTexture(GL_TEXTURE_2D, main_window_texture);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, main_window_width, main_window_height, 0, GL_RGB, GL_UNSIGNED_BYTE, main_window_pixels);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        glUseProgram(main_window_program);
-        glBindVertexArray(main_window_vertex.VAO);
+        //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glUseProgram(program);
+        glBindVertexArray(vertex.VAO);
+//        glActiveTexture(texture);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-        glBindTexture(GL_TEXTURE_2D, 1);
 
-        free((void *)raia_gui_imgui_render(""));
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        //
+        GLFWwindow* backup_current_context = glfwGetCurrentContext();
+        ImGui::UpdatePlatformWindows();
+        ImGui::RenderPlatformWindowsDefault();
+        glfwMakeContextCurrent(backup_current_context);
 
-        glfwSwapBuffers(main_window);
+        glfwSwapBuffers(window);
         glfwPollEvents();
     }
 
-    raia_gui_imgui_cleanup("");
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
 
     // Delete OpenGL objects
-//    glDeleteVertexArrays(1, &main_window_vertex.VAO);
+    glDeleteVertexArrays(1, &vertex.VAO);
 //    glDeleteBuffers(1, &main_window_vertex.VBO);
 //    glDeleteBuffers(1, &main_window_vertex.EBO);
 //
 //    glDeleteTextures(1, &main_window_texture);
 //    free(main_window_pixels);
-//    glDeleteTextures(1, &frame_texture);
+    glDeleteTextures(1, &texture);
 //    free(frame_pixels);
-    glfwDestroyWindow(main_window);
+    glfwDestroyWindow(window);
     glfwTerminate();
     return 0;
 }
