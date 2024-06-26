@@ -104,12 +104,14 @@ local samplingOptions = skia.SamplingOptions.new_4(1)
 local image = skia.Bitmap.asImage(image_bitmap)
 skia.Canvas.drawImage_2(canvas, image, 250, 240, samplingOptions, paint)
 
-image = skia.Bitmap.asImage(image_bitmap)
-skia.Canvas.drawImage_2(canvas, image, 50, 0, samplingOptions, paint)
+--image = skia.Bitmap.asImage(image_bitmap)
+--skia.Canvas.drawImage_2(canvas, image, 50, 0, samplingOptions, paint)
 
 --
 
 local pixels = skia.Bitmap.getPixels(bitmap);
+local pixels_buffer = ffi.new("char[?]", 800 * 600 * 4)
+ffi.C.memcpy(pixels_buffer, pixels, 800 * 600 * 4)
 
 bitmap = nil
 rect = nil
@@ -121,7 +123,7 @@ local system = Raia.System:new()
 local timer = Raia.Timer:new()
 local window = Raia.Window:new("Title", 800, 600)
 
---
+
 -- ImGui
 -- init
 im.checkVersion()
@@ -137,30 +139,27 @@ im.getIO_configFlags(config_flags)
 -- initImpl
 im.initForOpenGLImplGLFW(window.id, true);
 im.initImplOpenGL3("#version 300 es");
-print("")
 --
 
---
 
-window:setPixels(pixels)
 while window:shouldClose() == false do
     im.newFrameImplOpenGL3()
     im.newFrameImplGLFW()
     im.newFrame()
-    im.Begin("Hello")
-    im.text("aiueo")
+    im.Begin("Debug")
+    im.text(""..timer:getFPS().."FPS")
+    im.text(""..(system:getMemoryUsage()/1000/1000).."MB")
     im.End()
     im.showDemoWindow()
     --window:setTitle("FPS:"..timer:getFPS().."|"..(system:getMemoryUsage()/1000/1000).."MB")
     --
+    window:setPixels(pixels_buffer)
     window:redraw(false, false)
+    local backup_current_context = window:getCurrentContext()
     im.render()
     im.renderDrawDataImplOpenGL3(im.getDrawData())
-    local backup_current_context = window:getCurrentContext()
-    print(backup_current_context)
     im.updatePlatformWindows()
     im.renderPlatformWindowsDefault()
-    print(backup_current_context)
     window:makeContextCurrent(backup_current_context)
     window:swapBuffers()
     window:pollEvents()
