@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../../../common/c/utility/export_api.h"
-#include "../../../common/c/utility/platform.h"
+#include "../../common/c/utility/export_api.h"
+#include "../../common/c/utility/platform.h"
 
 #ifdef __WINDOWS__
 #include <windows.h>

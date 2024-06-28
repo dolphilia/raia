@@ -1194,7 +1194,7 @@ function Raia.Window:redraw(isSwap, isPollEvents)
     local texture = self.texture[0]
     local program = self.program
     local vao = self.vao[0]
-    gl.viewport(0, 0, width * 2, height * 2)
+    gl.viewport(0, 0, width, height)
     gl.clearColor(1.0, 1.0, 1.0, 1.0)
     gl.clear(gl.COLOR_BUFFER_BIT)
     gl.bindTexture(gl.TEXTURE_2D, texture)

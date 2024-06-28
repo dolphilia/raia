@@ -58,7 +58,7 @@ ffi.cdef[[
     void raia_imgui_separator();
 ]]
 
-local lib = ffi.load("raia_imgui")
+local lib = ffi.load("libraia_imgui")
 local ImGui = {}
 local bit = require("bit")
 

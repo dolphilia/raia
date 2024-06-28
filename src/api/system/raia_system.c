@@ -159,8 +159,8 @@ RAIA_API double get_memory_usage() {
 #ifdef __WINDOWS__
     PROCESS_MEMORY_COUNTERS info;
     if (GetProcessMemoryInfo(GetCurrentProcess(), &info, sizeof(info))) {
-        printf("Windows - Memory in use (resident): %lu bytes\n", info.WorkingSetSize);
-        printf("Windows - Pagefile usage: %lu bytes\n", info.PagefileUsage);
+        memory_in_use = (double)info.WorkingSetSize;//printf("Windows - Memory in use (resident): %lu bytes\n", info.WorkingSetSize);
+        //printf("Windows - Pagefile usage: %lu bytes\n", info.PagefileUsage);
     } else {
         printf("Windows - Failed to get process memory info\n");
     }

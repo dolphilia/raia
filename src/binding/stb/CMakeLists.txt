@@ -16,4 +16,4 @@ add_library(raia_stb SHARED
         src/stb/stb_image.c
 )
 
-#set_target_properties(raia_stb PROPERTIES PREFIX "")
+set_target_properties(raia_stb PROPERTIES PREFIX "")

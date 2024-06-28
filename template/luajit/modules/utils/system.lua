@@ -22,7 +22,7 @@ ffi.cdef[[
     double get_memory_usage();
 ]]
 
-local lib = ffi.load("raia_system")
+local lib = ffi.load("libraia_system")
 local System = {}
 
 function System.getOS()
