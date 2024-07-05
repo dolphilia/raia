@@ -5,7 +5,6 @@ local Raia = require("modules/raia")
 local im = require("modules/bindings/imgui")
 
 -- Skia
-
 local info = skia.ImageInfo.Make(800, 600, skia.ColorType.RGBA8888, skia.AlphaType.Opaque)
 local bitmap = skia.Bitmap.new()
 skia.Bitmap.allocPixels_3(bitmap, skia.Static.SkImageInfo.get(info))
@@ -37,9 +36,8 @@ local typeface_key
 local font
 local textblob_key
 
---skia.Paint.setStyle(paint, skia.Paint.Style.Fill)
 skia.Paint.setARGB(paint, 255, 255, 255, 255)
-skia.Paint.setStyle(paint, skia.Paint.Style.Fill)  -- スタイルを枠線に設定
+skia.Paint.setStyle(paint, skia.Paint.Style.Fill)  -- スタイルを塗りつぶしに設定
 typeface_key = skia.Typeface.MakeFromFile("Mplus1-Regular.ttf", 0)
 font = skia.Font.new_4(typeface_key, 64.0, 1.0, 0.0)
 textblob_key = skia.TextBlob.MakeFromString("こんにちは! Raia!", font, 0)
@@ -136,6 +134,7 @@ config_flags = bit.bor(config_flags, im.ConfigFlags.NavEnableGamepad)
 config_flags = bit.bor(config_flags, im.ConfigFlags.DockingEnable)
 config_flags = bit.bor(config_flags, im.ConfigFlags.ViewportsEnable)
 im.getIO_configFlags(config_flags)
+im.styleColorsLight()
 -- initImpl
 im.initForOpenGLImplGLFW(window.id, true);
 im.initImplOpenGL3("#version 300 es");
@@ -151,6 +150,8 @@ while window:shouldClose() == false do
     im.text(""..(system:getMemoryUsage()/1000/1000).."MB")
     im.End()
     im.showDemoWindow()
+    im.showMetricsWindow()
+    im.showStyleEditor()
     --window:setTitle("FPS:"..timer:getFPS().."|"..(system:getMemoryUsage()/1000/1000).."MB")
     --
     window:setPixels(pixels_buffer)
