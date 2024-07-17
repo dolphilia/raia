@@ -66,12 +66,6 @@ ffi.cdef[[
     // ウィンドウ・スクロール
     
     // パラメータ・スタック（共有）
-    void raia_imgui_push_style_var_float(int idx, float val);
-    void raia_imgui_push_style_var_vec2(int idx, float x, float y);
-    void raia_imgui_pop_style_var(int count);
-    void raia_imgui_push_style_color_u32(int idx, unsigned int col);
-    void raia_imgui_push_style_color_vec4(int idx, float x, float y, float z, float w);
-    void raia_imgui_pop_style_color(int count);
     
     // パラメータ・スタック（現在のウィンドウ）
     
@@ -98,12 +92,12 @@ ffi.cdef[[
     // ウィジェット: ドラッグスライダー
     
     // ウィジェット: レギュラー・スライダー
-    float raia_imgui_slider_float(const char *label, float *v, float v_min, float v_max);
+    float raia_imgui_slider_float(const char *label, float *v, float v_min, float v_max, const char* format /* = "%.3f"*/, int flags /* = 0 */);
     
     // ウィジェット: キーボード入力
     
     // ウィジェット: カラーエディター/ピッカー
-    bool raia_imgui_color_edit_3(const char *label, float *col);
+    bool raia_imgui_color_edit3(const char *label, float *col, int flags);
     
     // ウィジェット: ツリー
     
@@ -519,30 +513,6 @@ end
 
 -- パラメータ・スタック（共有）
 
-function ImGui.pushStyleColorU32(idx, col)
-    lib.raia_imgui_push_style_color_u32(idx, col)
-end
-
-function ImGui.pushStyleColorVec4(idx, x, y, z, w)
-    lib.raia_imgui_push_style_color_vec4(idx, x, y, z, w)
-end
-
-function ImGui.popStyleColor(count)
-    lib.raia_imgui_pop_style_color(count)
-end
-
-function ImGui.pushStyleVarFloat(idx, val)
-    lib.raia_imgui_push_style_var_float(idx, val)
-end
-
-function ImGui.pushStyleVarVec2(idx, x, y)
-    lib.raia_imgui_push_style_var_vec2(idx, x, y)
-end
-
-function ImGui.popStyleVar(count)
-    lib.raia_imgui_pop_style_var(count)
-end
-
 -- パラメータ・スタック（現在のウィンドウ）
 
 -- スタイルの読み込みとアクセス
@@ -586,8 +556,9 @@ end
 -- ウィジェット: ドラッグスライダー
 
 -- ウィジェット: レギュラー・スライダー
-
-function ImGui.sliderFloat(label, v, v_min, v_max)
+function ImGui.sliderFloat(label, v, v_min, v_max, format, flags)
+    format = format or "%.3f"
+    flags = flags or 0
     return lib.raia_imgui_slider_float(label, v, v_min, v_max)
 end
 
@@ -595,8 +566,9 @@ end
 
 -- ウィジェット: カラーエディター/ピッカー
 
-function ImGui.colorEdit3(label, col)
-    return lib.raia_imgui_color_edit_3(label, col)
+function ImGui.colorEdit3(label, col, flags)
+    flags = flags or 0
+    return lib.raia_imgui_color_edit3(label, col, flags)
 end
 
 -- ウィジェット: ツリー
