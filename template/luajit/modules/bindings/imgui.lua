@@ -171,7 +171,14 @@ ffi.cdef[[
     unsigned int raia_imgui_get_id_3(const void* ptr_id);
     
     // ウィジェット: テキスト
+    void raia_imgui_text_unformatted(const char* text, const char* text_end /* = NULL */);
     void raia_imgui_text(const char *text);
+    void raia_imgui_text_colored(float col_x, float col_y, float col_z, float col_w, const char* text);
+    void raia_imgui_text_disabled(const char* text);
+    void raia_imgui_text_wrapped(const char* text);
+    void raia_imgui_label_text(const char* label, const char* text);
+    void raia_imgui_bullet_text(const char* text);
+    void raia_imgui_separator_text(const char* label);
     
     // ウィジェット: メイン
     bool raia_imgui_button(const char *label, float width, float height);
@@ -256,6 +263,19 @@ ffi.cdef[[
     void raia_imgui_set_color_edit_options(int flags);
 
     // ウィジェット: ツリー
+    bool raia_imgui_tree_node(const char* label);
+    bool raia_imgui_tree_node_2(const char* str_id, const char* text);
+    bool raia_imgui_tree_node_3(const void* ptr_id, const char* text);
+    bool raia_imgui_tree_node_ex(const char* label, int flags /* = 0 */);
+    bool raia_imgui_tree_node_ex_2(const char* str_id, int flags, const char* text);
+    bool raia_imgui_tree_node_ex_3(const void* ptr_id, int flags, const char* text);
+    void raia_imgui_tree_push(const char* str_id);
+    void raia_imgui_tree_push_2(const void* ptr_id);
+    void raia_imgui_tree_pop();
+    float raia_imgui_get_tree_node_to_label_spacing();
+    bool raia_imgui_collapsing_header(const char* label, int flags /* = 0 */);
+    bool raia_imgui_collapsing_header_2(const char* label, bool* p_visible, int flags /* = 0 */);
+    void raia_imgui_set_next_item_open(bool is_open, int cond /* = 0 */);
     
     // ウィジェット: セレクタブル
     bool raia_imgui_selectable(const char* label, bool selected /* = false */, int flags /* = 0 */, float size_x /* = 0*/, float size_y /* = 0*/);
@@ -268,6 +288,21 @@ ffi.cdef[[
     bool raia_imgui_list_box_2(const char* label, int* current_item, bool (*items_getter)(void* data, int idx, const char** out_text), void* data, int items_count, int height_in_items /* = -1 */);
 
     // ウィジェット: データプロット
+    void raia_imgui_plot_lines(const char* label, const float* values, int values_count,
+                           int values_offset /* = 0 */, const char* overlay_text /* = NULL */,
+                           float scale_min /* = FLT_MAX */, float scale_max /* = FLT_MAX */,
+                           float graph_size_x /* = 0*/, float graph_size_y /* = 0 */, int stride /* = sizeof(float) */);
+    void raia_imgui_plot_lines_2(const char* label, float(*values_getter)(void* data, int idx),
+                                void* data, int values_count, int values_offset /* = 0 */, const char* overlay_text /* = NULL */,
+                                float scale_min /* = FLT_MAX */, float scale_max /* = FLT_MAX */,
+                                float graph_size_x /* = 0*/, float graph_size_y /* = 0 */);
+    void raia_imgui_plot_histogram(const char* label, const float* values, int values_count, int values_offset /* = 0 */,
+                                const char* overlay_text /* = NULL */, float scale_min /* = FLT_MAX */, float scale_max /* = FLT_MAX */,
+                                float graph_size_x /* = 0*/, float graph_size_y /* = 0 */, int stride /* = sizeof(float) */);
+    void raia_imgui_plot_histogram_2(const char* label, float(*values_getter)(void* data, int idx), void* data, int values_count,
+                                    int values_offset /* = 0 */, const char* overlay_text /* = NULL */,
+                                    float scale_min /* = FLT_MAX */, float scale_max /* = FLT_MAX */,
+                                    float graph_size_x /* = 0*/, float graph_size_y /* = 0 */);
 
     // ウィジェット: Value() ヘルパー
     void raia_imgui_value(const char* prefix, bool b);
@@ -288,9 +323,9 @@ ffi.cdef[[
     // ツールチップ
     bool raia_imgui_begin_tooltip();
     void raia_imgui_end_tooltip();
-    // TODO
+    void raia_imgui_set_tooltip(const char* text);
     bool raia_imgui_begin_item_tooltip();
-    // TODO
+    void raia_imgui_set_item_tooltip(const char* text);
     
     // ポップアップ・モーダル
     bool raia_imgui_begin_popup(const char* str_id, int flags /* = 0 */);
@@ -341,7 +376,12 @@ ffi.cdef[[
     void raia_imgui_set_tab_item_closed(const char* tab_or_docked_window_label);
     
     // ロギング/キャプチャ
-    // TODO
+    void raia_imgui_log_to_tty(int auto_open_depth /* = -1 */);
+    void raia_imgui_log_to_file(int auto_open_depth /* = -1 */, const char* filename /* = NULL */);
+    void raia_imgui_log_to_clipboard(int auto_open_depth /* = -1 */);
+    void raia_imgui_log_finish();
+    void raia_imgui_log_buttons();
+    void raia_imgui_log_text(const char* text);
     
     // 無効化 [BETA API]
     void raia_imgui_begin_disabled(bool disabled /* = true */);
@@ -463,6 +503,7 @@ ffi.cdef[[
 
     // -- ここから拡張
     double raia_get_flt_min();
+    double raia_get_flt_max();
 
     // imgui.cpp
     void raia_imgui_update_platform_windows();
@@ -1789,8 +1830,37 @@ end
 
 -- ウィジェット: テキスト
 
-function ImGui.text(text)
-    lib.raia_imgui_text(text)
+function ImGui.textUnformatted(text, text_end)
+    text_end = text_end or ffi.null
+    lib.raia_imgui_text_unformatted(text, text_end)
+end
+
+function ImGui.text(fmt, ...)
+    lib.raia_imgui_text(string.format(fmt, ...))
+end
+
+function ImGui.textColored(col_x, col_y, col_z, col_w, fmt, ...)
+    libraia_imgui_text_colored(col_x, col_y, col_z, col_w, string.format(fmt, ...))
+end
+
+function ImGui.textDisabled(fmt, ...)
+    lib.raia_imgui_text_disabled(string.format(fmt, ...))
+end
+
+function ImGui.textWrapped(fmt, ...)
+    lib.raia_imgui_text_wrapped(string.format(fmt, ...))
+end
+
+function ImGui.labelText(label, fmt, ...)
+    lib.raia_imgui_label_text(label, string.format(fmt, ...))
+end
+
+function ImGui.bulletText(fmt, ...)
+    lib.raia_imgui_bullet_text(string.format(fmt, ...))
+end
+
+function ImGui.separatorText(label)
+    lib.raia_imgui_separator_text(label)
 end
 
 -- ウィジェット: メイン
@@ -2229,7 +2299,65 @@ end
 
 -- ウィジェット: ツリー
 
+function ImGui.treeNode(label)
+    return lib.raia_imgui_tree_node(label)
+end
+
+function ImGui.treeNode_2(str_id, fmt, ...)
+    return lib.raia_imgui_tree_node_2(str_id, string.format(fmt, ...))
+end
+
+function ImGui.treeNode_3(ptr_id, fmt, ...)
+    return lib.raia_imgui_tree_node_3(ptr_id, string.format(fmt, ...))
+end
+
+function ImGui.treeNodeEx(label, flags)
+    flags = flags or 0
+    return lib.raia_imgui_tree_node_ex(label, flags)
+end
+
+function ImGui.treeNodeEx_2(str_id, flags, fmt, ...)
+    return lib.raia_imgui_tree_node_ex_2(str_id, flags, string.format(fmt, ...))
+end
+
+function ImGui.treeNodeEx_3(ptr_id, flags, fmt, ...)
+    return lib.raia_imgui_tree_node_ex_3(ptr_id, flags, string.format(fmt, ...))
+end
+
+function ImGui.treePush(str_id)
+    lib.raia_imgui_tree_push(str_id)
+end
+
+function ImGui.treePush_2(ptr_id)
+    lib.raia_imgui_tree_push_2(ptr_id)
+end
+
+function ImGui.treePop()
+    lib.raia_imgui_tree_pop()
+end
+
+function ImGui.getTreeNodeToLabelSpacing()
+    return lib.raia_imgui_get_tree_node_to_label_spacing()
+end
+
+function ImGui.collapsingHeader(label, flags)
+    flags = flags or 0
+    return lib.raia_imgui_collapsing_header(label, flags)
+end
+
+function ImGui.collapsingHeader_2(label, p_visible, flags)
+    flags = flags or 0
+    return lib.raia_imgui_collapsing_header_2(label, p_visible, flag)
+end
+
+function ImGui.setNextItemOpen(is_open, cond)
+    cond = cond or 0
+    lib.raia_imgui_set_next_item_open(is_open, cond)
+end
+
+
 -- ウィジェット: セレクタブル
+
 function ImGui.selectable(label, selected, flags, size_x, size_y)
     selected = selected or false
     flags = flags or 0
@@ -2267,6 +2395,48 @@ function ImGui.listBox_2(label, current_item, items_getter, data, items_count, h
 end
 
 -- ウィジェット: データプロット
+
+function ImGui.plotLines(label, values, values_count, values_offset, overlay_text, scale_min, scale_max, graph_size_x, graph_size_y, stride)
+    values_offset = values_offset or 0
+    overlay_text = overlay_text or ffi.null
+    scale_min = scale_min or lib.raia_get_flt_max()
+    scale_max = scale_max or lib.raia_get_flt_max()
+    graph_size_x = graph_size_x or 0
+    graph_size_y = graph_size_y or 0
+    stride = stride or ffi.sizeof("float")
+    lib.raia_imgui_plot_lines(label, values, values_count, values_offset, overlay_text, scale_min, scale_max, graph_size_x, graph_size_y, stride)
+end
+
+function ImGui.plotLines_2(label, values_getter, data, values_count, values_offset, overlay_text, scale_min , scale_max, graph_size_x, graph_size_y)
+    values_offset = values_offset or 0
+    overlay_text = overlay_text or ffi.null
+    scale_min = scale_min or lib.raia_get_flt_max()
+    scale_max = scale_max or lib.raia_get_flt_max()
+    graph_size_x = graph_size_x or 0
+    graph_size_y = graph_size_y or 0
+    lib.raia_imgui_plot_lines_2(label, values_getter, data, values_count, values_offset, overlay_text, scale_min , scale_max, graph_size_x, graph_size_y)
+end
+
+function ImGui.plotHistogram(label, values, values_count, values_offset, overlay_text, scale_min, scale_max, graph_size_x, graph_size_y, stride)
+    values_offset = values_offset or 0
+    overlay_text = overlay_text or ffi.null
+    scale_min = scale_min or lib.raia_get_flt_max()
+    scale_max = scale_max or lib.raia_get_flt_max()
+    graph_size_x = graph_size_x or 0
+    graph_size_y = graph_size_y or 0
+    stride = stride or ffi.sizeof("float")
+    lib.raia_imgui_plot_histogram(label, values, values_count, values_offset, overlay_text, scale_min, scale_max, graph_size_x, graph_size_y, stride)
+end
+
+function ImGui.plotHistogram_2(label, values_getter, data, values_count, values_offset, overlay_text, scale_min, scale_max, graph_size_x, graph_size_y)
+    values_offset = values_offset or 0
+    overlay_text = overlay_text or ffi.null
+    scale_min = scale_min or lib.raia_get_flt_max()
+    scale_max = scale_max or lib.raia_get_flt_max()
+    graph_size_x = graph_size_x or 0
+    graph_size_y = graph_size_y or 0
+    lib.raia_imgui_plot_histogram_2(label, values_getter, data, values_count, values_offset, overlay_text, scale_min, scale_max, graph_size_x, graph_size_y)
+end
 
 -- ウィジェット: Value() ヘルパー
 
@@ -2336,13 +2506,17 @@ function ImGui.endTooltip()
     lib.raia_imgui_end_tooltip()
 end
 
--- TODO
+function ImGui.setTooltip(fmt, ...)
+    lib.raia_imgui_set_tooltip(string.format(fmt, ...))
+end
 
 function ImGui.beginItemTooltip()
     return lib.raia_imgui_begin_item_tooltip()
 end
 
--- TODO
+function ImGui.setItemTooltip(fmt, ...)
+    lib.raia_imgui_set_item_tooltip(string.format(fmt, ...))
+end
 
 -- ポップアップ・モーダル
 
@@ -2555,7 +2729,34 @@ end
 
 -- ロギング/キャプチャ
 
--- TODO
+function ImGui.logToTTY(auto_open_depth)
+    auto_open_depth = auto_open_depth or -1
+    lib.raia_imgui_log_to_tty(auto_open_depth)
+end
+
+function ImGui.logToFile(auto_open_depth, filename)
+    auto_open_depth = auto_open_depth or -1
+    filename = filename or ffi.null
+    lib.raia_imgui_log_to_file(auto_open_depth, filename)
+end
+
+function ImGui.logToClipboard(auto_open_depth)
+    auto_open_depth = auto_open_depth or -1
+    lib.raia_imgui_log_to_clipboard(auto_open_depth)
+end
+
+function ImGui.logFinish()
+    lib.raia_imgui_log_finish()
+end
+
+function ImGui.logButtons()
+    lib.raia_imgui_log_buttons()
+end
+
+function ImGui.logText(fmt, ...)
+    lib.raia_imgui_log_text(string.format(fmt, ...))
+end
+
 
 -- 無効化 [BETA API]
 

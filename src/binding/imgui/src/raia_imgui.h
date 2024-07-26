@@ -210,8 +210,14 @@ ImGuiID raia_imgui_get_id_2(const char* str_id_begin, const char* str_id_end);
 ImGuiID raia_imgui_get_id_3(const void* ptr_id);
 
 // ウィジェット: テキスト
-// TODO
+void raia_imgui_text_unformatted(const char* text, const char* text_end /* = NULL */);
 void raia_imgui_text(const char *text);
+void raia_imgui_text_colored(float col_x, float col_y, float col_z, float col_w, const char* text);
+void raia_imgui_text_disabled(const char* text);
+void raia_imgui_text_wrapped(const char* text);
+void raia_imgui_label_text(const char* label, const char* text);
+void raia_imgui_bullet_text(const char* text);
+void raia_imgui_separator_text(const char* label);
 
 // ウィジェット: メイン
 bool raia_imgui_button(const char *label, float width, float height);
@@ -296,7 +302,19 @@ bool raia_imgui_color_button(const char* desc_id, float col_x, float col_y, floa
 void raia_imgui_set_color_edit_options(ImGuiColorEditFlags flags);
 
 // ウィジェット: ツリー
-// TODO
+bool raia_imgui_tree_node(const char* label);
+bool raia_imgui_tree_node_2(const char* str_id, const char* text);
+bool raia_imgui_tree_node_3(const void* ptr_id, const char* text);
+bool raia_imgui_tree_node_ex(const char* label, int flags /* = 0 */);
+bool raia_imgui_tree_node_ex_2(const char* str_id, int flags, const char* text);
+bool raia_imgui_tree_node_ex_3(const void* ptr_id, int flags, const char* text);
+void raia_imgui_tree_push(const char* str_id);
+void raia_imgui_tree_push_2(const void* ptr_id);
+void raia_imgui_tree_pop();
+float raia_imgui_get_tree_node_to_label_spacing();
+bool raia_imgui_collapsing_header(const char* label, int flags /* = 0 */);
+bool raia_imgui_collapsing_header_2(const char* label, bool* p_visible, int flags /* = 0 */);
+void raia_imgui_set_next_item_open(bool is_open, int cond /* = 0 */);
 
 // ウィジェット: セレクタブル
 bool raia_imgui_selectable(const char* label, bool selected /* = false */, ImGuiSelectableFlags flags /* = 0 */, float size_x /* = 0*/, float size_y /* = 0*/);
@@ -309,7 +327,21 @@ bool raia_imgui_list_box(const char* label, int* current_item, const char* const
 bool raia_imgui_list_box_2(const char* label, int* current_item, bool (*items_getter)(void* data, int idx, const char** out_text), void* data, int items_count, int height_in_items /* = -1 */);
 
 // ウィジェット: データプロット
-// TODO
+void raia_imgui_plot_lines(const char* label, const float* values, int values_count,
+                           int values_offset /* = 0 */, const char* overlay_text /* = NULL */,
+                           float scale_min /* = FLT_MAX */, float scale_max /* = FLT_MAX */,
+                           float graph_size_x /* = 0*/, float graph_size_y /* = 0 */, int stride /* = sizeof(float) */);
+void raia_imgui_plot_lines_2(const char* label, float(*values_getter)(void* data, int idx),
+                             void* data, int values_count, int values_offset /* = 0 */, const char* overlay_text /* = NULL */,
+                             float scale_min /* = FLT_MAX */, float scale_max /* = FLT_MAX */,
+                             float graph_size_x /* = 0*/, float graph_size_y /* = 0 */);
+void raia_imgui_plot_histogram(const char* label, const float* values, int values_count, int values_offset /* = 0 */,
+                               const char* overlay_text /* = NULL */, float scale_min /* = FLT_MAX */, float scale_max /* = FLT_MAX */,
+                               float graph_size_x /* = 0*/, float graph_size_y /* = 0 */, int stride /* = sizeof(float) */);
+void raia_imgui_plot_histogram_2(const char* label, float(*values_getter)(void* data, int idx), void* data, int values_count,
+                                 int values_offset /* = 0 */, const char* overlay_text /* = NULL */,
+                                 float scale_min /* = FLT_MAX */, float scale_max /* = FLT_MAX */,
+                                 float graph_size_x /* = 0*/, float graph_size_y /* = 0 */);
 
 // ウィジェット: Value() ヘルパー
 void raia_imgui_value(const char* prefix, bool b);
@@ -330,9 +362,9 @@ bool raia_imgui_menu_item_2(const char* label, const char* shortcut, bool* p_sel
 // ツールチップ
 bool raia_imgui_begin_tooltip();
 void raia_imgui_end_tooltip();
-// TODO
+void raia_imgui_set_tooltip(const char* text);
 bool raia_imgui_begin_item_tooltip();
-// TODO
+void raia_imgui_set_item_tooltip(const char* text);
 
 // ポップアップ・モーダル
 bool raia_imgui_begin_popup(const char* str_id, ImGuiWindowFlags flags /* = 0 */);
@@ -383,7 +415,12 @@ bool raia_imgui_tab_item_button(const char* label, ImGuiTabItemFlags flags /* = 
 void raia_imgui_set_tab_item_closed(const char* tab_or_docked_window_label);
 
 // ロギング/キャプチャ
-// TODO
+void raia_imgui_log_to_tty(int auto_open_depth /* = -1 */);
+void raia_imgui_log_to_file(int auto_open_depth /* = -1 */, const char* filename /* = NULL */);
+void raia_imgui_log_to_clipboard(int auto_open_depth /* = -1 */);
+void raia_imgui_log_finish();
+void raia_imgui_log_buttons();
+void raia_imgui_log_text(const char* text);
 
 // 無効化 [BETA API]
 void raia_imgui_begin_disabled(bool disabled /* = true */);
@@ -505,8 +542,9 @@ void raia_imgui_mem_free(void* ptr);
 
 // -- ここから拡張
 
-// FLT_MIN
+// FLT_MIN MAX
 double raia_get_flt_min();
+double raia_get_flt_max();
 
 // imgui.cpp
 void raia_imgui_update_platform_windows();

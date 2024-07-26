@@ -139,6 +139,8 @@ im.styleColorsLight()
 im.GLFW.initForOpenGL(window.id, true);
 im.OpenGL3.init("#version 300 es");
 --
+print(string.format("%d %d",100, 200))
+--im.lua_print_with_format("Hello %s, you have %d, new messages\n", "2000", 1000)
 
 
 while window:shouldClose() == false do

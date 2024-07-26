@@ -586,13 +586,37 @@ ImGuiID raia_imgui_get_id_3(const void* ptr_id) {
 
 // ウィジェット: テキスト
 
+void raia_imgui_text_unformatted(const char* text, const char* text_end /* = NULL */) {
+    ImGui::TextUnformatted(text, text_end);
+}
+
 void raia_imgui_text(const char *text) {
     ImGui::Text("%s", text);
 }
 
-//void TextV(const char* fmt, va_list args) {
-//    ImGui::TextV(fmt, args);
-//}
+void raia_imgui_text_colored(float col_x, float col_y, float col_z, float col_w, const char* text) {
+    ImGui::TextColored(ImVec4(col_x, col_y, col_z, col_w), "%s", text);
+}
+
+void raia_imgui_text_disabled(const char* text) {
+    ImGui::TextDisabled("%s", text);
+}
+
+void raia_imgui_text_wrapped(const char* text) {
+    ImGui::TextWrapped("%s", text);
+}
+
+void raia_imgui_label_text(const char* label, const char* text)  {
+    ImGui::LabelText(label, "%s", text);
+}
+
+void raia_imgui_bullet_text(const char* text) {
+    ImGui::BulletText("%s", text);
+}
+
+void raia_imgui_separator_text(const char* label) {
+    ImGui::SeparatorText(label);
+}
 
 // ウィジェット: メイン
 
@@ -874,6 +898,59 @@ void raia_imgui_set_color_edit_options(ImGuiColorEditFlags flags) {
 
 // ウィジェット: ツリー
 
+bool raia_imgui_tree_node(const char* label) {
+    return ImGui::TreeNode(label);
+}
+
+bool raia_imgui_tree_node_2(const char* str_id, const char* text) {
+    return ImGui::TreeNode(str_id, "%s", text);
+}
+
+bool raia_imgui_tree_node_3(const void* ptr_id, const char* text) {
+    return ImGui::TreeNode(ptr_id, "%s", text);
+}
+
+bool raia_imgui_tree_node_ex(const char* label, int flags /* = 0 */) {
+    return ImGui::TreeNodeEx(label, flags);
+}
+
+bool raia_imgui_tree_node_ex_2(const char* str_id, int flags, const char* text) {
+    return ImGui::TreeNodeEx(str_id, flags, "%s", text);
+}
+
+bool raia_imgui_tree_node_ex_3(const void* ptr_id, int flags, const char* text) {
+    return ImGui::TreeNodeEx(ptr_id, flags, "%s", text);
+}
+
+void raia_imgui_tree_push(const char* str_id) {
+    ImGui::TreePush(str_id);
+}
+
+void raia_imgui_tree_push_2(const void* ptr_id) {
+    ImGui::TreePush(ptr_id);
+}
+
+void raia_imgui_tree_pop() {
+    ImGui::TreePop();
+}
+
+float raia_imgui_get_tree_node_to_label_spacing() {
+    return ImGui::GetTreeNodeToLabelSpacing();
+}
+
+bool raia_imgui_collapsing_header(const char* label, int flags /* = 0 */) {
+    return ImGui::CollapsingHeader(label, flags);
+}
+
+bool raia_imgui_collapsing_header_2(const char* label, bool* p_visible, int flags /* = 0 */) {
+    return ImGui::CollapsingHeader(label, p_visible, flags);
+}
+
+void raia_imgui_set_next_item_open(bool is_open, int cond /* = 0 */) {
+    ImGui::SetNextItemOpen(is_open, cond);
+}
+
+
 // ウィジェット: セレクタブル
 
 bool raia_imgui_selectable(const char* label, bool selected /* = false */, ImGuiSelectableFlags flags /* = 0 */, float size_x /* = 0*/, float size_y /* = 0*/) {
@@ -904,10 +981,36 @@ bool raia_imgui_list_box_2(const char* label, int* current_item, bool (*items_ge
 
 // ウィジェット: データプロット
 
-//void raia_imgui_plot_lines(const char* label, const float* values, int values_count, int values_offset = 0, const char* overlay_text = NULL, float scale_min = FLT_MAX, float scale_max = FLT_MAX, ImVec2 graph_size = ImVec2(0, 0), int stride /* = sizeof(float) */);
-//void raia_imgui_plot_lines_2(const char* label, float(*values_getter)(void* data, int idx), void* data, int values_count, int values_offset = 0, const char* overlay_text = NULL, float scale_min = FLT_MAX, float scale_max = FLT_MAX, ImVec2 graph_size = ImVec2(0, 0));
-//void raia_imgui_plot_histogram(const char* label, const float* values, int values_count, int values_offset = 0, const char* overlay_text = NULL, float scale_min = FLT_MAX, float scale_max = FLT_MAX, ImVec2 graph_size = ImVec2(0, 0), int stride /* = sizeof(float) */);
-//void raia_imgui_plot_histogram_2(const char* label, float(*values_getter)(void* data, int idx), void* data, int values_count, int values_offset = 0, const char* overlay_text = NULL, float scale_min = FLT_MAX, float scale_max = FLT_MAX, ImVec2 graph_size = ImVec2(0, 0));
+void raia_imgui_plot_lines(const char* label, const float* values, int values_count,
+                           int values_offset /* = 0 */, const char* overlay_text /* = NULL */,
+                           float scale_min /* = FLT_MAX */, float scale_max /* = FLT_MAX */,
+                           float graph_size_x /* = 0*/, float graph_size_y /* = 0 */, int stride /* = sizeof(float) */) {
+    ImGui::PlotLines(label, values, values_count, values_offset, overlay_text, scale_min, scale_max,
+                     ImVec2(graph_size_x, graph_size_y), stride);
+}
+
+void raia_imgui_plot_lines_2(const char* label, float(*values_getter)(void* data, int idx),
+                             void* data, int values_count, int values_offset /* = 0 */, const char* overlay_text /* = NULL */,
+                             float scale_min /* = FLT_MAX */, float scale_max /* = FLT_MAX */,
+                             float graph_size_x /* = 0*/, float graph_size_y /* = 0 */) {
+    ImGui::PlotLines(label, values_getter, data, values_count, values_offset, overlay_text,
+                     scale_min, scale_max, ImVec2(graph_size_x, graph_size_y));
+}
+
+void raia_imgui_plot_histogram(const char* label, const float* values, int values_count, int values_offset /* = 0 */,
+                               const char* overlay_text /* = NULL */, float scale_min /* = FLT_MAX */, float scale_max /* = FLT_MAX */,
+                               float graph_size_x /* = 0*/, float graph_size_y /* = 0 */, int stride /* = sizeof(float) */) {
+    ImGui::PlotHistogram(label, values, values_count, values_offset, overlay_text,
+                         scale_min, scale_max, ImVec2(graph_size_x, graph_size_y), stride);
+}
+
+void raia_imgui_plot_histogram_2(const char* label, float(*values_getter)(void* data, int idx), void* data, int values_count,
+                                 int values_offset /* = 0 */, const char* overlay_text /* = NULL */,
+                                 float scale_min /* = FLT_MAX */, float scale_max /* = FLT_MAX */,
+                                 float graph_size_x /* = 0*/, float graph_size_y /* = 0 */) {
+    ImGui::PlotHistogram(label, values_getter, data, values_count, values_offset, overlay_text,
+                         scale_min, scale_max, ImVec2(graph_size_x, graph_size_y));
+}
 
 // ウィジェット: Value() ヘルパー
 
@@ -971,15 +1074,17 @@ void raia_imgui_end_tooltip() {
     ImGui::EndTooltip();
 }
 
-//void raia_imgui_set_tooltip(const char* fmt, ...) IM_FMTARGS(1);
-//void raia_imgui_set_tooltip_v(const char* fmt, va_list args) IM_FMTLIST(1);
+void raia_imgui_set_tooltip(const char* text) {
+    ImGui::SetTooltip("%s", text);
+}
 
 bool raia_imgui_begin_item_tooltip() {
     return ImGui::BeginItemTooltip();
 }
 
-//IMGUI_API void SetItemTooltip(const char* fmt, ...) IM_FMTARGS(1);
-//IMGUI_API void SetItemTooltipV(const char* fmt, va_list args) IM_FMTLIST(1);
+void raia_imgui_set_item_tooltip(const char* text) {
+    ImGui::SetItemTooltip("%s", text);
+}
 
 // ポップアップ・モーダル
 
@@ -1156,6 +1261,30 @@ void raia_imgui_set_tab_item_closed(const char* tab_or_docked_window_label) {
 }
 
 // ロギング/キャプチャ
+
+void raia_imgui_log_to_tty(int auto_open_depth /* = -1 */) {
+    ImGui::LogToTTY(auto_open_depth);
+}
+
+void raia_imgui_log_to_file(int auto_open_depth /* = -1 */, const char* filename /* = NULL */) {
+    ImGui::LogToFile(auto_open_depth, filename);
+}
+
+void raia_imgui_log_to_clipboard(int auto_open_depth /* = -1 */) {
+    ImGui::LogToClipboard(auto_open_depth);
+}
+
+void raia_imgui_log_finish() {
+    ImGui::LogFinish();
+}
+
+void raia_imgui_log_buttons() {
+    ImGui::LogButtons();
+}
+
+void raia_imgui_log_text(const char* text) {
+    ImGui::LogText("%s", text);
+}
 
 // ドラッグ・アンド・ドロップ
 
@@ -1567,8 +1696,12 @@ void raia_imgui_mem_free(void* ptr) {
 
 // -- ここから拡張
 
-double get_flt_min() {
+double raia_get_flt_min() {
     return FLT_MIN;
+}
+
+double raia_get_flt_max() {
+    return FLT_MAX;
 }
 
 // imgui.cpp
