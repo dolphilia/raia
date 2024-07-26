@@ -159,10 +159,6 @@ ImDrawList* raia_imgui_get_window_draw_list() {
     return ImGui::GetWindowDrawList();
 }
 
-//ImVec2 raia_imgui_get_window_pos() {
-//    return ImGui::GetWindowPos();
-//}
-
 float raia_imgui_get_window_pos_x() {
     return ImGui::GetWindowPos().x;
 }
@@ -170,10 +166,6 @@ float raia_imgui_get_window_pos_x() {
 float raia_imgui_get_window_pos_y() {
     return ImGui::GetWindowPos().y;
 }
-
-//ImVec2 raia_imgui_get_window_size() {
-//    return ImGui::GetWindowSize();
-//}
 
 float raia_imgui_get_window_width() {
     return ImGui::GetWindowWidth();
@@ -497,10 +489,6 @@ void raia_imgui_begin_group() {
 void raia_imgui_end_group() {
     ImGui::EndGroup();
 }
-
-//ImVec2 raia_imgui_GetCursorPos() {
-//    return ImGui::GetCursorPos();
-//}
 
 float raia_imgui_get_cursor_pos_x() {
     return ImGui::GetCursorPosX();
@@ -1403,7 +1391,7 @@ float raia_imgui_color_convert_u32_to_float4_w(ImU32 in) {
     return ImGui::ColorConvertU32ToFloat4(in).w;
 }
 
-ImU32 raia_imgui_color_convert_float4_to_u32(float in_x, float in_y, int in_z, int in_w) {
+ImU32 raia_imgui_color_convert_float4_to_u32(float in_x, float in_y, float in_z, float in_w) {
     return ImGui::ColorConvertFloat4ToU32(ImVec4(in_x, in_y, in_z, in_w));
 }
 
@@ -1417,17 +1405,171 @@ void raia_imgui_color_convert_hsv_to_rgb(float h, float s, float v, float * out_
 
 // 入力ユーティリティ: キーボード/マウス/ゲームパッド
 
+bool raia_imgui_is_key_down(ImGuiKey key) {
+    return ImGui::IsKeyDown(key);
+}
+
+bool raia_imgui_is_key_pressed(ImGuiKey key, bool repeat /* = true */) {
+    return ImGui::IsKeyPressed(key, repeat);
+}
+
+bool raia_imgui_is_key_released(ImGuiKey key) {
+    return ImGui::IsKeyReleased(key);
+}
+
+int raia_imgui_get_key_pressed_amount(ImGuiKey key, float repeat_delay, float rate) {
+    return ImGui::GetKeyPressedAmount(key, repeat_delay, rate);
+}
+
+const char* raia_imgui_get_key_name(ImGuiKey key) {
+    return ImGui::GetKeyName(key);
+}
+
+void raia_imgui_set_next_frame_want_capture_keyboard(bool want_capture_keyboard) {
+    ImGui::SetNextFrameWantCaptureKeyboard(want_capture_keyboard);
+}
+
 // 入力ユーティリティ： マウス専用
+
+bool raia_imgui_is_mouse_down(ImGuiMouseButton button) {
+    return ImGui::IsMouseDown(button);
+}
+
+bool raia_imgui_is_mouse_clicked(ImGuiMouseButton button, bool repeat /* = false */) {
+    return ImGui::IsMouseClicked(button, repeat);
+}
+
+bool raia_imgui_is_mouse_released(ImGuiMouseButton button) {
+    return ImGui::IsMouseReleased(button);
+}
+
+bool raia_imgui_is_mouse_double_clicked(ImGuiMouseButton button) {
+    return ImGui::IsMouseDoubleClicked(button);
+}
+
+int raia_imgui_get_mouse_clicked_count(ImGuiMouseButton button) {
+    return ImGui::GetMouseClickedCount(button);
+}
+
+bool raia_imgui_is_mouse_hovering_rect(float r_min_x, float r_min_y, float r_max_x, float r_max_y, bool clip /* = true */) {
+    return ImGui::IsMouseHoveringRect(ImVec2(r_min_x, r_min_y), ImVec2(r_max_x, r_max_y), clip);
+}
+
+bool raia_imgui_is_mouse_pos_valid(const ImVec2* mouse_pos /* = NULL */) {
+    return ImGui::IsMousePosValid(mouse_pos);
+}
+
+bool raia_imgui_is_any_mouse_down() {
+    return ImGui::IsAnyMouseDown();
+}
+
+float raia_imgui_get_mouse_pos_x() {
+    return ImGui::GetMousePos().x;
+}
+
+float raia_imgui_get_mouse_pos_y() {
+    return ImGui::GetMousePos().y;
+}
+
+float raia_imgui_get_mouse_pos_on_opening_current_popup_x() {
+    return ImGui::GetMousePosOnOpeningCurrentPopup().x;
+}
+
+float raia_imgui_get_mouse_pos_on_opening_current_popup_y() {
+    return ImGui::GetMousePosOnOpeningCurrentPopup().y;
+}
+
+bool raia_imgui_is_mouse_dragging(ImGuiMouseButton button, float lock_threshold /* = -1.0f */) {
+    return ImGui::IsMouseDragging(button, lock_threshold);
+}
+
+float raia_imgui_get_mouse_drag_delta_x(ImGuiMouseButton button /* = 0 */, float lock_threshold /* = -1.0f */) {
+    return ImGui::GetMouseDragDelta(button, lock_threshold).x;
+}
+
+float raia_imgui_get_mouse_drag_delta_y(ImGuiMouseButton button /* = 0 */, float lock_threshold /* = -1.0f */) {
+    return ImGui::GetMouseDragDelta(button, lock_threshold).y;
+}
+
+void raia_imgui_reset_mouse_drag_delta(ImGuiMouseButton button /* = 0 */) {
+    ImGui::ResetMouseDragDelta(button);
+}
+
+ImGuiMouseCursor raia_imgui_get_mouse_cursor() {
+    return ImGui::GetMouseCursor();
+}
+
+void raia_imgui_set_mouse_cursor(ImGuiMouseCursor cursor_type) {
+    ImGui::SetMouseCursor(cursor_type);
+}
+
+void raia_imgui_set_next_frame_want_capture_mouse(bool want_capture_mouse) {
+    ImGui::SetNextFrameWantCaptureMouse(want_capture_mouse);
+}
 
 // クリップボードユーティリティ
 
+const char* raia_imgui_get_clipboard_text() {
+    return ImGui::GetClipboardText();
+}
+
+void raia_imgui_set_clipboard_text(const char* text) {
+    ImGui::SetClipboardText(text);
+}
+
 // 設定/.Ini ユーティリティ
+
+void raia_imgui_load_ini_settings_from_disk(const char* ini_filename) {
+    ImGui::LoadIniSettingsFromDisk(ini_filename);
+}
+
+void raia_imgui_load_ini_settings_from_memory(const char* ini_data, size_t ini_size /* = 0 */) {
+    ImGui::LoadIniSettingsFromMemory(ini_data, ini_size);
+}
+
+void raia_imgui_save_ini_settings_to_disk(const char* ini_filename) {
+    ImGui::SaveIniSettingsToDisk(ini_filename);
+}
+
+const char* raia_imgui_save_ini_settings_to_memory(size_t* out_ini_size /* = NULL */) {
+    return ImGui::SaveIniSettingsToMemory(out_ini_size);
+}
 
 // デバッグ・ユーティリティ
 
+void raia_imgui_debug_text_encoding(const char* text) {
+    ImGui::DebugTextEncoding(text);
+}
+
+bool raia_imgui_debug_check_version_and_data_layout(const char* version_str, size_t sz_io, size_t sz_style, size_t sz_vec2, size_t sz_vec4, size_t sz_drawvert, size_t sz_drawidx) {
+    return ImGui::DebugCheckVersionAndDataLayout(version_str, sz_io, sz_style, sz_vec2, sz_vec4, sz_drawvert, sz_drawidx);
+}
+
 // メモリ・アロケータ
 
+void raia_imgui_set_allocator_functions(ImGuiMemAllocFunc alloc_func, ImGuiMemFreeFunc free_func, void* user_data /* = NULL */) {
+    ImGui::SetAllocatorFunctions(alloc_func, free_func, user_data);
+}
+
+void raia_imgui_get_allocator_functions(ImGuiMemAllocFunc* p_alloc_func, ImGuiMemFreeFunc* p_free_func, void** p_user_data) {
+    ImGui::GetAllocatorFunctions(p_alloc_func, p_free_func, p_user_data);
+}
+
+void* raia_imgui_mem_alloc(size_t size) {
+    return ImGui::MemAlloc(size);
+}
+
+void raia_imgui_mem_free(void* ptr) {
+    ImGui::MemFree(ptr);
+}
+
+// namespace ImGui
+
 // -- ここから拡張
+
+double get_flt_min() {
+    return FLT_MIN;
+}
 
 // imgui.cpp
 
@@ -1473,59 +1615,59 @@ void raia_imgui_impl_opengl3_shutdown() {
 
 // GetIO ユーティリティ
 
-void raia_imgui_getio_config_flags(int config_flags) {
+void raia_imgui_io_set_config_flags(int config_flags) {
     ImGui::GetIO().ConfigFlags = config_flags;
 }
 
-void raia_imgui_getio_config_viewports_no_auto_merge(bool flag) {
+void raia_imgui_io_set_config_viewports_no_auto_merge(bool flag) {
     ImGui::GetIO().ConfigViewportsNoAutoMerge = flag;
 }
 
-void raia_imgui_getio_config_viewports_no_task_bar_icon(bool flag) {
+void raia_imgui_io_set_config_viewports_no_task_bar_icon(bool flag) {
     ImGui::GetIO().ConfigViewportsNoTaskBarIcon = flag;
 }
 
-void raia_imgui_getio_font_global_scale(float num) {
+void raia_imgui_io_set_font_global_scale(float num) {
     ImGui::GetIO().FontGlobalScale = num;
 }
 
-float raia_imgui_getio_get_framerate() {
+float raia_imgui_io_get_framerate() {
     return ImGui::GetIO().Framerate;
 }
 
-void raia_imgui_getio_font_default(ImFont *font) {
+void raia_imgui_io_set_font_default(ImFont *font) {
     ImGui::GetIO().FontDefault = font;
 }
 
 // GetIO.Fonts ユーティリティ
 
-ImFont* raia_imgui_getio_fonts_add_font_default() {
+ImFont* raia_imgui_io_fonts_add_font_default() {
     return ImGui::GetIO().Fonts->AddFontDefault();
 }
 
-const ImWchar *raia_imgui_getio_fonts_get_glyph_ranges_japanese() {
+const ImWchar *raia_imgui_io_fonts_get_glyph_ranges_japanese() {
     return ImGui::GetIO().Fonts->GetGlyphRangesJapanese();
 }
 
-ImFont *raia_imgui_getio_fonts_add_font_from_file_ttf(const char *filename, float size_pixels, const ImFontConfig *font_cfg, const ImWchar *glyph_ranges) {
+ImFont *raia_imgui_io_fonts_add_font_from_file_ttf(const char *filename, float size_pixels, const ImFontConfig *font_cfg, const ImWchar *glyph_ranges) {
     return ImGui::GetIO().Fonts->AddFontFromFileTTF(filename, size_pixels, font_cfg, glyph_ranges);
 }
 
 // GetStyle ユーティリティ
 
-void raia_imgui_getstyle_window_border_size(float n) {
+void raia_imgui_style_window_border_size(float n) {
     ImGui::GetStyle().WindowBorderSize = n;
 }
 
-void raia_imgui_getstyle_window_rounding(float n) {
+void raia_imgui_style_window_rounding(float n) {
     ImGui::GetStyle().WindowRounding = n;
 }
 
-void raia_imgui_getstyle_scale_all_sizes(float n) {
+void raia_imgui_style_scale_all_sizes(float n) {
     ImGui::GetStyle().ScaleAllSizes(n);
 }
 
-void raia_imgui_set_style_colors(int col, float red, float green, float blue, float alpha) {
+void raia_imgui_style_set_colors(int col, float red, float green, float blue, float alpha) {
     ImGuiStyle& style = ImGui::GetStyle();
     style.Colors[col].x = red;
     style.Colors[col].y = green;

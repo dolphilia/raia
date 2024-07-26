@@ -119,7 +119,7 @@ collectgarbage("collect")
 
 local system = Raia.System:new()
 local timer = Raia.Timer:new()
-local window = Raia.Window:new("Title", 800, 600)
+local window = Raia.Window:new("RaiaEngine", 800, 600)
 
 
 -- ImGui
@@ -133,17 +133,17 @@ config_flags = bit.bor(config_flags, im.ConfigFlags.NavEnableKeyboard)
 config_flags = bit.bor(config_flags, im.ConfigFlags.NavEnableGamepad)
 config_flags = bit.bor(config_flags, im.ConfigFlags.DockingEnable)
 config_flags = bit.bor(config_flags, im.ConfigFlags.ViewportsEnable)
-im.getIO_configFlags(config_flags)
+im.IO.setConfigFlags(config_flags)
 im.styleColorsLight()
 -- initImpl
-im.initForOpenGLImplGLFW(window.id, true);
-im.initImplOpenGL3("#version 300 es");
+im.GLFW.initForOpenGL(window.id, true);
+im.OpenGL3.init("#version 300 es");
 --
 
 
 while window:shouldClose() == false do
-    im.newFrameImplOpenGL3()
-    im.newFrameImplGLFW()
+    im.OpenGL3.newFrame()
+    im.GLFW.newFrame()
     im.newFrame()
     im.Begin("Debug")
     im.text(""..timer:getFPS().."FPS")
@@ -158,7 +158,7 @@ while window:shouldClose() == false do
     window:redraw(false, false)
     local backup_current_context = window:getCurrentContext()
     im.render()
-    im.renderDrawDataImplOpenGL3(im.getDrawData())
+    im.OpenGL3.renderDrawData(im.getDrawData())
     im.updatePlatformWindows()
     im.renderPlatformWindowsDefault()
     window:makeContextCurrent(backup_current_context)

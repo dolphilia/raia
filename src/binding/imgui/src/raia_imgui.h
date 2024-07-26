@@ -183,7 +183,6 @@ void raia_imgui_indent(float indent_w /* = 0.0f*/);
 void raia_imgui_unindent(float indent_w /* = 0.0f*/);
 void raia_imgui_begin_group();
 void raia_imgui_end_group();
-//ImVec2 raia_imgui_GetCursorPos();
 float raia_imgui_get_cursor_pos_x();
 float raia_imgui_get_cursor_pos_y();
 void raia_imgui_set_cursor_pos(float local_pos_x, float local_pos_y);
@@ -211,6 +210,7 @@ ImGuiID raia_imgui_get_id_2(const char* str_id_begin, const char* str_id_end);
 ImGuiID raia_imgui_get_id_3(const void* ptr_id);
 
 // ウィジェット: テキスト
+// TODO
 void raia_imgui_text(const char *text);
 
 // ウィジェット: メイン
@@ -235,71 +235,278 @@ bool raia_imgui_image_button(const char* str_id, ImTextureID user_texture_id, fl
                              float tint_col_x /* = 1 */, float tint_col_y /* = 1 */, float tint_col_z /* = 1 */, float tint_col_w /* = 1 */);
 
 // ウィジェット: コンボボックス（ドロップダウン）
+bool raia_imgui_begin_combo(const char* label, const char* preview_value, ImGuiComboFlags flags /* = 0 */);
+void raia_imgui_end_combo();
+bool raia_imgui_combo(const char* label, int* current_item, const char* const items[], int items_count, int popup_max_height_in_items /* = -1 */);
+bool raia_imgui_combo_2(const char* label, int* current_item, const char* items_separated_by_zeros, int popup_max_height_in_items /* = -1 */);
+bool raia_imgui_combo_3(const char* label, int* current_item, bool(*items_getter)(void* data, int idx, const char** out_text), void* data, int items_count, int popup_max_height_in_items /* = -1 */);
 
 // ウィジェット: ドラッグスライダー
+bool raia_imgui_drag_float(const char* label, float* v, float v_speed /* = 1.0f */, float v_min /* = 0.0f */, float v_max /* = 0.0f */, const char* format /* = "%.3f" */, ImGuiSliderFlags flags /* = 0 */);
+bool raia_imgui_drag_float2(const char* label, float v[2], float v_speed /* = 1.0f */, float v_min /* = 0.0f */, float v_max /* = 0.0f */, const char* format /* = "%.3f" */, ImGuiSliderFlags flags /* = 0 */);
+bool raia_imgui_drag_float3(const char* label, float v[3], float v_speed /* = 1.0f */, float v_min /* = 0.0f */, float v_max /* = 0.0f */, const char* format /* = "%.3f" */, ImGuiSliderFlags flags /* = 0 */);
+bool raia_imgui_drag_float4(const char* label, float v[4], float v_speed /* = 1.0f */, float v_min /* = 0.0f */, float v_max /* = 0.0f */, const char* format /* = "%.3f" */, ImGuiSliderFlags flags /* = 0 */);
+bool raia_imgui_drag_float_range2(const char* label, float* v_current_min, float* v_current_max, float v_speed /* = 1.0f */, float v_min /* = 0.0f */, float v_max /* = 0.0f */, const char* format /* = "%.3f" */, const char* format_max /* = NULL */, ImGuiSliderFlags flags /* = 0 */);
+bool raia_imgui_drag_int(const char* label, int* v, float v_speed /* = 1.0f */, int v_min /* = 0 */, int v_max /* = 0 */, const char* format /* = "%d" */, ImGuiSliderFlags flags /* = 0 */) ;
+bool raia_imgui_drag_int2(const char* label, int v[2], float v_speed /* = 1.0f */, int v_min /* = 0 */, int v_max /* = 0 */, const char* format /* = "%d" */, ImGuiSliderFlags flags /* = 0 */);
+bool raia_imgui_drag_int3(const char* label, int v[3], float v_speed /* = 1.0f */, int v_min /* = 0 */, int v_max /* = 0 */, const char* format /* = "%d" */, ImGuiSliderFlags flags /* = 0 */);
+bool raia_imgui_drag_int4(const char* label, int v[4], float v_speed /* = 1.0f */, int v_min /* = 0 */, int v_max /* = 0 */, const char* format /* = "%d" */, ImGuiSliderFlags flags /* = 0 */);
+bool raia_imgui_drag_int_range2(const char* label, int* v_current_min, int* v_current_max, float v_speed /* = 1.0f */, int v_min /* = 0 */, int v_max /* = 0 */, const char* format /* = "%d" */, const char* format_max /* = NULL */, ImGuiSliderFlags flags /* = 0 */);
+bool raia_imgui_drag_scalar(const char* label, ImGuiDataType data_type, void* p_data, float v_speed /* = 1.0f */, const void* p_min /* = NULL */, const void* p_max /* = NULL */, const char* format /* = NULL */, ImGuiSliderFlags flags /* = 0 */);
+bool raia_imgui_drag_scalar_n(const char* label, ImGuiDataType data_type, void* p_data, int components, float v_speed /* = 1.0f */, const void* p_min /* = NULL */, const void* p_max /* = NULL */, const char* format /* = NULL */, ImGuiSliderFlags flags /* = 0 */);
 
 // ウィジェット: レギュラー・スライダー
 float raia_imgui_slider_float(const char *label, float *v, float v_min, float v_max, const char* format /* = "%.3f" */, ImGuiSliderFlags flags /* = 0 */);
+bool raia_imgui_slider_float2(const char* label, float v[2], float v_min, float v_max, const char* format /* = "%.3f" */, ImGuiSliderFlags flags /* = 0 */);
+bool raia_imgui_slider_float3(const char* label, float v[3], float v_min, float v_max, const char* format /* = "%.3f" */, ImGuiSliderFlags flags /* = 0 */);
+bool raia_imgui_slider_float4(const char* label, float v[4], float v_min, float v_max, const char* format /* = "%.3f" */, ImGuiSliderFlags flags /* = 0 */);
+bool raia_imgui_slider_angle(const char* label, float* v_rad, float v_degrees_min /* = -360.0f */, float v_degrees_max /* = +360.0f */, const char* format /* = "%.0f deg" */, ImGuiSliderFlags flags /* = 0 */);
+bool raia_imgui_slider_int(const char* label, int* v, int v_min, int v_max, const char* format /* = "%d" */, ImGuiSliderFlags flags /* = 0 */);
+bool raia_imgui_slider_int2(const char* label, int v[2], int v_min, int v_max, const char* format /* = "%d" */, ImGuiSliderFlags flags /* = 0 */);
+bool raia_imgui_slider_int3(const char* label, int v[3], int v_min, int v_max, const char* format /* = "%d" */, ImGuiSliderFlags flags /* = 0 */);
+bool raia_imgui_slider_int4(const char* label, int v[4], int v_min, int v_max, const char* format /* = "%d" */, ImGuiSliderFlags flags /* = 0 */);
+bool raia_imgui_slider_scalar(const char* label, ImGuiDataType data_type, void* p_data, const void* p_min, const void* p_max, const char* format /* = NULL */, ImGuiSliderFlags flags /* = 0 */);
+bool raia_imgui_slider_scalar_n(const char* label, ImGuiDataType data_type, void* p_data, int components, const void* p_min, const void* p_max, const char* format /* = NULL */, ImGuiSliderFlags flags /* = 0 */);
+bool raia_imgui_v_slider_float(const char* label, float size_x, float size_y, float* v, float v_min, float v_max, const char* format /* = "%.3f" */, ImGuiSliderFlags flags /* = 0 */);
+bool raia_imgui_v_slider_int(const char* label, float size_x, float size_y, int* v, int v_min, int v_max, const char* format /* = "%d" */, ImGuiSliderFlags flags /* = 0 */);
+bool raia_imgui_v_slider_scalar(const char* label, float size_x, float size_y, ImGuiDataType data_type, void* p_data, const void* p_min, const void* p_max, const char* format /* = NULL */, ImGuiSliderFlags flags /* = 0 */);
 
 // ウィジェット: キーボード入力
+bool raia_imgui_input_text(const char* label, char* buf, size_t buf_size, ImGuiInputTextFlags flags /* = 0 */, ImGuiInputTextCallback callback /* = NULL */, void* user_data /* = NULL */);
+bool raia_imgui_input_text_multiline(const char* label, char* buf, size_t buf_size, float size_x /* = 0 */, float size_y /* = 0 */, ImGuiInputTextFlags flags /* = 0 */, ImGuiInputTextCallback callback /* = NULL */, void* user_data /* = NULL */);
+bool raia_imgui_input_text_with_hint(const char* label, const char* hint, char* buf, size_t buf_size, ImGuiInputTextFlags flags /* = 0 */, ImGuiInputTextCallback callback /* = NULL */, void* user_data /* = NULL */);
+bool raia_imgui_input_float(const char* label, float* v, float step /* = 0.0f */, float step_fast /* = 0.0f */, const char* format /* = "%.3f" */, ImGuiInputTextFlags flags /* = 0 */);
+bool raia_imgui_input_float2(const char* label, float v[2], const char* format /* = "%.3f" */, ImGuiInputTextFlags flags /* = 0 */);
+bool raia_imgui_input_float3(const char* label, float v[3], const char* format /* = "%.3f" */, ImGuiInputTextFlags flags /* = 0 */);
+bool raia_imgui_input_float4(const char* label, float v[4], const char* format /* = "%.3f" */, ImGuiInputTextFlags flags /* = 0 */);
+bool raia_imgui_input_int(const char* label, int* v, int step /* = 1 */, int step_fast /* = 100 */, ImGuiInputTextFlags flags /* = 0 */);
+bool raia_imgui_input_int2(const char* label, int v[2], ImGuiInputTextFlags flags /* = 0 */);
+bool raia_imgui_input_int3(const char* label, int v[3], ImGuiInputTextFlags flags /* = 0 */);
+bool raia_imgui_input_int4(const char* label, int v[4], ImGuiInputTextFlags flags /* = 0 */);
+bool raia_imgui_input_double(const char* label, double* v, double step /* = 0.0 */, double step_fast /* = 0.0 */, const char* format /* = "%.6f" */, ImGuiInputTextFlags flags /* = 0 */);
+bool raia_imgui_input_scalar(const char* label, ImGuiDataType data_type, void* p_data, const void* p_step /* = NULL */, const void* p_step_fast /* = NULL */, const char* format /* = NULL */, ImGuiInputTextFlags flags /* = 0 */);
+bool raia_imgui_input_scalar_n(const char* label, ImGuiDataType data_type, void* p_data, int components, const void* p_step /* = NULL */, const void* p_step_fast /* = NULL */, const char* format /* = NULL */, ImGuiInputTextFlags flags /* = 0 */);
 
 // ウィジェット: カラーエディター/ピッカー
-bool raia_imgui_color_edit_3(const char *label, float *col, ImGuiColorEditFlags flags /* = 0 */);
+bool raia_imgui_color_edit3(const char *label, float *col, ImGuiColorEditFlags flags /* = 0 */);
+bool raia_imgui_color_edit4(const char* label, float col[4], ImGuiColorEditFlags flags /* = 0 */);
+bool raia_imgui_color_picker3(const char* label, float col[3], ImGuiColorEditFlags flags /* = 0 */);
+bool raia_imgui_color_picker4(const char* label, float col[4], ImGuiColorEditFlags flags /* = 0 */, const float* ref_col /* = NULL */);
+bool raia_imgui_color_button(const char* desc_id, float col_x, float col_y, float col_z, float col_w, ImGuiColorEditFlags flags /* = 0 */, float size_x /* = 0 */, float size_y /* = 0 */);
+void raia_imgui_set_color_edit_options(ImGuiColorEditFlags flags);
 
 // ウィジェット: ツリー
+// TODO
 
 // ウィジェット: セレクタブル
+bool raia_imgui_selectable(const char* label, bool selected /* = false */, ImGuiSelectableFlags flags /* = 0 */, float size_x /* = 0*/, float size_y /* = 0*/);
+bool raia_imgui_selectable_2(const char* label, bool* p_selected, ImGuiSelectableFlags flags /* = 0 */,  float size_x /* = 0*/, float size_y /* = 0*/);
 
 // ウィジェット: リストボックス
+bool raia_imgui_begin_list_box(const char* label, float size_x /* = 0*/, float size_y /* = 0*/);
+void raia_imgui_end_list_box();
+bool raia_imgui_list_box(const char* label, int* current_item, const char* const items[], int items_count, int height_in_items /* = -1 */);
+bool raia_imgui_list_box_2(const char* label, int* current_item, bool (*items_getter)(void* data, int idx, const char** out_text), void* data, int items_count, int height_in_items /* = -1 */);
 
 // ウィジェット: データプロット
+// TODO
 
 // ウィジェット: Value() ヘルパー
+void raia_imgui_value(const char* prefix, bool b);
+void raia_imgui_value_2(const char* prefix, int v);
+void raia_imgui_value_3(const char* prefix, unsigned int v);
+void raia_imgui_value_4(const char* prefix, float v, const char* float_format /* = NULL */);
 
 // ウィジェット: メニュー
+bool raia_imgui_begin_menu_bar();
+void raia_imgui_end_menu_bar();
+bool raia_imgui_begin_main_menu_bar();
+void raia_imgui_end_main_menu_bar();
+bool raia_imgui_begin_menu(const char* label, bool enabled /* = true */);
+void raia_imgui_end_menu();
+bool raia_imgui_menu_item(const char* label, const char* shortcut /* = NULL */, bool selected /* = false */, bool enabled /* = true */);
+bool raia_imgui_menu_item_2(const char* label, const char* shortcut, bool* p_selected, bool enabled /* = true */);
 
 // ツールチップ
+bool raia_imgui_begin_tooltip();
+void raia_imgui_end_tooltip();
+// TODO
+bool raia_imgui_begin_item_tooltip();
+// TODO
 
 // ポップアップ・モーダル
+bool raia_imgui_begin_popup(const char* str_id, ImGuiWindowFlags flags /* = 0 */);
+bool raia_imgui_begin_popup_modal(const char* name, bool* p_open /* = NULL */, ImGuiWindowFlags flags /* = 0 */);
+void raia_imgui_end_popup();
+void raia_imgui_open_popup(const char* str_id, ImGuiPopupFlags popup_flags /* = 0 */);
+void raia_imgui_open_popup_2(ImGuiID id, ImGuiPopupFlags popup_flags /* = 0 */);
+void raia_imgui_open_popup_on_item_click(const char* str_id /* = NULL */, ImGuiPopupFlags popup_flags /* = 1 */);
+void raia_imgui_close_current_popup();
+bool raia_imgui_begin_popup_context_item(const char* str_id /* = NULL */, ImGuiPopupFlags popup_flags /* = 1 */);
+bool raia_imgui_begin_popup_context_window(const char* str_id /* = NULL */, ImGuiPopupFlags popup_flags /* = 1 */);
+bool raia_imgui_begin_popup_context_void(const char* str_id /* = NULL */, ImGuiPopupFlags popup_flags /* = 1 */);
+bool raia_imgui_is_popup_open(const char* str_id, ImGuiPopupFlags flags /* = 0 */);
 
 // テーブル
+bool raia_imgui_begin_table(const char* str_id, int column, ImGuiTableFlags flags /* = 0 */, float outer_size_x /* = 0 */, float outer_size_y /* = 0 */, float inner_width /* = 0.0f */);
+void raia_imgui_end_table();
+void raia_imgui_table_next_row(ImGuiTableRowFlags row_flags /* = 0 */, float min_row_height /* = 0.0f */);
+bool raia_imgui_table_next_column();
+bool raia_imgui_table_set_column_index(int column_n);
+void raia_imgui_table_setup_column(const char* label, ImGuiTableColumnFlags flags /* = 0 */, float init_width_or_weight /* = 0.0f */, ImGuiID user_id /* = 0 */);
+void raia_imgui_table_setup_scroll_freeze(int cols, int rows);
+void raia_imgui_table_headers_row();
+void raia_imgui_table_header(const char* label);
+ImGuiTableSortSpecs* raia_imgui_table_get_sort_specs();
+int raia_imgui_table_get_column_count();
+int raia_imgui_table_get_column_index();
+int raia_imgui_table_get_row_index();
+const char* raia_imgui_table_get_column_name(int column_n /* = -1 */);
+ImGuiTableColumnFlags raia_imgui_table_get_column_flags(int column_n /* = -1 */);
+void raia_imgui_table_set_column_enabled(int column_n, bool v);
+void raia_imgui_table_set_bg_color(ImGuiTableBgTarget target, ImU32 color, int column_n /* = -1 */);
+void raia_imgui_columns(int count /* = 1 */, const char* id /* = NULL */, bool border /* = true */); // ここからレガシーなテーブルAPI
+void raia_imgui_next_column();
+int raia_imgui_get_column_index();
+float raia_imgui_get_column_width(int column_index /* = -1 */);
+void raia_imgui_set_column_width(int column_index, float width);
+float raia_imgui_get_column_offset(int column_index /* = -1 */);
+void raia_imgui_set_column_offset(int column_index, float offset_x);
+int raia_imgui_get_columns_count();
+
+// タブバー、タブ
+bool raia_imgui_begin_tab_bar(const char* str_id, ImGuiTabBarFlags flags /* = 0 */);
+void raia_imgui_end_tab_bar();
+bool raia_imgui_begin_tab_item(const char* label, bool* p_open /* = NULL */, ImGuiTabItemFlags flags /* = 0 */);
+void raia_imgui_end_tab_item();
+bool raia_imgui_tab_item_button(const char* label, ImGuiTabItemFlags flags /* = 0 */);
+void raia_imgui_set_tab_item_closed(const char* tab_or_docked_window_label);
 
 // ロギング/キャプチャ
+// TODO
 
 // 無効化 [BETA API]
+void raia_imgui_begin_disabled(bool disabled /* = true */);
+void raia_imgui_end_disabled();
 
 // クリッピング
+void raia_imgui_push_clip_rect(float clip_rect_min_x, float clip_rect_min_y, float clip_rect_max_x, float clip_rect_max_y, bool intersect_with_current_clip_rect);
+void raia_imgui_pop_clip_rect();
 
 // フォーカス, アクティブ化
+void raia_imgui_set_item_default_focus();
+void raia_imgui_set_keyboard_focus_here(int offset /* = 0 */);
 
 // オーバーラッピング・モード
+void raia_imgui_set_next_item_allow_overlap();
 
 // アイテム/ウィジェット ユーティリティとクエリ関数
+bool raia_imgui_is_item_hovered(ImGuiHoveredFlags flags /* = 0 */);
+bool raia_imgui_is_item_active();
+bool raia_imgui_is_item_focused();
+bool raia_imgui_is_item_clicked(ImGuiMouseButton mouse_button /* = 0 */);
+bool raia_imgui_is_item_visible();
+bool raia_imgui_is_item_edited();
+bool raia_imgui_is_item_activated();
+bool raia_imgui_is_item_deactivated();
+bool raia_imgui_is_item_deactivated_after_edit();
+bool raia_imgui_is_item_toggled_open();
+bool raia_imgui_is_any_item_hovered();
+bool raia_imgui_is_any_item_active();
+bool raia_imgui_is_any_item_focused();
+ImGuiID raia_imgui_get_item_id();
+float raia_imgui_get_item_rect_min_x();
+float raia_imgui_get_item_rect_min_y();
+float raia_imgui_get_item_rect_max_x();
+float raia_imgui_get_item_rect_max_y();
+float raia_imgui_get_item_rect_size_x();
+float raia_imgui_get_item_rect_size_y();
 
 // ビューポート
 ImGuiViewport* raia_imgui_get_main_viewport();
 
 // 背景／前景ドローリスト
+ImDrawList* raia_imgui_get_background_draw_list();
+ImDrawList* raia_imgui_get_foreground_draw_list();
 
 // その他ユーティリティ
+bool raia_imgui_is_rect_visible(float size_x, float size_y);
+bool raia_imgui_is_rect_visible_2(float rect_min_x, float rect_min_y, float rect_max_x, float rect_max_y);
+double raia_imgui_get_time();
+int raia_imgui_get_frame_count();
+ImDrawListSharedData* raia_imgui_get_draw_list_shared_data();
+const char* raia_imgui_get_style_color_name(ImGuiCol idx);
+void raia_imgui_set_state_storage(ImGuiStorage* storage);
+ImGuiStorage* raia_imgui_get_state_storage();
+bool raia_imgui_begin_child_frame(ImGuiID id, float size_x, float size_y, ImGuiWindowFlags flags /* = 0 */);
+void raia_imgui_end_child_frame();
 
 // テキスト・ユーティリティ
+float raia_imgui_calc_text_size_x(const char* text, const char* text_end /* = NULL */, bool hide_text_after_double_hash /* = false */, float wrap_width /* = -1.0f */);
+float raia_imgui_calc_text_size_y(const char* text, const char* text_end /* = NULL */, bool hide_text_after_double_hash /* = false */, float wrap_width /* = -1.0f */);
 
 // カラーユーティリティ
+float raia_imgui_color_convert_u32_to_float4_x(ImU32 in);
+float raia_imgui_color_convert_u32_to_float4_y(ImU32 in);
+float raia_imgui_color_convert_u32_to_float4_z(ImU32 in);
+float raia_imgui_color_convert_u32_to_float4_w(ImU32 in);
+ImU32 raia_imgui_color_convert_float4_to_u32(float in_x, float in_y, float in_z, float in_w);
+void raia_imgui_color_convert_rgb_to_hsv(float r, float g, float b, float * out_h, float * out_s, float * out_v);
+void raia_imgui_color_convert_hsv_to_rgb(float h, float s, float v, float * out_r, float * out_g, float * out_b);
 
 // 入力ユーティリティ: キーボード/マウス/ゲームパッド
+bool raia_imgui_is_key_down(ImGuiKey key);
+bool raia_imgui_is_key_pressed(ImGuiKey key, bool repeat /* = true */);
+bool raia_imgui_is_key_released(ImGuiKey key);
+int raia_imgui_get_key_pressed_amount(ImGuiKey key, float repeat_delay, float rate);
+const char* raia_imgui_get_key_name(ImGuiKey key);
+void raia_imgui_set_next_frame_want_capture_keyboard(bool want_capture_keyboard);
 
 // 入力ユーティリティ： マウス専用
+bool raia_imgui_is_mouse_down(ImGuiMouseButton button);
+bool raia_imgui_is_mouse_clicked(ImGuiMouseButton button, bool repeat /* = false */);
+bool raia_imgui_is_mouse_released(ImGuiMouseButton button);
+bool raia_imgui_is_mouse_double_clicked(ImGuiMouseButton button);
+int raia_imgui_get_mouse_clicked_count(ImGuiMouseButton button);
+bool raia_imgui_is_mouse_hovering_rect(float r_min_x, float r_min_y, float r_max_x, float r_max_y, bool clip /* = true */);
+bool raia_imgui_is_mouse_pos_valid(const ImVec2* mouse_pos /* = NULL */);
+bool raia_imgui_is_any_mouse_down();
+float raia_imgui_get_mouse_pos_x();
+float raia_imgui_get_mouse_pos_y();
+float raia_imgui_get_mouse_pos_on_opening_current_popup_x();
+float raia_imgui_get_mouse_pos_on_opening_current_popup_y();
+bool raia_imgui_is_mouse_dragging(ImGuiMouseButton button, float lock_threshold /* = -1.0f */);
+float raia_imgui_get_mouse_drag_delta_x(ImGuiMouseButton button /* = 0 */, float lock_threshold /* = -1.0f */);
+float raia_imgui_get_mouse_drag_delta_y(ImGuiMouseButton button /* = 0 */, float lock_threshold /* = -1.0f */);
+void raia_imgui_reset_mouse_drag_delta(ImGuiMouseButton button /* = 0 */);
+ImGuiMouseCursor raia_imgui_get_mouse_cursor();
+void raia_imgui_set_mouse_cursor(ImGuiMouseCursor cursor_type);
+void raia_imgui_set_next_frame_want_capture_mouse(bool want_capture_mouse);
 
 // クリップボードユーティリティ
+const char* raia_imgui_get_clipboard_text();
+void raia_imgui_set_clipboard_text(const char* text);
 
 // 設定/.Ini ユーティリティ
+void raia_imgui_load_ini_settings_from_disk(const char* ini_filename);
+void raia_imgui_load_ini_settings_from_memory(const char* ini_data, size_t ini_size /* = 0 */);
+void raia_imgui_save_ini_settings_to_disk(const char* ini_filename);
+const char* raia_imgui_save_ini_settings_to_memory(size_t* out_ini_size /* = NULL */);
 
 // デバッグ・ユーティリティ
+void raia_imgui_debug_text_encoding(const char* text);
+bool raia_imgui_debug_check_version_and_data_layout(const char* version_str, size_t sz_io, size_t sz_style, size_t sz_vec2, size_t sz_vec4, size_t sz_drawvert, size_t sz_drawidx);
 
 // メモリ・アロケータ
+void raia_imgui_set_allocator_functions(ImGuiMemAllocFunc alloc_func, ImGuiMemFreeFunc free_func, void* user_data /* = NULL */);
+void raia_imgui_get_allocator_functions(ImGuiMemAllocFunc* p_alloc_func, ImGuiMemFreeFunc* p_free_func, void** p_user_data);
+void* raia_imgui_mem_alloc(size_t size);
+void raia_imgui_mem_free(void* ptr);
 
 // -- ここから拡張
+
+// FLT_MIN
+double raia_get_flt_min();
 
 // imgui.cpp
 void raia_imgui_update_platform_windows();
@@ -317,23 +524,23 @@ void raia_imgui_impl_opengl3_render_draw_data(ImDrawData* draw_data);
 void raia_imgui_impl_opengl3_shutdown();
 
 // GetIO ユーティリティ
-void raia_imgui_getio_config_flags(int config_flags);
-void raia_imgui_getio_config_viewports_no_auto_merge(bool flag);
-void raia_imgui_getio_config_viewports_no_task_bar_icon(bool flag);
-void raia_imgui_getio_font_global_scale(float num);
-float raia_imgui_getio_get_framerate();
-void raia_imgui_getio_font_default(ImFont *font);
+void raia_imgui_io_set_config_flags(int config_flags);
+void raia_imgui_io_set_config_viewports_no_auto_merge(bool flag);
+void raia_imgui_io_set_config_viewports_no_task_bar_icon(bool flag);
+void raia_imgui_io_set_font_global_scale(float num);
+float raia_imgui_io_get_framerate();
+void raia_imgui_io_set_font_default(ImFont *font);
 
 // GetIO.Fonts ユーティリティ
-ImFont* raia_imgui_getio_fonts_add_font_default();
-const ImWchar *raia_imgui_getio_fonts_get_glyph_ranges_japanese();
-ImFont *raia_imgui_getio_fonts_add_font_from_file_ttf(const char *filename, float size_pixels, const ImFontConfig *font_cfg, const ImWchar *glyph_ranges);
+ImFont* raia_imgui_io_fonts_add_font_default();
+const ImWchar *raia_imgui_io_fonts_get_glyph_ranges_japanese();
+ImFont *raia_imgui_io_fonts_add_font_from_file_ttf(const char *filename, float size_pixels, const ImFontConfig *font_cfg, const ImWchar *glyph_ranges);
 
 // GetStyle ユーティリティ
-void raia_imgui_getstyle_window_border_size(float n);
-void raia_imgui_getstyle_window_rounding(float n);
-void raia_imgui_getstyle_scale_all_sizes(float n);
-void raia_imgui_set_style_colors(int col, float red, float green, float blue, float alpha);
+void raia_imgui_style_window_border_size(float n);
+void raia_imgui_style_window_rounding(float n);
+void raia_imgui_style_scale_all_sizes(float n);
+void raia_imgui_style_set_colors(int col, float red, float green, float blue, float alpha);
 
 }
 
