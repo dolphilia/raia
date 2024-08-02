@@ -575,11 +575,54 @@ const ImWchar *raia_imgui_io_fonts_get_glyph_ranges_japanese();
 ImFont *raia_imgui_io_fonts_add_font_from_file_ttf(const char *filename, float size_pixels, const ImFontConfig *font_cfg, const ImWchar *glyph_ranges);
 
 // GetStyle ユーティリティ
-void raia_imgui_style_window_border_size(float n);
-void raia_imgui_style_window_rounding(float n);
+void raia_imgui_style_set_alpha(float n);
+void raia_imgui_style_set_disabled_alpha(float n);
+void raia_imgui_style_set_window_padding(float x, float y);
+void raia_imgui_style_set_window_rounding(float n);
+void raia_imgui_style_set_window_border_size(float n);
+void raia_imgui_style_set_window_min_size(float x, float y);
+void raia_imgui_style_set_window_title_align(float x, float y);
+void raia_imgui_style_set_window_menu_button_position(ImGuiDir n);
+void raia_imgui_style_set_child_rounding(float n);
+void raia_imgui_style_set_child_border_size(float n);
+void raia_imgui_style_set_popup_rounding(float n);
+void raia_imgui_style_set_popup_border_size(float n);
+void raia_imgui_style_set_frame_padding(float x, float y);
+void raia_imgui_style_set_frame_rounding(float n);
+void raia_imgui_style_set_frame_border_size(float n);
+void raia_imgui_style_set_item_spacing(float x, float y);
+void raia_imgui_style_set_item_inner_spacing(float x, float y);
+void raia_imgui_style_set_cell_padding(float x, float y);
+void raia_imgui_style_set_touch_extra_padding(float x, float y);
+void raia_imgui_style_set_indent_spacing(float n);
+void raia_imgui_style_set_columns_min_spacing(float n);
+void raia_imgui_style_set_scrollbar_size(float n);
+void raia_imgui_style_set_scrollbar_rounding(float n);
+void raia_imgui_style_set_grab_min_size(float n);
+void raia_imgui_style_set_grab_rounding(float n);
+void raia_imgui_style_set_log_slider_deadzone(float n);
+void raia_imgui_style_set_tab_rounding(float n);
+void raia_imgui_style_set_tab_border_size(float n);
+void raia_imgui_style_set_tab_min_width_for_close_button(float n);
+void raia_imgui_style_set_bolor_button_position(ImGuiDir n);
+void raia_imgui_style_set_button_text_align(float x, float y);
+void raia_imgui_style_set_selectable_text_align(float x, float y);
+void raia_imgui_style_set_separator_text_border_size(float n);
+void raia_imgui_style_set_separator_text_align(float x, float y);
+void raia_imgui_style_set_separator_text_padding(float x, float y);
+void raia_imgui_style_set_display_window_padding(float x, float y);
+void raia_imgui_style_set_display_safe_area_padding(float x, float y);
+void raia_imgui_style_set_mouse_cursor_scale(float n);
+void raia_imgui_style_set_anti_aliased_lines(bool n);
+void raia_imgui_style_set_anti_aliased_lines_use_tex(bool n);
+void raia_imgui_style_set_anti_aliased_fill(bool n);
+void raia_imgui_style_set_curve_tessellation_tol(float n);
+void raia_imgui_style_set_circle_tessellation_max_error(float n);
 void raia_imgui_style_scale_all_sizes(float n);
 void raia_imgui_style_set_colors(int col, float red, float green, float blue, float alpha);
 
+// Image ユーティリティ
+void *raia_imgui_int_to_ptr(int value);
 }
 
 #endif //RAIA_GUI_RAIA_IMGUI_H

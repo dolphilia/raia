@@ -534,10 +534,54 @@ ffi.cdef[[
     void *raia_imgui_io_fonts_add_font_from_file_ttf(const char *filename, float size_pixels, const void *font_cfg, const void *glyph_ranges);
     
     // GetStyle ユーティリティ
-    void raia_imgui_style_window_border_size(float n);
-    void raia_imgui_style_window_rounding(float n);
+    void raia_imgui_style_set_alpha(float n);
+    void raia_imgui_style_set_disabled_alpha(float n);
+    void raia_imgui_style_set_window_padding(float x, float y);
+    void raia_imgui_style_set_window_rounding(float n);
+    void raia_imgui_style_set_window_border_size(float n);
+    void raia_imgui_style_set_window_min_size(float x, float y);
+    void raia_imgui_style_set_window_title_align(float x, float y);
+    void raia_imgui_style_set_window_menu_button_position(int n);
+    void raia_imgui_style_set_child_rounding(float n);
+    void raia_imgui_style_set_child_border_size(float n);
+    void raia_imgui_style_set_popup_rounding(float n);
+    void raia_imgui_style_set_popup_border_size(float n);
+    void raia_imgui_style_set_frame_padding(float x, float y);
+    void raia_imgui_style_set_frame_rounding(float n);
+    void raia_imgui_style_set_frame_border_size(float n);
+    void raia_imgui_style_set_item_spacing(float x, float y);
+    void raia_imgui_style_set_item_inner_spacing(float x, float y);
+    void raia_imgui_style_set_cell_padding(float x, float y);
+    void raia_imgui_style_set_touch_extra_padding(float x, float y);
+    void raia_imgui_style_set_indent_spacing(float n);
+    void raia_imgui_style_set_columns_min_spacing(float n);
+    void raia_imgui_style_set_scrollbar_size(float n);
+    void raia_imgui_style_set_scrollbar_rounding(float n);
+    void raia_imgui_style_set_grab_min_size(float n);
+    void raia_imgui_style_set_grab_rounding(float n);
+    void raia_imgui_style_set_log_slider_deadzone(float n);
+    void raia_imgui_style_set_tab_rounding(float n);
+    void raia_imgui_style_set_tab_border_size(float n);
+    void raia_imgui_style_set_tab_min_width_for_close_button(float n);
+    void raia_imgui_style_set_bolor_button_position(int n);
+    void raia_imgui_style_set_button_text_align(float x, float y);
+    void raia_imgui_style_set_selectable_text_align(float x, float y);
+    void raia_imgui_style_set_separator_text_border_size(float n);
+    void raia_imgui_style_set_separator_text_align(float x, float y);
+    void raia_imgui_style_set_separator_text_padding(float x, float y);
+    void raia_imgui_style_set_display_window_padding(float x, float y);
+    void raia_imgui_style_set_display_safe_area_padding(float x, float y);
+    void raia_imgui_style_set_mouse_cursor_scale(float n);
+    void raia_imgui_style_set_anti_aliased_lines(bool n);
+    void raia_imgui_style_set_anti_aliased_lines_use_tex(bool n);
+    void raia_imgui_style_set_anti_aliased_fill(bool n);
+    void raia_imgui_style_set_curve_tessellation_tol(float n);
+    void raia_imgui_style_set_circle_tessellation_max_error(float n);
     void raia_imgui_style_scale_all_sizes(float n);
     void raia_imgui_style_set_colors(int col, float red, float green, float blue, float alpha);
+
+    // Image ユーティリティ
+    void *raia_imgui_int_to_ptr(int value);
 ]]
 
 local lib = ffi.load("libraia_imgui")
@@ -1341,7 +1385,7 @@ end
 
 -- 子ウィンドウ
 
-function ImGui.BeginChild(str_id, size_x, size_y, border, flags)
+function ImGui.beginChild(str_id, size_x, size_y, border, flags)
     size_x = size_x or 0
     size_y = size_y or 0
     border = border or false
@@ -1349,7 +1393,7 @@ function ImGui.BeginChild(str_id, size_x, size_y, border, flags)
     return lib.raia_imgui_begin_child(str_id, size_x, size_y, border, flags)
 end
 
-function ImGui.BeginChild2(id, size_x, size_y, border, flags)
+function ImGui.beginChild2(id, size_x, size_y, border, flags)
     size_x = size_x or 0
     size_y = size_y or 0
     border = border or false
@@ -1357,7 +1401,7 @@ function ImGui.BeginChild2(id, size_x, size_y, border, flags)
     return lib.raia_imgui_begin_child_2(id, size_x, size_y, border, flags)
 end
 
-function ImGui.EndChild()
+function ImGui.endChild()
     lib.raia_imgui_end_child()
 end
 
@@ -3160,6 +3204,19 @@ end
 
 -- ここから拡張
 
+-- begin end の予約語回避のため
+-- ウィンドウ
+
+function ImGui.beginWindow(name, p_open, flags)
+    p_open = p_open or ffi.null
+    flags = flags or 0
+    return lib.raia_imgui_begin(name, p_open, flags)
+end
+
+function ImGui.endWindow()
+    lib.raia_imgui_end()
+end
+
 -- imgui.cpp
 
 function ImGui.updatePlatformWindows()
@@ -3254,13 +3311,178 @@ end
 
 ImGui.Style = {}
 
-function ImGui.Style.setWindowBorderSize(n)
-    lib.raia_imgui_style_window_border_size(n)
+function ImGui.Style.setAlpha(n)
+    lib.raia_imgui_style_set_alpha(n)
+end
+
+function ImGui.Style.setDisabledAlpha(n)
+    lib.raia_imgui_style_set_disabled_alpha(n)
+end
+
+function ImGui.Style.setWindowPadding(x, y)
+    lib.raia_imgui_style_set_window_padding(x, y)
 end
 
 function ImGui.Style.setWindowRounding(n)
-    lib.raia_imgui_style_window_rounding(n)
+    lib.raia_imgui_style_set_window_rounding(n)
 end
+
+function ImGui.Style.setWindowBorderSize(n)
+    lib.raia_imgui_style_set_window_border_size(n)
+end
+
+function ImGui.Style.setWindowMinSize(x, y)
+    lib.raia_imgui_style_set_window_min_size(x, y)
+end
+
+function ImGui.Style.setWindowTitleAlign(x, y)
+    lib.raia_imgui_style_set_window_title_align(x, y)
+end
+
+function ImGui.Style.setWindowMenuButtonPosition(n)
+    lib.raia_imgui_style_set_window_menu_button_position(n)
+end
+
+function ImGui.Style.setChildRounding(n)
+    lib.raia_imgui_style_set_child_rounding(n)
+end
+
+function ImGui.Style.setChildBorderSize(n)
+    lib.raia_imgui_style_set_child_border_size(n)
+end
+
+function ImGui.Style.setPopupRounding(n)
+    lib.raia_imgui_style_set_popup_rounding(n)
+end
+
+function ImGui.Style.setPopupBorderSize(n)
+    lib.raia_imgui_style_set_popup_border_size(n)
+end
+
+function ImGui.Style.setFramePadding(x, y)
+    lib.raia_imgui_style_set_frame_padding(x, y)
+end
+
+function ImGui.Style.setFrameRounding(n)
+    lib.raia_imgui_style_set_frame_rounding(n)
+end
+
+function ImGui.Style.setFrameBorderSize(n)
+    lib.raia_imgui_style_set_frame_border_size(n)
+end
+
+function ImGui.Style.setItemSpacing(x, y)
+    lib.raia_imgui_style_set_item_spacing(x, y)
+end
+
+function ImGui.Style.setItemInnerSpacing(x, y)
+    lib.raia_imgui_style_set_item_inner_spacing(x, y)
+end
+
+function ImGui.Style.setCellPadding(x, y)
+    lib.raia_imgui_style_set_cell_padding(x, y)
+end
+
+function ImGui.Style.setTouchExtraPadding(x, y)
+    lib.raia_imgui_style_set_touch_extra_padding(x, y)
+end
+
+function ImGui.Style.setIndentSpacing(n)
+    lib.raia_imgui_style_set_indent_spacing(n)
+end
+
+function ImGui.Style.setColumnsMinSpacing(n)
+    lib.raia_imgui_style_set_columns_min_spacing(n)
+end
+
+function ImGui.Style.setScrollbarSize(n)
+    lib.raia_imgui_style_set_scrollbar_size(n)
+end
+
+function ImGui.Style.setScrollbarRounding(n)
+    lib.raia_imgui_style_set_scrollbar_rounding(n)
+end
+
+function ImGui.Style.setGrabMinSize(n)
+    lib.raia_imgui_style_set_grab_min_size(n)
+end
+
+function ImGui.Style.setGrabRounding(n)
+    lib.raia_imgui_style_set_grab_rounding(n)
+end
+
+function ImGui.Style.setLogSliderDeadzone(n)
+    lib.raia_imgui_style_set_log_slider_deadzone(n)
+end
+
+function ImGui.Style.setTabRounding(n)
+    lib.raia_imgui_style_set_tab_rounding(n)
+end
+
+function ImGui.Style.setTabBorderSize(n)
+    lib.raia_imgui_style_set_tab_border_size(n)
+end
+
+function ImGui.Style.setTabMinWidthForCloseButton(n)
+    lib.raia_imgui_style_set_tab_min_width_for_close_button(n)
+end
+
+function ImGui.Style.setBolorButtonPosition(n)
+    lib.raia_imgui_style_set_bolor_button_position(n)
+end
+
+function ImGui.Style.setButtonTextAlign(x, y)
+    lib.raia_imgui_style_set_button_text_align(x, y)
+end
+
+function ImGui.Style.setSelectableTextAlign(x, y)
+    lib.raia_imgui_style_set_selectable_text_align(x, y)
+end
+
+function ImGui.Style.setSeparatorTextBorderSize(n)
+    lib.raia_imgui_style_set_separator_text_border_size(n)
+end
+
+function ImGui.Style.setSeparatorTextAlign(x, y)
+    lib.raia_imgui_style_set_separator_text_align(x, y)
+end
+
+function ImGui.Style.setSeparatorTextPadding(x, y)
+    lib.raia_imgui_style_set_separator_text_padding(x, y)
+end
+
+function ImGui.Style.setDisplayWindowPadding(x, u)
+    lib.raia_imgui_style_set_display_window_padding(x, y)
+end
+
+function ImGui.Style.setDisplaySafeAreaPadding(x, y)
+    lib.raia_imgui_style_set_display_safe_area_padding(x, y)
+end
+
+function ImGui.Style.setMouseCursorScale(n)
+    lib.raia_imgui_style_set_mouse_cursor_scale(n)
+end
+
+function ImGui.Style.setAntiAliasedLines(n)
+    lib.raia_imgui_style_set_anti_aliased_lines(n)
+end
+
+function ImGui.Style.setAntiAliasedLinesUseTex(n)
+    lib.raia_imgui_style_set_anti_aliased_lines_use_tex(n)
+end
+
+function ImGui.Style.setAntiAliasedFill(n)
+    lib.raia_imgui_style_set_anti_aliased_fill(n)
+end
+
+function ImGui.Style.setCurveTessellationTol(n)
+    lib.raia_imgui_style_set_curve_tessellation_tol(n)
+end
+
+function ImGui.Style.setCircleTessellationMaxError(n)
+    lib.raia_imgui_style_set_circle_tessellation_max_error(n)
+end
+
 
 function ImGui.Style.scaleAllSizes(n)
     lib.raia_imgui_style_scale_all_sizes(n)
@@ -3268,6 +3490,12 @@ end
 
 function ImGui.Style.setColors(col, red, green, blue, alpha)
     lib.raia_imgui_style_set_colors(col, red, green, blue, alpha)
+end
+
+-- その他の汎用 ユーティリティ
+
+function ImGui.intToPtr(value)
+    return lib.raia_imgui_int_to_ptr(value)
 end
 
 --

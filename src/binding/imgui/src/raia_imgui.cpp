@@ -1788,12 +1788,176 @@ ImFont *raia_imgui_io_fonts_add_font_from_file_ttf(const char *filename, float s
 
 // GetStyle ユーティリティ
 
-void raia_imgui_style_window_border_size(float n) {
+void raia_imgui_style_set_alpha(float n) {
+    ImGui::GetStyle().Alpha = n;
+}
+
+void raia_imgui_style_set_disabled_alpha(float n) {
+    ImGui::GetStyle().DisabledAlpha = n;
+}
+
+void raia_imgui_style_set_window_padding(float x, float y) {
+    ImGui::GetStyle().WindowPadding = ImVec2(x, y);
+}
+
+void raia_imgui_style_set_window_rounding(float n) {
+    ImGui::GetStyle().WindowRounding = n;
+}
+
+void raia_imgui_style_set_window_border_size(float n) {
     ImGui::GetStyle().WindowBorderSize = n;
 }
 
-void raia_imgui_style_window_rounding(float n) {
-    ImGui::GetStyle().WindowRounding = n;
+void raia_imgui_style_set_window_min_size(float x, float y) {
+    ImGui::GetStyle().WindowMinSize = ImVec2(x, y);
+}
+
+void raia_imgui_style_set_window_title_align(float x, float y) {
+    ImGui::GetStyle().WindowTitleAlign = ImVec2(x, y);
+}
+
+void raia_imgui_style_set_window_menu_button_position(ImGuiDir n) {
+    ImGui::GetStyle().WindowMenuButtonPosition = n;
+}
+
+void raia_imgui_style_set_child_rounding(float n) {
+    ImGui::GetStyle().ChildRounding = n;
+}
+
+void raia_imgui_style_set_child_border_size(float n) {
+    ImGui::GetStyle().ChildBorderSize = n;
+}
+
+void raia_imgui_style_set_popup_rounding(float n) {
+    ImGui::GetStyle().PopupRounding = n;
+}
+
+void raia_imgui_style_set_popup_border_size(float n) {
+    ImGui::GetStyle().PopupBorderSize = n;
+}
+
+void raia_imgui_style_set_frame_padding(float x, float y) {
+    ImGui::GetStyle().FramePadding = ImVec2(x, y);
+}
+
+void raia_imgui_style_set_frame_rounding(float n) {
+    ImGui::GetStyle().FrameRounding = n;
+}
+
+void raia_imgui_style_set_frame_border_size(float n) {
+    ImGui::GetStyle().FrameBorderSize = n;
+}
+
+void raia_imgui_style_set_item_spacing(float x, float y) {
+    ImGui::GetStyle().ItemSpacing = ImVec2(x, y);
+}
+
+void raia_imgui_style_set_item_inner_spacing(float x, float y) {
+    ImGui::GetStyle().ItemInnerSpacing = ImVec2(x, y);
+}
+
+void raia_imgui_style_set_cell_padding(float x, float y) {
+    ImGui::GetStyle().CellPadding = ImVec2(x, y);
+}
+
+void raia_imgui_style_set_touch_extra_padding(float x, float y) {
+    ImGui::GetStyle().TouchExtraPadding = ImVec2(x, y);
+}
+
+void raia_imgui_style_set_indent_spacing(float n) {
+    ImGui::GetStyle().IndentSpacing = n;
+}
+
+void raia_imgui_style_set_columns_min_spacing(float n) {
+    ImGui::GetStyle().ColumnsMinSpacing = n;
+}
+
+void raia_imgui_style_set_scrollbar_size(float n) {
+    ImGui::GetStyle().ScrollbarSize = n;
+}
+
+void raia_imgui_style_set_scrollbar_rounding(float n) {
+    ImGui::GetStyle().ScrollbarRounding = n;
+}
+
+void raia_imgui_style_set_grab_min_size(float n) {
+    ImGui::GetStyle().GrabMinSize = n;
+}
+
+void raia_imgui_style_set_grab_rounding(float n) {
+    ImGui::GetStyle().GrabRounding = n;
+}
+
+void raia_imgui_style_set_log_slider_deadzone(float n) {
+    ImGui::GetStyle().LogSliderDeadzone = n;
+}
+
+void raia_imgui_style_set_tab_rounding(float n) {
+    ImGui::GetStyle().TabRounding = n;
+}
+
+void raia_imgui_style_set_tab_border_size(float n) {
+    ImGui::GetStyle().TabBorderSize = n;
+}
+
+void raia_imgui_style_set_tab_min_width_for_close_button(float n) {
+    ImGui::GetStyle().TabMinWidthForCloseButton = n;
+}
+
+void raia_imgui_style_set_bolor_button_position(ImGuiDir n) {
+    ImGui::GetStyle().ColorButtonPosition = n;
+}
+
+void raia_imgui_style_set_button_text_align(float x, float y) {
+    ImGui::GetStyle().ButtonTextAlign = ImVec2(x, y);
+}
+
+void raia_imgui_style_set_selectable_text_align(float x, float y) {
+    ImGui::GetStyle().SelectableTextAlign = ImVec2(x, y);
+}
+
+void raia_imgui_style_set_separator_text_border_size(float n) {
+    ImGui::GetStyle().SeparatorTextBorderSize = n;
+}
+
+void raia_imgui_style_set_separator_text_align(float x, float y) {
+    ImGui::GetStyle().SeparatorTextAlign = ImVec2(x, y);
+}
+
+void raia_imgui_style_set_separator_text_padding(float x, float y) {
+    ImGui::GetStyle().SeparatorTextPadding = ImVec2(x, y);
+}
+
+void raia_imgui_style_set_display_window_padding(float x, float y) {
+    ImGui::GetStyle().DisplayWindowPadding = ImVec2(x, y);
+}
+
+void raia_imgui_style_set_display_safe_area_padding(float x, float y) {
+    ImGui::GetStyle().DisplaySafeAreaPadding = ImVec2(x, y);
+}
+
+void raia_imgui_style_set_mouse_cursor_scale(float n) {
+    ImGui::GetStyle().MouseCursorScale = n;
+}
+
+void raia_imgui_style_set_anti_aliased_lines(bool n) {
+    ImGui::GetStyle().AntiAliasedLines = n;
+}
+
+void raia_imgui_style_set_anti_aliased_lines_use_tex(bool n) {
+    ImGui::GetStyle().AntiAliasedLinesUseTex = n;
+}
+
+void raia_imgui_style_set_anti_aliased_fill(bool n) {
+    ImGui::GetStyle().AntiAliasedFill = n;
+}
+
+void raia_imgui_style_set_curve_tessellation_tol(float n) {
+    ImGui::GetStyle().CurveTessellationTol = n;
+}
+
+void raia_imgui_style_set_circle_tessellation_max_error(float n) {
+    ImGui::GetStyle().CircleTessellationMaxError = n;
 }
 
 void raia_imgui_style_scale_all_sizes(float n) {
@@ -1806,6 +1970,12 @@ void raia_imgui_style_set_colors(int col, float red, float green, float blue, fl
     style.Colors[col].y = green;
     style.Colors[col].z = blue;
     style.Colors[col].w = alpha;
+}
+
+// Image ユーティリティ
+
+void *raia_imgui_int_to_ptr(int value) {
+    return (void *)(intptr_t)value;
 }
 
 }

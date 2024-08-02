@@ -1158,14 +1158,16 @@ function Raia.Window:new(title, width, height)
     local fragment_shader = gl.createShader(gl.FRAGMENT_SHADER)
     gl.shaderSource(fragment_shader, 1, ffi.new("const char*[1]", {fragmentShaderSource}), nil)
     gl.compileShader(fragment_shader)
-    local program = gl.createShaderProgram()  -- 自動解放される
+    local program = gl.createProgram()-- gl.createShaderProgram()  -- 自動解放される
     gl.attachShader(program, vertex_shader)
     gl.attachShader(program, fragment_shader)
     gl.linkProgram(program)
     gl.deleteShader(vertex_shader)
     gl.deleteShader(fragment_shader)
     local pixels = ffi.new("GLubyte[?]", width * height * 4)
-    local texture = gl.createTexture() -- 自動解放される
+    --local texture = gl.createTexture() -- 自動解放される
+    local texture = ffi.new("GLuint[1]")
+    gl.genTextures(1, texture)
     gl.bindTexture(gl.TEXTURE_2D, texture[0])
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.UNSIGNED_BYTE, pixels)
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST)
@@ -1202,7 +1204,7 @@ function Raia.Window:redraw(isSwap, isPollEvents)
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST)
     gl.useProgram(program)
     gl.bindVertexArray(vao)
-    --gl.activeTexture(gl.TEXTURE0)
+    gl.activeTexture(gl.TEXTURE0)
     gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_INT, nil)
     if isSwap == true then
         glfw.swapBuffers(windowID)

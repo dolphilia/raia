@@ -161,11 +161,11 @@ int main(int argc, char* argv[]) {
     glGenTextures(1, &texture);
 
     // フレーム内ピクセルデータ
-//    const int frame_width = 320;
-//    const int frame_height = 240;
-//    GLubyte* frame_pixels = (GLubyte*)malloc(sizeof(GLubyte) * frame_width * frame_height * 4);
-    //GLuint frame_texture;
-    //glGenTextures(1, &frame_texture);
+    const int frame_width = 320;
+    const int frame_height = 240;
+    GLubyte* frame_pixels = (GLubyte*)malloc(sizeof(GLubyte) * frame_width * frame_height * 4);
+    GLuint frame_texture;
+    glGenTextures(1, &frame_texture);
 
 //    bool is_multi_viewport = true;
 //    bool show_demo_window = true;
@@ -183,25 +183,25 @@ int main(int argc, char* argv[]) {
 
         ImGui::ShowDemoWindow();
 
-//        {
-//            for (int i = 0; i < frame_width * frame_height * 4; i += 4) {
-//                frame_pixels[i]     = rand_xor128(0, 255); // Red
-//                frame_pixels[i + 1] = rand_xor128(0, 255); // Green
-//                frame_pixels[i + 2] = rand_xor128(0, 255); // Blue
-//                frame_pixels[i + 3] = 255; // Alpha
-//            }
-//            glBindTexture(GL_TEXTURE_2D, frame_texture);
-//            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, frame_width, frame_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, frame_pixels);
-//            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-//            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-//            glBindTexture(GL_TEXTURE_2D, 1);
-//
-//            auto size = ImVec2(frame_width, frame_height);
-//            if (ImGui::Begin("フレーム内にピクセルを描画する")) {
-//                ImGui::Image((void*)(intptr_t)frame_texture, size);
-//            }
-//            ImGui::End();
-//        }
+        {
+            for (int i = 0; i < frame_width * frame_height * 4; i += 4) {
+                frame_pixels[i]     = rand_xor128(0, 255); // Red
+                frame_pixels[i + 1] = rand_xor128(0, 255); // Green
+                frame_pixels[i + 2] = rand_xor128(0, 255); // Blue
+                frame_pixels[i + 3] = 255; // Alpha
+            }
+            glBindTexture(GL_TEXTURE_2D, frame_texture);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, frame_width, frame_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, frame_pixels);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+            //glBindTexture(GL_TEXTURE_2D, 1);
+
+            auto size = ImVec2(frame_width, frame_height);
+            if (ImGui::Begin("フレーム内にピクセルを描画する")) {
+                ImGui::Image((void*)(intptr_t)frame_texture, size);
+            }
+            ImGui::End();
+        }
 
         //int display_w, display_h;
         //glfwGetFramebufferSize(main_window, &display_w, &display_h);
