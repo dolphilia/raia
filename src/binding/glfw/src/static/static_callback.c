@@ -3,393 +3,418 @@
 //
 
 #include "static_callback.h"
+#include "../../../third_party/c/troydhanson/uthash/uthash.h"
 
-static raia_callback_t *raia_callback;
+typedef struct {
+    GLFWwindow *window; // GLFWwindow* をキーとして使用
+    int x, y;           // ウィンドウの位置情報
+    int width, height;  // ウィンドウのサイズ情報
+    bool close;
+    bool refresh;
+    int focused;
+    int iconified;
+    int framebuffer_size_width, framebuffer_size_height;
+    int key, key_scancode, key_action, key_mods;
+    double cursor_pos_x, cursor_pos_y;
+    int mouse_button, mouse_action, mouse_mods;
+    unsigned int char_codepoint;
+    unsigned int char_mods_codepoint;
+    int char_mods_mods;
+    int cursor_entered;
+    int scroll_offset_x, scroll_offset_y;
+    int drop_count;
+    const char **drop_paths;
+    int maximized;
+    float content_scale_x;
+    float content_scale_y;
+    UT_hash_handle hh;  // uthash 用のハンドル
+} window_data_t;
 
-void init_static_callback(void) {
-    raia_callback = (raia_callback_t *)malloc(sizeof(raia_callback_t));
+static window_data_t *window_data_map = NULL;
+static callback_data_t *callback_data = NULL;
+
+// Util
+
+window_data_t* get_or_create_window_data(GLFWwindow *window) {
+    window_data_t *data;
+    HASH_FIND_PTR(window_data_map, &window, data);
+    if (data == NULL) {
+        data = (window_data_t*)malloc(sizeof(window_data_t));
+        data->window = window;
+        data->x = -1; // 初期値
+        data->y = -1;
+        data->width = -1;
+        data->height = -1;
+        data->close = false;
+        data->refresh = false;
+        data->focused = -1;
+        data->framebuffer_size_width = -1;
+        data->framebuffer_size_height = -1;
+        data->key = -1;
+        data->key_scancode = -1;
+        data->key_action = -1;
+        data->key_mods = -1;
+        data->cursor_pos_x = -1;
+        data->cursor_pos_y = -1;
+        data->mouse_button = -1;
+        data->mouse_action = -1;
+        data->mouse_mods = -1;
+        data->char_codepoint = 0;
+        data->char_mods_codepoint = 0;
+        data->char_mods_mods = -1;
+        data->cursor_entered = -1;
+        data->scroll_offset_x = -1;
+        data->scroll_offset_y = -1;
+        data->drop_count = -1;
+        data->drop_paths = NULL;
+        data->maximized = -1;
+        data->content_scale_x = -1;
+        data->content_scale_y = -1;
+        HASH_ADD_PTR(window_data_map, window, data);
+    }
+    return data;
 }
 
-void event_error_callback(int error, const char *message) {
-    raia_callback->error_callback_error = error;
-    raia_callback->error_callback_message = message;
+// Error
+
+void error_callback(int error, const char *message) {
+    if (callback_data == NULL) {
+        callback_data = (callback_data_t *)malloc(sizeof(callback_data_t));
+    }
+    callback_data->error_code = error;
+    callback_data->error_message = message;
 }
 
-char *get_error_callback_t(void) {
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_int(ret_doc, ret_root, "error", raia_callback->error_callback_error);
-    yyjson_mut_obj_add_str(ret_doc, ret_root, "message", raia_callback->error_callback_message);
-
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    return result;
+int get_callback_data_error_code() {
+    return callback_data->error_code;
 }
 
-void event_joystick_callback(int jid, int event) {
-    raia_callback->joystick_callback_jid = jid;
-    raia_callback->joystick_callback_event = event;
+const char * get_callback_data_error_message() {
+    return callback_data->error_message;
 }
 
-char *get_joystick_callback_t(void) {
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_int(ret_doc, ret_root, "jid", raia_callback->joystick_callback_jid);
-    yyjson_mut_obj_add_int(ret_doc, ret_root, "event", raia_callback->joystick_callback_event);
+// Joystick
 
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    return result;
+void joystick_callback(int jid, int event) {
+    if (callback_data == NULL) {
+        callback_data = (callback_data_t *)malloc(sizeof(callback_data_t));
+    }
+    callback_data->joystick_id = jid;
+    callback_data->joystick_event = event;
 }
 
-void event_window_pos_callback(GLFWwindow *window, int x, int y) {
-    raia_callback->window_pos_callback_window = window;
-    raia_callback->window_pos_callback_x = x;
-    raia_callback->window_pos_callback_y = y;
+int get_callback_data_joystick_id() {
+    return callback_data->joystick_id;
 }
 
-char *get_window_pos_callback_t(void) {
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_uint(ret_doc, ret_root, "window", (uint64_t)(uintptr_t)raia_callback->window_pos_callback_window);
-    yyjson_mut_obj_add_int(ret_doc, ret_root, "x", raia_callback->window_pos_callback_x);
-    yyjson_mut_obj_add_int(ret_doc, ret_root, "y", raia_callback->window_pos_callback_y);
-
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    return result;
+int get_callback_data_joystick_event() {
+    return callback_data->joystick_event;
 }
 
-void event_window_size_callback(GLFWwindow *window, int width, int height) {
-    raia_callback->window_size_callback_window = window;
-    raia_callback->window_size_callback_width = width;
-    raia_callback->window_size_callback_height = height;
+// Monitor
+
+void monitor_callback(GLFWmonitor* monitor, int event) {
+    if (callback_data == NULL) {
+        callback_data = (callback_data_t *)malloc(sizeof(callback_data_t));
+    }
+    callback_data->monitor = monitor;
+    callback_data->monitor_event = event;
 }
 
-char *get_window_size_callback_t(void) {
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_uint(ret_doc, ret_root, "window", (uint64_t)(uintptr_t)raia_callback->window_size_callback_window);
-    yyjson_mut_obj_add_int(ret_doc, ret_root, "width", raia_callback->window_size_callback_width);
-    yyjson_mut_obj_add_int(ret_doc, ret_root, "height", raia_callback->window_size_callback_height);
-
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    return result;
+GLFWmonitor* get_monitor(void) {
+    return callback_data->monitor;
 }
 
-void event_window_close_callback(GLFWwindow *window) {
-    raia_callback->window_close_callback_window = window;
+int get_monitor_event(void) {
+    return callback_data->monitor_event;
 }
 
-char *get_window_close_callback_t(void) {
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_uint(ret_doc, ret_root, "window", (uint64_t)(uintptr_t)raia_callback->window_close_callback_window);
+// Pos
 
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    return result;
+void window_pos_callback(GLFWwindow *window, int x, int y) {
+    window_data_t *data = get_or_create_window_data(window);
+    data->x = x;
+    data->y = y;
 }
 
-// TODO check refresh callback is actually called
-void event_window_refresh_callback(GLFWwindow *window) {
-    raia_callback->window_refresh_callback_window = window;
+int get_window_pos_x(GLFWwindow *window) {
+    window_data_t *data = get_or_create_window_data(window);
+    return data->x;
 }
 
-char *get_window_refresh_callback_t(void) {
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_uint(ret_doc, ret_root, "window", (uint64_t)(uintptr_t)raia_callback->window_refresh_callback_window);
-
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    return result;
+int get_window_pos_y(GLFWwindow *window) {
+    window_data_t *data = get_or_create_window_data(window);
+    return data->y;
 }
 
-void event_window_focus_callback(GLFWwindow* window, int focused) {
-    raia_callback->window_focus_callback_window = window;
-    raia_callback->window_focus_callback_focused = focused;
+// Size
+
+void window_size_callback(GLFWwindow *window, int width, int height) {
+    window_data_t *data = get_or_create_window_data(window);
+    data->width = width;
+    data->height = height;
 }
 
-char *get_window_focus_callback_t(void) {
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_uint(ret_doc, ret_root, "window", (uint64_t)(uintptr_t)raia_callback->window_focus_callback_window);
-    yyjson_mut_obj_add_int(ret_doc, ret_root, "focused", raia_callback->window_focus_callback_focused);
-
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    return result;
+int get_window_size_width(GLFWwindow *window) {
+    window_data_t *data = get_or_create_window_data(window);
+    return data->width;
 }
 
-void event_window_iconify_callback(GLFWwindow *window, int iconified) {
-    raia_callback->window_iconify_callback_window = window;
-    raia_callback->window_iconify_callback_iconified = iconified;
+int get_window_size_height(GLFWwindow *window) {
+    window_data_t *data = get_or_create_window_data(window);
+    return data->height;
 }
 
-char *get_window_iconify_callback_t(void) {
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_uint(ret_doc, ret_root, "window", (uint64_t)(uintptr_t)raia_callback->window_iconify_callback_window);
-    yyjson_mut_obj_add_int(ret_doc, ret_root, "iconified", raia_callback->window_iconify_callback_iconified);
+// Close
 
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    return result;
+void window_close_callback(GLFWwindow *window) {
+    window_data_t *data = get_or_create_window_data(window);
+    data->close = true;
 }
 
-void event_framebuffer_size_callback(GLFWwindow *window, int width, int height) {
-    raia_callback->framebuffer_size_callback_window = window;
-    raia_callback->framebuffer_size_callback_width = width;
-    raia_callback->framebuffer_size_callback_height = height;
+bool get_window_close(GLFWwindow *window) {
+    window_data_t *data = get_or_create_window_data(window);
+    if (data->close) {
+        data->close = false;
+        return true;
+    }
+    return false;
 }
 
-char *get_framebuffer_size_callback_t(void) {
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_uint(ret_doc, ret_root, "window", (uint64_t)(uintptr_t)raia_callback->framebuffer_size_callback_window);
-    yyjson_mut_obj_add_int(ret_doc, ret_root, "width", raia_callback->framebuffer_size_callback_width);
-    yyjson_mut_obj_add_int(ret_doc, ret_root, "height", raia_callback->framebuffer_size_callback_height);
+// Refresh
 
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    return result;
+void window_refresh_callback(GLFWwindow *window) {
+    window_data_t *data = get_or_create_window_data(window);
+    data->refresh = true;
 }
 
-void event_key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
-    raia_callback->key_callback_window = window;
-    raia_callback->key_callback_key = key;
-    raia_callback->key_callback_scancode = scancode;
-    raia_callback->key_callback_action = action;
-    raia_callback->key_callback_mods = mods;
+bool get_window_refresh(GLFWwindow *window) {
+    window_data_t *data = get_or_create_window_data(window);
+    if (data->refresh) {
+        data->refresh = false;
+        return true;
+    }
+    return false;
 }
 
-char *get_key_callback_t(void) {
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_uint(ret_doc, ret_root, "window", (uint64_t)(uintptr_t)raia_callback->key_callback_window);
-    yyjson_mut_obj_add_int(ret_doc, ret_root, "key", raia_callback->key_callback_key);
-    yyjson_mut_obj_add_int(ret_doc, ret_root, "scancode", raia_callback->key_callback_scancode);
-    yyjson_mut_obj_add_int(ret_doc, ret_root, "action", raia_callback->key_callback_action);
-    yyjson_mut_obj_add_int(ret_doc, ret_root, "mods", raia_callback->key_callback_mods);
+// Focus
 
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    return result;
+void window_focus_callback(GLFWwindow* window, int focused) {
+    window_data_t *data = get_or_create_window_data(window);
+    data->focused = focused;
 }
 
-void event_cursor_pos_callback(GLFWwindow* window, double xpos, double ypos) {
-    raia_callback->cursor_position_callback_window = window;
-    raia_callback->cursor_position_callback_xpos = xpos;
-    raia_callback->cursor_position_callback_ypos = ypos;
+int get_window_focus(GLFWwindow *window) {
+    window_data_t *data = get_or_create_window_data(window);
+    return data->focused;
 }
 
-char *get_cursor_pos_callback_t(void) {
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_uint(ret_doc, ret_root, "window", (uint64_t)(uintptr_t)raia_callback->cursor_position_callback_window);
-    yyjson_mut_obj_add_real(ret_doc, ret_root, "xpos", raia_callback->cursor_position_callback_xpos);
-    yyjson_mut_obj_add_real(ret_doc, ret_root, "ypos", raia_callback->cursor_position_callback_ypos);
+// Iconify
 
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    return result;
+void window_iconify_callback(GLFWwindow *window, int iconified) {
+    window_data_t *data = get_or_create_window_data(window);
+    data->iconified = iconified;
 }
 
-void event_mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
-    raia_callback->mouse_button_callback_window = window;
-    raia_callback->mouse_button_callback_button = button;
-    raia_callback->mouse_button_callback_action = action;
-    raia_callback->mouse_button_callback_mods = mods;
+int get_window_iconified(GLFWwindow *window) {
+    window_data_t *data = get_or_create_window_data(window);
+    return data->iconified;
 }
 
-char *get_mouse_button_callback_t(void) {
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_uint(ret_doc, ret_root, "window", (uint64_t)(uintptr_t)raia_callback->mouse_button_callback_window);
-    yyjson_mut_obj_add_int(ret_doc, ret_root, "button", raia_callback->mouse_button_callback_button);
-    yyjson_mut_obj_add_int(ret_doc, ret_root, "action", raia_callback->mouse_button_callback_action);
-    yyjson_mut_obj_add_int(ret_doc, ret_root, "mods", raia_callback->mouse_button_callback_mods);
+// Framebuffer Size
 
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    return result;
+void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
+    window_data_t *data = get_or_create_window_data(window);
+    data->framebuffer_size_width = width;
+    data->framebuffer_size_height = height;
 }
 
-void event_char_callback(GLFWwindow* window, unsigned int codepoint) {
-    raia_callback->character_callback_window = window;
-    raia_callback->character_callback_codepoint = codepoint;
+int get_framebuffer_size_width(GLFWwindow *window) {
+    window_data_t *data = get_or_create_window_data(window);
+    return data->framebuffer_size_width;
 }
 
-char *get_char_callback_t(void) {
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_uint(ret_doc, ret_root, "window", (uint64_t)(uintptr_t)raia_callback->character_callback_window);
-    yyjson_mut_obj_add_uint(ret_doc, ret_root, "codepoint", raia_callback->character_callback_codepoint);
-
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    return result;
+int get_framebuffer_size_height(GLFWwindow *window) {
+    window_data_t *data = get_or_create_window_data(window);
+    return data->framebuffer_size_width;
 }
 
-void event_char_mods_callback(GLFWwindow *window, unsigned int codepoint, int mods) {
-    raia_callback->character_mods_callback_window = window;
-    raia_callback->character_mods_callback_codepoint = codepoint;
-    raia_callback->character_mods_callback_mods = mods;
+// Key
+
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    window_data_t *data = get_or_create_window_data(window);
+    data->key = key;
+    data->key_scancode = scancode;
+    data->key_action = action;
+    data->key_mods = mods;
 }
 
-char *get_char_mods_callback_t(void) {
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_uint(ret_doc, ret_root, "window", (uint64_t)(uintptr_t)raia_callback->character_mods_callback_window);
-    yyjson_mut_obj_add_uint(ret_doc, ret_root, "codepoint", raia_callback->character_mods_callback_codepoint);
-    yyjson_mut_obj_add_int(ret_doc, ret_root, "mods", raia_callback->character_mods_callback_mods);
-
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    return result;
+int get_key(GLFWwindow *window) {
+    window_data_t *data = get_or_create_window_data(window);
+    return data->key;
 }
 
-void event_cursor_enter_callback(GLFWwindow* window, int entered) {
-    raia_callback->cursor_enter_callback_window = window;
-    raia_callback->cursor_enter_callback_entered = entered;
+int get_key_scancode(GLFWwindow *window) {
+    window_data_t *data = get_or_create_window_data(window);
+    return data->key_scancode;
 }
 
-char *get_cursor_enter_callback_t(void) {
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_uint(ret_doc, ret_root, "window", (uint64_t)(uintptr_t)raia_callback->cursor_enter_callback_window);
-    yyjson_mut_obj_add_int(ret_doc, ret_root, "entered", raia_callback->cursor_enter_callback_entered);
-
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    return result;
+int get_key_action(GLFWwindow *window) {
+    window_data_t *data = get_or_create_window_data(window);
+    return data->key_action;
 }
 
-void event_scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
-    raia_callback->scroll_callback_window = window;
-    raia_callback->scroll_callback_xoffset = xoffset;
-    raia_callback->scroll_callback_yoffset = yoffset;
+int get_key_mods(GLFWwindow *window) {
+    window_data_t *data = get_or_create_window_data(window);
+    return data->key_mods;
 }
 
-char *get_scroll_callback_t(void) {
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_uint(ret_doc, ret_root, "window", (uint64_t)(uintptr_t)raia_callback->scroll_callback_window);
-    yyjson_mut_obj_add_real(ret_doc, ret_root, "xoffset", raia_callback->scroll_callback_xoffset);
-    yyjson_mut_obj_add_real(ret_doc, ret_root, "yoffset", raia_callback->scroll_callback_yoffset);
+// Cursor pos
 
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    return result;
+void cursor_pos_callback(GLFWwindow* window, double xpos, double ypos) {
+    window_data_t *data = get_or_create_window_data(window);
+    data->cursor_pos_x = xpos;
+    data->cursor_pos_y = ypos;
 }
 
-void event_drop_callback(GLFWwindow* window, int count, const char** paths) {
-    raia_callback->drop_callback_window = window;
-    raia_callback->drop_callback_count = count;
-    raia_callback->drop_callback_paths = paths;
+double get_cursor_pos_x(GLFWwindow* window) {
+    window_data_t *data = get_or_create_window_data(window);
+    return data->cursor_pos_x;
 }
 
-char *get_drop_callback_t(void) {
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_uint(ret_doc, ret_root, "window", (uint64_t)(uintptr_t)raia_callback->drop_callback_window);
-    yyjson_mut_obj_add_real(ret_doc, ret_root, "count", raia_callback->drop_callback_count);
-    yyjson_mut_val *ret_vals = yyjson_mut_arr_with_str(ret_doc, raia_callback->drop_callback_paths, raia_callback->drop_callback_count);
-    yyjson_mut_obj_add_val(ret_doc, ret_root, "paths", ret_vals);
-
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    return result;
+double get_cursor_pos_y(GLFWwindow* window) {
+    window_data_t *data = get_or_create_window_data(window);
+    return data->cursor_pos_y;
 }
 
-void event_window_maximize_callback(GLFWwindow* window, int maximized) {
-    raia_callback->window_maximize_callback_window = window;
-    raia_callback->window_maximize_callback_maximized = maximized;
+// Mouse button
+
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
+    window_data_t *data = get_or_create_window_data(window);
+    data->mouse_button = button;
+    data->mouse_action = action;
+    data->mouse_mods = mods;
 }
 
-char *get_window_maximize_callback_t(void) {
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_uint(ret_doc, ret_root, "window", (uint64_t)(uintptr_t)raia_callback->window_maximize_callback_window);
-    yyjson_mut_obj_add_int(ret_doc, ret_root, "maximized", raia_callback->window_maximize_callback_maximized);
-
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    return result;
+int get_mouse_button(GLFWwindow* window) {
+    window_data_t *data = get_or_create_window_data(window);
+    return data->mouse_button;
 }
 
-void event_window_content_scale_callback(GLFWwindow* window, float xscale, float yscale) {
-    raia_callback->window_content_scale_callback_window = window;
-    raia_callback->window_content_scale_callback_xscale = xscale;
-    raia_callback->window_content_scale_callback_yscale = yscale;
+int get_mouse_action(GLFWwindow* window) {
+    window_data_t *data = get_or_create_window_data(window);
+    return data->mouse_action;
 }
 
-char *get_window_content_scale_callback_t(void) {
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_uint(ret_doc, ret_root, "window", (uint64_t)(uintptr_t)raia_callback->window_content_scale_callback_window);
-    yyjson_mut_obj_add_real(ret_doc, ret_root, "xscale", raia_callback->window_content_scale_callback_xscale);
-    yyjson_mut_obj_add_real(ret_doc, ret_root, "yscale", raia_callback->window_content_scale_callback_yscale);
-
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
-
-    yyjson_mut_doc_free(ret_doc);
-    return result;
+int get_mouse_mods(GLFWwindow* window) {
+    window_data_t *data = get_or_create_window_data(window);
+    return data->mouse_mods;
 }
 
-void event_monitor_callback(GLFWmonitor* monitor, int event) {
-    raia_callback->monitor_callback_monitor = monitor;
-    raia_callback->monitor_callback_event = event;
+// Char
+
+void char_callback(GLFWwindow* window, unsigned int codepoint) {
+    window_data_t *data = get_or_create_window_data(window);
+    data->char_codepoint = codepoint;
 }
 
-char *get_event_monitor_callback_t(void) {
-    yyjson_mut_doc *ret_doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret_root = yyjson_mut_obj(ret_doc);
-    yyjson_mut_doc_set_root(ret_doc, ret_root);
-    yyjson_mut_obj_add_uint(ret_doc, ret_root, "monitor", (uint64_t)(uintptr_t)raia_callback->monitor_callback_monitor);
-    yyjson_mut_obj_add_int(ret_doc, ret_root, "event", raia_callback->monitor_callback_event);
+unsigned int get_char_codepoint(GLFWwindow* window) {
+    window_data_t *data = get_or_create_window_data(window);
+    return data->char_codepoint;
+}
 
-    char *result = yyjson_mut_write(ret_doc, YYJSON_WRITE_PRETTY, NULL);
+// Char mods
 
-    yyjson_mut_doc_free(ret_doc);
-    return result;
+void char_mods_callback(GLFWwindow *window, unsigned int codepoint, int mods) {
+    window_data_t *data = get_or_create_window_data(window);
+    data->char_mods_codepoint = codepoint;
+    data->char_mods_mods = mods;
+}
+
+unsigned int get_char_mods_codepoint(GLFWwindow* window) {
+    window_data_t *data = get_or_create_window_data(window);
+    return data->char_mods_codepoint;
+}
+
+int get_char_mods_mods(GLFWwindow* window) {
+    window_data_t *data = get_or_create_window_data(window);
+    return data->char_mods_mods;
+}
+
+// Enter
+
+void cursor_enter_callback(GLFWwindow* window, int entered) {
+    window_data_t *data = get_or_create_window_data(window);
+    data->cursor_entered = entered;
+}
+
+int get_cursor_entered(GLFWwindow* window) {
+    window_data_t *data = get_or_create_window_data(window);
+    return data->cursor_entered;
+}
+
+// Scroll
+
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
+    window_data_t *data = get_or_create_window_data(window);
+    data->scroll_offset_x = xoffset;
+    data->scroll_offset_y = yoffset;
+}
+
+int get_scroll_xoffset(GLFWwindow* window) {
+    window_data_t *data = get_or_create_window_data(window);
+    return data->scroll_offset_x;
+}
+
+int get_scroll_yoffset(GLFWwindow* window) {
+    window_data_t *data = get_or_create_window_data(window);
+    return data->scroll_offset_y;
+}
+
+// Drop
+
+void drop_callback(GLFWwindow* window, int count, const char** paths) {
+    window_data_t *data = get_or_create_window_data(window);
+    data->drop_count = count;
+    data->drop_paths = paths;
+}
+
+int get_drop_count(GLFWwindow* window) {
+    window_data_t *data = get_or_create_window_data(window);
+    return data->drop_count;
+}
+
+const char** get_drop_paths(GLFWwindow* window) {
+    window_data_t *data = get_or_create_window_data(window);
+    return data->drop_paths;
+}
+
+// Maximize
+
+void window_maximize_callback(GLFWwindow* window, int maximized) {
+    window_data_t *data = get_or_create_window_data(window);
+    data->maximized = maximized;
+}
+
+int get_window_maximized(GLFWwindow* window) {
+    window_data_t *data = get_or_create_window_data(window);
+    return data->maximized;
+}
+
+// Content scale
+
+void window_content_scale_callback(GLFWwindow* window, float xscale, float yscale) {
+    window_data_t *data = get_or_create_window_data(window);
+    data->content_scale_x = xscale;
+    data->content_scale_y = yscale;
+}
+
+float get_window_content_scale_x(GLFWwindow* window) {
+    window_data_t *data = get_or_create_window_data(window);
+    return data->content_scale_x;
+}
+
+float get_window_content_scale_y(GLFWwindow* window) {
+    window_data_t *data = get_or_create_window_data(window);
+    return data->content_scale_y;
 }

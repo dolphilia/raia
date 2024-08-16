@@ -1,17 +1,18 @@
 cmake_minimum_required(VERSION 3.25)
-project(raia_raudio)
+project(raia_miniaudio)
 
 include(${PROJECT_SOURCE_DIR}/../../setting.cmake)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_library(raia_raudio SHARED
-#add_executable(raia_raudio
-        src/raudio.c
-        src/external/stb_vorbis.c
-        src/external/qoaplay.c
-        src/external/qoa.h
+add_library(raia_miniaudio SHARED
+#add_executable(raia_miniaudio
         src/external/miniaudio.h
+        src/raia_miniaudio.c
+        src/raia_miniaudio.h
+        #src/external/stb_vorbis.c
+        #src/external/qoaplay.c
+        #src/external/qoa.h
 )
 
 # 現在のRPATH設定を取得（もしあれば）

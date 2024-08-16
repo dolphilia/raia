@@ -5,145 +5,117 @@
 #ifndef RAIA_APP_STATIC_CALLBACK_H
 #define RAIA_APP_STATIC_CALLBACK_H
 
-#include <stdio.h>
+#include <stdbool.h>
 #include "GLFW/glfw3.h"
-#include "../../../../third_party/c/ibireme/yyjson/yyjson.h"
 
 typedef struct raia_callback_t{
     //error_callback
-    int error_callback_error;
-    const char *error_callback_message;
-
+    int error_code;
+    const char *error_message;
     // joystick_callback
-    int joystick_callback_jid;
-    int joystick_callback_event;
-
+    int joystick_id;
+    int joystick_event;
     // monitor_callback
-    GLFWmonitor* monitor_callback_monitor;
-    int monitor_callback_event;
+    GLFWmonitor* monitor;
+    int monitor_event;
+} callback_data_t;
 
-    // window_pos_callback
-    GLFWwindow *window_pos_callback_window;
-    int window_pos_callback_x;
-    int window_pos_callback_y;
+void init_callback_data(void);
 
-    // window_size_callback
-    GLFWwindow *window_size_callback_window;
-    int window_size_callback_width;
-    int window_size_callback_height;
+// Error
+void error_callback(int error, const char *message);
+int get_callback_data_error_code();
+const char *get_callback_data_error_message();
 
-    // window_close_callback
-    GLFWwindow *window_close_callback_window;
+// Joystick
+void joystick_callback(int jid, int event);
+int get_callback_data_joystick_id();
+int get_callback_data_joystick_event();
 
-    // window_refresh_callback
-    GLFWwindow *window_refresh_callback_window;
+// Monitor
+void monitor_callback(GLFWmonitor* monitor, int event);
+GLFWmonitor* get_monitor(void);
+int get_monitor_event(void);
 
-    // window_focus_callback
-    GLFWwindow* window_focus_callback_window;
-    int window_focus_callback_focused;
+// Pos
+void window_pos_callback(GLFWwindow *window, int x, int y);
+int get_window_pos_x(GLFWwindow *window);
+int get_window_pos_y(GLFWwindow *window);
 
-    // window_iconify_callback
-    GLFWwindow *window_iconify_callback_window;
-    int window_iconify_callback_iconified;
+// Size
+void window_size_callback(GLFWwindow *window, int width, int height);
+int get_window_size_width(GLFWwindow *window);
+int get_window_size_height(GLFWwindow *window);
 
-    // framebuffer_size_callback
-    GLFWwindow *framebuffer_size_callback_window;
-    int framebuffer_size_callback_width;
-    int framebuffer_size_callback_height;
+// Close
+void window_close_callback(GLFWwindow *window);
+bool get_window_close(GLFWwindow *window);
 
-    // window_maximize_callback
-    GLFWwindow *window_maximize_callback_window;
-    int window_maximize_callback_maximized;
+// Refresh
+void window_refresh_callback(GLFWwindow *window);
+bool get_window_refresh(GLFWwindow *window);
 
-    // window_content_scale_callback
-    GLFWwindow* window_content_scale_callback_window;
-    float window_content_scale_callback_xscale;
-    float window_content_scale_callback_yscale;
+// Forcus
+void window_focus_callback(GLFWwindow* window, int focused);
+int get_window_focus(GLFWwindow *window);
 
-    // key_callback
-    GLFWwindow* key_callback_window;
-    int key_callback_key;
-    int key_callback_scancode;
-    int key_callback_action;
-    int key_callback_mods;
+// Iconify
+void window_iconify_callback(GLFWwindow *window, int iconified);
+int get_window_iconified(GLFWwindow *window);
 
-    // cursor_position_callback
-    GLFWwindow* cursor_position_callback_window;
-    double cursor_position_callback_xpos;
-    double cursor_position_callback_ypos;
+// Framebuffer Size
+void framebuffer_size_callback(GLFWwindow *window, int width, int height);
+int get_framebuffer_size_width(GLFWwindow *window);
+int get_framebuffer_size_height(GLFWwindow *window);
 
-    // mouse_button_callback
-    GLFWwindow* mouse_button_callback_window;
-    int mouse_button_callback_button;
-    int mouse_button_callback_action;
-    int mouse_button_callback_mods;
+// Key
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+int get_key(GLFWwindow *window);
+int get_key_scancode(GLFWwindow *window);
+int get_key_action(GLFWwindow *window);
+int get_key_mods(GLFWwindow *window);
 
-    // character_callback
-    GLFWwindow* character_callback_window;
-    unsigned int character_callback_codepoint;
+// Cursor pos
+void cursor_pos_callback(GLFWwindow* window, double xpos, double ypos);
+double get_cursor_pos_x(GLFWwindow* window);
+double get_cursor_pos_y(GLFWwindow* window);
 
-    // character_mods_callback
-    GLFWwindow *character_mods_callback_window;
-    unsigned int character_mods_callback_codepoint;
-    int character_mods_callback_mods;
+// Mouse Button
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
+int get_mouse_button(GLFWwindow* window);
+int get_mouse_action(GLFWwindow* window);
+int get_mouse_mods(GLFWwindow* window);
 
-    // cursor_enter_callback
-    GLFWwindow* cursor_enter_callback_window;
-    int cursor_enter_callback_entered;
+// Char
+void char_callback(GLFWwindow* window, unsigned int codepoint);
+unsigned int get_char_codepoint(GLFWwindow* window);
 
-    // scroll_callback
-    GLFWwindow* scroll_callback_window;
-    double scroll_callback_xoffset;
-    double scroll_callback_yoffset;
+// Char mods
+void char_mods_callback(GLFWwindow *window, unsigned int codepoint, int mods);
+unsigned int get_char_mods_codepoint(GLFWwindow* window);
+int get_char_mods_mods(GLFWwindow* window);
 
-    // drop_callback
-    GLFWwindow* drop_callback_window;
-    int drop_callback_count;
-    const char** drop_callback_paths;
-} raia_callback_t;
+// Cursor enter
+void cursor_enter_callback(GLFWwindow* window, int entered);
+int get_cursor_entered(GLFWwindow* window);
 
-void init_static_callback(void);
+// Scroll
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
+int get_scroll_xoffset(GLFWwindow* window);
+int get_scroll_yoffset(GLFWwindow* window);
 
-void event_error_callback(int error, const char *message);
-void event_window_pos_callback(GLFWwindow *window, int x, int y);
-void event_window_size_callback(GLFWwindow *window, int width, int height);
-void event_window_close_callback(GLFWwindow *window);
-void event_window_refresh_callback(GLFWwindow *window);
-void event_window_focus_callback(GLFWwindow* window, int focused);
-void event_window_iconify_callback(GLFWwindow *window, int iconified);
-void event_framebuffer_size_callback(GLFWwindow *window, int width, int height);
-void event_key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
-void event_cursor_pos_callback(GLFWwindow* window, double xpos, double ypos);
-void event_mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
-void event_char_callback(GLFWwindow* window, unsigned int codepoint);
-void event_char_mods_callback(GLFWwindow *window, unsigned int codepoint, int mods);
-void event_cursor_enter_callback(GLFWwindow* window, int entered);
-void event_scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
-void event_joystick_callback(int jid, int event);
-void event_drop_callback(GLFWwindow* window, int count, const char** paths);
-void event_window_maximize_callback(GLFWwindow* window, int maximized);
-void event_window_content_scale_callback(GLFWwindow* window, float xscale, float yscale);
-void event_monitor_callback(GLFWmonitor* monitor, int event);
+// Drop
+void drop_callback(GLFWwindow* window, int count, const char** paths);
+int get_drop_count(GLFWwindow* window);
+const char** get_drop_paths(GLFWwindow* window);
 
-char *get_error_callback_t(void);
-char *get_joystick_callback_t(void);
-char *get_window_pos_callback_t(void);
-char *get_window_size_callback_t(void);
-char *get_window_close_callback_t(void);
-char *get_window_refresh_callback_t(void);
-char *get_window_focus_callback_t(void);
-char *get_window_iconify_callback_t(void);
-char *get_framebuffer_size_callback_t(void);
-char *get_key_callback_t(void);
-char *get_cursor_pos_callback_t(void);
-char *get_mouse_button_callback_t(void);
-char *get_char_callback_t(void);
-char *get_char_mods_callback_t(void);
-char *get_cursor_enter_callback_t(void);
-char *get_scroll_callback_t(void);
-char *get_drop_callback_t(void);
-char *get_window_maximize_callback_t(void);
-char *get_window_content_scale_callback_t(void);
-char *get_event_monitor_callback_t(void);
+// Maximize
+void window_maximize_callback(GLFWwindow* window, int maximized);
+int get_window_maximized(GLFWwindow* window);
+
+// Content scale
+void window_content_scale_callback(GLFWwindow* window, float xscale, float yscale);
+float get_window_content_scale_x(GLFWwindow* window);
+float get_window_content_scale_y(GLFWwindow* window);
 
 #endif //RAIA_APP_STATIC_CALLBACK_H

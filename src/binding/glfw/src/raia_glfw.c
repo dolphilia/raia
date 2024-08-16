@@ -56,16 +56,6 @@ RAIA_API GLFWerrorfun raia_glfw_set_error_callback(GLFWerrorfun callback) {
     return glfwSetErrorCallback(callback);
 }
 
-// (代替関数)
-
-RAIA_API const char *raia_glfw_get_error_callback_alt(void) {
-    return get_error_callback_t();
-}
-
-RAIA_API void raia_glfw_set_error_callback_alt(void) {
-    glfwSetErrorCallback(event_error_callback);
-}
-
 //
 // 入力
 //
@@ -230,80 +220,6 @@ RAIA_API uint64_t raia_glfw_get_timer_frequency(void) {
     return glfwGetTimerFrequency();
 }
 
-// (代替関数)
-
-RAIA_API const char *raia_glfw_get_key_alt(void) {
-    return get_key_callback_t();
-}
-
-RAIA_API void raia_glfw_set_key_callback_alt(GLFWwindow *window) {
-    glfwSetKeyCallback(window, event_key_callback);
-}
-
-RAIA_API const char *raia_glfw_get_char_alt(void) {
-    return get_char_callback_t();
-}
-
-RAIA_API void raia_glfw_set_char_callback_alt(GLFWwindow *window) {
-    glfwSetCharCallback(window, event_char_callback);
-}
-
-RAIA_API const char *raia_glfw_get_char_mods_alt(void) {
-    return get_char_mods_callback_t();
-}
-
-RAIA_API void raia_glfw_set_char_mods_callback_alt(GLFWwindow *window) {
-    glfwSetCharModsCallback(window, event_char_mods_callback);
-}
-
-RAIA_API const char *raia_glfw_get_mouse_button_alt(void) {
-    return get_mouse_button_callback_t();
-}
-
-RAIA_API void raia_glfw_set_mouse_button_callback_alt(GLFWwindow *window) {
-    glfwSetMouseButtonCallback(window, event_mouse_button_callback);
-}
-
-RAIA_API const char *raia_glfw_get_cursor_pos_alt(void) {
-    return get_cursor_pos_callback_t();
-}
-
-RAIA_API void raia_glfw_set_cursor_pos_callback_alt(GLFWwindow *window) {
-    glfwSetCursorPosCallback(window, event_cursor_pos_callback);
-}
-
-RAIA_API const char *raia_glfw_get_cursor_enter_alt(void) {
-    return get_cursor_enter_callback_t();
-}
-
-RAIA_API void raia_glfw_set_cursor_enter_callback_alt(GLFWwindow *window) {
-    glfwSetCursorEnterCallback(window, event_cursor_enter_callback);
-}
-
-RAIA_API const char *raia_glfw_get_scroll_alt(void) {
-    return get_scroll_callback_t();
-}
-
-RAIA_API void raia_glfw_set_scroll_callback_alt(GLFWwindow *window) {
-    glfwSetScrollCallback(window, event_scroll_callback);
-}
-
-RAIA_API const char *raia_glfw_get_drop_alt(void) {
-    return get_drop_callback_t();
-}
-
-RAIA_API void raia_glfw_set_drop_callback_alt(GLFWwindow *window) {
-    glfwSetDropCallback(window, event_drop_callback);
-}
-
-RAIA_API const char *raia_glfw_get_joystick_alt(void) {
-    return get_joystick_callback_t();
-}
-
-RAIA_API void raia_glfw_set_joystick_callback_alt(void) {
-    glfwSetJoystickCallback(event_joystick_callback);
-}
-
 //
 // モニター
 //
@@ -366,16 +282,6 @@ RAIA_API const GLFWgammaramp *raia_glfw_get_gamma_ramp(GLFWmonitor *monitor) {
 
 RAIA_API void raia_glfw_set_gamma_ramp(GLFWmonitor *monitor, const GLFWgammaramp *ramp) {
     glfwSetGammaRamp(monitor, ramp);
-}
-
-// (代替関数)
-
-RAIA_API const char *raia_glfw_get_monitor_alt(void) {
-    return get_event_monitor_callback_t();
-}
-
-RAIA_API void raia_glfw_set_monitor_callback_alt(GLFWmonitorfun callback) {
-    glfwSetMonitorCallback(event_monitor_callback);
 }
 
 //
@@ -617,74 +523,266 @@ RAIA_API void raia_glfw_swap_buffers(GLFWwindow *window) {
 
 // (代替関数)
 
-RAIA_API const char *raia_glfw_get_window_pos_alt(void) {
-    return get_window_pos_callback_t();
+// Error
+
+RAIA_API void raia_glfw_set_error_callback_alt(void) {
+    glfwSetErrorCallback(error_callback);
 }
+
+RAIA_API int raia_glfw_get_error_code(void) {
+    return get_callback_data_error_code();
+}
+
+RAIA_API const char *raia_glfw_get_error_message(void) {
+    return get_callback_data_error_message();
+}
+
+// Joystick
+
+RAIA_API void raia_glfw_set_joystick_callback_alt(void) {
+    glfwSetJoystickCallback(joystick_callback);
+}
+
+RAIA_API int raia_glfw_get_joystick_id(void) {
+    return get_callback_data_joystick_id();
+}
+
+RAIA_API int raia_glfw_get_joystick_event(void) {
+    return get_callback_data_joystick_event();
+}
+
+// Monitor
+
+RAIA_API void raia_glfw_set_monitor_callback_alt(GLFWmonitorfun callback) {
+    glfwSetMonitorCallback(monitor_callback);
+}
+
+RAIA_API GLFWmonitor* raia_glfw_get_monitor(void) {
+    return get_monitor();
+}
+
+RAIA_API int raia_glfw_get_monitor_event(void) {
+    return get_monitor_event();
+}
+
+// Pos
 
 RAIA_API void raia_glfw_set_window_pos_callback_alt(GLFWwindow *window) {
-    glfwSetWindowPosCallback(window, event_window_pos_callback);
+    glfwSetWindowPosCallback(window, window_pos_callback);
 }
 
-RAIA_API const char *raia_glfw_get_window_size_alt(void) {
-    return get_window_size_callback_t();
+RAIA_API int raia_glfw_get_window_pos_x(GLFWwindow *window) {
+    return get_window_pos_x(window);
 }
+
+RAIA_API int raia_glfw_get_window_pos_y(GLFWwindow *window) {
+    return get_window_pos_y(window);
+}
+
+// Size
 
 RAIA_API void raia_glfw_set_window_size_callback_alt(GLFWwindow *window) {
-    glfwSetWindowSizeCallback(window, event_window_size_callback);
+    glfwSetWindowSizeCallback(window, window_size_callback);
 }
 
-RAIA_API const char *raia_glfw_get_window_close_alt(void) {
-    return get_window_close_callback_t();
+RAIA_API int raia_glfw_get_window_size_width(GLFWwindow *window) {
+    return get_window_size_width(window);
 }
+
+RAIA_API int raia_glfw_get_window_size_height(GLFWwindow *window) {
+    return get_window_size_height(window);
+}
+
+// Close
 
 RAIA_API void raia_glfw_set_window_close_callback_alt(GLFWwindow *window) {
-    glfwSetWindowCloseCallback(window, event_window_close_callback);
+    glfwSetWindowCloseCallback(window, window_close_callback);
 }
 
-RAIA_API const char *raia_glfw_get_window_refresh_alt(void) {
-    return get_window_refresh_callback_t();
+RAIA_API bool raia_glfw_get_window_close(GLFWwindow *window) {
+    return get_window_close(window);
 }
+
+// Refresh
 
 RAIA_API void raia_glfw_set_window_refresh_callback_alt(GLFWwindow *window) {
-    glfwSetWindowRefreshCallback(window, event_window_refresh_callback);
+    glfwSetWindowRefreshCallback(window, window_refresh_callback);
 }
 
-RAIA_API const char *raia_glfw_get_window_focus_alt(void) {
-    return get_window_focus_callback_t();
+RAIA_API bool raia_glfw_get_window_refresh(GLFWwindow *window) {
+    return get_window_refresh(window);
 }
+
+// Focus
 
 RAIA_API void raia_glfw_set_window_focus_callback_alt(GLFWwindow *window) {
-    glfwSetWindowFocusCallback(window, event_window_focus_callback);
+    glfwSetWindowFocusCallback(window, window_focus_callback);
 }
 
-RAIA_API const char *raia_glfw_get_window_iconify_alt(void) {
-    return get_window_iconify_callback_t();
+RAIA_API int raia_glfw_get_window_focus(GLFWwindow *window) {
+    return get_window_close(window);
 }
+
+// Iconify
 
 RAIA_API void raia_glfw_set_window_iconify_callback_alt(GLFWwindow *window) {
-    glfwSetWindowIconifyCallback(window, event_window_iconify_callback);
+    glfwSetWindowIconifyCallback(window, window_iconify_callback);
 }
 
-RAIA_API const char *raia_glfw_get_window_maximize_alt(void) {
-    return get_window_maximize_callback_t();
+RAIA_API int raia_glfw_get_window_iconified(GLFWwindow *window) {
+    return get_window_iconified(window);
 }
 
-RAIA_API void raia_glfw_set_window_maximize_callback_alt(GLFWwindow *window) {
-    glfwSetWindowMaximizeCallback(window, event_window_maximize_callback);
-}
-
-RAIA_API const char *raia_glfw_get_framebuffer_size_alt(const char *s) {
-    return get_framebuffer_size_callback_t();
-}
+// Framebuffer Size
 
 RAIA_API void raia_glfw_set_framebuffer_size_callback_alt(GLFWwindow *window) {
-    glfwSetFramebufferSizeCallback(window, event_framebuffer_size_callback);
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 }
 
-RAIA_API const char *raia_glfw_get_window_content_scale_alt(void) {
-    return get_window_content_scale_callback_t();
+RAIA_API int raia_glfw_get_framebuffer_size_width(GLFWwindow *window) {
+    return get_framebuffer_size_width(window);
 }
+
+RAIA_API int raia_glfw_get_framebuffer_size_height(GLFWwindow *window) {
+    return get_framebuffer_size_height(window);
+}
+
+// Key
+
+RAIA_API void raia_glfw_set_key_callback_alt(GLFWwindow *window) {
+    glfwSetKeyCallback(window, key_callback);
+}
+
+RAIA_API int raia_glfw_get_key_alt(GLFWwindow *window) {
+    return get_key(window);
+}
+
+RAIA_API int raia_glfw_get_key_scancode_alt(GLFWwindow *window) {
+    return get_key_scancode(window);
+}
+
+RAIA_API int raia_glfw_get_key_action(GLFWwindow *window) {
+    return get_key_action(window);
+}
+
+RAIA_API int raia_glfw_get_key_mods(GLFWwindow *window) {
+    return get_key_mods(window);
+}
+
+// Cursor pos
+
+RAIA_API void raia_glfw_set_cursor_pos_callback_alt(GLFWwindow *window) {
+    glfwSetCursorPosCallback(window, cursor_pos_callback);
+}
+
+RAIA_API double raia_glfw_get_cursor_pos_x(GLFWwindow *window) {
+    return get_cursor_pos_x(window);
+}
+
+RAIA_API double raia_glfw_get_cursor_pos_y(GLFWwindow *window) {
+    return get_cursor_pos_y(window);
+}
+
+// Mouse button
+
+RAIA_API void raia_glfw_set_mouse_button_callback_alt(GLFWwindow *window) {
+    glfwSetMouseButtonCallback(window, mouse_button_callback);
+}
+
+RAIA_API int raia_glfw_get_mouse_button_alt(GLFWwindow *window) {
+    return get_mouse_button(window);
+}
+
+RAIA_API int raia_glfw_get_mouse_action(GLFWwindow *window) {
+    return get_mouse_action(window);
+}
+
+RAIA_API int raia_glfw_get_mouse_mods(GLFWwindow *window) {
+    return get_mouse_mods(window);
+}
+
+// Char
+
+RAIA_API void raia_glfw_set_char_callback_alt(GLFWwindow *window) {
+    glfwSetCharCallback(window, char_callback);
+}
+
+RAIA_API unsigned int raia_glfw_get_char(GLFWwindow *window) {
+    return get_char_codepoint(window);
+}
+
+// Char mods
+
+RAIA_API void raia_glfw_set_char_mods_callback_alt(GLFWwindow *window) {
+    glfwSetCharModsCallback(window, char_mods_callback);
+}
+
+RAIA_API unsigned int raia_glfw_get_char_mods_codepoint(GLFWwindow *window) {
+    return get_char_mods_codepoint(window);
+}
+
+RAIA_API int raia_glfw_get_char_mods_mods(GLFWwindow *window) {
+    return get_char_mods_mods(window);
+}
+
+// Cursor enter
+
+RAIA_API void raia_glfw_set_cursor_enter_callback_alt(GLFWwindow *window) {
+    glfwSetCursorEnterCallback(window, cursor_enter_callback);
+}
+
+RAIA_API int raia_glfw_get_cursor_enter(GLFWwindow *window) {
+    return get_cursor_entered(window);
+}
+
+// Scroll
+
+RAIA_API void raia_glfw_set_scroll_callback_alt(GLFWwindow *window) {
+    glfwSetScrollCallback(window, scroll_callback);
+}
+
+RAIA_API int raia_glfw_get_scroll_offset_x(GLFWwindow *window) {
+    return get_scroll_xoffset(window);
+}
+
+RAIA_API int raia_glfw_get_scroll_offset_y(GLFWwindow *window) {
+    return get_scroll_yoffset(window);
+}
+
+// Drop
+
+RAIA_API void raia_glfw_set_drop_callback_alt(GLFWwindow *window) {
+    glfwSetDropCallback(window, drop_callback);
+}
+
+RAIA_API int raia_glfw_get_drop_count(GLFWwindow *window) {
+    return get_drop_count(window);
+}
+
+RAIA_API const char** raia_glfw_get_drop_paths(GLFWwindow *window) {
+    return get_drop_paths(window);
+}
+
+// Maximized
+
+RAIA_API void raia_glfw_set_window_maximize_callback_alt(GLFWwindow *window) {
+    glfwSetWindowMaximizeCallback(window, window_maximize_callback);
+}
+
+RAIA_API int raia_glfw_get_window_maximized(GLFWwindow *window) {
+    return get_window_maximized(window);
+}
+
+// Content scale
 
 RAIA_API void raia_glfw_set_window_content_scale_callback_alt(GLFWwindow *window) {
-    glfwSetWindowContentScaleCallback(window, event_window_content_scale_callback);
+    glfwSetWindowContentScaleCallback(window, window_content_scale_callback);
+}
+
+RAIA_API float raia_glfw_get_window_content_scale_x(GLFWwindow *window) {
+    return get_window_content_scale_x(window);
+}
+
+RAIA_API float raia_glfw_get_window_content_scale_y(GLFWwindow *window) {
+    return get_window_content_scale_y(window);
 }

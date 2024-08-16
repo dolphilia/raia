@@ -5,6 +5,30 @@ local Raia = require("modules/raia")
 local im = require("modules/bindings/imgui")
 local gl = require("modules/bindings/gles")
 
+print(raia.core.plus(100, 200))
+
+ffi.cdef[[
+    void *raia_internal_number_to_pointer(double number);
+    typedef struct lua_State lua_State;
+    void call_lua_function(lua_State *L);
+]]
+
+function raia.core.numToPtr(num)
+    return ffi.C.raia_internal_number_to_pointer(num)
+end
+
+-- 呼び出されるLua関数
+function my_lua_function()
+    print("Hello from Lua function!")
+end
+
+-- Lua関数をCに登録
+raia.core.registerLuaFunction(my_lua_function)
+
+local L = raia.core.numToPtr(raia.core.getLuaState())
+ffi.C.call_lua_function(L)
+
+
 -- Skia
 local info = skia.ImageInfo.Make(800, 600, skia.ColorType.RGBA8888, skia.AlphaType.Opaque)
 local bitmap = skia.Bitmap.new()
