@@ -1112,6 +1112,28 @@ function Raia.Window:new(title, width, height)
     end
     glfw.makeContextCurrent(windowID)
     glfw.swapInterval(1)
+    --
+    glfw.setErrorCallbackAlt()
+    glfw.setJoystickCallbackAlt()
+    --glfw.setMonitorCallbackAlt()
+    glfw.setWindowPosCallbackAlt(windowID)
+    glfw.setWindowSizeCallbackAlt(windowID)
+    glfw.setWindowCloseCallbackAlt(windowID)
+    glfw.setWindowRefreshCallbackAlt(windowID)
+    glfw.setWindowFocusCallbackAlt(windowID)
+    glfw.setWindowIconifyCallbackAlt(windowID)
+    glfw.setFramebufferSizeCallbackAlt(windowID)
+    glfw.setKeyCallbackAlt(windowID)
+    glfw.setCursorPosCallbackAlt(windowID)
+    glfw.setMouseButtonCallbackAlt(windowID)
+    glfw.setCharCallbackAlt(windowID)
+    glfw.setCharModsCallbackAlt(windowID)
+    glfw.setCursorEnterCallbackAlt(windowID)
+    glfw.setScrollCallbackAlt(windowID)
+    glfw.setDropCallbackAlt(windowID)
+    glfw.setWindowMaximizeCallbackAlt(windowID)
+    glfw.setWindowContentScaleCallbackAlt(windowID)
+    --
     local vertices = ffi.new("float[32]", {
         -1.0, 1.0, 0.0,  0.0, 0.0,  -- Position 0, TexCoord 0
         -1.0, -1.0, 0.0,  0.0, 1.0, -- Position 1, TexCoord 1
