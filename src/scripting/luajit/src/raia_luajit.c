@@ -47,6 +47,22 @@ void *raia_internal_number_to_pointer(double number) {
     return (void *)(uintptr_t)number;
 }
 
+double raia_internal_pointer_to_number(void *pointer) {
+    return (double)(uintptr_t)pointer;
+}
+
+int raia_core_pointer_to_number(lua_State* L) {
+    const void *pointer = lua_topointer(L, 1);
+    lua_pushnumber(L, (double)(uintptr_t)pointer);
+    return 1;
+}
+
+int raia_core_number_to_pointer(lua_State* L) {
+    double number = lua_tonumber(L, 1);
+    lua_pushlightuserdata(L, (void *)(uintptr_t)number);
+    return 1;
+}
+
 RAIA_API const char *init(int argc, char *argv[]) {
     lua_State *L = luaL_newstate(); // 新しいLua環境を作成
     luaL_openlibs(L); // 標準ライブラリをロード

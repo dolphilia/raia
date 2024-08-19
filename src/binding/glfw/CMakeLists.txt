@@ -17,8 +17,8 @@ add_library(raia_glfw SHARED
 #add_executable(raia_glfw
         src/raia_glfw.c
         src/static/static_callback.c
-        #../../third_party/c/ibireme/yyjson/yyjson.c
-        #../../common/c/wrapper/wrapper_yyjson.c
+        src/static/static_lua_state.c
+        src/static/static_lua_state.h
 )
 
 # 現在のRPATH設定を取得（もしあれば）
@@ -33,7 +33,7 @@ set_target_properties(raia_glfw PROPERTIES
         INSTALL_RPATH "${CURRENT_RPATH}")
 
 target_link_libraries(raia_glfw
-        $<$<PLATFORM_ID:Darwin>:  glfw.3.4>
+        $<$<PLATFORM_ID:Darwin>:  glfw.3.4 luajit-5.1>
         $<$<PLATFORM_ID:Linux>:   m dl EGL glfw GLESv2 X11 Xxf86vm Xrandr Xinerama Xcursor pthread Xi>
         $<$<PLATFORM_ID:Windows>: EGL glfw3 GLESv2>
         )

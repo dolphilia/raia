@@ -553,7 +553,7 @@ RAIA_API int raia_glfw_get_joystick_event(void) {
 
 // Monitor
 
-RAIA_API void raia_glfw_set_monitor_callback_alt(GLFWmonitorfun callback) {
+RAIA_API void raia_glfw_set_monitor_callback_alt(void) {
     glfwSetMonitorCallback(monitor_callback);
 }
 
@@ -786,3 +786,66 @@ RAIA_API float raia_glfw_get_window_content_scale_x(GLFWwindow *window) {
 RAIA_API float raia_glfw_get_window_content_scale_y(GLFWwindow *window) {
     return get_window_content_scale_y(window);
 }
+
+// LuaJIT
+
+/*
+int raia_glfw_set_error_callback_with_luajit(lua_State *L) {
+    callback_data_t * data = get_or_create_callback_data();
+    if (lua_isfunction(L, 1)) { // スタックの最初の引数が関数かどうかを確認
+        if (data->error_callback_lua_fn_ref != LUA_NOREF) {
+            luaL_unref(L, LUA_REGISTRYINDEX, data->error_callback_lua_fn_ref); // 既存の関数参照を解除
+        }
+        data->error_callback_lua_fn_ref = luaL_ref(L, LUA_REGISTRYINDEX); // Lua関数をレジストリに登録し、参照を保持
+    } else {
+        printf("Expected a function as argument.\n");
+    }
+    glfwSetErrorCallback(error_callback);
+    return 0;
+}
+
+int raia_glfw_set_cursor_pos_callback_with_luajit(lua_State *L) {
+    // スタックの第2引数をポインタとして取得
+    //int arg1 = (int)luaL_checkinteger(L, 1);
+    //printf("%d\n", arg1);
+    const void *window = lua_topointer(L, 1);
+    if (!window) {
+        printf("Error: First argument is not a valid pointer.\n");
+        return 0;
+    }
+    window_data_t *data = get_or_create_window_data(window);
+    if (lua_isfunction(L, 2)) { // スタックの最初の引数が関数かどうかを確認
+        if (data->cursor_pos_callback_ref != LUA_NOREF) {
+            luaL_unref(L, LUA_REGISTRYINDEX, data->cursor_pos_callback_ref); // 既存の関数参照を解除
+        }
+        data->cursor_pos_callback_ref = luaL_ref(L, LUA_REGISTRYINDEX); // Lua関数をレジストリに登録し、参照を保持
+    } else {
+        printf("Expected a function as argument.\n");
+    }
+    printf("Window: %p\n", window);
+    glfwSetCursorPosCallback(window, cursor_pos_callback);
+    return 0;
+}
+
+int raia_glfw_plus(lua_State* L) {
+    int arg1 = (int)luaL_checkinteger(L, 1); // 関数の引数を取得
+    int arg2 = (int)luaL_checkinteger(L, 2);
+    int result = arg1 + arg2; // 何かしらの計算
+    lua_pushinteger(L, result); // 結果をLuaスタックにプッシュ
+    return 1; // 戻り値の数を返す
+}
+
+RAIA_API void raia_glfw_init_luajit(lua_State* L) {
+    set_static_lua_state(L);
+    lua_newtable(L); // raia
+    {
+        lua_pushcfunction(L, raia_glfw_set_error_callback_with_luajit);
+        lua_setfield(L, -2, "setErrorCallbackWithLuaJIT");
+        lua_pushcfunction(L, raia_glfw_set_cursor_pos_callback_with_luajit);
+        lua_setfield(L, -2, "setCursorPosCallbackWithLuaJIT");
+        lua_pushcfunction(L, raia_glfw_plus);
+        lua_setfield(L, -2, "plus");
+    }
+    lua_setglobal(L, "raia_glfw");
+}
+*/

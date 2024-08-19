@@ -3,32 +3,6 @@
 //
 
 #include "static_callback.h"
-#include "../../../third_party/c/troydhanson/uthash/uthash.h"
-
-typedef struct {
-    GLFWwindow *window; // GLFWwindow* をキーとして使用
-    int x, y;           // ウィンドウの位置情報
-    int width, height;  // ウィンドウのサイズ情報
-    bool close;
-    bool refresh;
-    int focused;
-    int iconified;
-    int framebuffer_size_width, framebuffer_size_height;
-    int key, key_scancode, key_action, key_mods;
-    double cursor_pos_x, cursor_pos_y;
-    int mouse_button, mouse_action, mouse_mods;
-    unsigned int char_codepoint;
-    unsigned int char_mods_codepoint;
-    int char_mods_mods;
-    int cursor_entered;
-    int scroll_offset_x, scroll_offset_y;
-    int drop_count;
-    const char **drop_paths;
-    int maximized;
-    float content_scale_x;
-    float content_scale_y;
-    UT_hash_handle hh;  // uthash 用のハンドル
-} window_data_t;
 
 static window_data_t *window_data_map = NULL;
 static callback_data_t *callback_data = NULL;
@@ -54,8 +28,11 @@ window_data_t* get_or_create_window_data(GLFWwindow *window) {
         data->key_scancode = -1;
         data->key_action = -1;
         data->key_mods = -1;
+        //
         data->cursor_pos_x = -1;
         data->cursor_pos_y = -1;
+        // data->cursor_pos_callback_ref = LUA_NOREF;
+        //
         data->mouse_button = -1;
         data->mouse_action = -1;
         data->mouse_mods = -1;
@@ -75,14 +52,31 @@ window_data_t* get_or_create_window_data(GLFWwindow *window) {
     return data;
 }
 
+callback_data_t *get_or_create_callback_data() {
+    if (callback_data == NULL) {
+        callback_data = (callback_data_t *)malloc(sizeof(callback_data_t));
+        // error_callback
+        callback_data->error_code = -1;
+        callback_data->error_message = NULL;
+        // callback_data->error_callback_lua_fn_ref = LUA_NOREF;
+        // joystick_callback
+        callback_data->joystick_id = -1;
+        callback_data->joystick_event = -1;
+        // callback_data->joystick_callback_lua_fn_ref = LUA_NOREF;
+        // monitor_callback
+        callback_data->monitor = NULL;
+        callback_data->monitor_event = -1;
+        // callback_data->monitor_callback_lua_fn_ref = LUA_NOREF;
+    }
+    return callback_data;
+}
+
 // Error
 
 void error_callback(int error, const char *message) {
-    if (callback_data == NULL) {
-        callback_data = (callback_data_t *)malloc(sizeof(callback_data_t));
-    }
-    callback_data->error_code = error;
-    callback_data->error_message = message;
+    callback_data_t *data = get_or_create_callback_data();
+    data->error_code = error;
+    data->error_message = message;
 }
 
 int get_callback_data_error_code() {
@@ -96,11 +90,9 @@ const char * get_callback_data_error_message() {
 // Joystick
 
 void joystick_callback(int jid, int event) {
-    if (callback_data == NULL) {
-        callback_data = (callback_data_t *)malloc(sizeof(callback_data_t));
-    }
-    callback_data->joystick_id = jid;
-    callback_data->joystick_event = event;
+    callback_data_t *data = get_or_create_callback_data();
+    data->joystick_id = jid;
+    data->joystick_event = event;
 }
 
 int get_callback_data_joystick_id() {
@@ -114,11 +106,9 @@ int get_callback_data_joystick_event() {
 // Monitor
 
 void monitor_callback(GLFWmonitor* monitor, int event) {
-    if (callback_data == NULL) {
-        callback_data = (callback_data_t *)malloc(sizeof(callback_data_t));
-    }
-    callback_data->monitor = monitor;
-    callback_data->monitor_event = event;
+    callback_data_t *data = get_or_create_callback_data();
+    data->monitor = monitor;
+    data->monitor_event = event;
 }
 
 GLFWmonitor* get_monitor(void) {
@@ -275,6 +265,7 @@ void cursor_pos_callback(GLFWwindow* window, double xpos, double ypos) {
     window_data_t *data = get_or_create_window_data(window);
     data->cursor_pos_x = xpos;
     data->cursor_pos_y = ypos;
+    //printf("%f\n", data->cursor_pos_x);
 }
 
 double get_cursor_pos_x(GLFWwindow* window) {

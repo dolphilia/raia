@@ -4,30 +4,7 @@ local stb = require("modules/bindings/stb")
 local Raia = require("modules/raia")
 local im = require("modules/bindings/imgui")
 local gl = require("modules/bindings/gles")
-
-print(raia.core.plus(100, 200))
-
-ffi.cdef[[
-    void *raia_internal_number_to_pointer(double number);
-    typedef struct lua_State lua_State;
-    void call_lua_function(lua_State *L);
-]]
-
-function raia.core.numToPtr(num)
-    return ffi.C.raia_internal_number_to_pointer(num)
-end
-
--- 呼び出されるLua関数
-function my_lua_function()
-    print("Hello from Lua function!")
-end
-
--- Lua関数をCに登録
-raia.core.registerLuaFunction(my_lua_function)
-
-local L = raia.core.numToPtr(raia.core.getLuaState())
-ffi.C.call_lua_function(L)
-
+-- local glfw = require("modules/bindings/glfw")
 
 -- Skia
 local info = skia.ImageInfo.Make(800, 600, skia.ColorType.RGBA8888, skia.AlphaType.Opaque)
@@ -146,7 +123,6 @@ local system = Raia.System:new()
 local timer = Raia.Timer:new()
 local window = Raia.Window:new("RaiaEngine", 800, 600)
 
-
 -- ImGui
 -- init
 im.checkVersion()
@@ -260,10 +236,6 @@ gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, width, height, 0, gl.RGB, gl.UNSIGNED_BY
 gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST)
 
 
---
---
-
-
 while window:shouldClose() == false do
     im.OpenGL3.newFrame()
     im.GLFW.newFrame()
@@ -279,7 +251,9 @@ while window:shouldClose() == false do
     im.showMetricsWindow()
     im.showStyleEditor()
 
-    --window:setTitle("FPS:"..timer:getFPS().."|"..(system:getMemoryUsage()/1000/1000).."MB")
+    local L = raia.core.getLuaState()
+    
+    window:setTitle("lua_State *L =="..L)
     --
     window:setPixels(pixels_buffer)
     window:redraw(false, false)

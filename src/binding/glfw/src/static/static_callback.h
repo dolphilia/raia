@@ -7,20 +7,60 @@
 
 #include <stdbool.h>
 #include "GLFW/glfw3.h"
+#include "luajit/lua.h"
+#include "luajit/lualib.h"
+#include "luajit/lauxlib.h"
+#include "luajit/luajit.h"
+#include "../../../third_party/c/troydhanson/uthash/uthash.h"
 
 typedef struct raia_callback_t{
-    //error_callback
+    // error_callback
     int error_code;
     const char *error_message;
+    int error_callback_lua_fn_ref;
     // joystick_callback
     int joystick_id;
     int joystick_event;
+    int joystick_callback_lua_fn_ref;
     // monitor_callback
     GLFWmonitor* monitor;
     int monitor_event;
+    int monitor_callback_lua_fn_ref;
 } callback_data_t;
 
+typedef struct {
+    GLFWwindow *window; // GLFWwindow* をキーとして使用
+    int x, y;           // ウィンドウの位置情報
+    int width, height;  // ウィンドウのサイズ情報
+    bool close;
+    bool refresh;
+    int focused;
+    int iconified;
+    int framebuffer_size_width, framebuffer_size_height;
+    int key, key_scancode, key_action, key_mods;
+    // cursor_pos_callback
+    double cursor_pos_x, cursor_pos_y;
+    int cursor_pos_callback_ref;
+    //
+    int mouse_button, mouse_action, mouse_mods;
+    unsigned int char_codepoint;
+    unsigned int char_mods_codepoint;
+    int char_mods_mods;
+    int cursor_entered;
+    int scroll_offset_x, scroll_offset_y;
+    int drop_count;
+    const char **drop_paths;
+    int maximized;
+    float content_scale_x;
+    float content_scale_y;
+    UT_hash_handle hh;  // uthash 用のハンドル
+} window_data_t;
+
 void init_callback_data(void);
+
+// utils
+window_data_t* get_or_create_window_data(GLFWwindow *window);
+callback_data_t *get_or_create_callback_data();
 
 // Error
 void error_callback(int error, const char *message);

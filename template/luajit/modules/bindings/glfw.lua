@@ -36,8 +36,7 @@ ffi.cdef[[
     typedef void (* GLFWdropfun)(GLFWwindow* window, int path_count, const char* paths[]);
     typedef void (* GLFWmonitorfun)(GLFWmonitor* monitor, int event);
     typedef void (* GLFWjoystickfun)(int jid, int event);
-    typedef struct GLFWvidmode
-    {
+    typedef struct GLFWvidmode {
         int width;
         int height;
         int redBits;
@@ -45,26 +44,22 @@ ffi.cdef[[
         int blueBits;
         int refreshRate;
     } GLFWvidmode;
-    typedef struct GLFWgammaramp
-    {
+    typedef struct GLFWgammaramp {
         unsigned short* red;
         unsigned short* green;
         unsigned short* blue;
         unsigned int size;
     } GLFWgammaramp;
-    typedef struct GLFWimage
-    {
+    typedef struct GLFWimage {
         int width;
         int height;
         unsigned char* pixels;
     } GLFWimage;
-    typedef struct GLFWgamepadstate
-    {
+    typedef struct GLFWgamepadstate {
         unsigned char buttons[15];
         float axes[6];
     } GLFWgamepadstate;
-    typedef struct GLFWallocator
-    {
+    typedef struct GLFWallocator {
         GLFWallocatefun allocate;
         GLFWreallocatefun reallocate;
         GLFWdeallocatefun deallocate;
@@ -260,28 +255,133 @@ ffi.cdef[[
     void raia_glfw_post_empty_event(void);
     void raia_glfw_swap_buffers(GLFWwindow *window);
     // (代替関数)
-    const char *raia_glfw_get_window_pos_alt(void);
+    //const char *raia_glfw_get_window_pos_alt(void);
+    //void raia_glfw_set_window_pos_callback_alt(GLFWwindow *window);
+    //const char *raia_glfw_get_window_size_alt(void);
+    //void raia_glfw_set_window_size_callback_alt(GLFWwindow *window);
+    //const char *raia_glfw_get_window_close_alt(void);
+    //void raia_glfw_set_window_close_callback_alt(GLFWwindow *window);
+    //const char *raia_glfw_get_window_refresh_alt(void);
+    //void raia_glfw_set_window_refresh_callback_alt(GLFWwindow *window);
+    //const char *raia_glfw_get_window_focus_alt(void);
+    //void raia_glfw_set_window_focus_callback_alt(GLFWwindow *window);
+    //const char *raia_glfw_get_window_iconify_alt(void);
+    //void raia_glfw_set_window_iconify_callback_alt(GLFWwindow *window);
+    //const char *raia_glfw_get_window_maximize_alt(void);
+    //void raia_glfw_set_window_maximize_callback_alt(GLFWwindow *window);
+    //const char *raia_glfw_get_framebuffer_size_alt(const char *s);
+    //void raia_glfw_set_framebuffer_size_callback_alt(GLFWwindow *window);
+    //const char *raia_glfw_get_window_content_scale_alt(void);
+    //void raia_glfw_set_window_content_scale_callback_alt(GLFWwindow *window);
+    // LuaJIT拡張
+    // typedef struct lua_State lua_State;
+    // void raia_glfw_init_luajit(lua_State* L);
+    // Error
+    void raia_glfw_set_error_callback_alt(void);
+    int raia_glfw_get_error_code(void);
+    const char *raia_glfw_get_error_message(void);
+    // Joystick
+    void raia_glfw_set_joystick_callback_alt(void);
+    int raia_glfw_get_joystick_id(void);
+    int raia_glfw_get_joystick_event(void);
+    // Monitor
+    void raia_glfw_set_monitor_callback_alt(void);
+    GLFWmonitor* raia_glfw_get_monitor(void);
+    int raia_glfw_get_monitor_event(void);
+    // Pos
     void raia_glfw_set_window_pos_callback_alt(GLFWwindow *window);
-    const char *raia_glfw_get_window_size_alt(void);
+    int raia_glfw_get_window_pos_x(GLFWwindow *window);
+    int raia_glfw_get_window_pos_y(GLFWwindow *window);
+    // Size
     void raia_glfw_set_window_size_callback_alt(GLFWwindow *window);
-    const char *raia_glfw_get_window_close_alt(void);
+    int raia_glfw_get_window_size_width(GLFWwindow *window);
+    int raia_glfw_get_window_size_height(GLFWwindow *window);
+    // Close
     void raia_glfw_set_window_close_callback_alt(GLFWwindow *window);
-    const char *raia_glfw_get_window_refresh_alt(void);
+    bool raia_glfw_get_window_close(GLFWwindow *window);
+    // Refresh
     void raia_glfw_set_window_refresh_callback_alt(GLFWwindow *window);
-    const char *raia_glfw_get_window_focus_alt(void);
+    bool raia_glfw_get_window_refresh(GLFWwindow *window);
+    // Focus
     void raia_glfw_set_window_focus_callback_alt(GLFWwindow *window);
-    const char *raia_glfw_get_window_iconify_alt(void);
+    int raia_glfw_get_window_focus(GLFWwindow *window);
+    // Iconify
     void raia_glfw_set_window_iconify_callback_alt(GLFWwindow *window);
-    const char *raia_glfw_get_window_maximize_alt(void);
-    void raia_glfw_set_window_maximize_callback_alt(GLFWwindow *window);
-    const char *raia_glfw_get_framebuffer_size_alt(const char *s);
+    int raia_glfw_get_window_iconified(GLFWwindow *window);
+    // Framebuffer Size
     void raia_glfw_set_framebuffer_size_callback_alt(GLFWwindow *window);
-    const char *raia_glfw_get_window_content_scale_alt(void);
+    int raia_glfw_get_framebuffer_size_width(GLFWwindow *window);
+    int raia_glfw_get_framebuffer_size_height(GLFWwindow *window);
+    // Key
+    void raia_glfw_set_key_callback_alt(GLFWwindow *window);
+    int raia_glfw_get_key_alt(GLFWwindow *window);
+    int raia_glfw_get_key_scancode_alt(GLFWwindow *window);
+    int raia_glfw_get_key_action(GLFWwindow *window);
+    int raia_glfw_get_key_mods(GLFWwindow *window);
+    // Cursor pos
+    void raia_glfw_set_cursor_pos_callback_alt(GLFWwindow *window);
+    double raia_glfw_get_cursor_pos_x(GLFWwindow *window);
+    double raia_glfw_get_cursor_pos_y(GLFWwindow *window);
+    // Mouse button
+    void raia_glfw_set_mouse_button_callback_alt(GLFWwindow *window);
+    int raia_glfw_get_mouse_button_alt(GLFWwindow *window);
+    int raia_glfw_get_mouse_action(GLFWwindow *window);
+    int raia_glfw_get_mouse_mods(GLFWwindow *window);
+    // Char
+    void raia_glfw_set_char_callback_alt(GLFWwindow *window);
+    unsigned int raia_glfw_get_char(GLFWwindow *window);
+    // Char mods
+    void raia_glfw_set_char_mods_callback_alt(GLFWwindow *window);
+    unsigned int raia_glfw_get_char_mods_codepoint(GLFWwindow *window);
+    int raia_glfw_get_char_mods_mods(GLFWwindow *window);
+    // Cursor enter
+    void raia_glfw_set_cursor_enter_callback_alt(GLFWwindow *window);
+    int raia_glfw_get_cursor_enter(GLFWwindow *window);
+    // Scroll
+    void raia_glfw_set_scroll_callback_alt(GLFWwindow *window);
+    int raia_glfw_get_scroll_offset_x(GLFWwindow *window);
+    int raia_glfw_get_scroll_offset_y(GLFWwindow *window);
+    // Drop
+    void raia_glfw_set_drop_callback_alt(GLFWwindow *window);
+    int raia_glfw_get_drop_count(GLFWwindow *window);
+    const char** raia_glfw_get_drop_paths(GLFWwindow *window);
+    // Maximized
+    void raia_glfw_set_window_maximize_callback_alt(GLFWwindow *window);
+    int raia_glfw_get_window_maximized(GLFWwindow *window);
     void raia_glfw_set_window_content_scale_callback_alt(GLFWwindow *window);
+    float raia_glfw_get_window_content_scale_x(GLFWwindow *window);
+    float raia_glfw_get_window_content_scale_y(GLFWwindow *window);
 ]]
 
 local lib = ffi.load("raia_glfw")
 local GLFW = {}
+
+
+-- ffi.cdef[[
+--     void *raia_internal_number_to_pointer(double number);
+--     typedef struct lua_State lua_State;
+--     void call_lua_function(lua_State *L);
+-- ]]
+
+--[[
+
+function raia.core.numToPtr(num)
+    return ffi.C.raia_internal_number_to_pointer(num)
+end
+
+-- 呼び出されるLua関数
+function my_lua_function()
+    print("Hello from Lua function!")
+end
+
+-- Lua関数をCに登録
+raia.core.registerLuaFunction(my_lua_function)
+
+local L = raia.core.numToPtr(raia.core.getLuaState())
+ffi.C.call_lua_function(L)
+lib.raia_glfw_init_luajit(L)
+print(raia_glfw.plus(500,500))
+]]
 
 -- 定数
 
@@ -1225,76 +1325,268 @@ end
 
 -- (代替関数)
 
-function GLFW.getWindowPosAlt()
-    return lib.raia_glfw_get_window_pos_alt()
+-- Error
+
+function GLFW.setErrorCallbackAlt()
+    lib.raia_glfw_set_error_callback_alt()
 end
+
+function GLFW.getErrorCode()
+    return lib.raia_glfw_get_error_code()
+end
+
+function GLFW.getErrorMessage()
+    return lib.raia_glfw_get_error_message()
+end
+
+-- Joystick
+
+function GLFW.setJoystickCallbackAlt()
+    lib.raia_glfw_set_joystick_callback_alt()
+end
+
+function GLFW.getJoystickID()
+    return lib.raia_glfw_get_joystick_id()
+end
+
+function GLFW.getJoystickEvent()
+    return lib.raia_glfw_get_joystick_event()
+end
+
+-- Monitor
+
+function GLFW.setMonitorCallbackAlt()
+    lib.raia_glfw_set_monitor_callback_alt()
+end
+
+function GLFW.getMonitor()
+    return lib.raia_glfw_get_monitor()
+end
+
+function GLFW.getMonitorEvent()
+    return lib.raia_glfw_get_monitor_event()
+end
+
+-- Pos
 
 function GLFW.setWindowPosCallbackAlt(window)
     lib.raia_glfw_set_window_pos_callback_alt(window)
 end
 
-function GLFW.getWindowSizeAlt()
-    return lib.raia_glfw_get_window_size_alt()
+function GLFW.getWindowPosX(window)
+    return lib.raia_glfw_get_window_pos_x(window)
 end
+
+function GLFW.getWindowPosY(window)
+    return lib.raia_glfw_get_window_pos_y(window)
+end
+
+-- Size
 
 function GLFW.setWindowSizeCallbackAlt(window)
     lib.raia_glfw_set_window_size_callback_alt(window)
 end
 
-function GLFW.getWindowCloseAlt()
-    return lib.raia_glfw_get_window_close_alt()
+function GLFW.getWindowSizeWidth(window)
+    return lib.raia_glfw_get_window_size_width(window)
 end
+
+function GLFW.getWindowSizeHeight(window)
+    return lib.raia_glfw_get_window_size_height(window)
+end
+
+-- Close
 
 function GLFW.setWindowCloseCallbackAlt(window)
     lib.raia_glfw_set_window_close_callback_alt(window)
 end
 
-function GLFW.getWindowRefreshAlt()
-    return lib.raia_glfw_get_window_refresh_alt()
+function GLFW.getWindowClose(window)
+    return lib.raia_glfw_get_window_close(window)
 end
+
+-- Refresh
 
 function GLFW.setWindowRefreshCallbackAlt(window)
     lib.raia_glfw_set_window_refresh_callback_alt(window)
 end
 
-function GLFW.getWindowFocusAlt()
-    return lib.raia_glfw_get_window_focus_alt()
+function GLFW.getWindowRefresh(window)
+    return lib.raia_glfw_get_window_refresh(window)
 end
+
+-- Focus
 
 function GLFW.setWindowFocusCallbackAlt(window)
     lib.raia_glfw_set_window_focus_callback_alt(window)
 end
 
-function GLFW.getWindowIconifyAlt()
-    return lib.raia_glfw_get_window_iconify_alt()
+function GLFW.getWindowFocus(window)
+    return lib.raia_glfw_get_window_focus(window)
 end
+
+-- Iconify
 
 function GLFW.setWindowIconifyCallbackAlt(window)
     lib.raia_glfw_set_window_iconify_callback_alt(window)
 end
 
-function GLFW.getWindowMaximizeAlt()
-    return lib.raia_glfw_get_window_maximize_alt()
+function GLFW.getWindowIconified(window)
+    return lib.raia_glfw_get_window_iconified(window)
 end
 
-function GLFW.setWindowMaximizeCallbackAlt(window)
-    lib.raia_glfw_set_window_maximize_callback_alt(window)
-end
-
-function GLFW.getFramebufferSizeAlt(s)
-    return lib.raia_glfw_get_framebuffer_size_alt(s)
-end
+-- Framebuffer Size
 
 function GLFW.setFramebufferSizeCallbackAlt(window)
     lib.raia_glfw_set_framebuffer_size_callback_alt(window)
 end
 
-function GLFW.getWindowContentScaleAlt()
-    return lib.raia_glfw_get_window_content_scale_alt()
+function GLFW.getFramebufferSizeWidth(window)
+    return lib.raia_glfw_get_framebuffer_size_width(window)
 end
+
+function GLFW.getFramebufferSizeHeight(window)
+    return lib.raia_glfw_get_framebuffer_size_height(window)
+end
+
+-- Key
+
+function GLFW.setKeyCallbackAlt(window)
+    lib.raia_glfw_set_key_callback_alt(window)
+end
+
+function GLFW.getKeyAlt(window)
+    return lib.raia_glfw_get_key_alt(window)
+end
+
+function GLFW.getKeyScancodeAlt(window)
+    return lib.raia_glfw_get_key_scancode_alt(window)
+end
+
+function GLFW.getKeyAction(window)
+    return lib.raia_glfw_get_key_action(window)
+end
+
+function GLFW.getKeyMods(window)
+    return lib.raia_glfw_get_key_mods(window)
+end
+
+-- Cursor pos
+
+function GLFW.setCursorPosCallbackAlt(window)
+    lib.raia_glfw_set_cursor_pos_callback_alt(window)
+end
+
+function GLFW.getCursorPosX(window)
+    return lib.raia_glfw_get_cursor_pos_x(window)
+end
+
+function GLFW.getCursorPosY(window)
+    return lib.raia_glfw_get_cursor_pos_y(window)
+end
+
+-- Mouse button
+
+function GLFW.setMouseButtonCallbackAlt(window)
+    lib.raia_glfw_set_mouse_button_callback_alt(window)
+end
+
+function GLFW.getMouseButtonAlt(window)
+    return lib.raia_glfw_get_mouse_button_alt(window)
+end
+
+function GLFW.getMouseAction(window)
+    return lib.raia_glfw_get_mouse_action(window)
+end
+
+function GLFW.getMouseMods(window)
+    return lib.raia_glfw_get_mouse_mods(window)
+end
+
+-- Char
+
+function GLFW.setCharCallbackAlt(window)
+    lib.raia_glfw_set_char_callback_alt(window)
+end
+
+function GLFW.getChar(window)
+    return lib.raia_glfw_get_char(window)
+end
+
+-- Char mods
+
+function GLFW.setCharModsCallbackAlt(window)
+    lib.raia_glfw_set_char_mods_callback_alt(window)
+end
+
+function GLFW.getCharModsCodepoint(window)
+    return lib.raia_glfw_get_char_mods_codepoint(window)
+end
+
+function GLFW.getCharModsMods(window)
+    return lib.raia_glfw_get_char_mods_mods(window)
+end
+
+-- Cursor enter
+
+function GLFW.setCursorEnterCallbackAlt(window)
+    lib.raia_glfw_set_cursor_enter_callback_alt(window)
+end
+
+function GLFW.getCursorEnter(window)
+    return lib.raia_glfw_get_cursor_enter(window)
+end
+
+-- Scroll
+
+function GLFW.setScrollCallbackAlt(window)
+    lib.raia_glfw_set_scroll_callback_alt(window)
+end
+
+function GLFW.getScrollOffsetX(window)
+    return lib.raia_glfw_get_scroll_offset_x(window)
+end
+
+function GLFW.getScrollOffsetY(window)
+    return lib.raia_glfw_get_scroll_offset_y(window)
+end
+
+-- Drop
+
+function GLFW.setDropCallbackAlt(window)
+    lib.raia_glfw_set_drop_callback_alt(window)
+end
+
+function GLFW.getDropCount(window)
+    return lib.raia_glfw_get_drop_count(window)
+end
+
+function GLFW.getDropPaths(window)
+    return lib.raia_glfw_get_drop_paths(window)
+end
+
+-- Maximized
+
+function GLFW.setWindowMaximizeCallbackAlt(window)
+    lib.raia_glfw_set_window_maximize_callback_alt(window)
+end
+
+function GLFW.getWindowMaximized(window)
+    return lib.raia_glfw_get_window_maximized(window)
+end
+
+-- Content scale
 
 function GLFW.setWindowContentScaleCallbackAlt(window)
     lib.raia_glfw_set_window_content_scale_callback_alt(window)
+end
+
+function GLFW.getWindowContentScaleX(window)
+    return lib.raia_glfw_get_window_content_scale_x(window)
+end
+
+function GLFW.getWindowContentScaleY(window)
+    return lib.raia_glfw_get_window_content_scale_y(window)
 end
 
 return GLFW
