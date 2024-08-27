@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.25)
 project(raia_miniaudio)
 
-include(${PROJECT_SOURCE_DIR}/../../setting.cmake)
+#include(${PROJECT_SOURCE_DIR}/../../setting.cmake)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_library(raia_miniaudio SHARED
-#add_executable(raia_miniaudio
+#add_library(raia_miniaudio SHARED
+add_executable(raia_miniaudio
         src/external/miniaudio.h
         src/raia_miniaudio.c
         src/raia_miniaudio.h
@@ -14,6 +14,8 @@ add_library(raia_miniaudio SHARED
         #src/external/qoaplay.c
         #src/external/qoa.h
 )
+
+target_link_libraries(raia_miniaudio m)
 
 # 現在のRPATH設定を取得（もしあれば）
 #get_property(CURRENT_RPATH TARGET raia_imgui PROPERTY INSTALL_RPATH)
@@ -35,7 +37,7 @@ add_library(raia_miniaudio SHARED
 #        BUILD_WITH_INSTALL_RPATH TRUE
 #        INSTALL_RPATH "${CURRENT_RPATH}")
 
-#target_link_libraries(raia_imgui
+
 #        $<$<PLATFORM_ID:Darwin>: egl glfw.3.4 GLESv2>
 #        $<$<PLATFORM_ID:Linux>: m dl EGL glfw GLESv2 X11 Xxf86vm Xrandr Xinerama Xcursor pthread Xi>
 #        $<$<PLATFORM_ID:Windows>: EGL glfw3 GLESv2>

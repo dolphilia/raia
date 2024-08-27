@@ -3805,3 +3805,82 @@ ma_uint64 raia_ma_sound_group_get_time_in_pcm_frames(const ma_sound_group* pGrou
 }
 
 #endif  /* MA_NO_ENGINE */
+
+#define PI 3.14159265358979f
+#define SAMPLE_RATE 44100
+#define FREQUENCY 440.0f // 440Hz (A note)
+#define DURATION 2.0f    // 2 seconds
+
+void generate_sine_wave(float* buffer, size_t sampleCount, float frequency, float amplitude, float sampleRate) {
+    for (size_t i = 0; i < sampleCount; ++i) {
+        buffer[i] = amplitude * sinf((2.0f * PI * frequency * i) / sampleRate);
+    }
+}
+
+void data_callback(ma_device* pDevice, void* pOutput, const void* pInput, ma_uint32 frameCount) {
+    static size_t sampleIndex = 0;
+    float* output = (float*)pOutput;
+    float* buffer = (float*)pDevice->pUserData;
+
+    for (ma_uint32 i = 0; i < frameCount; ++i) {
+        if (sampleIndex < (size_t)(SAMPLE_RATE * DURATION)) {
+            output[i] = buffer[sampleIndex++];
+        } else {
+            output[i] = 0.0f; // Silence after 2 seconds
+        }
+    }
+
+    (void)pInput;
+}
+
+int main() {
+    ma_result result;
+    ma_device_config deviceConfig;
+    ma_device device;
+
+    // サイン波データを格納するバッファの作成
+    size_t sampleCount = (size_t)(SAMPLE_RATE * DURATION);
+    float* sineWaveBuffer = (float*)malloc(sampleCount * sizeof(float));
+
+    if (sineWaveBuffer == NULL) {
+        printf("Failed to allocate memory for sine wave buffer.\n");
+        return -1;
+    }
+
+    // サイン波の生成
+    generate_sine_wave(sineWaveBuffer, sampleCount, FREQUENCY, 0.5f, SAMPLE_RATE);
+
+    // オーディオデバイスの設定
+    deviceConfig = ma_device_config_init(ma_device_type_playback);
+    deviceConfig.playback.format = ma_format_f32;
+    deviceConfig.playback.channels = 1;
+    deviceConfig.sampleRate = SAMPLE_RATE;
+    deviceConfig.dataCallback = data_callback;
+    deviceConfig.pUserData = sineWaveBuffer;
+
+    // オーディオデバイスの初期化
+    result = ma_device_init(NULL, &deviceConfig, &device);
+    if (result != MA_SUCCESS) {
+        printf("Failed to initialize playback device.\n");
+        free(sineWaveBuffer);
+        return -1;
+    }
+
+    // オーディオデバイスの開始
+    result = ma_device_start(&device);
+    if (result != MA_SUCCESS) {
+        printf("Failed to start playback device.\n");
+        ma_device_uninit(&device);
+        free(sineWaveBuffer);
+        return -1;
+    }
+
+    // 2秒間再生（非同期で再生されるためスリープを使用）
+    ma_sleep((int)(DURATION * 1000));
+
+    // オーディオデバイスの終了
+    ma_device_uninit(&device);
+    free(sineWaveBuffer);
+
+    return 0;
+}
