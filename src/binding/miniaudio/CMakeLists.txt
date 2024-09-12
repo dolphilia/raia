@@ -10,6 +10,7 @@ add_executable(raia_miniaudio
         src/external/miniaudio.h
         src/raia_miniaudio.c
         src/raia_miniaudio.h
+        ../../common/c/utility/queue.c
         #src/external/stb_vorbis.c
         #src/external/qoaplay.c
         #src/external/qoa.h

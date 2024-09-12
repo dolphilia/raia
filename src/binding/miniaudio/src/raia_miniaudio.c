@@ -3806,6 +3806,39 @@ ma_uint64 raia_ma_sound_group_get_time_in_pcm_frames(const ma_sound_group* pGrou
 
 #endif  /* MA_NO_ENGINE */
 
+//-- ここから拡張
+
+ma_device_config * raia_ma_device_config_init_alt(ma_device_type deviceType) {
+    ma_device_config *pConfig = (ma_device_config*)malloc(sizeof(ma_device_config)); // ヒープ上にメモリを確保
+    if (pConfig == NULL) {
+        return NULL;  // メモリ確保失敗時のエラーハンドリング
+    }
+    *pConfig = ma_device_config_init(deviceType);  // 構造体の内容をヒープメモリにコピー
+    return pConfig;
+}
+
+void raia_ma_device_config_set_playback_format(ma_device_config *pConfig, int format) {
+    pConfig->playback.format = format;
+}
+
+void raia_ma_device_config_set_playback_channels(ma_device_config *pConfig, int channels) {
+    pConfig->playback.channels = channels;
+}
+
+void raia_ma_device_config_set_sampleRate(ma_device_config *pConfig, int sampleRate) {
+    pConfig->sampleRate = sampleRate;
+}
+
+void raia_ma_device_config_set_dataCallback() {
+}
+
+void raia_ma_device_config_set_pUserData(ma_device_config *pConfig, void * pUserData) {
+    pConfig->pUserData = pUserData;
+}
+
+
+//-- ここから実装
+
 #define PI 3.14159265358979f
 #define SAMPLE_RATE 44100
 #define FREQUENCY 440.0f // 440Hz (A note)
@@ -3821,6 +3854,8 @@ void data_callback(ma_device* pDevice, void* pOutput, const void* pInput, ma_uin
     static size_t sampleIndex = 0;
     float* output = (float*)pOutput;
     float* buffer = (float*)pDevice->pUserData;
+
+    printf("%zu\n", frameCount);
 
     for (ma_uint32 i = 0; i < frameCount; ++i) {
         if (sampleIndex < (size_t)(SAMPLE_RATE * DURATION)) {
