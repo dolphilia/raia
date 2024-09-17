@@ -11,7 +11,7 @@ add_library(raia_luajit SHARED
 )
 
 target_link_libraries(raia_luajit
-        $<$<PLATFORM_ID:Darwin>:  luajit-5.1>
+        $<$<PLATFORM_ID:Darwin>:  luajit-5.1.2.1.1725453128>
         $<$<PLATFORM_ID:Linux>:   luajit-5.1>
         $<$<PLATFORM_ID:Windows>: luajit-5.1>
 )

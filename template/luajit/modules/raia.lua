@@ -1092,19 +1092,66 @@ end
 Raia.Window = {}
 Raia.Window.__index = Raia.Window
 
+-- コンストラクタ
 function Raia.Window:new(title, width, height)
-    local self = setmetatable({}, Raia.Window)
-    --
+    local getter = function(t, key)
+        if key == "title" then
+            return rawget(t, "_title")
+        elseif key == "position" then
+            return {rawget(t, "_x"), rawget(t, "_y")}
+        elseif key == "size" then
+            return {rawget(t, "_width"), rawget(t, "_height")}
+        else
+            return Raia.Window[key]
+        end
+    end
+    local setter = function(t, key, value)
+        if key == "title" then
+            t:setTitle(value)
+        elseif key == "position" then
+            if raia.core.isType(value) == "table" and #value >= 2 then
+                t:setPosition(value[1], value[2])
+            else
+                error("Position must be a table with at least two numeric values")
+            end
+        elseif key == "size" then
+            if raia.core.isType(value) == "table" and #value >= 2 then
+                t:setSize(value[1], value[2])
+            else
+                error("Position must be a table with at least two numeric values")
+            end
+        else
+            rawset(t, key, value)
+        end
+    end
+    local instance = {}
+    setmetatable(instance, {
+        __index = getter,
+        __newindex = setter
+    })
+
     title = title or "Untitled"
     width = width or 500
     height = height or 500
-    --
+
+    self:initializeGLFW(instance, title, width, height) -- GLFW の初期化とウィンドウの作成
+    self:setupGLFWCallbacks(instance) -- GLFW コールバックの設定
+    self:initializeOpenGL(instance) -- OpenGL の初期化
+    self:setupShaders(instance) -- シェーダーのコンパイルとプログラムの作成
+    self:createTexture(instance) -- テクスチャの作成
+
+    instance:setTitle(title) -- 初期タイトルの設定
+
+    return instance
+end
+
+-- GLFW の初期化とウィンドウの作成
+function Raia.Window:initializeGLFW(instance, title, width, height)
     glfw.windowHint(glfw.CLIENT_API, glfw.OPENGL_ES_API)
     glfw.windowHint(glfw.CONTEXT_VERSION_MAJOR, 3)
     glfw.windowHint(glfw.CONTEXT_VERSION_MINOR, 0)
     glfw.windowHint(glfw.OPENGL_PROFILE, glfw.OPENGL_CORE_PROFILE)
     glfw.windowHint(glfw.CONTEXT_CREATION_API, glfw.EGL_CONTEXT_API)
-    --glfw.windowHint(glfw.VISIBLE, glfw.FALSE)
     local windowID = glfw.createWindow(width, height, title)
     if windowID == nil then
         glfw.terminate()
@@ -1112,10 +1159,23 @@ function Raia.Window:new(title, width, height)
     end
     glfw.makeContextCurrent(windowID)
     glfw.swapInterval(1)
-    --
+
+    -- インスタンスのプロパティを設定
+    rawset(instance, "id", windowID)
+    rawset(instance, "_title", title)
+    rawset(instance, "_width", width)
+    rawset(instance, "_height", height)
+    rawset(instance, "_x", 0)
+    rawset(instance, "_y", 0)
+    rawset(instance, "_visible", true)
+end
+
+-- GLFW コールバックの設定
+function Raia.Window:setupGLFWCallbacks(instance)
+    local windowID = instance.id
     glfw.setErrorCallbackAlt()
     glfw.setJoystickCallbackAlt()
-    --glfw.setMonitorCallbackAlt()
+    -- glfw.setMonitorCallbackAlt()
     glfw.setWindowPosCallbackAlt(windowID)
     glfw.setWindowSizeCallbackAlt(windowID)
     glfw.setWindowCloseCallbackAlt(windowID)
@@ -1133,30 +1193,47 @@ function Raia.Window:new(title, width, height)
     glfw.setDropCallbackAlt(windowID)
     glfw.setWindowMaximizeCallbackAlt(windowID)
     glfw.setWindowContentScaleCallbackAlt(windowID)
-    --
+end
+
+-- OpenGL の初期化
+function Raia.Window:initializeOpenGL(instance)
     local vertices = ffi.new("float[32]", {
-        -1.0, 1.0, 0.0,  0.0, 0.0,  -- Position 0, TexCoord 0
-        -1.0, -1.0, 0.0,  0.0, 1.0, -- Position 1, TexCoord 1
-        1.0, -1.0, 0.0,  1.0, 1.0,  -- Position 2, TexCoord 2
-        1.0, 1.0, 0.0,  1.0, 0.0    -- Position 3, TexCoord 3
+        -1.0,  1.0, 0.0,  0.0, 0.0,  -- Position 0, TexCoord 0
+        -1.0, -1.0, 0.0,  0.0, 1.0,  -- Position 1, TexCoord 1
+         1.0, -1.0, 0.0,  1.0, 1.0,  -- Position 2, TexCoord 2
+         1.0,  1.0, 0.0,  1.0, 0.0   -- Position 3, TexCoord 3
     })
     local indices = ffi.new("unsigned int[6]", {0, 1, 2, 0, 2, 3})
+
     local vao = ffi.new("GLuint[1]")
     local vbo = ffi.new("GLuint[1]")
     local ebo = ffi.new("GLuint[1]")
+
     gl.genVertexArrays(1, vao)
     gl.genBuffers(1, vbo)
     gl.genBuffers(1, ebo)
+
     gl.bindVertexArray(vao[0])
+
     gl.bindBuffer(gl.ARRAY_BUFFER, vbo[0])
     gl.bufferData(gl.ARRAY_BUFFER, ffi.sizeof(vertices), vertices, gl.STATIC_DRAW)
+
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ebo[0])
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, ffi.sizeof(indices), indices, gl.STATIC_DRAW)
-    gl.vertexAttribPointer(0, 3, gl.FLOAT, gl.FALSE, 5 * ffi.sizeof("float"), ffi.cast("void *", 0))
+
+    gl.vertexAttribPointer(0, 3, gl.FLOAT, gl.FALSE, 5 * ffi.sizeof("float"), ffi.cast("void*", 0))
     gl.enableVertexAttribArray(0)
-    gl.vertexAttribPointer(1, 2, gl.FLOAT, gl.FALSE, 5 * ffi.sizeof("float"), ffi.cast("void *", 3 * ffi.sizeof("float")))
+
+    gl.vertexAttribPointer(1, 2, gl.FLOAT, gl.FALSE, 5 * ffi.sizeof("float"), ffi.cast("void*", 3 * ffi.sizeof("float")))
     gl.enableVertexAttribArray(1)
+
     gl.bindVertexArray(0)
+
+    rawset(instance, "vao", vao)
+end
+
+-- シェーダーのコンパイルとプログラムの作成
+function Raia.Window:setupShaders(instance)
     local vertexShaderSource = [[
         attribute vec4 a_position;
         attribute vec2 a_texCoord;
@@ -1166,6 +1243,7 @@ function Raia.Window:new(title, width, height)
             v_texCoord = a_texCoord;
         }
     ]]
+
     local fragmentShaderSource = [[
         precision mediump float;
         varying vec2 v_texCoord;
@@ -1174,45 +1252,47 @@ function Raia.Window:new(title, width, height)
             gl_FragColor = texture2D(s_texture, v_texCoord);
         }
     ]]
+
     local vertex_shader = gl.createShader(gl.VERTEX_SHADER)
     gl.shaderSource(vertex_shader, 1, ffi.new("const char*[1]", {vertexShaderSource}), nil)
     gl.compileShader(vertex_shader)
+
     local fragment_shader = gl.createShader(gl.FRAGMENT_SHADER)
     gl.shaderSource(fragment_shader, 1, ffi.new("const char*[1]", {fragmentShaderSource}), nil)
     gl.compileShader(fragment_shader)
-    local program = gl.createProgram()-- gl.createShaderProgram()  -- 自動解放される
+
+    local program = gl.createProgram()
     gl.attachShader(program, vertex_shader)
     gl.attachShader(program, fragment_shader)
     gl.linkProgram(program)
+
     gl.deleteShader(vertex_shader)
     gl.deleteShader(fragment_shader)
+
+    rawset(instance, "program", program)
+end
+
+-- テクスチャの作成
+function Raia.Window:createTexture(instance)
+    local width = instance._width
+    local height = instance._height
     local pixels = ffi.new("GLubyte[?]", width * height * 4)
-    --local texture = gl.createTexture() -- 自動解放される
+
     local texture = ffi.new("GLuint[1]")
     gl.genTextures(1, texture)
     gl.bindTexture(gl.TEXTURE_2D, texture[0])
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.UNSIGNED_BYTE, pixels)
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST)
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST)
-    --
-    self.id = windowID
-    self.title = title
-    self.width = width
-    self.height = height
-    self.x = nil
-    self.y = nil
-    self.isVisible = true
-    self.pixels = pixels
-    self.program = program
-    self.texture = texture
-    self.vao = vao
-    return self
+
+    rawset(instance, "pixels", pixels)
+    rawset(instance, "texture", texture)
 end
 
 --- (拡張) 再描画する
 function Raia.Window:redraw(isSwap, isPollEvents)
-    local width = self.width
-    local height = self.height
+    local width = self._width
+    local height = self._height
     local windowID = self.id
     local pixels = self.pixels
     local texture = self.texture[0]
@@ -1259,10 +1339,9 @@ end
 
 --- （拡張）ウィンドウを中央に配置する
 function Raia.Window:center(width, height)
-    width = width or self.width
-    height = height or self.height
+    width = width or self._width
+    height = height or self._height
     local windowID = self.id
-    --
     local monitor = glfw.getPrimaryMonitor()
     local mode = glfw.getVideoMode(monitor)
     if not mode then
@@ -1271,25 +1350,22 @@ function Raia.Window:center(width, height)
     local x = (mode.width - width) / 2
     local y = (mode.height - height) / 2
     glfw.setWindowPos(windowID, x, y)
-    --
-    self.x = x
-    self.y = y
+    rawset(self, "_x", x)
+    rawset(self, "_y", y)
 end
 
 --- （拡張）ウィンドウを非表示状態にする
 function Raia.Window:hide()
     local windowID = self.id
     glfw.hideWindow(windowID)
-    --
-    self.isVisible = false
+    rawset(self, "_visible", false)
 end
 
 --- （拡張）ウィンドウを表示状態にする
 function Raia.Window:show()
     local windowID = self.id
     glfw.showWindow(windowID)
-    --
-    self.isVisible = true
+    rawset(self, "_visible", true)
 end
 
 --- ウィンドウを閉じる
@@ -1302,7 +1378,7 @@ end
 
 --- ウィンドウのタイトルを取得する
 function Raia.Window:getTitle()
-    return self.title
+    return self._title
 end
 
 --- デスクトップの幅と高さを取得する
@@ -1327,22 +1403,22 @@ end
 
 --- （廃止）ウィンドウの幅と高さを取得する
 function Raia.Window:getDimensions()
-    return self.width, self.height
+    return self._width, self._height
 end
 
 --- （廃止）ウィンドウの幅を取得する
 function Raia.Window:getWidth()
-    return self.width
+    return self._width
 end
 
 --- （廃止）ウィンドウの高さを取得する
 function Raia.Window:getHeight()
-    return self.height
+    return self._height
 end
 
 --- ウィンドウが表示されているか
 function Raia.Window:getVisible()
-   return Raia.Window.isVisible
+   return seif._visible
 end
 
 -- ## Set
@@ -1351,25 +1427,45 @@ end
 function Raia.Window:setTitle(title)
     local windowID = self.id
     glfw.setWindowTitle(windowID, title)
-    --
-    self.title = title
+    rawset(self, "_title", title)
 end
 
 --- 画面上にあるウィンドウの位置を設定する
 function Raia.Window:setPosition(x, y)
     local windowID = self.id
     glfw.setWindowPos(windowID, x, y)
-    --
-    self.x = x
-    self.y = y
+    rawset(self, "_x", x)
+    rawset(self, "_y", y)
+end
+
+function Raia.Window:setPositionX(x)
+    local windowID = self.id
+    local y = self._y
+    glfw.setWindowPos(windowID, x, y)
+    rawset(self, "_x", x)
+end
+
+function Raia.Window:setPositionY(y)
+    local windowID = self.id
+    local x = self._x
+    glfw.setWindowPos(windowID, x, y)
+    rawset(self, "_y", y)
+end
+
+--- 画面上にあるウィンドウのサイズを設定する
+function Raia.Window:setSize(width, height)
+    local windowID = self.id
+    glfw.setWindowSize(windowID, width, height)
+    rawset(self, "_width", width)
+    rawset(self, "_height", height)
 end
 
 --- フルスクリーンの設定をする
 function Raia.Window:setFullscreen(fullscreen, monitor)
     monitor = monitor or glfw.getPrimaryMonitor()
     local windowID = self.id
-    local x = self.x
-    local y = self.y
+    local x = self._x
+    local y = self._y
     local width = self.width
     local height = self.height
     if fullscreen then
@@ -1378,13 +1474,12 @@ function Raia.Window:setFullscreen(fullscreen, monitor)
     else
         glfw.setWindowMonitor(windowID, nil, x, y, width, height, glfw.DONT_CARE) -- ウィンドウモードに戻す
     end
-    --
-    self.isFullscreen = fullscreen
+    rawset(self, "isFullscreen", fullscreen)
 end
 
 --- （拡張）ピクセルデータを設定する
 function Raia.Window:setPixels(pixels)
-    self.pixels = pixels
+    rawset(self, "pixels", pixels)
 end
 
 -- ## is

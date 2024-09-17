@@ -254,28 +254,6 @@ ffi.cdef[[
     void raia_glfw_wait_events_timeout(double timeout);
     void raia_glfw_post_empty_event(void);
     void raia_glfw_swap_buffers(GLFWwindow *window);
-    // (代替関数)
-    //const char *raia_glfw_get_window_pos_alt(void);
-    //void raia_glfw_set_window_pos_callback_alt(GLFWwindow *window);
-    //const char *raia_glfw_get_window_size_alt(void);
-    //void raia_glfw_set_window_size_callback_alt(GLFWwindow *window);
-    //const char *raia_glfw_get_window_close_alt(void);
-    //void raia_glfw_set_window_close_callback_alt(GLFWwindow *window);
-    //const char *raia_glfw_get_window_refresh_alt(void);
-    //void raia_glfw_set_window_refresh_callback_alt(GLFWwindow *window);
-    //const char *raia_glfw_get_window_focus_alt(void);
-    //void raia_glfw_set_window_focus_callback_alt(GLFWwindow *window);
-    //const char *raia_glfw_get_window_iconify_alt(void);
-    //void raia_glfw_set_window_iconify_callback_alt(GLFWwindow *window);
-    //const char *raia_glfw_get_window_maximize_alt(void);
-    //void raia_glfw_set_window_maximize_callback_alt(GLFWwindow *window);
-    //const char *raia_glfw_get_framebuffer_size_alt(const char *s);
-    //void raia_glfw_set_framebuffer_size_callback_alt(GLFWwindow *window);
-    //const char *raia_glfw_get_window_content_scale_alt(void);
-    //void raia_glfw_set_window_content_scale_callback_alt(GLFWwindow *window);
-    // LuaJIT拡張
-    // typedef struct lua_State lua_State;
-    // void raia_glfw_init_luajit(lua_State* L);
     // Error
     void raia_glfw_set_error_callback_alt(void);
     int raia_glfw_get_error_code(void);
@@ -355,33 +333,6 @@ ffi.cdef[[
 
 local lib = ffi.load("raia_glfw")
 local GLFW = {}
-
-
--- ffi.cdef[[
---     void *raia_internal_number_to_pointer(double number);
---     typedef struct lua_State lua_State;
---     void call_lua_function(lua_State *L);
--- ]]
-
---[[
-
-function raia.core.numToPtr(num)
-    return ffi.C.raia_internal_number_to_pointer(num)
-end
-
--- 呼び出されるLua関数
-function my_lua_function()
-    print("Hello from Lua function!")
-end
-
--- Lua関数をCに登録
-raia.core.registerLuaFunction(my_lua_function)
-
-local L = raia.core.numToPtr(raia.core.getLuaState())
-ffi.C.call_lua_function(L)
-lib.raia_glfw_init_luajit(L)
-print(raia_glfw.plus(500,500))
-]]
 
 -- 定数
 

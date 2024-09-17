@@ -371,6 +371,7 @@ RAIA_API void raia_glfw_set_window_icon(GLFWwindow *window, int count, const GLF
 
 RAIA_API void raia_glfw_get_window_pos(GLFWwindow *window, int *xpos, int *ypos) {
     glfwGetWindowPos(window, xpos, ypos);
+    printf("%d", *xpos);
 }
 
 RAIA_API void raia_glfw_set_window_pos(GLFWwindow *window, int xpos, int ypos) {

@@ -63,6 +63,13 @@ int raia_core_number_to_pointer(lua_State* L) {
     return 1;
 }
 
+static int raia_core_is_lua_type(lua_State *L) {
+    int t = lua_type(L, 1);  // スタックの1番目の引数の型を取得
+    const char *tname = lua_typename(L, t);  // 型名を文字列で取得
+    lua_pushstring(L, tname);  // 型名をスタックにプッシュ
+    return 1;  // 戻り値の数
+}
+
 RAIA_API const char *init(int argc, char *argv[]) {
     lua_State *L = luaL_newstate(); // 新しいLua環境を作成
     luaL_openlibs(L); // 標準ライブラリをロード
@@ -96,6 +103,8 @@ RAIA_API const char *init(int argc, char *argv[]) {
             lua_setfield(L, -2, "registerLuaFunction");
             lua_pushcfunction(L, raia_core_get_lua_state);
             lua_setfield(L, -2, "getLuaState");
+            lua_pushcfunction(L, raia_core_is_lua_type);
+            lua_setfield(L, -2, "isType");
         }
         lua_setfield(L, -2, "core");
     }
