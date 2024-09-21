@@ -83,9 +83,6 @@ ffi.cdef[[
     const char *raia_glfw_get_version_string(void);
     int raia_glfw_get_error(const char **description);
     GLFWerrorfun raia_glfw_set_error_callback(GLFWerrorfun callback);
-    // (代替関数)
-    const char *raia_glfw_get_error_callback_alt(void);
-    void raia_glfw_set_error_callback_alt(void);
     //
     // 入力
     //
@@ -129,25 +126,6 @@ ffi.cdef[[
     void raia_glfw_set_time(double time);
     uint64_t raia_glfw_get_timer_value(void);
     uint64_t raia_glfw_get_timer_frequency(void);
-    // (代替関数)
-    const char *raia_glfw_get_key_alt(void);
-    void raia_glfw_set_key_callback_alt(GLFWwindow *window);
-    const char *raia_glfw_get_char_alt(void);
-    void raia_glfw_set_char_callback_alt(GLFWwindow *window);
-    const char *raia_glfw_get_char_mods_alt(void);
-    void raia_glfw_set_char_mods_callback_alt(GLFWwindow *window);
-    const char *raia_glfw_get_mouse_button_alt(void);
-    void raia_glfw_set_mouse_button_callback_alt(GLFWwindow *window);
-    const char *raia_glfw_get_cursor_pos_alt(void);
-    void raia_glfw_set_cursor_pos_callback_alt(GLFWwindow *window);
-    const char *raia_glfw_get_cursor_enter_alt(void);
-    void raia_glfw_set_cursor_enter_callback_alt(GLFWwindow *window);
-    const char *raia_glfw_get_scroll_alt(void);
-    void raia_glfw_set_scroll_callback_alt(GLFWwindow *window);
-    const char *raia_glfw_get_drop_alt(void);
-    void raia_glfw_set_drop_callback_alt(GLFWwindow *window);
-    const char *raia_glfw_get_joystick_alt(void);
-    void raia_glfw_set_joystick_callback_alt(void);
     //
     // モニター
     //
@@ -166,9 +144,6 @@ ffi.cdef[[
     void raia_glfw_set_gamma(GLFWmonitor *monitor, float gamma);
     const GLFWgammaramp *raia_glfw_get_gamma_ramp(GLFWmonitor *monitor);
     void raia_glfw_set_gamma_ramp(GLFWmonitor *monitor, const GLFWgammaramp *ramp);
-    // (代替関数)
-    const char *raia_glfw_get_monitor_alt(void);
-    void raia_glfw_set_monitor_callback_alt(GLFWmonitorfun callback);
     //
     // ネイティブアクセス
     //

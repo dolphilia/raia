@@ -3627,6 +3627,7 @@ end
 Skia.Static.SkData = {}
 
 function Skia.Static.SkData.delete(key)
+    print("呼ばれた")
     lib.static_sk_data_delete(key)
 end
 

@@ -78,23 +78,10 @@ RAIA_API const char *init(int argc, char *argv[]) {
     {
         lua_newtable(L); // raia.lib
         {
-            // Lib テーブルの中に C関数を登録
-//    lua_pushcfunction(L, raia_lib_open);
-//    lua_setfield(L, -2, "open");
-//    lua_pushcfunction(L, raia_lib_close);
-//    lua_setfield(L, -2, "close");
-//    lua_pushcfunction(L, raia_lib_close_all);
-//    lua_setfield(L, -2, "closeAll");
-//    lua_pushcfunction(L, raia_lib_add);
-//    lua_setfield(L, -2, "add");
-//    lua_pushcfunction(L, raia_lib_call);
-//    lua_setfield(L, -2, "call");
-//    lua_pushcfunction(L, raia_lib_ffi);
-//    lua_setfield(L, -2, "ffi");
-//    lua_pushcfunction(L, raia_lib_make_struct);
-//    lua_setfield(L, -2, "makeStruct");
+            lua_pushcfunction(L, raia_core_is_lua_type);
+            lua_setfield(L, -2, "type");
         }
-        lua_setfield(L, -2, "Lib"); // Lib テーブルを __Raia__ テーブルに登録
+        lua_setfield(L, -2, "lua"); // Lib テーブルを __Raia__ テーブルに登録
         lua_newtable(L); // raia.core
         {
             lua_pushcfunction(L, raia_core_plus);
@@ -103,8 +90,6 @@ RAIA_API const char *init(int argc, char *argv[]) {
             lua_setfield(L, -2, "registerLuaFunction");
             lua_pushcfunction(L, raia_core_get_lua_state);
             lua_setfield(L, -2, "getLuaState");
-            lua_pushcfunction(L, raia_core_is_lua_type);
-            lua_setfield(L, -2, "isType");
         }
         lua_setfield(L, -2, "core");
     }

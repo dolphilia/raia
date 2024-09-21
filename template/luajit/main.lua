@@ -1,4 +1,3 @@
-
 local ffi = require("ffi")
 local skia = require("modules/bindings/skia")
 local stb = require("modules/bindings/stb")
@@ -56,39 +55,27 @@ end
 
 --
 
-Surface = {}
-Surface.__index = Surface
+Paint = {}
+Paint.__index = Paint
 
-function Surface:new(width, height)
+function Paint:new()
     local getter = function(t, key)
-        if key == "opacity" then
-            return rawget(t, "_opacity")
-        elseif key == "typeface" then
-            return rawget(t, "_typeface")
-        elseif key == "bitmap" then
-            return rawget(t, "_bitmap")
-        elseif key == "position" then
-            return {rawget(t, "_x"), rawget(t, "_y")}
-        elseif key == "size" then
-            return {rawget(t, "_width"), rawget(t, "_height")}
+        if key == "color" then
+            return {
+                rawget(t, "_color_red"),
+                rawget(t, "_color_green"),
+                rawget(t, "_color_blue"),
+                rawget(t, "_color_alpha"),
+            }
         else
-            return Surface[key]
+            return Paint[key]
         end
     end
+
     local setter = function(t, key, value)
-        if key == "opacity" then
-            t:setOpacity(value)
-        elseif key == "typeface" then
-        elseif key == "bitmap" then
-        elseif key == "position" then
-            if raia.core.isType(value) == "table" and #value >= 2 then
-                t:setPosition(value[1], value[2])
-            else
-                error("Position must be a table with at least two numeric values")
-            end
-        elseif key == "size" then
-            if raia.core.isType(value) == "table" and #value >= 2 then
-                t:setSize(value[1], value[2])
+        if key == "color" then
+            if raia.lua.type(value) == "table" and #value == 4 then
+                t:setColorRGBA(value[1], value[2], value[3], value[4])
             else
                 error("Position must be a table with at least two numeric values")
             end
@@ -96,106 +83,262 @@ function Surface:new(width, height)
             rawset(t, key, value)
         end
     end
+
     local instance = {}
     setmetatable(instance, {
         __index = getter,
         __newindex = setter
     })
-    -- destructor
-    local gc_proxy = ffi.new("struct {}")  -- 空の構造体
+
+    -- デストラクタの設定
+    local gc_proxy = ffi.new("struct {}")
     local destructor_callback = function()
         if instance.destructor then
             instance:destructor()
         end
     end
     ffi.gc(gc_proxy, destructor_callback)
+    instance._gc_proxy = gc_proxy
 
-    opacity = opacity or 1.0
-    x = x or 0
-    y = y or 0
-    width = width or 300
-    height = height or 300
-
-    local image_info = skia.ImageInfo.Make(width, height, skia.ColorType.RGBA8888, skia.AlphaType.Opaque)
-    local bitmap = skia.Bitmap.new()
-    skia.Bitmap.allocPixels_3(bitmap, skia.Static.SkImageInfo.get(image_info))
-
-    local canvas = skia.Canvas.new_3(bitmap)
     local paint = skia.Paint.new()
     skia.Paint.setARGB(paint, 255, 0, 0, 0)
     skia.Paint.setAntiAlias(paint, true) -- アンチエイリアシングをオンにする
-    
-    local font_data_raw, font_data_size = load_file_to_memory("Mplus1-Regular.ttf")
-    
-    rawset(instance, "_opacity", opacity)
-    rawset(instance, "_x", x)
-    rawset(instance, "_y", y)
-    rawset(instance, "_width", width)
-    rawset(instance, "_height", height)
-    rawset(instance, "_image_info", image_info)
-    rawset(instance, "_bitmap", bitmap)
-    rawset(instance, "_canvas", canvas)
+    skia.Paint.setStyle(paint, skia.Paint.Style.Fill) -- 塗りつぶし
+
     rawset(instance, "_paint", paint)
-    rawset(instance, "_typeface", typeface)
+    rawset(instance, "_color_red", 0)
+    rawset(instance, "_color_green", 0)
+    rawset(instance, "_color_blue", 0)
+    rawset(instance, "_color_alpha", 255)
     rawset(instance, "_antialias", true)
-    rawset(instance, "_font_size", 24)
-    rawset(instance, "_font", nil)
-    rawset(instance, "_textblob", nil)
-    rawset(instance, "_font_data_raw", font_data_raw)
-    rawset(instance, "_font_data_size", font_data_size)
+    rawset(instance, "_style", skia.Paint.Style.Fill) -- 0
 
     return instance
 end
 
--- デストラクタの定義
+function Paint:destructor()
+    self._paint = nil
+    collectgarbage()
+end
+
+function Paint:setColorRGBA(r, g, b, a)
+    r = r or self._color_red
+    g = g or self._color_green
+    b = b or self._color_blue
+    a = a or self._color_alpha
+    local paint = self._paint
+    skia.Paint.setARGB(paint, a, r, g, b)
+    rawset(self, "_color_red", r)
+    rawset(self, "_color_green", g)
+    rawset(self, "_color_blue", b)
+    rawset(self, "_color_alpha", a)
+end
+
+function Paint:setColor(r, g, b, a)
+    self:setColorRGBA(r, g, b, a)
+end
+
+-- ペイントのスタイルを設定 (style == 0: 塗りつぶし, 1: 線画, 2: 線画と塗りつぶし)
+function Paint:setStyle(style)
+    local paint = self._paint
+    skia.Paint.setStyle(paint, style)
+end
+
+function Paint:setStrokeWidth(width)
+    local paint = self._paint
+    skia.Paint.setStrokeWidth(paint, width)  
+end
+
+function Paint:getPaint()
+    return self._paint
+end
+
+function Paint:getColorRed()
+    return self._color_red
+end
+
+function Paint:getColorGreen()
+    return self._color_green
+end
+
+function Paint:getColorBlue()
+    return self._color_blue
+end
+
+function Paint:getColorAlpha()
+    return self._color_alpha
+end
+
+--
+
+Font = {}
+Font.__index = Font
+
+function Font:new()
+    local font_data_raw, font_data_size = load_file_to_memory("Mplus1-Regular.ttf")
+
+    rawset(instance, "_font_data_raw", font_data_raw)
+    --
+    rawset(instance, "_font_size", 24)
+    rawset(instance, "_font_data_size", font_data_size)
+end
+
+--
+
+Surface = {}
+Surface.__index = Surface
+
+function Surface:new(width, height)
+    width = width or 300
+    height = height or 300
+
+    local getter = function(t, key)
+        if key == "paint" then
+            return rawget(t, "_paint")
+        elseif key == "opacity" then
+            return rawget(t, "_opacity")
+        elseif key == "bitmap" then
+            return rawget(t, "_bitmap")
+        elseif key == "position" then
+            return {
+                rawget(t, "_current_position_x"),
+                rawget(t, "_current_position_y")
+            }
+        elseif key == "size" then
+            return {
+                rawget(t, "_width"),
+                rawget(t, "_height")
+            }
+        else
+            return Surface[key]
+        end
+    end
+
+    local setter = function(t, key, value)
+        if key == "position" then
+            if raia.lua.type(value) == "table" and #value == 2 then
+                t:setPosition(value[1], value[2])
+            else
+                error("Position must be a table with at least two numeric values")
+            end
+        elseif key == "size" then
+            if raia.lua.type(value) == "table" and #value == 2 then
+                t:setSize(value[1], value[2])
+            else
+                error("Position must be a table with at least two numeric values")
+            end
+        elseif key == "currentColor" then
+            if raia.lua.type(value) == "table" and #value == 4 then
+                t:setCurrentColorRGBA(value[1], value[2], value[3], value[4])
+            else
+                error("Position must be a table with at least two numeric values")
+            end
+        else
+            rawset(t, key, value)
+        end
+    end
+
+    local instance = {}
+    setmetatable(instance, {
+        __index = getter,
+        __newindex = setter
+    })
+
+    -- デストラクタの設定
+    local gc_proxy = ffi.new("struct {}")
+    local destructor_callback = function()
+        if instance.destructor then
+            instance:destructor()
+        end
+    end
+    ffi.gc(gc_proxy, destructor_callback)
+    instance._gc_proxy = gc_proxy
+
+    -- Surface の初期化
+    local image_info = skia.ImageInfo.Make(width, height, skia.ColorType.RGBA8888, skia.AlphaType.Opaque)
+    local bitmap = skia.Bitmap.new()
+    skia.Bitmap.allocPixels_3(bitmap, skia.Static.SkImageInfo.get(image_info))
+    local canvas = skia.Canvas.new_3(bitmap)
+    local paint = Paint.new()
+    local font_data_raw, font_data_size = load_file_to_memory("Mplus1-Regular.ttf")
+    local rect = skia.Rect.MakeXYWH(0, 0, 500, 500)
+    
+    -- インスタンスのプロパティを設定
+    rawset(instance, "_image_info", image_info)
+    rawset(instance, "_bitmap", bitmap)
+    rawset(instance, "_canvas", canvas)
+    rawset(instance, "_paint", paint)
+    rawset(instance, "_rect", rect)
+    rawset(instance, "_font_data_raw", font_data_raw)
+    --
+    rawset(instance, "_font_data_size", font_data_size)
+    rawset(instance, "_opacity", 1.0)
+    rawset(instance, "_current_position_x", 0)
+    rawset(instance, "_current_position_y", 0)
+    rawset(instance, "_width", width)
+    rawset(instance, "_height", height)
+    rawset(instance, "_antialias", true)
+    rawset(instance, "_font_size", 24)
+    return instance
+end
+
+-- デストラクタ
 function Surface:destructor()
+    self._image_info = nil
+    self._bitmap = nil
+    self._canvas = nil
+    self._paint = nil
+    self._rect = nil
     if self._font_data_raw ~= nil then
         free_memory(self._font_data_raw)
         self._font_data_raw = nil
     end
-    self._paint = nil
-    self._bitmap = nil
-    self._canvas = nil
-    self._typeface = nil
+    collectgarbage()
 end
 
+function Surface:setPosition(x, y)
+    rawset(self, "_current_position_x", x)
+    rawset(self, "_current_position_y", y)
+end
 
 -- 色を設定
 function Surface:setColorRGBA(r, g, b, a)
     local paint = self._paint
-    skia.Paint.setARGB(paint, a, r, g, b)
-    rawset(self, "_paint", paint)
+    paint:setColor(r, g, b, a)
 end
 
--- ペイントのスタイル
--- 塗りつぶし = 0, 線画 = 1, 線画と塗りつぶし = 2
-function Surface:setPaintStyle(style)
+function Surface:setColor(r, g, b, a)
+    self:setColorRGBA(r, g, b, a)
+end
+
+-- ペイントのスタイルを設定 (style == 0: 塗りつぶし, 1: 線画, 2: 線画と塗りつぶし)
+function Surface:setStyle(style)
     local paint = self._paint
-    skia.Paint.setStyle(paint, style)  -- スタイルを枠線に設定
+    skia.Paint.setStyle(paint:getPaint(), style)
 end
 
 -- 枠線の幅を設定
 function Surface:setStrokeWidth(width)
     local paint = self._paint
-    skia.Paint.setStrokeWidth(paint, width)  
+    skia.Paint.setStrokeWidth(paint:getPaint(), width)  
 end
 
 -- 矩形を描画
 function Surface:drawRect(x, y, width, height)
     local canvas = self._canvas
     local paint = self._paint
-    local rect = skia.Rect.MakeXYWH(x, y, width, height)
-    skia.Canvas.drawRect(canvas, rect, paint)
-    rect = nil
+    local rect = self._rect
+    skia.Rect.setXYWH(skia.Static.SkRect.get(rect), x, y, width, height)
+    skia.Canvas.drawRect(canvas, rect, paint:getPaint())
 end
 
 -- 角丸矩形を描画
 function Surface:drawRoundRect(x, y, width, height, rx, ry)
     local canvas = self._canvas
     local paint = self._paint
-    local rect = skia.Rect.MakeXYWH(x, y, width, height)
-    skia.Canvas.drawRoundRect(canvas, skia.Static.SkRect.get(rect), rx, ry, paint)
-    rect = nil
+    local rect = self._rect
+    skia.Rect.setXYWH(skia.Static.SkRect.get(rect), x, y, width, height)
+    skia.Canvas.drawRoundRect(canvas, skia.Static.SkRect.get(rect), rx, ry, paint:getPaint())
 end
 
 -- ピクセルを取得する
@@ -206,8 +349,8 @@ end
 
 -- 文字を描画する
 function Surface:drawText(text, x, y)
-    x = x or 0
-    y = y or 0
+    x = x or self._current_position_x
+    y = y or self._current_position_y
     local canvas = self._canvas
     local paint = self._paint
     local font_data_raw = self._font_data_raw
@@ -218,10 +361,13 @@ function Surface:drawText(text, x, y)
     local font = skia.Font.new_4(typeface, font_size, 1.0, 0.0)
     local textblob = skia.TextBlob.MakeFromString(text, font, 0) -- SkTextEncoding::kUTF8 = 0
     skia.Font.setTypeface(font, typeface)
-    skia.Canvas.drawTextBlob(canvas, textblob, x, y, paint)
+    skia.Canvas.drawTextBlob(canvas, textblob, x, y, paint:getPaint())
+    --
+    font_data = nil
     typeface = nil
     font = nil
     textblob = nil
+    collectgarbage()
 end
 
 -- フォントサイズを設定する
@@ -234,27 +380,29 @@ end
 --
 
 local surface = Surface:new(800, 600)
-
-surface:setColorRGBA(255, 255, 255, 255)
+surface:setColor(255, 255, 255, 255)
 surface:drawRect(0, 0, 800, 600)
-
-surface:setColorRGBA(0, 0, 0, 128)
+surface:setColor(0, 0, 0, 128)
 surface:drawRoundRect(100, 100, 600, 400, 10, 10)
 
-surface:setColorRGBA(0, 0, 0, 255)
-surface:setPaintStyle(1)
+surface:setColor(0, 0, 0, 255)
+surface:setStyle(1)
 surface:setStrokeWidth(5)
 surface:drawRoundRect(100, 100, 600, 400, 10, 10)
 
 surface:setFontSize(64)
-surface:setColorRGBA(255, 255, 255, 255)
-surface:setPaintStyle(0)  -- スタイルを塗りつぶしに設定
-surface:drawText("こんにちは! Raia!", 100, 200)
+surface:setColor(255, 255, 255, 255)
+surface:setStyle(0)  -- スタイルを塗りつぶしに設定
+surface:setPosition(100, 200)
+surface:drawText("こんにちは! Raia!")
 
-surface:setColorRGBA(0, 0, 0, 255)
-surface:setPaintStyle(1)
+surface:setColor(0, 0, 0, 255)
+surface:setStyle(1)
 surface:setStrokeWidth(2)
-surface:drawText("こんにちは! Raia!", 100, 200)
+surface:setPosition(100, 200)
+surface:drawText("こんにちは! Raia!")
+
+
 
 -- グラデーションを描画する
 
@@ -320,6 +468,7 @@ ffi.C.memcpy(pixels_buffer, pixels, 800 * 600 * 4)
 
 surface.font_data_raw = nil
 surface = nil
+
 collectgarbage()
 
 -- bitmap = nil
@@ -461,14 +610,8 @@ while window:shouldClose() == false do
     im.showMetricsWindow()
     im.showStyleEditor()
 
-    local L = raia.core.getLuaState()
-    
-    --window:setTitle("lua_State *L =="..L)
-    --
     window:setPixels(pixels_buffer)
     window:redraw(false, false)
-
-
 
     im.render()
     im.OpenGL3.renderDrawData(im.getDrawData())
@@ -479,9 +622,9 @@ while window:shouldClose() == false do
     im.renderPlatformWindowsDefault()
 
     window:makeContextCurrent(backup_current_context)
-
     window:swapBuffers()
     window:pollEvents()
-
-    --
 end
+
+window = nil
+collectgarbage()
