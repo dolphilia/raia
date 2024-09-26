@@ -4,6 +4,7 @@ local stb = require("modules/bindings/stb")
 local Raia = require("modules/raia")
 local im = require("modules/bindings/imgui")
 local gl = require("modules/bindings/gles")
+local ma = require("modules/bindings/miniaudio")
 -- local glfw = require("modules/bindings/glfw")
 
 -- C標準ライブラリの関数をFFIで宣言

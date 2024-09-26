@@ -2,6 +2,7 @@
 #define RAIA_LUA_RAIA_LUA_H
 
 #include <stdio.h>
+#include <stdbool.h>
 #include "luajit/lua.h"
 #include "luajit/lualib.h"
 #include "luajit/lauxlib.h"

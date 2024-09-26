@@ -1180,7 +1180,7 @@ function Raia.Window:new(title, width, height)
     local count = 0
     local cb = ffi.cast("GLFWcursorposfun", function(window, xpos, ypos)
         count = count + 1
-        print(xpos)
+        --print(xpos)
         return window
     end)
 

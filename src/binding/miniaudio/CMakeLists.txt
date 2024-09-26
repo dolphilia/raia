@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.25)
 project(raia_miniaudio)
 
-#include(${PROJECT_SOURCE_DIR}/../../setting.cmake)
+include(${PROJECT_SOURCE_DIR}/../../setting.cmake)
 
 set(CMAKE_CXX_STANDARD 17)
 
-#add_library(raia_miniaudio SHARED
-add_executable(raia_miniaudio
+add_library(raia_miniaudio SHARED
+#add_executable(raia_miniaudio
         src/external/miniaudio.h
         src/raia_miniaudio.c
         src/raia_miniaudio.h

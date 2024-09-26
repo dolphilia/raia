@@ -70,18 +70,132 @@ static int raia_core_is_lua_type(lua_State *L) {
     return 1;  // 戻り値の数
 }
 
+int raia_os_get_sizeof_ptr(lua_State *L) {
+    #if defined(__LP64__) || defined(_WIN64) || (defined(__x86_64__) && !defined(__ILP32__)) || defined(_M_X64) || defined(__ia64__) || defined(_M_IA64) || defined(__aarch64__) || defined(_M_ARM64) || defined(__powerpc64__)
+        lua_pushinteger(L, 8);  // 64-bit system
+    #else
+        lua_pushinteger(L, 4);  // 32-bit system
+    #endif
+    return 1;
+}
+
+int raia_os_is_compiled_gcc(lua_State *L) {
+    #if defined(__GNUC__)
+        lua_pushboolean(L, true);
+    #else
+        lua_pushboolean(L, false);
+    #endif
+    return 1;
+}
+
+int raia_os_is_compiled_msvc(lua_State *L) {
+    #if defined(_MSC_VER)
+        lua_pushboolean(L, true);
+    #else
+        lua_pushboolean(L, false);
+    #endif
+    return 1;
+}
+
+int raia_os_is_compiled_clang(lua_State *L) {
+    #if defined(__clang__)
+        lua_pushboolean(L, true);
+    #else
+        lua_pushboolean(L, false);
+    #endif
+    return 1;
+}
+
+int raia_os_is_defined_wchar_t(lua_State *L) {
+    #if defined(_WCHAR_T_DEFINED)
+        lua_pushboolean(L, true);
+    #else
+        lua_pushboolean(L, false);
+    #endif
+    return 1;
+}
+
+int raia_os_is_windows(lua_State *L) {
+#if defined(_WIN32)
+    lua_pushboolean(L, true);
+#else
+    lua_pushboolean(L, false);
+#endif
+    return 1;
+}
+
+int raia_os_is_posix(lua_State *L) {
+#if !defined(_WIN32)
+    lua_pushboolean(L, true);
+#else
+    lua_pushboolean(L, false);
+#endif
+    return 1;
+}
+
+int raia_os_is_unix(lua_State *L) {
+#if !defined(__unix__)
+    lua_pushboolean(L, true);
+#else
+    lua_pushboolean(L, false);
+#endif
+    return 1;
+}
+
+int raia_os_is_linux(lua_State *L) {
+#if !defined(__linux__)
+    lua_pushboolean(L, true);
+#else
+    lua_pushboolean(L, false);
+#endif
+    return 1;
+}
+
+int raia_os_is_macos(lua_State *L) {
+#if !defined(__APPLE__)
+    lua_pushboolean(L, true);
+#else
+    lua_pushboolean(L, false);
+#endif
+    return 1;
+}
+
 RAIA_API const char *init(int argc, char *argv[]) {
     lua_State *L = luaL_newstate(); // 新しいLua環境を作成
     luaL_openlibs(L); // 標準ライブラリをロード
 
     lua_newtable(L); // raia
     {
+        lua_newtable(L); // raia.os
+        {
+            lua_pushcfunction(L, raia_os_get_sizeof_ptr);
+            lua_setfield(L, -2, "getSizeofPtr");
+            lua_pushcfunction(L, raia_os_is_compiled_gcc);
+            lua_setfield(L, -2, "isCompiledGCC");
+            lua_pushcfunction(L, raia_os_is_compiled_msvc);
+            lua_setfield(L, -2, "isCompiledMSVC");
+            lua_pushcfunction(L, raia_os_is_compiled_clang);
+            lua_setfield(L, -2, "isCompiledClang");
+            lua_pushcfunction(L, raia_os_is_defined_wchar_t);
+            lua_setfield(L, -2, "isDefinedWCharT");
+            lua_pushcfunction(L, raia_os_is_windows);
+            lua_setfield(L, -2, "isWindows");
+            lua_pushcfunction(L, raia_os_is_posix);
+            lua_setfield(L, -2, "isPosix");
+            lua_pushcfunction(L, raia_os_is_unix);
+            lua_setfield(L, -2, "isUnix");
+            lua_pushcfunction(L, raia_os_is_linux);
+            lua_setfield(L, -2, "isLinux");
+            lua_pushcfunction(L, raia_os_is_macos);
+            lua_setfield(L, -2, "isMacOS");
+        }
+        lua_setfield(L, -2, "os");
         lua_newtable(L); // raia.lib
         {
             lua_pushcfunction(L, raia_core_is_lua_type);
             lua_setfield(L, -2, "type");
         }
-        lua_setfield(L, -2, "lua"); // Lib テーブルを __Raia__ テーブルに登録
+        lua_setfield(L, -2, "lua");
         lua_newtable(L); // raia.core
         {
             lua_pushcfunction(L, raia_core_plus);
