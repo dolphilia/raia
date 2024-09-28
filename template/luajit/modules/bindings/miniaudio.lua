@@ -4603,4 +4603,3753 @@ ffi.cdef[[
 local lib = ffi.load("raia_miniaudio")
 local MA = {}
 
+-- Version
+function MA.version(pMajor, pMinor, pRevision)
+    return lib.raia_ma_version(pMajor, pMinor, pRevision)
+end
+
+function MA.versionString()
+    return lib.raia_ma_version_string()
+end
+
+
+-- Logging
+function MA.logCallbackInit(onLog, pUserData)
+    return lib.raia_ma_log_callback_init(onLog, pUserData)
+end
+
+function MA.logInit(pAllocationCallbacks, pLog)
+    return lib.raia_ma_log_init(pAllocationCallbacks, pLog)
+end
+
+function MA.logUninit(pLog)
+    return lib.raia_ma_log_uninit(pLog)
+end
+
+function MA.logRegisterCallback(pLog, callback)
+    return lib.raia_ma_log_register_callback(pLog, callback)
+end
+
+function MA.logUnregisterCallback(pLog, callback)
+    return lib.raia_ma_log_unregister_callback(pLog, callback)
+end
+
+function MA.logPost(pLog, level, pMessage)
+    return lib.raia_ma_log_post(pLog, level, pMessage)
+end
+
+function MA.logPostv(pLog, level, pFormat, args)
+    return lib.raia_ma_log_postv(pLog, level, pFormat, args)
+end
+
+--ma_result ma_log_postf(pLog, level, pFormat, ...); // TODO
+
+-- Biquad Filtering
+function MA.biquadConfigInit(format, channels, b0, b1, b2, a0, a1, a2)
+    return lib.raia_ma_biquad_config_init(format, channels, b0, b1, b2, a0, a1, a2)
+end
+
+function MA.biquadGetHeapSize(pConfig, pHeapSizeInBytes)
+    return lib.raia_ma_biquad_get_heap_size(pConfig, pHeapSizeInBytes)
+end
+
+function MA.biquadInitPreallocated(pConfig, pHeap, pBQ)
+    return lib.raia_ma_biquad_init_preallocated(pConfig, pHeap, pBQ)
+end
+
+function MA.biquadInit(pConfig, pAllocationCallbacks, pBQ)
+    return lib.raia_ma_biquad_init(pConfig, pAllocationCallbacks, pBQ)
+end
+
+function MA.biquadUninit(pBQ, pAllocationCallbacks)
+    return lib.raia_ma_biquad_uninit(pBQ, pAllocationCallbacks)
+end
+
+function MA.biquadReinit(pConfig, pBQ)
+    return lib.raia_ma_biquad_reinit(pConfig, pBQ)
+end
+
+function MA.biquadClearCache(pBQ)
+    return lib.raia_ma_biquad_clear_cache(pBQ)
+end
+
+function MA.biquadProcessPcmFrames(pBQ, pFramesOut, pFramesIn, frameCount)
+    return lib.raia_ma_biquad_process_pcm_frames(pBQ, pFramesOut, pFramesIn, frameCount)
+end
+
+function MA.biquadGetLatency(pBQ)
+    return lib.raia_ma_biquad_get_latency(pBQ)
+end
+
+
+-- Low-Pass Filtering
+function MA.lpf1ConfigInit(format, channels, sampleRate, cutoffFrequency)
+    return lib.raia_ma_lpf1_config_init(format, channels, sampleRate, cutoffFrequency)
+end
+
+function MA.lpf2ConfigInit(format, channels, sampleRate, cutoffFrequency, q)
+    return lib.raia_ma_lpf2_config_init(format, channels, sampleRate, cutoffFrequency, q)
+end
+
+function MA.lpf1GetHeapSize(pConfig, pHeapSizeInBytes)
+    return lib.raia_ma_lpf1_get_heap_size(pConfig, pHeapSizeInBytes)
+end
+
+function MA.lpf1InitPreallocated(pConfig, pHeap, pLPF)
+    return lib.raia_ma_lpf1_init_preallocated(pConfig, pHeap, pLPF)
+end
+
+function MA.lpf1Init(pConfig, pAllocationCallbacks, pLPF)
+    return lib.raia_ma_lpf1_init(pConfig, pAllocationCallbacks, pLPF)
+end
+
+function MA.lpf1Uninit(pLPF, pAllocationCallbacks)
+    return lib.raia_ma_lpf1_uninit(pLPF, pAllocationCallbacks)
+end
+
+function MA.lpf1Reinit(pConfig, pLPF)
+    return lib.raia_ma_lpf1_reinit(pConfig, pLPF)
+end
+
+function MA.lpf1ClearCache(pLPF)
+    return lib.raia_ma_lpf1_clear_cache(pLPF)
+end
+
+function MA.lpf1ProcessPcmFrames(pLPF, pFramesOut, pFramesIn, frameCount)
+    return lib.raia_ma_lpf1_process_pcm_frames(pLPF, pFramesOut, pFramesIn, frameCount)
+end
+
+function MA.lpf1GetLatency(pLPF)
+    return lib.raia_ma_lpf1_get_latency(pLPF)
+end
+
+function MA.lpf2GetHeapSize(pConfig, pHeapSizeInBytes)
+    return lib.raia_ma_lpf2_get_heap_size(pConfig, pHeapSizeInBytes)
+end
+
+function MA.lpf2InitPreallocated(pConfig, pHeap, pHPF)
+    return lib.raia_ma_lpf2_init_preallocated(pConfig, pHeap, pHPF)
+end
+
+function MA.lpf2Init(pConfig, pAllocationCallbacks, pLPF)
+    return lib.raia_ma_lpf2_init(pConfig, pAllocationCallbacks, pLPF)
+end
+
+function MA.lpf2Uninit(pLPF, pAllocationCallbacks)
+    return lib.raia_ma_lpf2_uninit(pLPF, pAllocationCallbacks)
+end
+
+function MA.lpf2Reinit(pConfig, pLPF)
+    return lib.raia_ma_lpf2_reinit(pConfig, pLPF)
+end
+
+function MA.lpf2ClearCache(pLPF)
+    return lib.raia_ma_lpf2_clear_cache(pLPF)
+end
+
+function MA.lpf2ProcessPcmFrames(pLPF, pFramesOut, pFramesIn, frameCount)
+    return lib.raia_ma_lpf2_process_pcm_frames(pLPF, pFramesOut, pFramesIn, frameCount)
+end
+
+function MA.lpf2GetLatency(pLPF)
+    return lib.raia_ma_lpf2_get_latency(pLPF)
+end
+
+function MA.lpfConfigInit(format, channels, sampleRate, cutoffFrequency, order)
+    return lib.raia_ma_lpf_config_init(format, channels, sampleRate, cutoffFrequency, order)
+end
+
+function MA.lpfGetHeapSize(pConfig, pHeapSizeInBytes)
+    return lib.raia_ma_lpf_get_heap_size(pConfig, pHeapSizeInBytes)
+end
+
+function MA.lpfInitPreallocated(pConfig, pHeap, pLPF)
+    return lib.raia_ma_lpf_init_preallocated(pConfig, pHeap, pLPF)
+end
+
+function MA.lpfInit(pConfig, pAllocationCallbacks, pLPF)
+    return lib.raia_ma_lpf_init(pConfig, pAllocationCallbacks, pLPF)
+end
+
+function MA.lpfUninit(pLPF, pAllocationCallbacks)
+    return lib.raia_ma_lpf_uninit(pLPF, pAllocationCallbacks)
+end
+
+function MA.lpfReinit(pConfig, pLPF)
+    return lib.raia_ma_lpf_reinit(pConfig, pLPF)
+end
+
+function MA.lpfClearCache(pLPF)
+    return lib.raia_ma_lpf_clear_cache(pLPF)
+end
+
+function MA.lpfProcessPcmFrames(pLPF, pFramesOut, pFramesIn, frameCount)
+    return lib.raia_ma_lpf_process_pcm_frames(pLPF, pFramesOut, pFramesIn, frameCount)
+end
+
+function MA.lpfGetLatency(pLPF)
+    return lib.raia_ma_lpf_get_latency(pLPF)
+end
+
+
+-- High-Pass Filtering
+function MA.hpf1ConfigInit(format, channels, sampleRate, cutoffFrequency)
+    return lib.raia_ma_hpf1_config_init(format, channels, sampleRate, cutoffFrequency)
+end
+
+function MA.hpf2ConfigInit(format, channels, sampleRate, cutoffFrequency, q)
+    return lib.raia_ma_hpf2_config_init(format, channels, sampleRate, cutoffFrequency, q)
+end
+
+function MA.hpf1GetHeapSize(pConfig, pHeapSizeInBytes)
+    return lib.raia_ma_hpf1_get_heap_size(pConfig, pHeapSizeInBytes)
+end
+
+function MA.hpf1InitPreallocated(pConfig, pHeap, pLPF)
+    return lib.raia_ma_hpf1_init_preallocated(pConfig, pHeap, pLPF)
+end
+
+function MA.hpf1Init(pConfig, pAllocationCallbacks, pHPF)
+    return lib.raia_ma_hpf1_init(pConfig, pAllocationCallbacks, pHPF)
+end
+
+function MA.hpf1Uninit(pHPF, pAllocationCallbacks)
+    return lib.raia_ma_hpf1_uninit(pHPF, pAllocationCallbacks)
+end
+
+function MA.hpf1Reinit(pConfig, pHPF)
+    return lib.raia_ma_hpf1_reinit(pConfig, pHPF)
+end
+
+function MA.hpf1ProcessPcmFrames(pHPF, pFramesOut, pFramesIn, frameCount)
+    return lib.raia_ma_hpf1_process_pcm_frames(pHPF, pFramesOut, pFramesIn, frameCount)
+end
+
+function MA.hpf1GetLatency(pHPF)
+    return lib.raia_ma_hpf1_get_latency(pHPF)
+end
+
+function MA.hpf2GetHeapSize(pConfig, pHeapSizeInBytes)
+    return lib.raia_ma_hpf2_get_heap_size(pConfig, pHeapSizeInBytes)
+end
+
+function MA.hpf2InitPreallocated(pConfig, pHeap, pHPF)
+    return lib.raia_ma_hpf2_init_preallocated(pConfig, pHeap, pHPF)
+end
+
+function MA.hpf2Init(pConfig, pAllocationCallbacks, pHPF)
+    return lib.raia_ma_hpf2_init(pConfig, pAllocationCallbacks, pHPF)
+end
+
+function MA.hpf2Uninit(pHPF, pAllocationCallbacks)
+    return lib.raia_ma_hpf2_uninit(pHPF, pAllocationCallbacks)
+end
+
+function MA.hpf2Reinit(pConfig, pHPF)
+    return lib.raia_ma_hpf2_reinit(pConfig, pHPF)
+end
+
+function MA.hpf2ProcessPcmFrames(pHPF, pFramesOut, pFramesIn, frameCount)
+    return lib.raia_ma_hpf2_process_pcm_frames(pHPF, pFramesOut, pFramesIn, frameCount)
+end
+
+function MA.hpf2GetLatency(pHPF)
+    return lib.raia_ma_hpf2_get_latency(pHPF)
+end
+
+function MA.hpfConfigInit(format, channels, sampleRate, cutoffFrequency, order)
+    return lib.raia_ma_hpf_config_init(format, channels, sampleRate, cutoffFrequency, order)
+end
+
+function MA.hpfGetHeapSize(pConfig, pHeapSizeInBytes)
+    return lib.raia_ma_hpf_get_heap_size(pConfig, pHeapSizeInBytes)
+end
+
+function MA.hpfInitPreallocated(pConfig, pHeap, pLPF)
+    return lib.raia_ma_hpf_init_preallocated(pConfig, pHeap, pLPF)
+end
+
+function MA.hpfInit(pConfig, pAllocationCallbacks, pHPF)
+    return lib.raia_ma_hpf_init(pConfig, pAllocationCallbacks, pHPF)
+end
+
+function MA.hpfUninit(pHPF, pAllocationCallbacks)
+    return lib.raia_ma_hpf_uninit(pHPF, pAllocationCallbacks)
+end
+
+function MA.hpfReinit(pConfig, pHPF)
+    return lib.raia_ma_hpf_reinit(pConfig, pHPF)
+end
+
+function MA.hpfProcessPcmFrames(pHPF, pFramesOut, pFramesIn, frameCount)
+    return lib.raia_ma_hpf_process_pcm_frames(pHPF, pFramesOut, pFramesIn, frameCount)
+end
+
+function MA.hpfGetLatency(pHPF)
+    return lib.raia_ma_hpf_get_latency(pHPF)
+end
+
+
+-- Band-Pass Filtering
+function MA.bpf2ConfigInit(format, channels, sampleRate, cutoffFrequency, q)
+    return lib.raia_ma_bpf2_config_init(format, channels, sampleRate, cutoffFrequency, q)
+end
+
+function MA.bpf2GetHeapSize(pConfig, pHeapSizeInBytes)
+    return lib.raia_ma_bpf2_get_heap_size(pConfig, pHeapSizeInBytes)
+end
+
+function MA.bpf2InitPreallocated(pConfig, pHeap, pBPF)
+    return lib.raia_ma_bpf2_init_preallocated(pConfig, pHeap, pBPF)
+end
+
+function MA.bpf2Init(pConfig, pAllocationCallbacks, pBPF)
+    return lib.raia_ma_bpf2_init(pConfig, pAllocationCallbacks, pBPF)
+end
+
+function MA.bpf2Uninit(pBPF, pAllocationCallbacks)
+    return lib.raia_ma_bpf2_uninit(pBPF, pAllocationCallbacks)
+end
+
+function MA.bpf2Reinit(pConfig, pBPF)
+    return lib.raia_ma_bpf2_reinit(pConfig, pBPF)
+end
+
+function MA.bpf2ProcessPcmFrames(pBPF, pFramesOut, pFramesIn, frameCount)
+    return lib.raia_ma_bpf2_process_pcm_frames(pBPF, pFramesOut, pFramesIn, frameCount)
+end
+
+function MA.bpf2GetLatency(pBPF)
+    return lib.raia_ma_bpf2_get_latency(pBPF)
+end
+
+function MA.bpfConfigInit(format, channels, sampleRate, cutoffFrequency, order)
+    return lib.raia_ma_bpf_config_init(format, channels, sampleRate, cutoffFrequency, order)
+end
+
+function MA.bpfGetHeapSize(pConfig, pHeapSizeInBytes)
+    return lib.raia_ma_bpf_get_heap_size(pConfig, pHeapSizeInBytes)
+end
+
+function MA.bpfInitPreallocated(pConfig, pHeap, pBPF)
+    return lib.raia_ma_bpf_init_preallocated(pConfig, pHeap, pBPF)
+end
+
+function MA.bpfInit(pConfig, pAllocationCallbacks, pBPF)
+    return lib.raia_ma_bpf_init(pConfig, pAllocationCallbacks, pBPF)
+end
+
+function MA.bpfUninit(pBPF, pAllocationCallbacks)
+    return lib.raia_ma_bpf_uninit(pBPF, pAllocationCallbacks)
+end
+
+function MA.bpfReinit(pConfig, pBPF)
+    return lib.raia_ma_bpf_reinit(pConfig, pBPF)
+end
+
+function MA.bpfProcessPcmFrames(pBPF, pFramesOut, pFramesIn, frameCount)
+    return lib.raia_ma_bpf_process_pcm_frames(pBPF, pFramesOut, pFramesIn, frameCount)
+end
+
+function MA.bpfGetLatency(pBPF)
+    return lib.raia_ma_bpf_get_latency(pBPF)
+end
+
+
+-- Notching Filter
+function MA.notch2ConfigInit(format, channels, sampleRate, q, frequency)
+    return lib.raia_ma_notch2_config_init(format, channels, sampleRate, q, frequency)
+end
+
+function MA.notch2GetHeapSize(pConfig, pHeapSizeInBytes)
+    return lib.raia_ma_notch2_get_heap_size(pConfig, pHeapSizeInBytes)
+end
+
+function MA.notch2InitPreallocated(pConfig, pHeap, pFilter)
+    return lib.raia_ma_notch2_init_preallocated(pConfig, pHeap, pFilter)
+end
+
+function MA.notch2Init(pConfig, pAllocationCallbacks, pFilter)
+    return lib.raia_ma_notch2_init(pConfig, pAllocationCallbacks, pFilter)
+end
+
+function MA.notch2Uninit(pFilter, pAllocationCallbacks)
+    return lib.raia_ma_notch2_uninit(pFilter, pAllocationCallbacks)
+end
+
+function MA.notch2Reinit(pConfig, pFilter)
+    return lib.raia_ma_notch2_reinit(pConfig, pFilter)
+end
+
+function MA.notch2ProcessPcmFrames(pFilter, pFramesOut, pFramesIn, frameCount)
+    return lib.raia_ma_notch2_process_pcm_frames(pFilter, pFramesOut, pFramesIn, frameCount)
+end
+
+function MA.notch2GetLatency(pFilter)
+    return lib.raia_ma_notch2_get_latency(pFilter)
+end
+
+
+-- Peaking EQ Filter
+function MA.peak2ConfigInit(format, channels, sampleRate, gainDB, q, frequency)
+    return lib.raia_ma_peak2_config_init(format, channels, sampleRate, gainDB, q, frequency)
+end
+
+function MA.peak2GetHeapSize(pConfig, pHeapSizeInBytes)
+    return lib.raia_ma_peak2_get_heap_size(pConfig, pHeapSizeInBytes)
+end
+
+function MA.peak2InitPreallocated(pConfig, pHeap, pFilter)
+    return lib.raia_ma_peak2_init_preallocated(pConfig, pHeap, pFilter)
+end
+
+function MA.peak2Init(pConfig, pAllocationCallbacks, pFilter)
+    return lib.raia_ma_peak2_init(pConfig, pAllocationCallbacks, pFilter)
+end
+
+function MA.peak2Uninit(pFilter, pAllocationCallbacks)
+    return lib.raia_ma_peak2_uninit(pFilter, pAllocationCallbacks)
+end
+
+function MA.peak2Reinit(pConfig, pFilter)
+    return lib.raia_ma_peak2_reinit(pConfig, pFilter)
+end
+
+function MA.peak2ProcessPcmFrames(pFilter, pFramesOut, pFramesIn, frameCount)
+    return lib.raia_ma_peak2_process_pcm_frames(pFilter, pFramesOut, pFramesIn, frameCount)
+end
+
+function MA.peak2GetLatency(pFilter)
+    return lib.raia_ma_peak2_get_latency(pFilter)
+end
+
+
+-- Low Shelf Filter
+function MA.loshelf2ConfigInit(format, channels, sampleRate, gainDB, shelfSlope, frequency)
+    return lib.raia_ma_loshelf2_config_init(format, channels, sampleRate, gainDB, shelfSlope, frequency)
+end
+
+function MA.loshelf2GetHeapSize(pConfig, pHeapSizeInBytes)
+    return lib.raia_ma_loshelf2_get_heap_size(pConfig, pHeapSizeInBytes)
+end
+
+function MA.loshelf2InitPreallocated(pConfig, pHeap, pFilter)
+    return lib.raia_ma_loshelf2_init_preallocated(pConfig, pHeap, pFilter)
+end
+
+function MA.loshelf2Init(pConfig, pAllocationCallbacks, pFilter)
+    return lib.raia_ma_loshelf2_init(pConfig, pAllocationCallbacks, pFilter)
+end
+
+function MA.loshelf2Uninit(pFilter, pAllocationCallbacks)
+    return lib.raia_ma_loshelf2_uninit(pFilter, pAllocationCallbacks)
+end
+
+function MA.loshelf2Reinit(pConfig, pFilter)
+    return lib.raia_ma_loshelf2_reinit(pConfig, pFilter)
+end
+
+function MA.loshelf2ProcessPcmFrames(pFilter, pFramesOut, pFramesIn, frameCount)
+    return lib.raia_ma_loshelf2_process_pcm_frames(pFilter, pFramesOut, pFramesIn, frameCount)
+end
+
+function MA.loshelf2GetLatency(pFilter)
+    return lib.raia_ma_loshelf2_get_latency(pFilter)
+end
+
+
+-- High Shelf Filter
+function MA.hishelf2ConfigInit(format, channels, sampleRate, gainDB, shelfSlope, frequency)
+    return lib.raia_ma_hishelf2_config_init(format, channels, sampleRate, gainDB, shelfSlope, frequency)
+end
+
+function MA.hishelf2GetHeapSize(pConfig, pHeapSizeInBytes)
+    return lib.raia_ma_hishelf2_get_heap_size(pConfig, pHeapSizeInBytes)
+end
+
+function MA.hishelf2InitPreallocated(pConfig, pHeap, pFilter)
+    return lib.raia_ma_hishelf2_init_preallocated(pConfig, pHeap, pFilter)
+end
+
+function MA.hishelf2Init(pConfig, pAllocationCallbacks, pFilter)
+    return lib.raia_ma_hishelf2_init(pConfig, pAllocationCallbacks, pFilter)
+end
+
+function MA.hishelf2Uninit(pFilter, pAllocationCallbacks)
+    return lib.raia_ma_hishelf2_uninit(pFilter, pAllocationCallbacks)
+end
+
+function MA.hishelf2Reinit(pConfig, pFilter)
+    return lib.raia_ma_hishelf2_reinit(pConfig, pFilter)
+end
+
+function MA.hishelf2ProcessPcmFrames(pFilter, pFramesOut, pFramesIn, frameCount)
+    return lib.raia_ma_hishelf2_process_pcm_frames(pFilter, pFramesOut, pFramesIn, frameCount)
+end
+
+function MA.hishelf2GetLatency(pFilter)
+    return lib.raia_ma_hishelf2_get_latency(pFilter)
+end
+
+
+-- (Delay)
+function MA.delayConfigInit(channels, sampleRate, delayInFrames, decay)
+    return lib.raia_ma_delay_config_init(channels, sampleRate, delayInFrames, decay)
+end
+
+function MA.delayInit(pConfig, pAllocationCallbacks, pDelay)
+    return lib.raia_ma_delay_init(pConfig, pAllocationCallbacks, pDelay)
+end
+
+function MA.delayUninit(pDelay, pAllocationCallbacks)
+    return lib.raia_ma_delay_uninit(pDelay, pAllocationCallbacks)
+end
+
+function MA.delayProcessPcmFrames(pDelay, pFramesOut, pFramesIn, frameCount)
+    return lib.raia_ma_delay_process_pcm_frames(pDelay, pFramesOut, pFramesIn, frameCount)
+end
+
+function MA.delaySetWet(pDelay, value)
+    return lib.raia_ma_delay_set_wet(pDelay, value)
+end
+
+function MA.delayGetWet(pDelay)
+    return lib.raia_ma_delay_get_wet(pDelay)
+end
+
+function MA.delaySetDry(pDelay, value)
+    return lib.raia_ma_delay_set_dry(pDelay, value)
+end
+
+function MA.delayGetDry(pDelay)
+    return lib.raia_ma_delay_get_dry(pDelay)
+end
+
+function MA.delaySetDecay(pDelay, value)
+    return lib.raia_ma_delay_set_decay(pDelay, value)
+end
+
+function MA.delayGetDecay(pDelay)
+    return lib.raia_ma_delay_get_decay(pDelay)
+end
+
+
+-- (Gainer)
+function MA.gainerConfigInit(channels, smoothTimeInFrames)
+    return lib.raia_ma_gainer_config_init(channels, smoothTimeInFrames)
+end
+
+function MA.gainerGetHeapSize(pConfig, pHeapSizeInBytes)
+    return lib.raia_ma_gainer_get_heap_size(pConfig, pHeapSizeInBytes)
+end
+
+function MA.gainerInitPreallocated(pConfig, pHeap, pGainer)
+    return lib.raia_ma_gainer_init_preallocated(pConfig, pHeap, pGainer)
+end
+
+function MA.gainerInit(pConfig, pAllocationCallbacks, pGainer)
+    return lib.raia_ma_gainer_init(pConfig, pAllocationCallbacks, pGainer)
+end
+
+function MA.gainerUninit(pGainer, pAllocationCallbacks)
+    return lib.raia_ma_gainer_uninit(pGainer, pAllocationCallbacks)
+end
+
+function MA.gainerProcessPcmFrames(pGainer, pFramesOut, pFramesIn, frameCount)
+    return lib.raia_ma_gainer_process_pcm_frames(pGainer, pFramesOut, pFramesIn, frameCount)
+end
+
+function MA.gainerSetGain(pGainer, newGain)
+    return lib.raia_ma_gainer_set_gain(pGainer, newGain)
+end
+
+function MA.gainerSetGains(pGainer, pNewGains)
+    return lib.raia_ma_gainer_set_gains(pGainer, pNewGains)
+end
+
+function MA.gainerSetMasterVolume(pGainer, volume)
+    return lib.raia_ma_gainer_set_master_volume(pGainer, volume)
+end
+
+function MA.gainerGetMasterVolume(pGainer, pVolume)
+    return lib.raia_ma_gainer_get_master_volume(pGainer, pVolume)
+end
+
+
+-- (panner)
+function MA.pannerConfigInit(format, channels)
+    return lib.raia_ma_panner_config_init(format, channels)
+end
+
+function MA.pannerInit(pConfig, pPanner)
+    return lib.raia_ma_panner_init(pConfig, pPanner)
+end
+
+function MA.pannerProcessPcmFrames(pPanner, pFramesOut, pFramesIn, frameCount)
+    return lib.raia_ma_panner_process_pcm_frames(pPanner, pFramesOut, pFramesIn, frameCount)
+end
+
+function MA.pannerSetMode(pPanner, mode)
+    return lib.raia_ma_panner_set_mode(pPanner, mode)
+end
+
+function MA.pannerGetMode(pPanner)
+    return lib.raia_ma_panner_get_mode(pPanner)
+end
+
+function MA.pannerSetPan(pPanner, pan)
+    return lib.raia_ma_panner_set_pan(pPanner, pan)
+end
+
+function MA.pannerGetPan(pPanner)
+    return lib.raia_ma_panner_get_pan(pPanner)
+end
+
+
+-- (Fader)
+function MA.faderConfigInit(format, channels, sampleRate)
+    return lib.raia_ma_fader_config_init(format, channels, sampleRate)
+end
+
+function MA.faderInit(pConfig, pFader)
+    return lib.raia_ma_fader_init(pConfig, pFader)
+end
+
+function MA.faderProcessPcmFrames(pFader, pFramesOut, pFramesIn, frameCount)
+    return lib.raia_ma_fader_process_pcm_frames(pFader, pFramesOut, pFramesIn, frameCount)
+end
+
+function MA.faderGetDataFormat(pFader, pFormat, pChannels, pSampleRate)
+    return lib.raia_ma_fader_get_data_format(pFader, pFormat, pChannels, pSampleRate)
+end
+
+function MA.faderSetFade(pFader, volumeBeg, volumeEnd, lengthInFrames)
+    return lib.raia_ma_fader_set_fade(pFader, volumeBeg, volumeEnd, lengthInFrames)
+end
+
+function MA.faderSetFadeEx(pFader, volumeBeg, volumeEnd, lengthInFrames, startOffsetInFrames)
+    return lib.raia_ma_fader_set_fade_ex(pFader, volumeBeg, volumeEnd, lengthInFrames, startOffsetInFrames)
+end
+
+function MA.faderGetCurrentVolume(pFader)
+    return lib.raia_ma_fader_get_current_volume(pFader)
+end
+
+
+-- (Spatializer)
+function MA.spatializerListenerConfigInit(channelsOut)
+    return lib.raia_ma_spatializer_listener_config_init(channelsOut)
+end
+
+function MA.spatializerListenerGetHeapSize(pConfig, pHeapSizeInBytes)
+    return lib.raia_ma_spatializer_listener_get_heap_size(pConfig, pHeapSizeInBytes)
+end
+
+function MA.spatializerListenerInitPreallocated(pConfig, pHeap, pListener)
+    return lib.raia_ma_spatializer_listener_init_preallocated(pConfig, pHeap, pListener)
+end
+
+function MA.spatializerListenerInit(pConfig, pAllocationCallbacks, pListener)
+    return lib.raia_ma_spatializer_listener_init(pConfig, pAllocationCallbacks, pListener)
+end
+
+function MA.spatializerListenerUninit(pListener, pAllocationCallbacks)
+    return lib.raia_ma_spatializer_listener_uninit(pListener, pAllocationCallbacks)
+end
+
+function MA.spatializerListenerGetChannelMap(pListener)
+    return lib.raia_ma_spatializer_listener_get_channel_map(pListener)
+end
+
+function MA.spatializerListenerSetCone(pListener, innerAngleInRadians, outerAngleInRadians, outerGain)
+    return lib.raia_ma_spatializer_listener_set_cone(pListener, innerAngleInRadians, outerAngleInRadians, outerGain)
+end
+
+function MA.spatializerListenerGetCone(pListener, pInnerAngleInRadians, pOuterAngleInRadians, pOuterGain)
+    return lib.raia_ma_spatializer_listener_get_cone(pListener, pInnerAngleInRadians, pOuterAngleInRadians, pOuterGain)
+end
+
+function MA.spatializerListenerSetPosition(pListener, x, y, z)
+    return lib.raia_ma_spatializer_listener_set_position(pListener, x, y, z)
+end
+
+function MA.spatializerListenerGetPosition(pListener)
+    return lib.raia_ma_spatializer_listener_get_position(pListener)
+end
+
+function MA.spatializerListenerSetDirection(pListener, x, y, z)
+    return lib.raia_ma_spatializer_listener_set_direction(pListener, x, y, z)
+end
+
+function MA.spatializerListenerGetDirection(pListener)
+    return lib.raia_ma_spatializer_listener_get_direction(pListener)
+end
+
+function MA.spatializerListenerSetVelocity(pListener, x, y, z)
+    return lib.raia_ma_spatializer_listener_set_velocity(pListener, x, y, z)
+end
+
+function MA.spatializerListenerGetVelocity(pListener)
+    return lib.raia_ma_spatializer_listener_get_velocity(pListener)
+end
+
+function MA.spatializerListenerSetSpeedOfSound(pListener, speedOfSound)
+    return lib.raia_ma_spatializer_listener_set_speed_of_sound(pListener, speedOfSound)
+end
+
+function MA.spatializerListenerGetSpeedOfSound(pListener)
+    return lib.raia_ma_spatializer_listener_get_speed_of_sound(pListener)
+end
+
+function MA.spatializerListenerSetWorldUp(pListener, x, y, z)
+    return lib.raia_ma_spatializer_listener_set_world_up(pListener, x, y, z)
+end
+
+function MA.spatializerListenerGetWorldUp(pListener)
+    return lib.raia_ma_spatializer_listener_get_world_up(pListener)
+end
+
+function MA.spatializerListenerSetEnabled(pListener, isEnabled)
+    return lib.raia_ma_spatializer_listener_set_enabled(pListener, isEnabled)
+end
+
+function MA.spatializerListenerIsEnabled(pListener)
+    return lib.raia_ma_spatializer_listener_is_enabled(pListener)
+end
+
+function MA.spatializerConfigInit(channelsIn, channelsOut)
+    return lib.raia_ma_spatializer_config_init(channelsIn, channelsOut)
+end
+
+function MA.spatializerGetHeapSize(pConfig, pHeapSizeInBytes)
+    return lib.raia_ma_spatializer_get_heap_size(pConfig, pHeapSizeInBytes)
+end
+
+function MA.spatializerInitPreallocated(pConfig, pHeap, pSpatializer)
+    return lib.raia_ma_spatializer_init_preallocated(pConfig, pHeap, pSpatializer)
+end
+
+function MA.spatializerInit(pConfig, pAllocationCallbacks, pSpatializer)
+    return lib.raia_ma_spatializer_init(pConfig, pAllocationCallbacks, pSpatializer)
+end
+
+function MA.spatializerUninit(pSpatializer, pAllocationCallbacks)
+    return lib.raia_ma_spatializer_uninit(pSpatializer, pAllocationCallbacks)
+end
+
+function MA.spatializerProcessPcmFrames(pSpatializer, pListener, pFramesOut, pFramesIn, frameCount)
+    return lib.raia_ma_spatializer_process_pcm_frames(pSpatializer, pListener, pFramesOut, pFramesIn, frameCount)
+end
+
+function MA.spatializerSetMasterVolume(pSpatializer, volume)
+    return lib.raia_ma_spatializer_set_master_volume(pSpatializer, volume)
+end
+
+function MA.spatializerGetMasterVolume(pSpatializer, pVolume)
+    return lib.raia_ma_spatializer_get_master_volume(pSpatializer, pVolume)
+end
+
+function MA.spatializerGetInputChannels(pSpatializer)
+    return lib.raia_ma_spatializer_get_input_channels(pSpatializer)
+end
+
+function MA.spatializerGetOutputChannels(pSpatializer)
+    return lib.raia_ma_spatializer_get_output_channels(pSpatializer)
+end
+
+function MA.spatializerSetAttenuationModel(pSpatializer, attenuationModel)
+    return lib.raia_ma_spatializer_set_attenuation_model(pSpatializer, attenuationModel)
+end
+
+function MA.spatializerGetAttenuationModel(pSpatializer)
+    return lib.raia_ma_spatializer_get_attenuation_model(pSpatializer)
+end
+
+function MA.spatializerSetPositioning(pSpatializer, positioning)
+    return lib.raia_ma_spatializer_set_positioning(pSpatializer, positioning)
+end
+
+function MA.spatializerGetPositioning(pSpatializer)
+    return lib.raia_ma_spatializer_get_positioning(pSpatializer)
+end
+
+function MA.spatializerSetRolloff(pSpatializer, rolloff)
+    return lib.raia_ma_spatializer_set_rolloff(pSpatializer, rolloff)
+end
+
+function MA.spatializerGetRolloff(pSpatializer)
+    return lib.raia_ma_spatializer_get_rolloff(pSpatializer)
+end
+
+function MA.spatializerSetMinGain(pSpatializer, minGain)
+    return lib.raia_ma_spatializer_set_min_gain(pSpatializer, minGain)
+end
+
+function MA.spatializerGetMinGain(pSpatializer)
+    return lib.raia_ma_spatializer_get_min_gain(pSpatializer)
+end
+
+function MA.spatializerSetMaxGain(pSpatializer, maxGain)
+    return lib.raia_ma_spatializer_set_max_gain(pSpatializer, maxGain)
+end
+
+function MA.spatializerGetMaxGain(pSpatializer)
+    return lib.raia_ma_spatializer_get_max_gain(pSpatializer)
+end
+
+function MA.spatializerSetMinDistance(pSpatializer, minDistance)
+    return lib.raia_ma_spatializer_set_min_distance(pSpatializer, minDistance)
+end
+
+function MA.spatializerGetMinDistance(pSpatializer)
+    return lib.raia_ma_spatializer_get_min_distance(pSpatializer)
+end
+
+function MA.spatializerSetMaxDistance(pSpatializer, maxDistance)
+    return lib.raia_ma_spatializer_set_max_distance(pSpatializer, maxDistance)
+end
+
+function MA.spatializerGetMaxDistance(pSpatializer)
+    return lib.raia_ma_spatializer_get_max_distance(pSpatializer)
+end
+
+function MA.spatializerSetCone(pSpatializer, innerAngleInRadians, outerAngleInRadians, outerGain)
+    return lib.raia_ma_spatializer_set_cone(pSpatializer, innerAngleInRadians, outerAngleInRadians, outerGain)
+end
+
+function MA.spatializerGetCone(pSpatializer, pInnerAngleInRadians, pOuterAngleInRadians, pOuterGain)
+    return lib.raia_ma_spatializer_get_cone(pSpatializer, pInnerAngleInRadians, pOuterAngleInRadians, pOuterGain)
+end
+
+function MA.spatializerSetDopplerFactor(pSpatializer, dopplerFactor)
+    return lib.raia_ma_spatializer_set_doppler_factor(pSpatializer, dopplerFactor)
+end
+
+function MA.spatializerGetDopplerFactor(pSpatializer)
+    return lib.raia_ma_spatializer_get_doppler_factor(pSpatializer)
+end
+
+function MA.spatializerSetDirectionalAttenuationFactor(pSpatializer, directionalAttenuationFactor)
+    return lib.raia_ma_spatializer_set_directional_attenuation_factor(pSpatializer, directionalAttenuationFactor)
+end
+
+function MA.spatializerGetDirectionalAttenuationFactor(pSpatializer)
+    return lib.raia_ma_spatializer_get_directional_attenuation_factor(pSpatializer)
+end
+
+function MA.spatializerSetPosition(pSpatializer, x, y, z)
+    return lib.raia_ma_spatializer_set_position(pSpatializer, x, y, z)
+end
+
+function MA.spatializerGetPosition(pSpatializer)
+    return lib.raia_ma_spatializer_get_position(pSpatializer)
+end
+
+function MA.spatializerSetDirection(pSpatializer, x, y, z)
+    return lib.raia_ma_spatializer_set_direction(pSpatializer, x, y, z)
+end
+
+function MA.spatializerGetDirection(pSpatializer)
+    return lib.raia_ma_spatializer_get_direction(pSpatializer)
+end
+
+function MA.spatializerSetVelocity(pSpatializer, x, y, z)
+    return lib.raia_ma_spatializer_set_velocity(pSpatializer, x, y, z)
+end
+
+function MA.spatializerGetVelocity(pSpatializer)
+    return lib.raia_ma_spatializer_get_velocity(pSpatializer)
+end
+
+function MA.spatializerGetRelativePositionAndDirection(pSpatializer, pListener, pRelativePos, pRelativeDir)
+    return lib.raia_ma_spatializer_get_relative_position_and_direction(pSpatializer, pListener, pRelativePos, pRelativeDir)
+end
+
+
+-- Resampling
+function MA.linearResamplerConfigInit(format, channels, sampleRateIn, sampleRateOut)
+    return lib.raia_ma_linear_resampler_config_init(format, channels, sampleRateIn, sampleRateOut)
+end
+
+function MA.linearResamplerGetHeapSize(pConfig, pHeapSizeInBytes)
+    return lib.raia_ma_linear_resampler_get_heap_size(pConfig, pHeapSizeInBytes)
+end
+
+function MA.linearResamplerInitPreallocated(pConfig, pHeap, pResampler)
+    return lib.raia_ma_linear_resampler_init_preallocated(pConfig, pHeap, pResampler)
+end
+
+function MA.linearResamplerInit(pConfig, pAllocationCallbacks, pResampler)
+    return lib.raia_ma_linear_resampler_init(pConfig, pAllocationCallbacks, pResampler)
+end
+
+function MA.linearResamplerUninit(pResampler, pAllocationCallbacks)
+    return lib.raia_ma_linear_resampler_uninit(pResampler, pAllocationCallbacks)
+end
+
+function MA.linearResamplerProcessPcmFrames(pResampler, pFramesIn, pFrameCountIn, pFramesOut, pFrameCountOut)
+    return lib.raia_ma_linear_resampler_process_pcm_frames(pResampler, pFramesIn, pFrameCountIn, pFramesOut, pFrameCountOut)
+end
+
+function MA.linearResamplerSetRate(pResampler, sampleRateIn, sampleRateOut)
+    return lib.raia_ma_linear_resampler_set_rate(pResampler, sampleRateIn, sampleRateOut)
+end
+
+function MA.linearResamplerSetRateRatio(pResampler, ratioInOut)
+    return lib.raia_ma_linear_resampler_set_rate_ratio(pResampler, ratioInOut)
+end
+
+function MA.linearResamplerGetInputLatency(pResampler)
+    return lib.raia_ma_linear_resampler_get_input_latency(pResampler)
+end
+
+function MA.linearResamplerGetOutputLatency(pResampler)
+    return lib.raia_ma_linear_resampler_get_output_latency(pResampler)
+end
+
+function MA.linearResamplerGetRequiredInputFrameCount(pResampler, outputFrameCount, pInputFrameCount)
+    return lib.raia_ma_linear_resampler_get_required_input_frame_count(pResampler, outputFrameCount, pInputFrameCount)
+end
+
+function MA.linearResamplerGetExpectedOutputFrameCount(pResampler, inputFrameCount, pOutputFrameCount)
+    return lib.raia_ma_linear_resampler_get_expected_output_frame_count(pResampler, inputFrameCount, pOutputFrameCount)
+end
+
+function MA.linearResamplerReset(pResampler)
+    return lib.raia_ma_linear_resampler_reset(pResampler)
+end
+
+function MA.resamplerConfigInit(format, channels, sampleRateIn, sampleRateOut, algorithm)
+    return lib.raia_ma_resampler_config_init(format, channels, sampleRateIn, sampleRateOut, algorithm)
+end
+
+function MA.resamplerGetHeapSize(pConfig, pHeapSizeInBytes)
+    return lib.raia_ma_resampler_get_heap_size(pConfig, pHeapSizeInBytes)
+end
+
+function MA.resamplerInitPreallocated(pConfig, pHeap, pResampler)
+    return lib.raia_ma_resampler_init_preallocated(pConfig, pHeap, pResampler)
+end
+
+function MA.resamplerInit(pConfig, pAllocationCallbacks, pResampler)
+    return lib.raia_ma_resampler_init(pConfig, pAllocationCallbacks, pResampler)
+end
+
+function MA.resamplerUninit(pResampler, pAllocationCallbacks)
+    return lib.raia_ma_resampler_uninit(pResampler, pAllocationCallbacks)
+end
+
+function MA.resamplerProcessPcmFrames(pResampler, pFramesIn, pFrameCountIn, pFramesOut, pFrameCountOut)
+    return lib.raia_ma_resampler_process_pcm_frames(pResampler, pFramesIn, pFrameCountIn, pFramesOut, pFrameCountOut)
+end
+
+function MA.resamplerSetRate(pResampler, sampleRateIn, sampleRateOut)
+    return lib.raia_ma_resampler_set_rate(pResampler, sampleRateIn, sampleRateOut)
+end
+
+function MA.resamplerSetRateRatio(pResampler, ratio)
+    return lib.raia_ma_resampler_set_rate_ratio(pResampler, ratio)
+end
+
+function MA.resamplerGetInputLatency(pResampler)
+    return lib.raia_ma_resampler_get_input_latency(pResampler)
+end
+
+function MA.resamplerGetOutputLatency(pResampler)
+    return lib.raia_ma_resampler_get_output_latency(pResampler)
+end
+
+function MA.raiaMaResamplerGetRequiredInputFrameCount(pResampler, outputFrameCount, pInputFrameCount)
+    return lib.raia_ma_resampler_get_required_input_frame_count(pResampler, outputFrameCount, pInputFrameCount)
+end
+
+function MA.resamplerGetExpectedOutputFrameCount(pResampler, inputFrameCount, pOutputFrameCount)
+    return lib.raia_ma_resampler_get_expected_output_frame_count(pResampler, inputFrameCount, pOutputFrameCount)
+end
+
+function MA.resamplerReset(pResampler)
+    return lib.raia_ma_resampler_reset(pResampler)
+end
+
+
+-- Channel Conversion
+function MA.channelConverterConfigInit(format, channelsIn, pChannelMapIn, channelsOut, pChannelMapOut, mixingMode)
+    return lib.raia_ma_channel_converter_config_init(format, channelsIn, pChannelMapIn, channelsOut, pChannelMapOut, mixingMode)
+end
+
+function MA.channelConverterGetHeapSize(pConfig, pHeapSizeInBytes)
+    return lib.raia_ma_channel_converter_get_heap_size(pConfig, pHeapSizeInBytes)
+end
+
+function MA.channelConverterInitPreallocated(pConfig, pHeap, pConverter)
+    return lib.raia_ma_channel_converter_init_preallocated(pConfig, pHeap, pConverter)
+end
+
+function MA.channelConverterInit(pConfig, pAllocationCallbacks, pConverter)
+    return lib.raia_ma_channel_converter_init(pConfig, pAllocationCallbacks, pConverter)
+end
+
+function MA.channelConverterUninit(pConverter, pAllocationCallbacks)
+    return lib.raia_ma_channel_converter_uninit(pConverter, pAllocationCallbacks)
+end
+
+function MA.channelConverterProcessPcmFrames(pConverter, pFramesOut, pFramesIn, frameCount)
+    return lib.raia_ma_channel_converter_process_pcm_frames(pConverter, pFramesOut, pFramesIn, frameCount)
+end
+
+function MA.channelConverterGetInputChannelMap(pConverter, pChannelMap, channelMapCap)
+    return lib.raia_ma_channel_converter_get_input_channel_map(pConverter, pChannelMap, channelMapCap)
+end
+
+function MA.channelConverterGetOutputChannelMap(pConverter, pChannelMap, channelMapCap)
+    return lib.raia_ma_channel_converter_get_output_channel_map(pConverter, pChannelMap, channelMapCap)
+end
+
+
+-- Data Conversion
+function MA.dataConverterConfigInitDefault()
+    return lib.raia_ma_data_converter_config_init_default()
+end
+
+function MA.dataConverterConfigInit(formatIn, formatOut, channelsIn, channelsOut, sampleRateIn, sampleRateOut)
+    return lib.raia_ma_data_converter_config_init(formatIn, formatOut, channelsIn, channelsOut, sampleRateIn, sampleRateOut)
+end
+
+function MA.dataConverterGetHeapSize(pConfig, pHeapSizeInBytes)
+    return lib.raia_ma_data_converter_get_heap_size(pConfig, pHeapSizeInBytes)
+end
+
+function MA.dataConverterInitPreallocated(pConfig, pHeap, pConverter)
+    return lib.raia_ma_data_converter_init_preallocated(pConfig, pHeap, pConverter)
+end
+
+function MA.dataConverterInit(pConfig, pAllocationCallbacks, pConverter)
+    return lib.raia_ma_data_converter_init(pConfig, pAllocationCallbacks, pConverter)
+end
+
+function MA.dataConverterUninit(pConverter, pAllocationCallbacks)
+    return lib.raia_ma_data_converter_uninit(pConverter, pAllocationCallbacks)
+end
+
+function MA.dataConverterProcessPcmFrames(pConverter, pFramesIn, pFrameCountIn, pFramesOut, pFrameCountOut)
+    return lib.raia_ma_data_converter_process_pcm_frames(pConverter, pFramesIn, pFrameCountIn, pFramesOut, pFrameCountOut)
+end
+
+function MA.dataConverterSetRate(pConverter, sampleRateIn, sampleRateOut)
+    return lib.raia_ma_data_converter_set_rate(pConverter, sampleRateIn, sampleRateOut)
+end
+
+function MA.dataConverterSetRateRatio(pConverter, ratioInOut)
+    return lib.raia_ma_data_converter_set_rate_ratio(pConverter, ratioInOut)
+end
+
+function MA.dataConverterGetInputLatency(pConverter)
+    return lib.raia_ma_data_converter_get_input_latency(pConverter)
+end
+
+function MA.dataConverterGetOutputLatency(pConverter)
+    return lib.raia_ma_data_converter_get_output_latency(pConverter)
+end
+
+function MA.dataConverterGetRequiredInputFrameCount(pConverter, outputFrameCount, pInputFrameCount)
+    return lib.raia_ma_data_converter_get_required_input_frame_count(pConverter, outputFrameCount, pInputFrameCount)
+end
+
+function MA.dataConverterGetExpectedOutputFrameCount(pConverter, inputFrameCount, pOutputFrameCount)
+    return lib.raia_ma_data_converter_get_expected_output_frame_count(pConverter, inputFrameCount, pOutputFrameCount)
+end
+
+function MA.dataConverterGetInputChannelMap(pConverter, pChannelMap, channelMapCap)
+    return lib.raia_ma_data_converter_get_input_channel_map(pConverter, pChannelMap, channelMapCap)
+end
+
+function MA.dataConverterGetOutputChannelMap(pConverter, pChannelMap, channelMapCap)
+    return lib.raia_ma_data_converter_get_output_channel_map(pConverter, pChannelMap, channelMapCap)
+end
+
+function MA.dataConverterReset(pConverter)
+    return lib.raia_ma_data_converter_reset(pConverter)
+end
+
+
+-- Format Conversion
+function MA.pcmU8ToS16(pOut, pIn, count, ditherMode)
+    return lib.raia_ma_pcm_u8_to_s16(pOut, pIn, count, ditherMode)
+end
+
+function MA.pcmU8ToS24(pOut, pIn, count, ditherMode)
+    return lib.raia_ma_pcm_u8_to_s24(pOut, pIn, count, ditherMode)
+end
+
+function MA.pcmU8ToS32(pOut, pIn, count, ditherMode)
+    return lib.raia_ma_pcm_u8_to_s32(pOut, pIn, count, ditherMode)
+end
+
+function MA.pcmU8ToF32(pOut, pIn, count, ditherMode)
+    return lib.raia_ma_pcm_u8_to_f32(pOut, pIn, count, ditherMode)
+end
+
+function MA.pcmS16ToU8(pOut, pIn, count, ditherMode)
+    return lib.raia_ma_pcm_s16_to_u8(pOut, pIn, count, ditherMode)
+end
+
+function MA.pcmS16ToS24(pOut, pIn, count, ditherMode)
+    return lib.raia_ma_pcm_s16_to_s24(pOut, pIn, count, ditherMode)
+end
+
+function MA.pcmS16ToS32(pOut, pIn, count, ditherMode)
+    return lib.raia_ma_pcm_s16_to_s32(pOut, pIn, count, ditherMode)
+end
+
+function MA.pcmS16ToF32(pOut, pIn, count, ditherMode)
+    return lib.raia_ma_pcm_s16_to_f32(pOut, pIn, count, ditherMode)
+end
+
+function MA.pcmS24ToU8(pOut, pIn, count, ditherMode)
+    return lib.raia_ma_pcm_s24_to_u8(pOut, pIn, count, ditherMode)
+end
+
+function MA.pcmS24ToS16(pOut, pIn, count, ditherMode)
+    return lib.raia_ma_pcm_s24_to_s16(pOut, pIn, count, ditherMode)
+end
+
+function MA.pcmS24ToS32(pOut, pIn, count, ditherMode)
+    return lib.raia_ma_pcm_s24_to_s32(pOut, pIn, count, ditherMode)
+end
+
+function MA.pcmS24ToF32(pOut, pIn, count, ditherMode)
+    return lib.raia_ma_pcm_s24_to_f32(pOut, pIn, count, ditherMode)
+end
+
+function MA.pcmS32ToU8(pOut, pIn, count, ditherMode)
+    return lib.raia_ma_pcm_s32_to_u8(pOut, pIn, count, ditherMode)
+end
+
+function MA.pcmS32ToS16(pOut, pIn, count, ditherMode)
+    return lib.raia_ma_pcm_s32_to_s16(pOut, pIn, count, ditherMode)
+end
+
+function MA.pcmS32ToS24(pOut, pIn, count, ditherMode)
+    return lib.raia_ma_pcm_s32_to_s24(pOut, pIn, count, ditherMode)
+end
+
+function MA.pcmS32ToF32(pOut, pIn, count, ditherMode)
+    return lib.raia_ma_pcm_s32_to_f32(pOut, pIn, count, ditherMode)
+end
+
+function MA.pcmF32ToU8(pOut, pIn, count, ditherMode)
+    return lib.raia_ma_pcm_f32_to_u8(pOut, pIn, count, ditherMode)
+end
+
+function MA.pcmF32ToS16(pOut, pIn, count, ditherMode)
+    return lib.raia_ma_pcm_f32_to_s16(pOut, pIn, count, ditherMode)
+end
+
+function MA.pcmF32ToS24(pOut, pIn, count, ditherMode)
+    return lib.raia_ma_pcm_f32_to_s24(pOut, pIn, count, ditherMode)
+end
+
+function MA.pcmF32ToS32(pOut, pIn, count, ditherMode)
+    return lib.raia_ma_pcm_f32_to_s32(pOut, pIn, count, ditherMode)
+end
+
+function MA.pcmConvert(pOut, formatOut, pIn, formatIn, sampleCount, ditherMode)
+    return lib.raia_ma_pcm_convert(pOut, formatOut, pIn, formatIn, sampleCount, ditherMode)
+end
+
+function MA.convertPcmFramesFormat(pOut, formatOut, pIn, formatIn, frameCount, channels, ditherMode)
+    return lib.raia_ma_convert_pcm_frames_format(pOut, formatOut, pIn, formatIn, frameCount, channels, ditherMode)
+end
+
+function MA.deinterleavePcmFrames(format, channels, frameCount, pInterleavedPCMFrames, ppDeinterleavedPCMFrames)
+    return lib.raia_ma_deinterleave_pcm_frames(format, channels, frameCount, pInterleavedPCMFrames, ppDeinterleavedPCMFrames)
+end
+
+function MA.interleavePcmFrames(format, channels, frameCount, ppDeinterleavedPCMFrames, pInterleavedPCMFrames)
+    return lib.raia_ma_interleave_pcm_frames(format, channels, frameCount, ppDeinterleavedPCMFrames, pInterleavedPCMFrames)
+end
+
+
+-- Channel Maps
+function MA.channelMapGetChannel(pChannelMap, channelCount, channelIndex)
+    return lib.raia_ma_channel_map_get_channel(pChannelMap, channelCount, channelIndex)
+end
+
+function MA.channelMapInitBlank(pChannelMap, channels)
+    return lib.raia_ma_channel_map_init_blank(pChannelMap, channels)
+end
+
+function MA.channelMapInitStandard(standardChannelMap, pChannelMap, channelMapCap, channels)
+    return lib.raia_ma_channel_map_init_standard(standardChannelMap, pChannelMap, channelMapCap, channels)
+end
+
+function MA.channelMapCopy(pOut, pIn, channels)
+    return lib.raia_ma_channel_map_copy(pOut, pIn, channels)
+end
+
+function MA.channelMapCopyOrDefault(pOut, channelMapCapOut, pIn, channels)
+    return lib.raia_ma_channel_map_copy_or_default(pOut, channelMapCapOut, pIn, channels)
+end
+
+function MA.channelMapIsValid(pChannelMap, channels)
+    return lib.raia_ma_channel_map_is_valid(pChannelMap, channels)
+end
+
+function MA.channelMapIsEqual(pChannelMapA, pChannelMapB, channels)
+    return lib.raia_ma_channel_map_is_equal(pChannelMapA, pChannelMapB, channels)
+end
+
+function MA.channelMapIsBlank(pChannelMap, channels)
+    return lib.raia_ma_channel_map_is_blank(pChannelMap, channels)
+end
+
+function MA.channelMapContainsChannelPosition(channels, pChannelMap, channelPosition)
+    return lib.raia_ma_channel_map_contains_channel_position(channels, pChannelMap, channelPosition)
+end
+
+function MA.channelMapFindChannelPosition(channels, pChannelMap, channelPosition, pChannelIndex)
+    return lib.raia_ma_channel_map_find_channel_position(channels, pChannelMap, channelPosition, pChannelIndex)
+end
+
+function MA.channelMapToString(pChannelMap, channels, pBufferOut, bufferCap)
+    return lib.raia_ma_channel_map_to_string(pChannelMap, channels, pBufferOut, bufferCap)
+end
+
+function MA.channelPositionToString(channel)
+    return lib.raia_ma_channel_position_to_string(channel)
+end
+
+
+-- Conversion Helpers
+function MA.convertFrames(pOut, frameCountOut, formatOut, channelsOut, sampleRateOut, pIn, frameCountIn, formatIn, channelsIn, sampleRateIn)
+    return lib.raia_ma_convert_frames(pOut, frameCountOut, formatOut, channelsOut, sampleRateOut, pIn, frameCountIn, formatIn, channelsIn, sampleRateIn)
+end
+
+function MA.convertFramesEx(pOut, frameCountOut, pIn, frameCountIn, pConfig)
+    return lib.raia_ma_convert_frames_ex(pOut, frameCountOut, pIn, frameCountIn, pConfig)
+end
+
+
+-- Data Source
+function MA.dataSourceConfigInit()
+    return lib.raia_ma_data_source_config_init()
+end
+
+function MA.dataSourceInit(pConfig, pDataSource)
+    return lib.raia_ma_data_source_init(pConfig, pDataSource)
+end
+
+function MA.dataSourceUninit(pDataSource)
+    return lib.raia_ma_data_source_uninit(pDataSource)
+end
+
+function MA.dataSourceReadPcmFrames(pDataSource, pFramesOut, frameCount, pFramesRead)
+    return lib.raia_ma_data_source_read_pcm_frames(pDataSource, pFramesOut, frameCount, pFramesRead)
+end
+
+function MA.dataSourceSeekPcmFrames(pDataSource, frameCount, pFramesSeeked)
+    return lib.raia_ma_data_source_seek_pcm_frames(pDataSource, frameCount, pFramesSeeked)
+end
+
+function MA.dataSourceSeekToPcmFrame(pDataSource, frameIndex)
+    return lib.raia_ma_data_source_seek_to_pcm_frame(pDataSource, frameIndex)
+end
+
+function MA.dataSourceGetDataFormat(pDataSource, pFormat, pChannels, pSampleRate, pChannelMap, channelMapCap)
+    return lib.raia_ma_data_source_get_data_format(pDataSource, pFormat, pChannels, pSampleRate, pChannelMap, channelMapCap)
+end
+
+function MA.dataSourceGetCursorInPcmFrames(pDataSource, pCursor)
+    return lib.raia_ma_data_source_get_cursor_in_pcm_frames(pDataSource, pCursor)
+end
+
+function MA.dataSourceGetLengthInPcmFrames(pDataSource, pLength)
+    return lib.raia_ma_data_source_get_length_in_pcm_frames(pDataSource, pLength)
+end
+
+function MA.dataSourceGetCursorInSeconds(pDataSource, pCursor)
+    return lib.raia_ma_data_source_get_cursor_in_seconds(pDataSource, pCursor)
+end
+
+function MA.dataSourceGetLengthInSeconds(pDataSource, pLength)
+    return lib.raia_ma_data_source_get_length_in_seconds(pDataSource, pLength)
+end
+
+function MA.dataSourceSetLooping(pDataSource, isLooping)
+    return lib.raia_ma_data_source_set_looping(pDataSource, isLooping)
+end
+
+function MA.dataSourceIsLooping(pDataSource)
+    return lib.raia_ma_data_source_is_looping(pDataSource)
+end
+
+function MA.dataSourceSetRangeInPcmFrames(pDataSource, rangeBegInFrames, rangeEndInFrames)
+    return lib.raia_ma_data_source_set_range_in_pcm_frames(pDataSource, rangeBegInFrames, rangeEndInFrames)
+end
+
+function MA.dataSourceGetRangeInPcmFrames(pDataSource, pRangeBegInFrames, pRangeEndInFrames)
+    return lib.raia_ma_data_source_get_range_in_pcm_frames(pDataSource, pRangeBegInFrames, pRangeEndInFrames)
+end
+
+function MA.dataSourceSetLoopPointInPcmFrames(pDataSource, loopBegInFrames, loopEndInFrames)
+    return lib.raia_ma_data_source_set_loop_point_in_pcm_frames(pDataSource, loopBegInFrames, loopEndInFrames)
+end
+
+function MA.dataSourceGetLoopPointInPcmFrames(pDataSource, pLoopBegInFrames, pLoopEndInFrames)
+    return lib.raia_ma_data_source_get_loop_point_in_pcm_frames(pDataSource, pLoopBegInFrames, pLoopEndInFrames)
+end
+
+function MA.dataSourceSetCurrent(pDataSource, pCurrentDataSource)
+    return lib.raia_ma_data_source_set_current(pDataSource, pCurrentDataSource)
+end
+
+function MA.dataSourceGetCurrent(pDataSource)
+    return lib.raia_ma_data_source_get_current(pDataSource)
+end
+
+function MA.dataSourceSetNext(pDataSource, pNextDataSource)
+    return lib.raia_ma_data_source_set_next(pDataSource, pNextDataSource)
+end
+
+function MA.dataSourceGetNext(pDataSource)
+    return lib.raia_ma_data_source_get_next(pDataSource)
+end
+
+function MA.dataSourceSetNextCallback(pDataSource, onGetNext)
+    return lib.raia_ma_data_source_set_next_callback(pDataSource, onGetNext)
+end
+
+function MA.dataSourceGetNextCallback(pDataSource)
+    return lib.raia_ma_data_source_get_next_callback(pDataSource)
+end
+
+function MA.audioBufferRefInit(format, channels, pData, sizeInFrames, pAudioBufferRef)
+    return lib.raia_ma_audio_buffer_ref_init(format, channels, pData, sizeInFrames, pAudioBufferRef)
+end
+
+function MA.audioBufferRefUninit(pAudioBufferRef)
+    return lib.raia_ma_audio_buffer_ref_uninit(pAudioBufferRef)
+end
+
+function MA.audioBufferRefSetData(pAudioBufferRef, pData, sizeInFrames)
+    return lib.raia_ma_audio_buffer_ref_set_data(pAudioBufferRef, pData, sizeInFrames)
+end
+
+function MA.audioBufferRefReadPcmFrames(pAudioBufferRef, pFramesOut, frameCount, loop)
+    return lib.raia_ma_audio_buffer_ref_read_pcm_frames(pAudioBufferRef, pFramesOut, frameCount, loop)
+end
+
+function MA.audioBufferRefSeekToPcmFrame(pAudioBufferRef, frameIndex)
+    return lib.raia_ma_audio_buffer_ref_seek_to_pcm_frame(pAudioBufferRef, frameIndex)
+end
+
+function MA.audioBufferRefMap(pAudioBufferRef, ppFramesOut, pFrameCount)
+    return lib.raia_ma_audio_buffer_ref_map(pAudioBufferRef, ppFramesOut, pFrameCount)
+end
+
+function MA.audioBufferRefUnmap(pAudioBufferRef, frameCount)
+    return lib.raia_ma_audio_buffer_ref_unmap(pAudioBufferRef, frameCount)
+end
+
+function MA.audioBufferRefAtEnd(pAudioBufferRef)
+    return lib.raia_ma_audio_buffer_ref_at_end(pAudioBufferRef)
+end
+
+function MA.audioBufferRefGetCursorInPcmFrames(pAudioBufferRef, pCursor)
+    return lib.raia_ma_audio_buffer_ref_get_cursor_in_pcm_frames(pAudioBufferRef, pCursor)
+end
+
+function MA.audioBufferRefGetLengthInPcmFrames(pAudioBufferRef, pLength)
+    return lib.raia_ma_audio_buffer_ref_get_length_in_pcm_frames(pAudioBufferRef, pLength)
+end
+
+function MA.audioBufferRefGetAvailableFrames(pAudioBufferRef, pAvailableFrames)
+    return lib.raia_ma_audio_buffer_ref_get_available_frames(pAudioBufferRef, pAvailableFrames)
+end
+
+function MA.audioBufferConfigInit(format, channels, sizeInFrames, pData, pAllocationCallbacks)
+    return lib.raia_ma_audio_buffer_config_init(format, channels, sizeInFrames, pData, pAllocationCallbacks)
+end
+
+function MA.audioBufferInit(pConfig, pAudioBuffer)
+    return lib.raia_ma_audio_buffer_init(pConfig, pAudioBuffer)
+end
+
+function MA.audioBufferInitCopy(pConfig, pAudioBuffer)
+    return lib.raia_ma_audio_buffer_init_copy(pConfig, pAudioBuffer)
+end
+
+function MA.audioBufferAllocAndInit(pConfig, ppAudioBuffer)
+    return lib.raia_ma_audio_buffer_alloc_and_init(pConfig, ppAudioBuffer)
+end
+
+function MA.audioBufferUninit(pAudioBuffer)
+    return lib.raia_ma_audio_buffer_uninit(pAudioBuffer)
+end
+
+function MA.audioBufferUninitAndFree(pAudioBuffer)
+    return lib.raia_ma_audio_buffer_uninit_and_free(pAudioBuffer)
+end
+
+function MA.audioBufferReadPcmFrames(pAudioBuffer, pFramesOut, frameCount, loop)
+    return lib.raia_ma_audio_buffer_read_pcm_frames(pAudioBuffer, pFramesOut, frameCount, loop)
+end
+
+function MA.audioBufferSeekToPcmFrame(pAudioBuffer, frameIndex)
+    return lib.raia_ma_audio_buffer_seek_to_pcm_frame(pAudioBuffer, frameIndex)
+end
+
+function MA.audioBufferMap(pAudioBuffer, ppFramesOut, pFrameCount)
+    return lib.raia_ma_audio_buffer_map(pAudioBuffer, ppFramesOut, pFrameCount)
+end
+
+function MA.audioBufferUnmap(pAudioBuffer, frameCount)
+    return lib.raia_ma_audio_buffer_unmap(pAudioBuffer, frameCount)
+end
+
+function MA.audioBufferAtEnd(pAudioBuffer)
+    return lib.raia_ma_audio_buffer_at_end(pAudioBuffer)
+end
+
+function MA.audioBufferGetCursorInPcmFrames(pAudioBuffer, pCursor)
+    return lib.raia_ma_audio_buffer_get_cursor_in_pcm_frames(pAudioBuffer, pCursor)
+end
+
+function MA.audioBufferGetLengthInPcmFrames(pAudioBuffer, pLength)
+    return lib.raia_ma_audio_buffer_get_length_in_pcm_frames(pAudioBuffer, pLength)
+end
+
+function MA.audioBufferGetAvailableFrames(pAudioBuffer, pAvailableFrames)
+    return lib.raia_ma_audio_buffer_get_available_frames(pAudioBuffer, pAvailableFrames)
+end
+
+
+-- Ring Buffer
+function MA.pagedAudioBufferDataInit(format, channels, pData)
+    return lib.raia_ma_paged_audio_buffer_data_init(format, channels, pData)
+end
+
+function MA.pagedAudioBufferDataUninit(pData, pAllocationCallbacks)
+    return lib.raia_ma_paged_audio_buffer_data_uninit(pData, pAllocationCallbacks)
+end
+
+function MA.pagedAudioBufferDataGetHead(pData)
+    return lib.raia_ma_paged_audio_buffer_data_get_head(pData)
+end
+
+function MA.pagedAudioBufferDataGetTail(pData)
+    return lib.raia_ma_paged_audio_buffer_data_get_tail(pData)
+end
+
+function MA.pagedAudioBufferDataGetLengthInPcmFrames(pData, pLength)
+    return lib.raia_ma_paged_audio_buffer_data_get_length_in_pcm_frames(pData, pLength)
+end
+
+function MA.pagedAudioBufferDataAllocatePage(pData, pageSizeInFrames, pInitialData, pAllocationCallbacks, ppPage)
+    return lib.raia_ma_paged_audio_buffer_data_allocate_page(pData, pageSizeInFrames, pInitialData, pAllocationCallbacks, ppPage)
+end
+
+function MA.pagedAudioBufferDataFreePage(pData, pPage, pAllocationCallbacks)
+    return lib.raia_ma_paged_audio_buffer_data_free_page(pData, pPage, pAllocationCallbacks)
+end
+
+function MA.pagedAudioBufferDataAppendPage(pData, pPage)
+    return lib.raia_ma_paged_audio_buffer_data_append_page(pData, pPage)
+end
+
+function MA.pagedAudioBufferDataAllocateAndAppendPage(pData, pageSizeInFrames, pInitialData, pAllocationCallbacks)
+    return lib.raia_ma_paged_audio_buffer_data_allocate_and_append_page(pData, pageSizeInFrames, pInitialData, pAllocationCallbacks)
+end
+
+function MA.pagedAudioBufferConfigInit(pData)
+    return lib.raia_ma_paged_audio_buffer_config_init(pData)
+end
+
+function MA.pagedAudioBufferInit(pConfig, pPagedAudioBuffer)
+    return lib.raia_ma_paged_audio_buffer_init(pConfig, pPagedAudioBuffer)
+end
+
+function MA.pagedAudioBufferUninit(pPagedAudioBuffer)
+    return lib.raia_ma_paged_audio_buffer_uninit(pPagedAudioBuffer)
+end
+
+function MA.pagedAudioBufferReadPcmFrames(pPagedAudioBuffer, pFramesOut, frameCount, pFramesRead)
+    return lib.raia_ma_paged_audio_buffer_read_pcm_frames(pPagedAudioBuffer, pFramesOut, frameCount, pFramesRead)
+end
+
+function MA.pagedAudioBufferSeekToPcmFrame(pPagedAudioBuffer, frameIndex)
+    return lib.raia_ma_paged_audio_buffer_seek_to_pcm_frame(pPagedAudioBuffer, frameIndex)
+end
+
+function MA.pagedAudioBufferGetCursorInPcmFrames(pPagedAudioBuffer, pCursor)
+    return lib.raia_ma_paged_audio_buffer_get_cursor_in_pcm_frames(pPagedAudioBuffer, pCursor)
+end
+
+function MA.pagedAudioBufferGetLengthInPcmFrames(pPagedAudioBuffer, pLength)
+    return lib.raia_ma_paged_audio_buffer_get_length_in_pcm_frames(pPagedAudioBuffer, pLength)
+end
+
+
+-- Ring Buffer
+function MA.rbInitEx(subbufferSizeInBytes, subbufferCount, subbufferStrideInBytes, pOptionalPreallocatedBuffer, pAllocationCallbacks, pRB)
+    return lib.raia_ma_rb_init_ex(subbufferSizeInBytes, subbufferCount, subbufferStrideInBytes, pOptionalPreallocatedBuffer, pAllocationCallbacks, pRB)
+end
+
+function MA.rbInit(bufferSizeInBytes, pOptionalPreallocatedBuffer, pAllocationCallbacks, pRB)
+    return lib.raia_ma_rb_init(bufferSizeInBytes, pOptionalPreallocatedBuffer, pAllocationCallbacks, pRB)
+end
+
+function MA.rbUninit(pRB)
+    return lib.raia_ma_rb_uninit(pRB)
+end
+
+function MA.rbReset(pRB)
+    return lib.raia_ma_rb_reset(pRB)
+end
+
+function MA.rbAcquireRead(pRB, pSizeInBytes, ppBufferOut)
+    return lib.raia_ma_rb_acquire_read(pRB, pSizeInBytes, ppBufferOut)
+end
+
+function MA.rbCommitRead(pRB, sizeInBytes)
+    return lib.raia_ma_rb_commit_read(pRB, sizeInBytes)
+end
+
+function MA.rbAcquireWrite(pRB, pSizeInBytes, ppBufferOut)
+    return lib.raia_ma_rb_acquire_write(pRB, pSizeInBytes, ppBufferOut)
+end
+
+function MA.rbCommitWrite(pRB, sizeInBytes)
+    return lib.raia_ma_rb_commit_write(pRB, sizeInBytes)
+end
+
+function MA.rbSeekRead(pRB, offsetInBytes)
+    return lib.raia_ma_rb_seek_read(pRB, offsetInBytes)
+end
+
+function MA.rbSeekWrite(pRB, offsetInBytes)
+    return lib.raia_ma_rb_seek_write(pRB, offsetInBytes)
+end
+
+function MA.rbPointerDistance(pRB)
+    return lib.raia_ma_rb_pointer_distance(pRB)
+end
+
+function MA.rbAvailableRead(pRB)
+    return lib.raia_ma_rb_available_read(pRB)
+end
+
+function MA.rbAvailableWrite(pRB)
+    return lib.raia_ma_rb_available_write(pRB)
+end
+
+function MA.rbGetSubbufferSize(pRB)
+    return lib.raia_ma_rb_get_subbuffer_size(pRB)
+end
+
+function MA.rbGetSubbufferStride(pRB)
+    return lib.raia_ma_rb_get_subbuffer_stride(pRB)
+end
+
+function MA.rbGetSubbufferOffset(pRB, subbufferIndex)
+    return lib.raia_ma_rb_get_subbuffer_offset(pRB, subbufferIndex)
+end
+
+function MA.rbGetSubbufferPtr(pRB, subbufferIndex, pBuffer)
+    return lib.raia_ma_rb_get_subbuffer_ptr(pRB, subbufferIndex, pBuffer)
+end
+
+function MA.pcmRbInitEx(format, channels, subbufferSizeInFrames, subbufferCount, subbufferStrideInFrames, pOptionalPreallocatedBuffer, pAllocationCallbacks, pRB)
+    return lib.raia_ma_pcm_rb_init_ex(format, channels, subbufferSizeInFrames, subbufferCount, subbufferStrideInFrames, pOptionalPreallocatedBuffer, pAllocationCallbacks, pRB)
+end
+
+function MA.pcmRbInit(format, channels, bufferSizeInFrames, pOptionalPreallocatedBuffer, pAllocationCallbacks, pRB)
+    return lib.raia_ma_pcm_rb_init(format, channels, bufferSizeInFrames, pOptionalPreallocatedBuffer, pAllocationCallbacks, pRB)
+end
+
+function MA.pcmRbUninit(pRB)
+    return lib.raia_ma_pcm_rb_uninit(pRB)
+end
+
+function MA.pcmRbReset(pRB)
+    return lib.raia_ma_pcm_rb_reset(pRB)
+end
+
+function MA.pcmRbAcquireRead(pRB, pSizeInFrames, ppBufferOut)
+    return lib.raia_ma_pcm_rb_acquire_read(pRB, pSizeInFrames, ppBufferOut)
+end
+
+function MA.pcmRbCommitRead(pRB, sizeInFrames)
+    return lib.raia_ma_pcm_rb_commit_read(pRB, sizeInFrames)
+end
+
+function MA.pcmRbAcquireWrite(pRB, pSizeInFrames, ppBufferOut)
+    return lib.raia_ma_pcm_rb_acquire_write(pRB, pSizeInFrames, ppBufferOut)
+end
+
+function MA.pcmRbCommitWrite(pRB, sizeInFrames)
+    return lib.raia_ma_pcm_rb_commit_write(pRB, sizeInFrames)
+end
+
+function MA.pcmRbSeekRead(pRB, offsetInFrames)
+    return lib.raia_ma_pcm_rb_seek_read(pRB, offsetInFrames)
+end
+
+function MA.pcmRbSeekWrite(pRB, offsetInFrames)
+    return lib.raia_ma_pcm_rb_seek_write(pRB, offsetInFrames)
+end
+
+function MA.pcmRbPointerDistance(pRB)
+    return lib.raia_ma_pcm_rb_pointer_distance(pRB)
+end
+
+function MA.pcmRbAvailableRead(pRB)
+    return lib.raia_ma_pcm_rb_available_read(pRB)
+end
+
+function MA.pcmRbAvailableWrite(pRB)
+    return lib.raia_ma_pcm_rb_available_write(pRB)
+end
+
+function MA.pcmRbGetSubbufferSize(pRB)
+    return lib.raia_ma_pcm_rb_get_subbuffer_size(pRB)
+end
+
+function MA.pcmRbGetSubbufferStride(pRB)
+    return lib.raia_ma_pcm_rb_get_subbuffer_stride(pRB)
+end
+
+function MA.pcmRbGetSubbufferOffset(pRB, subbufferIndex)
+    return lib.raia_ma_pcm_rb_get_subbuffer_offset(pRB, subbufferIndex)
+end
+
+function MA.pcmRbGetSubbufferPtr(pRB, subbufferIndex, pBuffer)
+    return lib.raia_ma_pcm_rb_get_subbuffer_ptr(pRB, subbufferIndex, pBuffer)
+end
+
+function MA.pcmRbGetFormat(pRB)
+    return lib.raia_ma_pcm_rb_get_format(pRB)
+end
+
+function MA.pcmRbGetChannels(pRB)
+    return lib.raia_ma_pcm_rb_get_channels(pRB)
+end
+
+function MA.pcmRbGetSampleRate(pRB)
+    return lib.raia_ma_pcm_rb_get_sample_rate(pRB)
+end
+
+function MA.pcmRbSetSampleRate(pRB, sampleRate)
+    return lib.raia_ma_pcm_rb_set_sample_rate(pRB, sampleRate)
+end
+
+function MA.duplexRbInit(captureFormat, captureChannels, sampleRate, captureInternalSampleRate, captureInternalPeriodSizeInFrames, pAllocationCallbacks, pRB)
+    return lib.raia_ma_duplex_rb_init(captureFormat, captureChannels, sampleRate, captureInternalSampleRate, captureInternalPeriodSizeInFrames, pAllocationCallbacks, pRB)
+end
+
+function MA.duplexRbUninit(pRB)
+    return lib.raia_ma_duplex_rb_uninit(pRB)
+end
+
+
+-- Miscellaneous Helpers
+function MA.resultDescription(result)
+    return lib.raia_ma_result_description(result)
+end
+
+function MA.malloc(sz, pAllocationCallbacks)
+    return lib.raia_ma_malloc(sz, pAllocationCallbacks)
+end
+
+function MA.calloc(sz, pAllocationCallbacks)
+    return lib.raia_ma_calloc(sz, pAllocationCallbacks)
+end
+
+function MA.realloc(p, sz, pAllocationCallbacks)
+    return lib.raia_ma_realloc(p, sz, pAllocationCallbacks)
+end
+
+function MA.free(p, pAllocationCallbacks)
+    return lib.raia_ma_free(p, pAllocationCallbacks)
+end
+
+function MA.alignedMalloc(sz, alignment, pAllocationCallbacks)
+    return lib.raia_ma_aligned_malloc(sz, alignment, pAllocationCallbacks)
+end
+
+function MA.alignedFree(p, pAllocationCallbacks)
+    return lib.raia_ma_aligned_free(p, pAllocationCallbacks)
+end
+
+function MA.getFormatName(format)
+    return lib.raia_ma_get_format_name(format)
+end
+
+function MA.blendF32(pOut, pInA, pInB, factor, channels)
+    return lib.raia_ma_blend_f32(pOut, pInA, pInB, factor, channels)
+end
+
+function MA.getBytesPerSample(format)
+    return lib.raia_ma_get_bytes_per_sample(format)
+end
+
+function MA.logLevelToString(logLevel)
+    return lib.raia_ma_log_level_to_string(logLevel)
+end
+
+
+-- Synchronization
+function MA.spinlockLock(pSpinlock)
+    return lib.raia_ma_spinlock_lock(pSpinlock)
+end
+
+function MA.spinlockLockNoyield(pSpinlock)
+    return lib.raia_ma_spinlock_lock_noyield(pSpinlock)
+end
+
+function MA.spinlockUnlock(pSpinlock)
+    return lib.raia_ma_spinlock_unlock(pSpinlock)
+end
+
+function MA.mutexInit(pMutex)
+    return lib.raia_ma_mutex_init(pMutex)
+end
+
+function MA.mutexUninit(pMutex)
+    return lib.raia_ma_mutex_uninit(pMutex)
+end
+
+function MA.mutexLock(pMutex)
+    return lib.raia_ma_mutex_lock(pMutex)
+end
+
+function MA.mutexUnlock(pMutex)
+    return lib.raia_ma_mutex_unlock(pMutex)
+end
+
+function MA.eventInit(pEvent)
+    return lib.raia_ma_event_init(pEvent)
+end
+
+function MA.eventUninit(pEvent)
+    return lib.raia_ma_event_uninit(pEvent)
+end
+
+function MA.eventWait(pEvent)
+    return lib.raia_ma_event_wait(pEvent)
+end
+
+function MA.eventSignal(pEvent)
+    return lib.raia_ma_event_signal(pEvent)
+end
+
+
+-- Fence
+function MA.fenceInit(pFence)
+    return lib.raia_ma_fence_init(pFence)
+end
+
+function MA.fenceUninit(pFence)
+    return lib.raia_ma_fence_uninit(pFence)
+end
+
+function MA.fenceAcquire(pFence)
+    return lib.raia_ma_fence_acquire(pFence)
+end
+
+function MA.fenceRelease(pFence)
+    return lib.raia_ma_fence_release(pFence)
+end
+
+function MA.fenceWait(pFence)
+    return lib.raia_ma_fence_wait(pFence)
+end
+
+
+-- Notification callback
+function MA.asyncNotificationSignal(pNotification)
+    return lib.raia_ma_async_notification_signal(pNotification)
+end
+
+
+-- Simple polling notification
+function MA.asyncNotificationPollInit(pNotificationPoll)
+    return lib.raia_ma_async_notification_poll_init(pNotificationPoll)
+end
+
+function MA.asyncNotificationPollIsSignalled(pNotificationPoll)
+    return lib.raia_ma_async_notification_poll_is_signalled(pNotificationPoll)
+end
+
+
+-- Event Notification
+function MA.asyncNotificationEventInit(pNotificationEvent)
+    return lib.raia_ma_async_notification_event_init(pNotificationEvent)
+end
+
+function MA.asyncNotificationEventUninit(pNotificationEvent)
+    return lib.raia_ma_async_notification_event_uninit(pNotificationEvent)
+end
+
+function MA.asyncNotificationEventWait(pNotificationEvent)
+    return lib.raia_ma_async_notification_event_wait(pNotificationEvent)
+end
+
+function MA.asyncNotificationEventSignal(pNotificationEvent)
+    return lib.raia_ma_async_notification_event_signal(pNotificationEvent)
+end
+
+
+-- Slot Allocator
+function MA.slotAllocatorConfigInit(capacity)
+    return lib.raia_ma_slot_allocator_config_init(capacity)
+end
+
+function MA.slotAllocatorGetHeapSize(pConfig, pHeapSizeInBytes)
+    return lib.raia_ma_slot_allocator_get_heap_size(pConfig, pHeapSizeInBytes)
+end
+
+function MA.slotAllocatorInitPreallocated(pConfig, pHeap, pAllocator)
+    return lib.raia_ma_slot_allocator_init_preallocated(pConfig, pHeap, pAllocator)
+end
+
+function MA.slotAllocatorInit(pConfig, pAllocationCallbacks, pAllocator)
+    return lib.raia_ma_slot_allocator_init(pConfig, pAllocationCallbacks, pAllocator)
+end
+
+function MA.slotAllocatorUninit(pAllocator, pAllocationCallbacks)
+    return lib.raia_ma_slot_allocator_uninit(pAllocator, pAllocationCallbacks)
+end
+
+function MA.slotAllocatorAlloc(pAllocator, pSlot)
+    return lib.raia_ma_slot_allocator_alloc(pAllocator, pSlot)
+end
+
+function MA.slotAllocatorFree(pAllocator, slot)
+    return lib.raia_ma_slot_allocator_free(pAllocator, slot)
+end
+
+function MA.jobInit(code)
+    return lib.raia_ma_job_init(code)
+end
+
+function MA.jobProcess(pJob)
+    return lib.raia_ma_job_process(pJob)
+end
+
+function MA.jobQueueConfigInit(flags, capacity)
+    return lib.raia_ma_job_queue_config_init(flags, capacity)
+end
+
+function MA.jobQueueGetHeapSize(pConfig, pHeapSizeInBytes)
+    return lib.raia_ma_job_queue_get_heap_size(pConfig, pHeapSizeInBytes)
+end
+
+function MA.jobQueueInitPreallocated(pConfig, pHeap, pQueue)
+    return lib.raia_ma_job_queue_init_preallocated(pConfig, pHeap, pQueue)
+end
+
+function MA.jobQueueInit(pConfig, pAllocationCallbacks, pQueue)
+    return lib.raia_ma_job_queue_init(pConfig, pAllocationCallbacks, pQueue)
+end
+
+function MA.jobQueueUninit(pQueue, pAllocationCallbacks)
+    return lib.raia_ma_job_queue_uninit(pQueue, pAllocationCallbacks)
+end
+
+function MA.jobQueuePost(pQueue, pJob)
+    return lib.raia_ma_job_queue_post(pQueue, pJob)
+end
+
+function MA.jobQueueNext(pQueue, pJob)
+    return lib.raia_ma_job_queue_next(pQueue, pJob)
+end
+
+
+-- DEVICE I/O
+function MA.deviceJobThreadConfigInit()
+    return lib.raia_ma_device_job_thread_config_init()
+end
+
+function MA.deviceJobThreadInit(pConfig, pAllocationCallbacks, pJobThread)
+    return lib.raia_ma_device_job_thread_init(pConfig, pAllocationCallbacks, pJobThread)
+end
+
+function MA.deviceJobThreadUninit(pJobThread, pAllocationCallbacks)
+    return lib.raia_ma_device_job_thread_uninit(pJobThread, pAllocationCallbacks)
+end
+
+function MA.deviceJobThreadPost(pJobThread, pJob)
+    return lib.raia_ma_device_job_thread_post(pJobThread, pJob)
+end
+
+function MA.deviceJobThreadNext(pJobThread, pJob)
+    return lib.raia_ma_device_job_thread_next(pJobThread, pJob)
+end
+
+-----
+function MA.contextConfigInit()
+    return lib.raia_ma_context_config_init()
+end
+
+function MA.contextInit(backends, backendCount, pConfig, pContext)
+    return lib.raia_ma_context_init(backends, backendCount, pConfig, pContext)
+end
+
+function MA.contextUninit(pContext)
+    return lib.raia_ma_context_uninit(pContext)
+end
+
+function MA.contextSizeof()
+    return lib.raia_ma_context_sizeof()
+end
+
+function MA.contextGetLog(pContext)
+    return lib.raia_ma_context_get_log(pContext)
+end
+
+function MA.contextEnumerateDevices(pContext, callback, pUserData)
+    return lib.raia_ma_context_enumerate_devices(pContext, callback, pUserData)
+end
+
+function MA.contextGetDevices(pContext, ppPlaybackDeviceInfos, pPlaybackDeviceCount, ppCaptureDeviceInfos, pCaptureDeviceCount)
+    return lib.raia_ma_context_get_devices(pContext, ppPlaybackDeviceInfos, pPlaybackDeviceCount, ppCaptureDeviceInfos, pCaptureDeviceCount)
+end
+
+function MA.contextGetDeviceInfo(pContext, deviceType, pDeviceID, pDeviceInfo)
+    return lib.raia_ma_context_get_device_info(pContext, deviceType, pDeviceID, pDeviceInfo)
+end
+
+function MA.contextIsLoopbackSupported(pContext)
+    return lib.raia_ma_context_is_loopback_supported(pContext)
+end
+
+function MA.deviceConfigInit(deviceType)
+    return lib.raia_ma_device_config_init(deviceType)
+end
+
+function MA.deviceInit(pContext, pConfig, pDevice)
+    return lib.raia_ma_device_init(pContext, pConfig, pDevice)
+end
+
+function MA.deviceInitEx(backends, backendCount, pContextConfig, pConfig, pDevice)
+    return lib.raia_ma_device_init_ex(backends, backendCount, pContextConfig, pConfig, pDevice)
+end
+
+function MA.deviceUninit(pDevice)
+    return lib.raia_ma_device_uninit(pDevice)
+end
+
+function MA.deviceGetContext(pDevice)
+    return lib.raia_ma_device_get_context(pDevice)
+end
+
+function MA.deviceGetLog(pDevice)
+    return lib.raia_ma_device_get_log(pDevice)
+end
+
+function MA.deviceGetInfo(pDevice, type, pDeviceInfo)
+    return lib.raia_ma_device_get_info(pDevice, type, pDeviceInfo)
+end
+
+function MA.deviceGetName(pDevice, type, pName, nameCap, pLengthNotIncludingNullTerminator)
+    return lib.raia_ma_device_get_name(pDevice, type, pName, nameCap, pLengthNotIncludingNullTerminator)
+end
+
+function MA.deviceStart(pDevice)
+    return lib.raia_ma_device_start(pDevice)
+end
+
+function MA.deviceStop(pDevice)
+    return lib.raia_ma_device_stop(pDevice)
+end
+
+function MA.deviceIsStarted(pDevice)
+    return lib.raia_ma_device_is_started(pDevice)
+end
+
+function MA.deviceGetState(pDevice)
+    return lib.raia_ma_device_get_state(pDevice)
+end
+
+function MA.devicePostInit(pDevice, deviceType, pPlaybackDescriptor, pCaptureDescriptor)
+    return lib.raia_ma_device_post_init(pDevice, deviceType, pPlaybackDescriptor, pCaptureDescriptor)
+end
+
+function MA.deviceSetMasterVolume(pDevice, volume)
+    return lib.raia_ma_device_set_master_volume(pDevice, volume)
+end
+
+function MA.deviceGetMasterVolume(pDevice, pVolume)
+    return lib.raia_ma_device_get_master_volume(pDevice, pVolume)
+end
+
+function MA.deviceSetMasterVolumeDb(pDevice, gainDB)
+    return lib.raia_ma_device_set_master_volume_db(pDevice, gainDB)
+end
+
+function MA.deviceGetMasterVolumeDb(pDevice, pGainDB)
+    return lib.raia_ma_device_get_master_volume_db(pDevice, pGainDB)
+end
+
+function MA.deviceHandleBackendDataCallback(pDevice, pOutput, pInput, frameCount)
+    return lib.raia_ma_device_handle_backend_data_callback(pDevice, pOutput, pInput, frameCount)
+end
+
+function MA.calculateBufferSizeInFramesFromDescriptor(pDescriptor, nativeSampleRate, performanceProfile)
+    return lib.raia_ma_calculate_buffer_size_in_frames_from_descriptor(pDescriptor, nativeSampleRate, performanceProfile)
+end
+
+function MA.getBackendName(backend)
+    return lib.raia_ma_get_backend_name(backend)
+end
+
+function MA.getBackendFromName(pBackendName, pBackend)
+    return lib.raia_ma_get_backend_from_name(pBackendName, pBackend)
+end
+
+function MA.isBackendEnabled(backend)
+    return lib.raia_ma_is_backend_enabled(backend)
+end
+
+function MA.getEnabledBackends(pBackends, backendCap, pBackendCount)
+    return lib.raia_ma_get_enabled_backends(pBackends, backendCap, pBackendCount)
+end
+
+function MA.isLoopbackSupported(backend)
+    return lib.raia_ma_is_loopback_supported(backend)
+end
+
+
+-- Utilities
+function MA.calculateBufferSizeInMillisecondsFromFrames(bufferSizeInFrames, sampleRate)
+    return lib.raia_ma_calculate_buffer_size_in_milliseconds_from_frames(bufferSizeInFrames, sampleRate)
+end
+
+function MA.calculateBufferSizeInFramesFromMilliseconds(bufferSizeInMilliseconds, sampleRate)
+    return lib.raia_ma_calculate_buffer_size_in_frames_from_milliseconds(bufferSizeInMilliseconds, sampleRate)
+end
+
+function MA.copyPcmFrames(dst, src, frameCount, format, channels)
+    return lib.raia_ma_copy_pcm_frames(dst, src, frameCount, format, channels)
+end
+
+function MA.silencePcmFrames(p, frameCount, format, channels)
+    return lib.raia_ma_silence_pcm_frames(p, frameCount, format, channels)
+end
+
+function MA.offsetPcmFramesPtr(p, offsetInFrames, format, channels)
+    return lib.raia_ma_offset_pcm_frames_ptr(p, offsetInFrames, format, channels)
+end
+
+function MA.offsetPcmFramesConstPtr(p, offsetInFrames, format, channels)
+    return lib.raia_ma_offset_pcm_frames_const_ptr(p, offsetInFrames, format, channels)
+end
+
+function MA.clipSamplesU8(pDst, pSrc, count)
+    return lib.raia_ma_clip_samples_u8(pDst, pSrc, count)
+end
+
+function MA.clipSamplesS16(pDst, pSrc, count)
+    return lib.raia_ma_clip_samples_s16(pDst, pSrc, count)
+end
+
+function MA.clipSamplesS24(pDst, pSrc, count)
+    return lib.raia_ma_clip_samples_s24(pDst, pSrc, count)
+end
+
+function MA.clipSamplesS32(pDst, pSrc, count)
+    return lib.raia_ma_clip_samples_s32(pDst, pSrc, count)
+end
+
+function MA.clipSamplesF32(pDst, pSrc, count)
+    return lib.raia_ma_clip_samples_f32(pDst, pSrc, count)
+end
+
+function MA.clipPcmFrames(pDst, pSrc, frameCount, format, channels)
+    return lib.raia_ma_clip_pcm_frames(pDst, pSrc, frameCount, format, channels)
+end
+
+function MA.copyAndApplyVolumeFactorU8(pSamplesOut, pSamplesIn, sampleCount, factor)
+    return lib.raia_ma_copy_and_apply_volume_factor_u8(pSamplesOut, pSamplesIn, sampleCount, factor)
+end
+
+function MA.copyAndApplyVolumeFactorS16(pSamplesOut, pSamplesIn, sampleCount, factor)
+    return lib.raia_ma_copy_and_apply_volume_factor_s16(pSamplesOut, pSamplesIn, sampleCount, factor)
+end
+
+function MA.copyAndApplyVolumeFactorS24(pSamplesOut, pSamplesIn, sampleCount, factor)
+    return lib.raia_ma_copy_and_apply_volume_factor_s24(pSamplesOut, pSamplesIn, sampleCount, factor)
+end
+
+function MA.copyAndApplyVolumeFactorS32(pSamplesOut, pSamplesIn, sampleCount, factor)
+    return lib.raia_ma_copy_and_apply_volume_factor_s32(pSamplesOut, pSamplesIn, sampleCount, factor)
+end
+
+function MA.copyAndApplyVolumeFactorF32(pSamplesOut, pSamplesIn, sampleCount, factor)
+    return lib.raia_ma_copy_and_apply_volume_factor_f32(pSamplesOut, pSamplesIn, sampleCount, factor)
+end
+
+function MA.applyVolumeFactorU8(pSamples, sampleCount, factor)
+    return lib.raia_ma_apply_volume_factor_u8(pSamples, sampleCount, factor)
+end
+
+function MA.applyVolumeFactorS16(pSamples, sampleCount, factor)
+    return lib.raia_ma_apply_volume_factor_s16(pSamples, sampleCount, factor)
+end
+
+function MA.applyVolumeFactorS24(pSamples, sampleCount, factor)
+    return lib.raia_ma_apply_volume_factor_s24(pSamples, sampleCount, factor)
+end
+
+function MA.applyVolumeFactorS32(pSamples, sampleCount, factor)
+    return lib.raia_ma_apply_volume_factor_s32(pSamples, sampleCount, factor)
+end
+
+function MA.applyVolumeFactorF32(pSamples, sampleCount, factor)
+    return lib.raia_ma_apply_volume_factor_f32(pSamples, sampleCount, factor)
+end
+
+function MA.copyAndApplyVolumeFactorPcmFramesU8(pFramesOut, pFramesIn, frameCount, channels, factor)
+    return lib.raia_ma_copy_and_apply_volume_factor_pcm_frames_u8(pFramesOut, pFramesIn, frameCount, channels, factor)
+end
+
+function MA.copyAndApplyVolumeFactorPcmFramesS16(pFramesOut, pFramesIn, frameCount, channels, factor)
+    return lib.raia_ma_copy_and_apply_volume_factor_pcm_frames_s16(pFramesOut, pFramesIn, frameCount, channels, factor)
+end
+
+function MA.copyAndApplyVolumeFactorPcmFramesS24(pFramesOut, pFramesIn, frameCount, channels, factor)
+    return lib.raia_ma_copy_and_apply_volume_factor_pcm_frames_s24(pFramesOut, pFramesIn, frameCount, channels, factor)
+end
+
+function MA.copyAndApplyVolumeFactorPcmFramesS32(pFramesOut, pFramesIn, frameCount, channels, factor)
+    return lib.raia_ma_copy_and_apply_volume_factor_pcm_frames_s32(pFramesOut, pFramesIn, frameCount, channels, factor)
+end
+
+function MA.copyAndApplyVolumeFactorPcmFramesF32(pFramesOut, pFramesIn, frameCount, channels, factor)
+    return lib.raia_ma_copy_and_apply_volume_factor_pcm_frames_f32(pFramesOut, pFramesIn, frameCount, channels, factor)
+end
+
+function MA.copyAndApplyVolumeFactorPcmFrames(pFramesOut, pFramesIn, frameCount, format, channels, factor)
+    return lib.raia_ma_copy_and_apply_volume_factor_pcm_frames(pFramesOut, pFramesIn, frameCount, format, channels, factor)
+end
+
+function MA.applyVolumeFactorPcmFramesU8(pFrames, frameCount, channels, factor)
+    return lib.raia_ma_apply_volume_factor_pcm_frames_u8(pFrames, frameCount, channels, factor)
+end
+
+function MA.applyVolumeFactorPcmFramesS16(pFrames, frameCount, channels, factor)
+    return lib.raia_ma_apply_volume_factor_pcm_frames_s16(pFrames, frameCount, channels, factor)
+end
+
+function MA.applyVolumeFactorPcmFramesS24(pFrames, frameCount, channels, factor)
+    return lib.raia_ma_apply_volume_factor_pcm_frames_s24(pFrames, frameCount, channels, factor)
+end
+
+function MA.applyVolumeFactorPcmFramesS32(pFrames, frameCount, channels, factor)
+    return lib.raia_ma_apply_volume_factor_pcm_frames_s32(pFrames, frameCount, channels, factor)
+end
+
+function MA.applyVolumeFactorPcmFramesF32(pFrames, frameCount, channels, factor)
+    return lib.raia_ma_apply_volume_factor_pcm_frames_f32(pFrames, frameCount, channels, factor)
+end
+
+function MA.applyVolumeFactorPcmFrames(pFrames, frameCount, format, channels, factor)
+    return lib.raia_ma_apply_volume_factor_pcm_frames(pFrames, frameCount, format, channels, factor)
+end
+
+function MA.copyAndApplyVolumeFactorPerChannelF32(pFramesOut, pFramesIn, frameCount, channels, pChannelGains)
+    return lib.raia_ma_copy_and_apply_volume_factor_per_channel_f32(pFramesOut, pFramesIn, frameCount, channels, pChannelGains)
+end
+
+function MA.copyAndApplyVolumeAndClipSamplesU8(pDst, pSrc, count, volume)
+    return lib.raia_ma_copy_and_apply_volume_and_clip_samples_u8(pDst, pSrc, count, volume)
+end
+
+function MA.copyAndApplyVolumeAndClipSamplesS16(pDst, pSrc, count, volume)
+    return lib.raia_ma_copy_and_apply_volume_and_clip_samples_s16(pDst, pSrc, count, volume)
+end
+
+function MA.copyAndApplyVolumeAndClipSamplesS24(pDst, pSrc, count, volume)
+    return lib.raia_ma_copy_and_apply_volume_and_clip_samples_s24(pDst, pSrc, count, volume)
+end
+
+function MA.copyAndApplyVolumeAndClipSamplesS32(pDst, pSrc, count, volume)
+    return lib.raia_ma_copy_and_apply_volume_and_clip_samples_s32(pDst, pSrc, count, volume)
+end
+
+function MA.copyAndApplyVolumeAndClipSamplesF32(pDst, pSrc, count, volume)
+    return lib.raia_ma_copy_and_apply_volume_and_clip_samples_f32(pDst, pSrc, count, volume)
+end
+
+function MA.copyAndApplyVolumeAndClipPcmFrames(pDst, pSrc, frameCount, format, channels, volume)
+    return lib.raia_ma_copy_and_apply_volume_and_clip_pcm_frames(pDst, pSrc, frameCount, format, channels, volume)
+end
+
+function MA.volumeLinearToDb(factor)
+    return lib.raia_ma_volume_linear_to_db(factor)
+end
+
+function MA.volumeDbToLinear(gain)
+    return lib.raia_ma_volume_db_to_linear(gain)
+end
+
+function MA.mixPcmFramesF32(pDst, pSrc, frameCount, channels, volume)
+    return lib.raia_ma_mix_pcm_frames_f32(pDst, pSrc, frameCount, channels, volume)
+end
+
+
+-- VFS
+function MA.vfsOpen(pVFS, pFilePath, openMode, pFile)
+    return lib.raia_ma_vfs_open(pVFS, pFilePath, openMode, pFile)
+end
+
+function MA.vfsOpenW(pVFS, pFilePath, openMode, pFile)
+    return lib.raia_ma_vfs_open_w(pVFS, pFilePath, openMode, pFile)
+end
+
+function MA.vfsClose(pVFS, file)
+    return lib.raia_ma_vfs_close(pVFS, file)
+end
+
+function MA.vfsRead(pVFS, file, pDst, sizeInBytes, pBytesRead)
+    return lib.raia_ma_vfs_read(pVFS, file, pDst, sizeInBytes, pBytesRead)
+end
+
+function MA.vfsWrite(pVFS, file, pSrc, sizeInBytes, pBytesWritten)
+    return lib.raia_ma_vfs_write(pVFS, file, pSrc, sizeInBytes, pBytesWritten)
+end
+
+function MA.vfsSeek(pVFS, file, offset, origin)
+    return lib.raia_ma_vfs_seek(pVFS, file, offset, origin)
+end
+
+function MA.vfsTell(pVFS, file, pCursor)
+    return lib.raia_ma_vfs_tell(pVFS, file, pCursor)
+end
+
+function MA.vfsInfo(pVFS, file, pInfo)
+    return lib.raia_ma_vfs_info(pVFS, file, pInfo)
+end
+
+function MA.vfsOpenAndReadFile(pVFS, pFilePath, ppData, pSize, pAllocationCallbacks)
+    return lib.raia_ma_vfs_open_and_read_file(pVFS, pFilePath, ppData, pSize, pAllocationCallbacks)
+end
+
+function MA.defaultVfsInit(pVFS, pAllocationCallbacks)
+    return lib.raia_ma_default_vfs_init(pVFS, pAllocationCallbacks)
+end
+
+
+-- Decoding
+function MA.decodingBackendConfigInit(preferredFormat, seekPointCount)
+    return lib.raia_ma_decoding_backend_config_init(preferredFormat, seekPointCount)
+end
+
+function MA.decoderConfigInit(outputFormat, outputChannels, outputSampleRate)
+    return lib.raia_ma_decoder_config_init(outputFormat, outputChannels, outputSampleRate)
+end
+
+function MA.decoderConfigInitDefault()
+    return lib.raia_ma_decoder_config_init_default()
+end
+
+function MA.decoderInit(onRead, onSeek, pUserData, pConfig, pDecoder)
+    return lib.raia_ma_decoder_init(onRead, onSeek, pUserData, pConfig, pDecoder)
+end
+
+function MA.decoderInitMemory(pData, dataSize, pConfig, pDecoder)
+    return lib.raia_ma_decoder_init_memory(pData, dataSize, pConfig, pDecoder)
+end
+
+function MA.decoderInitVfs(pVFS, pFilePath, pConfig, pDecoder)
+    return lib.raia_ma_decoder_init_vfs(pVFS, pFilePath, pConfig, pDecoder)
+end
+
+function MA.decoderInitVfsW(pVFS, pFilePath, pConfig, pDecoder)
+    return lib.raia_ma_decoder_init_vfs_w(pVFS, pFilePath, pConfig, pDecoder)
+end
+
+function MA.decoderInitFile(pFilePath, pConfig, pDecoder)
+    return lib.raia_ma_decoder_init_file(pFilePath, pConfig, pDecoder)
+end
+
+function MA.decoderInitFileW(pFilePath, pConfig, pDecoder)
+    return lib.raia_ma_decoder_init_file_w(pFilePath, pConfig, pDecoder)
+end
+
+function MA.decoderUninit(pDecoder)
+    return lib.raia_ma_decoder_uninit(pDecoder)
+end
+
+function MA.decoderReadPcmFrames(pDecoder, pFramesOut, frameCount, pFramesRead)
+    return lib.raia_ma_decoder_read_pcm_frames(pDecoder, pFramesOut, frameCount, pFramesRead)
+end
+
+function MA.decoderSeekToPcmFrame(pDecoder, frameIndex)
+    return lib.raia_ma_decoder_seek_to_pcm_frame(pDecoder, frameIndex)
+end
+
+function MA.decoderGetDataFormat(pDecoder, pFormat, pChannels, pSampleRate, pChannelMap, channelMapCap)
+    return lib.raia_ma_decoder_get_data_format(pDecoder, pFormat, pChannels, pSampleRate, pChannelMap, channelMapCap)
+end
+
+function MA.decoderGetCursorInPcmFrames(pDecoder, pCursor)
+    return lib.raia_ma_decoder_get_cursor_in_pcm_frames(pDecoder, pCursor)
+end
+
+function MA.decoderGetLengthInPcmFrames(pDecoder, pLength)
+    return lib.raia_ma_decoder_get_length_in_pcm_frames(pDecoder, pLength)
+end
+
+function MA.decoderGetAvailableFrames(pDecoder, pAvailableFrames)
+    return lib.raia_ma_decoder_get_available_frames(pDecoder, pAvailableFrames)
+end
+
+function MA.decodeFromVfs(pVFS, pFilePath, pConfig, pFrameCountOut, ppPCMFramesOut)
+    return lib.raia_ma_decode_from_vfs(pVFS, pFilePath, pConfig, pFrameCountOut, ppPCMFramesOut)
+end
+
+function MA.decodeFile(pFilePath, pConfig, pFrameCountOut, ppPCMFramesOut)
+    return lib.raia_ma_decode_file(pFilePath, pConfig, pFrameCountOut, ppPCMFramesOut)
+end
+
+function MA.decodeMemory(pData, dataSize, pConfig, pFrameCountOut, ppPCMFramesOut)
+    return lib.raia_ma_decode_memory(pData, dataSize, pConfig, pFrameCountOut, ppPCMFramesOut)
+end
+
+
+-- Encoding
+function MA.encoderConfigInit(encodingFormat, format, channels, sampleRate)
+    return lib.raia_ma_encoder_config_init(encodingFormat, format, channels, sampleRate)
+end
+
+function MA.encoderInit(onWrite, onSeek, pUserData, pConfig, pEncoder)
+    return lib.raia_ma_encoder_init(onWrite, onSeek, pUserData, pConfig, pEncoder)
+end
+
+function MA.encoderInitVfs(pVFS, pFilePath, pConfig, pEncoder)
+    return lib.raia_ma_encoder_init_vfs(pVFS, pFilePath, pConfig, pEncoder)
+end
+
+function MA.encoderInitVfsW(pVFS, pFilePath, pConfig, pEncoder)
+    return lib.raia_ma_encoder_init_vfs_w(pVFS, pFilePath, pConfig, pEncoder)
+end
+
+function MA.encoderInitFile(pFilePath, pConfig, pEncoder)
+    return lib.raia_ma_encoder_init_file(pFilePath, pConfig, pEncoder)
+end
+
+function MA.encoderInitFileW(pFilePath, pConfig, pEncoder)
+    return lib.raia_ma_encoder_init_file_w(pFilePath, pConfig, pEncoder)
+end
+
+function MA.encoderUninit(pEncoder)
+    return lib.raia_ma_encoder_uninit(pEncoder)
+end
+
+function MA.encoderWritePcmFrames(pEncoder, pFramesIn, frameCount, pFramesWritten)
+    return lib.raia_ma_encoder_write_pcm_frames(pEncoder, pFramesIn, frameCount, pFramesWritten)
+end
+
+
+-- Generation
+function MA.waveformConfigInit(format, channels, sampleRate, type, amplitude, frequency)
+    return lib.raia_ma_waveform_config_init(format, channels, sampleRate, type, amplitude, frequency)
+end
+
+function MA.waveformInit(pConfig, pWaveform)
+    return lib.raia_ma_waveform_init(pConfig, pWaveform)
+end
+
+function MA.waveformUninit(pWaveform)
+    return lib.raia_ma_waveform_uninit(pWaveform)
+end
+
+function MA.waveformReadPcmFrames(pWaveform, pFramesOut, frameCount, pFramesRead)
+    return lib.raia_ma_waveform_read_pcm_frames(pWaveform, pFramesOut, frameCount, pFramesRead)
+end
+
+function MA.waveformSeekToPcmFrame(pWaveform, frameIndex)
+    return lib.raia_ma_waveform_seek_to_pcm_frame(pWaveform, frameIndex)
+end
+
+function MA.waveformSetAmplitude(pWaveform, amplitude)
+    return lib.raia_ma_waveform_set_amplitude(pWaveform, amplitude)
+end
+
+function MA.waveformSetFrequency(pWaveform, frequency)
+    return lib.raia_ma_waveform_set_frequency(pWaveform, frequency)
+end
+
+function MA.waveformSetType(pWaveform, type)
+    return lib.raia_ma_waveform_set_type(pWaveform, type)
+end
+
+function MA.waveformSetSampleRate(pWaveform, sampleRate)
+    return lib.raia_ma_waveform_set_sample_rate(pWaveform, sampleRate)
+end
+
+function MA.pulsewaveConfigInit(format, channels, sampleRate, dutyCycle, amplitude, frequency)
+    return lib.raia_ma_pulsewave_config_init(format, channels, sampleRate, dutyCycle, amplitude, frequency)
+end
+
+function MA.pulsewaveInit(pConfig, pWaveform)
+    return lib.raia_ma_pulsewave_init(pConfig, pWaveform)
+end
+
+function MA.pulsewaveUninit(pWaveform)
+    return lib.raia_ma_pulsewave_uninit(pWaveform)
+end
+
+function MA.pulsewaveReadPcmFrames(pWaveform, pFramesOut, frameCount, pFramesRead)
+    return lib.raia_ma_pulsewave_read_pcm_frames(pWaveform, pFramesOut, frameCount, pFramesRead)
+end
+
+function MA.pulsewaveSeekToPcmFrame(pWaveform, frameIndex)
+    return lib.raia_ma_pulsewave_seek_to_pcm_frame(pWaveform, frameIndex)
+end
+
+function MA.pulsewaveSetAmplitude(pWaveform, amplitude)
+    return lib.raia_ma_pulsewave_set_amplitude(pWaveform, amplitude)
+end
+
+function MA.pulsewaveSetFrequency(pWaveform, frequency)
+    return lib.raia_ma_pulsewave_set_frequency(pWaveform, frequency)
+end
+
+function MA.pulsewaveSetSampleRate(pWaveform, sampleRate)
+    return lib.raia_ma_pulsewave_set_sample_rate(pWaveform, sampleRate)
+end
+
+function MA.pulsewaveSetDutyCycle(pWaveform, dutyCycle)
+    return lib.raia_ma_pulsewave_set_duty_cycle(pWaveform, dutyCycle)
+end
+
+function MA.noiseConfigInit(format, channels, type, seed, amplitude)
+    return lib.raia_ma_noise_config_init(format, channels, type, seed, amplitude)
+end
+
+function MA.noiseGetHeapSize(pConfig, pHeapSizeInBytes)
+    return lib.raia_ma_noise_get_heap_size(pConfig, pHeapSizeInBytes)
+end
+
+function MA.noiseInitPreallocated(pConfig, pHeap, pNoise)
+    return lib.raia_ma_noise_init_preallocated(pConfig, pHeap, pNoise)
+end
+
+function MA.noiseInit(pConfig, pAllocationCallbacks, pNoise)
+    return lib.raia_ma_noise_init(pConfig, pAllocationCallbacks, pNoise)
+end
+
+function MA.noiseUninit(pNoise, pAllocationCallbacks)
+    return lib.raia_ma_noise_uninit(pNoise, pAllocationCallbacks)
+end
+
+function MA.noiseReadPcmFrames(pNoise, pFramesOut, frameCount, pFramesRead)
+    return lib.raia_ma_noise_read_pcm_frames(pNoise, pFramesOut, frameCount, pFramesRead)
+end
+
+function MA.noiseSetAmplitude(pNoise, amplitude)
+    return lib.raia_ma_noise_set_amplitude(pNoise, amplitude)
+end
+
+function MA.noiseSetSeed(pNoise, seed)
+    return lib.raia_ma_noise_set_seed(pNoise, seed)
+end
+
+function MA.noiseSetType(pNoise, type)
+    return lib.raia_ma_noise_set_type(pNoise, type)
+end
+
+
+-- Resource Manager
+function MA.resourceManagerPipelineNotificationsInit()
+    return lib.raia_ma_resource_manager_pipeline_notifications_init()
+end
+
+function MA.resourceManagerDataSourceConfigInit()
+    return lib.raia_ma_resource_manager_data_source_config_init()
+end
+
+function MA.resourceManagerConfigInit()
+    return lib.raia_ma_resource_manager_config_init()
+end
+
+function MA.resourceManagerInit(pConfig, pResourceManager)
+    return lib.raia_ma_resource_manager_init(pConfig, pResourceManager)
+end
+
+function MA.resourceManagerUninit(pResourceManager)
+    return lib.raia_ma_resource_manager_uninit(pResourceManager)
+end
+
+function MA.resourceManagerGetLog(pResourceManager)
+    return lib.raia_ma_resource_manager_get_log(pResourceManager)
+end
+
+function MA.resourceManagerRegisterFile(pResourceManager, pFilePath, flags)
+    return lib.raia_ma_resource_manager_register_file(pResourceManager, pFilePath, flags)
+end
+
+function MA.resourceManagerRegisterFileW(pResourceManager, pFilePath, flags)
+    return lib.raia_ma_resource_manager_register_file_w(pResourceManager, pFilePath, flags)
+end
+
+function MA.resourceManagerRegisterDecodedData(pResourceManager, pName, pData, frameCount, format, channels, sampleRate)
+    return lib.raia_ma_resource_manager_register_decoded_data(pResourceManager, pName, pData, frameCount, format, channels, sampleRate)
+end
+
+function MA.resourceManagerRegisterDecodedDataW(pResourceManager, pName, pData, frameCount, format, channels, sampleRate)
+    return lib.raia_ma_resource_manager_register_decoded_data_w(pResourceManager, pName, pData, frameCount, format, channels, sampleRate)
+end
+
+function MA.resourceManagerRegisterEncodedData(pResourceManager, pName, pData, sizeInBytes)
+    return lib.raia_ma_resource_manager_register_encoded_data(pResourceManager, pName, pData, sizeInBytes)
+end
+
+function MA.resourceManagerRegisterEncodedDataW(pResourceManager, pName, pData, sizeInBytes)
+    return lib.raia_ma_resource_manager_register_encoded_data_w(pResourceManager, pName, pData, sizeInBytes)
+end
+
+function MA.resourceManagerUnregisterFile(pResourceManager, pFilePath)
+    return lib.raia_ma_resource_manager_unregister_file(pResourceManager, pFilePath)
+end
+
+function MA.resourceManagerUnregisterFileW(pResourceManager, pFilePath)
+    return lib.raia_ma_resource_manager_unregister_file_w(pResourceManager, pFilePath)
+end
+
+function MA.resourceManagerUnregisterData(pResourceManager, pName)
+    return lib.raia_ma_resource_manager_unregister_data(pResourceManager, pName)
+end
+
+function MA.resourceManagerUnregisterDataW(pResourceManager, pName)
+    return lib.raia_ma_resource_manager_unregister_data_w(pResourceManager, pName)
+end
+
+function MA.resourceManagerDataBufferInitEx(pResourceManager, pConfig, pDataBuffer)
+    return lib.raia_ma_resource_manager_data_buffer_init_ex(pResourceManager, pConfig, pDataBuffer)
+end
+
+function MA.resourceManagerDataBufferInit(pResourceManager, pFilePath, flags, pNotifications, pDataBuffer)
+    return lib.raia_ma_resource_manager_data_buffer_init(pResourceManager, pFilePath, flags, pNotifications, pDataBuffer)
+end
+
+function MA.resourceManagerDataBufferInitW(pResourceManager, pFilePath, flags, pNotifications, pDataBuffer)
+    return lib.raia_ma_resource_manager_data_buffer_init_w(pResourceManager, pFilePath, flags, pNotifications, pDataBuffer)
+end
+
+function MA.resourceManagerDataBufferInitCopy(pResourceManager, pExistingDataBuffer, pDataBuffer)
+    return lib.raia_ma_resource_manager_data_buffer_init_copy(pResourceManager, pExistingDataBuffer, pDataBuffer)
+end
+
+function MA.resourceManagerDataBufferUninit(pDataBuffer)
+    return lib.raia_ma_resource_manager_data_buffer_uninit(pDataBuffer)
+end
+
+function MA.resourceManagerDataBufferReadPcmFrames(pDataBuffer, pFramesOut, frameCount, pFramesRead)
+    return lib.raia_ma_resource_manager_data_buffer_read_pcm_frames(pDataBuffer, pFramesOut, frameCount, pFramesRead)
+end
+
+function MA.resourceManagerDataBufferSeekToPcmFrame(pDataBuffer, frameIndex)
+    return lib.raia_ma_resource_manager_data_buffer_seek_to_pcm_frame(pDataBuffer, frameIndex)
+end
+
+function MA.resourceManagerDataBufferGetDataFormat(pDataBuffer, pFormat, pChannels, pSampleRate, pChannelMap, channelMapCap)
+    return lib.raia_ma_resource_manager_data_buffer_get_data_format(pDataBuffer, pFormat, pChannels, pSampleRate, pChannelMap, channelMapCap)
+end
+
+function MA.resourceManagerDataBufferGetCursorInPcmFrames(pDataBuffer, pCursor)
+    return lib.raia_ma_resource_manager_data_buffer_get_cursor_in_pcm_frames(pDataBuffer, pCursor)
+end
+
+function MA.resourceManagerDataBufferGetLengthInPcmFrames(pDataBuffer, pLength)
+    return lib.raia_ma_resource_manager_data_buffer_get_length_in_pcm_frames(pDataBuffer, pLength)
+end
+
+function MA.resourceManagerDataBufferResult(pDataBuffer)
+    return lib.raia_ma_resource_manager_data_buffer_result(pDataBuffer)
+end
+
+function MA.resourceManagerDataBufferSetLooping(pDataBuffer, isLooping)
+    return lib.raia_ma_resource_manager_data_buffer_set_looping(pDataBuffer, isLooping)
+end
+
+function MA.resourceManagerDataBufferIsLooping(pDataBuffer)
+    return lib.raia_ma_resource_manager_data_buffer_is_looping(pDataBuffer)
+end
+
+function MA.resourceManagerDataBufferGetAvailableFrames(pDataBuffer, pAvailableFrames)
+    return lib.raia_ma_resource_manager_data_buffer_get_available_frames(pDataBuffer, pAvailableFrames)
+end
+
+function MA.resourceManagerDataStreamInitEx(pResourceManager, pConfig, pDataStream)
+    return lib.raia_ma_resource_manager_data_stream_init_ex(pResourceManager, pConfig, pDataStream)
+end
+
+function MA.resourceManagerDataStreamInit(pResourceManager, pFilePath, flags, pNotifications, pDataStream)
+    return lib.raia_ma_resource_manager_data_stream_init(pResourceManager, pFilePath, flags, pNotifications, pDataStream)
+end
+
+function MA.resourceManagerDataStreamInitW(pResourceManager, pFilePath, flags, pNotifications, pDataStream)
+    return lib.raia_ma_resource_manager_data_stream_init_w(pResourceManager, pFilePath, flags, pNotifications, pDataStream)
+end
+
+function MA.resourceManagerDataStreamUninit(pDataStream)
+    return lib.raia_ma_resource_manager_data_stream_uninit(pDataStream)
+end
+
+function MA.resourceManagerDataStreamReadPcmFrames(pDataStream, pFramesOut, frameCount, pFramesRead)
+    return lib.raia_ma_resource_manager_data_stream_read_pcm_frames(pDataStream, pFramesOut, frameCount, pFramesRead)
+end
+
+function MA.resourceManagerDataStreamSeekToPcmFrame(pDataStream, frameIndex)
+    return lib.raia_ma_resource_manager_data_stream_seek_to_pcm_frame(pDataStream, frameIndex)
+end
+
+function MA.resourceManagerDataStreamGetDataFormat(pDataStream, pFormat, pChannels, pSampleRate, pChannelMap, channelMapCap)
+    return lib.raia_ma_resource_manager_data_stream_get_data_format(pDataStream, pFormat, pChannels, pSampleRate, pChannelMap, channelMapCap)
+end
+
+function MA.resourceManagerDataStreamGetCursorInPcmFrames(pDataStream, pCursor)
+    return lib.raia_ma_resource_manager_data_stream_get_cursor_in_pcm_frames(pDataStream, pCursor)
+end
+
+function MA.resourceManagerDataStreamGetLengthInPcmFrames(pDataStream, pLength)
+    return lib.raia_ma_resource_manager_data_stream_get_length_in_pcm_frames(pDataStream, pLength)
+end
+
+function MA.resourceManagerDataStreamResult(pDataStream)
+    return lib.raia_ma_resource_manager_data_stream_result(pDataStream)
+end
+
+function MA.resourceManagerDataStreamSetLooping(pDataStream, isLooping)
+    return lib.raia_ma_resource_manager_data_stream_set_looping(pDataStream, isLooping)
+end
+
+function MA.resourceManagerDataStreamIsLooping(pDataStream)
+    return lib.raia_ma_resource_manager_data_stream_is_looping(pDataStream)
+end
+
+function MA.resourceManagerDataStreamGetAvailableFrames(pDataStream, pAvailableFrames)
+    return lib.raia_ma_resource_manager_data_stream_get_available_frames(pDataStream, pAvailableFrames)
+end
+
+function MA.resourceManagerDataSourceInitEx(pResourceManager, pConfig, pDataSource)
+    return lib.raia_ma_resource_manager_data_source_init_ex(pResourceManager, pConfig, pDataSource)
+end
+
+function MA.resourceManagerDataSourceInit(pResourceManager, pName, flags, pNotifications, pDataSource)
+    return lib.raia_ma_resource_manager_data_source_init(pResourceManager, pName, flags, pNotifications, pDataSource)
+end
+
+function MA.resourceManagerDataSourceInitW(pResourceManager, pName, flags, pNotifications, pDataSource)
+    return lib.raia_ma_resource_manager_data_source_init_w(pResourceManager, pName, flags, pNotifications, pDataSource)
+end
+
+function MA.resourceManagerDataSourceInitCopy(pResourceManager, pExistingDataSource, pDataSource)
+    return lib.raia_ma_resource_manager_data_source_init_copy(pResourceManager, pExistingDataSource, pDataSource)
+end
+
+function MA.resourceManagerDataSourceUninit(pDataSource)
+    return lib.raia_ma_resource_manager_data_source_uninit(pDataSource)
+end
+
+function MA.resourceManagerDataSourceReadPcmFrames(pDataSource, pFramesOut, frameCount, pFramesRead)
+    return lib.raia_ma_resource_manager_data_source_read_pcm_frames(pDataSource, pFramesOut, frameCount, pFramesRead)
+end
+
+function MA.resourceManagerDataSourceSeekToPcmFrame(pDataSource, frameIndex)
+    return lib.raia_ma_resource_manager_data_source_seek_to_pcm_frame(pDataSource, frameIndex)
+end
+
+function MA.resourceManagerDataSourceGetDataFormat(pDataSource, pFormat, pChannels, pSampleRate, pChannelMap, channelMapCap)
+    return lib.raia_ma_resource_manager_data_source_get_data_format(pDataSource, pFormat, pChannels, pSampleRate, pChannelMap, channelMapCap)
+end
+
+function MA.resourceManagerDataSourceGetCursorInPcmFrames(pDataSource, pCursor)
+    return lib.raia_ma_resource_manager_data_source_get_cursor_in_pcm_frames(pDataSource, pCursor)
+end
+
+function MA.resourceManagerDataSourceGetLengthInPcmFrames(pDataSource, pLength)
+    return lib.raia_ma_resource_manager_data_source_get_length_in_pcm_frames(pDataSource, pLength)
+end
+
+function MA.resourceManagerDataSourceResult(pDataSource)
+    return lib.raia_ma_resource_manager_data_source_result(pDataSource)
+end
+
+function MA.resourceManagerDataSourceSetLooping(pDataSource, isLooping)
+    return lib.raia_ma_resource_manager_data_source_set_looping(pDataSource, isLooping)
+end
+
+function MA.resourceManagerDataSourceIsLooping(pDataSource)
+    return lib.raia_ma_resource_manager_data_source_is_looping(pDataSource)
+end
+
+function MA.resourceManagerDataSourceGetAvailableFrames(pDataSource, pAvailableFrames)
+    return lib.raia_ma_resource_manager_data_source_get_available_frames(pDataSource, pAvailableFrames)
+end
+
+function MA.resourceManagerPostJob(pResourceManager, pJob)
+    return lib.raia_ma_resource_manager_post_job(pResourceManager, pJob)
+end
+
+function MA.resourceManagerPostJobQuit(pResourceManager)
+    return lib.raia_ma_resource_manager_post_job_quit(pResourceManager)
+end
+
+function MA.resourceManagerNextJob(pResourceManager, pJob)
+    return lib.raia_ma_resource_manager_next_job(pResourceManager, pJob)
+end
+
+function MA.resourceManagerProcessJob(pResourceManager, pJob)
+    return lib.raia_ma_resource_manager_process_job(pResourceManager, pJob)
+end
+
+function MA.resourceManagerProcessNextJob(pResourceManager)
+    return lib.raia_ma_resource_manager_process_next_job(pResourceManager)
+end
+
+
+-- Node Graph
+function MA.nodeConfigInit()
+    return lib.raia_ma_node_config_init()
+end
+
+function MA.nodeGetHeapSize(pNodeGraph, pConfig, pHeapSizeInBytes)
+    return lib.raia_ma_node_get_heap_size(pNodeGraph, pConfig, pHeapSizeInBytes)
+end
+
+function MA.nodeInitPreallocated(pNodeGraph, pConfig, pHeap, pNode)
+    return lib.raia_ma_node_init_preallocated(pNodeGraph, pConfig, pHeap, pNode)
+end
+
+function MA.nodeInit(pNodeGraph, pConfig, pAllocationCallbacks, pNode)
+    return lib.raia_ma_node_init(pNodeGraph, pConfig, pAllocationCallbacks, pNode)
+end
+
+function MA.nodeUninit(pNode, pAllocationCallbacks)
+    return lib.raia_ma_node_uninit(pNode, pAllocationCallbacks)
+end
+
+function MA.nodeGetNodeGraph(pNode)
+    return lib.raia_ma_node_get_node_graph(pNode)
+end
+
+function MA.nodeGetInputBusCount(pNode)
+    return lib.raia_ma_node_get_input_bus_count(pNode)
+end
+
+function MA.nodeGetOutputBusCount(pNode)
+    return lib.raia_ma_node_get_output_bus_count(pNode)
+end
+
+function MA.nodeGetInputChannels(pNode, inputBusIndex)
+    return lib.raia_ma_node_get_input_channels(pNode, inputBusIndex)
+end
+
+function MA.nodeGetOutputChannels(pNode, outputBusIndex)
+    return lib.raia_ma_node_get_output_channels(pNode, outputBusIndex)
+end
+
+function MA.nodeAttachOutputBus(pNode, outputBusIndex, pOtherNode, otherNodeInputBusIndex)
+    return lib.raia_ma_node_attach_output_bus(pNode, outputBusIndex, pOtherNode, otherNodeInputBusIndex)
+end
+
+function MA.nodeDetachOutputBus(pNode, outputBusIndex)
+    return lib.raia_ma_node_detach_output_bus(pNode, outputBusIndex)
+end
+
+function MA.nodeDetachAllOutputBuses(pNode)
+    return lib.raia_ma_node_detach_all_output_buses(pNode)
+end
+
+function MA.nodeSetOutputBusVolume(pNode, outputBusIndex, volume)
+    return lib.raia_ma_node_set_output_bus_volume(pNode, outputBusIndex, volume)
+end
+
+function MA.nodeGetOutputBusVolume(pNode, outputBusIndex)
+    return lib.raia_ma_node_get_output_bus_volume(pNode, outputBusIndex)
+end
+
+function MA.nodeSetState(pNode, state)
+    return lib.raia_ma_node_set_state(pNode, state)
+end
+
+function MA.nodeGetState(pNode)
+    return lib.raia_ma_node_get_state(pNode)
+end
+
+function MA.nodeSetStateTime(pNode, state, globalTime)
+    return lib.raia_ma_node_set_state_time(pNode, state, globalTime)
+end
+
+function MA.nodeGetStateTime(pNode, state)
+    return lib.raia_ma_node_get_state_time(pNode, state)
+end
+
+function MA.nodeGetStateByTime(pNode, globalTime)
+    return lib.raia_ma_node_get_state_by_time(pNode, globalTime)
+end
+
+function MA.nodeGetStateByTimeRange(pNode, globalTimeBeg, globalTimeEnd)
+    return lib.raia_ma_node_get_state_by_time_range(pNode, globalTimeBeg, globalTimeEnd)
+end
+
+function MA.nodeGetTime(pNode)
+    return lib.raia_ma_node_get_time(pNode)
+end
+
+function MA.nodeSetTime(pNode, localTime)
+    return lib.raia_ma_node_set_time(pNode, localTime)
+end
+
+function MA.nodeGraphConfigInit(channels)
+    return lib.raia_ma_node_graph_config_init(channels)
+end
+
+function MA.nodeGraphInit(pConfig, pAllocationCallbacks, pNodeGraph)
+    return lib.raia_ma_node_graph_init(pConfig, pAllocationCallbacks, pNodeGraph)
+end
+
+function MA.nodeGraphUninit(pNodeGraph, pAllocationCallbacks)
+    return lib.raia_ma_node_graph_uninit(pNodeGraph, pAllocationCallbacks)
+end
+
+function MA.nodeGraphGetEndpoint(pNodeGraph)
+    return lib.raia_ma_node_graph_get_endpoint(pNodeGraph)
+end
+
+function MA.nodeGraphReadPcmFrames(pNodeGraph, pFramesOut, frameCount, pFramesRead)
+    return lib.raia_ma_node_graph_read_pcm_frames(pNodeGraph, pFramesOut, frameCount, pFramesRead)
+end
+
+function MA.nodeGraphGetChannels(pNodeGraph)
+    return lib.raia_ma_node_graph_get_channels(pNodeGraph)
+end
+
+function MA.nodeGraphGetTime(pNodeGraph)
+    return lib.raia_ma_node_graph_get_time(pNodeGraph)
+end
+
+function MA.nodeGraphSetTime(pNodeGraph, globalTime)
+    return lib.raia_ma_node_graph_set_time(pNodeGraph, globalTime)
+end
+
+function MA.dataSourceNodeConfigInit(pDataSource)
+    return lib.raia_ma_data_source_node_config_init(pDataSource)
+end
+
+function MA.dataSourceNodeInit(pNodeGraph, pConfig, pAllocationCallbacks, pDataSourceNode)
+    return lib.raia_ma_data_source_node_init(pNodeGraph, pConfig, pAllocationCallbacks, pDataSourceNode)
+end
+
+function MA.dataSourceNodeUninit(pDataSourceNode, pAllocationCallbacks)
+    return lib.raia_ma_data_source_node_uninit(pDataSourceNode, pAllocationCallbacks)
+end
+
+function MA.dataSourceNodeSetLooping(pDataSourceNode, isLooping)
+    return lib.raia_ma_data_source_node_set_looping(pDataSourceNode, isLooping)
+end
+
+function MA.dataSourceNodeIsLooping(pDataSourceNode)
+    return lib.raia_ma_data_source_node_is_looping(pDataSourceNode)
+end
+
+function MA.splitterNodeConfigInit(channels)
+    return lib.raia_ma_splitter_node_config_init(channels)
+end
+
+function MA.splitterNodeInit(pNodeGraph, pConfig, pAllocationCallbacks, pSplitterNode)
+    return lib.raia_ma_splitter_node_init(pNodeGraph, pConfig, pAllocationCallbacks, pSplitterNode)
+end
+
+function MA.splitterNodeUninit(pSplitterNode, pAllocationCallbacks)
+    return lib.raia_ma_splitter_node_uninit(pSplitterNode, pAllocationCallbacks)
+end
+
+function MA.biquadNodeConfigInit(channels, b0, b1, b2, a0, a1, a2)
+    return lib.raia_ma_biquad_node_config_init(channels, b0, b1, b2, a0, a1, a2)
+end
+
+function MA.biquadNodeInit(pNodeGraph, pConfig, pAllocationCallbacks, pNode)
+    return lib.raia_ma_biquad_node_init(pNodeGraph, pConfig, pAllocationCallbacks, pNode)
+end
+
+function MA.biquadNodeReinit(pConfig, pNode)
+    return lib.raia_ma_biquad_node_reinit(pConfig, pNode)
+end
+
+function MA.biquadNodeUninit(pNode, pAllocationCallbacks)
+    return lib.raia_ma_biquad_node_uninit(pNode, pAllocationCallbacks)
+end
+
+function MA.lpfNodeConfigInit(channels, sampleRate, cutoffFrequency, order)
+    return lib.raia_ma_lpf_node_config_init(channels, sampleRate, cutoffFrequency, order)
+end
+
+function MA.lpfNodeInit(pNodeGraph, pConfig, pAllocationCallbacks, pNode)
+    return lib.raia_ma_lpf_node_init(pNodeGraph, pConfig, pAllocationCallbacks, pNode)
+end
+
+function MA.lpfNodeReinit(pConfig, pNode)
+    return lib.raia_ma_lpf_node_reinit(pConfig, pNode)
+end
+
+function MA.lpfNodeUninit(pNode, pAllocationCallbacks)
+    return lib.raia_ma_lpf_node_uninit(pNode, pAllocationCallbacks)
+end
+
+function MA.hpfNodeConfigInit(channels, sampleRate, cutoffFrequency, order)
+    return lib.raia_ma_hpf_node_config_init(channels, sampleRate, cutoffFrequency, order)
+end
+
+function MA.hpfNodeInit(pNodeGraph, pConfig, pAllocationCallbacks, pNode)
+    return lib.raia_ma_hpf_node_init(pNodeGraph, pConfig, pAllocationCallbacks, pNode)
+end
+
+function MA.hpfNodeReinit(pConfig, pNode)
+    return lib.raia_ma_hpf_node_reinit(pConfig, pNode)
+end
+
+function MA.hpfNodeUninit(pNode, pAllocationCallbacks)
+    return lib.raia_ma_hpf_node_uninit(pNode, pAllocationCallbacks)
+end
+
+function MA.bpfNodeConfigInit(channels, sampleRate, cutoffFrequency, order)
+    return lib.raia_ma_bpf_node_config_init(channels, sampleRate, cutoffFrequency, order)
+end
+
+function MA.bpfNodeInit(pNodeGraph, pConfig, pAllocationCallbacks, pNode)
+    return lib.raia_ma_bpf_node_init(pNodeGraph, pConfig, pAllocationCallbacks, pNode)
+end
+
+function MA.bpfNodeReinit(pConfig, pNode)
+    return lib.raia_ma_bpf_node_reinit(pConfig, pNode)
+end
+
+function MA.bpfNodeUninit(pNode, pAllocationCallbacks)
+    return lib.raia_ma_bpf_node_uninit(pNode, pAllocationCallbacks)
+end
+
+function MA.notchNodeConfigInit(channels, sampleRate, q, frequency)
+    return lib.raia_ma_notch_node_config_init(channels, sampleRate, q, frequency)
+end
+
+function MA.notchNodeInit(pNodeGraph, pConfig, pAllocationCallbacks, pNode)
+    return lib.raia_ma_notch_node_init(pNodeGraph, pConfig, pAllocationCallbacks, pNode)
+end
+
+function MA.notchNodeReinit(pConfig, pNode)
+    return lib.raia_ma_notch_node_reinit(pConfig, pNode)
+end
+
+function MA.notchNodeUninit(pNode, pAllocationCallbacks)
+    return lib.raia_ma_notch_node_uninit(pNode, pAllocationCallbacks)
+end
+
+function MA.peakNodeConfigInit(channels, sampleRate, gainDB, q, frequency)
+    return lib.raia_ma_peak_node_config_init(channels, sampleRate, gainDB, q, frequency)
+end
+
+function MA.peakNodeInit(pNodeGraph, pConfig, pAllocationCallbacks, pNode)
+    return lib.raia_ma_peak_node_init(pNodeGraph, pConfig, pAllocationCallbacks, pNode)
+end
+
+function MA.peakNodeReinit(pConfig, pNode)
+    return lib.raia_ma_peak_node_reinit(pConfig, pNode)
+end
+
+function MA.peakNodeUninit(pNode, pAllocationCallbacks)
+    return lib.raia_ma_peak_node_uninit(pNode, pAllocationCallbacks)
+end
+
+function MA.loshelfNodeConfigInit(channels, sampleRate, gainDB, q, frequency)
+    return lib.raia_ma_loshelf_node_config_init(channels, sampleRate, gainDB, q, frequency)
+end
+
+function MA.loshelfNodeInit(pNodeGraph, pConfig, pAllocationCallbacks, pNode)
+    return lib.raia_ma_loshelf_node_init(pNodeGraph, pConfig, pAllocationCallbacks, pNode)
+end
+
+function MA.loshelfNodeReinit(pConfig, pNode)
+    return lib.raia_ma_loshelf_node_reinit(pConfig, pNode)
+end
+
+function MA.loshelfNodeUninit(pNode, pAllocationCallbacks)
+    return lib.raia_ma_loshelf_node_uninit(pNode, pAllocationCallbacks)
+end
+
+function MA.hishelfNodeConfigInit(channels, sampleRate, gainDB, q, frequency)
+    return lib.raia_ma_hishelf_node_config_init(channels, sampleRate, gainDB, q, frequency)
+end
+
+function MA.hishelfNodeInit(pNodeGraph, pConfig, pAllocationCallbacks, pNode)
+    return lib.raia_ma_hishelf_node_init(pNodeGraph, pConfig, pAllocationCallbacks, pNode)
+end
+
+function MA.hishelfNodeReinit(pConfig, pNode)
+    return lib.raia_ma_hishelf_node_reinit(pConfig, pNode)
+end
+
+function MA.hishelfNodeUninit(pNode, pAllocationCallbacks)
+    return lib.raia_ma_hishelf_node_uninit(pNode, pAllocationCallbacks)
+end
+
+function MA.delayNodeConfigInit(channels, sampleRate, delayInFrames, decay)
+    return lib.raia_ma_delay_node_config_init(channels, sampleRate, delayInFrames, decay)
+end
+
+function MA.delayNodeInit(pNodeGraph, pConfig, pAllocationCallbacks, pDelayNode)
+    return lib.raia_ma_delay_node_init(pNodeGraph, pConfig, pAllocationCallbacks, pDelayNode)
+end
+
+function MA.delayNodeUninit(pDelayNode, pAllocationCallbacks)
+    return lib.raia_ma_delay_node_uninit(pDelayNode, pAllocationCallbacks)
+end
+
+function MA.delayNodeSetWet(pDelayNode, value)
+    return lib.raia_ma_delay_node_set_wet(pDelayNode, value)
+end
+
+function MA.delayNodeGetWet(pDelayNode)
+    return lib.raia_ma_delay_node_get_wet(pDelayNode)
+end
+
+function MA.delayNodeSetDry(pDelayNode, value)
+    return lib.raia_ma_delay_node_set_dry(pDelayNode, value)
+end
+
+function MA.delayNodeGetDry(pDelayNode)
+    return lib.raia_ma_delay_node_get_dry(pDelayNode)
+end
+
+function MA.delayNodeSetDecay(pDelayNode, value)
+    return lib.raia_ma_delay_node_set_decay(pDelayNode, value)
+end
+
+function MA.delayNodeGetDecay(pDelayNode)
+    return lib.raia_ma_delay_node_get_decay(pDelayNode)
+end
+
+
+-- Engine
+function MA.engineNodeConfigInit(pEngine, type, flags)
+    return lib.raia_ma_engine_node_config_init(pEngine, type, flags)
+end
+
+function MA.engineNodeGetHeapSize(pConfig, pHeapSizeInBytes)
+    return lib.raia_ma_engine_node_get_heap_size(pConfig, pHeapSizeInBytes)
+end
+
+function MA.engineNodeInitPreallocated(pConfig, pHeap, pEngineNode)
+    return lib.raia_ma_engine_node_init_preallocated(pConfig, pHeap, pEngineNode)
+end
+
+function MA.engineNodeInit(pConfig, pAllocationCallbacks, pEngineNode)
+    return lib.raia_ma_engine_node_init(pConfig, pAllocationCallbacks, pEngineNode)
+end
+
+function MA.engineNodeUninit(pEngineNode, pAllocationCallbacks)
+    return lib.raia_ma_engine_node_uninit(pEngineNode, pAllocationCallbacks)
+end
+
+function MA.soundConfigInit()
+    return lib.raia_ma_sound_config_init()
+end
+
+function MA.soundConfigInit2(pEngine)
+    return lib.raia_ma_sound_config_init_2(pEngine)
+end
+
+function MA.soundGroupConfigInit()
+    return lib.raia_ma_sound_group_config_init()
+end
+
+function MA.soundGroupConfigInit2(pEngine)
+    return lib.raia_ma_sound_group_config_init_2(pEngine)
+end
+
+function MA.engineConfigInit()
+    return lib.raia_ma_engine_config_init()
+end
+
+function MA.engineInit(pConfig, pEngine)
+    return lib.raia_ma_engine_init(pConfig, pEngine)
+end
+
+function MA.engineUninit(pEngine)
+    return lib.raia_ma_engine_uninit(pEngine)
+end
+
+function MA.engineReadPcmFrames(pEngine, pFramesOut, frameCount, pFramesRead)
+    return lib.raia_ma_engine_read_pcm_frames(pEngine, pFramesOut, frameCount, pFramesRead)
+end
+
+function MA.engineGetNodeGraph(pEngine)
+    return lib.raia_ma_engine_get_node_graph(pEngine)
+end
+
+function MA.engineGetResourceManager(pEngine)
+    return lib.raia_ma_engine_get_resource_manager(pEngine)
+end
+
+function MA.engineGetDevice(pEngine)
+    return lib.raia_ma_engine_get_device(pEngine)
+end
+
+function MA.engineGetLog(pEngine)
+    return lib.raia_ma_engine_get_log(pEngine)
+end
+
+function MA.engineGetEndpoint(pEngine)
+    return lib.raia_ma_engine_get_endpoint(pEngine)
+end
+
+function MA.engineGetTimeInPcmFrames(pEngine)
+    return lib.raia_ma_engine_get_time_in_pcm_frames(pEngine)
+end
+
+function MA.engineGetTimeInMilliseconds(pEngine)
+    return lib.raia_ma_engine_get_time_in_milliseconds(pEngine)
+end
+
+function MA.engineSetTimeInPcmFrames(pEngine, globalTime)
+    return lib.raia_ma_engine_set_time_in_pcm_frames(pEngine, globalTime)
+end
+
+function MA.engineSetTimeInMilliseconds(pEngine, globalTime)
+    return lib.raia_ma_engine_set_time_in_milliseconds(pEngine, globalTime)
+end
+
+function MA.engineGetTime(pEngine)
+    return lib.raia_ma_engine_get_time(pEngine)
+end
+
+function MA.engineSetTime(pEngine, globalTime)
+    return lib.raia_ma_engine_set_time(pEngine, globalTime)
+end
+
+function MA.engineGetChannels(pEngine)
+    return lib.raia_ma_engine_get_channels(pEngine)
+end
+
+function MA.engineGetSampleRate(pEngine)
+    return lib.raia_ma_engine_get_sample_rate(pEngine)
+end
+
+function MA.engineStart(pEngine)
+    return lib.raia_ma_engine_start(pEngine)
+end
+
+function MA.engineStop(pEngine)
+    return lib.raia_ma_engine_stop(pEngine)
+end
+
+function MA.engineSetVolume(pEngine, volume)
+    return lib.raia_ma_engine_set_volume(pEngine, volume)
+end
+
+function MA.engineGetVolume(pEngine)
+    return lib.raia_ma_engine_get_volume(pEngine)
+end
+
+function MA.engineSetGainDb(pEngine, gainDB)
+    return lib.raia_ma_engine_set_gain_db(pEngine, gainDB)
+end
+
+function MA.engineGetGainDb(pEngine)
+    return lib.raia_ma_engine_get_gain_db(pEngine)
+end
+
+function MA.engineGetListenerCount(pEngine)
+    return lib.raia_ma_engine_get_listener_count(pEngine)
+end
+
+function MA.engineFindClosestListener(pEngine, absolutePosX, absolutePosY, absolutePosZ)
+    return lib.raia_ma_engine_find_closest_listener(pEngine, absolutePosX, absolutePosY, absolutePosZ)
+end
+
+function MA.engineListenerSetPosition(pEngine, listenerIndex, x, y, z)
+    return lib.raia_ma_engine_listener_set_position(pEngine, listenerIndex, x, y, z)
+end
+
+function MA.engineListenerGetPosition(pEngine, listenerIndex)
+    return lib.raia_ma_engine_listener_get_position(pEngine, listenerIndex)
+end
+
+function MA.engineListenerSetDirection(pEngine, listenerIndex, x, y, z)
+    return lib.raia_ma_engine_listener_set_direction(pEngine, listenerIndex, x, y, z)
+end
+
+function MA.engineListenerGetDirection(pEngine, listenerIndex)
+    return lib.raia_ma_engine_listener_get_direction(pEngine, listenerIndex)
+end
+
+function MA.engineListenerSetVelocity(pEngine, listenerIndex, x, y, z)
+    return lib.raia_ma_engine_listener_set_velocity(pEngine, listenerIndex, x, y, z)
+end
+
+function MA.engineListenerGetVelocity(pEngine, listenerIndex)
+    return lib.raia_ma_engine_listener_get_velocity(pEngine, listenerIndex)
+end
+
+function MA.engineListenerSetCone(pEngine, listenerIndex, innerAngleInRadians, outerAngleInRadians, outerGain)
+    return lib.raia_ma_engine_listener_set_cone(pEngine, listenerIndex, innerAngleInRadians, outerAngleInRadians, outerGain)
+end
+
+function MA.engineListenerGetCone(pEngine, listenerIndex, pInnerAngleInRadians, pOuterAngleInRadians, pOuterGain)
+    return lib.raia_ma_engine_listener_get_cone(pEngine, listenerIndex, pInnerAngleInRadians, pOuterAngleInRadians, pOuterGain)
+end
+
+function MA.engineListenerSetWorldUp(pEngine, listenerIndex, x, y, z)
+    return lib.raia_ma_engine_listener_set_world_up(pEngine, listenerIndex, x, y, z)
+end
+
+function MA.engineListenerGetWorldUp(pEngine, listenerIndex)
+    return lib.raia_ma_engine_listener_get_world_up(pEngine, listenerIndex)
+end
+
+function MA.engineListenerSetEnabled(pEngine, listenerIndex, isEnabled)
+    return lib.raia_ma_engine_listener_set_enabled(pEngine, listenerIndex, isEnabled)
+end
+
+function MA.engineListenerIsEnabled(pEngine, listenerIndex)
+    return lib.raia_ma_engine_listener_is_enabled(pEngine, listenerIndex)
+end
+
+function MA.enginePlaySoundEx(pEngine, pFilePath, pNode, nodeInputBusIndex)
+    return lib.raia_ma_engine_play_sound_ex(pEngine, pFilePath, pNode, nodeInputBusIndex)
+end
+
+function MA.enginePlaySound(pEngine, pFilePath, pGroup)
+    return lib.raia_ma_engine_play_sound(pEngine, pFilePath, pGroup)
+end
+
+function MA.soundInitFromFile(pEngine, pFilePath, flags, pGroup, pDoneFence, pSound)
+    return lib.raia_ma_sound_init_from_file(pEngine, pFilePath, flags, pGroup, pDoneFence, pSound)
+end
+
+function MA.soundInitFromFileW(pEngine, pFilePath, flags, pGroup, pDoneFence, pSound)
+    return lib.raia_ma_sound_init_from_file_w(pEngine, pFilePath, flags, pGroup, pDoneFence, pSound)
+end
+
+function MA.soundInitCopy(pEngine, pExistingSound, flags, pGroup, pSound)
+    return lib.raia_ma_sound_init_copy(pEngine, pExistingSound, flags, pGroup, pSound)
+end
+
+function MA.soundInitFromDataSource(pEngine, pDataSource, flags, pGroup, pSound)
+    return lib.raia_ma_sound_init_from_data_source(pEngine, pDataSource, flags, pGroup, pSound)
+end
+
+function MA.soundInitEx(pEngine, pConfig, pSound)
+    return lib.raia_ma_sound_init_ex(pEngine, pConfig, pSound)
+end
+
+function MA.soundUninit(pSound)
+    return lib.raia_ma_sound_uninit(pSound)
+end
+
+function MA.soundGetEngine(pSound)
+    return lib.raia_ma_sound_get_engine(pSound)
+end
+
+function MA.soundGetDataSource(pSound)
+    return lib.raia_ma_sound_get_data_source(pSound)
+end
+
+function MA.soundStart(pSound)
+    return lib.raia_ma_sound_start(pSound)
+end
+
+function MA.soundStop(pSound)
+    return lib.raia_ma_sound_stop(pSound)
+end
+
+function MA.soundStopWithFadeInPcmFrames(pSound, fadeLengthInFrames)
+    return lib.raia_ma_sound_stop_with_fade_in_pcm_frames(pSound, fadeLengthInFrames)
+end
+
+function MA.soundStopWithFadeInMilliseconds(pSound, fadeLengthInFrames)
+    return lib.raia_ma_sound_stop_with_fade_in_milliseconds(pSound, fadeLengthInFrames)
+end
+
+function MA.soundSetVolume(pSound, volume)
+    return lib.raia_ma_sound_set_volume(pSound, volume)
+end
+
+function MA.soundGetVolume(pSound)
+    return lib.raia_ma_sound_get_volume(pSound)
+end
+
+function MA.soundSetPan(pSound, pan)
+    return lib.raia_ma_sound_set_pan(pSound, pan)
+end
+
+function MA.soundGetPan(pSound)
+    return lib.raia_ma_sound_get_pan(pSound)
+end
+
+function MA.soundSetPanMode(pSound, panMode)
+    return lib.raia_ma_sound_set_pan_mode(pSound, panMode)
+end
+
+function MA.soundGetPanMode(pSound)
+    return lib.raia_ma_sound_get_pan_mode(pSound)
+end
+
+function MA.soundSetPitch(pSound, pitch)
+    return lib.raia_ma_sound_set_pitch(pSound, pitch)
+end
+
+function MA.soundGetPitch(pSound)
+    return lib.raia_ma_sound_get_pitch(pSound)
+end
+
+function MA.soundSetSpatializationEnabled(pSound, enabled)
+    return lib.raia_ma_sound_set_spatialization_enabled(pSound, enabled)
+end
+
+function MA.soundIsSpatializationEnabled(pSound)
+    return lib.raia_ma_sound_is_spatialization_enabled(pSound)
+end
+
+function MA.soundSetPinnedListenerIndex(pSound, listenerIndex)
+    return lib.raia_ma_sound_set_pinned_listener_index(pSound, listenerIndex)
+end
+
+function MA.soundGetPinnedListenerIndex(pSound)
+    return lib.raia_ma_sound_get_pinned_listener_index(pSound)
+end
+
+function MA.soundGetListenerIndex(pSound)
+    return lib.raia_ma_sound_get_listener_index(pSound)
+end
+
+function MA.soundGetDirectionToListener(pSound)
+    return lib.raia_ma_sound_get_direction_to_listener(pSound)
+end
+
+function MA.soundSetPosition(pSound, x, y, z)
+    return lib.raia_ma_sound_set_position(pSound, x, y, z)
+end
+
+function MA.soundGetPosition(pSound)
+    return lib.raia_ma_sound_get_position(pSound)
+end
+
+function MA.soundSetDirection(pSound, x, y, z)
+    return lib.raia_ma_sound_set_direction(pSound, x, y, z)
+end
+
+function MA.soundGetDirection(pSound)
+    return lib.raia_ma_sound_get_direction(pSound)
+end
+
+function MA.soundSetVelocity(pSound, x, y, z)
+    return lib.raia_ma_sound_set_velocity(pSound, x, y, z)
+end
+
+function MA.soundGetVelocity(pSound)
+    return lib.raia_ma_sound_get_velocity(pSound)
+end
+
+function MA.soundSetAttenuationModel(pSound, attenuationModel)
+    return lib.raia_ma_sound_set_attenuation_model(pSound, attenuationModel)
+end
+
+function MA.soundGetAttenuationModel(pSound)
+    return lib.raia_ma_sound_get_attenuation_model(pSound)
+end
+
+function MA.soundSetPositioning(pSound, positioning)
+    return lib.raia_ma_sound_set_positioning(pSound, positioning)
+end
+
+function MA.soundGetPositioning(pSound)
+    return lib.raia_ma_sound_get_positioning(pSound)
+end
+
+function MA.soundSetRolloff(pSound, rolloff)
+    return lib.raia_ma_sound_set_rolloff(pSound, rolloff)
+end
+
+function MA.soundGetRolloff(pSound)
+    return lib.raia_ma_sound_get_rolloff(pSound)
+end
+
+function MA.soundSetMinGain(pSound, minGain)
+    return lib.raia_ma_sound_set_min_gain(pSound, minGain)
+end
+
+function MA.soundGetMinGain(pSound)
+    return lib.raia_ma_sound_get_min_gain(pSound)
+end
+
+function MA.soundSetMaxGain(pSound, maxGain)
+    return lib.raia_ma_sound_set_max_gain(pSound, maxGain)
+end
+
+function MA.soundGetMaxGain(pSound)
+    return lib.raia_ma_sound_get_max_gain(pSound)
+end
+
+function MA.soundSetMinDistance(pSound, minDistance)
+    return lib.raia_ma_sound_set_min_distance(pSound, minDistance)
+end
+
+function MA.soundGetMinDistance(pSound)
+    return lib.raia_ma_sound_get_min_distance(pSound)
+end
+
+function MA.soundSetMaxDistance(pSound, maxDistance)
+    return lib.raia_ma_sound_set_max_distance(pSound, maxDistance)
+end
+
+function MA.soundGetMaxDistance(pSound)
+    return lib.raia_ma_sound_get_max_distance(pSound)
+end
+
+function MA.soundSetCone(pSound, innerAngleInRadians, outerAngleInRadians, outerGain)
+    return lib.raia_ma_sound_set_cone(pSound, innerAngleInRadians, outerAngleInRadians, outerGain)
+end
+
+function MA.soundGetCone(pSound, pInnerAngleInRadians, pOuterAngleInRadians, pOuterGain)
+    return lib.raia_ma_sound_get_cone(pSound, pInnerAngleInRadians, pOuterAngleInRadians, pOuterGain)
+end
+
+function MA.soundSetDopplerFactor(pSound, dopplerFactor)
+    return lib.raia_ma_sound_set_doppler_factor(pSound, dopplerFactor)
+end
+
+function MA.soundGetDopplerFactor(pSound)
+    return lib.raia_ma_sound_get_doppler_factor(pSound)
+end
+
+function MA.soundSetDirectionalAttenuationFactor(pSound, directionalAttenuationFactor)
+    return lib.raia_ma_sound_set_directional_attenuation_factor(pSound, directionalAttenuationFactor)
+end
+
+function MA.soundGetDirectionalAttenuationFactor(pSound)
+    return lib.raia_ma_sound_get_directional_attenuation_factor(pSound)
+end
+
+function MA.soundSetFadeInPcmFrames(pSound, volumeBeg, volumeEnd, fadeLengthInFrames)
+    return lib.raia_ma_sound_set_fade_in_pcm_frames(pSound, volumeBeg, volumeEnd, fadeLengthInFrames)
+end
+
+function MA.soundSetFadeInMilliseconds(pSound, volumeBeg, volumeEnd, fadeLengthInMilliseconds)
+    return lib.raia_ma_sound_set_fade_in_milliseconds(pSound, volumeBeg, volumeEnd, fadeLengthInMilliseconds)
+end
+
+function MA.soundSetFadeStartInPcmFrames(pSound, volumeBeg, volumeEnd, fadeLengthInFrames, absoluteGlobalTimeInFrames)
+    return lib.raia_ma_sound_set_fade_start_in_pcm_frames(pSound, volumeBeg, volumeEnd, fadeLengthInFrames, absoluteGlobalTimeInFrames)
+end
+
+function MA.soundSetFadeStartInMilliseconds(pSound, volumeBeg, volumeEnd, fadeLengthInMilliseconds, absoluteGlobalTimeInMilliseconds)
+    return lib.raia_ma_sound_set_fade_start_in_milliseconds(pSound, volumeBeg, volumeEnd, fadeLengthInMilliseconds, absoluteGlobalTimeInMilliseconds)
+end
+
+function MA.soundGetCurrentFadeVolume(pSound)
+    return lib.raia_ma_sound_get_current_fade_volume(pSound)
+end
+
+function MA.soundSetStartTimeInPcmFrames(pSound, absoluteGlobalTimeInFrames)
+    return lib.raia_ma_sound_set_start_time_in_pcm_frames(pSound, absoluteGlobalTimeInFrames)
+end
+
+function MA.soundSetStartTimeInMilliseconds(pSound, absoluteGlobalTimeInMilliseconds)
+    return lib.raia_ma_sound_set_start_time_in_milliseconds(pSound, absoluteGlobalTimeInMilliseconds)
+end
+
+function MA.soundSetStopTimeInPcmFrames(pSound, absoluteGlobalTimeInFrames)
+    return lib.raia_ma_sound_set_stop_time_in_pcm_frames(pSound, absoluteGlobalTimeInFrames)
+end
+
+function MA.soundSetStopTimeInMilliseconds(pSound, absoluteGlobalTimeInMilliseconds)
+    return lib.raia_ma_sound_set_stop_time_in_milliseconds(pSound, absoluteGlobalTimeInMilliseconds)
+end
+
+function MA.soundSetStopTimeWithFadeInPcmFrames(pSound, stopAbsoluteGlobalTimeInFrames, fadeLengthInFrames)
+    return lib.raia_ma_sound_set_stop_time_with_fade_in_pcm_frames(pSound, stopAbsoluteGlobalTimeInFrames, fadeLengthInFrames)
+end
+
+function MA.soundSetStopTimeWithFadeInMilliseconds(pSound, stopAbsoluteGlobalTimeInMilliseconds, fadeLengthInMilliseconds)
+    return lib.raia_ma_sound_set_stop_time_with_fade_in_milliseconds(pSound, stopAbsoluteGlobalTimeInMilliseconds, fadeLengthInMilliseconds)
+end
+
+function MA.soundIsPlaying(pSound)
+    return lib.raia_ma_sound_is_playing(pSound)
+end
+
+function MA.soundGetTimeInPcmFrames(pSound)
+    return lib.raia_ma_sound_get_time_in_pcm_frames(pSound)
+end
+
+function MA.soundGetTimeInMilliseconds(pSound)
+    return lib.raia_ma_sound_get_time_in_milliseconds(pSound)
+end
+
+function MA.soundSetLooping(pSound, isLooping)
+    return lib.raia_ma_sound_set_looping(pSound, isLooping)
+end
+
+function MA.soundIsLooping(pSound)
+    return lib.raia_ma_sound_is_looping(pSound)
+end
+
+function MA.soundAtEnd(pSound)
+    return lib.raia_ma_sound_at_end(pSound)
+end
+
+function MA.soundSeekToPcmFrame(pSound, frameIndex)
+    return lib.raia_ma_sound_seek_to_pcm_frame(pSound, frameIndex)
+end
+
+function MA.soundGetDataFormat(pSound, pFormat, pChannels, pSampleRate, pChannelMap, channelMapCap)
+    return lib.raia_ma_sound_get_data_format(pSound, pFormat, pChannels, pSampleRate, pChannelMap, channelMapCap)
+end
+
+function MA.soundGetCursorInPcmFrames(pSound, pCursor)
+    return lib.raia_ma_sound_get_cursor_in_pcm_frames(pSound, pCursor)
+end
+
+function MA.soundGetLengthInPcmFrames(pSound, pLength)
+    return lib.raia_ma_sound_get_length_in_pcm_frames(pSound, pLength)
+end
+
+function MA.soundGetCursorInSeconds(pSound, pCursor)
+    return lib.raia_ma_sound_get_cursor_in_seconds(pSound, pCursor)
+end
+
+function MA.soundGetLengthInSeconds(pSound, pLength)
+    return lib.raia_ma_sound_get_length_in_seconds(pSound, pLength)
+end
+
+function MA.soundSetEndCallback(pSound, callback, pUserData)
+    return lib.raia_ma_sound_set_end_callback(pSound, callback, pUserData)
+end
+
+function MA.soundGroupInit(pEngine, flags, pParentGroup, pGroup)
+    return lib.raia_ma_sound_group_init(pEngine, flags, pParentGroup, pGroup)
+end
+
+function MA.soundGroupInitEx(pEngine, pConfig, pGroup)
+    return lib.raia_ma_sound_group_init_ex(pEngine, pConfig, pGroup)
+end
+
+function MA.soundGroupUninit(pGroup)
+    return lib.raia_ma_sound_group_uninit(pGroup)
+end
+
+function MA.soundGroupGetEngine(pGroup)
+    return lib.raia_ma_sound_group_get_engine(pGroup)
+end
+
+function MA.soundGroupStart(pGroup)
+    return lib.raia_ma_sound_group_start(pGroup)
+end
+
+function MA.soundGroupStop(pGroup)
+    return lib.raia_ma_sound_group_stop(pGroup)
+end
+
+function MA.soundGroupSetVolume(pGroup, volume)
+    return lib.raia_ma_sound_group_set_volume(pGroup, volume)
+end
+
+function MA.soundGroupGetVolume(pGroup)
+    return lib.raia_ma_sound_group_get_volume(pGroup)
+end
+
+function MA.soundGroupSetPan(pGroup, pan)
+    return lib.raia_ma_sound_group_set_pan(pGroup, pan)
+end
+
+function MA.soundGroupGetPan(pGroup)
+    return lib.raia_ma_sound_group_get_pan(pGroup)
+end
+
+function MA.soundGroupSetPanMode(pGroup, panMode)
+    return lib.raia_ma_sound_group_set_pan_mode(pGroup, panMode)
+end
+
+function MA.soundGroupGetPanMode(pGroup)
+    return lib.raia_ma_sound_group_get_pan_mode(pGroup)
+end
+
+function MA.soundGroupSetPitch(pGroup, pitch)
+    return lib.raia_ma_sound_group_set_pitch(pGroup, pitch)
+end
+
+function MA.soundGroupGetPitch(pGroup)
+    return lib.raia_ma_sound_group_get_pitch(pGroup)
+end
+
+function MA.soundGroupSetSpatializationEnabled(pGroup, enabled)
+    return lib.raia_ma_sound_group_set_spatialization_enabled(pGroup, enabled)
+end
+
+function MA.soundGroupIsSpatializationEnabled(pGroup)
+    return lib.raia_ma_sound_group_is_spatialization_enabled(pGroup)
+end
+
+function MA.soundGroupSetPinnedListenerIndex(pGroup, listenerIndex)
+    return lib.raia_ma_sound_group_set_pinned_listener_index(pGroup, listenerIndex)
+end
+
+function MA.soundGroupGetPinnedListenerIndex(pGroup)
+    return lib.raia_ma_sound_group_get_pinned_listener_index(pGroup)
+end
+
+function MA.soundGroupGetListenerIndex(pGroup)
+    return lib.raia_ma_sound_group_get_listener_index(pGroup)
+end
+
+function MA.soundGroupGetDirectionToListener(pGroup)
+    return lib.raia_ma_sound_group_get_direction_to_listener(pGroup)
+end
+
+function MA.soundGroupSetPosition(pGroup, x, y, z)
+    return lib.raia_ma_sound_group_set_position(pGroup, x, y, z)
+end
+
+function MA.soundGroupGetPosition(pGroup)
+    return lib.raia_ma_sound_group_get_position(pGroup)
+end
+
+function MA.soundGroupSetDirection(pGroup, x, y, z)
+    return lib.raia_ma_sound_group_set_direction(pGroup, x, y, z)
+end
+
+function MA.soundGroupGetDirection(pGroup)
+    return lib.raia_ma_sound_group_get_direction(pGroup)
+end
+
+function MA.soundGroupSetVelocity(pGroup, x, y, z)
+    return lib.raia_ma_sound_group_set_velocity(pGroup, x, y, z)
+end
+
+function MA.soundGroupGetVelocity(pGroup)
+    return lib.raia_ma_sound_group_get_velocity(pGroup)
+end
+
+function MA.soundGroupSetAttenuationModel(pGroup, attenuationModel)
+    return lib.raia_ma_sound_group_set_attenuation_model(pGroup, attenuationModel)
+end
+
+function MA.soundGroupGetAttenuationModel(pGroup)
+    return lib.raia_ma_sound_group_get_attenuation_model(pGroup)
+end
+
+function MA.soundGroupSetPositioning(pGroup, positioning)
+    return lib.raia_ma_sound_group_set_positioning(pGroup, positioning)
+end
+
+function MA.soundGroupGetPositioning(pGroup)
+    return lib.raia_ma_sound_group_get_positioning(pGroup)
+end
+
+function MA.soundGroupSetRolloff(pGroup, rolloff)
+    return lib.raia_ma_sound_group_set_rolloff(pGroup, rolloff)
+end
+
+function MA.soundGroupGetRolloff(pGroup)
+    return lib.raia_ma_sound_group_get_rolloff(pGroup)
+end
+
+function MA.soundGroupSetMinGain(pGroup, minGain)
+    return lib.raia_ma_sound_group_set_min_gain(pGroup, minGain)
+end
+
+function MA.soundGroupGetMinGain(pGroup)
+    return lib.raia_ma_sound_group_get_min_gain(pGroup)
+end
+
+function MA.soundGroupSetMaxGain(pGroup, maxGain)
+    return lib.raia_ma_sound_group_set_max_gain(pGroup, maxGain)
+end
+
+function MA.soundGroupGetMaxGain(pGroup)
+    return lib.raia_ma_sound_group_get_max_gain(pGroup)
+end
+
+function MA.soundGroupSetMinDistance(pGroup, minDistance)
+    return lib.raia_ma_sound_group_set_min_distance(pGroup, minDistance)
+end
+
+function MA.soundGroupGetMinDistance(pGroup)
+    return lib.raia_ma_sound_group_get_min_distance(pGroup)
+end
+
+function MA.soundGroupSetMaxDistance(pGroup, maxDistance)
+    return lib.raia_ma_sound_group_set_max_distance(pGroup, maxDistance)
+end
+
+function MA.soundGroupGetMaxDistance(pGroup)
+    return lib.raia_ma_sound_group_get_max_distance(pGroup)
+end
+
+function MA.soundGroupSetCone(pGroup, innerAngleInRadians, outerAngleInRadians, outerGain)
+    return lib.raia_ma_sound_group_set_cone(pGroup, innerAngleInRadians, outerAngleInRadians, outerGain)
+end
+
+function MA.soundGroupGetCone(pGroup, pInnerAngleInRadians, pOuterAngleInRadians, pOuterGain)
+    return lib.raia_ma_sound_group_get_cone(pGroup, pInnerAngleInRadians, pOuterAngleInRadians, pOuterGain)
+end
+
+function MA.soundGroupSetDopplerFactor(pGroup, dopplerFactor)
+    return lib.raia_ma_sound_group_set_doppler_factor(pGroup, dopplerFactor)
+end
+
+function MA.soundGroupGetDopplerFactor(pGroup)
+    return lib.raia_ma_sound_group_get_doppler_factor(pGroup)
+end
+
+function MA.soundGroupSetDirectionalAttenuationFactor(pGroup, directionalAttenuationFactor)
+    return lib.raia_ma_sound_group_set_directional_attenuation_factor(pGroup, directionalAttenuationFactor)
+end
+
+function MA.soundGroupGetDirectionalAttenuationFactor(pGroup)
+    return lib.raia_ma_sound_group_get_directional_attenuation_factor(pGroup)
+end
+
+function MA.soundGroupSetFadeInPcmFrames(pGroup, volumeBeg, volumeEnd, fadeLengthInFrames)
+    return lib.raia_ma_sound_group_set_fade_in_pcm_frames(pGroup, volumeBeg, volumeEnd, fadeLengthInFrames)
+end
+
+function MA.soundGroupSetFadeInMilliseconds(pGroup, volumeBeg, volumeEnd, fadeLengthInMilliseconds)
+    return lib.raia_ma_sound_group_set_fade_in_milliseconds(pGroup, volumeBeg, volumeEnd, fadeLengthInMilliseconds)
+end
+
+function MA.soundGroupGetCurrentFadeVolume(pGroup)
+    return lib.raia_ma_sound_group_get_current_fade_volume(pGroup)
+end
+
+function MA.soundGroupSetStartTimeInPcmFrames(pGroup, absoluteGlobalTimeInFrames)
+    return lib.raia_ma_sound_group_set_start_time_in_pcm_frames(pGroup, absoluteGlobalTimeInFrames)
+end
+
+function MA.soundGroupSetStartTimeInMilliseconds(pGroup, absoluteGlobalTimeInMilliseconds)
+    return lib.raia_ma_sound_group_set_start_time_in_milliseconds(pGroup, absoluteGlobalTimeInMilliseconds)
+end
+
+function MA.soundGroupSetStopTimeInPcmFrames(pGroup, absoluteGlobalTimeInFrames)
+    return lib.raia_ma_sound_group_set_stop_time_in_pcm_frames(pGroup, absoluteGlobalTimeInFrames)
+end
+
+function MA.soundGroupSetStopTimeInMilliseconds(pGroup, absoluteGlobalTimeInMilliseconds)
+    return lib.raia_ma_sound_group_set_stop_time_in_milliseconds(pGroup, absoluteGlobalTimeInMilliseconds)
+end
+
+function MA.soundGroupIsPlaying(pGroup)
+    return lib.raia_ma_sound_group_is_playing(pGroup)
+end
+
+function MA.soundGroupGetTimeInPcmFrames(pGroup)
+    return lib.raia_ma_sound_group_get_time_in_pcm_frames(pGroup)
+end
+
 return MA
