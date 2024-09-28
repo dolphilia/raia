@@ -4384,7 +4384,6 @@ MA_ATOMIC_SAFE_TYPE_DECL(64,  8, uint64)
 MA_ATOMIC_SAFE_TYPE_DECL(f32, 4, float)
 MA_ATOMIC_SAFE_TYPE_DECL(32,  4, bool32)
 
-
 /* Spinlocks are 32-bit for compatibility reasons. */
 typedef ma_uint32 ma_spinlock;
 
