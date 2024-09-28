@@ -2639,6 +2639,964 @@ end
 
 -- VFS
 
+ffi.cdef[[
+    typedef void      ma_vfs;
+    typedef ma_handle ma_vfs_file;
+    
+    typedef enum {
+        MA_OPEN_MODE_READ  = 0x00000001,
+        MA_OPEN_MODE_WRITE = 0x00000002
+    } ma_open_mode_flags;
+    
+    typedef enum {
+        ma_seek_origin_start,
+        ma_seek_origin_current,
+        ma_seek_origin_end  /* Not used by decoders. */
+    } ma_seek_origin;
+    
+    typedef struct {
+        ma_uint64 sizeInBytes;
+    } ma_file_info;
+    
+    typedef struct {
+        ma_result (* onOpen) (ma_vfs* pVFS, const char* pFilePath, ma_uint32 openMode, ma_vfs_file* pFile);
+        ma_result (* onOpenW)(ma_vfs* pVFS, const wchar_t* pFilePath, ma_uint32 openMode, ma_vfs_file* pFile);
+        ma_result (* onClose)(ma_vfs* pVFS, ma_vfs_file file);
+        ma_result (* onRead) (ma_vfs* pVFS, ma_vfs_file file, void* pDst, size_t sizeInBytes, size_t* pBytesRead);
+        ma_result (* onWrite)(ma_vfs* pVFS, ma_vfs_file file, const void* pSrc, size_t sizeInBytes, size_t* pBytesWritten);
+        ma_result (* onSeek) (ma_vfs* pVFS, ma_vfs_file file, ma_int64 offset, ma_seek_origin origin);
+        ma_result (* onTell) (ma_vfs* pVFS, ma_vfs_file file, ma_int64* pCursor);
+        ma_result (* onInfo) (ma_vfs* pVFS, ma_vfs_file file, ma_file_info* pInfo);
+    } ma_vfs_callbacks;
+    
+    typedef struct {
+        ma_vfs_callbacks cb;
+        ma_allocation_callbacks allocationCallbacks;    /* Only used for the wchar_t version of open() on non-Windows platforms. */
+    } ma_default_vfs;
+    
+    typedef ma_result (* ma_read_proc)(void* pUserData, void* pBufferOut, size_t bytesToRead, size_t* pBytesRead);
+    typedef ma_result (* ma_seek_proc)(void* pUserData, ma_int64 offset, ma_seek_origin origin);
+    typedef ma_result (* ma_tell_proc)(void* pUserData, ma_int64* pCursor);
+    
+    typedef enum
+    {
+        ma_encoding_format_unknown = 0,
+        ma_encoding_format_wav,
+        ma_encoding_format_flac,
+        ma_encoding_format_mp3,
+        ma_encoding_format_vorbis
+    } ma_encoding_format;
+]]
+
+-- Decoding
+
+ffi.cdef[[
+    typedef struct ma_decoder ma_decoder;
+
+    typedef struct {
+        ma_format preferredFormat;
+        ma_uint32 seekPointCount;   /* Set to > 0 to generate a seektable if the decoding backend supports it. */
+    } ma_decoding_backend_config;
+    
+    typedef struct {
+        ma_result (* onInit      )(void* pUserData, ma_read_proc onRead, ma_seek_proc onSeek, ma_tell_proc onTell, void* pReadSeekTellUserData, const ma_decoding_backend_config* pConfig, const ma_allocation_callbacks* pAllocationCallbacks, ma_data_source** ppBackend);
+        ma_result (* onInitFile  )(void* pUserData, const char* pFilePath, const ma_decoding_backend_config* pConfig, const ma_allocation_callbacks* pAllocationCallbacks, ma_data_source** ppBackend);               /* Optional. */
+        ma_result (* onInitFileW )(void* pUserData, const wchar_t* pFilePath, const ma_decoding_backend_config* pConfig, const ma_allocation_callbacks* pAllocationCallbacks, ma_data_source** ppBackend);            /* Optional. */
+        ma_result (* onInitMemory)(void* pUserData, const void* pData, size_t dataSize, const ma_decoding_backend_config* pConfig, const ma_allocation_callbacks* pAllocationCallbacks, ma_data_source** ppBackend);  /* Optional. */
+        void      (* onUninit    )(void* pUserData, ma_data_source* pBackend, const ma_allocation_callbacks* pAllocationCallbacks);
+    } ma_decoding_backend_vtable;
+    
+    typedef ma_result (* ma_decoder_read_proc)(ma_decoder* pDecoder, void* pBufferOut, size_t bytesToRead, size_t* pBytesRead);         /* Returns the number of bytes read. */
+    typedef ma_result (* ma_decoder_seek_proc)(ma_decoder* pDecoder, ma_int64 byteOffset, ma_seek_origin origin);
+    typedef ma_result (* ma_decoder_tell_proc)(ma_decoder* pDecoder, ma_int64* pCursor);
+    
+    typedef struct {
+        ma_format format;      /* Set to 0 or ma_format_unknown to use the stream's internal format. */
+        ma_uint32 channels;    /* Set to 0 to use the stream's internal channels. */
+        ma_uint32 sampleRate;  /* Set to 0 to use the stream's internal sample rate. */
+        ma_channel* pChannelMap;
+        ma_channel_mix_mode channelMixMode;
+        ma_dither_mode ditherMode;
+        ma_resampler_config resampling;
+        ma_allocation_callbacks allocationCallbacks;
+        ma_encoding_format encodingFormat;
+        ma_uint32 seekPointCount;   /* When set to > 0, specifies the number of seek points to use for the generation of a seek table. Not all decoding backends support this. */
+        ma_decoding_backend_vtable** ppCustomBackendVTables;
+        ma_uint32 customBackendCount;
+        void* pCustomBackendUserData;
+    } ma_decoder_config;
+    
+    struct ma_decoder {
+        ma_data_source_base ds;
+        ma_data_source* pBackend;                   /* The decoding backend we'll be pulling data from. */
+        const ma_decoding_backend_vtable* pBackendVTable; /* The vtable for the decoding backend. This needs to be stored so we can access the onUninit() callback. */
+        void* pBackendUserData;
+        ma_decoder_read_proc onRead;
+        ma_decoder_seek_proc onSeek;
+        ma_decoder_tell_proc onTell;
+        void* pUserData;
+        ma_uint64 readPointerInPCMFrames;      /* In output sample rate. Used for keeping track of how many frames are available for decoding. */
+        ma_format outputFormat;
+        ma_uint32 outputChannels;
+        ma_uint32 outputSampleRate;
+        ma_data_converter converter;    /* Data conversion is achieved by running frames through this. */
+        void* pInputCache;              /* In input format. Can be null if it's not needed. */
+        ma_uint64 inputCacheCap;        /* The capacity of the input cache. */
+        ma_uint64 inputCacheConsumed;   /* The number of frames that have been consumed in the cache. Used for determining the next valid frame. */
+        ma_uint64 inputCacheRemaining;  /* The number of valid frames remaining in the cahce. */
+        ma_allocation_callbacks allocationCallbacks;
+        union {
+            struct {
+                ma_vfs* pVFS;
+                ma_vfs_file file;
+            } vfs;
+            struct {
+                const ma_uint8* pData;
+                size_t dataSize;
+                size_t currentReadPos;
+            } memory;               /* Only used for decoders that were opened against a block of memory. */
+        } data;
+    };
+]]
+
+-- Encoding
+
+ffi.cdef[[
+    typedef struct ma_encoder ma_encoder;
+
+    typedef ma_result (* ma_encoder_write_proc)           (ma_encoder* pEncoder, const void* pBufferIn, size_t bytesToWrite, size_t* pBytesWritten);
+    typedef ma_result (* ma_encoder_seek_proc)            (ma_encoder* pEncoder, ma_int64 offset, ma_seek_origin origin);
+    typedef ma_result (* ma_encoder_init_proc)            (ma_encoder* pEncoder);
+    typedef void      (* ma_encoder_uninit_proc)          (ma_encoder* pEncoder);
+    typedef ma_result (* ma_encoder_write_pcm_frames_proc)(ma_encoder* pEncoder, const void* pFramesIn, ma_uint64 frameCount, ma_uint64* pFramesWritten);
+    
+    typedef struct
+    {
+        ma_encoding_format encodingFormat;
+        ma_format format;
+        ma_uint32 channels;
+        ma_uint32 sampleRate;
+        ma_allocation_callbacks allocationCallbacks;
+    } ma_encoder_config;
+    
+    struct ma_encoder
+    {
+        ma_encoder_config config;
+        ma_encoder_write_proc onWrite;
+        ma_encoder_seek_proc onSeek;
+        ma_encoder_init_proc onInit;
+        ma_encoder_uninit_proc onUninit;
+        ma_encoder_write_pcm_frames_proc onWritePCMFrames;
+        void* pUserData;
+        void* pInternalEncoder;
+        union
+        {
+            struct
+            {
+                ma_vfs* pVFS;
+                ma_vfs_file file;
+            } vfs;
+        } data;
+    };
+]]
+
+-- Generation
+
+ffi.cdef[[
+    typedef enum
+    {
+        ma_waveform_type_sine,
+        ma_waveform_type_square,
+        ma_waveform_type_triangle,
+        ma_waveform_type_sawtooth
+    } ma_waveform_type;
+    
+    typedef struct
+    {
+        ma_format format;
+        ma_uint32 channels;
+        ma_uint32 sampleRate;
+        ma_waveform_type type;
+        double amplitude;
+        double frequency;
+    } ma_waveform_config;
+    
+    typedef struct
+    {
+        ma_data_source_base ds;
+        ma_waveform_config config;
+        double advance;
+        double time;
+    } ma_waveform;
+    
+    typedef struct
+    {
+        ma_format format;
+        ma_uint32 channels;
+        ma_uint32 sampleRate;
+        double dutyCycle;
+        double amplitude;
+        double frequency;
+    } ma_pulsewave_config;
+    
+    typedef struct
+    {
+        ma_waveform waveform;
+        ma_pulsewave_config config;
+    } ma_pulsewave;
+    
+    typedef enum
+    {
+        ma_noise_type_white,
+        ma_noise_type_pink,
+        ma_noise_type_brownian
+    } ma_noise_type;
+    
+    typedef struct
+    {
+        ma_format format;
+        ma_uint32 channels;
+        ma_noise_type type;
+        ma_int32 seed;
+        double amplitude;
+        ma_bool32 duplicateChannels;
+    } ma_noise_config;
+    
+    typedef struct
+    {
+        ma_data_source_base ds;
+        ma_noise_config config;
+        ma_lcg lcg;
+        union
+        {
+            struct
+            {
+                double** bin;
+                double* accumulation;
+                ma_uint32* counter;
+            } pink;
+            struct
+            {
+                double* accumulation;
+            } brownian;
+        } state;
+    
+        /* Memory management. */
+        void* _pHeap;
+        ma_bool32 _ownsHeap;
+    } ma_noise;
+]]
+
+-- Resource Manager
+
+ffi.cdef[[
+    typedef struct ma_resource_manager                  ma_resource_manager;
+    typedef struct ma_resource_manager_data_buffer_node ma_resource_manager_data_buffer_node;
+    typedef struct ma_resource_manager_data_buffer      ma_resource_manager_data_buffer;
+    typedef struct ma_resource_manager_data_stream      ma_resource_manager_data_stream;
+    typedef struct ma_resource_manager_data_source      ma_resource_manager_data_source;
+    
+    typedef enum
+    {
+        MA_RESOURCE_MANAGER_DATA_SOURCE_FLAG_STREAM         = 0x00000001,   /* When set, does not load the entire data source in memory. Disk I/O will happen on job threads. */
+        MA_RESOURCE_MANAGER_DATA_SOURCE_FLAG_DECODE         = 0x00000002,   /* Decode data before storing in memory. When set, decoding is done at the resource manager level rather than the mixing thread. Results in faster mixing, but higher memory usage. */
+        MA_RESOURCE_MANAGER_DATA_SOURCE_FLAG_ASYNC          = 0x00000004,   /* When set, the resource manager will load the data source asynchronously. */
+        MA_RESOURCE_MANAGER_DATA_SOURCE_FLAG_WAIT_INIT      = 0x00000008,   /* When set, waits for initialization of the underlying data source before returning from ma_resource_manager_data_source_init(). */
+        MA_RESOURCE_MANAGER_DATA_SOURCE_FLAG_UNKNOWN_LENGTH = 0x00000010    /* Gives the resource manager a hint that the length of the data source is unknown and calling `ma_data_source_get_length_in_pcm_frames()` should be avoided. */
+    } ma_resource_manager_data_source_flags;
+    
+    
+    /*
+    Pipeline notifications used by the resource manager. Made up of both an async notification and a fence, both of which are optional.
+    */
+    typedef struct
+    {
+        ma_async_notification* pNotification;
+        ma_fence* pFence;
+    } ma_resource_manager_pipeline_stage_notification;
+    
+    typedef struct
+    {
+        ma_resource_manager_pipeline_stage_notification init;    /* Initialization of the decoder. */
+        ma_resource_manager_pipeline_stage_notification done;    /* Decoding fully completed. */
+    } ma_resource_manager_pipeline_notifications;
+    
+    typedef enum
+    {
+        /* Indicates ma_resource_manager_next_job() should not block. Only valid when the job thread count is 0. */
+        MA_RESOURCE_MANAGER_FLAG_NON_BLOCKING = 0x00000001,
+    
+        /* Disables any kind of multithreading. Implicitly enables MA_RESOURCE_MANAGER_FLAG_NON_BLOCKING. */
+        MA_RESOURCE_MANAGER_FLAG_NO_THREADING = 0x00000002
+    } ma_resource_manager_flags;
+    
+    typedef struct
+    {
+        const char* pFilePath;
+        const wchar_t* pFilePathW;
+        const ma_resource_manager_pipeline_notifications* pNotifications;
+        ma_uint64 initialSeekPointInPCMFrames;
+        ma_uint64 rangeBegInPCMFrames;
+        ma_uint64 rangeEndInPCMFrames;
+        ma_uint64 loopPointBegInPCMFrames;
+        ma_uint64 loopPointEndInPCMFrames;
+        ma_bool32 isLooping;
+        ma_uint32 flags;
+    } ma_resource_manager_data_source_config;
+    
+    typedef enum
+    {
+        ma_resource_manager_data_supply_type_unknown = 0,   /* Used for determining whether or the data supply has been initialized. */
+        ma_resource_manager_data_supply_type_encoded,       /* Data supply is an encoded buffer. Connector is ma_decoder. */
+        ma_resource_manager_data_supply_type_decoded,       /* Data supply is a decoded buffer. Connector is ma_audio_buffer. */
+        ma_resource_manager_data_supply_type_decoded_paged  /* Data supply is a linked list of decoded buffers. Connector is ma_paged_audio_buffer. */
+    } ma_resource_manager_data_supply_type;
+    
+    typedef struct
+    {
+        ma_resource_manager_data_supply_type type;    /* Read and written from different threads so needs to be accessed atomically. */
+        union
+        {
+            struct
+            {
+                const void* pData;
+                size_t sizeInBytes;
+            } encoded;
+            struct
+            {
+                const void* pData;
+                ma_uint64 totalFrameCount;
+                ma_uint64 decodedFrameCount;
+                ma_format format;
+                ma_uint32 channels;
+                ma_uint32 sampleRate;
+            } decoded;
+            struct
+            {
+                ma_paged_audio_buffer_data data;
+                ma_uint64 decodedFrameCount;
+                ma_uint32 sampleRate;
+            } decodedPaged;
+        } backend;
+    } ma_resource_manager_data_supply;
+    
+    struct ma_resource_manager_data_buffer_node
+    {
+        ma_uint32 hashedName32;                         /* The hashed name. This is the key. */
+        ma_uint32 refCount;
+        ma_result result;                 /* Result from asynchronous loading. When loading set to MA_BUSY. When fully loaded set to MA_SUCCESS. When deleting set to MA_UNAVAILABLE. */
+        ma_uint32 executionCounter;       /* For allocating execution orders for jobs. */
+        ma_uint32 executionPointer;       /* For managing the order of execution for asynchronous jobs relating to this object. Incremented as jobs complete processing. */
+        ma_bool32 isDataOwnedByResourceManager;         /* Set to true when the underlying data buffer was allocated the resource manager. Set to false if it is owned by the application (via ma_resource_manager_register_*()). */
+        ma_resource_manager_data_supply data;
+        ma_resource_manager_data_buffer_node* pParent;
+        ma_resource_manager_data_buffer_node* pChildLo;
+        ma_resource_manager_data_buffer_node* pChildHi;
+    };
+    
+    struct ma_resource_manager_data_buffer
+    {
+        ma_data_source_base ds;                         /* Base data source. A data buffer is a data source. */
+        ma_resource_manager* pResourceManager;          /* A pointer to the resource manager that owns this buffer. */
+        ma_resource_manager_data_buffer_node* pNode;    /* The data node. This is reference counted and is what supplies the data. */
+        ma_uint32 flags;                                /* The flags that were passed used to initialize the buffer. */
+        ma_uint32 executionCounter;       /* For allocating execution orders for jobs. */
+        ma_uint32 executionPointer;       /* For managing the order of execution for asynchronous jobs relating to this object. Incremented as jobs complete processing. */
+        ma_uint64 seekTargetInPCMFrames;                /* Only updated by the public API. Never written nor read from the job thread. */
+        ma_bool32 seekToCursorOnNextRead;               /* On the next read we need to seek to the frame cursor. */
+        ma_result result;                 /* Keeps track of a result of decoding. Set to MA_BUSY while the buffer is still loading. Set to MA_SUCCESS when loading is finished successfully. Otherwise set to some other code. */
+        ma_bool32 isLooping;              /* Can be read and written by different threads at the same time. Must be used atomically. */
+        ma_atomic_bool32 isConnectorInitialized;        /* Used for asynchronous loading to ensure we don't try to initialize the connector multiple times while waiting for the node to fully load. */
+        union
+        {
+            ma_decoder decoder;                 /* Supply type is ma_resource_manager_data_supply_type_encoded */
+            ma_audio_buffer buffer;             /* Supply type is ma_resource_manager_data_supply_type_decoded */
+            ma_paged_audio_buffer pagedBuffer;  /* Supply type is ma_resource_manager_data_supply_type_decoded_paged */
+        } connector;    /* Connects this object to the node's data supply. */
+    };
+    
+    struct ma_resource_manager_data_stream
+    {
+        ma_data_source_base ds;                     /* Base data source. A data stream is a data source. */
+        ma_resource_manager* pResourceManager;      /* A pointer to the resource manager that owns this data stream. */
+        ma_uint32 flags;                            /* The flags that were passed used to initialize the stream. */
+        ma_decoder decoder;                         /* Used for filling pages with data. This is only ever accessed by the job thread. The public API should never touch this. */
+        ma_bool32 isDecoderInitialized;             /* Required for determining whether or not the decoder should be uninitialized in MA_JOB_TYPE_RESOURCE_MANAGER_FREE_DATA_STREAM. */
+        ma_uint64 totalLengthInPCMFrames;           /* This is calculated when first loaded by the MA_JOB_TYPE_RESOURCE_MANAGER_LOAD_DATA_STREAM. */
+        ma_uint32 relativeCursor;                   /* The playback cursor, relative to the current page. Only ever accessed by the public API. Never accessed by the job thread. */
+        ma_uint64 absoluteCursor;     /* The playback cursor, in absolute position starting from the start of the file. */
+        ma_uint32 currentPageIndex;                 /* Toggles between 0 and 1. Index 0 is the first half of pPageData. Index 1 is the second half. Only ever accessed by the public API. Never accessed by the job thread. */
+        ma_uint32 executionCounter;   /* For allocating execution orders for jobs. */
+        ma_uint32 executionPointer;   /* For managing the order of execution for asynchronous jobs relating to this object. Incremented as jobs complete processing. */
+    
+        /* Written by the public API, read by the job thread. */
+        ma_bool32 isLooping;          /* Whether or not the stream is looping. It's important to set the looping flag at the data stream level for smooth loop transitions. */
+    
+        /* Written by the job thread, read by the public API. */
+        void* pPageData;                            /* Buffer containing the decoded data of each page. Allocated once at initialization time. */
+        ma_uint32 pageFrameCount[2];  /* The number of valid PCM frames in each page. Used to determine the last valid frame. */
+    
+        /* Written and read by both the public API and the job thread. These must be atomic. */
+        ma_result result;             /* Result from asynchronous loading. When loading set to MA_BUSY. When initialized set to MA_SUCCESS. When deleting set to MA_UNAVAILABLE. If an error occurs when loading, set to an error code. */
+        ma_bool32 isDecoderAtEnd;     /* Whether or not the decoder has reached the end. */
+        ma_bool32 isPageValid[2];     /* Booleans to indicate whether or not a page is valid. Set to false by the public API, set to true by the job thread. Set to false as the pages are consumed, true when they are filled. */
+        ma_bool32 seekCounter;        /* When 0, no seeking is being performed. When > 0, a seek is being performed and reading should be delayed with MA_BUSY. */
+    };
+    
+    struct ma_resource_manager_data_source
+    {
+        union
+        {
+            ma_resource_manager_data_buffer buffer;
+            ma_resource_manager_data_stream stream;
+        } backend;  /* Must be the first item because we need the first item to be the data source callbacks for the buffer or stream. */
+    
+        ma_uint32 flags;                          /* The flags that were passed in to ma_resource_manager_data_source_init(). */
+        ma_uint32 executionCounter;     /* For allocating execution orders for jobs. */
+        ma_uint32 executionPointer;     /* For managing the order of execution for asynchronous jobs relating to this object. Incremented as jobs complete processing. */
+    };
+    
+    typedef struct
+    {
+        ma_allocation_callbacks allocationCallbacks;
+        ma_log* pLog;
+        ma_format decodedFormat;        /* The decoded format to use. Set to ma_format_unknown (default) to use the file's native format. */
+        ma_uint32 decodedChannels;      /* The decoded channel count to use. Set to 0 (default) to use the file's native channel count. */
+        ma_uint32 decodedSampleRate;    /* the decoded sample rate to use. Set to 0 (default) to use the file's native sample rate. */
+        ma_uint32 jobThreadCount;       /* Set to 0 if you want to self-manage your job threads. Defaults to 1. */
+        size_t jobThreadStackSize;
+        ma_uint32 jobQueueCapacity;     /* The maximum number of jobs that can fit in the queue at a time. Defaults to MA_JOB_TYPE_RESOURCE_MANAGER_QUEUE_CAPACITY. Cannot be zero. */
+        ma_uint32 flags;
+        ma_vfs* pVFS;                   /* Can be NULL in which case defaults will be used. */
+        ma_decoding_backend_vtable** ppCustomDecodingBackendVTables;
+        ma_uint32 customDecodingBackendCount;
+        void* pCustomDecodingBackendUserData;
+    } ma_resource_manager_config;
+    
+    struct ma_resource_manager
+    {
+        ma_resource_manager_config config;
+        ma_resource_manager_data_buffer_node* pRootDataBufferNode;      /* The root buffer in the binary tree. */
+        ma_mutex dataBufferBSTLock;                                     /* For synchronizing access to the data buffer binary tree. */
+        ma_thread jobThreads[64]; /* The threads for executing jobs. */
+        ma_job_queue jobQueue;                                          /* Multi-consumer, multi-producer job queue for managing jobs for asynchronous decoding and streaming. */
+        ma_default_vfs defaultVFS;                                      /* Only used if a custom VFS is not specified. */
+        ma_log log;                                                     /* Only used if no log was specified in the config. */
+    };
+]]
+
+-- Node Graph
+
+ffi.cdef[[
+    typedef struct ma_node_graph ma_node_graph;
+    typedef void ma_node;
+    
+    
+    /* Node flags. */
+    typedef enum
+    {
+        MA_NODE_FLAG_PASSTHROUGH                = 0x00000001,
+        MA_NODE_FLAG_CONTINUOUS_PROCESSING      = 0x00000002,
+        MA_NODE_FLAG_ALLOW_NULL_INPUT           = 0x00000004,
+        MA_NODE_FLAG_DIFFERENT_PROCESSING_RATES = 0x00000008,
+        MA_NODE_FLAG_SILENT_OUTPUT              = 0x00000010
+    } ma_node_flags;
+    
+    
+    /* The playback state of a node. Either started or stopped. */
+    typedef enum
+    {
+        ma_node_state_started = 0,
+        ma_node_state_stopped = 1
+    } ma_node_state;
+    
+    
+    typedef struct
+    {
+        /*
+        Extended processing callback. This callback is used for effects that process input and output
+        at different rates (i.e. they perform resampling). This is similar to the simple version, only
+        they take two separate frame counts: one for input, and one for output.
+    
+        On input, `pFrameCountOut` is equal to the capacity of the output buffer for each bus, whereas
+        `pFrameCountIn` will be equal to the number of PCM frames in each of the buffers in `ppFramesIn`.
+    
+        On output, set `pFrameCountOut` to the number of PCM frames that were actually output and set
+        `pFrameCountIn` to the number of input frames that were consumed.
+        */
+        void (* onProcess)(ma_node* pNode, const float** ppFramesIn, ma_uint32* pFrameCountIn, float** ppFramesOut, ma_uint32* pFrameCountOut);
+    
+        /*
+        A callback for retrieving the number of a input frames that are required to output the
+        specified number of output frames. You would only want to implement this when the node performs
+        resampling. This is optional, even for nodes that perform resampling, but it does offer a
+        small reduction in latency as it allows miniaudio to calculate the exact number of input frames
+        to read at a time instead of having to estimate.
+        */
+        ma_result (* onGetRequiredInputFrameCount)(ma_node* pNode, ma_uint32 outputFrameCount, ma_uint32* pInputFrameCount);
+    
+        /*
+        The number of input buses. This is how many sub-buffers will be contained in the `ppFramesIn`
+        parameters of the callbacks above.
+        */
+        ma_uint8 inputBusCount;
+    
+        /*
+        The number of output buses. This is how many sub-buffers will be contained in the `ppFramesOut`
+        parameters of the callbacks above.
+        */
+        ma_uint8 outputBusCount;
+    
+        /*
+        Flags describing characteristics of the node. This is currently just a placeholder for some
+        ideas for later on.
+        */
+        ma_uint32 flags;
+    } ma_node_vtable;
+    
+    typedef struct
+    {
+        const ma_node_vtable* vtable;       /* Should never be null. Initialization of the node will fail if so. */
+        ma_node_state initialState;         /* Defaults to ma_node_state_started. */
+        ma_uint32 inputBusCount;            /* Only used if the vtable specifies an input bus count of `MA_NODE_BUS_COUNT_UNKNOWN`, otherwise must be set to `MA_NODE_BUS_COUNT_UNKNOWN` (default). */
+        ma_uint32 outputBusCount;           /* Only used if the vtable specifies an output bus count of `MA_NODE_BUS_COUNT_UNKNOWN`, otherwise  be set to `MA_NODE_BUS_COUNT_UNKNOWN` (default). */
+        const ma_uint32* pInputChannels;    /* The number of elements are determined by the input bus count as determined by the vtable, or `inputBusCount` if the vtable specifies `MA_NODE_BUS_COUNT_UNKNOWN`. */
+        const ma_uint32* pOutputChannels;   /* The number of elements are determined by the output bus count as determined by the vtable, or `outputBusCount` if the vtable specifies `MA_NODE_BUS_COUNT_UNKNOWN`. */
+    } ma_node_config;
+    
+    /*
+    A node has multiple output buses. An output bus is attached to an input bus as an item in a linked
+    list. Think of the input bus as a linked list, with the output bus being an item in that list.
+    */
+    typedef struct ma_node_output_bus ma_node_output_bus;
+    struct ma_node_output_bus
+    {
+        /* Immutable. */
+        ma_node* pNode;                                         /* The node that owns this output bus. The input node. Will be null for dummy head and tail nodes. */
+        ma_uint8 outputBusIndex;                                /* The index of the output bus on pNode that this output bus represents. */
+        ma_uint8 channels;                                      /* The number of channels in the audio stream for this bus. */
+    
+        /* Mutable via multiple threads. Must be used atomically. The weird ordering here is for packing reasons. */
+        ma_uint8 inputNodeInputBusIndex;                        /* The index of the input bus on the input. Required for detaching. Will only be used within the spinlock so does not need to be atomic. */
+        ma_uint32 flags;                          /* Some state flags for tracking the read state of the output buffer. A combination of MA_NODE_OUTPUT_BUS_FLAG_*. */
+        ma_uint32 refCount;                       /* Reference count for some thread-safety when detaching. */
+        ma_bool32 isAttached;                     /* This is used to prevent iteration of nodes that are in the middle of being detached. Used for thread safety. */
+        ma_spinlock lock;                         /* Unfortunate lock, but significantly simplifies the implementation. Required for thread-safe attaching and detaching. */
+        float volume;                             /* Linear. */
+        ma_node_output_bus* pNext;    /* If null, it's the tail node or detached. */
+        ma_node_output_bus* pPrev;    /* If null, it's the head node or detached. */
+        ma_node* pInputNode;          /* The node that this output bus is attached to. Required for detaching. */
+    };
+    
+    /*
+    A node has multiple input buses. The output buses of a node are connecting to the input busses of
+    another. An input bus is essentially just a linked list of output buses.
+    */
+    typedef struct ma_node_input_bus ma_node_input_bus;
+    struct ma_node_input_bus
+    {
+        /* Mutable via multiple threads. */
+        ma_node_output_bus head;                /* Dummy head node for simplifying some lock-free thread-safety stuff. */
+        ma_uint32 nextCounter;    /* This is used to determine whether or not the input bus is finding the next node in the list. Used for thread safety when detaching output buses. */
+        ma_spinlock lock;         /* Unfortunate lock, but significantly simplifies the implementation. Required for thread-safe attaching and detaching. */
+    
+        /* Set once at startup. */
+        ma_uint8 channels;                      /* The number of channels in the audio stream for this bus. */
+    };
+    
+    
+    typedef struct ma_node_base ma_node_base;
+    struct ma_node_base
+    {
+        /* These variables are set once at startup. */
+        ma_node_graph* pNodeGraph;              /* The graph this node belongs to. */
+        const ma_node_vtable* vtable;
+        float* pCachedData;                     /* Allocated on the heap. Fixed size. Needs to be stored on the heap because reading from output buses is done in separate function calls. */
+        ma_uint16 cachedDataCapInFramesPerBus;  /* The capacity of the input data cache in frames, per bus. */
+    
+        /* These variables are read and written only from the audio thread. */
+        ma_uint16 cachedFrameCountOut;
+        ma_uint16 cachedFrameCountIn;
+        ma_uint16 consumedFrameCountIn;
+    
+        /* These variables are read and written between different threads. */
+        ma_node_state state;      /* When set to stopped, nothing will be read, regardless of the times in stateTimes. */
+        ma_uint64 stateTimes[2];  /* Indexed by ma_node_state. Specifies the time based on the global clock that a node should be considered to be in the relevant state. */
+        ma_uint64 localTime;      /* The node's local clock. This is just a running sum of the number of output frames that have been processed. Can be modified by any thread with `ma_node_set_time()`. */
+        ma_uint32 inputBusCount;
+        ma_uint32 outputBusCount;
+        ma_node_input_bus* pInputBuses;
+        ma_node_output_bus* pOutputBuses;
+    
+        /* Memory management. */
+        ma_node_input_bus _inputBuses[2];
+        ma_node_output_bus _outputBuses[2];
+        void* _pHeap;   /* A heap allocation for internal use only. pInputBuses and/or pOutputBuses will point to this if the bus count exceeds MA_MAX_NODE_LOCAL_BUS_COUNT. */
+        ma_bool32 _ownsHeap;    /* If set to true, the node owns the heap allocation and _pHeap will be freed in ma_node_uninit(). */
+    };
+    
+    typedef struct
+    {
+        ma_uint32 channels;
+        ma_uint16 nodeCacheCapInFrames;
+    } ma_node_graph_config;
+    
+    struct ma_node_graph
+    {
+        /* Immutable. */
+        ma_node_base base;                  /* The node graph itself is a node so it can be connected as an input to different node graph. This has zero inputs and calls ma_node_graph_read_pcm_frames() to generate it's output. */
+        ma_node_base endpoint;              /* Special node that all nodes eventually connect to. Data is read from this node in ma_node_graph_read_pcm_frames(). */
+        ma_uint16 nodeCacheCapInFrames;
+    
+        /* Read and written by multiple threads. */
+        ma_bool32 isReading;
+    };
+    
+    /* Data source node. 0 input buses, 1 output bus. Used for reading from a data source. */
+    typedef struct
+    {
+        ma_node_config nodeConfig;
+        ma_data_source* pDataSource;
+    } ma_data_source_node_config;
+    
+    typedef struct
+    {
+        ma_node_base base;
+        ma_data_source* pDataSource;
+    } ma_data_source_node;
+    
+    /* Splitter Node. 1 input, many outputs. Used for splitting/copying a stream so it can be as input into two separate output nodes. */
+    typedef struct
+    {
+        ma_node_config nodeConfig;
+        ma_uint32 channels;
+        ma_uint32 outputBusCount;
+    } ma_splitter_node_config;
+    
+    typedef struct
+    {
+        ma_node_base base;
+    } ma_splitter_node;
+    
+    /*
+    Biquad Node
+    */
+    typedef struct
+    {
+        ma_node_config nodeConfig;
+        ma_biquad_config biquad;
+    } ma_biquad_node_config;
+    
+    typedef struct
+    {
+        ma_node_base baseNode;
+        ma_biquad biquad;
+    } ma_biquad_node;
+    
+    /*
+    Low Pass Filter Node
+    */
+    typedef struct
+    {
+        ma_node_config nodeConfig;
+        ma_lpf_config lpf;
+    } ma_lpf_node_config;
+    
+    typedef struct
+    {
+        ma_node_base baseNode;
+        ma_lpf lpf;
+    } ma_lpf_node;
+    
+    /*
+    High Pass Filter Node
+    */
+    typedef struct
+    {
+        ma_node_config nodeConfig;
+        ma_hpf_config hpf;
+    } ma_hpf_node_config;
+    
+    typedef struct
+    {
+        ma_node_base baseNode;
+        ma_hpf hpf;
+    } ma_hpf_node;
+    
+    /*
+    Band Pass Filter Node
+    */
+    typedef struct
+    {
+        ma_node_config nodeConfig;
+        ma_bpf_config bpf;
+    } ma_bpf_node_config;
+    
+    typedef struct
+    {
+        ma_node_base baseNode;
+        ma_bpf bpf;
+    } ma_bpf_node;
+    
+    /*
+    Notching Filter Node
+    */
+    typedef struct
+    {
+        ma_node_config nodeConfig;
+        ma_notch_config notch;
+    } ma_notch_node_config;
+    
+    typedef struct
+    {
+        ma_node_base baseNode;
+        ma_notch2 notch;
+    } ma_notch_node;
+    
+    /*
+    Peaking Filter Node
+    */
+    typedef struct
+    {
+        ma_node_config nodeConfig;
+        ma_peak_config peak;
+    } ma_peak_node_config;
+    
+    typedef struct
+    {
+        ma_node_base baseNode;
+        ma_peak2 peak;
+    } ma_peak_node;
+    
+    /*
+    Low Shelf Filter Node
+    */
+    typedef struct
+    {
+        ma_node_config nodeConfig;
+        ma_loshelf_config loshelf;
+    } ma_loshelf_node_config;
+    
+    typedef struct
+    {
+        ma_node_base baseNode;
+        ma_loshelf2 loshelf;
+    } ma_loshelf_node;
+    
+    /*
+    High Shelf Filter Node
+    */
+    typedef struct
+    {
+        ma_node_config nodeConfig;
+        ma_hishelf_config hishelf;
+    } ma_hishelf_node_config;
+    
+    typedef struct
+    {
+        ma_node_base baseNode;
+        ma_hishelf2 hishelf;
+    } ma_hishelf_node;
+    
+    typedef struct
+    {
+        ma_node_config nodeConfig;
+        ma_delay_config delay;
+    } ma_delay_node_config;
+    
+    typedef struct
+    {
+        ma_node_base baseNode;
+        ma_delay delay;
+    } ma_delay_node;
+]]
+
+-- Engine
+
+ffi.cdef[[
+    typedef struct ma_engine ma_engine;
+    typedef struct ma_sound  ma_sound;
+    
+    
+    /* Sound flags. */
+    typedef enum
+    {
+        /* Resource manager flags. */
+        MA_SOUND_FLAG_STREAM                = 0x00000001,   /* MA_RESOURCE_MANAGER_DATA_SOURCE_FLAG_STREAM */
+        MA_SOUND_FLAG_DECODE                = 0x00000002,   /* MA_RESOURCE_MANAGER_DATA_SOURCE_FLAG_DECODE */
+        MA_SOUND_FLAG_ASYNC                 = 0x00000004,   /* MA_RESOURCE_MANAGER_DATA_SOURCE_FLAG_ASYNC */
+        MA_SOUND_FLAG_WAIT_INIT             = 0x00000008,   /* MA_RESOURCE_MANAGER_DATA_SOURCE_FLAG_WAIT_INIT */
+        MA_SOUND_FLAG_UNKNOWN_LENGTH        = 0x00000010,   /* MA_RESOURCE_MANAGER_DATA_SOURCE_FLAG_UNKNOWN_LENGTH */
+    
+        /* ma_sound specific flags. */
+        MA_SOUND_FLAG_NO_DEFAULT_ATTACHMENT = 0x00001000,   /* Do not attach to the endpoint by default. Useful for when setting up nodes in a complex graph system. */
+        MA_SOUND_FLAG_NO_PITCH              = 0x00002000,   /* Disable pitch shifting with ma_sound_set_pitch() and ma_sound_group_set_pitch(). This is an optimization. */
+        MA_SOUND_FLAG_NO_SPATIALIZATION     = 0x00004000    /* Disable spatialization. */
+    } ma_sound_flags;
+    
+    typedef enum
+    {
+        ma_engine_node_type_sound,
+        ma_engine_node_type_group
+    } ma_engine_node_type;
+    
+    typedef struct
+    {
+        ma_engine* pEngine;
+        ma_engine_node_type type;
+        ma_uint32 channelsIn;
+        ma_uint32 channelsOut;
+        ma_uint32 sampleRate;               /* Only used when the type is set to ma_engine_node_type_sound. */
+        ma_uint32 volumeSmoothTimeInPCMFrames;  /* The number of frames to smooth over volume changes. Defaults to 0 in which case no smoothing is used. */
+        ma_mono_expansion_mode monoExpansionMode;
+        ma_bool8 isPitchDisabled;           /* Pitching can be explicitly disabled with MA_SOUND_FLAG_NO_PITCH to optimize processing. */
+        ma_bool8 isSpatializationDisabled;  /* Spatialization can be explicitly disabled with MA_SOUND_FLAG_NO_SPATIALIZATION. */
+        ma_uint8 pinnedListenerIndex;       /* The index of the listener this node should always use for spatialization. If set to MA_LISTENER_INDEX_CLOSEST the engine will use the closest listener. */
+    } ma_engine_node_config;
+    
+    /* Base node object for both ma_sound and ma_sound_group. */
+    typedef struct
+    {
+        ma_node_base baseNode;                              /* Must be the first member for compatiblity with the ma_node API. */
+        ma_engine* pEngine;                                 /* A pointer to the engine. Set based on the value from the config. */
+        ma_uint32 sampleRate;                               /* The sample rate of the input data. For sounds backed by a data source, this will be the data source's sample rate. Otherwise it'll be the engine's sample rate. */
+        ma_uint32 volumeSmoothTimeInPCMFrames;
+        ma_mono_expansion_mode monoExpansionMode;
+        ma_fader fader;
+        ma_linear_resampler resampler;                      /* For pitch shift. */
+        ma_spatializer spatializer;
+        ma_panner panner;
+        ma_gainer volumeGainer;                             /* This will only be used if volumeSmoothTimeInPCMFrames is > 0. */
+        ma_atomic_float volume;                             /* Defaults to 1. */
+        float pitch;
+        float oldPitch;                                     /* For determining whether or not the resampler needs to be updated to reflect the new pitch. The resampler will be updated on the mixing thread. */
+        float oldDopplerPitch;                              /* For determining whether or not the resampler needs to be updated to take a new doppler pitch into account. */
+        ma_bool32 isPitchDisabled;            /* When set to true, pitching will be disabled which will allow the resampler to be bypassed to save some computation. */
+        ma_bool32 isSpatializationDisabled;   /* Set to false by default. When set to false, will not have spatialisation applied. */
+        ma_uint32 pinnedListenerIndex;        /* The index of the listener this node should always use for spatialization. If set to MA_LISTENER_INDEX_CLOSEST the engine will use the closest listener. */
+    
+        /* When setting a fade, it's not done immediately in ma_sound_set_fade(). It's deferred to the audio thread which means we need to store the settings here. */
+        struct
+        {
+            ma_atomic_float volumeBeg;
+            ma_atomic_float volumeEnd;
+            ma_atomic_uint64 fadeLengthInFrames;            /* <-- Defaults to (~(ma_uint64)0) which is used to indicate that no fade should be applied. */
+            ma_atomic_uint64 absoluteGlobalTimeInFrames;    /* <-- The time to start the fade. */
+        } fadeSettings;
+    
+        /* Memory management. */
+        ma_bool8 _ownsHeap;
+        void* _pHeap;
+    } ma_engine_node;
+    
+    /* Callback for when a sound reaches the end. */
+    typedef void (* ma_sound_end_proc)(void* pUserData, ma_sound* pSound);
+    
+    typedef struct
+    {
+        const char* pFilePath;                      /* Set this to load from the resource manager. */
+        const wchar_t* pFilePathW;                  /* Set this to load from the resource manager. */
+        ma_data_source* pDataSource;                /* Set this to load from an existing data source. */
+        ma_node* pInitialAttachment;                /* If set, the sound will be attached to an input of this node. This can be set to a ma_sound. If set to NULL, the sound will be attached directly to the endpoint unless MA_SOUND_FLAG_NO_DEFAULT_ATTACHMENT is set in `flags`. */
+        ma_uint32 initialAttachmentInputBusIndex;   /* The index of the input bus of pInitialAttachment to attach the sound to. */
+        ma_uint32 channelsIn;                       /* Ignored if using a data source as input (the data source's channel count will be used always). Otherwise, setting to 0 will cause the engine's channel count to be used. */
+        ma_uint32 channelsOut;                      /* Set this to 0 (default) to use the engine's channel count. Set to MA_SOUND_SOURCE_CHANNEL_COUNT to use the data source's channel count (only used if using a data source as input). */
+        ma_mono_expansion_mode monoExpansionMode;   /* Controls how the mono channel should be expanded to other channels when spatialization is disabled on a sound. */
+        ma_uint32 flags;                            /* A combination of MA_SOUND_FLAG_* flags. */
+        ma_uint32 volumeSmoothTimeInPCMFrames;      /* The number of frames to smooth over volume changes. Defaults to 0 in which case no smoothing is used. */
+        ma_uint64 initialSeekPointInPCMFrames;      /* Initializes the sound such that it's seeked to this location by default. */
+        ma_uint64 rangeBegInPCMFrames;
+        ma_uint64 rangeEndInPCMFrames;
+        ma_uint64 loopPointBegInPCMFrames;
+        ma_uint64 loopPointEndInPCMFrames;
+        ma_bool32 isLooping;
+        ma_sound_end_proc endCallback;              /* Fired when the sound reaches the end. Will be fired from the audio thread. Do not restart, uninitialize or otherwise change the state of the sound from here. Instead fire an event or set a variable to indicate to a different thread to change the start of the sound. Will not be fired in response to a scheduled stop with ma_sound_set_stop_time_*(). */
+        void* pEndCallbackUserData;
+        ma_resource_manager_pipeline_notifications initNotifications;
+        ma_fence* pDoneFence;                       /* Deprecated. Use initNotifications instead. Released when the resource manager has finished decoding the entire sound. Not used with streams. */
+    } ma_sound_config;
+    
+    struct ma_sound
+    {
+        ma_engine_node engineNode;          /* Must be the first member for compatibility with the ma_node API. */
+        ma_data_source* pDataSource;
+        ma_uint64 seekTarget; /* The PCM frame index to seek to in the mixing thread. Set to (~(ma_uint64)0) to not perform any seeking. */
+        ma_bool32 atEnd;
+        ma_sound_end_proc endCallback;
+        void* pEndCallbackUserData;
+        ma_bool8 ownsDataSource;
+    
+        /*
+        We're declaring a resource manager data source object here to save us a malloc when loading a
+        sound via the resource manager, which I *think* will be the most common scenario.
+        */
+        ma_resource_manager_data_source* pResourceManagerDataSource;
+    };
+    
+    /* Structure specifically for sounds played with ma_engine_play_sound(). Making this a separate structure to reduce overhead. */
+    typedef struct ma_sound_inlined ma_sound_inlined;
+    struct ma_sound_inlined
+    {
+        ma_sound sound;
+        ma_sound_inlined* pNext;
+        ma_sound_inlined* pPrev;
+    };
+    
+    /* A sound group is just a sound. */
+    typedef ma_sound_config ma_sound_group_config;
+    typedef ma_sound        ma_sound_group;
+    
+    typedef void (* ma_engine_process_proc)(void* pUserData, float* pFramesOut, ma_uint64 frameCount);
+    
+    typedef struct
+    {
+        ma_resource_manager* pResourceManager;          /* Can be null in which case a resource manager will be created for you. */
+        ma_context* pContext;
+        ma_device* pDevice;                             /* If set, the caller is responsible for calling ma_engine_data_callback() in the device's data callback. */
+        ma_device_id* pPlaybackDeviceID;                /* The ID of the playback device to use with the default listener. */
+        ma_device_data_proc dataCallback;               /* Can be null. Can be used to provide a custom device data callback. */
+        ma_device_notification_proc notificationCallback;
+        ma_log* pLog;                                   /* When set to NULL, will use the context's log. */
+        ma_uint32 listenerCount;                        /* Must be between 1 and MA_ENGINE_MAX_LISTENERS. */
+        ma_uint32 channels;                             /* The number of channels to use when mixing and spatializing. When set to 0, will use the native channel count of the device. */
+        ma_uint32 sampleRate;                           /* The sample rate. When set to 0 will use the native channel count of the device. */
+        ma_uint32 periodSizeInFrames;                   /* If set to something other than 0, updates will always be exactly this size. The underlying device may be a different size, but from the perspective of the mixer that won't matter.*/
+        ma_uint32 periodSizeInMilliseconds;             /* Used if periodSizeInFrames is unset. */
+        ma_uint32 gainSmoothTimeInFrames;               /* The number of frames to interpolate the gain of spatialized sounds across. If set to 0, will use gainSmoothTimeInMilliseconds. */
+        ma_uint32 gainSmoothTimeInMilliseconds;         /* When set to 0, gainSmoothTimeInFrames will be used. If both are set to 0, a default value will be used. */
+        ma_uint32 defaultVolumeSmoothTimeInPCMFrames;   /* Defaults to 0. Controls the default amount of smoothing to apply to volume changes to sounds. High values means more smoothing at the expense of high latency (will take longer to reach the new volume). */
+        ma_allocation_callbacks allocationCallbacks;
+        ma_bool32 noAutoStart;                          /* When set to true, requires an explicit call to ma_engine_start(). This is false by default, meaning the engine will be started automatically in ma_engine_init(). */
+        ma_bool32 noDevice;                             /* When set to true, don't create a default device. ma_engine_read_pcm_frames() can be called manually to read data. */
+        ma_mono_expansion_mode monoExpansionMode;       /* Controls how the mono channel should be expanded to other channels when spatialization is disabled on a sound. */
+        ma_vfs* pResourceManagerVFS;                    /* A pointer to a pre-allocated VFS object to use with the resource manager. This is ignored if pResourceManager is not NULL. */
+        ma_engine_process_proc onProcess;               /* Fired at the end of each call to ma_engine_read_pcm_frames(). For engine's that manage their own internal device (the default configuration), this will be fired from the audio thread, and you do not need to call ma_engine_read_pcm_frames() manually in order to trigger this. */
+        void* pProcessUserData;                         /* User data that's passed into onProcess. */
+    } ma_engine_config;
+    
+    struct ma_engine
+    {
+        ma_node_graph nodeGraph;                /* An engine is a node graph. It should be able to be plugged into any ma_node_graph API (with a cast) which means this must be the first member of this struct. */
+        ma_resource_manager* pResourceManager;
+        ma_device* pDevice;                     /* Optionally set via the config, otherwise allocated by the engine in ma_engine_init(). */
+        ma_log* pLog;
+        ma_uint32 sampleRate;
+        ma_uint32 listenerCount;
+        ma_spatializer_listener listeners[4];
+        ma_allocation_callbacks allocationCallbacks;
+        ma_bool8 ownsResourceManager;
+        ma_bool8 ownsDevice;
+        ma_spinlock inlinedSoundLock;               /* For synchronizing access so the inlined sound list. */
+        ma_sound_inlined* pInlinedSoundHead;        /* The first inlined sound. Inlined sounds are tracked in a linked list. */
+        ma_uint32 inlinedSoundCount;  /* The total number of allocated inlined sound objects. Used for debugging. */
+        ma_uint32 gainSmoothTimeInFrames;           /* The number of frames to interpolate the gain of spatialized sounds across. */
+        ma_uint32 defaultVolumeSmoothTimeInPCMFrames;
+        ma_mono_expansion_mode monoExpansionMode;
+        ma_engine_process_proc onProcess;
+        void* pProcessUserData;
+    };
+]]
+
 -- Functions
 
 ffi.cdef[[
@@ -3242,7 +4200,404 @@ ffi.cdef[[
     float raia_ma_volume_db_to_linear(float gain);
     ma_result raia_ma_mix_pcm_frames_f32(float* pDst, const float* pSrc, ma_uint64 frameCount, ma_uint32 channels, float volume);
 
-    
+    // VFS
+    ma_result raia_ma_vfs_open(ma_vfs* pVFS, const char* pFilePath, ma_uint32 openMode, ma_vfs_file* pFile);
+    ma_result raia_ma_vfs_open_w(ma_vfs* pVFS, const wchar_t* pFilePath, ma_uint32 openMode, ma_vfs_file* pFile);
+    ma_result raia_ma_vfs_close(ma_vfs* pVFS, ma_vfs_file file);
+    ma_result raia_ma_vfs_read(ma_vfs* pVFS, ma_vfs_file file, void* pDst, size_t sizeInBytes, size_t* pBytesRead);
+    ma_result raia_ma_vfs_write(ma_vfs* pVFS, ma_vfs_file file, const void* pSrc, size_t sizeInBytes, size_t* pBytesWritten);
+    ma_result raia_ma_vfs_seek(ma_vfs* pVFS, ma_vfs_file file, ma_int64 offset, ma_seek_origin origin);
+    ma_result raia_ma_vfs_tell(ma_vfs* pVFS, ma_vfs_file file, ma_int64* pCursor);
+    ma_result raia_ma_vfs_info(ma_vfs* pVFS, ma_vfs_file file, ma_file_info* pInfo);
+    ma_result raia_ma_vfs_open_and_read_file(ma_vfs* pVFS, const char* pFilePath, void** ppData, size_t* pSize, const ma_allocation_callbacks* pAllocationCallbacks);
+    ma_result raia_ma_default_vfs_init(ma_default_vfs* pVFS, const ma_allocation_callbacks* pAllocationCallbacks);
+
+    // Decoding
+    ma_decoding_backend_config raia_ma_decoding_backend_config_init(ma_format preferredFormat, ma_uint32 seekPointCount);
+    ma_decoder_config raia_ma_decoder_config_init(ma_format outputFormat, ma_uint32 outputChannels, ma_uint32 outputSampleRate);
+    ma_decoder_config raia_ma_decoder_config_init_default(void);
+    ma_result raia_ma_decoder_init(ma_decoder_read_proc onRead, ma_decoder_seek_proc onSeek, void* pUserData, const ma_decoder_config* pConfig, ma_decoder* pDecoder);
+    ma_result raia_ma_decoder_init_memory(const void* pData, size_t dataSize, const ma_decoder_config* pConfig, ma_decoder* pDecoder);
+    ma_result raia_ma_decoder_init_vfs(ma_vfs* pVFS, const char* pFilePath, const ma_decoder_config* pConfig, ma_decoder* pDecoder);
+    ma_result raia_ma_decoder_init_vfs_w(ma_vfs* pVFS, const wchar_t* pFilePath, const ma_decoder_config* pConfig, ma_decoder* pDecoder);
+    ma_result raia_ma_decoder_init_file(const char* pFilePath, const ma_decoder_config* pConfig, ma_decoder* pDecoder);
+    ma_result raia_ma_decoder_init_file_w(const wchar_t* pFilePath, const ma_decoder_config* pConfig, ma_decoder* pDecoder);
+    ma_result raia_ma_decoder_uninit(ma_decoder* pDecoder);
+    ma_result raia_ma_decoder_read_pcm_frames(ma_decoder* pDecoder, void* pFramesOut, ma_uint64 frameCount, ma_uint64* pFramesRead);
+    ma_result raia_ma_decoder_seek_to_pcm_frame(ma_decoder* pDecoder, ma_uint64 frameIndex);
+    ma_result raia_ma_decoder_get_data_format(ma_decoder* pDecoder, ma_format* pFormat, ma_uint32* pChannels, ma_uint32* pSampleRate, ma_channel* pChannelMap, size_t channelMapCap);
+    ma_result raia_ma_decoder_get_cursor_in_pcm_frames(ma_decoder* pDecoder, ma_uint64* pCursor);
+    ma_result raia_ma_decoder_get_length_in_pcm_frames(ma_decoder* pDecoder, ma_uint64* pLength);
+    ma_result raia_ma_decoder_get_available_frames(ma_decoder* pDecoder, ma_uint64* pAvailableFrames);
+    ma_result raia_ma_decode_from_vfs(ma_vfs* pVFS, const char* pFilePath, ma_decoder_config* pConfig, ma_uint64* pFrameCountOut, void** ppPCMFramesOut);
+    ma_result raia_ma_decode_file(const char* pFilePath, ma_decoder_config* pConfig, ma_uint64* pFrameCountOut, void** ppPCMFramesOut);
+    ma_result raia_ma_decode_memory(const void* pData, size_t dataSize, ma_decoder_config* pConfig, ma_uint64* pFrameCountOut, void** ppPCMFramesOut);
+
+    // Encoding
+    ma_encoder_config raia_ma_encoder_config_init(ma_encoding_format encodingFormat, ma_format format, ma_uint32 channels, ma_uint32 sampleRate);
+    ma_result raia_ma_encoder_init(ma_encoder_write_proc onWrite, ma_encoder_seek_proc onSeek, void* pUserData, const ma_encoder_config* pConfig, ma_encoder* pEncoder);
+    ma_result raia_ma_encoder_init_vfs(ma_vfs* pVFS, const char* pFilePath, const ma_encoder_config* pConfig, ma_encoder* pEncoder);
+    ma_result raia_ma_encoder_init_vfs_w(ma_vfs* pVFS, const wchar_t* pFilePath, const ma_encoder_config* pConfig, ma_encoder* pEncoder);
+    ma_result raia_ma_encoder_init_file(const char* pFilePath, const ma_encoder_config* pConfig, ma_encoder* pEncoder);
+    ma_result raia_ma_encoder_init_file_w(const wchar_t* pFilePath, const ma_encoder_config* pConfig, ma_encoder* pEncoder);
+    void raia_ma_encoder_uninit(ma_encoder* pEncoder);
+    ma_result raia_ma_encoder_write_pcm_frames(ma_encoder* pEncoder, const void* pFramesIn, ma_uint64 frameCount, ma_uint64* pFramesWritten);
+
+    // Generation
+    ma_waveform_config raia_ma_waveform_config_init(ma_format format, ma_uint32 channels, ma_uint32 sampleRate, ma_waveform_type type, double amplitude, double frequency);
+    ma_result raia_ma_waveform_init(const ma_waveform_config* pConfig, ma_waveform* pWaveform);
+    void raia_ma_waveform_uninit(ma_waveform* pWaveform);
+    ma_result raia_ma_waveform_read_pcm_frames(ma_waveform* pWaveform, void* pFramesOut, ma_uint64 frameCount, ma_uint64* pFramesRead);
+    ma_result raia_ma_waveform_seek_to_pcm_frame(ma_waveform* pWaveform, ma_uint64 frameIndex);
+    ma_result raia_ma_waveform_set_amplitude(ma_waveform* pWaveform, double amplitude);
+    ma_result raia_ma_waveform_set_frequency(ma_waveform* pWaveform, double frequency);
+    ma_result raia_ma_waveform_set_type(ma_waveform* pWaveform, ma_waveform_type type);
+    ma_result raia_ma_waveform_set_sample_rate(ma_waveform* pWaveform, ma_uint32 sampleRate);
+    ma_pulsewave_config raia_ma_pulsewave_config_init(ma_format format, ma_uint32 channels, ma_uint32 sampleRate, double dutyCycle, double amplitude, double frequency);
+    ma_result raia_ma_pulsewave_init(const ma_pulsewave_config* pConfig, ma_pulsewave* pWaveform);
+    void raia_ma_pulsewave_uninit(ma_pulsewave* pWaveform);
+    ma_result raia_ma_pulsewave_read_pcm_frames(ma_pulsewave* pWaveform, void* pFramesOut, ma_uint64 frameCount, ma_uint64* pFramesRead);
+    ma_result raia_ma_pulsewave_seek_to_pcm_frame(ma_pulsewave* pWaveform, ma_uint64 frameIndex);
+    ma_result raia_ma_pulsewave_set_amplitude(ma_pulsewave* pWaveform, double amplitude);
+    ma_result raia_ma_pulsewave_set_frequency(ma_pulsewave* pWaveform, double frequency);
+    ma_result raia_ma_pulsewave_set_sample_rate(ma_pulsewave* pWaveform, ma_uint32 sampleRate);
+    ma_result raia_ma_pulsewave_set_duty_cycle(ma_pulsewave* pWaveform, double dutyCycle);
+    ma_noise_config raia_ma_noise_config_init(ma_format format, ma_uint32 channels, ma_noise_type type, ma_int32 seed, double amplitude);
+    ma_result raia_ma_noise_get_heap_size(const ma_noise_config* pConfig, size_t* pHeapSizeInBytes);
+    ma_result raia_ma_noise_init_preallocated(const ma_noise_config* pConfig, void* pHeap, ma_noise* pNoise);
+    ma_result raia_ma_noise_init(const ma_noise_config* pConfig, const ma_allocation_callbacks* pAllocationCallbacks, ma_noise* pNoise);
+    void raia_ma_noise_uninit(ma_noise* pNoise, const ma_allocation_callbacks* pAllocationCallbacks);
+    ma_result raia_ma_noise_read_pcm_frames(ma_noise* pNoise, void* pFramesOut, ma_uint64 frameCount, ma_uint64* pFramesRead);
+    ma_result raia_ma_noise_set_amplitude(ma_noise* pNoise, double amplitude);
+    ma_result raia_ma_noise_set_seed(ma_noise* pNoise, ma_int32 seed);
+    ma_result raia_ma_noise_set_type(ma_noise* pNoise, ma_noise_type type);
+
+    // Resource Manager
+    ma_resource_manager_pipeline_notifications raia_ma_resource_manager_pipeline_notifications_init(void);
+    ma_resource_manager_data_source_config raia_ma_resource_manager_data_source_config_init(void);
+    ma_resource_manager_config raia_ma_resource_manager_config_init(void);
+    ma_result raia_ma_resource_manager_init(const ma_resource_manager_config* pConfig, ma_resource_manager* pResourceManager);
+    void raia_ma_resource_manager_uninit(ma_resource_manager* pResourceManager);
+    ma_log* raia_ma_resource_manager_get_log(ma_resource_manager* pResourceManager);
+    ma_result raia_ma_resource_manager_register_file(ma_resource_manager* pResourceManager, const char* pFilePath, ma_uint32 flags);
+    ma_result raia_ma_resource_manager_register_file_w(ma_resource_manager* pResourceManager, const wchar_t* pFilePath, ma_uint32 flags);
+    ma_result raia_ma_resource_manager_register_decoded_data(ma_resource_manager* pResourceManager, const char* pName, const void* pData, ma_uint64 frameCount, ma_format format, ma_uint32 channels, ma_uint32 sampleRate);
+    ma_result raia_ma_resource_manager_register_decoded_data_w(ma_resource_manager* pResourceManager, const wchar_t* pName, const void* pData, ma_uint64 frameCount, ma_format format, ma_uint32 channels, ma_uint32 sampleRate);
+    ma_result raia_ma_resource_manager_register_encoded_data(ma_resource_manager* pResourceManager, const char* pName, const void* pData, size_t sizeInBytes);
+    ma_result raia_ma_resource_manager_register_encoded_data_w(ma_resource_manager* pResourceManager, const wchar_t* pName, const void* pData, size_t sizeInBytes);
+    ma_result raia_ma_resource_manager_unregister_file(ma_resource_manager* pResourceManager, const char* pFilePath);
+    ma_result raia_ma_resource_manager_unregister_file_w(ma_resource_manager* pResourceManager, const wchar_t* pFilePath);
+    ma_result raia_ma_resource_manager_unregister_data(ma_resource_manager* pResourceManager, const char* pName);
+    ma_result raia_ma_resource_manager_unregister_data_w(ma_resource_manager* pResourceManager, const wchar_t* pName);
+    ma_result raia_ma_resource_manager_data_buffer_init_ex(ma_resource_manager* pResourceManager, const ma_resource_manager_data_source_config* pConfig, ma_resource_manager_data_buffer* pDataBuffer);
+    ma_result raia_ma_resource_manager_data_buffer_init(ma_resource_manager* pResourceManager, const char* pFilePath, ma_uint32 flags, const ma_resource_manager_pipeline_notifications* pNotifications, ma_resource_manager_data_buffer* pDataBuffer);
+    ma_result raia_ma_resource_manager_data_buffer_init_w(ma_resource_manager* pResourceManager, const wchar_t* pFilePath, ma_uint32 flags, const ma_resource_manager_pipeline_notifications* pNotifications, ma_resource_manager_data_buffer* pDataBuffer);
+    ma_result raia_ma_resource_manager_data_buffer_init_copy(ma_resource_manager* pResourceManager, const ma_resource_manager_data_buffer* pExistingDataBuffer, ma_resource_manager_data_buffer* pDataBuffer);
+    ma_result raia_ma_resource_manager_data_buffer_uninit(ma_resource_manager_data_buffer* pDataBuffer);
+    ma_result raia_ma_resource_manager_data_buffer_read_pcm_frames(ma_resource_manager_data_buffer* pDataBuffer, void* pFramesOut, ma_uint64 frameCount, ma_uint64* pFramesRead);
+    ma_result raia_ma_resource_manager_data_buffer_seek_to_pcm_frame(ma_resource_manager_data_buffer* pDataBuffer, ma_uint64 frameIndex);
+    ma_result raia_ma_resource_manager_data_buffer_get_data_format(ma_resource_manager_data_buffer* pDataBuffer, ma_format* pFormat, ma_uint32* pChannels, ma_uint32* pSampleRate, ma_channel* pChannelMap, size_t channelMapCap);
+    ma_result raia_ma_resource_manager_data_buffer_get_cursor_in_pcm_frames(ma_resource_manager_data_buffer* pDataBuffer, ma_uint64* pCursor);
+    ma_result raia_ma_resource_manager_data_buffer_get_length_in_pcm_frames(ma_resource_manager_data_buffer* pDataBuffer, ma_uint64* pLength);
+    ma_result raia_ma_resource_manager_data_buffer_result(const ma_resource_manager_data_buffer* pDataBuffer);
+    ma_result raia_ma_resource_manager_data_buffer_set_looping(ma_resource_manager_data_buffer* pDataBuffer, ma_bool32 isLooping);
+    ma_bool32 raia_ma_resource_manager_data_buffer_is_looping(const ma_resource_manager_data_buffer* pDataBuffer);
+    ma_result raia_ma_resource_manager_data_buffer_get_available_frames(ma_resource_manager_data_buffer* pDataBuffer, ma_uint64* pAvailableFrames);
+    ma_result raia_ma_resource_manager_data_stream_init_ex(ma_resource_manager* pResourceManager, const ma_resource_manager_data_source_config* pConfig, ma_resource_manager_data_stream* pDataStream);
+    ma_result raia_ma_resource_manager_data_stream_init(ma_resource_manager* pResourceManager, const char* pFilePath, ma_uint32 flags, const ma_resource_manager_pipeline_notifications* pNotifications, ma_resource_manager_data_stream* pDataStream);
+    ma_result raia_ma_resource_manager_data_stream_init_w(ma_resource_manager* pResourceManager, const wchar_t* pFilePath, ma_uint32 flags, const ma_resource_manager_pipeline_notifications* pNotifications, ma_resource_manager_data_stream* pDataStream);
+    ma_result raia_ma_resource_manager_data_stream_uninit(ma_resource_manager_data_stream* pDataStream);
+    ma_result raia_ma_resource_manager_data_stream_read_pcm_frames(ma_resource_manager_data_stream* pDataStream, void* pFramesOut, ma_uint64 frameCount, ma_uint64* pFramesRead);
+    ma_result raia_ma_resource_manager_data_stream_seek_to_pcm_frame(ma_resource_manager_data_stream* pDataStream, ma_uint64 frameIndex);
+    ma_result raia_ma_resource_manager_data_stream_get_data_format(ma_resource_manager_data_stream* pDataStream, ma_format* pFormat, ma_uint32* pChannels, ma_uint32* pSampleRate, ma_channel* pChannelMap, size_t channelMapCap);
+    ma_result raia_ma_resource_manager_data_stream_get_cursor_in_pcm_frames(ma_resource_manager_data_stream* pDataStream, ma_uint64* pCursor);
+    ma_result raia_ma_resource_manager_data_stream_get_length_in_pcm_frames(ma_resource_manager_data_stream* pDataStream, ma_uint64* pLength);
+    ma_result raia_ma_resource_manager_data_stream_result(const ma_resource_manager_data_stream* pDataStream);
+    ma_result raia_ma_resource_manager_data_stream_set_looping(ma_resource_manager_data_stream* pDataStream, ma_bool32 isLooping);
+    ma_bool32 raia_ma_resource_manager_data_stream_is_looping(const ma_resource_manager_data_stream* pDataStream);
+    ma_result raia_ma_resource_manager_data_stream_get_available_frames(ma_resource_manager_data_stream* pDataStream, ma_uint64* pAvailableFrames);
+    ma_result raia_ma_resource_manager_data_source_init_ex(ma_resource_manager* pResourceManager, const ma_resource_manager_data_source_config* pConfig, ma_resource_manager_data_source* pDataSource);
+    ma_result raia_ma_resource_manager_data_source_init(ma_resource_manager* pResourceManager, const char* pName, ma_uint32 flags, const ma_resource_manager_pipeline_notifications* pNotifications, ma_resource_manager_data_source* pDataSource);
+    ma_result raia_ma_resource_manager_data_source_init_w(ma_resource_manager* pResourceManager, const wchar_t* pName, ma_uint32 flags, const ma_resource_manager_pipeline_notifications* pNotifications, ma_resource_manager_data_source* pDataSource);
+    ma_result raia_ma_resource_manager_data_source_init_copy(ma_resource_manager* pResourceManager, const ma_resource_manager_data_source* pExistingDataSource, ma_resource_manager_data_source* pDataSource);
+    ma_result raia_ma_resource_manager_data_source_uninit(ma_resource_manager_data_source* pDataSource);
+    ma_result raia_ma_resource_manager_data_source_read_pcm_frames(ma_resource_manager_data_source* pDataSource, void* pFramesOut, ma_uint64 frameCount, ma_uint64* pFramesRead);
+    ma_result raia_ma_resource_manager_data_source_seek_to_pcm_frame(ma_resource_manager_data_source* pDataSource, ma_uint64 frameIndex);
+    ma_result raia_ma_resource_manager_data_source_get_data_format(ma_resource_manager_data_source* pDataSource, ma_format* pFormat, ma_uint32* pChannels, ma_uint32* pSampleRate, ma_channel* pChannelMap, size_t channelMapCap);
+    ma_result raia_ma_resource_manager_data_source_get_cursor_in_pcm_frames(ma_resource_manager_data_source* pDataSource, ma_uint64* pCursor);
+    ma_result raia_ma_resource_manager_data_source_get_length_in_pcm_frames(ma_resource_manager_data_source* pDataSource, ma_uint64* pLength);
+    ma_result raia_ma_resource_manager_data_source_result(const ma_resource_manager_data_source* pDataSource);
+    ma_result raia_ma_resource_manager_data_source_set_looping(ma_resource_manager_data_source* pDataSource, ma_bool32 isLooping);
+    ma_bool32 raia_ma_resource_manager_data_source_is_looping(const ma_resource_manager_data_source* pDataSource);
+    ma_result raia_ma_resource_manager_data_source_get_available_frames(ma_resource_manager_data_source* pDataSource, ma_uint64* pAvailableFrames);
+    ma_result raia_ma_resource_manager_post_job(ma_resource_manager* pResourceManager, const ma_job* pJob);
+    ma_result raia_ma_resource_manager_post_job_quit(ma_resource_manager* pResourceManager);
+    ma_result raia_ma_resource_manager_next_job(ma_resource_manager* pResourceManager, ma_job* pJob);
+    ma_result raia_ma_resource_manager_process_job(ma_resource_manager* pResourceManager, ma_job* pJob);
+    ma_result raia_ma_resource_manager_process_next_job(ma_resource_manager* pResourceManager);
+
+    // Node Graph
+    ma_node_config raia_ma_node_config_init(void);
+    ma_result raia_ma_node_get_heap_size(ma_node_graph* pNodeGraph, const ma_node_config* pConfig, size_t* pHeapSizeInBytes);
+    ma_result raia_ma_node_init_preallocated(ma_node_graph* pNodeGraph, const ma_node_config* pConfig, void* pHeap, ma_node* pNode);
+    ma_result raia_ma_node_init(ma_node_graph* pNodeGraph, const ma_node_config* pConfig, const ma_allocation_callbacks* pAllocationCallbacks, ma_node* pNode);
+    void raia_ma_node_uninit(ma_node* pNode, const ma_allocation_callbacks* pAllocationCallbacks);
+    ma_node_graph* raia_ma_node_get_node_graph(const ma_node* pNode);
+    ma_uint32 raia_ma_node_get_input_bus_count(const ma_node* pNode);
+    ma_uint32 raia_ma_node_get_output_bus_count(const ma_node* pNode);
+    ma_uint32 raia_ma_node_get_input_channels(const ma_node* pNode, ma_uint32 inputBusIndex);
+    ma_uint32 raia_ma_node_get_output_channels(const ma_node* pNode, ma_uint32 outputBusIndex);
+    ma_result raia_ma_node_attach_output_bus(ma_node* pNode, ma_uint32 outputBusIndex, ma_node* pOtherNode, ma_uint32 otherNodeInputBusIndex);
+    ma_result raia_ma_node_detach_output_bus(ma_node* pNode, ma_uint32 outputBusIndex);
+    ma_result raia_ma_node_detach_all_output_buses(ma_node* pNode);
+    ma_result raia_ma_node_set_output_bus_volume(ma_node* pNode, ma_uint32 outputBusIndex, float volume);
+    float raia_ma_node_get_output_bus_volume(const ma_node* pNode, ma_uint32 outputBusIndex);
+    ma_result raia_ma_node_set_state(ma_node* pNode, ma_node_state state);
+    ma_node_state raia_ma_node_get_state(const ma_node* pNode);
+    ma_result raia_ma_node_set_state_time(ma_node* pNode, ma_node_state state, ma_uint64 globalTime);
+    ma_uint64 raia_ma_node_get_state_time(const ma_node* pNode, ma_node_state state);
+    ma_node_state raia_ma_node_get_state_by_time(const ma_node* pNode, ma_uint64 globalTime);
+    ma_node_state raia_ma_node_get_state_by_time_range(const ma_node* pNode, ma_uint64 globalTimeBeg, ma_uint64 globalTimeEnd);
+    ma_uint64 raia_ma_node_get_time(const ma_node* pNode);
+    ma_result raia_ma_node_set_time(ma_node* pNode, ma_uint64 localTime);
+    ma_node_graph_config raia_ma_node_graph_config_init(ma_uint32 channels);
+    ma_result raia_ma_node_graph_init(const ma_node_graph_config* pConfig, const ma_allocation_callbacks* pAllocationCallbacks, ma_node_graph* pNodeGraph);
+    void raia_ma_node_graph_uninit(ma_node_graph* pNodeGraph, const ma_allocation_callbacks* pAllocationCallbacks);
+    ma_node* raia_ma_node_graph_get_endpoint(ma_node_graph* pNodeGraph);
+    ma_result raia_ma_node_graph_read_pcm_frames(ma_node_graph* pNodeGraph, void* pFramesOut, ma_uint64 frameCount, ma_uint64* pFramesRead);
+    ma_uint32 raia_ma_node_graph_get_channels(const ma_node_graph* pNodeGraph);
+    ma_uint64 raia_ma_node_graph_get_time(const ma_node_graph* pNodeGraph);
+    ma_result raia_ma_node_graph_set_time(ma_node_graph* pNodeGraph, ma_uint64 globalTime);
+    ma_data_source_node_config raia_ma_data_source_node_config_init(ma_data_source* pDataSource);
+    ma_result raia_ma_data_source_node_init(ma_node_graph* pNodeGraph, const ma_data_source_node_config* pConfig, const ma_allocation_callbacks* pAllocationCallbacks, ma_data_source_node* pDataSourceNode);
+    void raia_ma_data_source_node_uninit(ma_data_source_node* pDataSourceNode, const ma_allocation_callbacks* pAllocationCallbacks);
+    ma_result raia_ma_data_source_node_set_looping(ma_data_source_node* pDataSourceNode, ma_bool32 isLooping);
+    ma_bool32 raia_ma_data_source_node_is_looping(ma_data_source_node* pDataSourceNode);
+    ma_splitter_node_config raia_ma_splitter_node_config_init(ma_uint32 channels);
+    ma_result raia_ma_splitter_node_init(ma_node_graph* pNodeGraph, const ma_splitter_node_config* pConfig, const ma_allocation_callbacks* pAllocationCallbacks, ma_splitter_node* pSplitterNode);
+    void raia_ma_splitter_node_uninit(ma_splitter_node* pSplitterNode, const ma_allocation_callbacks* pAllocationCallbacks);
+    ma_biquad_node_config raia_ma_biquad_node_config_init(ma_uint32 channels, float b0, float b1, float b2, float a0, float a1, float a2);
+    ma_result raia_ma_biquad_node_init(ma_node_graph* pNodeGraph, const ma_biquad_node_config* pConfig, const ma_allocation_callbacks* pAllocationCallbacks, ma_biquad_node* pNode);
+    ma_result raia_ma_biquad_node_reinit(const ma_biquad_config* pConfig, ma_biquad_node* pNode);
+    void raia_ma_biquad_node_uninit(ma_biquad_node* pNode, const ma_allocation_callbacks* pAllocationCallbacks);
+    ma_lpf_node_config raia_ma_lpf_node_config_init(ma_uint32 channels, ma_uint32 sampleRate, double cutoffFrequency, ma_uint32 order);
+    ma_result raia_ma_lpf_node_init(ma_node_graph* pNodeGraph, const ma_lpf_node_config* pConfig, const ma_allocation_callbacks* pAllocationCallbacks, ma_lpf_node* pNode);
+    ma_result raia_ma_lpf_node_reinit(const ma_lpf_config* pConfig, ma_lpf_node* pNode);
+    void raia_ma_lpf_node_uninit(ma_lpf_node* pNode, const ma_allocation_callbacks* pAllocationCallbacks);
+    ma_hpf_node_config raia_ma_hpf_node_config_init(ma_uint32 channels, ma_uint32 sampleRate, double cutoffFrequency, ma_uint32 order);
+    ma_result raia_ma_hpf_node_init(ma_node_graph* pNodeGraph, const ma_hpf_node_config* pConfig, const ma_allocation_callbacks* pAllocationCallbacks, ma_hpf_node* pNode);
+    ma_result raia_ma_hpf_node_reinit(const ma_hpf_config* pConfig, ma_hpf_node* pNode);
+    void raia_ma_hpf_node_uninit(ma_hpf_node* pNode, const ma_allocation_callbacks* pAllocationCallbacks);
+    ma_bpf_node_config raia_ma_bpf_node_config_init(ma_uint32 channels, ma_uint32 sampleRate, double cutoffFrequency, ma_uint32 order);
+    ma_result raia_ma_bpf_node_init(ma_node_graph* pNodeGraph, const ma_bpf_node_config* pConfig, const ma_allocation_callbacks* pAllocationCallbacks, ma_bpf_node* pNode);
+    ma_result raia_ma_bpf_node_reinit(const ma_bpf_config* pConfig, ma_bpf_node* pNode);
+    void raia_ma_bpf_node_uninit(ma_bpf_node* pNode, const ma_allocation_callbacks* pAllocationCallbacks);
+    ma_notch_node_config raia_ma_notch_node_config_init(ma_uint32 channels, ma_uint32 sampleRate, double q, double frequency);
+    ma_result raia_ma_notch_node_init(ma_node_graph* pNodeGraph, const ma_notch_node_config* pConfig, const ma_allocation_callbacks* pAllocationCallbacks, ma_notch_node* pNode);
+    ma_result raia_ma_notch_node_reinit(const ma_notch_config* pConfig, ma_notch_node* pNode);
+    void raia_ma_notch_node_uninit(ma_notch_node* pNode, const ma_allocation_callbacks* pAllocationCallbacks);
+    ma_peak_node_config raia_ma_peak_node_config_init(ma_uint32 channels, ma_uint32 sampleRate, double gainDB, double q, double frequency);
+    ma_result raia_ma_peak_node_init(ma_node_graph* pNodeGraph, const ma_peak_node_config* pConfig, const ma_allocation_callbacks* pAllocationCallbacks, ma_peak_node* pNode);
+    ma_result raia_ma_peak_node_reinit(const ma_peak_config* pConfig, ma_peak_node* pNode);
+    void raia_ma_peak_node_uninit(ma_peak_node* pNode, const ma_allocation_callbacks* pAllocationCallbacks);
+    ma_loshelf_node_config raia_ma_loshelf_node_config_init(ma_uint32 channels, ma_uint32 sampleRate, double gainDB, double q, double frequency);
+    ma_result raia_ma_loshelf_node_init(ma_node_graph* pNodeGraph, const ma_loshelf_node_config* pConfig, const ma_allocation_callbacks* pAllocationCallbacks, ma_loshelf_node* pNode);
+    ma_result raia_ma_loshelf_node_reinit(const ma_loshelf_config* pConfig, ma_loshelf_node* pNode);
+    void raia_ma_loshelf_node_uninit(ma_loshelf_node* pNode, const ma_allocation_callbacks* pAllocationCallbacks);
+    ma_hishelf_node_config raia_ma_hishelf_node_config_init(ma_uint32 channels, ma_uint32 sampleRate, double gainDB, double q, double frequency);
+    ma_result raia_ma_hishelf_node_init(ma_node_graph* pNodeGraph, const ma_hishelf_node_config* pConfig, const ma_allocation_callbacks* pAllocationCallbacks, ma_hishelf_node* pNode);
+    ma_result raia_ma_hishelf_node_reinit(const ma_hishelf_config* pConfig, ma_hishelf_node* pNode);
+    void raia_ma_hishelf_node_uninit(ma_hishelf_node* pNode, const ma_allocation_callbacks* pAllocationCallbacks);
+    ma_delay_node_config raia_ma_delay_node_config_init(ma_uint32 channels, ma_uint32 sampleRate, ma_uint32 delayInFrames, float decay);
+    ma_result raia_ma_delay_node_init(ma_node_graph* pNodeGraph, const ma_delay_node_config* pConfig, const ma_allocation_callbacks* pAllocationCallbacks, ma_delay_node* pDelayNode);
+    void raia_ma_delay_node_uninit(ma_delay_node* pDelayNode, const ma_allocation_callbacks* pAllocationCallbacks);
+    void raia_ma_delay_node_set_wet(ma_delay_node* pDelayNode, float value);
+    float raia_ma_delay_node_get_wet(const ma_delay_node* pDelayNode);
+    void raia_ma_delay_node_set_dry(ma_delay_node* pDelayNode, float value);
+    float raia_ma_delay_node_get_dry(const ma_delay_node* pDelayNode);
+    void raia_ma_delay_node_set_decay(ma_delay_node* pDelayNode, float value);
+    float raia_ma_delay_node_get_decay(const ma_delay_node* pDelayNode);
+
+    // Engine
+    ma_engine_node_config raia_ma_engine_node_config_init(ma_engine* pEngine, ma_engine_node_type type, ma_uint32 flags);
+    ma_result raia_ma_engine_node_get_heap_size(const ma_engine_node_config* pConfig, size_t* pHeapSizeInBytes);
+    ma_result raia_ma_engine_node_init_preallocated(const ma_engine_node_config* pConfig, void* pHeap, ma_engine_node* pEngineNode);
+    ma_result raia_ma_engine_node_init(const ma_engine_node_config* pConfig, const ma_allocation_callbacks* pAllocationCallbacks, ma_engine_node* pEngineNode);
+    void raia_ma_engine_node_uninit(ma_engine_node* pEngineNode, const ma_allocation_callbacks* pAllocationCallbacks);
+    ma_sound_config raia_ma_sound_config_init(void);
+    ma_sound_config raia_ma_sound_config_init_2(ma_engine* pEngine);
+    ma_sound_group_config raia_ma_sound_group_config_init(void);
+    ma_sound_group_config raia_ma_sound_group_config_init_2(ma_engine* pEngine);
+    ma_engine_config raia_ma_engine_config_init(void);
+    ma_result raia_ma_engine_init(const ma_engine_config* pConfig, ma_engine* pEngine);
+    void raia_ma_engine_uninit(ma_engine* pEngine);
+    ma_result raia_ma_engine_read_pcm_frames(ma_engine* pEngine, void* pFramesOut, ma_uint64 frameCount, ma_uint64* pFramesRead);
+    ma_node_graph* raia_ma_engine_get_node_graph(ma_engine* pEngine);
+    ma_resource_manager* raia_ma_engine_get_resource_manager(ma_engine* pEngine);
+    ma_device* raia_ma_engine_get_device(ma_engine* pEngine);
+    ma_log* raia_ma_engine_get_log(ma_engine* pEngine);
+    ma_node* raia_ma_engine_get_endpoint(ma_engine* pEngine);
+    ma_uint64 raia_ma_engine_get_time_in_pcm_frames(const ma_engine* pEngine);
+    ma_uint64 raia_ma_engine_get_time_in_milliseconds(const ma_engine* pEngine);
+    ma_result raia_ma_engine_set_time_in_pcm_frames(ma_engine* pEngine, ma_uint64 globalTime);
+    ma_result raia_ma_engine_set_time_in_milliseconds(ma_engine* pEngine, ma_uint64 globalTime);
+    ma_uint64 raia_ma_engine_get_time(const ma_engine* pEngine);
+    ma_result raia_ma_engine_set_time(ma_engine* pEngine, ma_uint64 globalTime);
+    ma_uint32 raia_ma_engine_get_channels(const ma_engine* pEngine);
+    ma_uint32 raia_ma_engine_get_sample_rate(const ma_engine* pEngine);
+    ma_result raia_ma_engine_start(ma_engine* pEngine);
+    ma_result raia_ma_engine_stop(ma_engine* pEngine);
+    ma_result raia_ma_engine_set_volume(ma_engine* pEngine, float volume);
+    float raia_ma_engine_get_volume(ma_engine* pEngine);
+    ma_result raia_ma_engine_set_gain_db(ma_engine* pEngine, float gainDB);
+    float raia_ma_engine_get_gain_db(ma_engine* pEngine);
+    ma_uint32 raia_ma_engine_get_listener_count(const ma_engine* pEngine);
+    ma_uint32 raia_ma_engine_find_closest_listener(const ma_engine* pEngine, float absolutePosX, float absolutePosY, float absolutePosZ);
+    void raia_ma_engine_listener_set_position(ma_engine* pEngine, ma_uint32 listenerIndex, float x, float y, float z);
+    ma_vec3f raia_ma_engine_listener_get_position(const ma_engine* pEngine, ma_uint32 listenerIndex);
+    void raia_ma_engine_listener_set_direction(ma_engine* pEngine, ma_uint32 listenerIndex, float x, float y, float z);
+    ma_vec3f raia_ma_engine_listener_get_direction(const ma_engine* pEngine, ma_uint32 listenerIndex);
+    void raia_ma_engine_listener_set_velocity(ma_engine* pEngine, ma_uint32 listenerIndex, float x, float y, float z);
+    ma_vec3f raia_ma_engine_listener_get_velocity(const ma_engine* pEngine, ma_uint32 listenerIndex);
+    void raia_ma_engine_listener_set_cone(ma_engine* pEngine, ma_uint32 listenerIndex, float innerAngleInRadians, float outerAngleInRadians, float outerGain);
+    void raia_ma_engine_listener_get_cone(const ma_engine* pEngine, ma_uint32 listenerIndex, float* pInnerAngleInRadians, float* pOuterAngleInRadians, float* pOuterGain);
+    void raia_ma_engine_listener_set_world_up(ma_engine* pEngine, ma_uint32 listenerIndex, float x, float y, float z);
+    ma_vec3f raia_ma_engine_listener_get_world_up(const ma_engine* pEngine, ma_uint32 listenerIndex);
+    void raia_ma_engine_listener_set_enabled(ma_engine* pEngine, ma_uint32 listenerIndex, ma_bool32 isEnabled);
+    ma_bool32 raia_ma_engine_listener_is_enabled(const ma_engine* pEngine, ma_uint32 listenerIndex);
+    ma_result raia_ma_engine_play_sound_ex(ma_engine* pEngine, const char* pFilePath, ma_node* pNode, ma_uint32 nodeInputBusIndex);
+    ma_result raia_ma_engine_play_sound(ma_engine* pEngine, const char* pFilePath, ma_sound_group* pGroup);
+    ma_result raia_ma_sound_init_from_file(ma_engine* pEngine, const char* pFilePath, ma_uint32 flags, ma_sound_group* pGroup, ma_fence* pDoneFence, ma_sound* pSound);
+    ma_result raia_ma_sound_init_from_file_w(ma_engine* pEngine, const wchar_t* pFilePath, ma_uint32 flags, ma_sound_group* pGroup, ma_fence* pDoneFence, ma_sound* pSound);
+    ma_result raia_ma_sound_init_copy(ma_engine* pEngine, const ma_sound* pExistingSound, ma_uint32 flags, ma_sound_group* pGroup, ma_sound* pSound);
+    ma_result raia_ma_sound_init_from_data_source(ma_engine* pEngine, ma_data_source* pDataSource, ma_uint32 flags, ma_sound_group* pGroup, ma_sound* pSound);
+    ma_result raia_ma_sound_init_ex(ma_engine* pEngine, const ma_sound_config* pConfig, ma_sound* pSound);
+    void raia_ma_sound_uninit(ma_sound* pSound);
+    ma_engine* raia_ma_sound_get_engine(const ma_sound* pSound);
+    ma_data_source* raia_ma_sound_get_data_source(const ma_sound* pSound);
+    ma_result raia_ma_sound_start(ma_sound* pSound);
+    ma_result raia_ma_sound_stop(ma_sound* pSound);
+    ma_result raia_ma_sound_stop_with_fade_in_pcm_frames(ma_sound* pSound, ma_uint64 fadeLengthInFrames);
+    ma_result raia_ma_sound_stop_with_fade_in_milliseconds(ma_sound* pSound, ma_uint64 fadeLengthInFrames);
+    void raia_ma_sound_set_volume(ma_sound* pSound, float volume);
+    float raia_ma_sound_get_volume(const ma_sound* pSound);
+    void raia_ma_sound_set_pan(ma_sound* pSound, float pan);
+    float raia_ma_sound_get_pan(const ma_sound* pSound);
+    void raia_ma_sound_set_pan_mode(ma_sound* pSound, ma_pan_mode panMode);
+    ma_pan_mode raia_ma_sound_get_pan_mode(const ma_sound* pSound);
+    void raia_ma_sound_set_pitch(ma_sound* pSound, float pitch);
+    float raia_ma_sound_get_pitch(const ma_sound* pSound);
+    void raia_ma_sound_set_spatialization_enabled(ma_sound* pSound, ma_bool32 enabled);
+    ma_bool32 raia_ma_sound_is_spatialization_enabled(const ma_sound* pSound);
+    void raia_ma_sound_set_pinned_listener_index(ma_sound* pSound, ma_uint32 listenerIndex);
+    ma_uint32 raia_ma_sound_get_pinned_listener_index(const ma_sound* pSound);
+    ma_uint32 raia_ma_sound_get_listener_index(const ma_sound* pSound);
+    ma_vec3f raia_ma_sound_get_direction_to_listener(const ma_sound* pSound);
+    void raia_ma_sound_set_position(ma_sound* pSound, float x, float y, float z);
+    ma_vec3f raia_ma_sound_get_position(const ma_sound* pSound);
+    void raia_ma_sound_set_direction(ma_sound* pSound, float x, float y, float z);
+    ma_vec3f raia_ma_sound_get_direction(const ma_sound* pSound);
+    void raia_ma_sound_set_velocity(ma_sound* pSound, float x, float y, float z);
+    ma_vec3f raia_ma_sound_get_velocity(const ma_sound* pSound);
+    void raia_ma_sound_set_attenuation_model(ma_sound* pSound, ma_attenuation_model attenuationModel);
+    ma_attenuation_model raia_ma_sound_get_attenuation_model(const ma_sound* pSound);
+    void raia_ma_sound_set_positioning(ma_sound* pSound, ma_positioning positioning);
+    ma_positioning raia_ma_sound_get_positioning(const ma_sound* pSound);
+    void raia_ma_sound_set_rolloff(ma_sound* pSound, float rolloff);
+    float raia_ma_sound_get_rolloff(const ma_sound* pSound);
+    void raia_ma_sound_set_min_gain(ma_sound* pSound, float minGain);
+    float raia_ma_sound_get_min_gain(const ma_sound* pSound);
+    void raia_ma_sound_set_max_gain(ma_sound* pSound, float maxGain);
+    float raia_ma_sound_get_max_gain(const ma_sound* pSound);
+    void raia_ma_sound_set_min_distance(ma_sound* pSound, float minDistance);
+    float raia_ma_sound_get_min_distance(const ma_sound* pSound);
+    void raia_ma_sound_set_max_distance(ma_sound* pSound, float maxDistance);
+    float raia_ma_sound_get_max_distance(const ma_sound* pSound);
+    void raia_ma_sound_set_cone(ma_sound* pSound, float innerAngleInRadians, float outerAngleInRadians, float outerGain);
+    void raia_ma_sound_get_cone(const ma_sound* pSound, float* pInnerAngleInRadians, float* pOuterAngleInRadians, float* pOuterGain);
+    void raia_ma_sound_set_doppler_factor(ma_sound* pSound, float dopplerFactor);
+    float raia_ma_sound_get_doppler_factor(const ma_sound* pSound);
+    void raia_ma_sound_set_directional_attenuation_factor(ma_sound* pSound, float directionalAttenuationFactor);
+    float raia_ma_sound_get_directional_attenuation_factor(const ma_sound* pSound);
+    void raia_ma_sound_set_fade_in_pcm_frames(ma_sound* pSound, float volumeBeg, float volumeEnd, ma_uint64 fadeLengthInFrames);
+    void raia_ma_sound_set_fade_in_milliseconds(ma_sound* pSound, float volumeBeg, float volumeEnd, ma_uint64 fadeLengthInMilliseconds);
+    void raia_ma_sound_set_fade_start_in_pcm_frames(ma_sound* pSound, float volumeBeg, float volumeEnd, ma_uint64 fadeLengthInFrames, ma_uint64 absoluteGlobalTimeInFrames);
+    void raia_ma_sound_set_fade_start_in_milliseconds(ma_sound* pSound, float volumeBeg, float volumeEnd, ma_uint64 fadeLengthInMilliseconds, ma_uint64 absoluteGlobalTimeInMilliseconds);
+    float raia_ma_sound_get_current_fade_volume(const ma_sound* pSound);
+    void raia_ma_sound_set_start_time_in_pcm_frames(ma_sound* pSound, ma_uint64 absoluteGlobalTimeInFrames);
+    void raia_ma_sound_set_start_time_in_milliseconds(ma_sound* pSound, ma_uint64 absoluteGlobalTimeInMilliseconds);
+    void raia_ma_sound_set_stop_time_in_pcm_frames(ma_sound* pSound, ma_uint64 absoluteGlobalTimeInFrames);
+    void raia_ma_sound_set_stop_time_in_milliseconds(ma_sound* pSound, ma_uint64 absoluteGlobalTimeInMilliseconds);
+    void raia_ma_sound_set_stop_time_with_fade_in_pcm_frames(ma_sound* pSound, ma_uint64 stopAbsoluteGlobalTimeInFrames, ma_uint64 fadeLengthInFrames);
+    void raia_ma_sound_set_stop_time_with_fade_in_milliseconds(ma_sound* pSound, ma_uint64 stopAbsoluteGlobalTimeInMilliseconds, ma_uint64 fadeLengthInMilliseconds);
+    ma_bool32 raia_ma_sound_is_playing(const ma_sound* pSound);
+    ma_uint64 raia_ma_sound_get_time_in_pcm_frames(const ma_sound* pSound);
+    ma_uint64 raia_ma_sound_get_time_in_milliseconds(const ma_sound* pSound);
+    void raia_ma_sound_set_looping(ma_sound* pSound, ma_bool32 isLooping);
+    ma_bool32 raia_ma_sound_is_looping(const ma_sound* pSound);
+    ma_bool32 raia_ma_sound_at_end(const ma_sound* pSound);
+    ma_result raia_ma_sound_seek_to_pcm_frame(ma_sound* pSound, ma_uint64 frameIndex);
+    ma_result raia_ma_sound_get_data_format(ma_sound* pSound, ma_format* pFormat, ma_uint32* pChannels, ma_uint32* pSampleRate, ma_channel* pChannelMap, size_t channelMapCap);
+    ma_result raia_ma_sound_get_cursor_in_pcm_frames(ma_sound* pSound, ma_uint64* pCursor);
+    ma_result raia_ma_sound_get_length_in_pcm_frames(ma_sound* pSound, ma_uint64* pLength);
+    ma_result raia_ma_sound_get_cursor_in_seconds(ma_sound* pSound, float* pCursor);
+    ma_result raia_ma_sound_get_length_in_seconds(ma_sound* pSound, float* pLength);
+    ma_result raia_ma_sound_set_end_callback(ma_sound* pSound, ma_sound_end_proc callback, void* pUserData);
+    ma_result raia_ma_sound_group_init(ma_engine* pEngine, ma_uint32 flags, ma_sound_group* pParentGroup, ma_sound_group* pGroup);
+    ma_result raia_ma_sound_group_init_ex(ma_engine* pEngine, const ma_sound_group_config* pConfig, ma_sound_group* pGroup);
+    void raia_ma_sound_group_uninit(ma_sound_group* pGroup);
+    ma_engine* raia_ma_sound_group_get_engine(const ma_sound_group* pGroup);
+    ma_result raia_ma_sound_group_start(ma_sound_group* pGroup);
+    ma_result raia_ma_sound_group_stop(ma_sound_group* pGroup);
+    void raia_ma_sound_group_set_volume(ma_sound_group* pGroup, float volume);
+    float raia_ma_sound_group_get_volume(const ma_sound_group* pGroup);
+    void raia_ma_sound_group_set_pan(ma_sound_group* pGroup, float pan);
+    float raia_ma_sound_group_get_pan(const ma_sound_group* pGroup);
+    void raia_ma_sound_group_set_pan_mode(ma_sound_group* pGroup, ma_pan_mode panMode);
+    ma_pan_mode raia_ma_sound_group_get_pan_mode(const ma_sound_group* pGroup);
+    void raia_ma_sound_group_set_pitch(ma_sound_group* pGroup, float pitch);
+    float raia_ma_sound_group_get_pitch(const ma_sound_group* pGroup);
+    void raia_ma_sound_group_set_spatialization_enabled(ma_sound_group* pGroup, ma_bool32 enabled);
+    ma_bool32 raia_ma_sound_group_is_spatialization_enabled(const ma_sound_group* pGroup);
+    void raia_ma_sound_group_set_pinned_listener_index(ma_sound_group* pGroup, ma_uint32 listenerIndex);
+    ma_uint32 raia_ma_sound_group_get_pinned_listener_index(const ma_sound_group* pGroup);
+    ma_uint32 raia_ma_sound_group_get_listener_index(const ma_sound_group* pGroup);
+    ma_vec3f raia_ma_sound_group_get_direction_to_listener(const ma_sound_group* pGroup);
+    void raia_ma_sound_group_set_position(ma_sound_group* pGroup, float x, float y, float z);
+    ma_vec3f raia_ma_sound_group_get_position(const ma_sound_group* pGroup);
+    void raia_ma_sound_group_set_direction(ma_sound_group* pGroup, float x, float y, float z);
+    ma_vec3f raia_ma_sound_group_get_direction(const ma_sound_group* pGroup);
+    void raia_ma_sound_group_set_velocity(ma_sound_group* pGroup, float x, float y, float z);
+    ma_vec3f raia_ma_sound_group_get_velocity(const ma_sound_group* pGroup);
+    void raia_ma_sound_group_set_attenuation_model(ma_sound_group* pGroup, ma_attenuation_model attenuationModel);
+    ma_attenuation_model raia_ma_sound_group_get_attenuation_model(const ma_sound_group* pGroup);
+    void raia_ma_sound_group_set_positioning(ma_sound_group* pGroup, ma_positioning positioning);
+    ma_positioning raia_ma_sound_group_get_positioning(const ma_sound_group* pGroup);
+    void raia_ma_sound_group_set_rolloff(ma_sound_group* pGroup, float rolloff);
+    float raia_ma_sound_group_get_rolloff(const ma_sound_group* pGroup);
+    void raia_ma_sound_group_set_min_gain(ma_sound_group* pGroup, float minGain);
+    float raia_ma_sound_group_get_min_gain(const ma_sound_group* pGroup);
+    void raia_ma_sound_group_set_max_gain(ma_sound_group* pGroup, float maxGain);
+    float raia_ma_sound_group_get_max_gain(const ma_sound_group* pGroup);
+    void raia_ma_sound_group_set_min_distance(ma_sound_group* pGroup, float minDistance);
+    float raia_ma_sound_group_get_min_distance(const ma_sound_group* pGroup);
+    void raia_ma_sound_group_set_max_distance(ma_sound_group* pGroup, float maxDistance);
+    float raia_ma_sound_group_get_max_distance(const ma_sound_group* pGroup);
+    void raia_ma_sound_group_set_cone(ma_sound_group* pGroup, float innerAngleInRadians, float outerAngleInRadians, float outerGain);
+    void raia_ma_sound_group_get_cone(const ma_sound_group* pGroup, float* pInnerAngleInRadians, float* pOuterAngleInRadians, float* pOuterGain);
+    void raia_ma_sound_group_set_doppler_factor(ma_sound_group* pGroup, float dopplerFactor);
+    float raia_ma_sound_group_get_doppler_factor(const ma_sound_group* pGroup);
+    void raia_ma_sound_group_set_directional_attenuation_factor(ma_sound_group* pGroup, float directionalAttenuationFactor);
+    float raia_ma_sound_group_get_directional_attenuation_factor(const ma_sound_group* pGroup);
+    void raia_ma_sound_group_set_fade_in_pcm_frames(ma_sound_group* pGroup, float volumeBeg, float volumeEnd, ma_uint64 fadeLengthInFrames);
+    void raia_ma_sound_group_set_fade_in_milliseconds(ma_sound_group* pGroup, float volumeBeg, float volumeEnd, ma_uint64 fadeLengthInMilliseconds);
+    float raia_ma_sound_group_get_current_fade_volume(ma_sound_group* pGroup);
+    void raia_ma_sound_group_set_start_time_in_pcm_frames(ma_sound_group* pGroup, ma_uint64 absoluteGlobalTimeInFrames);
+    void raia_ma_sound_group_set_start_time_in_milliseconds(ma_sound_group* pGroup, ma_uint64 absoluteGlobalTimeInMilliseconds);
+    void raia_ma_sound_group_set_stop_time_in_pcm_frames(ma_sound_group* pGroup, ma_uint64 absoluteGlobalTimeInFrames);
+    void raia_ma_sound_group_set_stop_time_in_milliseconds(ma_sound_group* pGroup, ma_uint64 absoluteGlobalTimeInMilliseconds);
+    ma_bool32 raia_ma_sound_group_is_playing(const ma_sound_group* pGroup);
+    ma_uint64 raia_ma_sound_group_get_time_in_pcm_frames(const ma_sound_group* pGroup);
 ]]
 
 local lib = ffi.load("raia_miniaudio")
