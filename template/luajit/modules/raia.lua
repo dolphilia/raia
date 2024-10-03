@@ -1144,6 +1144,7 @@ function Raia.Window:new(title, width, height)
         end
     end
     ffi.gc(gc_proxy, destructor_callback)
+    instance._gc_proxy = gc_proxy
 
     -- GLFW の初期化とウィンドウの作成
     glfw.windowHint(glfw.CLIENT_API, glfw.OPENGL_ES_API)
