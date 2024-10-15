@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
 #include "luajit/lua.h"
 #include "luajit/lualib.h"
 #include "luajit/lauxlib.h"

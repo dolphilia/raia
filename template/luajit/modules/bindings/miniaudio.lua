@@ -4598,6 +4598,9 @@ ffi.cdef[[
     void raia_ma_sound_group_set_stop_time_in_milliseconds(ma_sound_group* pGroup, ma_uint64 absoluteGlobalTimeInMilliseconds);
     ma_bool32 raia_ma_sound_group_is_playing(const ma_sound_group* pGroup);
     ma_uint64 raia_ma_sound_group_get_time_in_pcm_frames(const ma_sound_group* pGroup);
+
+    //
+    void raia_ma_sleep(ma_uint32 milliseconds);
 ]]
 
 local lib = ffi.load("raia_miniaudio")
@@ -8352,4 +8355,66 @@ function MA.soundGroupGetTimeInPcmFrames(pGroup)
     return lib.raia_ma_sound_group_get_time_in_pcm_frames(pGroup)
 end
 
+--
+
+function MA.sleep(milliseconds)
+    lib.raia_ma_sleep(milliseconds)
+end
+
+---
+
+
+ffi.cdef[[
+    void* malloc(size_t size);
+    void free(void* ptr);
+]]
+
+--[[
+local pi = 3.14159265358979
+local sample_rate = 44100
+local frequency = 440.0 -- 440Hz (A note)
+local duration = 2.0 -- 2 seconds
+
+local function data_callback(pDevice, pOutput, pInput, frameCount)
+    local output = ffi.cast("float*", pOutput)  -- pOutputをfloat*にキャスト
+    local buffer = ffi.cast("float*", pDevice.pUserData)  -- pUserDataをfloat*にキャスト
+
+    print(frameCount)  -- frameCountを表示
+
+    for i = 0, frameCount - 1 do
+        if sampleIndex < (sample_rate * duration) then
+            output[i] = buffer[sampleIndex]
+            sampleIndex = sampleIndex + 1
+        else
+            output[i] = 0.0  -- 2秒以降は無音
+        end
+    end
+end
+
+local result = ffi.new("ma_result")
+local deviceConfig = ffi.new("ma_device_config")
+local device = ffi.new("ma_device")
+local sampleCount = sample_rate * duration --ffi.new("size_t", sample_rate * duration)
+local sineWaveBuffer = ffi.cast("float*", ffi.C.malloc(sampleCount * ffi.sizeof("float")))
+
+for i = 0, sampleCount - 1 do
+    sineWaveBuffer[i] = 0.5 * math.sin((2.0 * pi * frequency * i) / sample_rate);
+end
+
+deviceConfig = MA.deviceConfigInit(1)
+deviceConfig.playback.format = 5;
+deviceConfig.playback.channels = 1;
+deviceConfig.sampleRate = sample_rate;
+deviceConfig.dataCallback = data_callback;
+deviceConfig.pUserData = sineWaveBuffer;
+
+result = MA.deviceInit(ffi.NULL, deviceConfig, device)
+result = MA.deviceStart(device)
+
+MA.sleep(duration * 1000)
+MA.deviceStop(device)
+MA.deviceUninit(device)
+
+--ffi.C.free(sineWaveBuffer)
+]]
 return MA

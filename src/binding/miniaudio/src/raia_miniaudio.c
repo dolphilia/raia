@@ -3806,6 +3806,10 @@ ma_uint64 raia_ma_sound_group_get_time_in_pcm_frames(const ma_sound_group* pGrou
 
 #endif  /* MA_NO_ENGINE */
 
+void raia_ma_sleep(ma_uint32 milliseconds) {
+    ma_sleep(milliseconds);
+}
+
 //-- ここから拡張
 
 ma_device_config * raia_ma_device_config_init_alt(ma_device_type deviceType) {

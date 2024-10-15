@@ -6,6 +6,7 @@ local ma = require("modules/bindings/miniaudio")
 local Surface = require("modules/surface")
 
 --
+print(string.concat("aiueo", "kakikukeko"))
 
 local surface = Surface:new(800, 600)
 surface:setColor(255, 255, 255, 255)
@@ -23,7 +24,7 @@ surface:setColor(255, 255, 255, 255)
 surface:setStyle(0)  -- スタイルを塗りつぶしに設定
 surface:setPosition(100, 200)
 surface:drawText("こんにちは! Raia!")
-collectgarbage()
+
 surface:setColor(0, 0, 0, 255)
 surface:setStyle(1)
 surface:setStrokeWidth(2)
@@ -47,7 +48,7 @@ collectgarbage()
 
 -- bitmap = nil
 -- rect = nil
---collectgarbage("collect")
+-- collectgarbage("collect")
 --
 
 local system = Raia.System:new()

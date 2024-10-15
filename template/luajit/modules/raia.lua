@@ -1173,21 +1173,21 @@ function Raia.Window:new(title, width, height)
     glfw.setFramebufferSizeCallbackAlt(windowID)
     glfw.setKeyCallbackAlt(windowID)
 
-    ffi.cdef[[
-        typedef struct GLFWwindow GLFWwindow;
-        typedef void (* GLFWcursorposfun)(GLFWwindow* window, double xpos, double ypos);
-    ]]
+    -- ffi.cdef[[
+    --     typedef struct GLFWwindow GLFWwindow;
+    --     typedef void (* GLFWcursorposfun)(GLFWwindow* window, double xpos, double ypos);
+    -- ]]
 
-    local count = 0
-    local cb = ffi.cast("GLFWcursorposfun", function(window, xpos, ypos)
-        count = count + 1
-        --print(xpos)
-        return window
-    end)
+    -- local count = 0
+    -- local cb = ffi.cast("GLFWcursorposfun", function(window, xpos, ypos)
+    --     count = count + 1
+    --     --print(xpos)
+    --     return window
+    -- end)
 
-    glfw.setCursorPosCallback(windowID, cb)
+    -- glfw.setCursorPosCallback(windowID, cb)
 
-    --glfw.setCursorPosCallbackAlt(windowID)
+    glfw.setCursorPosCallbackAlt(windowID)
     glfw.setMouseButtonCallbackAlt(windowID)
     glfw.setCharCallbackAlt(windowID)
     glfw.setCharModsCallbackAlt(windowID)

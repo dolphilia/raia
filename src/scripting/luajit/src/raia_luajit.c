@@ -160,10 +160,26 @@ int raia_os_is_macos(lua_State *L) {
     return 1;
 }
 
+// string.concat 関数の実装
+int string_concat(lua_State *L) {
+    const char *str1 = luaL_checkstring(L, 1); // 第1引数を取得
+    const char *str2 = luaL_checkstring(L, 2); // 第2引数を取得
+
+    lua_pushstring(L, strcat(strdup(str1), str2)); // 2つの文字列を連結してスタックにプッシュ
+    return 1; // 1つの値を返す
+}
+
 RAIA_API const char *init(int argc, char *argv[]) {
     lua_State *L = luaL_newstate(); // 新しいLua環境を作成
     luaL_openlibs(L); // 標準ライブラリをロード
 
+    // Luaのstringテーブルを取得
+    lua_getglobal(L, "string");
+    // stringテーブルにconcat関数を登録
+    lua_pushcfunction(L, string_concat);
+    lua_setfield(L, -2, "concat");
+
+    // 新規テーブル raia に追加
     lua_newtable(L); // raia
     {
         lua_newtable(L); // raia.os
