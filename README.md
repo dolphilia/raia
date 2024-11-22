@@ -1,3 +1,3 @@
 # RaiaEngine
 
-RaiaEngineはゲーム開発に特化した汎用エンジンです。
+RaiaEngine is a general-purpose engine specialized for game development.
