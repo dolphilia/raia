@@ -7,6 +7,7 @@ local Surface = require("modules/surface")
 
 --
 print(string.concat("aiueo", "kakikukeko"))
+print(_VERSION)
 
 local surface = Surface:new(800, 600)
 surface:setColor(255, 255, 255, 255)
