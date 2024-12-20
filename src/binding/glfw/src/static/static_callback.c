@@ -31,7 +31,6 @@ window_data_t* get_or_create_window_data(GLFWwindow *window) {
         //
         data->cursor_pos_x = -1;
         data->cursor_pos_y = -1;
-        // data->cursor_pos_callback_ref = LUA_NOREF;
         //
         data->mouse_button = -1;
         data->mouse_action = -1;
@@ -58,15 +57,12 @@ callback_data_t *get_or_create_callback_data() {
         // error_callback
         callback_data->error_code = -1;
         callback_data->error_message = NULL;
-        // callback_data->error_callback_lua_fn_ref = LUA_NOREF;
         // joystick_callback
         callback_data->joystick_id = -1;
         callback_data->joystick_event = -1;
-        // callback_data->joystick_callback_lua_fn_ref = LUA_NOREF;
         // monitor_callback
         callback_data->monitor = NULL;
         callback_data->monitor_event = -1;
-        // callback_data->monitor_callback_lua_fn_ref = LUA_NOREF;
     }
     return callback_data;
 }
@@ -265,7 +261,6 @@ void cursor_pos_callback(GLFWwindow* window, double xpos, double ypos) {
     window_data_t *data = get_or_create_window_data(window);
     data->cursor_pos_x = xpos;
     data->cursor_pos_y = ypos;
-    //printf("%f\n", data->cursor_pos_x);
 }
 
 double get_cursor_pos_x(GLFWwindow* window) {

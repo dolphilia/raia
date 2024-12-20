@@ -7,10 +7,6 @@
 
 #include <stdbool.h>
 #include "GLFW/glfw3.h"
-#include "luajit/lua.h"
-#include "luajit/lualib.h"
-#include "luajit/lauxlib.h"
-#include "luajit/luajit.h"
 #include "../../../third_party/c/troydhanson/uthash/uthash.h"
 
 typedef struct raia_callback_t{
