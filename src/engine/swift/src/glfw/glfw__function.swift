@@ -1,20 +1,10 @@
-// glfw/_namespace.swift
+// glfw/_function.swift
 
-enum GLFW {
+import Foundation
 
-    // MARK: Typealias
+extension GLFW {
 
-    typealias GLFWwindowposfun = @convention(c) (OpaquePointer?, Int32, Int32) -> Void
-    typealias GLFWwindowsizefun = @convention(c) (OpaquePointer?, Int32, Int32) -> Void
-    typealias GLFWwindowclosefun = @convention(c) (OpaquePointer?) -> Void
-    typealias GLFWwindowrefreshfun = @convention(c) (OpaquePointer?) -> Void
-    typealias GLFWwindowfocusfun = @convention(c) (OpaquePointer?, Int32) -> Void
-    typealias GLFWwindowiconifyfun = @convention(c) (OpaquePointer?, Int32) -> Void
-    typealias GLFWwindowmaximizefun = @convention(c) (OpaquePointer?, Int32) -> Void
-    typealias GLFWframebuffersizefun = @convention(c) (OpaquePointer?, Int32, Int32) -> Void
-    typealias GLFWwindowcontentscalefun = @convention(c) (OpaquePointer?, Float, Float) -> Void
-    
-    // MARK: -コンテキスト
+    // MARK: コンテキスト
 
     static func makeContextCurrent(_ window:OpaquePointer?) -> Void {
         raia_glfw_make_context_current(window)
@@ -40,7 +30,7 @@ enum GLFW {
         }
     }
 
-    // MARK: - 初期化・バージョン・エラー
+    // MARK: 初期化・バージョン・エラー
 
     static func initialize() -> Int {
         return Int(raia_glfw_init())
@@ -54,12 +44,14 @@ enum GLFW {
         raia_glfw_init_hint(Int32(hint), Int32(value))
     }
 
-    static func getVersion() -> (major: Int, minor: Int, rev: Int) {
-        var major: Int32 = 0
-        var minor: Int32 = 0
-        var rev: Int32 = 0
-        raia_glfw_get_version(&major, &minor, &rev)
-        return (Int(major), Int(minor), Int(rev))
+    static func getVersion(major: inout Int, minor: inout Int, rev: inout Int) {
+        var majorTemp: Int32 = 0
+        var minorTemp: Int32 = 0
+        var revTemp: Int32 = 0
+        raia_glfw_get_version(&majorTemp, &minorTemp, &revTemp)
+        major = Int(majorTemp)
+        minor = Int(minorTemp)
+        rev = Int(revTemp)
     }
 
     static func getVersionString() -> String? {
@@ -76,11 +68,11 @@ enum GLFW {
         return (errorCode, description)
     }
 
-    static func setErrorCallback(callback: @escaping GLFWerrorfun) -> GLFWerrorfun? {
+    static func setErrorCallback(_ callback: @escaping GLFWerrorfun) -> GLFWerrorfun? {
         return raia_glfw_set_error_callback(callback)
     }
 
-    // MARK: - 入力
+    // MARK: 入力
 
     static func getInputMode(window: OpaquePointer?, mode: Int) -> Int {
         return Int(raia_glfw_get_input_mode(window, Int32(mode)))
@@ -113,11 +105,12 @@ enum GLFW {
         return Int(raia_glfw_get_mouse_button(window, Int32(button)))
     }
 
-    static func getCursorPos(window: OpaquePointer?) -> (xpos: Double, ypos: Double) {
-        var xpos: Double = 0.0
-        var ypos: Double = 0.0
-        raia_glfw_get_cursor_pos(window, &xpos, &ypos)
-        return (xpos, ypos)
+    static func getCursorPos(window: OpaquePointer?, xpos: inout Double, ypos: inout Double) {
+        var xposTemp: Double = 0.0
+        var yposTemp: Double = 0.0
+        raia_glfw_get_cursor_pos(window, &xposTemp, &yposTemp)
+        xpos = xposTemp
+        ypos = yposTemp
     }
 
     static func setCursorPos(window: OpaquePointer?, xpos: Double, ypos: Double) {
@@ -168,9 +161,9 @@ enum GLFW {
         return raia_glfw_set_scroll_callback(window, callback)
     }
 
-    static func setDropCallback(window: OpaquePointer?, callback: @escaping GLFWdropfun) -> GLFWdropfun? {
-        return raia_glfw_set_drop_callback(window, callback)
-    }
+    // static func setDropCallback(window: OpaquePointer?, callback: @escaping GLFWdropfun) -> GLFWdropfun? {
+    //     return raia_glfw_set_drop_callback(window, callback)
+    // }
 
     static func joystickPresent(jid: Int) -> Bool {
         return raia_glfw_joystick_present(Int32(jid)) != 0
@@ -276,7 +269,7 @@ enum GLFW {
         return raia_glfw_get_timer_frequency()
     }
 
-    // MARK: - モニター
+    // MARK: モニター
 
     static func getMonitors() -> [OpaquePointer?] {
         var count: Int32 = 0
@@ -290,34 +283,40 @@ enum GLFW {
         return raia_glfw_get_primary_monitor()
     }
 
-    static func getMonitorPos(monitor: OpaquePointer?) -> (xpos: Int, ypos: Int) {
-        var xpos: Int32 = 0
-        var ypos: Int32 = 0
-        raia_glfw_get_monitor_pos(monitor, &xpos, &ypos)
-        return (Int(xpos), Int(ypos))
+    static func getMonitorPos(_ monitor: OpaquePointer?, xpos: inout Int, ypos: inout Int) {
+        var xposTemp: Int32 = 0
+        var yposTemp: Int32 = 0
+        raia_glfw_get_monitor_pos(monitor, &xposTemp, &yposTemp)
+        xpos = Int(xposTemp)
+        ypos = Int(yposTemp)
     }
 
-    static func getMonitorWorkarea(monitor: OpaquePointer?) -> (xpos: Int, ypos: Int, width: Int, height: Int) {
-        var xpos: Int32 = 0
-        var ypos: Int32 = 0
-        var width: Int32 = 0
-        var height: Int32 = 0
-        raia_glfw_get_monitor_workarea(monitor, &xpos, &ypos, &width, &height)
-        return (Int(xpos), Int(ypos), Int(width), Int(height))
+    static func getMonitorWorkarea(_ monitor: OpaquePointer?, xpos: inout Int, ypos: inout Int, width: inout Int, height: inout Int) {
+        var xposTemp: Int32 = 0
+        var yposTemp: Int32 = 0
+        var widthTemp: Int32 = 0
+        var heightTemp: Int32 = 0
+        raia_glfw_get_monitor_workarea(monitor, &xposTemp, &yposTemp, &widthTemp, &heightTemp)
+        xpos = Int(xposTemp)
+        ypos = Int(yposTemp)
+        width = Int(widthTemp)
+        height = Int(heightTemp)
     }
 
-    static func getMonitorPhysicalSize(monitor: OpaquePointer?) -> (widthMM: Int, heightMM: Int) {
-        var widthMM: Int32 = 0
-        var heightMM: Int32 = 0
-        raia_glfw_get_monitor_physical_size(monitor, &widthMM, &heightMM)
-        return (Int(widthMM), Int(heightMM))
+    static func getMonitorPhysicalSize(_ monitor: OpaquePointer?, widthMM: inout Int, heightMM: inout Int) {
+        var widthMMTemp: Int32 = 0
+        var heightMMTemp: Int32 = 0
+        raia_glfw_get_monitor_physical_size(monitor, &widthMMTemp, &heightMMTemp)
+        widthMM = Int(widthMMTemp)
+        heightMM = Int(heightMMTemp)
     }
 
-    static func getMonitorContentScale(monitor: OpaquePointer?) -> (xscale: Float, yscale: Float) {
-        var xscale: Float = 0.0
-        var yscale: Float = 0.0
-        raia_glfw_get_monitor_content_scale(monitor, &xscale, &yscale)
-        return (xscale, yscale)
+    static func getMonitorContentScale(_ monitor: OpaquePointer?, xscale: inout Float, yscale: inout Float) {
+        var xscaleTemp: Float = 0.0
+        var yscaleTemp: Float = 0.0
+        raia_glfw_get_monitor_content_scale(monitor, &xscaleTemp, &yscaleTemp)
+        xscale = xscaleTemp
+        yscale = yscaleTemp
     }
 
     static func getMonitorName(monitor: OpaquePointer?) -> String? {
@@ -369,7 +368,7 @@ enum GLFW {
         raia_glfw_set_gamma_ramp(monitor, ramp)
     }
 
-    // MARK: - Vulkanサポート
+    // MARK: Vulkanサポート
 
     static func vulkanSupported() -> Int {
         return Int(raia_glfw_vulkan_supported())
@@ -385,7 +384,7 @@ enum GLFW {
         }
     }
 
-    // MARK: - ウィンドウ
+    // MARK: ウィンドウ
 
     static func defaultWindowHints() {
         raia_glfw_default_window_hints()

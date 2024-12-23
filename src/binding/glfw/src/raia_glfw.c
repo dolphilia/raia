@@ -2,6 +2,8 @@
 #include "static/static_callback.h"
 #include "../../../common/c/utility/export_api.h"
 
+#include <stdbool.h>
+
 //
 // コンテキスト
 //

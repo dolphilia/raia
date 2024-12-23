@@ -12,7 +12,7 @@
 
 # =============================================================================
 # Project: SwiftCIntegration
-# Configurations: Release
+# Configurations: Debug
 # =============================================================================
 
 #############################################
@@ -24,7 +24,7 @@ ninja_required_version = 1.5
 #############################################
 # Set configuration variable for custom commands.
 
-CONFIGURATION = Release
+CONFIGURATION = Debug
 # =============================================================================
 # Include auxiliary files.
 
@@ -41,37 +41,37 @@ include CMakeFiles/rules.ninja
 
 cmake_ninja_workdir = /Users/dolphilia/github/raia/src/engine/swift/build/
 # =============================================================================
-# Object build statements for STATIC_LIBRARY target cfunc
+# Object build statements for STATIC_LIBRARY target wrapper
 
 
 #############################################
-# Order-only phony target for cfunc
+# Order-only phony target for wrapper
 
-build cmake_object_order_depends_target_cfunc: phony || .
+build cmake_object_order_depends_target_wrapper: phony || .
 
-build CMakeFiles/cfunc.dir/cfunc.c.o: C_COMPILER__cfunc_unscanned_Release /Users/dolphilia/github/raia/src/engine/swift/cfunc.c || cmake_object_order_depends_target_cfunc
-  DEP_FILE = CMakeFiles/cfunc.dir/cfunc.c.o.d
-  FLAGS = -O3 -DNDEBUG -std=gnu11 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -mmacosx-version-min=15.1
+build CMakeFiles/wrapper.dir/wrapper.c.o: C_COMPILER__wrapper_unscanned_Debug /Users/dolphilia/github/raia/src/engine/swift/wrapper.c || cmake_object_order_depends_target_wrapper
+  DEP_FILE = CMakeFiles/wrapper.dir/wrapper.c.o.d
+  FLAGS = -g -std=gnu11 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -mmacosx-version-min=15.1
   INCLUDES = -I/Users/dolphilia/github/raia/src/engine/swift/../../../sdk/macos/arm64/include -I/Users/dolphilia/github/raia/src/engine/swift/include -I/Users/dolphilia/github/raia/src/engine/swift
-  OBJECT_DIR = CMakeFiles/cfunc.dir
-  OBJECT_FILE_DIR = CMakeFiles/cfunc.dir
+  OBJECT_DIR = CMakeFiles/wrapper.dir
+  OBJECT_FILE_DIR = CMakeFiles/wrapper.dir
 
 
 # =============================================================================
-# Link build statements for STATIC_LIBRARY target cfunc
+# Link build statements for STATIC_LIBRARY target wrapper
 
 
 #############################################
-# Link the static library libcfunc.a
+# Link the static library libwrapper.a
 
-build libcfunc.a: C_STATIC_LIBRARY_LINKER__cfunc_Release CMakeFiles/cfunc.dir/cfunc.c.o
+build libwrapper.a: C_STATIC_LIBRARY_LINKER__wrapper_Debug CMakeFiles/wrapper.dir/wrapper.c.o
   ARCH_FLAGS = -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -mmacosx-version-min=15.1
-  LANGUAGE_COMPILE_FLAGS = -O3 -DNDEBUG
-  OBJECT_DIR = CMakeFiles/cfunc.dir
+  LANGUAGE_COMPILE_FLAGS = -g
+  OBJECT_DIR = CMakeFiles/wrapper.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_FILE = libcfunc.a
-  TARGET_PDB = cfunc.a.dbg
+  TARGET_FILE = libwrapper.a
+  TARGET_PDB = wrapper.a.dbg
 
 # =============================================================================
 # Object build statements for EXECUTABLE target main
@@ -80,7 +80,7 @@ build libcfunc.a: C_STATIC_LIBRARY_LINKER__cfunc_Release CMakeFiles/cfunc.dir/cf
 #############################################
 # Order-only phony target for main
 
-build cmake_object_order_depends_target_main: phony || cmake_object_order_depends_target_cfunc
+build cmake_object_order_depends_target_main: phony || cmake_object_order_depends_target_wrapper
 
 
 # =============================================================================
@@ -88,12 +88,12 @@ build cmake_object_order_depends_target_main: phony || cmake_object_order_depend
 
 
 #############################################
-# Link the executable /Users/dolphilia/github/raia/build/macos/arm64/release/main
+# Link the executable /Users/dolphilia/github/raia/build/macos/arm64/debug/main
 
-build /Users/dolphilia/github/raia/build/macos/arm64/release/main CMakeFiles/main.dir/src/main.swift.o CMakeFiles/main.dir/src/glfw/_namespace.swift.o CMakeFiles/main.dir/src/glfw/initializer.swift.o CMakeFiles/main.dir/src/glfw/window.swift.o: Swift_EXECUTABLE_LINKER__main_Release /Users/dolphilia/github/raia/src/engine/swift/src/main.swift /Users/dolphilia/github/raia/src/engine/swift/src/glfw/_namespace.swift /Users/dolphilia/github/raia/src/engine/swift/src/glfw/initializer.swift /Users/dolphilia/github/raia/src/engine/swift/src/glfw/window.swift | libcfunc.a || libcfunc.a
-  FLAGS = -import-objc-header /Users/dolphilia/github/raia/src/engine/swift/bridging-header.h -O -wmo -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -output-file-map CMakeFiles/main.dir/Release/output-file-map.json  -import-objc-header /Users/dolphilia/github/raia/src/engine/swift/bridging-header.h -O -wmo -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk
+build /Users/dolphilia/github/raia/build/macos/arm64/debug/main CMakeFiles/main.dir/src/main.swift.o CMakeFiles/main.dir/src/glfw/glfw___namespace.swift.o CMakeFiles/main.dir/src/glfw/glfw__const.swift.o CMakeFiles/main.dir/src/glfw/glfw__function.swift.o CMakeFiles/main.dir/src/glfw/glfw__typealias.swift.o CMakeFiles/main.dir/src/glfw/glfw_context.swift.o CMakeFiles/main.dir/src/glfw/glfw_corsor.swift.o CMakeFiles/main.dir/src/glfw/glfw_initializer.swift.o CMakeFiles/main.dir/src/glfw/glfw_input.swift.o CMakeFiles/main.dir/src/glfw/glfw_monitor.swift.o CMakeFiles/main.dir/src/glfw/glfw_system.swift.o CMakeFiles/main.dir/src/glfw/glfw_time.swift.o CMakeFiles/main.dir/src/glfw/glfw_window.swift.o CMakeFiles/main.dir/src/gles/gles___namespace.swift.o CMakeFiles/main.dir/src/gles/gles__const.swift.o CMakeFiles/main.dir/src/gles/gles__function.swift.o: Swift_EXECUTABLE_LINKER__main_Debug /Users/dolphilia/github/raia/src/engine/swift/src/main.swift /Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw___namespace.swift /Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw__const.swift /Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw__function.swift /Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw__typealias.swift /Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw_context.swift /Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw_corsor.swift /Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw_initializer.swift /Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw_input.swift /Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw_monitor.swift /Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw_system.swift /Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw_time.swift /Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw_window.swift /Users/dolphilia/github/raia/src/engine/swift/src/gles/gles___namespace.swift /Users/dolphilia/github/raia/src/engine/swift/src/gles/gles__const.swift /Users/dolphilia/github/raia/src/engine/swift/src/gles/gles__function.swift | libwrapper.a || libwrapper.a
+  FLAGS = -import-objc-header /Users/dolphilia/github/raia/src/engine/swift/bridging-header.h -Onone -g -incremental -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -output-file-map CMakeFiles/main.dir/Debug/output-file-map.json  -import-objc-header /Users/dolphilia/github/raia/src/engine/swift/bridging-header.h -Onone -g -incremental -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk
   INCLUDES = -I /Users/dolphilia/github/raia/src/engine/swift/../../../sdk/macos/arm64/include -I /Users/dolphilia/github/raia/src/engine/swift/include -I /Users/dolphilia/github/raia/src/engine/swift
-  LINK_LIBRARIES = -Xlinker -rpath -Xlinker /Users/dolphilia/github/raia/src/engine/swift/../../../sdk/macos/arm64/lib -Xlinker -rpath -Xlinker /Users/dolphilia/github/raia/src/engine/swift/lib  libcfunc.a  -lglfw.3.4  -lraia_glfw
+  LINK_LIBRARIES = -Xlinker -rpath -Xlinker /Users/dolphilia/github/raia/src/engine/swift/../../../sdk/macos/arm64/lib -Xlinker -rpath -Xlinker /Users/dolphilia/github/raia/src/engine/swift/lib  libwrapper.a  -lglfw.3.4  -lraia_glfw  -legl  -lGLESv2  -lraia_gles
   LINK_PATH = -L /Users/dolphilia/github/raia/src/engine/swift/build   -L /Users/dolphilia/github/raia/src/engine/swift/../../../sdk/macos/arm64/lib   -L /Users/dolphilia/github/raia/src/engine/swift/lib   -L /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk/usr/lib/swift
   OBJECT_DIR = CMakeFiles/main.dir
   POST_BUILD = :
@@ -101,8 +101,8 @@ build /Users/dolphilia/github/raia/build/macos/arm64/release/main CMakeFiles/mai
   SWIFT_LIBRARY_NAME = main
   SWIFT_MODULE = main.swiftmodule
   SWIFT_MODULE_NAME = main
-  SWIFT_SOURCES = /Users/dolphilia/github/raia/src/engine/swift/src/main.swift /Users/dolphilia/github/raia/src/engine/swift/src/glfw/_namespace.swift /Users/dolphilia/github/raia/src/engine/swift/src/glfw/initializer.swift /Users/dolphilia/github/raia/src/engine/swift/src/glfw/window.swift
-  TARGET_FILE = /Users/dolphilia/github/raia/build/macos/arm64/release/main
+  SWIFT_SOURCES = /Users/dolphilia/github/raia/src/engine/swift/src/main.swift /Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw___namespace.swift /Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw__const.swift /Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw__function.swift /Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw__typealias.swift /Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw_context.swift /Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw_corsor.swift /Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw_initializer.swift /Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw_input.swift /Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw_monitor.swift /Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw_system.swift /Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw_time.swift /Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw_window.swift /Users/dolphilia/github/raia/src/engine/swift/src/gles/gles___namespace.swift /Users/dolphilia/github/raia/src/engine/swift/src/gles/gles__const.swift /Users/dolphilia/github/raia/src/engine/swift/src/gles/gles__function.swift
+  TARGET_FILE = /Users/dolphilia/github/raia/build/macos/arm64/debug/main
   TARGET_PDB = main.dbg
 
 
@@ -132,9 +132,9 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 # Target aliases.
 
-build cfunc: phony libcfunc.a
+build main: phony /Users/dolphilia/github/raia/build/macos/arm64/debug/main
 
-build main: phony /Users/dolphilia/github/raia/build/macos/arm64/release/main
+build wrapper: phony libwrapper.a
 
 # =============================================================================
 # Folder targets.
@@ -144,7 +144,7 @@ build main: phony /Users/dolphilia/github/raia/build/macos/arm64/release/main
 #############################################
 # Folder: /Users/dolphilia/github/raia/src/engine/swift/build
 
-build all: phony libcfunc.a /Users/dolphilia/github/raia/build/macos/arm64/release/main
+build all: phony libwrapper.a /Users/dolphilia/github/raia/build/macos/arm64/debug/main
 
 # =============================================================================
 # Built-in targets

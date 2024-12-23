@@ -5,13 +5,72 @@
 #ifndef RAIA_GUI_RAIA_GLFW_H
 #define RAIA_GUI_RAIA_GLFW_H
 
-#include <stdbool.h>
-#include "GLFW/glfw3.h"
-//#include "../../../common/c/utility/export_api.h"
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-//
-// コンテキスト
-//
+#include <stdbool.h>
+#include <stdint.h>
+
+// MARK: 型
+
+#define GLFW_TRUE 1
+
+typedef struct GLFWwindow   GLFWwindow;
+typedef struct GLFWmonitor  GLFWmonitor;
+typedef struct GLFWcursor   GLFWcursor;
+
+typedef struct GLFWvidmode {
+    int width;
+    int height;
+    int redBits;
+    int greenBits;
+    int blueBits;
+    int refreshRate;
+} GLFWvidmode;
+
+typedef struct GLFWgammaramp {
+    unsigned short* red;
+    unsigned short* green;
+    unsigned short* blue;
+    unsigned int size;
+} GLFWgammaramp;
+
+typedef struct GLFWimage {
+    int width;
+    int height;
+    unsigned char* pixels;
+} GLFWimage;
+
+typedef struct GLFWgamepadstate {
+    unsigned char buttons[15];
+    float axes[6];
+} GLFWgamepadstate;
+
+typedef void (*GLFWerrorfun)(int, const char*);
+typedef void (*GLFWkeyfun)(GLFWwindow*, int, int, int, int);
+typedef void (*GLFWcharfun)(GLFWwindow*, unsigned int);
+typedef void (*GLFWcharmodsfun)(GLFWwindow*, unsigned int, int);
+typedef void (*GLFWmousebuttonfun)(GLFWwindow*, int, int, int);
+typedef void (*GLFWcursorposfun)(GLFWwindow*, double, double);
+typedef void (*GLFWcursorenterfun)(GLFWwindow*, int);
+typedef void (*GLFWscrollfun)(GLFWwindow*, double, double);
+typedef void (*GLFWdropfun)(GLFWwindow*, int, const char**);
+typedef void (*GLFWjoystickfun)(int, int);
+typedef void (*GLFWmonitorfun)(GLFWmonitor*, int);
+typedef void (*GLFWwindowposfun)(GLFWwindow*, int, int);
+typedef void (*GLFWwindowsizefun)(GLFWwindow*, int, int);
+typedef void (*GLFWwindowclosefun)(GLFWwindow*);
+typedef void (*GLFWwindowrefreshfun)(GLFWwindow*);
+typedef void (*GLFWwindowfocusfun)(GLFWwindow*, int);
+typedef void (*GLFWwindowiconifyfun)(GLFWwindow*, int);
+typedef void (*GLFWwindowmaximizefun)(GLFWwindow*, int);
+typedef void (*GLFWframebuffersizefun)(GLFWwindow*, int, int);
+typedef void (*GLFWwindowcontentscalefun)(GLFWwindow*, float, float);
+
+typedef void (*GLFWglproc)(void);
+
+// MARK: コンテキスト
 
 void raia_glfw_make_context_current(GLFWwindow *window);
 GLFWwindow *raia_glfw_get_current_context(void);
@@ -19,9 +78,7 @@ void raia_glfw_swap_interval(int interval);
 int raia_glfw_extension_supported(const char *extension);
 GLFWglproc raia_glfw_get_proc_address(const char *procname);
 
-//
-// 初期化・バージョン・エラー
-//
+// MARK: 初期化・バージョン・エラー
 
 int raia_glfw_init(void);
 void raia_glfw_terminate(void);
@@ -31,9 +88,7 @@ const char *raia_glfw_get_version_string(void);
 int raia_glfw_get_error(const char **description);
 GLFWerrorfun raia_glfw_set_error_callback(GLFWerrorfun callback);
 
-//
-// 入力
-//
+// MARK: 入力
 
 int raia_glfw_get_input_mode(GLFWwindow *window, int mode);
 void raia_glfw_set_input_mode(GLFWwindow *window, int mode, int value);
@@ -76,9 +131,7 @@ void raia_glfw_set_time(double time);
 uint64_t raia_glfw_get_timer_value(void);
 uint64_t raia_glfw_get_timer_frequency(void);
 
-//
-// モニター
-//
+// MARK: モニター
 
 GLFWmonitor **raia_glfw_get_monitors(int *count);
 GLFWmonitor *raia_glfw_get_primary_monitor(void);
@@ -96,9 +149,7 @@ void raia_glfw_set_gamma(GLFWmonitor *monitor, float gamma);
 const GLFWgammaramp *raia_glfw_get_gamma_ramp(GLFWmonitor *monitor);
 void raia_glfw_set_gamma_ramp(GLFWmonitor *monitor, const GLFWgammaramp *ramp);
 
-//
-// ネイティブアクセス
-//
+// MARK: ネイティブアクセス
 
 // glfwGetWin32Adapter
 // glfwGetWin32Monitor
@@ -125,9 +176,7 @@ void raia_glfw_set_gamma_ramp(GLFWmonitor *monitor, const GLFWgammaramp *ramp);
 // glfwGetOSMesaDepthBuffer
 // glfwGetOSMesaContext
 
-//
-// Vulkanサポート
-//
+// MARK: Vulkanサポート
 
 int raia_glfw_vulkan_supported(void);
 const char **raia_glfw_get_required_instance_extensions(uint32_t *count);
@@ -136,9 +185,7 @@ const char **raia_glfw_get_required_instance_extensions(uint32_t *count);
 // glfwGetPhysicalDevicePresentationSupport
 // glfwCreateWindowSurface
 
-//
-// ウィンドウ
-//
+// MARK: ウィンドウ
 
 void raia_glfw_default_window_hints(void);
 void raia_glfw_window_hint(int hint, int value);
@@ -188,7 +235,7 @@ void raia_glfw_wait_events_timeout(double timeout);
 void raia_glfw_post_empty_event(void);
 void raia_glfw_swap_buffers(GLFWwindow *window);
 
-// (代替関数)
+// MARK: (代替関数)
 
 // Error
 
@@ -305,5 +352,9 @@ int raia_glfw_get_window_maximized(GLFWwindow *window);
 void raia_glfw_set_window_content_scale_callback_alt(GLFWwindow *window);
 float raia_glfw_get_window_content_scale_x(GLFWwindow *window);
 float raia_glfw_get_window_content_scale_y(GLFWwindow *window);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif //RAIA_GUI_RAIA_GLFW_H

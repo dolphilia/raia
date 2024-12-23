@@ -1,9 +1,9 @@
 [
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
-  "command": "/usr/bin/clang -I/Users/dolphilia/github/raia/src/engine/swift/../../../sdk/macos/arm64/include -I/Users/dolphilia/github/raia/src/engine/swift/include -I/Users/dolphilia/github/raia/src/engine/swift -O3 -DNDEBUG -std=gnu11 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -mmacosx-version-min=15.1 -o CMakeFiles/cfunc.dir/cfunc.c.o -c /Users/dolphilia/github/raia/src/engine/swift/cfunc.c",
-  "file": "/Users/dolphilia/github/raia/src/engine/swift/cfunc.c",
-  "output": "CMakeFiles/cfunc.dir/cfunc.c.o"
+  "command": "/usr/bin/clang -I/Users/dolphilia/github/raia/src/engine/swift/../../../sdk/macos/arm64/include -I/Users/dolphilia/github/raia/src/engine/swift/include -I/Users/dolphilia/github/raia/src/engine/swift -g -std=gnu11 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -mmacosx-version-min=15.1 -o CMakeFiles/wrapper.dir/wrapper.c.o -c /Users/dolphilia/github/raia/src/engine/swift/wrapper.c",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/wrapper.c",
+  "output": "CMakeFiles/wrapper.dir/wrapper.c.o"
 },
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
@@ -14,19 +14,91 @@
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
   "command": ":",
-  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/glfw/_namespace.swift",
-  "output": "CMakeFiles/main.dir/src/glfw/_namespace.swift.o"
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw___namespace.swift",
+  "output": "CMakeFiles/main.dir/src/glfw/glfw___namespace.swift.o"
 },
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
   "command": ":",
-  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/glfw/initializer.swift",
-  "output": "CMakeFiles/main.dir/src/glfw/initializer.swift.o"
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw__const.swift",
+  "output": "CMakeFiles/main.dir/src/glfw/glfw__const.swift.o"
 },
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
   "command": ":",
-  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/glfw/window.swift",
-  "output": "CMakeFiles/main.dir/src/glfw/window.swift.o"
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw__function.swift",
+  "output": "CMakeFiles/main.dir/src/glfw/glfw__function.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw__typealias.swift",
+  "output": "CMakeFiles/main.dir/src/glfw/glfw__typealias.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw_context.swift",
+  "output": "CMakeFiles/main.dir/src/glfw/glfw_context.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw_corsor.swift",
+  "output": "CMakeFiles/main.dir/src/glfw/glfw_corsor.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw_initializer.swift",
+  "output": "CMakeFiles/main.dir/src/glfw/glfw_initializer.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw_input.swift",
+  "output": "CMakeFiles/main.dir/src/glfw/glfw_input.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw_monitor.swift",
+  "output": "CMakeFiles/main.dir/src/glfw/glfw_monitor.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw_system.swift",
+  "output": "CMakeFiles/main.dir/src/glfw/glfw_system.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw_time.swift",
+  "output": "CMakeFiles/main.dir/src/glfw/glfw_time.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw_window.swift",
+  "output": "CMakeFiles/main.dir/src/glfw/glfw_window.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/gles/gles___namespace.swift",
+  "output": "CMakeFiles/main.dir/src/gles/gles___namespace.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/gles/gles__const.swift",
+  "output": "CMakeFiles/main.dir/src/gles/gles__const.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/gles/gles__function.swift",
+  "output": "CMakeFiles/main.dir/src/gles/gles__function.swift.o"
 }
 ]

@@ -3,7 +3,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "libcfunc.a"
+			"path" : "libwrapper.a"
 		}
 	],
 	"backtrace" : 1,
@@ -68,7 +68,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-O3 -DNDEBUG -std=gnu11 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -mmacosx-version-min=15.1"
+					"fragment" : "-g -std=gnu11 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -mmacosx-version-min=15.1"
 				}
 			],
 			"includes" : 
@@ -101,9 +101,9 @@
 			]
 		}
 	],
-	"id" : "cfunc::@6890427a1f51a3e7e1df",
-	"name" : "cfunc",
-	"nameOnDisk" : "libcfunc.a",
+	"id" : "wrapper::@6890427a1f51a3e7e1df",
+	"name" : "wrapper",
+	"nameOnDisk" : "libwrapper.a",
 	"paths" : 
 	{
 		"build" : ".",
@@ -124,7 +124,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "cfunc.c",
+			"path" : "wrapper.c",
 			"sourceGroupIndex" : 0
 		}
 	],
