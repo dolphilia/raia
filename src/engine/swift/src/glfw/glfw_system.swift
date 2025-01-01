@@ -36,9 +36,9 @@ extension GLFW {
             swiftErrorCallback?(Int(errorCode), description)
         }
 
-        static func setErrorCallback(_ callback: @escaping (Int, String?) -> Void) -> GLFWerrorfun? {
+        static func setErrorCallback(callback: @escaping (Int, String?) -> Void) -> GLFWerrorfun? {
             swiftErrorCallback = callback
-            return GLFW.setErrorCallback(cErrorCallback)
+            return GLFW.setErrorCallback(callback:cErrorCallback)
         }
 
         // MARK: コンテキスト
@@ -48,15 +48,15 @@ extension GLFW {
             return windowPointer
         }
 
-        static func swapInterval(_ interval: Int) {
+        static func swapInterval(interval: Int) {
             GLFW.swapInterval(interval:interval)
         }
 
-        static func extensionSupported(_ extension_: String) -> Bool {
+        static func extensionSupported(extension_: String) -> Bool {
             return raia_glfw_extension_supported(extension_) != 0
         }
 
-        static func getProcAddress(_ procname: String) -> (@convention(c) () -> Void)? {
+        static func getProcAddress(procname: String) -> (@convention(c) () -> Void)? {
             return GLFW.getProcAddress(procname:procname)
         }
     }

@@ -6,7 +6,7 @@ extension GLFW {
             return GLFW.getTime()
         }
 
-        static func setTime(_ time: Double) {
+        static func setTime(time: Double) {
             GLFW.setTime(time:time)
         }
 

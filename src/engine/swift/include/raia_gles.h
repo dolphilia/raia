@@ -224,7 +224,7 @@ void raia_gl_get_active_uniform_block_name (GLuint program, GLuint uniformBlockI
 void raia_gl_uniform_block_binding (GLuint program, GLuint uniformBlockIndex, GLuint uniformBlockBinding);
 void raia_gl_draw_arrays_instanced (GLenum mode, GLint first, GLsizei count, GLsizei instancecount);
 void raia_gl_draw_elements_instanced (GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei instancecount);
-GLsync raia_gl_fence_sync (GLenum condition, GLbitfield flags);
+GLsync raia_gl_fence_sync (GLenum condition_, GLbitfield flags);
 GLboolean raia_gl_is_sync (GLsync sync);
 void raia_gl_delete_sync (GLsync sync);
 GLenum raia_gl_client_wait_sync (GLsync sync, GLbitfield flags, GLuint64 timeout);

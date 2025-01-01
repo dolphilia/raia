@@ -6,7 +6,7 @@ extension GLFW {
 
     // MARK: コンテキスト
 
-    static func makeContextCurrent(_ window:OpaquePointer?) -> Void {
+    static func makeContextCurrent(window:OpaquePointer?) -> Void {
         raia_glfw_make_context_current(window)
     }
 
@@ -68,7 +68,7 @@ extension GLFW {
         return (errorCode, description)
     }
 
-    static func setErrorCallback(_ callback: @escaping GLFWerrorfun) -> GLFWerrorfun? {
+    static func setErrorCallback(callback: @escaping GLFWerrorfun) -> GLFWerrorfun? {
         return raia_glfw_set_error_callback(callback)
     }
 
@@ -283,7 +283,7 @@ extension GLFW {
         return raia_glfw_get_primary_monitor()
     }
 
-    static func getMonitorPos(_ monitor: OpaquePointer?, xpos: inout Int, ypos: inout Int) {
+    static func getMonitorPos(monitor: OpaquePointer?, xpos: inout Int, ypos: inout Int) {
         var xposTemp: Int32 = 0
         var yposTemp: Int32 = 0
         raia_glfw_get_monitor_pos(monitor, &xposTemp, &yposTemp)
@@ -291,7 +291,7 @@ extension GLFW {
         ypos = Int(yposTemp)
     }
 
-    static func getMonitorWorkarea(_ monitor: OpaquePointer?, xpos: inout Int, ypos: inout Int, width: inout Int, height: inout Int) {
+    static func getMonitorWorkarea(monitor: OpaquePointer?, xpos: inout Int, ypos: inout Int, width: inout Int, height: inout Int) {
         var xposTemp: Int32 = 0
         var yposTemp: Int32 = 0
         var widthTemp: Int32 = 0
@@ -303,7 +303,7 @@ extension GLFW {
         height = Int(heightTemp)
     }
 
-    static func getMonitorPhysicalSize(_ monitor: OpaquePointer?, widthMM: inout Int, heightMM: inout Int) {
+    static func getMonitorPhysicalSize(monitor: OpaquePointer?, widthMM: inout Int, heightMM: inout Int) {
         var widthMMTemp: Int32 = 0
         var heightMMTemp: Int32 = 0
         raia_glfw_get_monitor_physical_size(monitor, &widthMMTemp, &heightMMTemp)
@@ -311,7 +311,7 @@ extension GLFW {
         heightMM = Int(heightMMTemp)
     }
 
-    static func getMonitorContentScale(_ monitor: OpaquePointer?, xscale: inout Float, yscale: inout Float) {
+    static func getMonitorContentScale(monitor: OpaquePointer?, xscale: inout Float, yscale: inout Float) {
         var xscaleTemp: Float = 0.0
         var yscaleTemp: Float = 0.0
         raia_glfw_get_monitor_content_scale(monitor, &xscaleTemp, &yscaleTemp)
@@ -406,29 +406,29 @@ extension GLFW {
         }
     }
 
-    static func destroyWindow(_ window: OpaquePointer?) {
+    static func destroyWindow(window: OpaquePointer?) {
         raia_glfw_destroy_window(window)
     }
 
-    static func windowShouldClose(_ window: OpaquePointer?) -> Int {
+    static func windowShouldClose(window: OpaquePointer?) -> Int {
         return Int(raia_glfw_window_should_close(window))
     }
 
-    static func setWindowShouldClose(_ window: OpaquePointer?, value: Int) {
+    static func setWindowShouldClose(window: OpaquePointer?, value: Int) {
         raia_glfw_set_window_should_close(window, Int32(value))
     }
 
-    static func setWindowTitle(_ window: OpaquePointer?, title: String) {
+    static func setWindowTitle(window: OpaquePointer?, title: String) {
         title.withCString { cString in
             raia_glfw_set_window_title(window, cString)
         }
     }
 
-    static func setWindowIcon(_ window: OpaquePointer?, count: Int, images: UnsafePointer<GLFWimage>?) {
+    static func setWindowIcon(window: OpaquePointer?, count: Int, images: UnsafePointer<GLFWimage>?) {
         raia_glfw_set_window_icon(window, Int32(count), images)
     }
 
-    static func getWindowPos(_ window: OpaquePointer?, xpos: inout Int, ypos: inout Int) {
+    static func getWindowPos(window: OpaquePointer?, xpos: inout Int, ypos: inout Int) {
         var x: Int32 = 0
         var y: Int32 = 0
         raia_glfw_get_window_pos(window, &x, &y)
@@ -436,11 +436,11 @@ extension GLFW {
         ypos = Int(y)
     }
 
-    static func setWindowPos(_ window: OpaquePointer?, xpos: Int, ypos: Int) {
+    static func setWindowPos(window: OpaquePointer?, xpos: Int, ypos: Int) {
         raia_glfw_set_window_pos(window, Int32(xpos), Int32(ypos))
     }
 
-    static func getWindowSize(_ window: OpaquePointer?, width: inout Int, height: inout Int) {
+    static func getWindowSize(window: OpaquePointer?, width: inout Int, height: inout Int) {
         var w: Int32 = 0
         var h: Int32 = 0
         raia_glfw_get_window_size(window, &w, &h)
@@ -448,19 +448,19 @@ extension GLFW {
         height = Int(h)
     }
 
-    static func setWindowSizeLimits(_ window: OpaquePointer?, minWidth: Int, minHeight: Int, maxWidth: Int, maxHeight: Int) {
+    static func setWindowSizeLimits(window: OpaquePointer?, minWidth: Int, minHeight: Int, maxWidth: Int, maxHeight: Int) {
         raia_glfw_set_window_size_limits(window, Int32(minWidth), Int32(minHeight), Int32(maxWidth), Int32(maxHeight))
     }
 
-    static func setWindowAspectRatio(_ window: OpaquePointer?, numer: Int, denom: Int) {
+    static func setWindowAspectRatio(window: OpaquePointer?, numer: Int, denom: Int) {
         raia_glfw_set_window_aspect_ratio(window, Int32(numer), Int32(denom))
     }
 
-    static func setWindowSize(_ window: OpaquePointer?, width: Int, height: Int) {
+    static func setWindowSize(window: OpaquePointer?, width: Int, height: Int) {
         raia_glfw_set_window_size(window, Int32(width), Int32(height))
     }
 
-    static func getFramebufferSize(_ window: OpaquePointer?, width: inout Int, height: inout Int) {
+    static func getFramebufferSize(window: OpaquePointer?, width: inout Int, height: inout Int) {
         var w: Int32 = 0
         var h: Int32 = 0
         raia_glfw_get_framebuffer_size(window, &w, &h)
@@ -468,7 +468,7 @@ extension GLFW {
         height = Int(h)
     }
 
-    static func getWindowFrameSize(_ window: OpaquePointer?, left: inout Int, top: inout Int, right: inout Int, bottom: inout Int) {
+    static func getWindowFrameSize(window: OpaquePointer?, left: inout Int, top: inout Int, right: inout Int, bottom: inout Int) {
         var l: Int32 = 0
         var t: Int32 = 0
         var r: Int32 = 0
@@ -480,7 +480,7 @@ extension GLFW {
         bottom = Int(b)
     }
 
-    static func getWindowContentScale(_ window: OpaquePointer?, xscale: inout Float, yscale: inout Float) {
+    static func getWindowContentScale(window: OpaquePointer?, xscale: inout Float, yscale: inout Float) {
         var x: Float = 0.0
         var y: Float = 0.0
         raia_glfw_get_window_content_scale(window, &x, &y)
@@ -488,99 +488,99 @@ extension GLFW {
         yscale = y
     }
 
-    static func getWindowOpacity(_ window: OpaquePointer?) -> Float {
+    static func getWindowOpacity(window: OpaquePointer?) -> Float {
         return raia_glfw_get_window_opacity(window)
     }
 
-    static func setWindowOpacity(_ window: OpaquePointer?, opacity: Float) {
+    static func setWindowOpacity(window: OpaquePointer?, opacity: Float) {
         raia_glfw_set_window_opacity(window, opacity)
     }
 
-    static func iconifyWindow(_ window: OpaquePointer?) {
+    static func iconifyWindow(window: OpaquePointer?) {
         raia_glfw_iconify_window(window)
     }
 
-    static func restoreWindow(_ window: OpaquePointer?) {
+    static func restoreWindow(window: OpaquePointer?) {
         raia_glfw_restore_window(window)
     }
 
-    static func maximizeWindow(_ window: OpaquePointer?) {
+    static func maximizeWindow(window: OpaquePointer?) {
         raia_glfw_maximize_window(window)
     }
 
-    static func showWindow(_ window: OpaquePointer?) {
+    static func showWindow(window: OpaquePointer?) {
         raia_glfw_show_window(window)
     }
 
-    static func hideWindow(_ window: OpaquePointer?) {
+    static func hideWindow(window: OpaquePointer?) {
         raia_glfw_hide_window(window)
     }
 
-    static func focusWindow(_ window: OpaquePointer?) {
+    static func focusWindow(window: OpaquePointer?) {
         raia_glfw_focus_window(window)
     }
 
-    static func requestWindowAttention(_ window: OpaquePointer?) {
+    static func requestWindowAttention(window: OpaquePointer?) {
         raia_glfw_request_window_attention(window)
     }
 
-    static func getWindowMonitor(_ window: OpaquePointer?) -> OpaquePointer? {
+    static func getWindowMonitor(window: OpaquePointer?) -> OpaquePointer? {
         return raia_glfw_get_window_monitor(window)
     }
 
-    static func setWindowMonitor(_ window: OpaquePointer?, monitor: OpaquePointer?, xpos: Int, ypos: Int, width: Int, height: Int, refreshRate: Int) {
+    static func setWindowMonitor(window: OpaquePointer?, monitor: OpaquePointer?, xpos: Int, ypos: Int, width: Int, height: Int, refreshRate: Int) {
         raia_glfw_set_window_monitor(window, monitor, Int32(xpos), Int32(ypos), Int32(width), Int32(height), Int32(refreshRate))
     }
 
-    static func getWindowAttrib(_ window: OpaquePointer?, attrib: Int) -> Int {
+    static func getWindowAttrib(window: OpaquePointer?, attrib: Int) -> Int {
         return Int(raia_glfw_get_window_attrib(window, Int32(attrib)))
     }
 
-    static func setWindowAttrib(_ window: OpaquePointer?, attrib: Int, value: Int) {
+    static func setWindowAttrib(window: OpaquePointer?, attrib: Int, value: Int) {
         raia_glfw_set_window_attrib(window, Int32(attrib), Int32(value))
     }
 
-    static func setWindowUserPointer(_ window: OpaquePointer?, pointer: UnsafeRawPointer?) {
+    static func setWindowUserPointer(window: OpaquePointer?, pointer: UnsafeRawPointer?) {
         raia_glfw_set_window_user_pointer(window, UnsafeMutableRawPointer(mutating: pointer))
     }
 
-    static func getWindowUserPointer(_ window: OpaquePointer?) -> UnsafeRawPointer? {
+    static func getWindowUserPointer(window: OpaquePointer?) -> UnsafeRawPointer? {
         return UnsafeRawPointer(raia_glfw_get_window_user_pointer(window))
     }
 
-    static func setWindowPosCallback(_ window: OpaquePointer?, _ callback: @escaping GLFWwindowposfun) -> GLFWwindowposfun? {
+    static func setWindowPosCallback(window: OpaquePointer?, callback: @escaping GLFWwindowposfun) -> GLFWwindowposfun? {
         return raia_glfw_set_window_pos_callback(window, callback)
     }
 
-    static func setWindowSizeCallback(_ window: OpaquePointer?, _ callback: @escaping GLFWwindowsizefun) -> GLFWwindowsizefun? {
+    static func setWindowSizeCallback(window: OpaquePointer?, callback: @escaping GLFWwindowsizefun) -> GLFWwindowsizefun? {
         return raia_glfw_set_window_size_callback(window, callback)
     }
 
-    static func setWindowCloseCallback(_ window: OpaquePointer?, _ callback: @escaping GLFWwindowclosefun) -> GLFWwindowclosefun? {
+    static func setWindowCloseCallback(window: OpaquePointer?, callback: @escaping GLFWwindowclosefun) -> GLFWwindowclosefun? {
         return raia_glfw_set_window_close_callback(window, callback)
     }
 
-    static func setWindowRefreshCallback(_ window: OpaquePointer?, _ callback: @escaping GLFWwindowrefreshfun) -> GLFWwindowrefreshfun? {
+    static func setWindowRefreshCallback(window: OpaquePointer?, callback: @escaping GLFWwindowrefreshfun) -> GLFWwindowrefreshfun? {
         return raia_glfw_set_window_refresh_callback(window, callback)
     }
 
-    static func setWindowFocusCallback(_ window: OpaquePointer?, _ callback: @escaping GLFWwindowfocusfun) -> GLFWwindowfocusfun? {
+    static func setWindowFocusCallback(window: OpaquePointer?, callback: @escaping GLFWwindowfocusfun) -> GLFWwindowfocusfun? {
         return raia_glfw_set_window_focus_callback(window, callback)
     }
 
-    static func setWindowIconifyCallback(_ window: OpaquePointer?, _ callback: @escaping GLFWwindowiconifyfun) -> GLFWwindowiconifyfun? {
+    static func setWindowIconifyCallback(window: OpaquePointer?, callback: @escaping GLFWwindowiconifyfun) -> GLFWwindowiconifyfun? {
         return raia_glfw_set_window_iconify_callback(window, callback)
     }
 
-    static func setWindowMaximizeCallback(_ window: OpaquePointer?, _ callback: @escaping GLFWwindowmaximizefun) -> GLFWwindowmaximizefun? {
+    static func setWindowMaximizeCallback(window: OpaquePointer?, callback: @escaping GLFWwindowmaximizefun) -> GLFWwindowmaximizefun? {
         return raia_glfw_set_window_maximize_callback(window, callback)
     }
 
-    static func setFramebufferSizeCallback(_ window: OpaquePointer?, _ callback: @escaping GLFWframebuffersizefun) -> GLFWframebuffersizefun? {
+    static func setFramebufferSizeCallback(window: OpaquePointer?, callback: @escaping GLFWframebuffersizefun) -> GLFWframebuffersizefun? {
         return raia_glfw_set_framebuffer_size_callback(window, callback)
     }
 
-    static func setWindowContentScaleCallback(_ window: OpaquePointer?, _ callback: @escaping GLFWwindowcontentscalefun) -> GLFWwindowcontentscalefun? {
+    static func setWindowContentScaleCallback(window: OpaquePointer?, callback: @escaping GLFWwindowcontentscalefun) -> GLFWwindowcontentscalefun? {
         return raia_glfw_set_window_content_scale_callback(window, callback)
     }
 
@@ -600,7 +600,7 @@ extension GLFW {
         raia_glfw_post_empty_event()
     }
 
-    static func swapBuffers(_ window: OpaquePointer?) {
+    static func swapBuffers(window: OpaquePointer?) {
         raia_glfw_swap_buffers(window)
     }
 }
