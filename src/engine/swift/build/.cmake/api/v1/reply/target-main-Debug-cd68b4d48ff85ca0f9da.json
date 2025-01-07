@@ -57,7 +57,7 @@
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 53,
+				"line" : 51,
 				"parent" : 0
 			},
 			{
@@ -123,9 +123,7 @@
 				19,
 				20,
 				21,
-				22,
-				23,
-				24
+				22
 			]
 		}
 	],
@@ -244,9 +242,7 @@
 				19,
 				20,
 				21,
-				22,
-				23,
-				24
+				22
 			]
 		}
 	],
@@ -262,18 +258,6 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "src/game/__game_namespace.swift",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "src/game/_game_protocol_extension.swift",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "src/game/_game_protocol.swift",
 			"sourceGroupIndex" : 0
 		},
 		{

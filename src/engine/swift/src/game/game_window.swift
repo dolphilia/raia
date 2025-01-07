@@ -18,17 +18,17 @@ extension Game {
             GLFW.windowHint(hint: GLFW.CONTEXT_CREATION_API, value: GLFW.EGL_CONTEXT_API)
             GLFW.windowHint(hint: GLFW.CLIENT_API, value: GLFW.OPENGL_ES_API)
 
-            let w = GLFW.Window(width: width, height: height, title: title)
-            w.makeContextCurrent()
-            self.window = w
+            let win = GLFW.Window(width: width, height: height, title: title)
+            win.makeContextCurrent()
+            self.window = win
 
-            let (scaleX, _) = w.getWindowContentScale()
+            let (scaleX, _) = win.getWindowContentScale()
             if scaleX > 1.0 {
                 isHighDPI = true
                 scaleFactor = Int(scaleX)
             }
 
-            renderer.setupGL()
+            renderer.setup()
         }
 
         func run(mainLoop: () -> Void) {

@@ -20,8 +20,8 @@ extension Game {
     }
 
     struct TextureData {
-        let width: Int
-        let height: Int
+        var width: Int = 0
+        var height: Int = 0
         var pixels: UnsafeMutablePointer<GLubyte>?
         var id: UInt32 = 0
     }

@@ -23,8 +23,6 @@ add_executable(main
     src/main.swift
 
     src/game/__game_namespace.swift
-    src/game/_game_protocol_extension.swift
-    src/game/_game_protocol.swift
     src/game/_game_rendererprotocol.swift
     src/game/_game_struct.swift
     src/game/game_renderer2d.swift

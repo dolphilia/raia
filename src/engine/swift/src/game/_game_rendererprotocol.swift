@@ -1,7 +1,8 @@
 extension Game {
     protocol RendererProtocol {
-        func setupGL()
-        func render(viewportWidth: Int, viewportHeight: Int)
+        func setup()
         func cleanup()
+        func render(viewportWidth: Int, viewportHeight: Int)
+        func setPixels(pixels: UnsafeMutablePointer<GLubyte>?)
     }
 }

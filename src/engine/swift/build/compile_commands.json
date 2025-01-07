@@ -26,18 +26,6 @@
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
   "command": ":",
-  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/game/_game_protocol_extension.swift",
-  "output": "CMakeFiles/main.dir/src/game/_game_protocol_extension.swift.o"
-},
-{
-  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
-  "command": ":",
-  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/game/_game_protocol.swift",
-  "output": "CMakeFiles/main.dir/src/game/_game_protocol.swift.o"
-},
-{
-  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
-  "command": ":",
   "file": "/Users/dolphilia/github/raia/src/engine/swift/src/game/_game_rendererprotocol.swift",
   "output": "CMakeFiles/main.dir/src/game/_game_rendererprotocol.swift.o"
 },

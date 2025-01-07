@@ -1,31 +1,21 @@
 extension Game {
     class Renderer3D: RendererProtocol {
-        // MARK: - リソースID
-        private var program: UInt32 = 0
-        private var VAO: UInt32 = 0
-        private var VBO: UInt32 = 0
-        private var EBO: UInt32 = 0
 
-        // ユニフォームロケーション
-        private var uMVMatrixLoc: Int32 = -1
-        private var uProjMatrixLoc: Int32 = -1
-        private var uLightPosLoc: Int32 = -1
-        private var uLightColorLoc: Int32 = -1
-        private var uBaseColorLoc: Int32 = -1
+        var glResources = Game.GLResources()
 
-        // 立方体を回転させる角度など
-        private var rotationY: Float = 0.0
-
-        // MARK: - 3D用の頂点データ (位置 + 法線) とシェーダソース
-        private struct GLData {
-            let vertices: [Float]
-            let indices: [UInt32]
-            let vertexShaderSource: String
-            let fragmentShaderSource: String
+        struct UniformLocations {
+            var mvMatrix: Int32 = -1
+            var projMatrix: Int32 = -1
+            var lightPos: Int32 = -1
+            var lightColor: Int32 = -1
+            var baseColor: Int32 = -1
         }
 
-        // 例: 立方体（6面×4頂点=24頂点, 法線付き）+ シェーダ
-        private let glData = GLData(
+        var uniformLocs = UniformLocations()
+
+        private var rotationY: Float = 0.0
+
+        private let glData = Game.GLData(
             vertices: [
                 // 前面 (0,0,1)
                 -0.5, -0.5,  0.5,   0, 0, 1,
@@ -121,22 +111,16 @@ extension Game {
             """
         )
 
-        // MARK: - イニシャライザ
-        init() {
-            // 特になし (頂点データやシェーダは上記 glData に固定)
-        }
+        init() {}
 
-        // MARK: - setupGL (コンテキストがカレントである前提)
-        func setupGL() {
-            // 1) 頂点バッファ
-            GLES.genVertexArrays(n: 1, arrays: &VAO)
-            GLES.genBuffers(n: 1, buffers: &VBO)
-            GLES.genBuffers(n: 1, buffers: &EBO)
+        func setup() {
+            GLES.genVertexArrays(n: 1, arrays: &glResources.VAO)
+            GLES.genBuffers(n: 1, buffers: &glResources.VBO)
+            GLES.genBuffers(n: 1, buffers: &glResources.EBO)
 
-            GLES.bindVertexArray(array: Int(VAO))
+            GLES.bindVertexArray(array: Int(glResources.VAO))
 
-            // VBO
-            GLES.bindBuffer(target: GLES.ARRAY_BUFFER, buffer: Int(VBO))
+            GLES.bindBuffer(target: GLES.ARRAY_BUFFER, buffer: Int(glResources.VBO))
             glData.vertices.withUnsafeBytes { ptr in
                 GLES.bufferData(target: GLES.ARRAY_BUFFER,
                                 size: ptr.count,
@@ -144,58 +128,44 @@ extension Game {
                                 usage: GLES.STATIC_DRAW)
             }
 
-            // EBO
-            GLES.bindBuffer(target: GLES.ELEMENT_ARRAY_BUFFER, buffer: Int(EBO))
+            GLES.bindBuffer(target: GLES.ELEMENT_ARRAY_BUFFER, buffer: Int(glResources.EBO))
             glData.indices.withUnsafeBytes { ptr in
-                GLES.bufferData(target: GLES.ELEMENT_ARRAY_BUFFER,
-                                size: ptr.count,
-                                data: ptr.baseAddress,
-                                usage: GLES.STATIC_DRAW)
+                GLES.bufferData(target: GLES.ELEMENT_ARRAY_BUFFER, size: ptr.count, data: ptr.baseAddress, usage: GLES.STATIC_DRAW)
             }
 
-            // 頂点属性 (a_position=0, a_normal=1)
             let stride = 6 * MemoryLayout<Float>.stride
-            // position
-            GLES.vertexAttribPointer(index: 0, size: 3, type: GLES.FLOAT,
-                                    normalized: false, stride: stride, pointer: nil)
+            GLES.vertexAttribPointer(index: 0, size: 3, type: GLES.FLOAT, normalized: false, stride: stride, pointer: nil)
             GLES.enableVertexAttribArray(index: 0)
-            // normal (オフセット=3)
+
             let normalOffset = UnsafeRawPointer(bitPattern: 3 * MemoryLayout<Float>.stride)
-            GLES.vertexAttribPointer(index: 1, size: 3, type: GLES.FLOAT,
-                                    normalized: false, stride: stride, pointer: normalOffset)
+            GLES.vertexAttribPointer(index: 1, size: 3, type: GLES.FLOAT, normalized: false, stride: stride, pointer: normalOffset)
             GLES.enableVertexAttribArray(index: 1)
 
             GLES.bindVertexArray(array: 0)
 
-            // 2) シェーダ
-            program = GLES.createProgram(
+            glResources.program = GLES.createProgram(
                 vertexSource: glData.vertexShaderSource,
                 fragmentSource: glData.fragmentShaderSource
             )
 
-            // 3) ユニフォームロケーションを取得
-            let prog = Int(program)
-            uMVMatrixLoc   = Int32(GLES.getUniformLocation(program: prog, name: "uMVMatrix"))
-            uProjMatrixLoc = Int32(GLES.getUniformLocation(program: prog, name: "uProjMatrix"))
-            uLightPosLoc   = Int32(GLES.getUniformLocation(program: prog, name: "uLightPos"))
-            uLightColorLoc = Int32(GLES.getUniformLocation(program: prog, name: "uLightColor"))
-            uBaseColorLoc  = Int32(GLES.getUniformLocation(program: prog, name: "uBaseColor"))
+            let prog = Int(glResources.program)
+            uniformLocs.mvMatrix   = Int32(GLES.getUniformLocation(program: prog, name: "uMVMatrix"))
+            uniformLocs.projMatrix = Int32(GLES.getUniformLocation(program: prog, name: "uProjMatrix"))
+            uniformLocs.lightPos   = Int32(GLES.getUniformLocation(program: prog, name: "uLightPos"))
+            uniformLocs.lightColor = Int32(GLES.getUniformLocation(program: prog, name: "uLightColor"))
+            uniformLocs.baseColor  = Int32(GLES.getUniformLocation(program: prog, name: "uBaseColor"))
         }
 
-        // MARK: - render
         func render(viewportWidth: Int, viewportHeight: Int) {
             rotationY += 0.0001
 
-            // 1) ビューポート＆クリア
             GLES.viewport(x: 0, y: 0, width: viewportWidth, height: viewportHeight)
             GLES.clearColor(red: 0.2, green: 0.3, blue: 0.4, alpha: 1.0)
             GLES.clear(mask: GLES.COLOR_BUFFER_BIT | GLES.DEPTH_BUFFER_BIT)
             GLES.enable(cap: GLES.DEPTH_TEST)
 
-            // 2) シェーダ使用
-            GLES.useProgram(program: Int(program))
+            GLES.useProgram(program: Int(glResources.program))
 
-            // 3) MVP行列計算 (cglm 等を想定)
             var model      = [Float](repeating: 0, count: 16)
             var view       = [Float](repeating: 0, count: 16)
             var projection = [Float](repeating: 0, count: 16)
@@ -208,68 +178,57 @@ extension Game {
             var eye:    [Float] = [0, 2, -4]
             var center: [Float] = [0, 0, 0]
             var up:     [Float] = [0, 1, 0]
-            // カメラ行列
+
             swift_glm_lookat(&eye, &center, &up, &view)
 
             let aspect = Float(viewportWidth) / Float(viewportHeight)
             swift_glm_perspective(Float.pi/3, aspect, 0.1, 100.0, &projection)
 
-            // 回転
             var axisY = [Float](arrayLiteral: 0, 1, 0)
             swift_glm_rotate(&model, rotationY, &axisY)
 
-            // mv = view * model
             swift_glm_mat4_mul(&view, &model, &mv)
 
-            // uniform 転送
             mv.withUnsafeBufferPointer { ptr in
-                GLES.uniformMatrix4fv(location: Int(uMVMatrixLoc),
-                                    count: 1,
-                                    transpose: false,
-                                    value: ptr.baseAddress!)
+                GLES.uniformMatrix4fv(location: Int(uniformLocs.mvMatrix), count: 1, transpose: false, value: ptr.baseAddress!)
             }
             projection.withUnsafeBufferPointer { ptr in
-                GLES.uniformMatrix4fv(location: Int(uProjMatrixLoc),
-                                    count: 1,
-                                    transpose: false,
-                                    value: ptr.baseAddress!)
+                GLES.uniformMatrix4fv(location: Int(uniformLocs.projMatrix), count: 1, transpose: false, value: ptr.baseAddress!)
             }
 
-            // 光源
             let lightPos: [Float] = [2, 2, 2]
             let lightColor: [Float] = [1, 1, 1]
             let baseColor: [Float] = [1, 1, 1]
 
             lightPos.withUnsafeBufferPointer { ptr in
-                GLES.uniform3fv(location: Int(uLightPosLoc), count: 1, value: ptr.baseAddress!)
+                GLES.uniform3fv(location: Int(uniformLocs.lightPos), count: 1, value: ptr.baseAddress!)
             }
             lightColor.withUnsafeBufferPointer { ptr in
-                GLES.uniform3fv(location: Int(uLightColorLoc), count: 1, value: ptr.baseAddress!)
+                GLES.uniform3fv(location: Int(uniformLocs.lightColor), count: 1, value: ptr.baseAddress!)
             }
             baseColor.withUnsafeBufferPointer { ptr in
-                GLES.uniform3fv(location: Int(uBaseColorLoc), count: 1, value: ptr.baseAddress!)
+                GLES.uniform3fv(location: Int(uniformLocs.baseColor), count: 1, value: ptr.baseAddress!)
             }
 
-            // 4) VAOバインドして描画
-            GLES.bindVertexArray(array: Int(VAO))
-            GLES.drawElements(mode: GLES.TRIANGLES,
-                            count: glData.indices.count,
-                            type: GLES.UNSIGNED_INT,
-                            indices: nil)
+            GLES.bindVertexArray(array: Int(glResources.VAO))
+            GLES.drawElements(mode: GLES.TRIANGLES, count: glData.indices.count, type: GLES.UNSIGNED_INT, indices: nil)
         }
 
-        // MARK: - cleanup
         func cleanup() {
-            withUnsafePointer(to: VAO) {
+            withUnsafePointer(to: glResources.VAO) {
                 GLES.deleteVertexArrays(n: 1, arrays: $0)
             }
-            withUnsafePointer(to: VBO) {
+            withUnsafePointer(to: glResources.VBO) {
                 GLES.deleteBuffers(n: 1, buffers: $0)
             }
-            withUnsafePointer(to: EBO) {
+            withUnsafePointer(to: glResources.EBO) {
                 GLES.deleteBuffers(n: 1, buffers: $0)
             }
-            GLES.deleteProgram(program: Int(program))
+            GLES.deleteProgram(program: Int(glResources.program))
+        }
+
+        func setPixels(pixels: UnsafeMutablePointer<GLubyte>?) {
+            //textureData.pixels = pixels
         }
     }
 }
