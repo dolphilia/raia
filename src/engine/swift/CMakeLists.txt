@@ -12,17 +12,29 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_Swift_FLAGS "${CMAKE_Swift_FLAGS} -import-objc-header ${CMAKE_SOURCE_DIR}/bridging-header.h")
 
 # C言語コードをライブラリとしてビルド
-add_library(wrapper STATIC wrapper.c)
+add_library(wrapper STATIC
+    wrapper/cglm_wrapper.c
+    wrapper/glfw_wrapper.c
+)
 target_include_directories(wrapper PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 # Swiftの実行ファイルを作成し、C側のライブラリとリンク
 add_executable(main 
     src/main.swift
 
-    src/glfw/glfw___namespace.swift
-    src/glfw/glfw__const.swift
-    src/glfw/glfw__function.swift
-    src/glfw/glfw__typealias.swift
+    src/game/__game_namespace.swift
+    src/game/_game_protocol_extension.swift
+    src/game/_game_protocol.swift
+    src/game/_game_rendererprotocol.swift
+    src/game/_game_struct.swift
+    src/game/game_renderer2d.swift
+    src/game/game_renderer3d.swift
+    src/game/game_window.swift
+
+    src/glfw/__glfw_namespace.swift
+    src/glfw/_glfw_const.swift
+    src/glfw/_glfw_function.swift
+    src/glfw/_glfw_typealias.swift
     src/glfw/glfw_context.swift
     src/glfw/glfw_corsor.swift
     src/glfw/glfw_initializer.swift
@@ -32,9 +44,10 @@ add_executable(main
     src/glfw/glfw_time.swift
     src/glfw/glfw_window.swift
 
-    src/gles/gles___namespace.swift
-    src/gles/gles__const.swift
-    src/gles/gles__function.swift
+    src/gles/__gles_namespace.swift
+    src/gles/_gles_const.swift
+    src/gles/_gles_function.swift
+    src/gles/_gles_helper.swift
 )
 
-target_link_libraries(main PRIVATE wrapper glfw.3.4 raia_glfw egl GLESv2 raia_gles)
+target_link_libraries(main PRIVATE wrapper glfw.3.4 raia_glfw egl GLESv2 raia_gles cglm)
