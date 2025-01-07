@@ -1,10 +1,10 @@
 extension Game {
     class Window<R: RendererProtocol> {
         private let window: GLFW.Window
+        private let renderer: R
         private let config: Game.WindowConfig
         private var isHighDPI: Bool = false
         private var scaleFactor: Int = 1
-        private let renderer: R
 
         init(width: Int, height: Int, title: String, renderer: R) {
             self.config = Game.WindowConfig(width: width, height: height, title: title)
