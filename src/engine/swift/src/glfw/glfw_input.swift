@@ -26,15 +26,30 @@ extension GLFW {
         }
 
         static func getJoystickAxes(jid: Int) -> [Float] {
-            return GLFW.getJoystickAxes(jid: jid)
+            var count: Int32 = 0
+            guard let pointer = GLFW.getJoystickAxes(jid: jid, count: &count) else {
+                return []
+            }
+            let buffer = UnsafeBufferPointer(start: pointer.assumingMemoryBound(to: Float.self), count: Int(count))
+            return Array(buffer)
         }
 
         static func getJoystickButtons(jid: Int) -> [UInt8] {
-            return GLFW.getJoystickButtons(jid: jid)
+            var count: Int32 = 0
+            guard let pointer = GLFW.getJoystickButtons(jid: jid, count: &count) else {
+                return []
+            }
+            let buffer = UnsafeBufferPointer(start: pointer, count: Int(count))
+            return Array(buffer)
         }
 
         static func getJoystickHats(jid: Int) -> [UInt8] {
-            return GLFW.getJoystickHats(jid: jid)
+            var count: Int32 = 0
+            guard let pointer = GLFW.getJoystickHats(jid: jid, count: &count) else {
+                return []
+            }
+            let buffer = UnsafeBufferPointer(start: pointer, count: Int(count))
+            return Array(buffer)
         }
 
         static func getJoystickName(jid: Int) -> String? {
@@ -58,7 +73,7 @@ extension GLFW {
         }
 
         static func setJoystickCallback(callback: @escaping GLFWjoystickfun) -> GLFWjoystickfun? {
-            return GLFW.setJoystickCallback(callback: callback)
+            return GLFW.setJoystickCallback(callback: callback).map { unsafeBitCast($0, to: GLFWjoystickfun.self) }
         }
 
         static func updateGamepadMappings(string: String) -> Bool {
@@ -69,9 +84,9 @@ extension GLFW {
             return GLFW.getGamepadName(jid: jid)
         }
 
-        static func getGamepadState(jid: Int) -> (connected: Bool, state: GLFWgamepadstate?) {
-            var state = GLFWgamepadstate()
-            let connected = GLFW.getGamepadState(jid: jid, state: &state)
+        static func getGamepadState(jid: Int) -> (connected: Bool, state: UnsafeMutableRawPointer?) {
+            var state: UnsafeMutableRawPointer? = nil
+            let connected = GLFW.getGamepadState(jid: jid, state: &state) != 0
             return (connected, connected ? state : nil)
         }
     }

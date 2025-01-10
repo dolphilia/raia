@@ -4,7 +4,7 @@ import Foundation
 
 extension GLFW {
     class Window {
-        private var windowPointer: OpaquePointer?
+        private var windowPointer: UnsafeMutableRawPointer?
 
         // MARK: コールバッククロージャ
 
@@ -238,157 +238,143 @@ extension GLFW {
 
         func setWindowPositionCallback(callback: @escaping (Int, Int) -> Void) {
             self.positionCallback = callback
-            _ = GLFW.setWindowPosCallback(window:windowPointer) { window, x, y in
-                guard let window = GLFW.getWindowUserPointer(window:window).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
+            _ = GLFW.setWindowPosCallback(window:windowPointer) { (ptr, x, y) in
+                guard let window = GLFW.getWindowUserPointer(window: UnsafeMutableRawPointer(ptr)).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
                 window.positionCallback?(Int(x), Int(y))
             }
         }
 
         func setWindowSizeCallback(callback: @escaping (Int, Int) -> Void) {
             self.sizeCallback = callback
-            _ = GLFW.setWindowSizeCallback(window:windowPointer) { window, width, height in
-                guard let window = GLFW.getWindowUserPointer(window:window).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
-                window.sizeCallback?(Int(width), Int(height))
+            _ = GLFW.setWindowSizeCallback(window: windowPointer) { (ptr, w, h) in
+                guard let window = GLFW.getWindowUserPointer(window: UnsafeMutableRawPointer(ptr)).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
+                window.sizeCallback?(Int(w), Int(h))
             }
         }
 
         func setWindowCloseCallback(callback: @escaping () -> Void) {
             self.closeCallback = callback
-            _ = GLFW.setWindowCloseCallback(window:windowPointer) { window in
-                guard let window = GLFW.getWindowUserPointer(window:window).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
+            _ = GLFW.setWindowCloseCallback(window:windowPointer) { ptr in
+                guard let window = GLFW.getWindowUserPointer(window: UnsafeMutableRawPointer(ptr)).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
                 window.closeCallback?()
             }
         }
 
         func setWindowRefreshCallback(callback: @escaping () -> Void) {
             self.refreshCallback = callback
-            _ = GLFW.setWindowRefreshCallback(window:windowPointer) { window in
-                guard let window = GLFW.getWindowUserPointer(window:window).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
+            _ = GLFW.setWindowRefreshCallback(window:windowPointer) { ptr in
+                guard let window = GLFW.getWindowUserPointer(window: UnsafeMutableRawPointer(ptr)).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
                 window.refreshCallback?()
             }
         }
 
         func setWindowFocusCallback(callback: @escaping (Bool) -> Void) {
             self.focusCallback = callback
-            _ = GLFW.setWindowFocusCallback(window:windowPointer) { window, focused in
-                guard let window = GLFW.getWindowUserPointer(window:window).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
-                window.focusCallback?(focused == GLFW_TRUE)
+            _ = GLFW.setWindowFocusCallback(window:windowPointer) { ptr, focused in
+                guard let window = GLFW.getWindowUserPointer(window: UnsafeMutableRawPointer(ptr)).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
+                window.focusCallback?(focused == GLFW.TRUE)
             }
         }
 
         func setWindowIconifyCallback(callback: @escaping (Bool) -> Void) {
             self.iconifyCallback = callback
-            _ = GLFW.setWindowIconifyCallback(window:windowPointer) { window, iconified in
-                guard let window = GLFW.getWindowUserPointer(window:window).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
-                window.iconifyCallback?(iconified == GLFW_TRUE)
+            _ = GLFW.setWindowIconifyCallback(window:windowPointer) { ptr, iconified in
+                guard let window = GLFW.getWindowUserPointer(window: UnsafeMutableRawPointer(ptr)).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
+                window.iconifyCallback?(iconified == GLFW.TRUE)
             }
         }
 
         func setWindowMaximizeCallback(callback: @escaping (Bool) -> Void) {
             self.maximizeCallback = callback
-            _ = GLFW.setWindowMaximizeCallback(window:windowPointer) { window, maximized in
-                guard let window = GLFW.getWindowUserPointer(window:window).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
-                window.maximizeCallback?(maximized == GLFW_TRUE)
+            _ = GLFW.setWindowMaximizeCallback(window:windowPointer) { ptr, maximized in
+                guard let window = GLFW.getWindowUserPointer(window: UnsafeMutableRawPointer(ptr)).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
+                window.maximizeCallback?(maximized == GLFW.TRUE)
             }
         }
 
         func setFramebufferSizeCallback(callback: @escaping (Int, Int) -> Void) {
             self.framebufferSizeCallback = callback
-            _ = GLFW.setFramebufferSizeCallback(window:windowPointer) { window, width, height in
-                guard let window = GLFW.getWindowUserPointer(window:window).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
+            _ = GLFW.setFramebufferSizeCallback(window:windowPointer) { ptr, width, height in
+                guard let window = GLFW.getWindowUserPointer(window: UnsafeMutableRawPointer(ptr)).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
                 window.framebufferSizeCallback?(Int(width), Int(height))
             }
         }
 
         func setWindowContentScaleCallback(callback: @escaping (Float, Float) -> Void) {
             self.contentScaleCallback = callback
-            _ = GLFW.setWindowContentScaleCallback(window:windowPointer) { window, xscale, yscale in
-                guard let window = GLFW.getWindowUserPointer(window:window).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
+            _ = GLFW.setWindowContentScaleCallback(window:windowPointer) { ptr, xscale, yscale in
+                guard let window = GLFW.getWindowUserPointer(window: UnsafeMutableRawPointer(ptr)).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
                 window.contentScaleCallback?(xscale, yscale)
             }
         }
 
         func setKeyCallback(callback: @escaping (Int32, Int32, Int32, Int32) -> Void) {
             self.keyCallback = callback
-            _ = GLFW.setKeyCallback(window: windowPointer) { window, key, scancode, action, mods in
-                guard let window = GLFW.getWindowUserPointer(window:window).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
+            _ = GLFW.setKeyCallback(window: windowPointer) { ptr, key, scancode, action, mods in
+                guard let window = GLFW.getWindowUserPointer(window: UnsafeMutableRawPointer(ptr)).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
                 window.keyCallback?(key, scancode, action, mods)
             }
         }
 
         func setCharCallback(callback: @escaping (UInt32) -> Void) {
             self.charCallback = callback
-            _ = GLFW.setCharCallback(window: windowPointer) { window, char in
-                guard let window = GLFW.getWindowUserPointer(window:window).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
+            _ = GLFW.setCharCallback(window: windowPointer) { ptr, char in
+                guard let window = GLFW.getWindowUserPointer(window: UnsafeMutableRawPointer(ptr)).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
                 window.charCallback?(char)
             }
         }
 
         func setCharModsCallback(callback: @escaping (UInt32, Int32) -> Void) {
             self.charModsCallback = callback
-            _ = GLFW.setCharModsCallback(window: windowPointer) { window, char, mods in
-                guard let window = GLFW.getWindowUserPointer(window:window).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
+            _ = GLFW.setCharModsCallback(window: windowPointer) { ptr, char, mods in
+                guard let window = GLFW.getWindowUserPointer(window: UnsafeMutableRawPointer(ptr)).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
                 window.charModsCallback?(char, mods)
             }
         }
 
         func setMouseButtonCallback(callback: @escaping (Int32, Int32, Int32) -> Void) {
             self.mouseButtonCallback = callback
-            _ = GLFW.setMouseButtonCallback(window: windowPointer) { window, button, action, mods in
-                guard let window = GLFW.getWindowUserPointer(window:window).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
+            _ = GLFW.setMouseButtonCallback(window: windowPointer) { ptr, button, action, mods in
+                guard let window = GLFW.getWindowUserPointer(window: UnsafeMutableRawPointer(ptr)).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
                 window.mouseButtonCallback?(button, action, mods)
             }
         }
 
         func setCursorPosCallback(callback: @escaping (Double, Double) -> Void) {
             self.cursorPosCallback = callback
-            _ = GLFW.setCursorPosCallback(window: windowPointer) { window, xpos, ypos in
-                guard let window = GLFW.getWindowUserPointer(window:window).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
+            _ = GLFW.setCursorPosCallback(window: windowPointer) { ptr, xpos, ypos in
+                guard let window = GLFW.getWindowUserPointer(window: UnsafeMutableRawPointer(ptr)).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
                 window.cursorPosCallback?(xpos, ypos)
             }
         }
 
         func setCursorEnterCallback(callback: @escaping (Bool) -> Void) {
             self.cursorEnterCallback = callback
-            _ = GLFW.setCursorEnterCallback(window: windowPointer) { window, entered in
-                guard let window = GLFW.getWindowUserPointer(window:window).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
-                window.cursorEnterCallback?(entered == GLFW_TRUE)
+            _ = GLFW.setCursorEnterCallback(window: windowPointer) { ptr, entered in
+                guard let window = GLFW.getWindowUserPointer(window: UnsafeMutableRawPointer(ptr)).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
+                window.cursorEnterCallback?(entered == GLFW.TRUE)
             }
         }
 
         func setScrollCallback(callback: @escaping (Double, Double) -> Void) {
             self.scrollCallback = callback
-            _ = GLFW.setScrollCallback(window: windowPointer) { window, xoffset, yoffset in
-                guard let window = GLFW.getWindowUserPointer(window:window).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
+            _ = GLFW.setScrollCallback(window: windowPointer) { ptr, xoffset, yoffset in
+                guard let window = GLFW.getWindowUserPointer(window: UnsafeMutableRawPointer(ptr)).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
                 window.scrollCallback?(xoffset, yoffset)
             }
         }
 
-        typealias WrapDropFunType = @convention(c) (OpaquePointer?, Int32, UnsafePointer<UnsafePointer<Int8>>?) -> Void
-
-        @_silgen_name("wrap_raia_glfw_set_drop_callback")
-        func bridging_wrap_raia_glfw_set_drop_callback( window: OpaquePointer?, callback: @escaping WrapDropFunType) -> WrapDropFunType?
-
-        @discardableResult
-        func setMyDropCallback(window: OpaquePointer?, callback: @escaping WrapDropFunType) -> WrapDropFunType? {
-            return bridging_wrap_raia_glfw_set_drop_callback(window:window, callback:callback)
-        }
-
         func setDropCallback(callback: @escaping ([String]) -> Void) {
             self.dropCallback = callback
-            _ = setMyDropCallback(window: windowPointer) { (winPointer: OpaquePointer?, count: Int32, paths: UnsafePointer<UnsafePointer<Int8>>?) in
-                guard let swiftWindow = GLFW.getWindowUserPointer(window:winPointer)
-                    .map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { 
-                    return
-                }
+            _ = GLFW.setDropCallback(window: windowPointer) { ptr, count, paths in
+                guard let window = GLFW.getWindowUserPointer(window: UnsafeMutableRawPointer(ptr)).map({ Unmanaged<Window>.fromOpaque($0).takeUnretainedValue() }) else { return }
                 guard let paths = paths else { return }
                 let filePaths = (0..<Int(count)).compactMap { index -> String? in
                     String(cString: paths[index])
                 }
-                swiftWindow.dropCallback?(filePaths)
+                window.dropCallback?(filePaths)
             }
         }
- 
 
         // MARK: ユーザーポインタの操作
 

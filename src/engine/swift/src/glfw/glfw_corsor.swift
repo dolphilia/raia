@@ -2,9 +2,9 @@ import Foundation
 
 extension GLFW {
     class Cursor {
-        private var cursorPointer: OpaquePointer?
+        private var cursorPointer: UnsafeMutableRawPointer?
 
-        init(image: UnsafePointer<GLFWimage>?, xhot: Int, yhot: Int) {
+        init(image: UnsafeMutableRawPointer?, xhot: Int, yhot: Int) {
             self.cursorPointer = GLFW.createCursor(image: image, xhot: xhot, yhot: yhot)
         }
 
@@ -16,7 +16,7 @@ extension GLFW {
             GLFW.destroyCursor(cursor: cursorPointer)
         }
 
-        func setCursor(window: OpaquePointer?) {
+        func setCursor(window: UnsafeMutableRawPointer?) {
             GLFW.setCursor(window: window, cursor: cursorPointer)
         }
     }

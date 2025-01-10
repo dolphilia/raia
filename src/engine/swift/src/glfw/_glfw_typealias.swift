@@ -3,6 +3,7 @@
 import Foundation
 
 extension GLFW {
+
     typealias GLFWwindowposfun = @convention(c) (OpaquePointer?, Int32, Int32) -> Void
     typealias GLFWwindowsizefun = @convention(c) (OpaquePointer?, Int32, Int32) -> Void
     typealias GLFWwindowclosefun = @convention(c) (OpaquePointer?) -> Void
@@ -21,4 +22,6 @@ extension GLFW {
     typealias GLFWscrollfun = @convention(c) (OpaquePointer?, Double, Double) -> Void
     typealias GLFWdropfun = @convention(c) (OpaquePointer?, Int32, UnsafePointer<UnsafePointer<Int8>>?) -> Void
     typealias GLFWerrorfun = @convention(c) (Int32, UnsafePointer<CChar>?) -> Void
+    typealias GLFWjoystickfun = @convention(c) (Int32, Int32) -> Void
+    typealias GLFWmonitorfun = @convention(c) (OpaquePointer?, Int32) -> Void
 }

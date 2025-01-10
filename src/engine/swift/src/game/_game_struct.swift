@@ -22,7 +22,7 @@ extension Game {
     struct TextureData {
         var width: Int = 0
         var height: Int = 0
-        var pixels: UnsafeMutablePointer<GLubyte>?
+        var pixels: UnsafeMutablePointer<UInt8>?
         var id: UInt32 = 0
     }
 }

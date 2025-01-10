@@ -38,8 +38,8 @@ extension Game {
             GLES.genBuffers(n: 1, buffers: &glResources.VBO)
             GLES.genBuffers(n: 1, buffers: &glResources.EBO)
             GLES.bindVertexArray(array: Int(glResources.VAO))
-
             GLES.bindBuffer(target: GLES.ARRAY_BUFFER, buffer: Int(glResources.VBO))
+            
             glData.vertices.withUnsafeBytes { ptr in
                 GLES.bufferData(target: GLES.ARRAY_BUFFER, size: ptr.count, data: ptr.baseAddress, usage: GLES.STATIC_DRAW)
             }
@@ -61,7 +61,7 @@ extension Game {
             glResources.program = GLES.createProgram(vertexSource: glData.vertexShaderSource, fragmentSource: glData.fragmentShaderSource)
 
             let pixelCount = textureData.width * textureData.height * 4
-            textureData.pixels = UnsafeMutablePointer<GLubyte>.allocate(capacity: pixelCount)
+            textureData.pixels = UnsafeMutablePointer<UInt8>.allocate(capacity: pixelCount)
             guard let px = textureData.pixels else { return }
             for i in 0..<pixelCount {
                px[i] = 255
@@ -76,16 +76,16 @@ extension Game {
         func cleanup() {
             textureData.pixels?.deallocate()
             withUnsafePointer(to: glResources.VAO) {
-                GLES.deleteVertexArrays(n: 1, arrays: $0)
+                GLES.deleteVertexArrays(n: 1, arrays: UnsafeMutableRawPointer(mutating: $0))
             }
             withUnsafePointer(to: glResources.VBO) {
-                GLES.deleteBuffers(n: 1, buffers: $0)
+                GLES.deleteBuffers(n: 1, buffers: UnsafeMutableRawPointer(mutating: $0))
             }
             withUnsafePointer(to: glResources.EBO) {
-                GLES.deleteBuffers(n: 1, buffers: $0)
+                GLES.deleteBuffers(n: 1, buffers: UnsafeMutableRawPointer(mutating: $0))
             }
             withUnsafePointer(to: textureData.id) {
-                GLES.deleteTextures(n: 1, textures: $0)
+                GLES.deleteTextures(n: 1, textures: UnsafeMutableRawPointer(mutating: $0))
             }
             GLES.deleteProgram(program: Int(glResources.program))
         }
@@ -103,7 +103,7 @@ extension Game {
             GLES.drawElements(mode: GLES.TRIANGLES, count: glData.indices.count, type: GLES.UNSIGNED_INT, indices: nil)
         }
 
-        func setPixels(pixels: UnsafeMutablePointer<GLubyte>?) {
+        func setPixels(pixels: UnsafeMutablePointer<UInt8>?) {
             textureData.pixels = pixels
         }
     }

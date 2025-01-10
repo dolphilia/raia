@@ -1,30 +1,29 @@
+
 #include "raia_glfw.h"
 #include "static/static_callback.h"
-#include "../../../common/c/utility/export_api.h"
-
-#include <stdbool.h>
+#include <GLFW/glfw3.h>
 
 //
 // コンテキスト
 //
 
-RAIA_API void raia_glfw_make_context_current(GLFWwindow *window) {
+void raia_glfw_make_context_current(void *window) {
     glfwMakeContextCurrent(window);
 }
 
-RAIA_API GLFWwindow *raia_glfw_get_current_context(void) {
+void *raia_glfw_get_current_context(void) {
     return glfwGetCurrentContext();
 }
 
-RAIA_API void raia_glfw_swap_interval(int interval) {
+void raia_glfw_swap_interval(int interval) {
     glfwSwapInterval(interval);
 }
 
-RAIA_API int raia_glfw_extension_supported(const char *extension) {
+int raia_glfw_extension_supported(const char *extension) {
     return glfwExtensionSupported(extension);
 }
 
-RAIA_API GLFWglproc raia_glfw_get_proc_address(const char *procname) {
+void *raia_glfw_get_proc_address(const char *procname) {
     return glfwGetProcAddress(procname);
 }
 
@@ -32,31 +31,31 @@ RAIA_API GLFWglproc raia_glfw_get_proc_address(const char *procname) {
 // 初期化・バージョン・エラー
 //
 
-RAIA_API int raia_glfw_init(void) {
+int raia_glfw_init(void) {
     return glfwInit();
 }
 
-RAIA_API void raia_glfw_terminate(void) {
+void raia_glfw_terminate(void) {
     glfwTerminate();
 }
 
-RAIA_API void raia_glfw_init_hint(int hint, int value) {
+void raia_glfw_init_hint(int hint, int value) {
     glfwInitHint(hint, value);
 }
 
-RAIA_API void raia_glfw_get_version(int *major, int *minor, int *rev) {
+void raia_glfw_get_version(void *major, void *minor, void *rev) {
     glfwGetVersion(major, minor, rev);
 }
 
-RAIA_API const char *raia_glfw_get_version_string(void) {
+const char *raia_glfw_get_version_string(void) {
     return glfwGetVersionString();
 }
 
-RAIA_API int raia_glfw_get_error(const char **description) {
+int raia_glfw_get_error(const char **description) {
     return glfwGetError(description);
 }
 
-RAIA_API GLFWerrorfun raia_glfw_set_error_callback(GLFWerrorfun callback) {
+void * raia_glfw_set_error_callback(void * callback) {
     return glfwSetErrorCallback(callback);
 }
 
@@ -64,163 +63,163 @@ RAIA_API GLFWerrorfun raia_glfw_set_error_callback(GLFWerrorfun callback) {
 // 入力
 //
 
-RAIA_API int raia_glfw_get_input_mode(GLFWwindow *window, int mode) {
+int raia_glfw_get_input_mode(void *window, int mode) {
     return glfwGetInputMode(window, mode);
 }
 
-RAIA_API void raia_glfw_set_input_mode(GLFWwindow *window, int mode, int value) {
+void raia_glfw_set_input_mode(void *window, int mode, int value) {
     glfwSetInputMode(window, mode, value);
 }
 
-RAIA_API int raia_glfw_raw_mouse_motion_supported(void) {
+int raia_glfw_raw_mouse_motion_supported(void) {
     return glfwRawMouseMotionSupported();
 }
 
-RAIA_API const char *raia_glfw_get_key_name(int key, int scancode) {
+const char *raia_glfw_get_key_name(int key, int scancode) {
     return glfwGetKeyName(key, scancode);
 }
 
-RAIA_API int raia_glfw_get_key_scancode(int key){
+int raia_glfw_get_key_scancode(int key){
     return glfwGetKeyScancode(key);
 }
 
-RAIA_API int raia_glfw_get_key(GLFWwindow *window, int key) {
+int raia_glfw_get_key(void *window, int key) {
     return glfwGetKey(window, key);
 }
 
-RAIA_API int raia_glfw_get_mouse_button(GLFWwindow *window, int button) {
+int raia_glfw_get_mouse_button(void *window, int button) {
     return glfwGetMouseButton(window, button);
 }
 
-RAIA_API void raia_glfw_get_cursor_pos(GLFWwindow *window, double *xpos, double *ypos) {
+void raia_glfw_get_cursor_pos(void *window, double *xpos, double *ypos) {
     glfwGetCursorPos(window, xpos, ypos);
 }
 
-RAIA_API void raia_glfw_set_cursor_pos(GLFWwindow *window, double xpos, double ypos) {
+void raia_glfw_set_cursor_pos(void *window, double xpos, double ypos) {
     glfwSetCursorPos(window, xpos, ypos);
 }
 
-RAIA_API GLFWcursor *raia_glfw_create_cursor(const GLFWimage *image, int xhot, int yhot) {
+void *raia_glfw_create_cursor(const void *image, int xhot, int yhot) {
     return glfwCreateCursor(image, xhot, yhot);
 }
 
-RAIA_API GLFWcursor *raia_glfw_create_standard_cursor(int shape) {
+void *raia_glfw_create_standard_cursor(int shape) {
     return glfwCreateStandardCursor(shape);
 }
 
-RAIA_API void raia_glfw_destroy_cursor(GLFWcursor *cursor) {
+void raia_glfw_destroy_cursor(void *cursor) {
     glfwDestroyCursor(cursor);
 }
 
-RAIA_API void raia_glfw_set_cursor(GLFWwindow *window, GLFWcursor *cursor) {
+void raia_glfw_set_cursor(void *window, void *cursor) {
     glfwSetCursor(window, cursor);
 }
 
-RAIA_API GLFWkeyfun raia_glfw_set_key_callback(GLFWwindow *window, GLFWkeyfun callback) {
+void * raia_glfw_set_key_callback(void *window, void * callback) {
     return glfwSetKeyCallback(window, callback);
 }
 
-RAIA_API GLFWcharfun raia_glfw_set_char_callback(GLFWwindow *window, GLFWcharfun callback) {
+void * raia_glfw_set_char_callback(void *window, void * callback) {
     return glfwSetCharCallback(window, callback);
 }
 
-RAIA_API GLFWcharmodsfun raia_glfw_set_char_mods_callback(GLFWwindow *window, GLFWcharmodsfun callback) {
+void * raia_glfw_set_char_mods_callback(void *window, void * callback) {
     return glfwSetCharModsCallback(window, callback);
 }
 
-RAIA_API GLFWmousebuttonfun raia_glfw_set_mouse_button_callback(GLFWwindow *window, GLFWmousebuttonfun callback) {
+void * raia_glfw_set_mouse_button_callback(void *window, void * callback) {
     return glfwSetMouseButtonCallback(window, callback);
 }
 
-RAIA_API GLFWcursorposfun raia_glfw_set_cursor_pos_callback(GLFWwindow *window, GLFWcursorposfun callback) {
+void * raia_glfw_set_cursor_pos_callback(void *window, void * callback) {
     return glfwSetCursorPosCallback(window, callback);
 }
 
-RAIA_API GLFWcursorenterfun raia_glfw_set_cursor_enter_callback(GLFWwindow *window, GLFWcursorenterfun callback) {
+void * raia_glfw_set_cursor_enter_callback(void *window, void * callback) {
     return glfwSetCursorEnterCallback(window, callback);
 }
 
-RAIA_API GLFWscrollfun raia_glfw_set_scroll_callback(GLFWwindow *window, GLFWscrollfun callback) {
+void * raia_glfw_set_scroll_callback(void *window, void * callback) {
     return glfwSetScrollCallback(window, callback);
 }
 
-RAIA_API GLFWdropfun raia_glfw_set_drop_callback(GLFWwindow *window, GLFWdropfun callback) {
+void * raia_glfw_set_drop_callback(void *window, void * callback) {
     return glfwSetDropCallback(window, callback);
 }
 
-RAIA_API int raia_glfw_joystick_present(int jid) {
+int raia_glfw_joystick_present(int jid) {
     return glfwJoystickPresent(jid);
 }
 
-RAIA_API const float *raia_glfw_get_joystick_axes(int jid, int *count) {
+const void *raia_glfw_get_joystick_axes(int jid, void *count) {
     return glfwGetJoystickAxes(jid, count); // 返された配列は，GLFWによって確保・解放される
 }
 
-RAIA_API const unsigned char *raia_glfw_get_joystick_buttons(int jid, int *count) {
+const unsigned char *raia_glfw_get_joystick_buttons(int jid, void *count) {
     return glfwGetJoystickButtons(jid, count); // 返された配列は、GLFWによって割り当てられ、解放される。
 }
 
-RAIA_API const unsigned char *raia_glfw_get_joystick_hats(int jid, int *count) {
+const unsigned char *raia_glfw_get_joystick_hats(int jid, void *count) {
     return glfwGetJoystickHats(jid, count);
 }
 
-RAIA_API const char *raia_glfw_get_joystick_name(int jid) {
+const char *raia_glfw_get_joystick_name(int jid) {
     return glfwGetJoystickName(jid);
 }
 
-RAIA_API const char *raia_glfw_get_joystick_guid(int jid) {
+const char *raia_glfw_get_joystick_guid(int jid) {
     return glfwGetJoystickGUID(jid);
 }
 
-RAIA_API void raia_glfw_set_joystick_user_pointer(int jid, void *pointer) {
+void raia_glfw_set_joystick_user_pointer(int jid, void *pointer) {
     glfwSetJoystickUserPointer(jid, pointer);
 }
 
-RAIA_API void *raia_glfw_get_joystick_user_pointer(int jid) {
+void *raia_glfw_get_joystick_user_pointer(int jid) {
     return glfwGetJoystickUserPointer(jid);
 }
 
-RAIA_API int raia_glfw_joystick_is_gamepad(int jid) {
+int raia_glfw_joystick_is_gamepad(int jid) {
     return glfwJoystickIsGamepad(jid);
 }
 
-RAIA_API GLFWjoystickfun raia_glfw_set_joystick_callback(GLFWjoystickfun callback) {
+void * raia_glfw_set_joystick_callback(void * callback) {
     return glfwSetJoystickCallback(callback);
 }
 
-RAIA_API int raia_glfw_update_gamepad_mappings(const char *string) {
+int raia_glfw_update_gamepad_mappings(const char *string) {
     return glfwUpdateGamepadMappings(string);
 }
 
-RAIA_API const char *raia_glfw_get_gamepad_name(int jid) {
+const char *raia_glfw_get_gamepad_name(int jid) {
     return glfwGetGamepadName(jid);
 }
 
-RAIA_API int raia_glfw_get_gamepad_state(int jid, GLFWgamepadstate *state) {
+int raia_glfw_get_gamepad_state(int jid, void *state) {
     return glfwGetGamepadState(jid, state);
 }
 
-RAIA_API void raia_glfw_set_clipboard_string(GLFWwindow *window, const char *string) {
+void raia_glfw_set_clipboard_string(void *window, const char *string) {
     glfwSetClipboardString(window, string);
 }
 
-RAIA_API const char *raia_glfw_get_clipboard_string(GLFWwindow *window) {
+const char *raia_glfw_get_clipboard_string(void *window) {
     return glfwGetClipboardString(window);
 }
 
-RAIA_API double raia_glfw_get_time(void) {
+double raia_glfw_get_time(void) {
     return glfwGetTime();
 }
 
-RAIA_API void raia_glfw_set_time(double time) {
+void raia_glfw_set_time(double time) {
     glfwSetTime(time);
 }
 
-RAIA_API uint64_t raia_glfw_get_timer_value(void) {
+unsigned long long raia_glfw_get_timer_value(void) {
     return glfwGetTimerValue();
 }
 
-RAIA_API uint64_t raia_glfw_get_timer_frequency(void) {
+unsigned long long raia_glfw_get_timer_frequency(void) {
     return glfwGetTimerFrequency();
 }
 
@@ -228,63 +227,63 @@ RAIA_API uint64_t raia_glfw_get_timer_frequency(void) {
 // モニター
 //
 
-RAIA_API GLFWmonitor **raia_glfw_get_monitors(int *count) {
+void **raia_glfw_get_monitors(void *count) {
     return glfwGetMonitors(count);
 }
 
-RAIA_API GLFWmonitor *raia_glfw_get_primary_monitor(void) {
+void *raia_glfw_get_primary_monitor(void) {
     return glfwGetPrimaryMonitor();
 }
 
-RAIA_API void raia_glfw_get_monitor_pos(GLFWmonitor *monitor, int *xpos, int *ypos) {
+void raia_glfw_get_monitor_pos(void *monitor, void *xpos, void *ypos) {
     glfwGetMonitorPos(monitor, xpos, ypos);
 }
 
-RAIA_API void raia_glfw_get_monitor_workarea(GLFWmonitor *monitor, int *xpos, int *ypos, int *width, int *height) {
+void raia_glfw_get_monitor_workarea(void *monitor, void *xpos, void *ypos, void *width, void *height) {
     glfwGetMonitorWorkarea(monitor,xpos, ypos, width, height);
 }
 
-RAIA_API void raia_glfw_get_monitor_physical_size(GLFWmonitor *monitor, int *widthMM, int *heightMM) {
+void raia_glfw_get_monitor_physical_size(void *monitor, void *widthMM, void *heightMM) {
     glfwGetMonitorPhysicalSize(monitor, widthMM, heightMM);
 }
 
-RAIA_API void raia_glfw_get_monitor_content_scale(GLFWmonitor *monitor, float *xscale, float *yscale) {
+void raia_glfw_get_monitor_content_scale(void *monitor, void *xscale, void *yscale) {
     glfwGetMonitorContentScale(monitor, xscale, yscale);
 }
 
-RAIA_API const char *raia_glfw_get_monitor_name(GLFWmonitor *monitor) {
+const char *raia_glfw_get_monitor_name(void *monitor) {
     return glfwGetMonitorName(monitor);
 }
 
-RAIA_API void raia_glfw_set_monitor_user_pointer(GLFWmonitor *monitor, void *pointer) {
+void raia_glfw_set_monitor_user_pointer(void *monitor, void *pointer) {
     glfwSetMonitorUserPointer(monitor, pointer);
 }
 
-RAIA_API void *raia_glfw_get_monitor_user_pointer(GLFWmonitor *monitor) {
+void *raia_glfw_get_monitor_user_pointer(void *monitor) {
     return glfwGetMonitorUserPointer(monitor);
 }
 
-RAIA_API GLFWmonitorfun raia_glfw_set_monitor_callback(GLFWmonitorfun callback) {
+void * raia_glfw_set_monitor_callback(void * callback) {
     return glfwSetMonitorCallback(callback);
 }
 
-RAIA_API const GLFWvidmode *raia_glfw_get_video_modes(GLFWmonitor *monitor, int *count) {
+const void *raia_glfw_get_video_modes(void *monitor, void *count) {
     return glfwGetVideoModes(monitor, count);
 }
 
-RAIA_API const GLFWvidmode *raia_glfw_get_video_mode(GLFWmonitor *monitor) {
+const void *raia_glfw_get_video_mode(void *monitor) {
     return glfwGetVideoMode(monitor);
 }
 
-RAIA_API void raia_glfw_set_gamma(GLFWmonitor *monitor, float gamma) {
+void raia_glfw_set_gamma(void *monitor, float gamma) {
     glfwSetGamma(monitor, gamma);
 }
 
-RAIA_API const GLFWgammaramp *raia_glfw_get_gamma_ramp(GLFWmonitor *monitor) {
+const void *raia_glfw_get_gamma_ramp(void *monitor) {
     return glfwGetGammaRamp(monitor);
 }
 
-RAIA_API void raia_glfw_set_gamma_ramp(GLFWmonitor *monitor, const GLFWgammaramp *ramp) {
+void raia_glfw_set_gamma_ramp(void *monitor, const void *ramp) {
     glfwSetGammaRamp(monitor, ramp);
 }
 
@@ -321,11 +320,11 @@ RAIA_API void raia_glfw_set_gamma_ramp(GLFWmonitor *monitor, const GLFWgammaramp
 // Vulkanサポート
 //
 
-RAIA_API int raia_glfw_vulkan_supported(void) {
+int raia_glfw_vulkan_supported(void) {
     return glfwVulkanSupported();
 }
 
-RAIA_API const char **raia_glfw_get_required_instance_extensions(uint32_t *count) {
+const char **raia_glfw_get_required_instance_extensions(void *count) {
     return glfwGetRequiredInstanceExtensions(count);
 }
 
@@ -337,191 +336,191 @@ RAIA_API const char **raia_glfw_get_required_instance_extensions(uint32_t *count
 // ウィンドウ
 //
 
-RAIA_API void raia_glfw_default_window_hints(void) {
+void raia_glfw_default_window_hints(void) {
     glfwDefaultWindowHints();
 }
 
-RAIA_API void raia_glfw_window_hint(int hint, int value) {
+void raia_glfw_window_hint(int hint, int value) {
     glfwWindowHint(hint, value);
 }
 
-RAIA_API void raia_glfw_window_hint_string(int hint, const char *value) {
+void raia_glfw_window_hint_string(int hint, const char *value) {
     glfwWindowHintString(hint, value);
 }
 
-RAIA_API GLFWwindow *raia_glfw_create_window(int width, int height, const char *title, GLFWmonitor *monitor, GLFWwindow *share) {
+void *raia_glfw_create_window(int width, int height, const char *title, void *monitor, void *share) {
     return glfwCreateWindow(width, height, title, monitor, share);
 }
 
-RAIA_API void raia_glfw_destroy_window(GLFWwindow *window) {
+void raia_glfw_destroy_window(void *window) {
     glfwDestroyWindow(window);
 }
 
-RAIA_API int raia_glfw_window_should_close(GLFWwindow *window) {
+int raia_glfw_window_should_close(void *window) {
     return glfwWindowShouldClose(window);
 }
 
-RAIA_API void raia_glfw_set_window_should_close(GLFWwindow *window, int value) {
+void raia_glfw_set_window_should_close(void *window, int value) {
     glfwSetWindowShouldClose(window, value);
 }
 
-RAIA_API void raia_glfw_set_window_title(GLFWwindow *window, const char *title) {
+void raia_glfw_set_window_title(void *window, const char *title) {
     glfwSetWindowTitle(window, title);
 }
 
-RAIA_API void raia_glfw_set_window_icon(GLFWwindow *window, int count, const GLFWimage *images) {
+void raia_glfw_set_window_icon(void *window, int count, const void *images) {
     glfwSetWindowIcon(window, count, images);
 }
 
-RAIA_API void raia_glfw_get_window_pos(GLFWwindow *window, int *xpos, int *ypos) {
+void raia_glfw_get_window_pos(void *window, void *xpos, void *ypos) {
     glfwGetWindowPos(window, xpos, ypos);
 }
 
-RAIA_API void raia_glfw_set_window_pos(GLFWwindow *window, int xpos, int ypos) {
+void raia_glfw_set_window_pos(void *window, int xpos, int ypos) {
     glfwSetWindowPos(window, xpos, ypos);
 }
 
-RAIA_API void raia_glfw_get_window_size(GLFWwindow *window, int *width, int *height) {
+void raia_glfw_get_window_size(void *window, void *width, void *height) {
     glfwGetWindowSize(window, width, height);
 }
 
-RAIA_API void raia_glfw_set_window_size_limits(GLFWwindow *window, int minwidth, int minheight, int maxwidth, int maxheight) {
+void raia_glfw_set_window_size_limits(void *window, int minwidth, int minheight, int maxwidth, int maxheight) {
     glfwSetWindowSizeLimits(window, minwidth, minheight, maxwidth, maxheight);
 }
 
-RAIA_API void raia_glfw_set_window_aspect_ratio(GLFWwindow *window, int numer, int denom) {
+void raia_glfw_set_window_aspect_ratio(void *window, int numer, int denom) {
     glfwSetWindowAspectRatio(window, numer, denom);
 }
 
-RAIA_API void raia_glfw_set_window_size(GLFWwindow *window, int width, int height) {
+void raia_glfw_set_window_size(void *window, int width, int height) {
     glfwSetWindowSize(window, width, height);
 }
 
-RAIA_API void raia_glfw_get_framebuffer_size(GLFWwindow *window, int *width, int *height) {
+void raia_glfw_get_framebuffer_size(void *window, void *width, void *height) {
     glfwGetFramebufferSize(window, width, height);
 }
 
-RAIA_API void raia_glfw_get_window_frame_size(GLFWwindow *window, int *left, int *top, int *right, int *bottom) {
+void raia_glfw_get_window_frame_size(void *window, void *left, void *top, void *right, void *bottom) {
     glfwGetWindowFrameSize(window, left, top, right, bottom);
 }
 
-RAIA_API void raia_glfw_get_window_content_scale(GLFWwindow *window, float *xscale, float *yscale) {
+void raia_glfw_get_window_content_scale(void *window, void *xscale, void *yscale) {
     glfwGetWindowContentScale(window, xscale, yscale);
 }
 
-RAIA_API float raia_glfw_get_window_opacity(GLFWwindow *window) {
+float raia_glfw_get_window_opacity(void *window) {
     return glfwGetWindowOpacity(window);
 }
 
-RAIA_API void raia_glfw_set_window_opacity(GLFWwindow *window, float opacity) {
+void raia_glfw_set_window_opacity(void *window, float opacity) {
     glfwSetWindowOpacity(window, opacity);
 }
 
-RAIA_API void raia_glfw_iconify_window(GLFWwindow *window) {
+void raia_glfw_iconify_window(void *window) {
     glfwIconifyWindow(window);
 }
 
-RAIA_API void raia_glfw_restore_window(GLFWwindow *window) {
+void raia_glfw_restore_window(void *window) {
     glfwRestoreWindow(window);
 }
 
-RAIA_API void raia_glfw_maximize_window(GLFWwindow *window) {
+void raia_glfw_maximize_window(void *window) {
     glfwMaximizeWindow(window);
 }
 
-RAIA_API void raia_glfw_show_window(GLFWwindow *window) {
+void raia_glfw_show_window(void *window) {
     glfwShowWindow(window);
 }
 
-RAIA_API void raia_glfw_hide_window(GLFWwindow *window) {
+void raia_glfw_hide_window(void *window) {
     glfwHideWindow(window);
 }
 
-RAIA_API void raia_glfw_focus_window(GLFWwindow *window) {
+void raia_glfw_focus_window(void *window) {
     glfwFocusWindow(window);
 }
 
-RAIA_API void raia_glfw_request_window_attention(GLFWwindow *window) {
+void raia_glfw_request_window_attention(void *window) {
     glfwRequestWindowAttention(window);
 }
 
-RAIA_API GLFWmonitor *raia_glfw_get_window_monitor(GLFWwindow *window) {
+void *raia_glfw_get_window_monitor(void *window) {
     return glfwGetWindowMonitor(window);
 }
 
-RAIA_API void raia_glfw_set_window_monitor(GLFWwindow *window, GLFWmonitor *monitor, int xpos, int ypos, int width, int height, int refreshRate) {
+void raia_glfw_set_window_monitor(void *window, void *monitor, int xpos, int ypos, int width, int height, int refreshRate) {
     glfwSetWindowMonitor(window, monitor, xpos, ypos, width, height, refreshRate);
 }
 
-RAIA_API int raia_glfw_get_window_attrib(GLFWwindow *window, int attrib) {
+int raia_glfw_get_window_attrib(void *window, int attrib) {
     return glfwGetWindowAttrib(window, attrib);
 }
 
-RAIA_API void raia_glfw_set_window_attrib(GLFWwindow *window, int attrib, int value) {
+void raia_glfw_set_window_attrib(void *window, int attrib, int value) {
     glfwSetWindowAttrib(window, attrib, value);
 }
 
-RAIA_API void raia_glfw_set_window_user_pointer(GLFWwindow *window, void *pointer) {
+void raia_glfw_set_window_user_pointer(void *window, void *pointer) {
     glfwSetWindowUserPointer(window, pointer);
 }
 
-RAIA_API void *raia_glfw_get_window_user_pointer(GLFWwindow *window) {
+void *raia_glfw_get_window_user_pointer(void *window) {
     return glfwGetWindowUserPointer(window);
 }
 
-RAIA_API GLFWwindowposfun raia_glfw_set_window_pos_callback(GLFWwindow *window, GLFWwindowposfun callback) {
+void * raia_glfw_set_window_pos_callback(void *window, void * callback) {
     return glfwSetWindowPosCallback(window, callback);
 }
 
-RAIA_API GLFWwindowsizefun raia_glfw_set_window_size_callback(GLFWwindow *window, GLFWwindowsizefun callback) {
+void * raia_glfw_set_window_size_callback(void *window, void * callback) {
     return glfwSetWindowSizeCallback(window, callback);
 }
 
-RAIA_API GLFWwindowclosefun raia_glfw_set_window_close_callback(GLFWwindow *window, GLFWwindowclosefun callback) {
+void * raia_glfw_set_window_close_callback(void *window, void * callback) {
     return glfwSetWindowCloseCallback(window, callback);
 }
 
-RAIA_API GLFWwindowrefreshfun raia_glfw_set_window_refresh_callback(GLFWwindow *window, GLFWwindowrefreshfun callback) {
+void * raia_glfw_set_window_refresh_callback(void *window, void * callback) {
     return glfwSetWindowRefreshCallback(window, callback);
 }
 
-RAIA_API GLFWwindowfocusfun raia_glfw_set_window_focus_callback(GLFWwindow *window, GLFWwindowfocusfun callback) {
+void * raia_glfw_set_window_focus_callback(void *window, void * callback) {
     return glfwSetWindowFocusCallback(window, callback);
 }
 
-RAIA_API GLFWwindowiconifyfun raia_glfw_set_window_iconify_callback(GLFWwindow *window, GLFWwindowiconifyfun callback) {
+void * raia_glfw_set_window_iconify_callback(void *window, void * callback) {
     return glfwSetWindowIconifyCallback(window, callback);
 }
 
-RAIA_API GLFWwindowmaximizefun raia_glfw_set_window_maximize_callback(GLFWwindow *window, GLFWwindowmaximizefun callback) {
+void * raia_glfw_set_window_maximize_callback(void *window, void * callback) {
     return glfwSetWindowMaximizeCallback(window, callback);
 }
 
-RAIA_API GLFWframebuffersizefun raia_glfw_set_framebuffer_size_callback(GLFWwindow *window, GLFWframebuffersizefun callback) {
+void * raia_glfw_set_framebuffer_size_callback(void *window, void * callback) {
     return glfwSetFramebufferSizeCallback(window, callback);
 }
 
-RAIA_API GLFWwindowcontentscalefun raia_glfw_set_window_content_scale_callback(GLFWwindow *window, GLFWwindowcontentscalefun callback) {
+void * raia_glfw_set_window_content_scale_callback(void *window, void * callback) {
     return glfwSetWindowContentScaleCallback(window, callback);
 }
 
-RAIA_API void raia_glfw_poll_events(void) {
+void raia_glfw_poll_events(void) {
     glfwPollEvents();
 }
 
-RAIA_API void raia_glfw_wait_events(void) {
+void raia_glfw_wait_events(void) {
     glfwWaitEvents();
 }
 
-RAIA_API void raia_glfw_wait_events_timeout(double timeout) {
+void raia_glfw_wait_events_timeout(double timeout) {
     glfwWaitEventsTimeout(timeout);
 }
 
-RAIA_API void raia_glfw_post_empty_event(void) {
+void raia_glfw_post_empty_event(void) {
     glfwPostEmptyEvent();
 }
 
-RAIA_API void raia_glfw_swap_buffers(GLFWwindow *window) {
+void raia_glfw_swap_buffers(void *window) {
     glfwSwapBuffers(window);
 }
 
@@ -529,264 +528,264 @@ RAIA_API void raia_glfw_swap_buffers(GLFWwindow *window) {
 
 // Error
 
-RAIA_API void raia_glfw_set_error_callback_alt(void) {
+void raia_glfw_set_error_callback_alt(void) {
     glfwSetErrorCallback(error_callback);
 }
 
-RAIA_API int raia_glfw_get_error_code(void) {
+int raia_glfw_get_error_code(void) {
     return get_callback_data_error_code();
 }
 
-RAIA_API const char *raia_glfw_get_error_message(void) {
+const char *raia_glfw_get_error_message(void) {
     return get_callback_data_error_message();
 }
 
 // Joystick
 
-RAIA_API void raia_glfw_set_joystick_callback_alt(void) {
+void raia_glfw_set_joystick_callback_alt(void) {
     glfwSetJoystickCallback(joystick_callback);
 }
 
-RAIA_API int raia_glfw_get_joystick_id(void) {
+int raia_glfw_get_joystick_id(void) {
     return get_callback_data_joystick_id();
 }
 
-RAIA_API int raia_glfw_get_joystick_event(void) {
+int raia_glfw_get_joystick_event(void) {
     return get_callback_data_joystick_event();
 }
 
 // Monitor
 
-RAIA_API void raia_glfw_set_monitor_callback_alt(void) {
+void raia_glfw_set_monitor_callback_alt(void) {
     glfwSetMonitorCallback(monitor_callback);
 }
 
-RAIA_API GLFWmonitor* raia_glfw_get_monitor(void) {
+void * raia_glfw_get_monitor(void) {
     return get_monitor();
 }
 
-RAIA_API int raia_glfw_get_monitor_event(void) {
+int raia_glfw_get_monitor_event(void) {
     return get_monitor_event();
 }
 
 // Pos
 
-RAIA_API void raia_glfw_set_window_pos_callback_alt(GLFWwindow *window) {
+void raia_glfw_set_window_pos_callback_alt(void *window) {
     glfwSetWindowPosCallback(window, window_pos_callback);
 }
 
-RAIA_API int raia_glfw_get_window_pos_x(GLFWwindow *window) {
+int raia_glfw_get_window_pos_x(void *window) {
     return get_window_pos_x(window);
 }
 
-RAIA_API int raia_glfw_get_window_pos_y(GLFWwindow *window) {
+int raia_glfw_get_window_pos_y(void *window) {
     return get_window_pos_y(window);
 }
 
 // Size
 
-RAIA_API void raia_glfw_set_window_size_callback_alt(GLFWwindow *window) {
+void raia_glfw_set_window_size_callback_alt(void *window) {
     glfwSetWindowSizeCallback(window, window_size_callback);
 }
 
-RAIA_API int raia_glfw_get_window_size_width(GLFWwindow *window) {
+int raia_glfw_get_window_size_width(void *window) {
     return get_window_size_width(window);
 }
 
-RAIA_API int raia_glfw_get_window_size_height(GLFWwindow *window) {
+int raia_glfw_get_window_size_height(void *window) {
     return get_window_size_height(window);
 }
 
 // Close
 
-RAIA_API void raia_glfw_set_window_close_callback_alt(GLFWwindow *window) {
+void raia_glfw_set_window_close_callback_alt(void *window) {
     glfwSetWindowCloseCallback(window, window_close_callback);
 }
 
-RAIA_API bool raia_glfw_get_window_close(GLFWwindow *window) {
+int raia_glfw_get_window_close(void *window) {
     return get_window_close(window);
 }
 
 // Refresh
 
-RAIA_API void raia_glfw_set_window_refresh_callback_alt(GLFWwindow *window) {
+void raia_glfw_set_window_refresh_callback_alt(void *window) {
     glfwSetWindowRefreshCallback(window, window_refresh_callback);
 }
 
-RAIA_API bool raia_glfw_get_window_refresh(GLFWwindow *window) {
+int raia_glfw_get_window_refresh(void *window) {
     return get_window_refresh(window);
 }
 
 // Focus
 
-RAIA_API void raia_glfw_set_window_focus_callback_alt(GLFWwindow *window) {
+void raia_glfw_set_window_focus_callback_alt(void *window) {
     glfwSetWindowFocusCallback(window, window_focus_callback);
 }
 
-RAIA_API int raia_glfw_get_window_focus(GLFWwindow *window) {
+int raia_glfw_get_window_focus(void *window) {
     return get_window_close(window);
 }
 
 // Iconify
 
-RAIA_API void raia_glfw_set_window_iconify_callback_alt(GLFWwindow *window) {
+void raia_glfw_set_window_iconify_callback_alt(void *window) {
     glfwSetWindowIconifyCallback(window, window_iconify_callback);
 }
 
-RAIA_API int raia_glfw_get_window_iconified(GLFWwindow *window) {
+int raia_glfw_get_window_iconified(void *window) {
     return get_window_iconified(window);
 }
 
 // Framebuffer Size
 
-RAIA_API void raia_glfw_set_framebuffer_size_callback_alt(GLFWwindow *window) {
+void raia_glfw_set_framebuffer_size_callback_alt(void *window) {
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 }
 
-RAIA_API int raia_glfw_get_framebuffer_size_width(GLFWwindow *window) {
+int raia_glfw_get_framebuffer_size_width(void *window) {
     return get_framebuffer_size_width(window);
 }
 
-RAIA_API int raia_glfw_get_framebuffer_size_height(GLFWwindow *window) {
+int raia_glfw_get_framebuffer_size_height(void *window) {
     return get_framebuffer_size_height(window);
 }
 
 // Key
 
-RAIA_API void raia_glfw_set_key_callback_alt(GLFWwindow *window) {
+void raia_glfw_set_key_callback_alt(void *window) {
     glfwSetKeyCallback(window, key_callback);
 }
 
-RAIA_API int raia_glfw_get_key_alt(GLFWwindow *window) {
+int raia_glfw_get_key_alt(void *window) {
     return get_key(window);
 }
 
-RAIA_API int raia_glfw_get_key_scancode_alt(GLFWwindow *window) {
+int raia_glfw_get_key_scancode_alt(void *window) {
     return get_key_scancode(window);
 }
 
-RAIA_API int raia_glfw_get_key_action(GLFWwindow *window) {
+int raia_glfw_get_key_action(void *window) {
     return get_key_action(window);
 }
 
-RAIA_API int raia_glfw_get_key_mods(GLFWwindow *window) {
+int raia_glfw_get_key_mods(void *window) {
     return get_key_mods(window);
 }
 
 // Cursor pos
 
-RAIA_API void raia_glfw_set_cursor_pos_callback_alt(GLFWwindow *window) {
+void raia_glfw_set_cursor_pos_callback_alt(void *window) {
     glfwSetCursorPosCallback(window, cursor_pos_callback);
 }
 
-RAIA_API double raia_glfw_get_cursor_pos_x(GLFWwindow *window) {
+double raia_glfw_get_cursor_pos_x(void *window) {
     return get_cursor_pos_x(window);
 }
 
-RAIA_API double raia_glfw_get_cursor_pos_y(GLFWwindow *window) {
+double raia_glfw_get_cursor_pos_y(void *window) {
     return get_cursor_pos_y(window);
 }
 
 // Mouse button
 
-RAIA_API void raia_glfw_set_mouse_button_callback_alt(GLFWwindow *window) {
+void raia_glfw_set_mouse_button_callback_alt(void *window) {
     glfwSetMouseButtonCallback(window, mouse_button_callback);
 }
 
-RAIA_API int raia_glfw_get_mouse_button_alt(GLFWwindow *window) {
+int raia_glfw_get_mouse_button_alt(void *window) {
     return get_mouse_button(window);
 }
 
-RAIA_API int raia_glfw_get_mouse_action(GLFWwindow *window) {
+int raia_glfw_get_mouse_action(void *window) {
     return get_mouse_action(window);
 }
 
-RAIA_API int raia_glfw_get_mouse_mods(GLFWwindow *window) {
+int raia_glfw_get_mouse_mods(void *window) {
     return get_mouse_mods(window);
 }
 
 // Char
 
-RAIA_API void raia_glfw_set_char_callback_alt(GLFWwindow *window) {
+void raia_glfw_set_char_callback_alt(void *window) {
     glfwSetCharCallback(window, char_callback);
 }
 
-RAIA_API unsigned int raia_glfw_get_char(GLFWwindow *window) {
+unsigned int raia_glfw_get_char(void *window) {
     return get_char_codepoint(window);
 }
 
 // Char mods
 
-RAIA_API void raia_glfw_set_char_mods_callback_alt(GLFWwindow *window) {
+void raia_glfw_set_char_mods_callback_alt(void *window) {
     glfwSetCharModsCallback(window, char_mods_callback);
 }
 
-RAIA_API unsigned int raia_glfw_get_char_mods_codepoint(GLFWwindow *window) {
+unsigned int raia_glfw_get_char_mods_codepoint(void *window) {
     return get_char_mods_codepoint(window);
 }
 
-RAIA_API int raia_glfw_get_char_mods_mods(GLFWwindow *window) {
+int raia_glfw_get_char_mods_mods(void *window) {
     return get_char_mods_mods(window);
 }
 
 // Cursor enter
 
-RAIA_API void raia_glfw_set_cursor_enter_callback_alt(GLFWwindow *window) {
+void raia_glfw_set_cursor_enter_callback_alt(void *window) {
     glfwSetCursorEnterCallback(window, cursor_enter_callback);
 }
 
-RAIA_API int raia_glfw_get_cursor_enter(GLFWwindow *window) {
+int raia_glfw_get_cursor_enter(void *window) {
     return get_cursor_entered(window);
 }
 
 // Scroll
 
-RAIA_API void raia_glfw_set_scroll_callback_alt(GLFWwindow *window) {
+void raia_glfw_set_scroll_callback_alt(void *window) {
     glfwSetScrollCallback(window, scroll_callback);
 }
 
-RAIA_API int raia_glfw_get_scroll_offset_x(GLFWwindow *window) {
+int raia_glfw_get_scroll_offset_x(void *window) {
     return get_scroll_xoffset(window);
 }
 
-RAIA_API int raia_glfw_get_scroll_offset_y(GLFWwindow *window) {
+int raia_glfw_get_scroll_offset_y(void *window) {
     return get_scroll_yoffset(window);
 }
 
 // Drop
 
-RAIA_API void raia_glfw_set_drop_callback_alt(GLFWwindow *window) {
+void raia_glfw_set_drop_callback_alt(void *window) {
     glfwSetDropCallback(window, drop_callback);
 }
 
-RAIA_API int raia_glfw_get_drop_count(GLFWwindow *window) {
+int raia_glfw_get_drop_count(void *window) {
     return get_drop_count(window);
 }
 
-RAIA_API const char** raia_glfw_get_drop_paths(GLFWwindow *window) {
+const char** raia_glfw_get_drop_paths(void *window) {
     return get_drop_paths(window);
 }
 
 // Maximized
 
-RAIA_API void raia_glfw_set_window_maximize_callback_alt(GLFWwindow *window) {
+void raia_glfw_set_window_maximize_callback_alt(void *window) {
     glfwSetWindowMaximizeCallback(window, window_maximize_callback);
 }
 
-RAIA_API int raia_glfw_get_window_maximized(GLFWwindow *window) {
+int raia_glfw_get_window_maximized(void *window) {
     return get_window_maximized(window);
 }
 
 // Content scale
 
-RAIA_API void raia_glfw_set_window_content_scale_callback_alt(GLFWwindow *window) {
+void raia_glfw_set_window_content_scale_callback_alt(void *window) {
     glfwSetWindowContentScaleCallback(window, window_content_scale_callback);
 }
 
-RAIA_API float raia_glfw_get_window_content_scale_x(GLFWwindow *window) {
+float raia_glfw_get_window_content_scale_x(void *window) {
     return get_window_content_scale_x(window);
 }
 
-RAIA_API float raia_glfw_get_window_content_scale_y(GLFWwindow *window) {
+float raia_glfw_get_window_content_scale_y(void *window) {
     return get_window_content_scale_y(window);
 }

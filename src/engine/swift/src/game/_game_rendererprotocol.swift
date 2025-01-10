@@ -3,6 +3,6 @@ extension Game {
         func setup()
         func cleanup()
         func render(viewportWidth: Int, viewportHeight: Int)
-        func setPixels(pixels: UnsafeMutablePointer<GLubyte>?)
+        func setPixels(pixels: UnsafeMutablePointer<UInt8>?)
     }
 }

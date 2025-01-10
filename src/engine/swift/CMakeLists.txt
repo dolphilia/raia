@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.20)
 project(SwiftCIntegration LANGUAGES C Swift)
 
 include(${PROJECT_SOURCE_DIR}/../../setting.cmake)
+include_directories(${PROJECT_SOURCE_DIR}/../../../sdk/macos/arm64/include/skia)
 
 include_directories(${PROJECT_SOURCE_DIR}/include)
 link_directories(${PROJECT_SOURCE_DIR}/lib)
@@ -15,6 +16,7 @@ set(CMAKE_Swift_FLAGS "${CMAKE_Swift_FLAGS} -import-objc-header ${CMAKE_SOURCE_D
 add_library(wrapper STATIC
     wrapper/cglm_wrapper.c
     wrapper/glfw_wrapper.c
+    wrapper/noise.c
 )
 target_include_directories(wrapper PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
@@ -25,6 +27,7 @@ add_executable(main
     src/game/__game_namespace.swift
     src/game/_game_rendererprotocol.swift
     src/game/_game_struct.swift
+    src/game/_game_typealias.swift
     src/game/game_renderer2d.swift
     src/game/game_renderer3d.swift
     src/game/game_window.swift
@@ -33,7 +36,6 @@ add_executable(main
     src/glfw/_glfw_const.swift
     src/glfw/_glfw_function.swift
     src/glfw/_glfw_typealias.swift
-    src/glfw/glfw_context.swift
     src/glfw/glfw_corsor.swift
     src/glfw/glfw_initializer.swift
     src/glfw/glfw_input.swift

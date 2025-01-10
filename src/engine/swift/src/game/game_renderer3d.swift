@@ -1,6 +1,5 @@
 extension Game {
     class Renderer3D: RendererProtocol {
-
         var glResources = Game.GLResources()
 
         struct UniformLocations {
@@ -117,10 +116,9 @@ extension Game {
             GLES.genVertexArrays(n: 1, arrays: &glResources.VAO)
             GLES.genBuffers(n: 1, buffers: &glResources.VBO)
             GLES.genBuffers(n: 1, buffers: &glResources.EBO)
-
             GLES.bindVertexArray(array: Int(glResources.VAO))
-
             GLES.bindBuffer(target: GLES.ARRAY_BUFFER, buffer: Int(glResources.VBO))
+            
             glData.vertices.withUnsafeBytes { ptr in
                 GLES.bufferData(target: GLES.ARRAY_BUFFER,
                                 size: ptr.count,
@@ -190,10 +188,10 @@ extension Game {
             swift_glm_mat4_mul(&view, &model, &mv)
 
             mv.withUnsafeBufferPointer { ptr in
-                GLES.uniformMatrix4fv(location: Int(uniformLocs.mvMatrix), count: 1, transpose: false, value: ptr.baseAddress!)
+                GLES.uniformMatrix4fv(location: Int(uniformLocs.mvMatrix), count: 1, transpose: false, value: UnsafeMutableRawPointer(mutating: ptr.baseAddress))
             }
             projection.withUnsafeBufferPointer { ptr in
-                GLES.uniformMatrix4fv(location: Int(uniformLocs.projMatrix), count: 1, transpose: false, value: ptr.baseAddress!)
+                GLES.uniformMatrix4fv(location: Int(uniformLocs.projMatrix), count: 1, transpose: false, value: UnsafeMutableRawPointer(mutating: ptr.baseAddress))
             }
 
             let lightPos: [Float] = [2, 2, 2]
@@ -201,13 +199,13 @@ extension Game {
             let baseColor: [Float] = [1, 1, 1]
 
             lightPos.withUnsafeBufferPointer { ptr in
-                GLES.uniform3fv(location: Int(uniformLocs.lightPos), count: 1, value: ptr.baseAddress!)
+                GLES.uniform3fv(location: Int(uniformLocs.lightPos), count: 1, value: UnsafeMutableRawPointer(mutating: ptr.baseAddress))
             }
             lightColor.withUnsafeBufferPointer { ptr in
-                GLES.uniform3fv(location: Int(uniformLocs.lightColor), count: 1, value: ptr.baseAddress!)
+                GLES.uniform3fv(location: Int(uniformLocs.lightColor), count: 1, value: UnsafeMutableRawPointer(mutating: ptr.baseAddress))
             }
             baseColor.withUnsafeBufferPointer { ptr in
-                GLES.uniform3fv(location: Int(uniformLocs.baseColor), count: 1, value: ptr.baseAddress!)
+                GLES.uniform3fv(location: Int(uniformLocs.baseColor), count: 1, value: UnsafeMutableRawPointer(mutating: ptr.baseAddress))
             }
 
             GLES.bindVertexArray(array: Int(glResources.VAO))
@@ -216,18 +214,18 @@ extension Game {
 
         func cleanup() {
             withUnsafePointer(to: glResources.VAO) {
-                GLES.deleteVertexArrays(n: 1, arrays: $0)
+                GLES.deleteVertexArrays(n: 1, arrays: UnsafeMutableRawPointer(mutating: $0))
             }
             withUnsafePointer(to: glResources.VBO) {
-                GLES.deleteBuffers(n: 1, buffers: $0)
+                GLES.deleteBuffers(n: 1, buffers: UnsafeMutableRawPointer(mutating: $0))
             }
             withUnsafePointer(to: glResources.EBO) {
-                GLES.deleteBuffers(n: 1, buffers: $0)
+                GLES.deleteBuffers(n: 1, buffers: UnsafeMutableRawPointer(mutating: $0))
             }
             GLES.deleteProgram(program: Int(glResources.program))
         }
 
-        func setPixels(pixels: UnsafeMutablePointer<GLubyte>?) {
+        func setPixels(pixels: UnsafeMutablePointer<UInt8>?) {
             //textureData.pixels = pixels
         }
     }

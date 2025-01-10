@@ -1,15 +1,21 @@
 [
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
-  "command": "/usr/bin/clang -I/Users/dolphilia/github/raia/src/engine/swift/../../../sdk/macos/arm64/include -I/Users/dolphilia/github/raia/src/engine/swift/include -I/Users/dolphilia/github/raia/src/engine/swift -g -std=gnu11 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -mmacosx-version-min=15.1 -o CMakeFiles/wrapper.dir/wrapper/cglm_wrapper.c.o -c /Users/dolphilia/github/raia/src/engine/swift/wrapper/cglm_wrapper.c",
+  "command": "/usr/bin/clang -I/Users/dolphilia/github/raia/src/engine/swift/../../../sdk/macos/arm64/include -I/Users/dolphilia/github/raia/src/engine/swift/../../../sdk/macos/arm64/include/skia -I/Users/dolphilia/github/raia/src/engine/swift/include -I/Users/dolphilia/github/raia/src/engine/swift -O3 -DNDEBUG -std=gnu11 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -mmacosx-version-min=15.1 -o CMakeFiles/wrapper.dir/wrapper/cglm_wrapper.c.o -c /Users/dolphilia/github/raia/src/engine/swift/wrapper/cglm_wrapper.c",
   "file": "/Users/dolphilia/github/raia/src/engine/swift/wrapper/cglm_wrapper.c",
   "output": "CMakeFiles/wrapper.dir/wrapper/cglm_wrapper.c.o"
 },
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
-  "command": "/usr/bin/clang -I/Users/dolphilia/github/raia/src/engine/swift/../../../sdk/macos/arm64/include -I/Users/dolphilia/github/raia/src/engine/swift/include -I/Users/dolphilia/github/raia/src/engine/swift -g -std=gnu11 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -mmacosx-version-min=15.1 -o CMakeFiles/wrapper.dir/wrapper/glfw_wrapper.c.o -c /Users/dolphilia/github/raia/src/engine/swift/wrapper/glfw_wrapper.c",
+  "command": "/usr/bin/clang -I/Users/dolphilia/github/raia/src/engine/swift/../../../sdk/macos/arm64/include -I/Users/dolphilia/github/raia/src/engine/swift/../../../sdk/macos/arm64/include/skia -I/Users/dolphilia/github/raia/src/engine/swift/include -I/Users/dolphilia/github/raia/src/engine/swift -O3 -DNDEBUG -std=gnu11 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -mmacosx-version-min=15.1 -o CMakeFiles/wrapper.dir/wrapper/glfw_wrapper.c.o -c /Users/dolphilia/github/raia/src/engine/swift/wrapper/glfw_wrapper.c",
   "file": "/Users/dolphilia/github/raia/src/engine/swift/wrapper/glfw_wrapper.c",
   "output": "CMakeFiles/wrapper.dir/wrapper/glfw_wrapper.c.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": "/usr/bin/clang -I/Users/dolphilia/github/raia/src/engine/swift/../../../sdk/macos/arm64/include -I/Users/dolphilia/github/raia/src/engine/swift/../../../sdk/macos/arm64/include/skia -I/Users/dolphilia/github/raia/src/engine/swift/include -I/Users/dolphilia/github/raia/src/engine/swift -O3 -DNDEBUG -std=gnu11 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -mmacosx-version-min=15.1 -o CMakeFiles/wrapper.dir/wrapper/noise.c.o -c /Users/dolphilia/github/raia/src/engine/swift/wrapper/noise.c",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/wrapper/noise.c",
+  "output": "CMakeFiles/wrapper.dir/wrapper/noise.c.o"
 },
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
@@ -34,6 +40,12 @@
   "command": ":",
   "file": "/Users/dolphilia/github/raia/src/engine/swift/src/game/_game_struct.swift",
   "output": "CMakeFiles/main.dir/src/game/_game_struct.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/game/_game_typealias.swift",
+  "output": "CMakeFiles/main.dir/src/game/_game_typealias.swift.o"
 },
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
@@ -76,12 +88,6 @@
   "command": ":",
   "file": "/Users/dolphilia/github/raia/src/engine/swift/src/glfw/_glfw_typealias.swift",
   "output": "CMakeFiles/main.dir/src/glfw/_glfw_typealias.swift.o"
-},
-{
-  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
-  "command": ":",
-  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/glfw/glfw_context.swift",
-  "output": "CMakeFiles/main.dir/src/glfw/glfw_context.swift.o"
 },
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",

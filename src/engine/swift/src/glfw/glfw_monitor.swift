@@ -2,15 +2,15 @@ import Foundation
 
 extension GLFW {
     class Monitor {
-        let monitorPointer: OpaquePointer?
+        let monitorPointer: UnsafeMutableRawPointer?
 
-        init(pointer: OpaquePointer?) {
+        init(pointer: UnsafeMutableRawPointer?) {
             self.monitorPointer = pointer
         }
 
         // MARK: Monitor Management
 
-        static func from(pointer: OpaquePointer?) -> Monitor? {
+        static func from(pointer: UnsafeMutableRawPointer?) -> Monitor? {
             guard let validPointer = pointer else { return nil }
             return Monitor(pointer: validPointer)
         }
@@ -71,11 +71,11 @@ extension GLFW {
 
         // MARK: Video Modes
 
-        func getVideoModes() -> [GLFWvidmode] {
-            return GLFW.getVideoModes(monitor: monitorPointer)
+        func getVideoModes(count: UnsafeMutableRawPointer?) -> UnsafeRawPointer? {
+            return GLFW.getVideoModes(monitor: monitorPointer, count: count)
         }
 
-        func getVideoMode() -> GLFWvidmode? {
+        func getVideoMode() -> UnsafeRawPointer? {
             return GLFW.getVideoMode(monitor: monitorPointer)
         }
 
@@ -85,11 +85,11 @@ extension GLFW {
             GLFW.setGamma(monitor: monitorPointer, gamma: gamma)
         }
 
-        func getGammaRamp() -> GLFWgammaramp? {
+        func getGammaRamp() -> UnsafeRawPointer? {
             return GLFW.getGammaRamp(monitor: monitorPointer)
         }
 
-        func setGammaRamp(ramp: GLFWgammaramp) {
+        func setGammaRamp(ramp: UnsafeRawPointer?) {
             withUnsafePointer(to: ramp) { pointer in
                 GLFW.setGammaRamp(monitor: monitorPointer, ramp: pointer)
             }

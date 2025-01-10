@@ -38,12 +38,12 @@ extension GLFW {
 
         static func setErrorCallback(callback: @escaping (Int, String?) -> Void) -> GLFWerrorfun? {
             swiftErrorCallback = callback
-            return GLFW.setErrorCallback(callback:cErrorCallback)
+            return GLFW.setErrorCallback(callback: cErrorCallback).map { unsafeBitCast($0, to: GLFWerrorfun.self) }
         }
 
         // MARK: コンテキスト
 
-        static func getCurrentContext() -> OpaquePointer? {
+        static func getCurrentContext() -> UnsafeMutableRawPointer? {
             guard let windowPointer = GLFW.getCurrentContext() else { return nil }
             return windowPointer
         }
@@ -57,7 +57,7 @@ extension GLFW {
         }
 
         static func getProcAddress(procname: String) -> (@convention(c) () -> Void)? {
-            return GLFW.getProcAddress(procname:procname)
+            return GLFW.getProcAddress(procname:procname).map { unsafeBitCast($0, to: (@convention(c) () -> Void).self) }
         }
     }
 }

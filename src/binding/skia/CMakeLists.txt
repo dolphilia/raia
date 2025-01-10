@@ -16,6 +16,7 @@ endif()
 
 #add_executable(raia_skia src/raia_skia.cpp
 add_library(raia_skia SHARED
+        src/raia_skia.cpp
         src/binding/gr_backend_drawable_info.cpp
         src/binding/gr_backend_drawable_info.h
         src/binding/gr_backend_format.cpp

@@ -13,7 +13,7 @@ else()
         set(CMAKE_INSTALL_RPATH "$ORIGIN")
 endif()
 
-add_library(raia_glfw STATIC
+add_library(raia_glfw SHARED
 #add_executable(raia_glfw
         src/raia_glfw.c
         src/static/static_callback.c
