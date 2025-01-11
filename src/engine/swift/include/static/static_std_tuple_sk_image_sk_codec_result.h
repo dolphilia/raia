@@ -13,10 +13,14 @@
 #include "include/core/SkYUVAPixmaps.h"
 #include "include/core/SkImage.h"
 #include "include/codec/SkCodec.h"
+#include "export_api.h"
 
 typedef int tuple_sk_image_sk_codec_result_t;
 
-extern "C" void static_tuple_sk_image_sk_codec_result_delete(int key);
+extern "C" {
+RAIA_API void static_tuple_sk_image_sk_codec_result_delete(int key);
+}
+
 int static_tuple_sk_image_sk_codec_result_make(std::tuple<sk_sp<SkImage>, SkCodec::Result> value);
 std::tuple<sk_sp<SkImage>, SkCodec::Result> static_tuple_sk_image_sk_codec_result_get(int key, int index);
 void static_tuple_sk_image_sk_codec_result_set(int key, std::tuple<sk_sp<SkImage>, SkCodec::Result> value);

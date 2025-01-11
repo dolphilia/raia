@@ -7,11 +7,12 @@
 
 #include "include/effects/SkDiscretePathEffect.h"
 #include "../static/static_sk_path_effect.h"
+#include "export_api.h"
 
 extern "C" {
-void SkDiscretePathEffect_delete(SkDiscretePathEffect * discretePathEffect);
-sk_path_effect_t SkDiscretePathEffect_Make(SkScalar segLength, SkScalar dev, uint32_t seedAssist);
-void SkDiscretePathEffect_RegisterFlattenables();
+RAIA_API void SkDiscretePathEffect_delete(SkDiscretePathEffect * discretePathEffect);
+RAIA_API sk_path_effect_t SkDiscretePathEffect_Make(SkScalar segLength, SkScalar dev, uint32_t seedAssist);
+RAIA_API void SkDiscretePathEffect_RegisterFlattenables();
 }
 
 #endif //RAIA_SKIA_SK_DISCRETE_PATH_EFFECT_H

@@ -9,12 +9,19 @@
 #include <string>
 #include <map>
 #include "include/core/SkImageGenerator.h"
+#ifdef _WIN32
+#include <memory>
+#endif
+#include "export_api.h"
 
 typedef int sk_image_generator_t;
 
+extern "C" {
+RAIA_API void static_sk_image_generator_delete(int key);
+RAIA_API SkImageGenerator *static_sk_image_generator_get(int key);
+}
+
 int static_sk_image_generator_make(std::unique_ptr<SkImageGenerator> value);
-extern "C" void static_sk_image_generator_delete(int key);
-extern "C" SkImageGenerator *static_sk_image_generator_get(int key);
 void static_sk_image_generator_set(int key, std::unique_ptr<SkImageGenerator> value);
 std::unique_ptr<SkImageGenerator> static_sk_image_generator_move(int key);
 

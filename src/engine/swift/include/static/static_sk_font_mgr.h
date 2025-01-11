@@ -9,12 +9,16 @@
 #include <string>
 #include <map>
 #include "include/core/SkFontMgr.h"
+#include "export_api.h"
 
 typedef int sk_font_mgr_t;
 
+extern "C" {
+RAIA_API void static_sk_font_mgr_delete(int key);
+RAIA_API SkFontMgr *static_sk_font_mgr_get(int key);
+}
+
 int static_sk_font_mgr_make(sk_sp<SkFontMgr> value);
-extern "C" void static_sk_font_mgr_delete(int key);
-extern "C" SkFontMgr *static_sk_font_mgr_get(int key);
 void static_sk_font_mgr_set(int key, sk_sp<SkFontMgr> value);
 sk_sp<SkFontMgr> static_sk_font_mgr_move(int key);
 

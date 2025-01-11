@@ -9,11 +9,16 @@
 #include <string>
 #include <map>
 #include "include/codec/SkCodec.h"
+#include "export_api.h"
 
 typedef int sk_codecs_decoder_t;
 
+extern "C" {
+RAIA_API void static_sk_codecs_decoder_delete(int key);
+RAIA_API SkCodecs::Decoder * static_sk_codecs_decoder_get_ptr(int key);
+}
+
 int static_sk_codecs_decoder_make(SkCodecs::Decoder value);
-extern "C" void static_sk_codecs_decoder_delete(int key);
 SkCodecs::Decoder static_sk_codecs_decoder_get(int key);
 void static_sk_codecs_decoder_set(int key, SkCodecs::Decoder value);
 

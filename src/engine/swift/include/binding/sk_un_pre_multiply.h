@@ -6,14 +6,15 @@
 #define RAIA_SKIA_SK_UN_PRE_MULTIPLY_H
 
 #include "include/core/SkUnPreMultiply.h"
+#include "export_api.h"
 
 extern "C" {
-void SkUnPreMultiply_delete(SkUnPreMultiply * unPreMultiply);
+RAIA_API void SkUnPreMultiply_delete(SkUnPreMultiply * unPreMultiply);
 // static
-const SkUnPreMultiply::Scale * SkUnPreMultiply_GetScaleTable();
-SkUnPreMultiply::Scale SkUnPreMultiply_GetScale(U8CPU alpha);
-U8CPU SkUnPreMultiply_ApplyScale(SkUnPreMultiply::Scale scale, U8CPU component);
-SkColor SkUnPreMultiply_PMColorToColor(SkPMColor c);
+RAIA_API const SkUnPreMultiply::Scale * SkUnPreMultiply_GetScaleTable();
+RAIA_API SkUnPreMultiply::Scale SkUnPreMultiply_GetScale(U8CPU alpha);
+RAIA_API U8CPU SkUnPreMultiply_ApplyScale(SkUnPreMultiply::Scale scale, U8CPU component);
+RAIA_API SkColor SkUnPreMultiply_PMColorToColor(SkPMColor c);
 }
 
 #endif //RAIA_SKIA_SK_UN_PRE_MULTIPLY_H

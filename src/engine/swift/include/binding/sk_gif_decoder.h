@@ -12,10 +12,10 @@
 #include "../static/static_sk_codecs_decoder.h"
 
 extern "C" {
-bool SkGifDecoder_IsGif(const void* ptr, size_t size);
-sk_codec_t SkGifDecoder_Decode(int static_stream, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
-sk_codec_t SkGifDecoder_Decode_2(int static_data, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
-sk_codecs_decoder_t SkGifDecoder_Decoder();
+RAIA_API bool SkGifDecoder_IsGif(const void* ptr, size_t size);
+RAIA_API sk_codec_t SkGifDecoder_Decode(int static_stream, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
+RAIA_API sk_codec_t SkGifDecoder_Decode_2(int static_data, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
+RAIA_API sk_codecs_decoder_t SkGifDecoder_Decoder();
 }
 
 #endif //RAIA_SKIA_SK_GIF_DECODER_H

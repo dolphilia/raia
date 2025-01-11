@@ -7,11 +7,12 @@
 
 #include "include/core/SkCanvas.h"
 #include "include/core/SkAnnotation.h"
+#include "export_api.h"
 
 extern "C" {
-void SkAnnotation_SkAnnotateLinkToDestination(SkCanvas *canvas, const SkRect *rect, SkData *data);
-void SkAnnotation_SkAnnotateNamedDestination(SkCanvas *canvas, const SkPoint *point, SkData *data);
-void SkAnnotation_SkAnnotateRectWithURL(SkCanvas *canvas, const SkRect *rect, SkData *data);
+RAIA_API void SkAnnotation_SkAnnotateLinkToDestination(SkCanvas *canvas, const SkRect *rect, SkData *data);
+RAIA_API void SkAnnotation_SkAnnotateNamedDestination(SkCanvas *canvas, const SkPoint *point, SkData *data);
+RAIA_API void SkAnnotation_SkAnnotateRectWithURL(SkCanvas *canvas, const SkRect *rect, SkData *data);
 }
 
 #endif //RAIA_SKIA_SK_ANNOTATION_H

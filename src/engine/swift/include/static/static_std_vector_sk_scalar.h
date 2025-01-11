@@ -10,16 +10,17 @@
 #include <map>
 #include <vector>
 #include "include/core/SkScalar.h"
+#include "export_api.h"
 
 typedef int vector_sk_scalar_t;
 
 extern "C" {
-void static_vector_sk_scalar_delete(int key);
-SkScalar static_vector_sk_scalar_get(int key, int index);
-void static_vector_sk_scalar_push_back(int key, SkScalar value);
-void static_vector_sk_scalar_insert(int key, int index, SkScalar value);
-void static_vector_sk_scalar_pop_back(int key);
-void static_vector_sk_scalar_erase(int key, int index);
+RAIA_API void static_vector_sk_scalar_delete(int key);
+RAIA_API SkScalar static_vector_sk_scalar_get(int key, int index);
+RAIA_API void static_vector_sk_scalar_push_back(int key, SkScalar value);
+RAIA_API void static_vector_sk_scalar_insert(int key, int index, SkScalar value);
+RAIA_API void static_vector_sk_scalar_pop_back(int key);
+RAIA_API void static_vector_sk_scalar_erase(int key, int index);
 }
 
 int static_vector_sk_scalar_make(std::vector<SkScalar> value);

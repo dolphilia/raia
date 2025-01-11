@@ -7,10 +7,11 @@
 
 #include "include/codec/SkPixmapUtils.h"
 #include "../static/static_sk_image_info.h"
+#include "export_api.h"
 
 extern "C" {
-bool SkPixmapUtils_Orient(const SkPixmap* dst, const SkPixmap* src, SkEncodedOrigin origin);
-sk_image_info_t SkPixmapUtils_SwapWidthHeight(const SkImageInfo* info);
+RAIA_API bool SkPixmapUtils_Orient(const SkPixmap* dst, const SkPixmap* src, SkEncodedOrigin origin);
+RAIA_API sk_image_info_t SkPixmapUtils_SwapWidthHeight(const SkImageInfo* info);
 }
 
 #endif //RAIA_SKIA_SK_PIXMAP_UTILS_H

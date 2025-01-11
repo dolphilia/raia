@@ -9,11 +9,16 @@
 #include <string>
 #include <map>
 #include "include/core/SkStrokeRec.h"
+#include "export_api.h"
 
 typedef int sk_stroke_rec_t;
 
+extern "C" {
+RAIA_API void static_sk_stroke_rec_delete(int key);
+RAIA_API SkStrokeRec * static_sk_stroke_rec_get_ptr(int key);
+}
+
 int static_sk_stroke_rec_make(SkStrokeRec value);
-extern "C" void static_sk_stroke_rec_delete(int key);
 SkStrokeRec static_sk_stroke_rec_get(int key);
 void static_sk_stroke_rec_set(int key, SkStrokeRec value);
 

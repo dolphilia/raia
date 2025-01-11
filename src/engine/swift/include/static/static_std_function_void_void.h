@@ -8,11 +8,18 @@
 #include <set>
 #include <string>
 #include <map>
+#ifdef _WIN32
+#include <functional>
+#endif
+#include "export_api.h"
 
 typedef int function_void_void_t;
 
+extern "C" {
+RAIA_API void static_function_void_void_delete(int key);
+}
+
 int static_function_void_void_make(std::function<void(void)> value);
-extern "C" void static_function_void_void_delete(int key);
 std::function<void(void)> static_function_void_void_get(int key);
 void static_function_void_void_set(int key, std::function<void(void)> value);
 

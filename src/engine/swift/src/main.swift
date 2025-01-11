@@ -2,8 +2,6 @@
 
 import Foundation
 
-
-
 func main() {
     let renderer = Game.Renderer2D(texWidth: 300, texHeight: 300)
     let window = Game.Window<Game.Renderer2D>(width: 300, height: 300, title: "RandomNoise", renderer: renderer)

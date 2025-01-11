@@ -9,11 +9,16 @@
 #include <string>
 #include <map>
 #include "include/core/SkFontStyle.h"
+#include "export_api.h"
 
 typedef int sk_font_style_t;
 
+extern "C" {
+RAIA_API void static_sk_font_style_delete(int key);
+RAIA_API SkFontStyle * static_sk_font_style_get_ptr(int key);
+}
+
 int static_sk_font_style_make(SkFontStyle value);
-extern "C" void static_sk_font_style_delete(int key);
 SkFontStyle static_sk_font_style_get(int key);
 void static_sk_font_style_set(int key, SkFontStyle value);
 

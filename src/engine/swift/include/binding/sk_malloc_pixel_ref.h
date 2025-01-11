@@ -11,10 +11,11 @@
 #include "include/core/SkMallocPixelRef.h"
 #include "../static/static_sk_pixel_ref.h"
 #include "../static/static_sk_data.h"
+#include "export_api.h"
 
 extern "C" {
-sk_pixel_ref_t SkMallocPixelRef_MakeAllocate(const SkImageInfo *imageInfo, size_t rowBytes);
-sk_pixel_ref_t SkMallocPixelRef_MakeWithData(const SkImageInfo &imageInfo, size_t rowBytes, sk_data_t data);
+RAIA_API sk_pixel_ref_t SkMallocPixelRef_MakeAllocate(const SkImageInfo *imageInfo, size_t rowBytes);
+RAIA_API sk_pixel_ref_t SkMallocPixelRef_MakeWithData(const SkImageInfo &imageInfo, size_t rowBytes, sk_data_t data);
 }
 
 #endif //RAIA_SKIA_SK_MALLOC_PIXEL_REF_H

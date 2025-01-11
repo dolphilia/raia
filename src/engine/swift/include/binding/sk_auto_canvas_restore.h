@@ -6,11 +6,12 @@
 #define RAIA_SKIA_SK_AUTO_CANVAS_RESTORE_H
 
 #include "include/core/SkCanvas.h"
+#include "export_api.h"
 
 extern "C" {
-SkAutoCanvasRestore *SkAutoCanvasRestore_new(SkCanvas * canvas, bool doSave);
-void SkAutoCanvasRestore_delete(SkAutoCanvasRestore *autoCanvasRestore);
-void SkAutoCanvasRestore_restore(SkAutoCanvasRestore *autoCanvasRestore);
+RAIA_API SkAutoCanvasRestore *SkAutoCanvasRestore_new(SkCanvas * canvas, bool doSave);
+RAIA_API void SkAutoCanvasRestore_delete(SkAutoCanvasRestore *autoCanvasRestore);
+RAIA_API void SkAutoCanvasRestore_restore(SkAutoCanvasRestore *autoCanvasRestore);
 }
 
 #endif //RAIA_SKIA_SK_AUTO_CANVAS_RESTORE_H

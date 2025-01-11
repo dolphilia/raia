@@ -6,12 +6,13 @@
 #define RAIA_SKIA_SK_FONT_STYLE_H
 
 #include "include/core/SkFontStyle.h"
+#include "export_api.h"
 
 extern "C" {
-void SkFontStyle_delete(SkFontStyle *font_style);
-int SkFontStyle_weight(SkFontStyle *font_style);
-int SkFontStyle_width(SkFontStyle *font_style);
-SkFontStyle::Slant SkFontStyle_slant(SkFontStyle *font_style);
+RAIA_API void SkFontStyle_delete(SkFontStyle *font_style);
+RAIA_API int SkFontStyle_weight(SkFontStyle *font_style);
+RAIA_API int SkFontStyle_width(SkFontStyle *font_style);
+RAIA_API SkFontStyle::Slant SkFontStyle_slant(SkFontStyle *font_style);
 }
 
 #endif //RAIA_SKIA_SK_FONT_STYLE_H

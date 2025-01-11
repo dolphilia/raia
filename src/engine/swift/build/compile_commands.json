@@ -154,5 +154,17 @@
   "command": ":",
   "file": "/Users/dolphilia/github/raia/src/engine/swift/src/gles/_gles_helper.swift",
   "output": "CMakeFiles/main.dir/src/gles/_gles_helper.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/__skia_namespace.swift",
+  "output": "CMakeFiles/main.dir/src/skia/__skia_namespace.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/_skia_function.swift",
+  "output": "CMakeFiles/main.dir/src/skia/_skia_function.swift.o"
 }
 ]

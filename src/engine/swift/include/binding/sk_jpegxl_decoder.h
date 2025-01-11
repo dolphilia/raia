@@ -12,10 +12,10 @@
 #include "../static/static_sk_codecs_decoder.h"
 
 extern "C" {
-//bool SkJpegxlDecoder_IsIco(const void* ptr, size_t size);
-//int SkJpegxlDecoder_Decode(int static_stream, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
-//int SkJpegxlDecoder_Decode_2(int static_data, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
-//int SkJpegxlDecoder_Decoder();
+//RAIA_API bool SkJpegxlDecoder_IsIco(const void* ptr, size_t size);
+//RAIA_API int SkJpegxlDecoder_Decode(int static_stream, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
+//RAIA_API int SkJpegxlDecoder_Decode_2(int static_data, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
+//RAIA_API int SkJpegxlDecoder_Decoder();
 }
 
 #endif //RAIA_SKIA_SK_JPEGXL_DECODER_H

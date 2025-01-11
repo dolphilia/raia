@@ -7,11 +7,12 @@
 
 #include "include/effects/SkLumaColorFilter.h"
 #include "../static/static_sk_color_filter.h"
+#include "export_api.h"
 
 extern "C" {
-void SkLumaColorFilter_delete(SkLumaColorFilter * lumaColorFilter);
+RAIA_API void SkLumaColorFilter_delete(SkLumaColorFilter * lumaColorFilter);
 // static
-sk_color_filter_t SkLumaColorFilter_Make();
+RAIA_API sk_color_filter_t SkLumaColorFilter_Make();
 }
 
 #endif //RAIA_SKIA_SK_LUMA_COLOR_FILTER_H

@@ -7,11 +7,12 @@
 
 #include "include/effects/SkDashPathEffect.h"
 #include "../static/static_sk_path_effect.h"
+#include "export_api.h"
 
 extern "C" {
-void SkDashPathEffect_delete(SkDashPathEffect * dashPathEffect);
+RAIA_API void SkDashPathEffect_delete(SkDashPathEffect * dashPathEffect);
 // static
-sk_path_effect_t SkDashPathEffect_Make(const SkScalar intervals[], int count, SkScalar phase);
+RAIA_API sk_path_effect_t SkDashPathEffect_Make(const SkScalar intervals[], int count, SkScalar phase);
 }
 
 #endif //RAIA_SKIA_SK_DASH_PATH_EFFECT_H

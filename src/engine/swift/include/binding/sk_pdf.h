@@ -9,9 +9,9 @@
 #include "../static/static_sk_document.h"
 
 extern "C" {
-void SkPDF_SetNodeId(SkCanvas *dst, int nodeID);
-sk_document_t SkPDF_MakeDocument(SkWStream *stream, const SkPDF::Metadata *metadata);
-sk_document_t SkPDF_MakeDocument_2(SkWStream *stream);
+RAIA_API void SkPDF_SetNodeId(SkCanvas *dst, int nodeID);
+RAIA_API sk_document_t SkPDF_MakeDocument(SkWStream *stream, const SkPDF::Metadata *metadata);
+RAIA_API sk_document_t SkPDF_MakeDocument_2(SkWStream *stream);
 }
 
 #endif //RAIA_SKIA_SK_PDF_H

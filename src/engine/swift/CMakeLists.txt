@@ -48,6 +48,9 @@ add_executable(main
     src/gles/_gles_const.swift
     src/gles/_gles_function.swift
     src/gles/_gles_helper.swift
+
+    src/skia/__skia_namespace.swift
+    src/skia/_skia_function.swift
 )
 
-target_link_libraries(main PRIVATE wrapper glfw.3.4 raia_glfw egl GLESv2 raia_gles cglm)
+target_link_libraries(main PRIVATE wrapper glfw.3.4 raia_glfw egl GLESv2 raia_gles cglm reskia)

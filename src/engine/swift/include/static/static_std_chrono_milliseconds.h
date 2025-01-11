@@ -8,11 +8,18 @@
 #include <set>
 #include <string>
 #include <map>
+#ifdef _WIN32
+#include <chrono>
+#endif
+#include "export_api.h"
 
 typedef int chrono_milliseconds_t;
 
+extern "C" {
+RAIA_API void static_chrono_milliseconds_delete(int key);
+}
+
 int static_chrono_milliseconds_make(std::chrono::milliseconds value);
-extern "C" void static_chrono_milliseconds_delete(int key);
 std::chrono::milliseconds static_chrono_milliseconds_get(int key);
 void static_chrono_milliseconds_set(int key, std::chrono::milliseconds value);
 

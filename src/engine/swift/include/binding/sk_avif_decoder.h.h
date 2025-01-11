@@ -10,12 +10,13 @@
 #include "../static/static_sk_data.h"
 #include "../static/static_sk_codec.h"
 #include "../static/static_sk_codecs_decoder.h"
+#include "export_api.h"
 
 extern "C" {
-//bool SkAvifDecoder_IsAvif(const void* ptr, size_t size);
-//int SkAvifDecoder_Decode(int static_stream, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
-//int SkAvifDecoder_Decode_2(int static_data, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
-//int SkAvifDecoder_Decoder();
+//RAIA_API bool SkAvifDecoder_IsAvif(const void* ptr, size_t size);
+//RAIA_API int SkAvifDecoder_Decode(int static_stream, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
+//RAIA_API int SkAvifDecoder_Decode_2(int static_data, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
+//RAIA_API int SkAvifDecoder_Decoder();
 }
 
 #endif //RAIA_SKIA_SK_AVIF_DECODER_H_H

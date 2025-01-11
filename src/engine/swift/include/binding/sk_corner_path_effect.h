@@ -7,12 +7,13 @@
 
 #include "include/effects/SkCornerPathEffect.h"
 #include "../static/static_sk_path_effect.h"
+#include "export_api.h"
 
 extern "C" {
-void SkCornerPathEffect_delete(SkCornerPathEffect * cornerPathEffect);
+RAIA_API void SkCornerPathEffect_delete(SkCornerPathEffect * cornerPathEffect);
 // static
-sk_path_effect_t SkCornerPathEffect_Make(SkScalar radius);
-void SkCornerPathEffect_RegisterFlattenables();
+RAIA_API sk_path_effect_t SkCornerPathEffect_Make(SkScalar radius);
+RAIA_API void SkCornerPathEffect_RegisterFlattenables();
 }
 
 #endif //RAIA_SKIA_SK_CORNER_PATH_EFFECT_H
