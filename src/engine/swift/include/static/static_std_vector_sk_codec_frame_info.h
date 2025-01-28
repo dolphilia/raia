@@ -8,10 +8,10 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-typedef int vector_sk_codec_frame_into_t;
-void static_vector_sk_codec_frame_into_delete(int key);
-void static_vector_sk_codec_frame_into_pop_back(int key);
-void static_vector_sk_codec_frame_into_erase(int key, int index);
+typedef int vector_sk_codec_frame_info_t;
+void static_vector_sk_codec_frame_info_delete(int key);
+void static_vector_sk_codec_frame_info_pop_back(int key);
+void static_vector_sk_codec_frame_info_erase(int key, int index);
 #ifdef __cplusplus
 }
 #endif

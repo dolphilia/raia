@@ -172,5 +172,11 @@
   "command": ":",
   "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/_skia_type.swift",
   "output": "CMakeFiles/main.dir/src/skia/_skia_type.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_colormatrix.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_colormatrix.swift.o"
 }
 ]

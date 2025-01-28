@@ -254,6 +254,7 @@ extern "C" {
 #include "static/static_std_tuple_int_int.h"
 #include "static/static_std_tuple_int_sk_yuva_pixmap_info_data_type.h"
 #include "static/static_std_tuple_sk_image_sk_codec_result.h"
+#include "static/static_std_vector_int_ptr.h"
 #include "static/static_std_vector_sk_codec_frame_info.h"
 #include "static/static_std_vector_sk_scalar.h"
 
