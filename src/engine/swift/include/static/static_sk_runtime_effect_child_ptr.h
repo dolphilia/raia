@@ -5,22 +5,14 @@
 #ifndef RAIA_SKIA_STATIC_SK_RUNTIME_EFFECT_CHILD_PTR_H
 #define RAIA_SKIA_STATIC_SK_RUNTIME_EFFECT_CHILD_PTR_H
 
-#include <set>
-#include <string>
-#include <map>
-#include "include/effects/SkRuntimeEffect.h"
-#include "export_api.h"
-
-typedef int const_sk_runtime_effect_child_ptr_t;
-
+#ifdef __cplusplus
 extern "C" {
-RAIA_API void static_const_sk_runtime_effect_child_ptr_delete(int key);
-RAIA_API const SkRuntimeEffect::ChildPtr * static_const_sk_runtime_effect_child_ptr_get_ptr(int key, int index);
+#endif
+typedef int const_sk_runtime_effect_child_ptr_t;
+void static_const_sk_runtime_effect_child_ptr_delete(int key);
+const void * static_const_sk_runtime_effect_child_ptr_get_ptr(int key, int index); // -> const SkRuntimeEffect::ChildPtr *
+#ifdef __cplusplus
 }
-
-// const
-int static_const_sk_runtime_effect_child_ptr_make(SkSpan<const SkRuntimeEffect::ChildPtr> value);
-SkSpan<const SkRuntimeEffect::ChildPtr> static_const_sk_runtime_effect_child_ptr_get(int key);
-void static_const_sk_runtime_effect_child_ptr_set(int key, SkSpan<const SkRuntimeEffect::ChildPtr> value);
+#endif
 
 #endif //RAIA_SKIA_STATIC_SK_RUNTIME_EFFECT_CHILD_PTR_H

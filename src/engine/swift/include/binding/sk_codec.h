@@ -5,54 +5,52 @@
 #ifndef RAIA_SKIA_SK_CODEC_H
 #define RAIA_SKIA_SK_CODEC_H
 
-#include "include/codec/SkCodec.h"
-#include "../static/static_sk_data.h"
-#include "../static/static_sk_stream.h"
-#include "../static/static_sk_codec.h"
-#include "../static/static_sk_image_info.h"
-#include "../static/static_sk_i_rect.h"
-#include "../static/static_std_tuple_sk_image_sk_codec_result.h"
-#include "../static/static_std_vector_sk_codec_frame_info.h"
-#include "../static/static_sk_i_size.h"
-#include "export_api.h"
-
+#ifdef __cplusplus
 extern "C" {
-RAIA_API void SkCodec_delete(SkCodec* codec);
-RAIA_API sk_image_info_t SkCodec_getInfo(SkCodec* codec);
-RAIA_API sk_i_size_t SkCodec_dimensions(SkCodec* codec);
-RAIA_API sk_i_rect_t SkCodec_bounds(SkCodec* codec);
-RAIA_API const skcms_ICCProfile* SkCodec_getICCProfile(SkCodec* codec);
-RAIA_API SkEncodedOrigin SkCodec_getOrigin(SkCodec* codec);
-RAIA_API sk_i_size_t SkCodec_getScaledDimensions(SkCodec* codec, float desiredScale);
-RAIA_API bool SkCodec_getValidSubset(SkCodec* codec, SkIRect* desiredSubset);
-RAIA_API SkEncodedImageFormat SkCodec_getEncodedFormat(SkCodec* codec);
-RAIA_API SkCodec::Result SkCodec_getPixels(SkCodec* codec, const SkImageInfo* info, void* pixels, size_t rowBytes, const SkCodec::Options* options);
-RAIA_API SkCodec::Result SkCodec_getPixels_2(SkCodec* codec, const SkImageInfo* info, void* pixels, size_t rowBytes);
-RAIA_API SkCodec::Result SkCodec_getPixels_3(SkCodec* codec, const SkPixmap* pm, const SkCodec::Options* opts);
-RAIA_API int SkCodec_getImage(SkCodec* codec, const SkImageInfo* info, const SkCodec::Options* opts);
-RAIA_API int SkCodec_getImage_2(SkCodec* codec);
-RAIA_API bool SkCodec_queryYUVAInfo(SkCodec* codec, const SkYUVAPixmapInfo::SupportedDataTypes* supportedDataTypes, SkYUVAPixmapInfo* yuvaPixmapInfo);
-RAIA_API SkCodec::Result SkCodec_getYUVAPlanes(SkCodec* codec, const SkYUVAPixmaps* yuvaPixmaps);
-RAIA_API SkCodec::Result SkCodec_startIncrementalDecode(SkCodec* codec, const SkImageInfo* dstInfo, void* dst, size_t rowBytes, const SkCodec::Options* options);
-RAIA_API SkCodec::Result SkCodec_startIncrementalDecode_2(SkCodec* codec, const SkImageInfo* dstInfo, void* dst, size_t rowBytes);
-RAIA_API SkCodec::Result SkCodec_incrementalDecode(SkCodec* codec, int* rowsDecoded);
-RAIA_API SkCodec::Result SkCodec_startScanlineDecode(SkCodec* codec, const SkImageInfo* dstInfo, const SkCodec::Options* options);
-RAIA_API SkCodec::Result SkCodec_startScanlineDecode_2(SkCodec* codec, const SkImageInfo* dstInfo);
-RAIA_API int SkCodec_getScanlines(SkCodec* codec, void* dst, int countLines, size_t rowBytes);
-RAIA_API bool SkCodec_skipScanlines(SkCodec* codec, int countLines);
-RAIA_API SkCodec::SkScanlineOrder SkCodec_getScanlineOrder(SkCodec* codec);
-RAIA_API int SkCodec_nextScanline(SkCodec* codec);
-RAIA_API int SkCodec_outputScanline(SkCodec* codec, int inputScanline);
-RAIA_API int SkCodec_getFrameCount(SkCodec* codec);
-RAIA_API bool SkCodec_getFrameInfo(SkCodec* codec, int index, SkCodec::FrameInfo* info);
-RAIA_API int SkCodec_getFrameInfo_2(SkCodec* codec);
-RAIA_API int SkCodec_getRepetitionCount(SkCodec* codec);
+#endif
+
+void SkCodec_delete(void * codec); // (SkCodec* codec)
+int SkCodec_getInfo(void * codec); // (SkCodec* codec) -> sk_image_info_t
+int SkCodec_dimensions(void * codec); // (SkCodec* codec) -> sk_i_size_t
+int SkCodec_bounds(void * codec); // (SkCodec* codec) -> sk_i_rect_t
+const void * SkCodec_getICCProfile(void * codec); // (SkCodec* codec) -> const skcms_ICCProfile*
+int SkCodec_getOrigin(void * codec); // (SkCodec* codec) -> SkEncodedOrigin
+int SkCodec_getScaledDimensions(void * codec, float desiredScale); // (SkCodec* codec, float desiredScale) -> sk_i_size_t
+bool SkCodec_getValidSubset(void * codec, void * desiredSubset); // (SkCodec* codec, SkIRect* desiredSubset) -> bool
+int SkCodec_getEncodedFormat(void * codec); // (SkCodec* codec) -> SkEncodedImageFormat
+int SkCodec_getPixels(void * codec, const void * info, void* pixels, unsigned long rowBytes, const void * options); // (SkCodec* codec, const SkImageInfo* info, void* pixels, size_t rowBytes, const SkCodec::Options* options) -> SkCodec::Result
+int SkCodec_getPixels_2(void * codec, const void * info, void* pixels, unsigned long rowBytes); // (SkCodec* codec, const SkImageInfo* info, void* pixels, size_t rowBytes) -> SkCodec::Result
+int SkCodec_getPixels_3(void * codec, const void * pm, const void * opts); // (SkCodec* codec, const SkPixmap* pm, const SkCodec::Options* opts) -> SkCodec::Result
+int SkCodec_getImage(void * codec, const void * info, const void * opts); // (SkCodec* codec, const SkImageInfo* info, const SkCodec::Options* opts) -> int
+int SkCodec_getImage_2(void * codec); // (SkCodec* codec) -> int
+bool SkCodec_queryYUVAInfo(void * codec, const void * supportedDataTypes, void * yuvaPixmapInfo); // (SkCodec* codec, const SkYUVAPixmapInfo::SupportedDataTypes* supportedDataTypes, SkYUVAPixmapInfo* yuvaPixmapInfo) -> bool
+int SkCodec_getYUVAPlanes(void * codec, const void * yuvaPixmaps); // (SkCodec* codec, const SkYUVAPixmaps* yuvaPixmaps) -> SkCodec::Result
+int SkCodec_startIncrementalDecode(void * codec, const void * dstInfo, void* dst, unsigned long rowBytes, const void * options); // (SkCodec* codec, const SkImageInfo* dstInfo, void* dst, size_t rowBytes, const SkCodec::Options* options) -> SkCodec::Result
+int SkCodec_startIncrementalDecode_2(void * codec, const void * dstInfo, void* dst, unsigned long rowBytes); // (SkCodec* codec, const SkImageInfo* dstInfo, void* dst, size_t rowBytes) -> SkCodec::Result
+int SkCodec_incrementalDecode(void * codec, int* rowsDecoded); // (SkCodec* codec, int* rowsDecoded) -> SkCodec::Result
+int SkCodec_startScanlineDecode(void * codec, const void * dstInfo, const void * options); // (SkCodec* codec, const SkImageInfo* dstInfo, const SkCodec::Options* options) -> SkCodec::Result
+int SkCodec_startScanlineDecode_2(void * codec, const void * dstInfo); // (SkCodec* codec, const SkImageInfo* dstInfo) -> SkCodec::Result
+int SkCodec_getScanlines(void * codec, void* dst, int countLines, unsigned long rowBytes); // (SkCodec* codec, void* dst, int countLines, size_t rowBytes) -> int
+bool SkCodec_skipScanlines(void * codec, int countLines); // (SkCodec* codec, int countLines) -> bool
+int SkCodec_getScanlineOrder(void * codec); // (SkCodec* codec) -> SkCodec::SkScanlineOrder
+int SkCodec_nextScanline(void * codec); // (SkCodec* codec) -> int
+int SkCodec_outputScanline(void * codec, int inputScanline); // (SkCodec* codec, int inputScanline) -> int
+int SkCodec_getFrameCount(void * codec); // (SkCodec* codec) -> int
+bool SkCodec_getFrameInfo(void * codec, int index, void * info); // (SkCodec* codec, int index, SkCodec::FrameInfo* info) -> bool
+int SkCodec_getFrameInfo_2(void * codec); // (SkCodec* codec) -> int
+int SkCodec_getRepetitionCount(void * codec); // (SkCodec* codec) -> int
+
 // static
-RAIA_API size_t SkCodec_MinBufferedBytesNeeded();
-RAIA_API const char* SkCodec_ResultToString(SkCodec::Result result);
-RAIA_API sk_codec_t SkCodec_MakeFromStream(sk_stream_t stream, SkCodec::Result* result, SkPngChunkReader* pngChunkReader, SkCodec::SelectionPolicy selectionPolicy);
-RAIA_API sk_codec_t SkCodec_MakeFromData(sk_stream_t stream, SkPngChunkReader* pngChunkReader);
+
+unsigned long SkCodec_MinBufferedBytesNeeded(); // () -> size_t
+const char* SkCodec_ResultToString(int result); // (SkCodec::Result result) -> const char*
+int SkCodec_MakeFromStream(int stream, void * result, void * pngChunkReader, int selectionPolicy); // (sk_stream_t stream, SkCodec::Result* result, SkPngChunkReader* pngChunkReader, SkCodec::SelectionPolicy selectionPolicy) -> sk_codec_t
+int SkCodec_MakeFromData(int stream, void * pngChunkReader); // (sk_stream_t stream, SkPngChunkReader* pngChunkReader) -> sk_codec_t
+
 //void SkCodec_Register(bool (*peek)(const void*, size_t), std::unique_ptr<SkCodec> (*make)(std::unique_ptr<SkStream>, SkCodec::Result*));
+
+#ifdef __cplusplus
 }
+#endif
 
 #endif //RAIA_SKIA_SK_CODEC_H

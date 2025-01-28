@@ -9,7 +9,7 @@
 extern "C" {
 #endif
 
-bool SkAlphaType_SkAlphaTypeIsOpaque(int at);
+bool SkAlphaType_SkAlphaTypeIsOpaque(int at); // (SkAlphaType at) -> bool
 
 #ifdef __cplusplus
 }

@@ -5,21 +5,14 @@
 #ifndef RAIA_SKIA_STATIC_SK_SURFACE_PROPS_H
 #define RAIA_SKIA_STATIC_SK_SURFACE_PROPS_H
 
-#include <set>
-#include <string>
-#include <map>
-#include "include/core/SkSurfaceProps.h"
-#include "export_api.h"
-
-typedef int sk_surface_props_t;
-
+#ifdef __cplusplus
 extern "C" {
-RAIA_API void static_sk_surface_props_delete(int key);
-RAIA_API SkSurfaceProps * static_sk_surface_props_get_ptr(int key);
+#endif
+typedef int sk_surface_props_t;
+void static_sk_surface_props_delete(int key);
+void * static_sk_surface_props_get_ptr(int key); // -> SkSurfaceProps *
+#ifdef __cplusplus
 }
-
-int static_sk_surface_props_make(SkSurfaceProps value);
-SkSurfaceProps static_sk_surface_props_get(int key);
-void static_sk_surface_props_set(int key, SkSurfaceProps value);
+#endif
 
 #endif //RAIA_SKIA_STATIC_SK_SURFACE_PROPS_H

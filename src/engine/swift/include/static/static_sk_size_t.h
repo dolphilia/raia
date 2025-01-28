@@ -5,20 +5,17 @@
 #ifndef RAIA_SKIA_STATIC_SK_SIZE_T_H
 #define RAIA_SKIA_STATIC_SK_SIZE_T_H
 
-#include <set>
-#include <map>
-#include "include/core/SkRect.h"
-#include "export_api.h"
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef int sk_size_t;
 
-extern "C" {
-RAIA_API void static_sk_size_delete(int key);
-RAIA_API SkSize * static_sk_size_get_ptr(int key);
-}
+void static_sk_size_delete(int key);
+void * static_sk_size_get_ptr(int key); // -> SkSize *
 
-int static_sk_size_make(SkSize value);
-SkSize static_sk_size_get(int key);
-void static_sk_size_set(int key, SkSize value);
+#ifdef __cplusplus
+}
+#endif
 
 #endif //RAIA_SKIA_STATIC_SK_SIZE_T_H

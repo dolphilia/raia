@@ -5,19 +5,14 @@
 #ifndef RAIA_SKIA_STATIC_SK_CUBIC_RESAMPLER_H
 #define RAIA_SKIA_STATIC_SK_CUBIC_RESAMPLER_H
 
-#include <set>
-#include <map>
-#include "include/core/SkSamplingOptions.h"
-#include "export_api.h"
-
-typedef int sk_cubic_resampler_t;
-
+#ifdef __cplusplus
 extern "C" {
-RAIA_API void static_sk_cubic_resampler_delete(int key);
-RAIA_API SkCubicResampler * static_sk_cubic_resampler_get_ptr(int key);
+#endif
+typedef int sk_cubic_resampler_t;
+void static_sk_cubic_resampler_delete(int key);
+void * static_sk_cubic_resampler_get_ptr(int key); // -> SkCubicResampler *
+#ifdef __cplusplus
 }
-
-int static_sk_cubic_resampler_make(SkCubicResampler value);
-SkCubicResampler static_sk_cubic_resampler_get(int key);
+#endif
 
 #endif //RAIA_SKIA_STATIC_SK_CUBIC_RESAMPLER_H

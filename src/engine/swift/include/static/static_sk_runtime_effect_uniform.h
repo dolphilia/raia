@@ -5,22 +5,14 @@
 #ifndef RAIA_SKIA_STATIC_SK_RUNTIME_EFFECT_UNIFORM_H
 #define RAIA_SKIA_STATIC_SK_RUNTIME_EFFECT_UNIFORM_H
 
-#include <set>
-#include <string>
-#include <map>
-#include "include/effects/SkRuntimeEffect.h"
-#include "export_api.h"
-
-typedef int const_sk_runtime_effect_uniform_t;
-
+#ifdef __cplusplus
 extern "C" {
-RAIA_API void static_const_sk_runtime_effect_uniform_delete(int key);
-RAIA_API const SkRuntimeEffect::Uniform * static_const_sk_runtime_effect_uniform_get(int key, int index);
+#endif
+typedef int const_sk_runtime_effect_uniform_t;
+void static_const_sk_runtime_effect_uniform_delete(int key);
+const void * static_const_sk_runtime_effect_uniform_get(int key, int index); // -> const SkRuntimeEffect::Uniform *
+#ifdef __cplusplus
 }
-
-// const
-int static_const_sk_runtime_effect_uniform_make(SkSpan<const SkRuntimeEffect::Uniform> value);
-SkSpan<const SkRuntimeEffect::Uniform> static_const_sk_runtime_effect_uniform_get(int key);
-void static_const_sk_runtime_effect_uniform_set(int key, SkSpan<const SkRuntimeEffect::Uniform> value);
+#endif
 
 #endif //RAIA_SKIA_STATIC_SK_RUNTIME_EFFECT_UNIFORM_H

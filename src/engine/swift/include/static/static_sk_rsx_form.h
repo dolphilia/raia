@@ -5,20 +5,14 @@
 #ifndef RAIA_SKIA_STATIC_SK_RSX_FORM_H
 #define RAIA_SKIA_STATIC_SK_RSX_FORM_H
 
-#include <set>
-#include <map>
-#include "include/core/SkRSXform.h"
-#include "export_api.h"
-
-typedef int sk_rsx_form_t;
-
+#ifdef __cplusplus
 extern "C" {
-RAIA_API void static_sk_rsx_form_delete(int key);
-RAIA_API SkRSXform * static_sk_rsx_form_get_ptr(int key);
+#endif
+typedef int sk_rsx_form_t;
+void static_sk_rsx_form_delete(int key);
+void * static_sk_rsx_form_get_ptr(int key); // -> SkRSXform *
+#ifdef __cplusplus
 }
-
-int static_sk_rsx_form_make(SkRSXform value);
-SkRSXform static_sk_rsx_form_get(int key);
-void static_sk_rsx_form_set(int key, SkRSXform value);
+#endif
 
 #endif //RAIA_SKIA_STATIC_SK_RSX_FORM_H

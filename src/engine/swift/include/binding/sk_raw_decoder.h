@@ -12,10 +12,10 @@
 #include "../static/static_sk_codecs_decoder.h"
 
 extern "C" {
-RAIA_API bool SkRawDecoder_IsRaw(const void* ptr, size_t size);
-RAIA_API sk_codec_t SkRawDecoder_Decode(int static_stream, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
-RAIA_API sk_codec_t SkRawDecoder_Decode_2(int static_data, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
-RAIA_API sk_codecs_decoder_t SkRawDecoder_Decoder();
+bool SkRawDecoder_IsRaw(const void* ptr, size_t size);
+sk_codec_t SkRawDecoder_Decode(int static_stream, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
+sk_codec_t SkRawDecoder_Decode_2(int static_data, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
+sk_codecs_decoder_t SkRawDecoder_Decoder();
 }
 
 #endif //RAIA_SKIA_SK_RAW_DECODER_H

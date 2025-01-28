@@ -5,30 +5,33 @@
 #ifndef RAIA_SKIA_SK_TEXT_BLOB_H
 #define RAIA_SKIA_SK_TEXT_BLOB_H
 
-#include "include/core/SkTextBlob.h"
-#include "../static/static_sk_data.h"
-#include "../static/static_sk_text_blob.h"
-#include "export_api.h"
-
+#ifdef __cplusplus
 extern "C" {
-RAIA_API void SkTextBlob_delete(SkTextBlob *text_blob);
-RAIA_API const SkRect * SkTextBlob_bounds(SkTextBlob *text_blob);
-RAIA_API uint32_t SkTextBlob_uniqueID(SkTextBlob *text_blob);
-RAIA_API int SkTextBlob_getIntercepts(SkTextBlob *text_blob, const SkScalar bounds[2], SkScalar intervals[], const SkPaint *paint);
-RAIA_API size_t SkTextBlob_serialize(SkTextBlob *text_blob, const SkSerialProcs *procs, void *memory, size_t memory_size);
-RAIA_API sk_data_t SkTextBlob_serialize_2(SkTextBlob *text_blob, const SkSerialProcs *procs);
-RAIA_API bool SkTextBlob_unique(SkTextBlob *text_blob);
-RAIA_API void SkTextBlob_ref(SkTextBlob *text_blob);
-RAIA_API void SkTextBlob_unref(SkTextBlob *text_blob);
-RAIA_API void SkTextBlob_deref(SkTextBlob *text_blob);
-RAIA_API bool SkTextBlob_refCntGreaterThan(SkTextBlob *text_blob, int32_t threadIsolatedTestCnt);
+#endif
+
+void SkTextBlob_delete(void *text_blob); // (SkTextBlob *text_blob)
+const void * SkTextBlob_bounds(void *text_blob); // (SkTextBlob *text_blob) -> const SkRect *
+unsigned int SkTextBlob_uniqueID(void *text_blob); // (SkTextBlob *text_blob) -> uint32_t
+int SkTextBlob_getIntercepts(void *text_blob, const void * bounds, void * intervals, const void *paint); // (SkTextBlob *text_blob, const SkScalar bounds[2], SkScalar intervals[], const SkPaint *paint) -> int
+unsigned long SkTextBlob_serialize(void *text_blob, const void *procs, void *memory, unsigned long memory_size); // (SkTextBlob *text_blob, const SkSerialProcs *procs, void *memory, size_t memory_size) -> size_t
+int SkTextBlob_serialize_2(void *text_blob, const void *procs); // (SkTextBlob *text_blob, const SkSerialProcs *procs) -> sk_data_t
+bool SkTextBlob_unique(void *text_blob); // (SkTextBlob *text_blob) -> bool
+void SkTextBlob_ref(void *text_blob); // (SkTextBlob *text_blob)
+void SkTextBlob_unref(void *text_blob); // (SkTextBlob *text_blob)
+void SkTextBlob_deref(void *text_blob); // (SkTextBlob *text_blob)
+bool SkTextBlob_refCntGreaterThan(void *text_blob, int threadIsolatedTestCnt); // (SkTextBlob *text_blob, int32_t threadIsolatedTestCnt) -> bool
+
 // static
-RAIA_API sk_text_blob_t SkTextBlob_MakeFromText(const void *text, size_t byteLength, const SkFont *font, SkTextEncoding encoding);
-RAIA_API sk_text_blob_t SkTextBlob_MakeFromString(const char *string, const SkFont *font, SkTextEncoding encoding);
-RAIA_API sk_text_blob_t SkTextBlob_MakeFromPosTextH(const void *text, size_t byteLength, const SkScalar xpos[], SkScalar constY, const SkFont *font, SkTextEncoding encoding);
-RAIA_API sk_text_blob_t SkTextBlob_MakeFromPosText(const void *text, size_t byteLength, const SkPoint pos[], const SkFont *font, SkTextEncoding encoding);
-RAIA_API sk_text_blob_t SkTextBlob_MakeFromRSXform(const void *text, size_t byteLength, const SkRSXform xform[], const SkFont *font, SkTextEncoding encoding);
-RAIA_API sk_text_blob_t SkTextBlob_Deserialize(const void *data, size_t size, const SkDeserialProcs *procs);
+
+int SkTextBlob_MakeFromText(const void *text, unsigned long byteLength, const void *font, int encoding); // (const void *text, size_t byteLength, const SkFont *font, SkTextEncoding encoding) -> sk_text_blob_t
+int SkTextBlob_MakeFromString(const char *string, const void *font, int encoding); // (const char *string, const SkFont *font, SkTextEncoding encoding) -> sk_text_blob_t
+int SkTextBlob_MakeFromPosTextH(const void *text, unsigned long byteLength, const void * xpos, float constY, const void *font, int encoding); // (const void *text, size_t byteLength, const SkScalar xpos[], SkScalar constY, const SkFont *font, SkTextEncoding encoding) -> sk_text_blob_t
+int SkTextBlob_MakeFromPosText(const void *text, unsigned long byteLength, const void * pos, const void *font, int encoding); // (const void *text, size_t byteLength, const SkPoint pos[], const SkFont *font, SkTextEncoding encoding) -> sk_text_blob_t
+int SkTextBlob_MakeFromRSXform(const void *text, unsigned long byteLength, const void * xform, const void *font, int encoding); // (const void *text, size_t byteLength, const SkRSXform xform[], const SkFont *font, SkTextEncoding encoding) -> sk_text_blob_t
+int SkTextBlob_Deserialize(const void *data, unsigned long size, const void *procs); // (const void *data, size_t size, const SkDeserialProcs *procs) -> sk_text_blob_t
+
+#ifdef __cplusplus
 }
+#endif
 
 #endif //RAIA_SKIA_SK_TEXT_BLOB_H

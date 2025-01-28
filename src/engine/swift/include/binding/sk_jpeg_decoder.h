@@ -10,13 +10,12 @@
 #include "../static/static_sk_data.h"
 #include "../static/static_sk_codec.h"
 #include "../static/static_sk_codecs_decoder.h"
-#include "export_api.h"
 
 extern "C" {
-RAIA_API bool SkJpegDecoder_IsJpeg(const void* ptr, size_t size);
-RAIA_API sk_codec_t SkJpegDecoder_Decode(int static_stream, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
-RAIA_API sk_codec_t SkJpegDecoder_Decode_2(int static_data, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
-RAIA_API sk_codecs_decoder_t SkJpegDecoder_Decoder();
+bool SkJpegDecoder_IsJpeg(const void* ptr, size_t size);
+sk_codec_t SkJpegDecoder_Decode(int static_stream, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
+sk_codec_t SkJpegDecoder_Decode_2(int static_data, SkCodec::Result* result, SkCodecs::DecodeContext decodeContext);
+sk_codecs_decoder_t SkJpegDecoder_Decoder();
 }
 
 #endif //RAIA_SKIA_SK_JPEG_DECODER_H

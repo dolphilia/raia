@@ -12,8 +12,8 @@
 #include "include/ports/SkTypeface_mac.h"
 #include <CoreText/CoreText.h>
 extern "C" {
-RAIA_API sk_typeface_t Mac_SkMakeTypefaceFromCTFont(CTFontRef fontRef);
-RAIA_API CTFontRef Mac_SkTypeface_GetCTFontRef(const SkTypeface *face);
+sk_typeface_t Mac_SkMakeTypefaceFromCTFont(CTFontRef fontRef);
+CTFontRef Mac_SkTypeface_GetCTFontRef(const SkTypeface *face);
 }
 #endif
 

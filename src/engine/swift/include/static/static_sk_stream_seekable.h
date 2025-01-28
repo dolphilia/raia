@@ -5,21 +5,14 @@
 #ifndef RAIA_SKIA_STATIC_SK_STREAM_SEEKABLE_H
 #define RAIA_SKIA_STATIC_SK_STREAM_SEEKABLE_H
 
-#include <set>
-#include <string>
-#include <map>
-#include "include/core/SkStream.h"
-#include "export_api.h"
-
-typedef int sk_stream_seekable_t;
-
+#ifdef __cplusplus
 extern "C" {
-RAIA_API void static_sk_stream_seekable_delete(int key);
-RAIA_API SkStreamSeekable *static_sk_stream_seekable_get(int key);
+#endif
+typedef int sk_stream_seekable_t;
+void static_sk_stream_seekable_delete(int key);
+void *static_sk_stream_seekable_get(int key); // -> SkStreamSeekable *
+#ifdef __cplusplus
 }
-
-int static_sk_stream_seekable_make(std::unique_ptr<SkStreamSeekable> value);
-void static_sk_stream_seekable_set(int key, std::unique_ptr<SkStreamSeekable> value);
-std::unique_ptr<SkStreamSeekable> static_sk_stream_seekable_move(int key);
+#endif
 
 #endif //RAIA_SKIA_STATIC_SK_STREAM_SEEKABLE_H

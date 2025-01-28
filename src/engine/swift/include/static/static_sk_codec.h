@@ -5,21 +5,17 @@
 #ifndef RAIA_SKIA_STATIC_SK_CODEC_H
 #define RAIA_SKIA_STATIC_SK_CODEC_H
 
-#include <set>
-#include <string>
-#include <map>
-#include "include/codec/SkCodec.h"
-#include "export_api.h"
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef int sk_codec_t;
 
-extern "C" {
-RAIA_API void static_sk_codec_delete(int key);
-RAIA_API SkCodec *static_sk_codec_get(int key);
-}
+void static_sk_codec_delete(int key);
+void *static_sk_codec_get(int key); // -> SkCodec *
 
-int static_sk_codec_make(std::unique_ptr<SkCodec> value);
-void static_sk_codec_set(int key, std::unique_ptr<SkCodec> value);
-std::unique_ptr<SkCodec> static_sk_codec_move(int key);
+#ifdef __cplusplus
+}
+#endif
 
 #endif //RAIA_SKIA_STATIC_SK_CODEC_H

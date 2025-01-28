@@ -5,66 +5,69 @@
 #ifndef RAIA_SKIA_SK_FONT_H
 #define RAIA_SKIA_SK_FONT_H
 
-#include "include/core/SkFont.h"
-#include "../static/static_sk_typeface.h"
-#include "../static/static_std_vector_sk_scalar.h"
-#include "../static/static_sk_font.h"
-#include "../static/static_sk_point.h"
-#include "export_api.h"
-
+#ifdef __cplusplus
 extern "C" {
-RAIA_API SkFont *SkFont_new();
-RAIA_API SkFont *SkFont_new_2(sk_typeface_t typeface, SkScalar size);
-RAIA_API SkFont *SkFont_new_3(sk_typeface_t typeface);
-RAIA_API SkFont *SkFont_new_4(sk_typeface_t typeface, SkScalar size, SkScalar scaleX, SkScalar skewX);
-RAIA_API void SkFont_delete(SkFont *font);
-RAIA_API bool SkFont_isForceAutoHinting(SkFont *font);
-RAIA_API bool SkFont_isEmbeddedBitmaps(SkFont *font);
-RAIA_API bool SkFont_isSubpixel(SkFont *font);
-RAIA_API bool SkFont_isLinearMetrics(SkFont *font);
-RAIA_API bool SkFont_isEmbolden(SkFont *font);
-RAIA_API bool SkFont_isBaselineSnap(SkFont *font);
-RAIA_API void SkFont_setForceAutoHinting(SkFont *font, bool forceAutoHinting);
-RAIA_API void SkFont_setEmbeddedBitmaps(SkFont *font, bool embeddedBitmaps);
-RAIA_API void SkFont_setSubpixel(SkFont *font, bool subpixel);
-RAIA_API void SkFont_setLinearMetrics(SkFont *font, bool linearMetrics);
-RAIA_API void SkFont_setEmbolden(SkFont *font, bool embolden);
-RAIA_API void SkFont_setBaselineSnap(SkFont *font, bool baselineSnap);
-RAIA_API SkFont::Edging SkFont_getEdging(SkFont *font);
-RAIA_API void SkFont_setEdging(SkFont *font, SkFont::Edging edging);
-RAIA_API void SkFont_setHinting(SkFont *font, SkFontHinting hintingLevel);
-RAIA_API SkFontHinting SkFont_getHinting(SkFont *font);
-RAIA_API sk_font_t SkFont_makeWithSize(SkFont *font, SkScalar size);
-RAIA_API SkTypeface * SkFont_getTypeface(SkFont *font);
-RAIA_API SkScalar SkFont_getSize(SkFont *font);
-RAIA_API SkScalar SkFont_getScaleX(SkFont *font);
-RAIA_API SkScalar SkFont_getSkewX(SkFont *font);
-RAIA_API sk_typeface_t SkFont_refTypeface(SkFont *font);
-RAIA_API void SkFont_setTypeface(SkFont *font, sk_typeface_t typeface);
-RAIA_API void SkFont_setSize(SkFont *font, SkScalar textSize);
-RAIA_API void SkFont_setScaleX(SkFont *font, SkScalar scaleX);
-RAIA_API void SkFont_setSkewX(SkFont *font, SkScalar skewX);
-RAIA_API int SkFont_textToGlyphs(SkFont *font, const void *text, size_t byteLength, SkTextEncoding encoding, SkGlyphID glyphs[], int maxGlyphCount);
-RAIA_API SkGlyphID SkFont_unicharToGlyph(SkFont *font, SkUnichar uni);
-RAIA_API void SkFont_unicharsToGlyphs(SkFont *font, const SkUnichar uni[], int count, SkGlyphID glyphs[]);
-RAIA_API int SkFont_countText(SkFont *font, const void *text, size_t byteLength, SkTextEncoding encoding);
-RAIA_API SkScalar SkFont_measureText(SkFont *font, const void *text, size_t byteLength, SkTextEncoding encoding, SkRect *bounds);
-RAIA_API SkScalar SkFont_measureText_2(SkFont *font, const void *text, size_t byteLength, SkTextEncoding encoding, SkRect *bounds, const SkPaint *paint);
-RAIA_API void SkFont_getWidths(SkFont *font, const SkGlyphID glyphs[], int count, SkScalar widths[], SkRect bounds[]);
-// @TODO
-RAIA_API void SkFont_getWidths_2(SkFont *font, const SkGlyphID glyphs[], int count, SkScalar widths[], std::nullptr_t ptr);
-RAIA_API void SkFont_getWidths_3(SkFont *font, const SkGlyphID glyphs[], int count, SkScalar widths[]);
-RAIA_API void SkFont_getWidthsBounds(SkFont *font, const SkGlyphID glyphs[], int count, SkScalar widths[], SkRect bounds[], const SkPaint *paint);
-RAIA_API void SkFont_getBounds(SkFont *font, const SkGlyphID glyphs[], int count, SkRect bounds[], const SkPaint *paint);
-RAIA_API void SkFont_getPos(SkFont *font, const SkGlyphID glyphs[], int count, SkPoint pos[], sk_point_t origin);
-RAIA_API void SkFont_getXPos(SkFont *font, const SkGlyphID glyphs[], int count, SkScalar xpos[], SkScalar origin);
-RAIA_API int SkFont_getIntercepts(SkFont *font, const SkGlyphID glyphs[], int count, const SkPoint pos[], SkScalar top, SkScalar bottom, const SkPaint *paint);
-RAIA_API bool SkFont_getPath(SkFont *font, SkGlyphID glyphID, SkPath *path);
-// @TODO
-RAIA_API void SkFont_getPaths(SkFont *font, const SkGlyphID glyphIDs[], int count, void(*glyphPathProc)(const SkPath *pathOrNull, const SkMatrix &mx, void *ctx), void *ctx);
-RAIA_API SkScalar SkFont_getMetrics(SkFont *font, SkFontMetrics *metrics);
-RAIA_API SkScalar SkFont_getSpacing(SkFont *font);
-RAIA_API void SkFont_dump(SkFont *font);
+#endif
+
+void *SkFont_new(); // () -> SkFont *
+void *SkFont_new_2(int typeface, float size); // (sk_typeface_t typeface, SkScalar size) -> SkFont *
+void *SkFont_new_3(int typeface); // (sk_typeface_t typeface) -> SkFont *
+void *SkFont_new_4(int typeface, float size, float scaleX, float skewX); // (sk_typeface_t typeface, SkScalar size, SkScalar scaleX, SkScalar skewX) -> SkFont *
+void SkFont_delete(void *font); // (SkFont *font)
+bool SkFont_isForceAutoHinting(void *font); // (SkFont *font) -> bool
+bool SkFont_isEmbeddedBitmaps(void *font); // (SkFont *font) -> bool
+bool SkFont_isSubpixel(void *font); // (SkFont *font) -> bool
+bool SkFont_isLinearMetrics(void *font); // (SkFont *font) -> bool
+bool SkFont_isEmbolden(void *font); // (SkFont *font) -> bool
+bool SkFont_isBaselineSnap(void *font); // (SkFont *font) -> bool
+void SkFont_setForceAutoHinting(void *font, bool forceAutoHinting); // (SkFont *font, bool forceAutoHinting)
+void SkFont_setEmbeddedBitmaps(void *font, bool embeddedBitmaps); // (SkFont *font, bool embeddedBitmaps)
+void SkFont_setSubpixel(void *font, bool subpixel); // (SkFont *font, bool subpixel)
+void SkFont_setLinearMetrics(void *font, bool linearMetrics); // (SkFont *font, bool linearMetrics)
+void SkFont_setEmbolden(void *font, bool embolden); // (SkFont *font, bool embolden)
+void SkFont_setBaselineSnap(void *font, bool baselineSnap); // (SkFont *font, bool baselineSnap)
+int SkFont_getEdging(void *font); // (SkFont *font) -> SkFont::Edging
+void SkFont_setEdging(void *font, int edging); // (SkFont *font, SkFont::Edging edging)
+void SkFont_setHinting(void *font, int hintingLevel); // (SkFont *font, SkFontHinting hintingLevel)
+int SkFont_getHinting(void *font); // (SkFont *font) -> SkFontHinting
+int SkFont_makeWithSize(void *font, float size); // (SkFont *font, SkScalar size) -> sk_font_t
+void * SkFont_getTypeface(void *font); // (SkFont *font) -> SkTypeface *
+float SkFont_getSize(void *font); // (SkFont *font) -> SkScalar
+float SkFont_getScaleX(void *font); // (SkFont *font) -> SkScalar
+float SkFont_getSkewX(void *font); // (SkFont *font) -> SkScalar
+int SkFont_refTypeface(void *font); // (SkFont *font) -> sk_typeface_t
+
+// TODO
+//void SkFont_setTypeface(void *font, sk_typeface_t typeface); // (SkFont *font, sk_typeface_t typeface)
+void SkFont_setSize(void *font, float textSize); // (SkFont *font, SkScalar textSize)
+void SkFont_setScaleX(void *font, float scaleX); // (SkFont *font, SkScalar scaleX)
+void SkFont_setSkewX(void *font, float skewX); // (SkFont *font, SkScalar skewX)
+int SkFont_textToGlyphs(void *font, const void *text, unsigned long byteLength, int encoding, void * glyphs, int maxGlyphCount); // (SkFont *font, const void *text, size_t byteLength, SkTextEncoding encoding, SkGlyphID glyphs[], int maxGlyphCount) -> int
+unsigned short SkFont_unicharToGlyph(void *font, int uni); // (SkFont *font, SkUnichar uni) -> SkGlyphID
+void SkFont_unicharsToGlyphs(void *font, const void * uni, int count, void * glyphs); // (SkFont *font, const SkUnichar uni[], int count, SkGlyphID glyphs[])
+int SkFont_countText(void *font, const void *text, unsigned long byteLength, int encoding); // (SkFont *font, const void *text, size_t byteLength, SkTextEncoding encoding) -> int
+float SkFont_measureText(void *font, const void *text, unsigned long byteLength, int encoding, void *bounds); // (SkFont *font, const void *text, size_t byteLength, SkTextEncoding encoding, SkRect *bounds) -> SkScalar
+float SkFont_measureText_2(void *font, const void *text, unsigned long byteLength, int encoding, void *bounds, const void *paint); // (SkFont *font, const void *text, size_t byteLength, SkTextEncoding encoding, SkRect *bounds, const SkPaint *paint) -> SkScalar
+void SkFont_getWidths(void *font, const void * glyphs, int count, void * widths, void * bounds); // (SkFont *font, const SkGlyphID glyphs[], int count, SkScalar widths[], SkRect bounds[])
+
+// TODO
+//void SkFont_getWidths_2(void *font, const void * glyphs, int count, void * widths, std::nullptr_t ptr); // (SkFont *font, const SkGlyphID glyphs[], int count, SkScalar widths[], std::nullptr_t ptr)
+void SkFont_getWidths_3(void *font, const void * glyphs, int count, void * widths); // (SkFont *font, const SkGlyphID glyphs[], int count, SkScalar widths[])
+void SkFont_getWidthsBounds(void *font, const void * glyphs, int count, void * widths, void * bounds, const void *paint); // (SkFont *font, const SkGlyphID glyphs[], int count, SkScalar widths[], SkRect bounds[], const SkPaint *paint)
+void SkFont_getBounds(void *font, const void * glyphs, int count, void * bounds, const void *paint); // (SkFont *font, const SkGlyphID glyphs[], int count, SkRect bounds[], const SkPaint *paint)
+void SkFont_getPos(void *font, const void * glyphs, int count, void * pos, int origin); // (SkFont *font, const SkGlyphID glyphs[], int count, SkPoint pos[], sk_point_t origin)
+void SkFont_getXPos(void *font, const void * glyphs, int count, void * xpos, float origin); // (SkFont *font, const SkGlyphID glyphs[], int count, SkScalar xpos[], SkScalar origin)
+int SkFont_getIntercepts(void *font, const void * glyphs, int count, const void * pos, float top, float bottom, const void *paint); // (SkFont *font, const SkGlyphID glyphs[], int count, const SkPoint pos[], SkScalar top, SkScalar bottom, const SkPaint *paint) -> int
+bool SkFont_getPath(void *font, unsigned short glyphID, void*path); // (SkFont *font, SkGlyphID glyphID, SkPath *path) -> bool
+
+// TODO
+//void SkFont_getPaths(void *font, const void * glyphIDs, int count, void(*glyphPathProc)(const SkPath *pathOrNull, const SkMatrix &mx, void *ctx), void *ctx); // (SkFont *font, const SkGlyphID glyphIDs[], int count, void(*glyphPathProc)(const SkPath *pathOrNull, const SkMatrix &mx, void *ctx), void *ctx)
+float SkFont_getMetrics(void *font, void * metrics); // (SkFont *font, SkFontMetrics *metrics) -> SkScalar
+float SkFont_getSpacing(void *font); // (SkFont *font) -> SkScalar
+void SkFont_dump(void *font); // (SkFont *font)
+
+#ifdef __cplusplus
 }
+#endif
 
 #endif //RAIA_SKIA_SK_FONT_H

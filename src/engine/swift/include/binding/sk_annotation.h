@@ -5,14 +5,16 @@
 #ifndef RAIA_SKIA_SK_ANNOTATION_H
 #define RAIA_SKIA_SK_ANNOTATION_H
 
-#include "include/core/SkCanvas.h"
-#include "include/core/SkAnnotation.h"
-#include "export_api.h"
-
+#ifdef __cplusplus
 extern "C" {
-RAIA_API void SkAnnotation_SkAnnotateLinkToDestination(SkCanvas *canvas, const SkRect *rect, SkData *data);
-RAIA_API void SkAnnotation_SkAnnotateNamedDestination(SkCanvas *canvas, const SkPoint *point, SkData *data);
-RAIA_API void SkAnnotation_SkAnnotateRectWithURL(SkCanvas *canvas, const SkRect *rect, SkData *data);
+#endif
+
+void SkAnnotation_SkAnnotateLinkToDestination(void *canvas, const void *rect, void *data); // (SkCanvas *canvas, const SkRect *rect, SkData *data)
+void SkAnnotation_SkAnnotateNamedDestination(void *canvas, const void *point, void *data); // (SkCanvas *canvas, const SkPoint *point, SkData *data)
+void SkAnnotation_SkAnnotateRectWithURL(void *canvas, const void *rect, void *data); // (SkCanvas *canvas, const SkRect *rect, SkData *data)
+
+#ifdef __cplusplus
 }
+#endif
 
 #endif //RAIA_SKIA_SK_ANNOTATION_H
