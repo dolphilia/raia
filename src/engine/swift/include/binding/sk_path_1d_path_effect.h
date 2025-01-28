@@ -5,14 +5,19 @@
 #ifndef RAIA_SKIA_SK_PATH_1D_PATH_EFFECT_H
 #define RAIA_SKIA_SK_PATH_1D_PATH_EFFECT_H
 
-#include "include/effects/Sk1DPathEffect.h"
-#include "../static/static_sk_path_effect.h"
-
+#ifdef __cplusplus
 extern "C" {
-void SkPath1DPathEffect_delete(SkPath1DPathEffect * path1DPathEffect);
+#endif
+
+void SkPath1DPathEffect_delete(void *path1DPathEffect); // (SkPath1DPathEffect *path1DPathEffect)
+
 // static
-sk_path_effect_t SkPath1DPathEffect_Make(const SkPath *path, SkScalar advance, SkScalar phase, SkPath1DPathEffect::Style style);
-void SkPath1DPathEffect_RegisterFlattenables();
+
+int SkPath1DPathEffect_Make(const void *path, float advance, float phase, int style); // (const SkPath *path, SkScalar advance, SkScalar phase, SkPath1DPathEffect::Style style) -> sk_path_effect_t
+void SkPath1DPathEffect_RegisterFlattenables(); // ()
+
+#ifdef __cplusplus
 }
+#endif
 
 #endif //RAIA_SKIA_SK_PATH_1D_PATH_EFFECT_H

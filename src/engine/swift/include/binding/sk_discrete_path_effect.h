@@ -5,13 +5,19 @@
 #ifndef RAIA_SKIA_SK_DISCRETE_PATH_EFFECT_H
 #define RAIA_SKIA_SK_DISCRETE_PATH_EFFECT_H
 
-#include "include/effects/SkDiscretePathEffect.h"
-#include "../static/static_sk_path_effect.h"
-
+#ifdef __cplusplus
 extern "C" {
-void SkDiscretePathEffect_delete(SkDiscretePathEffect * discretePathEffect);
-sk_path_effect_t SkDiscretePathEffect_Make(SkScalar segLength, SkScalar dev, uint32_t seedAssist);
-void SkDiscretePathEffect_RegisterFlattenables();
+#endif
+
+void SkDiscretePathEffect_delete(void * discretePathEffect); // (SkDiscretePathEffect * discretePathEffect)
+
+// static
+
+int SkDiscretePathEffect_Make(float segLength, float dev, unsigned int seedAssist); // (SkScalar segLength, SkScalar dev, uint32_t seedAssist) -> sk_path_effect_t
+void SkDiscretePathEffect_RegisterFlattenables(); // ()
+
+#ifdef __cplusplus
 }
+#endif
 
 #endif //RAIA_SKIA_SK_DISCRETE_PATH_EFFECT_H

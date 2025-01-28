@@ -5,22 +5,27 @@
 #ifndef RAIA_SKIA_SK_I_SIZE_H
 #define RAIA_SKIA_SK_I_SIZE_H
 
-#include "include/core/SkSize.h"
-#include "../static/static_sk_i_size.h"
-
+#ifdef __cplusplus
 extern "C" {
-void SkISize_delete(SkISize *i_size);
-void SkISize_set(SkISize *i_size, int32_t w, int32_t h) ;
-bool SkISize_isZero(SkISize *i_size);
-bool SkISize_isEmpty(SkISize *i_size);
-void SkISize_setEmpty(SkISize *i_size);
-int32_t SkISize_width(SkISize *i_size);
-int32_t SkISize_height(SkISize *i_size);
-int64_t SkISize_area(SkISize *i_size);
-bool SkISize_equals(SkISize *i_size, int32_t w, int32_t h);
+#endif
+
+void SkISize_delete(void *i_size); // (SkISize *i_size)
+void SkISize_set(void *i_size, int w, int h); // (SkISize *i_size, int32_t w, int32_t h)
+bool SkISize_isZero(void *i_size); // (SkISize *i_size) -> bool
+bool SkISize_isEmpty(void *i_size); // (SkISize *i_size) -> bool
+void SkISize_setEmpty(void *i_size); // (SkISize *i_size)
+int SkISize_width(void *i_size); // (SkISize *i_size) -> int32_t
+int SkISize_height(void *i_size); // (SkISize *i_size) -> int32_t
+long long SkISize_area(void *i_size); // (SkISize *i_size) -> int64_t
+bool SkISize_equals(void *i_size, int w, int h); // (SkISize *i_size, int32_t w, int32_t h) -> bool
+
 // static
-sk_i_size_t SkISize_Make(int32_t w, int32_t h);
-sk_i_size_t SkISize_MakeEmpty();
+
+int SkISize_Make(int w, int h); // (int32_t w, int32_t h) -> sk_i_size_t
+int SkISize_MakeEmpty(); // () -> sk_i_size_t
+
+#ifdef __cplusplus
 }
+#endif
 
 #endif //RAIA_SKIA_SK_I_SIZE_H

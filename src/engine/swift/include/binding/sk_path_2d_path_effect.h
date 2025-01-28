@@ -5,14 +5,19 @@
 #ifndef RAIA_SKIA_SK_PATH_2D_PATH_EFFECT_H
 #define RAIA_SKIA_SK_PATH_2D_PATH_EFFECT_H
 
-#include "include/effects/Sk2DPathEffect.h"
-#include "../static/static_sk_path_effect.h"
-
+#ifdef __cplusplus
 extern "C" {
-void SkPath2DPathEffect_delete(SkPath2DPathEffect * path2DPathEffect);
+#endif
+
+void SkPath2DPathEffect_delete(void *path2DPathEffect); // (SkPath2DPathEffect *path2DPathEffect)
+
 // static
-sk_path_effect_t SkPath2DPathEffect_Make(const SkMatrix *matrix, const SkPath *path);
-void SkPath2DPathEffect_RegisterFlattenables();
+
+int SkPath2DPathEffect_Make(const void *matrix, const void *path); // (const SkMatrix *matrix, const SkPath *path) -> sk_path_effect_t
+void SkPath2DPathEffect_RegisterFlattenables(); // ()
+
+#ifdef __cplusplus
 }
+#endif
 
 #endif //RAIA_SKIA_SK_PATH_2D_PATH_EFFECT_H

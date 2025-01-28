@@ -5,27 +5,30 @@
 #ifndef RAIA_SKIA_SK_FLATTENABLE_H
 #define RAIA_SKIA_SK_FLATTENABLE_H
 
-#include "include/core/SkFlattenable.h"
-#include "../static/static_sk_flattenable.h"
-#include "../static/static_sk_data.h"
-#include "../static/static_sk_flattenable_factory.h"
-
+#ifdef __cplusplus
 extern "C" {
-void SkFlattenable_delete(SkFlattenable *flattenable);
-sk_flattenable_factory_t SkFlattenable_getFactory(SkFlattenable *flattenable);
-const char * SkFlattenable_getTypeName(SkFlattenable *flattenable);
-void SkFlattenable_flatten(SkFlattenable *flattenable, SkWriteBuffer *write_buffer);
-SkFlattenable::Type SkFlattenable_getFlattenableType(SkFlattenable *flattenable);
-sk_data_t SkFlattenable_serialize(SkFlattenable *flattenable, const SkSerialProcs * serial_procs);
-size_t SkFlattenable_serialize_2(SkFlattenable *flattenable, void *memory, size_t memory_size, const SkSerialProcs * serial_procs);
-bool SkFlattenable_unique(SkFlattenable *flattenable);
-void SkFlattenable_ref(SkFlattenable *flattenable);
-void SkFlattenable_unref(SkFlattenable *flattenable);
+#endif
+
+void SkFlattenable_delete(void *flattenable); // (SkFlattenable *flattenable)
+int SkFlattenable_getFactory(void *flattenable); // (SkFlattenable *flattenable) -> sk_flattenable_factory_t
+const char * SkFlattenable_getTypeName(void *flattenable); // (SkFlattenable *flattenable) -> const char *
+void SkFlattenable_flatten(void *flattenable, void *write_buffer); // (SkFlattenable *flattenable, SkWriteBuffer *write_buffer)
+int SkFlattenable_getFlattenableType(void *flattenable); // (SkFlattenable *flattenable) -> SkFlattenable::Type
+int SkFlattenable_serialize(void *flattenable, const void * serial_procs); // (SkFlattenable *flattenable, const SkSerialProcs *serial_procs) -> sk_data_t
+unsigned long SkFlattenable_serialize_2(void *flattenable, void *memory, unsigned long memory_size, const void * serial_procs); // (SkFlattenable *flattenable, void *memory, size_t memory_size, const SkSerialProcs *serial_procs) -> size_t
+bool SkFlattenable_unique(void *flattenable); // (SkFlattenable *flattenable) -> bool
+void SkFlattenable_ref(void *flattenable); // (SkFlattenable *flattenable)
+void SkFlattenable_unref(void *flattenable); // (SkFlattenable *flattenable)
+
 // static
-sk_flattenable_factory_t SkFlattenable_NameToFactory(const char name[]);
-const char * SkFlattenable_FactoryToName(sk_flattenable_factory_t factory);
-void SkFlattenable_Register(const char name[], sk_flattenable_factory_t factory);
-int SkFlattenable_Deserialize(SkFlattenable::Type type, const void *data, size_t length, const SkDeserialProcs *procs);
+
+int SkFlattenable_NameToFactory(const char name[]); // (const char name[]) -> sk_flattenable_factory_t
+const char * SkFlattenable_FactoryToName(int factory); // (sk_flattenable_factory_t factory) -> const char *
+void SkFlattenable_Register(const char name[], int factory); // (const char name[], sk_flattenable_factory_t factory)
+int SkFlattenable_Deserialize(int type, const void *data, unsigned long length, const void *procs); // (SkFlattenable::Type type, const void *data, size_t length, const SkDeserialProcs *procs) -> int
+
+#ifdef __cplusplus
 }
+#endif
 
 #endif //RAIA_SKIA_SK_FLATTENABLE_H

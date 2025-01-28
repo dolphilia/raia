@@ -5,17 +5,21 @@
 #ifndef RAIA_SKIA_SK_DOCUMENT_H
 #define RAIA_SKIA_SK_DOCUMENT_H
 
-#include "include/core/SkDocument.h"
-
+#ifdef __cplusplus
 extern "C" {
-void SkDocument_delete(SkDocument *document);
-SkCanvas * SkDocument_beginPage(SkDocument * document, SkScalar width, SkScalar height, const SkRect *content);
-void SkDocument_endPage(SkDocument *document);
-void SkDocument_close(SkDocument *document);
-void SkDocument_abort(SkDocument *document);
-bool SkDocument_unique(SkDocument *document);
-void SkDocument_ref(SkDocument *document);
-void SkDocument_unref(SkDocument *document);
+#endif
+
+void SkDocument_delete(void *document); // (SkDocument *document)
+void * SkDocument_beginPage(void * document, float width, float height, const void *content); // (SkDocument *document, SkScalar width, SkScalar height, const SkRect *content) -> SkCanvas *
+void SkDocument_endPage(void *document); // (SkDocument *document)
+void SkDocument_close(void *document); // (SkDocument *document)
+void SkDocument_abort(void *document); // (SkDocument *document)
+bool SkDocument_unique(void *document); // (SkDocument *document) -> bool
+void SkDocument_ref(void *document); // (SkDocument *document)
+void SkDocument_unref(void *document); // (SkDocument *document)
+
+#ifdef __cplusplus
 }
+#endif
 
 #endif //RAIA_SKIA_SK_DOCUMENT_H

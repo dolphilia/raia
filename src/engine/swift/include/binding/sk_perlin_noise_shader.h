@@ -5,12 +5,17 @@
 #ifndef RAIA_SKIA_SK_PERLIN_NOISE_SHADER_H
 #define RAIA_SKIA_SK_PERLIN_NOISE_SHADER_H
 
-#include "include/effects/SkPerlinNoiseShader.h"
-#include "../static/static_sk_shader.h"
-
+#ifdef __cplusplus
 extern "C" {
-sk_shader_t SkPerlinNoiseShader_MakeFractalNoise(SkScalar baseFrequencyX, SkScalar baseFrequencyY, int numOctaves, SkScalar seed, const SkISize *tileSize);
-sk_shader_t SkPerlinNoiseShader_MakeTurbulence(SkScalar baseFrequencyX, SkScalar baseFrequencyY, int numOctaves, SkScalar seed, const SkISize *tileSize);
+#endif
+
+// static
+
+int SkPerlinNoiseShader_MakeFractalNoise(float baseFrequencyX, float baseFrequencyY, int numOctaves, float seed, const void *tileSize); // (SkScalar baseFrequencyX, SkScalar baseFrequencyY, int numOctaves, SkScalar seed, const SkISize *tileSize) -> sk_shader_t
+int SkPerlinNoiseShader_MakeTurbulence(float baseFrequencyX, float baseFrequencyY, int numOctaves, float seed, const void *tileSize); // (SkScalar baseFrequencyX, SkScalar baseFrequencyY, int numOctaves, SkScalar seed, const SkISize *tileSize) -> sk_shader_t
+
+#ifdef __cplusplus
 }
+#endif
 
 #endif //RAIA_SKIA_SK_PERLIN_NOISE_SHADER_H

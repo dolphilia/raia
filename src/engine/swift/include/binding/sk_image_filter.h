@@ -5,38 +5,39 @@
 #ifndef RAIA_SKIA_SK_IMAGE_FILTER_H
 #define RAIA_SKIA_SK_IMAGE_FILTER_H
 
-#include "include/core/SkImageFilter.h"
-#include "../static/static_sk_data.h"
-#include "../static/static_sk_image_filter.h"
-#include "../static/static_sk_i_rect.h"
-#include "../static/static_sk_rect.h"
-#include "../static/static_sk_flattenable_factory.h"
-
+#ifdef __cplusplus
 extern "C" {
-void SkImageFilter_delete(SkImageFilter *image_filter);
-sk_i_rect_t SkImageFilter_filterBounds(SkImageFilter *image_filter, const SkIRect *src, const SkMatrix *ctm, SkImageFilter::MapDirection direction, const SkIRect *inputRect);
-bool SkImageFilter_isColorFilterNode(SkImageFilter *image_filter, SkColorFilter **filterPtr);
-bool SkImageFilter_asColorFilter(SkImageFilter *image_filter, SkColorFilter **filterPtr);
-bool SkImageFilter_asAColorFilter(SkImageFilter *image_filter, SkColorFilter **filterPtr);
-int SkImageFilter_countInputs(SkImageFilter *image_filter);
-const SkImageFilter * SkImageFilter_getInput(SkImageFilter *image_filter, int i);
-sk_rect_t SkImageFilter_computeFastBounds(SkImageFilter *image_filter, const SkRect *bounds);
-bool SkImageFilter_canComputeFastBounds(SkImageFilter *image_filter);
-sk_image_filter_t SkImageFilter_makeWithLocalMatrix(SkImageFilter *image_filter, const SkMatrix *matrix);
-sk_flattenable_factory_t SkImageFilter_getFactory(SkImageFilter *image_filter);
-const char * SkImageFilter_getTypeName(SkImageFilter *image_filter);
-void SkImageFilter_flatten(SkImageFilter *image_filter, SkWriteBuffer *buffer);
-SkImageFilter::Type SkImageFilter_getFlattenableType(SkImageFilter *image_filter);
-sk_data_t SkImageFilter_serialize(SkImageFilter *image_filter, const SkSerialProcs *procs);
-size_t SkImageFilter_serialize_2(SkImageFilter *image_filter, void *memory, size_t memory_size, const SkSerialProcs *procs);
-bool SkImageFilter_unique(SkImageFilter *image_filter);
-void SkImageFilter_ref(SkImageFilter *image_filter);
-void SkImageFilter_unref(SkImageFilter *image_filter);
+#endif
+
+void SkImageFilter_delete(void *image_filter); // (SkImageFilter *image_filter)
+int SkImageFilter_filterBounds(void *image_filter, const void *src, const void *ctm, int direction, const void *inputRect); // (SkImageFilter *image_filter, const SkIRect *src, const SkMatrix *ctm, SkImageFilter::MapDirection direction, const SkIRect *inputRect) -> sk_i_rect_t
+bool SkImageFilter_isColorFilterNode(void *image_filter, void **filterPtr); // (SkImageFilter *image_filter, SkColorFilter **filterPtr) -> bool
+bool SkImageFilter_asColorFilter(void *image_filter, void **filterPtr); // (SkImageFilter *image_filter, SkColorFilter **filterPtr) -> bool
+bool SkImageFilter_asAColorFilter(void *image_filter, void **filterPtr); // (SkImageFilter *image_filter, SkColorFilter **filterPtr) -> bool
+int SkImageFilter_countInputs(void *image_filter); // (SkImageFilter *image_filter) -> int
+const void *SkImageFilter_getInput(void *image_filter, int i); // (SkImageFilter *image_filter, int i) -> const SkImageFilter *
+int SkImageFilter_computeFastBounds(void *image_filter, const void *bounds); // (SkImageFilter *image_filter, const SkRect *bounds) -> sk_rect_t
+bool SkImageFilter_canComputeFastBounds(void *image_filter); // (SkImageFilter *image_filter) -> bool
+int SkImageFilter_makeWithLocalMatrix(void *image_filter, const void *matrix); // (SkImageFilter *image_filter, const SkMatrix *matrix) -> sk_image_filter_t
+int SkImageFilter_getFactory(void *image_filter); // (SkImageFilter *image_filter) -> sk_flattenable_factory_t
+const char *SkImageFilter_getTypeName(void *image_filter); // (SkImageFilter *image_filter) -> const char *
+void SkImageFilter_flatten(void *image_filter, void *buffer); // (SkImageFilter *image_filter, SkWriteBuffer *buffer)
+int SkImageFilter_getFlattenableType(void *image_filter); // (SkImageFilter *image_filter) -> SkImageFilter::Type
+int SkImageFilter_serialize(void *image_filter, const void *procs); // (SkImageFilter *image_filter, const SkSerialProcs *procs) -> sk_data_t
+unsigned long SkImageFilter_serialize_2(void *image_filter, void *memory, unsigned long memory_size, const void *procs); // (SkImageFilter *image_filter, void *memory, size_t memory_size, const SkSerialProcs *procs) -> size_t
+bool SkImageFilter_unique(void *image_filter); // (SkImageFilter *image_filter) -> bool
+void SkImageFilter_ref(void *image_filter); // (SkImageFilter *image_filter)
+void SkImageFilter_unref(void *image_filter); // (SkImageFilter *image_filter)
+
 // static
-sk_image_filter_t SkImageFilter_Deserialize(const void *data, size_t size, const SkDeserialProcs *procs);
-sk_flattenable_factory_t SkImageFilter_NameToFactory(const char name[]);
-const char * SkImageFilter_FactoryToName(sk_flattenable_factory_t factory);
-void SkImageFilter_Register(const char name[], sk_flattenable_factory_t factory);
+
+int SkImageFilter_Deserialize(const void *data, unsigned long size, const void *procs); // (const void *data, size_t size, const SkDeserialProcs *procs) -> sk_image_filter_t
+int SkImageFilter_NameToFactory(const char name[]); // (const char name[]) -> sk_flattenable_factory_t
+const char *SkImageFilter_FactoryToName(int factory); // (sk_flattenable_factory_t factory) -> const char *
+void SkImageFilter_Register(const char name[], int factory); // (const char name[], sk_flattenable_factory_t factory)
+
+#ifdef __cplusplus
 }
+#endif
 
 #endif //RAIA_SKIA_SK_IMAGE_FILTER_H

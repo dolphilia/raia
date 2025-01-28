@@ -166,5 +166,11 @@
   "command": ":",
   "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/_skia_function.swift",
   "output": "CMakeFiles/main.dir/src/skia/_skia_function.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/_skia_type.swift",
+  "output": "CMakeFiles/main.dir/src/skia/_skia_type.swift.o"
 }
 ]

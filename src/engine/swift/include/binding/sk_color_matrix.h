@@ -19,8 +19,8 @@ void SkColorMatrix_setConcat(void *color_matrix, const void *a, const void *b); 
 void SkColorMatrix_preConcat(void *color_matrix, const void *mat); // (SkColorMatrix *color_matrix, const SkColorMatrix *mat)
 void SkColorMatrix_postConcat(void *color_matrix, const void *mat); // (SkColorMatrix *color_matrix, const SkColorMatrix *mat)
 void SkColorMatrix_setSaturation(void *color_matrix, float sat); // (SkColorMatrix *color_matrix, float sat)
-void SkColorMatrix_setRowMajor(void *color_matrix, const float src[20]); // (SkColorMatrix *color_matrix, const float src[20])
-void SkColorMatrix_getRowMajor(void *color_matrix, float dst[20]); // (SkColorMatrix *color_matrix, float dst[20])
+void SkColorMatrix_setRowMajor(void *color_matrix, const void * src); // (SkColorMatrix *color_matrix, const float src[20])
+void SkColorMatrix_getRowMajor(void *color_matrix, void * dst); // (SkColorMatrix *color_matrix, float dst[20])
 
 // static
 

@@ -5,13 +5,18 @@
 #ifndef RAIA_SKIA_SK_LUMA_COLOR_FILTER_H
 #define RAIA_SKIA_SK_LUMA_COLOR_FILTER_H
 
-#include "include/effects/SkLumaColorFilter.h"
-#include "../static/static_sk_color_filter.h"
-
+#ifdef __cplusplus
 extern "C" {
-void SkLumaColorFilter_delete(SkLumaColorFilter * lumaColorFilter);
+#endif
+
+void SkLumaColorFilter_delete(void * lumaColorFilter); // (SkLumaColorFilter * lumaColorFilter)
+
 // static
-sk_color_filter_t SkLumaColorFilter_Make();
+
+int SkLumaColorFilter_Make(); // () -> sk_color_filter_t
+
+#ifdef __cplusplus
 }
+#endif
 
 #endif //RAIA_SKIA_SK_LUMA_COLOR_FILTER_H

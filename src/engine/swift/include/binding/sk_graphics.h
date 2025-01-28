@@ -5,31 +5,39 @@
 #ifndef RAIA_SKIA_SK_GRAPHICS_H
 #define RAIA_SKIA_SK_GRAPHICS_H
 
-#include "include/core/SkGraphics.h"
-
+#ifdef __cplusplus
 extern "C" {
-void SkGraphics_delete(SkGraphics * graphics);
+#endif
+
+void SkGraphics_delete(void *graphics); // (SkGraphics *graphics)
+
 // static
-void SkGraphics_Init();
-size_t SkGraphics_GetFontCacheLimit();
-size_t SkGraphics_SetFontCacheLimit(size_t bytes);
-size_t SkGraphics_GetFontCacheUsed();
-int SkGraphics_GetFontCacheCountUsed();
-int SkGraphics_GetFontCacheCountLimit();
-int SkGraphics_SetFontCacheCountLimit(int count);
-void SkGraphics_PurgeFontCache();
-void SkGraphics_PurgePinnedFontCache();
-size_t SkGraphics_GetResourceCacheTotalBytesUsed();
-size_t SkGraphics_GetResourceCacheTotalByteLimit();
-size_t SkGraphics_SetResourceCacheTotalByteLimit(size_t newLimit);
-void SkGraphics_PurgeResourceCache();
-size_t SkGraphics_GetResourceCacheSingleAllocationByteLimit();
-size_t SkGraphics_SetResourceCacheSingleAllocationByteLimit(size_t newLimit);
-void SkGraphics_DumpMemoryStatistics(SkTraceMemoryDump *dump);
-void SkGraphics_PurgeAllCaches();
-SkGraphics::ImageGeneratorFromEncodedDataFactory SkGraphics_SetImageGeneratorFromEncodedDataFactory(SkGraphics::ImageGeneratorFromEncodedDataFactory factory);
-SkGraphics::OpenTypeSVGDecoderFactory SkGraphics_SetOpenTypeSVGDecoderFactory(SkGraphics::OpenTypeSVGDecoderFactory factory);
-SkGraphics::OpenTypeSVGDecoderFactory SkGraphics_GetOpenTypeSVGDecoderFactory();
+
+void SkGraphics_Init(); // ()
+unsigned long SkGraphics_GetFontCacheLimit(); // () -> size_t
+unsigned long SkGraphics_SetFontCacheLimit(unsigned long bytes); // (size_t bytes) -> size_t
+unsigned long SkGraphics_GetFontCacheUsed(); // () -> size_t
+int SkGraphics_GetFontCacheCountUsed(); // () -> int
+int SkGraphics_GetFontCacheCountLimit(); // () -> int
+int SkGraphics_SetFontCacheCountLimit(int count); // (int count) -> int
+void SkGraphics_PurgeFontCache(); // ()
+void SkGraphics_PurgePinnedFontCache(); // ()
+unsigned long SkGraphics_GetResourceCacheTotalBytesUsed(); // () -> size_t
+unsigned long SkGraphics_GetResourceCacheTotalByteLimit(); // () -> size_t
+unsigned long SkGraphics_SetResourceCacheTotalByteLimit(unsigned long newLimit); // (size_t newLimit) -> size_t
+void SkGraphics_PurgeResourceCache(); // ()
+unsigned long SkGraphics_GetResourceCacheSingleAllocationByteLimit(); // () -> size_t
+unsigned long SkGraphics_SetResourceCacheSingleAllocationByteLimit(unsigned long newLimit); // (size_t newLimit) -> size_t
+void SkGraphics_DumpMemoryStatistics(void *dump); // (SkTraceMemoryDump *dump)
+void SkGraphics_PurgeAllCaches(); // ()
+
+// TODO
+//void * SkGraphics_SetImageGeneratorFromEncodedDataFactory(void * factory); // (SkGraphics::ImageGeneratorFromEncodedDataFactory factory) -> SkGraphics::ImageGeneratorFromEncodedDataFactory
+//void * SkGraphics_SetOpenTypeSVGDecoderFactory(SkGraphics::OpenTypeSVGDecoderFactory factory); // (SkGraphics::OpenTypeSVGDecoderFactory factory) -> SkGraphics::OpenTypeSVGDecoderFactory
+//void * SkGraphics_GetOpenTypeSVGDecoderFactory(); // () -> SkGraphics::OpenTypeSVGDecoderFactory
+
+#ifdef __cplusplus
 }
+#endif
 
 #endif //RAIA_SKIA_SK_GRAPHICS_H

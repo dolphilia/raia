@@ -5,16 +5,15 @@
 #ifndef RAIA_SKIA_SK_MALLOC_PIXEL_REF_H
 #define RAIA_SKIA_SK_MALLOC_PIXEL_REF_H
 
-#include "include/core/SkPixelRef.h"
-#include "include/core/SkImageInfo.h"
-#include "include/core/SkData.h"
-#include "include/core/SkMallocPixelRef.h"
-#include "../static/static_sk_pixel_ref.h"
-#include "../static/static_sk_data.h"
-
+#ifdef __cplusplus
 extern "C" {
-sk_pixel_ref_t SkMallocPixelRef_MakeAllocate(const SkImageInfo *imageInfo, size_t rowBytes);
-sk_pixel_ref_t SkMallocPixelRef_MakeWithData(const SkImageInfo &imageInfo, size_t rowBytes, sk_data_t data);
+#endif
+
+int SkMallocPixelRef_MakeAllocate(const void *imageInfo, unsigned long rowBytes); // (const SkImageInfo *imageInfo, size_t rowBytes) -> sk_pixel_ref_t
+int SkMallocPixelRef_MakeWithData(const void *imageInfo, unsigned long rowBytes, int data); // (const SkImageInfo &imageInfo, size_t rowBytes, sk_data_t data) -> sk_pixel_ref_t
+
+#ifdef __cplusplus
 }
+#endif
 
 #endif //RAIA_SKIA_SK_MALLOC_PIXEL_REF_H

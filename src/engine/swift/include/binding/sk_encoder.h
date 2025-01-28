@@ -5,11 +5,15 @@
 #ifndef RAIA_SKIA_SK_ENCODER_H
 #define RAIA_SKIA_SK_ENCODER_H
 
-#include "include/encode/SkEncoder.h"
-
+#ifdef __cplusplus
 extern "C" {
-void SkEncoder_delete(SkEncoder *encoder);
-bool SkEncoder_encodeRows(SkEncoder *encoder, int numRows);
+#endif
+
+void SkEncoder_delete(void *encoder); // (SkEncoder *encoder)
+bool SkEncoder_encodeRows(void *encoder, int numRows); // (SkEncoder *encoder, int numRows) -> bool
+
+#ifdef __cplusplus
 }
+#endif
 
 #endif //RAIA_SKIA_SK_ENCODER_H

@@ -5,14 +5,18 @@
 #ifndef RAIA_SKIA_SK_REF_CNT_BASE_H
 #define RAIA_SKIA_SK_REF_CNT_BASE_H
 
-#include "include/core/SkRefCnt.h"
-
+#ifdef __cplusplus
 extern "C" {
-SkRefCntBase *SkRefCntBase_new();
-void SkRefCntBase_delete(SkRefCntBase *ref_cnt_base);
-bool SkRefCntBase_unique(SkRefCntBase *ref_cnt_base);
-void SkRefCntBase_ref(SkRefCntBase *ref_cnt_base);
-void SkRefCntBase_unref(SkRefCntBase *ref_cnt_base);
+#endif
+
+void *SkRefCntBase_new();
+void SkRefCntBase_delete(void *ref_cnt_base);
+bool SkRefCntBase_unique(void *ref_cnt_base);
+void SkRefCntBase_ref(void *ref_cnt_base);
+void SkRefCntBase_unref(void *ref_cnt_base);
+
+#ifdef __cplusplus
 }
+#endif
 
 #endif //RAIA_SKIA_SK_REF_CNT_BASE_H

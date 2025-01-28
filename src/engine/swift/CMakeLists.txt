@@ -51,6 +51,7 @@ add_executable(main
 
     src/skia/__skia_namespace.swift
     src/skia/_skia_function.swift
+    src/skia/_skia_type.swift
 )
 
 target_link_libraries(main PRIVATE wrapper glfw.3.4 raia_glfw egl GLESv2 raia_gles cglm reskia)

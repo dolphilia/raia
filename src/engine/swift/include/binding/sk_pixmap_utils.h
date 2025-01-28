@@ -5,12 +5,15 @@
 #ifndef RAIA_SKIA_SK_PIXMAP_UTILS_H
 #define RAIA_SKIA_SK_PIXMAP_UTILS_H
 
-#include "include/codec/SkPixmapUtils.h"
-#include "../static/static_sk_image_info.h"
-
+#ifdef __cplusplus
 extern "C" {
-bool SkPixmapUtils_Orient(const SkPixmap* dst, const SkPixmap* src, SkEncodedOrigin origin);
-sk_image_info_t SkPixmapUtils_SwapWidthHeight(const SkImageInfo* info);
+#endif
+
+bool SkPixmapUtils_Orient(const void* dst, const void* src, int origin); // (const SkPixmap* dst, const SkPixmap* src, SkEncodedOrigin origin) -> bool
+int SkPixmapUtils_SwapWidthHeight(const void* info); // (const SkImageInfo* info) -> sk_image_info_t
+
+#ifdef __cplusplus
 }
+#endif
 
 #endif //RAIA_SKIA_SK_PIXMAP_UTILS_H

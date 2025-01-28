@@ -5,13 +5,16 @@
 #ifndef RAIA_SKIA_SK_CUBIC_RESAMPLER_H
 #define RAIA_SKIA_SK_CUBIC_RESAMPLER_H
 
-#include "include/core/SkSamplingOptions.h"
-#include "../static/static_sk_cubic_resampler.h"
-
+#ifdef __cplusplus
 extern "C" {
-void SkCubicResampler_delete(SkCubicResampler *cubicResampler);
-sk_cubic_resampler_t SkCubicResampler_Mitchell();
-sk_cubic_resampler_t SkCubicResampler_CatmullRom();
+#endif
+
+void SkCubicResampler_delete(void *cubicResampler); // (SkCubicResampler *cubicResampler)
+int SkCubicResampler_Mitchell(); // () -> sk_cubic_resampler_t
+int SkCubicResampler_CatmullRom(); // () -> sk_cubic_resampler_t
+
+#ifdef __cplusplus
 }
+#endif
 
 #endif //RAIA_SKIA_SK_CUBIC_RESAMPLER_H

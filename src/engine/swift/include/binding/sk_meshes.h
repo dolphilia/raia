@@ -5,15 +5,19 @@
 #ifndef RAIA_SKIA_SK_MESHES_H
 #define RAIA_SKIA_SK_MESHES_H
 
-#include "include/core/SkMesh.h"
-#include "../static/static_sk_mesh_index_buffer.h"
-#include "../static/static_sk_mesh_vertex_buffer.h"
-
+#ifdef __cplusplus
 extern "C" {
-sk_mesh_index_buffer_t SkMeshes_MakeIndexBuffer(const void *data, size_t size);
-sk_mesh_index_buffer_t SkMeshes_CopyIndexBuffer(const sk_sp< SkMesh::IndexBuffer > *indexBuffer);
-sk_mesh_index_buffer_t SkMeshes_MakeVertexBuffer(const void *data, size_t size);
-sk_mesh_index_buffer_t SkMeshes_CopyVertexBuffer(const sk_sp< SkMesh::VertexBuffer > *vertexBuffer);
+#endif
+
+// static
+
+int SkMeshes_MakeIndexBuffer(const void *data, unsigned long size); // // (const void *data, size_t size) -> sk_mesh_index_buffer_t
+int SkMeshes_CopyIndexBuffer(const void *indexBuffer); // // (const sk_sp< SkMesh::IndexBuffer > *indexBuffer) -> sk_mesh_index_buffer_t
+int SkMeshes_MakeVertexBuffer(const void *data, unsigned long size); // // (const void *data, size_t size) -> sk_mesh_index_buffer_t
+int SkMeshes_CopyVertexBuffer(const void *vertexBuffer); // // (const sk_sp< SkMesh::VertexBuffer > *vertexBuffer) -> sk_mesh_index_buffer_t
+
+#ifdef __cplusplus
 }
+#endif
 
 #endif //RAIA_SKIA_SK_MESHES_H

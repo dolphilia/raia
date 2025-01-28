@@ -5,37 +5,41 @@
 #ifndef RAIA_SKIA_SK_STREAM_SEEKABLE_H
 #define RAIA_SKIA_SK_STREAM_SEEKABLE_H
 
-#include "include/core/SkStream.h"
-#include "../static/static_sk_stream_seekable.h"
-#include "../static/static_sk_stream_asset.h"
-
+#ifdef __cplusplus
 extern "C" {
-void SkStreamSeekable_delete(SkStreamSeekable *stream_seekable);
-sk_stream_seekable_t SkStreamSeekable_duplicate(SkStreamSeekable *stream_seekable);
-bool SkStreamSeekable_hasPosition(SkStreamSeekable *stream_seekable);
-size_t SkStreamSeekable_getPosition(SkStreamSeekable *stream_seekable);
-bool SkStreamSeekable_seek(SkStreamSeekable *stream_seekable, size_t position);
-bool SkStreamSeekable_move(SkStreamSeekable *stream_seekable, long offset);
-sk_stream_seekable_t SkStreamSeekable_fork(SkStreamSeekable *stream_seekable);
-bool SkStreamSeekable_rewind(SkStreamSeekable *stream_seekable);
-size_t SkStreamSeekable_read(SkStreamSeekable *stream_seekable, void *buffer, size_t size);
-size_t SkStreamSeekable_skip(SkStreamSeekable *stream_seekable, size_t size);
-size_t SkStreamSeekable_peek(SkStreamSeekable *stream_seekable, void *buffer, size_t size);
-bool SkStreamSeekable_isAtEnd(SkStreamSeekable *stream_seekable);
-bool SkStreamSeekable_readS8(SkStreamSeekable *stream_seekable, int8_t *i);
-bool SkStreamSeekable_readS16(SkStreamSeekable *stream_seekable, int16_t *i);
-bool SkStreamSeekable_readS32(SkStreamSeekable *stream_seekable, int32_t *i);
-bool SkStreamSeekable_readU8(SkStreamSeekable *stream_seekable, uint8_t *i);
-bool SkStreamSeekable_readU16(SkStreamSeekable *stream_seekable, uint16_t *i);
-bool SkStreamSeekable_readU32(SkStreamSeekable *stream_seekable, uint32_t *i);
-bool SkStreamSeekable_readBool(SkStreamSeekable *stream_seekable, bool *b);
-bool SkStreamSeekable_readScalar(SkStreamSeekable *stream_seekable, SkScalar *v);
-bool SkStreamSeekable_readPackedUInt(SkStreamSeekable *stream_seekable, size_t *size);
-bool SkStreamSeekable_hasLength(SkStreamSeekable *stream_seekable);
-size_t SkStreamSeekable_getLength(SkStreamSeekable *stream_seekable);
-const void * SkStreamSeekable_getMemoryBase(SkStreamSeekable *stream_seekable);
+#endif
+
+void SkStreamSeekable_delete(void *stream_seekable); // Deletes the SkStreamSeekable object and releases its resources.
+int SkStreamSeekable_duplicate(void *stream_seekable); // Creates a duplicate of the given SkStreamSeekable object.
+bool SkStreamSeekable_hasPosition(void *stream_seekable); // Checks if the stream supports position querying.
+unsigned long SkStreamSeekable_getPosition(void *stream_seekable); // Returns the current position in the stream.
+bool SkStreamSeekable_seek(void *stream_seekable, unsigned long position); // Moves the read position to the specified offset.
+bool SkStreamSeekable_move(void *stream_seekable, long offset); // Moves the read position by the specified offset relative to the current position.
+int SkStreamSeekable_fork(void *stream_seekable); // Creates a forked copy of the current stream at its current position.
+bool SkStreamSeekable_rewind(void *stream_seekable); // Resets the read position to the beginning of the stream.
+unsigned long SkStreamSeekable_read(void *stream_seekable, void *buffer, unsigned long size); // Reads up to `size` bytes from the stream into `buffer`.
+unsigned long SkStreamSeekable_skip(void *stream_seekable, unsigned long size); // Skips over the specified number of bytes in the stream.
+unsigned long SkStreamSeekable_peek(void *stream_seekable, void *buffer, unsigned long size); // Reads `size` bytes into `buffer` without advancing the read position.
+bool SkStreamSeekable_isAtEnd(void *stream_seekable); // Checks if the stream has reached its end.
+bool SkStreamSeekable_readS8(void *stream_seekable, void *i); // Reads an 8-bit signed integer from the stream.
+bool SkStreamSeekable_readS16(void *stream_seekable, void *i); // Reads a 16-bit signed integer from the stream.
+bool SkStreamSeekable_readS32(void *stream_seekable, void *i); // Reads a 32-bit signed integer from the stream.
+bool SkStreamSeekable_readU8(void *stream_seekable, void *i); // Reads an 8-bit unsigned integer from the stream.
+bool SkStreamSeekable_readU16(void *stream_seekable, void *i); // Reads a 16-bit unsigned integer from the stream.
+bool SkStreamSeekable_readU32(void *stream_seekable, void *i); // Reads a 32-bit unsigned integer from the stream.
+bool SkStreamSeekable_readBool(void *stream_seekable, void *b); // Reads a boolean value from the stream.
+bool SkStreamSeekable_readScalar(void *stream_seekable, void *v); // Reads a scalar value from the stream.
+bool SkStreamSeekable_readPackedUInt(void *stream_seekable, void *size); // Reads a packed unsigned integer from the stream.
+bool SkStreamSeekable_hasLength(void *stream_seekable); // Checks if the stream has a known length.
+unsigned long SkStreamSeekable_getLength(void *stream_seekable); // Returns the total length of the stream.
+const void * SkStreamSeekable_getMemoryBase(void *stream_seekable); // Returns a pointer to the stream's memory base if available.
+
 // static
-sk_stream_asset_t SkStreamSeekable_MakeFromFile(const char path[]);
+
+int SkStreamSeekable_MakeFromFile(const char path[]); // Creates a SkStreamSeekable object from the specified file.
+
+#ifdef __cplusplus
 }
+#endif
 
 #endif //RAIA_SKIA_SK_STREAM_SEEKABLE_H

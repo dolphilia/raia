@@ -5,23 +5,28 @@
 #ifndef RAIA_SKIA_SK_COLOR_TABLE_H
 #define RAIA_SKIA_SK_COLOR_TABLE_H
 
-#include "include/core/SkColorTable.h"
-#include "../static/static_sk_color_table.h"
-
+#ifdef __cplusplus
 extern "C" {
-void SkColorTable_delete(SkColorTable *color_table);
-const uint8_t * SkColorTable_alphaTable(SkColorTable *color_table);
-const uint8_t * SkColorTable_redTable(SkColorTable *color_table);
-const uint8_t * SkColorTable_greenTable(SkColorTable *color_table);
-const uint8_t * SkColorTable_blueTable(SkColorTable *color_table);
-void SkColorTable_flatten(SkColorTable *color_table, SkWriteBuffer *buffer);
-bool SkColorTable_unique(SkColorTable *color_table);
-void SkColorTable_ref(SkColorTable *color_table);
-void SkColorTable_unref(SkColorTable *color_table);
+#endif
+
+void SkColorTable_delete(void *color_table); // (SkColorTable *color_table)
+const void * SkColorTable_alphaTable(void *color_table); // (SkColorTable *color_table) -> const uint8_t *
+const void * SkColorTable_redTable(void *color_table); // (SkColorTable *color_table) -> const uint8_t *
+const void * SkColorTable_greenTable(void *color_table); // (SkColorTable *color_table) -> const uint8_t *
+const void * SkColorTable_blueTable(void *color_table); // (SkColorTable *color_table) -> const uint8_t *
+void SkColorTable_flatten(void *color_table, void *buffer); // (SkColorTable *color_table, SkWriteBuffer *buffer)
+bool SkColorTable_unique(void *color_table); // (SkColorTable *color_table) -> bool
+void SkColorTable_ref(void *color_table); // (SkColorTable *color_table)
+void SkColorTable_unref(void *color_table); // (SkColorTable *color_table)
+
 // static
-sk_color_table_t SkColorTable_Make(const uint8_t table[256]);
-sk_color_table_t SkColorTable_Make_2(const uint8_t tableA[256], const uint8_t tableR[256], const uint8_t tableG[256], const uint8_t tableB[256]);
-sk_color_table_t SkColorTable_Deserialize(SkReadBuffer *buffer);
+
+int SkColorTable_Make(const void * table); // (const uint8_t table[256]) -> sk_color_table_t
+int SkColorTable_Make_2(const void * tableA, const void * tableR, const void * tableG, const void * tableB); // (const uint8_t tableA[256], const uint8_t tableR[256], const uint8_t tableG[256], const uint8_t tableB[256]) -> sk_color_table_t
+int SkColorTable_Deserialize(void * buffer); // (SkReadBuffer *buffer) -> sk_color_table_t
+
+#ifdef __cplusplus
 }
+#endif
 
 #endif //RAIA_SKIA_SK_COLOR_TABLE_H

@@ -5,14 +5,16 @@
 #ifndef RAIA_SKIA_SK_PNG_ENCODER_H
 #define RAIA_SKIA_SK_PNG_ENCODER_H
 
-#include "include/encode/SkPngEncoder.h"
-#include "../static/static_sk_data.h"
-#include "../static/static_sk_encoder.h"
-
+#ifdef __cplusplus
 extern "C" {
-bool SkPngEncoder_Encode(SkWStream* dst, const SkPixmap* src, const SkPngEncoder::Options* options);
-sk_data_t SkPngEncoder_Encode_2(GrDirectContext* ctx, const SkImage* img, const SkPngEncoder::Options* options);
-sk_encoder_t SkPngEncoder_Make(SkWStream* dst, const SkPixmap* src, const SkPngEncoder::Options* options);
+#endif
+
+bool SkPngEncoder_Encode(void* dst, const void* src, const void* options); // (SkWStream* dst, const SkPixmap* src, const SkPngEncoder::Options* options) -> bool
+int SkPngEncoder_Encode_2(void* ctx, const void* img, const void* options); // (GrDirectContext* ctx, const SkImage* img, const SkPngEncoder::Options* options) -> sk_data_t
+int SkPngEncoder_Make(void* dst, const void* src, const void* options); // (SkWStream* dst, const SkPixmap* src, const SkPngEncoder::Options* options) -> sk_encoder_t
+
+#ifdef __cplusplus
 }
+#endif
 
 #endif //RAIA_SKIA_SK_PNG_ENCODER_H

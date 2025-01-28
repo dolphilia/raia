@@ -5,13 +5,17 @@
 #ifndef RAIA_SKIA_SK_HIGH_CONTRAST_CONFIG_H
 #define RAIA_SKIA_SK_HIGH_CONTRAST_CONFIG_H
 
-#include "include/effects/SkHighContrastFilter.h"
-
+#ifdef __cplusplus
 extern "C" {
-SkHighContrastConfig *SkHighContrastConfig_new();
-SkHighContrastConfig *SkHighContrastConfig_new_2(bool grayscale, SkHighContrastConfig::InvertStyle invertStyle, SkScalar contrast);
-void SkHighContrastConfig_delete(SkHighContrastConfig * highContrastConfig);
-bool isValid(SkHighContrastConfig *high_contrast_config);
+#endif
+
+void *SkHighContrastConfig_new(); // () -> SkHighContrastConfig *
+void *SkHighContrastConfig_new_2(bool grayscale, int invertStyle, float contrast); // (bool grayscale, SkHighContrastConfig::InvertStyle invertStyle, SkScalar contrast) -> SkHighContrastConfig *
+void SkHighContrastConfig_delete(void * highContrastConfig); // (SkHighContrastConfig * highContrastConfig)
+bool isValid(void *high_contrast_config); // (SkHighContrastConfig *high_contrast_config) -> bool
+
+#ifdef __cplusplus
 }
+#endif
 
 #endif //RAIA_SKIA_SK_HIGH_CONTRAST_CONFIG_H

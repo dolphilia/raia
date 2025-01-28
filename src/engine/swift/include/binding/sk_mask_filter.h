@@ -5,32 +5,32 @@
 #ifndef RAIA_SKIA_SK_MASK_FILTER_H
 #define RAIA_SKIA_SK_MASK_FILTER_H
 
-#include "include/core/SkMaskFilter.h"
-#include "include/core/SkRect.h"
-#include "include/core/SkData.h"
-#include "../static/static_sk_mask_filter.h"
-#include "../static/static_sk_rect.h"
-#include "../static/static_sk_data.h"
-#include "../static/static_sk_flattenable_factory.h"
-
+#ifdef __cplusplus
 extern "C" {
-void SkMaskFilter_delete(SkMaskFilter *maskFilter);
-sk_rect_t SkMaskFilter_approximateFilteredBounds(SkMaskFilter *mask_filter, const SkRect *src);
-sk_flattenable_factory_t SkMaskFilter_getFactory(SkMaskFilter *mask_filter);
-const char * SkMaskFilter_getTypeName(SkMaskFilter *mask_filter);
-void SkMaskFilter_flatten(SkMaskFilter *mask_filter, SkWriteBuffer *buffer);
-SkMaskFilter::Type SkMaskFilter_getFlattenableType(SkMaskFilter *mask_filter);
-sk_data_t SkMaskFilter_serialize(SkMaskFilter *mask_filter, const SkSerialProcs *procs);
-size_t SkMaskFilter_serialize_2(SkMaskFilter *mask_filter, void *memory, size_t memory_size, const SkSerialProcs *procs);
-bool SkMaskFilter_unique(SkMaskFilter *mask_filter);
-void SkMaskFilter_ref(SkMaskFilter *mask_filter);
-void SkMaskFilter_unref(SkMaskFilter *mask_filter);
+#endif
+
+void SkMaskFilter_delete(void *maskFilter); // (SkMaskFilter *maskFilter)
+int SkMaskFilter_approximateFilteredBounds(void *mask_filter, const void *src); // (SkMaskFilter *mask_filter, const SkRect *src) -> sk_rect_t
+int SkMaskFilter_getFactory(void *mask_filter); // (SkMaskFilter *mask_filter) -> sk_flattenable_factory_t
+const char *SkMaskFilter_getTypeName(void *mask_filter); // (SkMaskFilter *mask_filter) -> const char *
+void SkMaskFilter_flatten(void *mask_filter, void *buffer); // (SkMaskFilter *mask_filter, SkWriteBuffer *buffer)
+int SkMaskFilter_getFlattenableType(void *mask_filter); // (SkMaskFilter *mask_filter) -> SkMaskFilter::Type
+int SkMaskFilter_serialize(void *mask_filter, const void *procs); // (SkMaskFilter *mask_filter, const SkSerialProcs *procs) -> sk_data_t
+unsigned long SkMaskFilter_serialize_2(void *mask_filter, void *memory, unsigned long memory_size, const void *procs); // (SkMaskFilter *mask_filter, void *memory, size_t memory_size, const SkSerialProcs *procs) -> size_t
+bool SkMaskFilter_unique(void *mask_filter); // (SkMaskFilter *mask_filter) -> bool
+void SkMaskFilter_ref(void *mask_filter); // (SkMaskFilter *mask_filter)
+void SkMaskFilter_unref(void *mask_filter); // (SkMaskFilter *mask_filter)
+
 // static
-sk_mask_filter_t SkMaskFilter_MakeBlur(SkBlurStyle style, SkScalar sigma, bool respectCTM);
-sk_mask_filter_t SkMaskFilter_Deserialize(const void *data, size_t size, const SkDeserialProcs *procs);
-sk_flattenable_factory_t SkMaskFilter_NameToFactory(const char name[]);
-const char * SkMaskFilter_FactoryToName(sk_flattenable_factory_t factory);
-void SkMaskFilter_Register(const char name[], sk_flattenable_factory_t factory);
+
+int SkMaskFilter_MakeBlur(int style, float sigma, bool respectCTM); // (SkBlurStyle style, SkScalar sigma, bool respectCTM) -> sk_mask_filter_t
+int SkMaskFilter_Deserialize(const void *data, unsigned long size, const void *procs); // (const void *data, size_t size, const SkDeserialProcs *procs) -> sk_mask_filter_t
+int SkMaskFilter_NameToFactory(const char name[]); // (const char name[]) -> sk_flattenable_factory_t
+const char *SkMaskFilter_FactoryToName(int factory); // (sk_flattenable_factory_t factory) -> const char *
+void SkMaskFilter_Register(const char name[], int factory); // (const char name[], sk_flattenable_factory_t factory)
+
+#ifdef __cplusplus
 }
+#endif
 
 #endif //RAIA_SKIA_SK_MASK_FILTER_H

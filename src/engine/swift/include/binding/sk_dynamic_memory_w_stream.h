@@ -5,43 +5,47 @@
 #ifndef RAIA_SKIA_SK_DYNAMIC_MEMORY_W_STREAM_H
 #define RAIA_SKIA_SK_DYNAMIC_MEMORY_W_STREAM_H
 
-#include "include/core/SkStream.h"
-#include "../static/static_sk_data.h"
-#include "../static/static_sk_stream_asset.h"
-
+#ifdef __cplusplus
 extern "C" {
-SkDynamicMemoryWStream *SkDynamicMemoryWStream_new();
-//SkDynamicMemoryWStream * SkDynamicMemoryWStream_new_2(SkDynamicMemoryWStream &&stream)
-void SkDynamicMemoryWStream_delete(SkDynamicMemoryWStream *dynamic_memory_w_stream);
-bool SkDynamicMemoryWStream_write(SkDynamicMemoryWStream *dynamic_memory_w_stream, const void *buffer, size_t size);
-size_t SkDynamicMemoryWStream_bytesWritten(SkDynamicMemoryWStream *dynamic_memory_w_stream);
-bool SkDynamicMemoryWStream_read(SkDynamicMemoryWStream *dynamic_memory_w_stream, void *buffer, size_t offset, size_t size);
-void SkDynamicMemoryWStream_copyTo(SkDynamicMemoryWStream *dynamic_memory_w_stream, void *dst);
-bool SkDynamicMemoryWStream_writeToStream(SkDynamicMemoryWStream *dynamic_memory_w_stream, SkWStream *dst);
-void SkDynamicMemoryWStream_copyToAndReset(SkDynamicMemoryWStream *dynamic_memory_w_stream, void *dst);
-bool SkDynamicMemoryWStream_writeToAndReset(SkDynamicMemoryWStream *dynamic_memory_w_stream, SkWStream *dst);
-bool SkDynamicMemoryWStream_writeToAndReset_2(SkDynamicMemoryWStream *dynamic_memory_w_stream, SkDynamicMemoryWStream *dst);
-void SkDynamicMemoryWStream_prependToAndReset(SkDynamicMemoryWStream *dynamic_memory_w_stream, SkDynamicMemoryWStream *dst);
-sk_data_t SkDynamicMemoryWStream_detachAsData(SkDynamicMemoryWStream *dynamic_memory_w_stream);
-sk_stream_asset_t SkDynamicMemoryWStream_detachAsStream(SkDynamicMemoryWStream *dynamic_memory_w_stream);
-void SkDynamicMemoryWStream_reset(SkDynamicMemoryWStream *dynamic_memory_w_stream);
-void SkDynamicMemoryWStream_padToAlign4(SkDynamicMemoryWStream *dynamic_memory_w_stream);
-void SkDynamicMemoryWStream_flush(SkDynamicMemoryWStream *dynamic_memory_w_stream);
-bool SkDynamicMemoryWStream_write8(SkDynamicMemoryWStream *dynamic_memory_w_stream, U8CPU value);
-bool SkDynamicMemoryWStream_write16(SkDynamicMemoryWStream *dynamic_memory_w_stream, U16CPU value);
-bool SkDynamicMemoryWStream_write32(SkDynamicMemoryWStream *dynamic_memory_w_stream, uint32_t v);
-bool SkDynamicMemoryWStream_writeText(SkDynamicMemoryWStream *dynamic_memory_w_stream, const char text[]);
-bool SkDynamicMemoryWStream_newline(SkDynamicMemoryWStream *dynamic_memory_w_stream);
-bool SkDynamicMemoryWStream_writeDecAsText(SkDynamicMemoryWStream *dynamic_memory_w_stream, int32_t v);
-bool SkDynamicMemoryWStream_writeBigDecAsText(SkDynamicMemoryWStream *dynamic_memory_w_stream, int64_t v, int minDigits);
-bool SkDynamicMemoryWStream_writeHexAsText(SkDynamicMemoryWStream *dynamic_memory_w_stream, uint32_t v, int minDigits);
-bool SkDynamicMemoryWStream_writeScalarAsText(SkDynamicMemoryWStream *dynamic_memory_w_stream, SkScalar scalar);
-bool SkDynamicMemoryWStream_writeBool(SkDynamicMemoryWStream *dynamic_memory_w_stream, bool v);
-bool SkDynamicMemoryWStream_writeScalar(SkDynamicMemoryWStream *dynamic_memory_w_stream, SkScalar scalar);
-bool SkDynamicMemoryWStream_writePackedUInt(SkDynamicMemoryWStream *dynamic_memory_w_stream, size_t length);
-bool SkDynamicMemoryWStream_writeStream(SkDynamicMemoryWStream *dynamic_memory_w_stream, SkStream *input, size_t length);
+#endif
+
+void *SkDynamicMemoryWStream_new(); // () -> SkDynamicMemoryWStream *
+// SkDynamicMemoryWStream * SkDynamicMemoryWStream_new_2(SkDynamicMemoryWStream &&stream)
+void SkDynamicMemoryWStream_delete(void *dynamic_memory_w_stream); // (SkDynamicMemoryWStream *dynamic_memory_w_stream)
+bool SkDynamicMemoryWStream_write(void *dynamic_memory_w_stream, const void *buffer, unsigned long size); // (SkDynamicMemoryWStream *dynamic_memory_w_stream, const void *buffer, size_t size) -> bool
+unsigned long SkDynamicMemoryWStream_bytesWritten(void *dynamic_memory_w_stream); // (SkDynamicMemoryWStream *dynamic_memory_w_stream) -> size_t
+bool SkDynamicMemoryWStream_read(void *dynamic_memory_w_stream, void *buffer, unsigned long offset, unsigned long size); // (SkDynamicMemoryWStream *dynamic_memory_w_stream, void *buffer, size_t offset, size_t size) -> bool
+void SkDynamicMemoryWStream_copyTo(void *dynamic_memory_w_stream, void *dst); // (SkDynamicMemoryWStream *dynamic_memory_w_stream, void *dst)
+bool SkDynamicMemoryWStream_writeToStream(void *dynamic_memory_w_stream, void *dst); // (SkDynamicMemoryWStream *dynamic_memory_w_stream, SkWStream *dst) -> bool
+void SkDynamicMemoryWStream_copyToAndReset(void *dynamic_memory_w_stream, void *dst); // (SkDynamicMemoryWStream *dynamic_memory_w_stream, void *dst)
+bool SkDynamicMemoryWStream_writeToAndReset(void *dynamic_memory_w_stream, void *dst); // (SkDynamicMemoryWStream *dynamic_memory_w_stream, SkWStream *dst) -> bool
+bool SkDynamicMemoryWStream_writeToAndReset_2(void *dynamic_memory_w_stream, void *dst); // (SkDynamicMemoryWStream *dynamic_memory_w_stream, SkDynamicMemoryWStream *dst) -> bool
+void SkDynamicMemoryWStream_prependToAndReset(void *dynamic_memory_w_stream, void *dst); // (SkDynamicMemoryWStream *dynamic_memory_w_stream, SkDynamicMemoryWStream *dst)
+int SkDynamicMemoryWStream_detachAsData(void *dynamic_memory_w_stream); // (SkDynamicMemoryWStream *dynamic_memory_w_stream) -> sk_data_t
+int SkDynamicMemoryWStream_detachAsStream(void *dynamic_memory_w_stream); // (SkDynamicMemoryWStream *dynamic_memory_w_stream) -> sk_stream_asset_t
+void SkDynamicMemoryWStream_reset(void *dynamic_memory_w_stream); // (SkDynamicMemoryWStream *dynamic_memory_w_stream)
+void SkDynamicMemoryWStream_padToAlign4(void *dynamic_memory_w_stream); // (SkDynamicMemoryWStream *dynamic_memory_w_stream)
+void SkDynamicMemoryWStream_flush(void *dynamic_memory_w_stream); // (SkDynamicMemoryWStream *dynamic_memory_w_stream)
+bool SkDynamicMemoryWStream_write8(void *dynamic_memory_w_stream, unsigned int value); // (SkDynamicMemoryWStream *dynamic_memory_w_stream, U8CPU value) -> bool
+bool SkDynamicMemoryWStream_write16(void *dynamic_memory_w_stream, unsigned int value); // (SkDynamicMemoryWStream *dynamic_memory_w_stream, U16CPU value) -> bool
+bool SkDynamicMemoryWStream_write32(void *dynamic_memory_w_stream, unsigned int v); // (SkDynamicMemoryWStream *dynamic_memory_w_stream, uint32_t v) -> bool
+bool SkDynamicMemoryWStream_writeText(void *dynamic_memory_w_stream, const char text[]); // (SkDynamicMemoryWStream *dynamic_memory_w_stream, const char text[]) -> bool
+bool SkDynamicMemoryWStream_newline(void *dynamic_memory_w_stream); // (SkDynamicMemoryWStream *dynamic_memory_w_stream) -> bool
+bool SkDynamicMemoryWStream_writeDecAsText(void *dynamic_memory_w_stream, int v); // (SkDynamicMemoryWStream *dynamic_memory_w_stream, int32_t v) -> bool
+bool SkDynamicMemoryWStream_writeBigDecAsText(void *dynamic_memory_w_stream, long long v, int minDigits); // (SkDynamicMemoryWStream *dynamic_memory_w_stream, int64_t v, int minDigits) -> bool
+bool SkDynamicMemoryWStream_writeHexAsText(void *dynamic_memory_w_stream, unsigned int v, int minDigits); // (SkDynamicMemoryWStream *dynamic_memory_w_stream, uint32_t v, int minDigits) -> bool
+bool SkDynamicMemoryWStream_writeScalarAsText(void *dynamic_memory_w_stream, float scalar); // (SkDynamicMemoryWStream *dynamic_memory_w_stream, SkScalar scalar) -> bool
+bool SkDynamicMemoryWStream_writeBool(void *dynamic_memory_w_stream, bool v); // (SkDynamicMemoryWStream *dynamic_memory_w_stream, bool v) -> bool
+bool SkDynamicMemoryWStream_writeScalar(void *dynamic_memory_w_stream, float scalar); // (SkDynamicMemoryWStream *dynamic_memory_w_stream, SkScalar scalar) -> bool
+bool SkDynamicMemoryWStream_writePackedUInt(void *dynamic_memory_w_stream, unsigned long length); // (SkDynamicMemoryWStream *dynamic_memory_w_stream, size_t length) -> bool
+bool SkDynamicMemoryWStream_writeStream(void *dynamic_memory_w_stream, void *input, unsigned long length); // (SkDynamicMemoryWStream *dynamic_memory_w_stream, SkStream *input, size_t length) -> bool
+
 // static
-int SkDynamicMemoryWStream_SizeOfPackedUInt(size_t value);
+
+int SkDynamicMemoryWStream_SizeOfPackedUInt(unsigned long value); // (size_t value) -> int
+
+#ifdef __cplusplus
 }
+#endif
 
 #endif //RAIA_SKIA_SK_DYNAMIC_MEMORY_W_STREAM_H

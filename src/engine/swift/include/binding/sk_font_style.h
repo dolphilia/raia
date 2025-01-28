@@ -5,13 +5,17 @@
 #ifndef RAIA_SKIA_SK_FONT_STYLE_H
 #define RAIA_SKIA_SK_FONT_STYLE_H
 
-#include "include/core/SkFontStyle.h"
-
+#ifdef __cplusplus
 extern "C" {
-void SkFontStyle_delete(SkFontStyle *font_style);
-int SkFontStyle_weight(SkFontStyle *font_style);
-int SkFontStyle_width(SkFontStyle *font_style);
-SkFontStyle::Slant SkFontStyle_slant(SkFontStyle *font_style);
+#endif
+
+void SkFontStyle_delete(void *font_style); // (SkFontStyle *font_style)
+int SkFontStyle_weight(void *font_style); // (SkFontStyle *font_style) -> int
+int SkFontStyle_width(void *font_style); // (SkFontStyle *font_style) -> int
+int SkFontStyle_slant(void *font_style); // (SkFontStyle *font_style) -> SkFontStyle::Slant
+
+#ifdef __cplusplus
 }
+#endif
 
 #endif //RAIA_SKIA_SK_FONT_STYLE_H

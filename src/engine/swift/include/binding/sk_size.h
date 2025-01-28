@@ -5,26 +5,30 @@
 #ifndef RAIA_SKIA_SK_SIZE_H
 #define RAIA_SKIA_SK_SIZE_H
 
-#include "include/core/SkSize.h"
-#include "../static/static_sk_i_size.h"
-#include "../static/static_sk_size_t.h"
-
+#ifdef __cplusplus
 extern "C" {
-void SkSize_delete(SkSize *size);
-void SkSize_set(SkSize *size, SkScalar w, SkScalar h);
-bool SkSize_isZero(SkSize *size);
-bool SkSize_isEmpty(SkSize *size);
-void SkSize_setEmpty(SkSize *size);
-SkScalar SkSize_width(SkSize *size);
-SkScalar SkSize_height(SkSize *size);
-bool SkSize_equals(SkSize *size, SkScalar w, SkScalar h);
-sk_i_size_t SkSize_toRound(SkSize *size);
-sk_i_size_t SkSize_toCeil(SkSize *size);
-sk_i_size_t SkSize_toFloor(SkSize *size);
+#endif
+
+void SkSize_delete(void *size); // (SkSize *size)
+void SkSize_set(void *size, float w, float h); // (SkSize *size, SkScalar w, SkScalar h)
+bool SkSize_isZero(void *size); // (SkSize *size) -> bool
+bool SkSize_isEmpty(void *size); // (SkSize *size) -> bool
+void SkSize_setEmpty(void *size); // (SkSize *size)
+float SkSize_width(void *size); // (SkSize *size) -> SkScalar
+float SkSize_height(void *size); // (SkSize *size) -> SkScalar
+bool SkSize_equals(void *size, float w, float h); // (SkSize *size, SkScalar w, SkScalar h) -> bool
+int SkSize_toRound(void *size); // (SkSize *size) -> sk_i_size_t
+int SkSize_toCeil(void *size); // (SkSize *size) -> sk_i_size_t
+int SkSize_toFloor(void *size); // (SkSize *size) -> sk_i_size_t
+
 // static
-sk_size_t SkSize_Make(SkScalar w, SkScalar h);
-sk_size_t SkSize_Make_2(const SkISize *src);
-sk_size_t SkSize_MakeEmpty();
+
+int SkSize_Make(float w, float h); // (SkScalar w, SkScalar h) -> sk_size_t
+int SkSize_Make_2(const void *src); // (const SkISize *src) -> sk_size_t
+int SkSize_MakeEmpty(); // () -> sk_size_t
+
+#ifdef __cplusplus
 }
+#endif
 
 #endif //RAIA_SKIA_SK_SIZE_H

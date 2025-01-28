@@ -5,22 +5,22 @@
 #ifndef RAIA_SKIA_SK_PICTURE_RECORDER_H
 #define RAIA_SKIA_SK_PICTURE_RECORDER_H
 
-#include "include/core/SkPictureRecorder.h"
-#include "include/core/SkBBHFactory.h"
-#include "../static/static_sk_picture.h"
-#include "../static/static_sk_drawable.h"
-#include "../static/static_sk_b_box_hierarchy.h"
-
+#ifdef __cplusplus
 extern "C" {
-SkPictureRecorder *SkPictureRecorder_new();
-void SkPictureRecorder_delete(SkPictureRecorder *picture_recorder);
-SkCanvas *SkPictureRecorder_beginRecording(SkPictureRecorder *picture_recorder, const SkRect *bounds, sk_b_box_hierarchy_t b_box_hierarchy);
-SkCanvas * SkPictureRecorder_beginRecording_2(SkPictureRecorder *picture_recorder, const SkRect *bounds, SkBBHFactory *bbhFactory);
-SkCanvas * SkPictureRecorder_beginRecording_3(SkPictureRecorder *picture_recorder, SkScalar width, SkScalar height, SkBBHFactory *bbhFactory);
-SkCanvas * SkPictureRecorder_getRecordingCanvas(SkPictureRecorder *picture_recorder);
-sk_picture_t SkPictureRecorder_finishRecordingAsPicture(SkPictureRecorder *picture_recorder);
-sk_picture_t SkPictureRecorder_finishRecordingAsPictureWithCull(SkPictureRecorder *picture_recorder, const SkRect *cullRect);
-sk_picture_t SkPictureRecorder_finishRecordingAsDrawable(SkPictureRecorder *picture_recorder);
+#endif
+
+void *SkPictureRecorder_new(); // () -> SkPictureRecorder *
+void SkPictureRecorder_delete(void *picture_recorder); // (SkPictureRecorder *picture_recorder)
+void *SkPictureRecorder_beginRecording(void *picture_recorder, const void *bounds, int b_box_hierarchy); // (SkPictureRecorder *picture_recorder, const SkRect *bounds, sk_b_box_hierarchy_t b_box_hierarchy) -> SkCanvas *
+void *SkPictureRecorder_beginRecording_2(void *picture_recorder, const void *bounds, void *bbhFactory); // (SkPictureRecorder *picture_recorder, const SkRect *bounds, SkBBHFactory *bbhFactory) -> SkCanvas *
+void *SkPictureRecorder_beginRecording_3(void *picture_recorder, float width, float height, void *bbhFactory); // (SkPictureRecorder *picture_recorder, SkScalar width, SkScalar height, SkBBHFactory *bbhFactory) -> SkCanvas *
+void *SkPictureRecorder_getRecordingCanvas(void *picture_recorder); // (SkPictureRecorder *picture_recorder) -> SkCanvas *
+int SkPictureRecorder_finishRecordingAsPicture(void *picture_recorder); // (SkPictureRecorder *picture_recorder) -> sk_picture_t
+int SkPictureRecorder_finishRecordingAsPictureWithCull(void *picture_recorder, const void *cullRect); // (SkPictureRecorder *picture_recorder, const SkRect *cullRect) -> sk_picture_t
+int SkPictureRecorder_finishRecordingAsDrawable(void *picture_recorder); // (SkPictureRecorder *picture_recorder) -> sk_picture_t
+
+#ifdef __cplusplus
 }
+#endif
 
 #endif //RAIA_SKIA_SK_PICTURE_RECORDER_H
