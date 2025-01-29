@@ -4,19 +4,17 @@ import Foundation
 
 let cm = Skia.ColorMatrix()
 
+//
 
-let bitmap = SkBitmap_new()
-SkBitmap_allocN32Pixels(bitmap, 300, 300, false)
-let canvas = SkCanvas_new_3(bitmap)
-let paint = SkPaint_new()
+let bitmap = Skia.Bitmap()
+bitmap.allocN32Pixels(width: 300, height: 300, isOpaque: false)
+let canvas = Skia.Canvas(bitmap: bitmap)
+let paint = Skia.Paint()
+paint.setColor(color: 0xFFFF0000)
+let rect = Skia.Rect.MakeXYWH(x: 0, y: 0, w: 300, h: 300)
+canvas.drawRect(rect: rect, paint: paint)
 
-SkPaint_setColor(paint, 0xFFFF0000)
-let rect = SkRect_MakeXYWH(0, 0, 300, 300)
-SkCanvas_drawRect(canvas, rect, paint)
-
-let pixels = SkBitmap_getPixels(bitmap)?.assumingMemoryBound(to: UInt8.self)
-
-//print(bitmap)
+let pixels = bitmap.getPixels()
 
 func main() {
     let renderer = Game.Renderer2D(texWidth: 300, texHeight: 300)

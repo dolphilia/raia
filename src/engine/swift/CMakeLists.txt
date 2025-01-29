@@ -50,9 +50,19 @@ add_executable(main
     src/gles/_gles_helper.swift
 
     src/skia/__skia_namespace.swift
+    src/skia/_skia_enum.swift
     src/skia/_skia_function.swift
     src/skia/_skia_type.swift
+    src/skia/_skia_typealias.swift
+    src/skia/skia_bitmap.swift
+    src/skia/skia_canvas.swift
     src/skia/skia_colormatrix.swift
+    src/skia/skia_ipoint.swift
+    src/skia/skia_irect.swift
+    src/skia/skia_isize.swift
+    src/skia/skia_paint.swift
+    src/skia/skia_rect.swift
+    src/skia/skia_size.swift
 )
 
 target_link_libraries(main PRIVATE wrapper glfw.3.4 raia_glfw egl GLESv2 raia_gles cglm reskia)

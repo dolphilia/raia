@@ -64,6 +64,7 @@ extern "C" {
 #include "binding/sk_graphics.h"
 #include "binding/sk_high_contrast_config.h"
 #include "binding/sk_high_contrast_filter.h"
+#include "binding/sk_i_point.h"
 #include "binding/sk_i_rect.h"
 #include "binding/sk_i_size.h"
 #include "binding/sk_icc.h"

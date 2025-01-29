@@ -5,6 +5,10 @@ extension Skia {
     public final class AndroidCodecType {
         public let handle: sk_android_codec_t
 
+        var pointer: AndroidCodecMutablePointer? {
+            return static_sk_android_codec_get(handle)
+        }
+
         public init(handle: sk_android_codec_t) {
             self.handle = handle
         }
@@ -827,6 +831,10 @@ extension Skia {
 
     public final class RectType {
         public let handle: sk_rect_t
+
+        public var pointer : RectMutablePointer? {
+            return static_sk_rect_get_ptr(handle)
+        }
 
         public init(handle: sk_rect_t) {
             self.handle = handle
