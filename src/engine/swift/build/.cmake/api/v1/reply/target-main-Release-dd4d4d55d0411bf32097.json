@@ -57,7 +57,7 @@
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 68,
+				"line" : 75,
 				"parent" : 0
 			},
 			{
@@ -147,7 +147,14 @@
 				33,
 				34,
 				35,
-				36
+				36,
+				37,
+				38,
+				39,
+				40,
+				41,
+				42,
+				43
 			]
 		}
 	],
@@ -285,7 +292,14 @@
 				33,
 				34,
 				35,
-				36
+				36,
+				37,
+				38,
+				39,
+				40,
+				41,
+				42,
+				43
 			]
 		}
 	],
@@ -474,7 +488,31 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
+			"path" : "src/skia/skia_color4f.swift",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
 			"path" : "src/skia/skia_colormatrix.swift",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/skia/skia_colorspace.swift",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/skia/skia_image.swift",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/skia/skia_imageinfo.swift",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -498,7 +536,25 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
+			"path" : "src/skia/skia_mask.swift",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/skia/skia_maskbuilder.swift",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
 			"path" : "src/skia/skia_paint.swift",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/skia/skia_point.swift",
 			"sourceGroupIndex" : 0
 		},
 		{

@@ -200,8 +200,32 @@
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
   "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_color4f.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_color4f.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
   "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_colormatrix.swift",
   "output": "CMakeFiles/main.dir/src/skia/skia_colormatrix.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_colorspace.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_colorspace.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_image.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_image.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_imageinfo.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_imageinfo.swift.o"
 },
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
@@ -224,8 +248,26 @@
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
   "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_mask.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_mask.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_maskbuilder.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_maskbuilder.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
   "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_paint.swift",
   "output": "CMakeFiles/main.dir/src/skia/skia_paint.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_point.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_point.swift.o"
 },
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",

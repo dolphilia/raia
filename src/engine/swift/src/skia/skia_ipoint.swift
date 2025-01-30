@@ -1,7 +1,14 @@
 extension Skia {
     class IPoint {
         public var pointer: Skia.IPointMutablePointer?
-        public var handle: sk_i_point_t
+        public var handle: sk_i_point_t?
+
+        deinit {
+            SkIPoint_delete(self.pointer)
+            if let handle = self.handle {
+                static_sk_i_point_delete(handle)
+            }
+        }
 
         // int x(int i_point); // () -> int32_t
         func x() -> Int {
@@ -26,7 +33,7 @@ extension Skia {
 
         // // static
 
-        init(pointer: Skia.IPointMutablePointer?, handle: sk_i_point_t) {
+        init(pointer: Skia.IPointMutablePointer?, handle: sk_i_point_t?) {
             self.pointer = pointer
             self.handle = handle
         }

@@ -24,6 +24,7 @@ extern "C" {
 #include "binding/sk_capabilities.h"
 #include "binding/sk_codec.h"
 #include "binding/sk_codecs.h"
+#include "binding/sk_color_4f.h"
 #include "binding/sk_color_filter.h"
 #include "binding/sk_color_filters.h"
 #include "binding/sk_color_info.h"
@@ -82,6 +83,8 @@ extern "C" {
 #include "binding/sk_luma_color_filter.h"
 #include "binding/sk_m_44.h"
 #include "binding/sk_malloc_pixel_ref.h"
+#include "binding/sk_mask.h"
+#include "binding/sk_mask_builder.h"
 #include "binding/sk_mask_filter.h"
 #include "binding/sk_matrix.h"
 #include "binding/sk_memory_stream.h"
@@ -157,6 +160,9 @@ extern "C" {
 #include "binding/sk_yuva_info.h"
 #include "binding/sk_yuva_pixmap_info.h"
 #include "binding/sk_yuva_pixmaps.h"
+
+// Static
+
 #include "static/static_sk_android_codec.h"
 #include "static/static_sk_b_box_hierarchy.h"
 #include "static/static_sk_blend_mode.h"
@@ -203,6 +209,8 @@ extern "C" {
 #include "static/static_sk_image_required_properties.h"
 #include "static/static_sk_image.h"
 #include "static/static_sk_m_44.h"
+#include "static/static_sk_mask.h"
+#include "static/static_sk_mask_builder.h"
 #include "static/static_sk_mask_filter.h"
 #include "static/static_sk_matrix.h"
 #include "static/static_sk_memory_stream.h"

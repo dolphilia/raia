@@ -56,11 +56,18 @@ add_executable(main
     src/skia/_skia_typealias.swift
     src/skia/skia_bitmap.swift
     src/skia/skia_canvas.swift
+    src/skia/skia_color4f.swift
     src/skia/skia_colormatrix.swift
+    src/skia/skia_colorspace.swift
+    src/skia/skia_image.swift
+    src/skia/skia_imageinfo.swift
     src/skia/skia_ipoint.swift
     src/skia/skia_irect.swift
     src/skia/skia_isize.swift
+    src/skia/skia_mask.swift
+    src/skia/skia_maskbuilder.swift
     src/skia/skia_paint.swift
+    src/skia/skia_point.swift
     src/skia/skia_rect.swift
     src/skia/skia_size.swift
 )
