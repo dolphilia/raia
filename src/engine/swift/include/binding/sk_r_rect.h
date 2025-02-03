@@ -13,8 +13,8 @@ extern "C" {
 void *SkRRect_new(); // () -> SkRRect *
 void *SkRRect_new_2(const void *rrect); // (const SkRRect *rrect) -> SkRRect *
 void SkRRect_delete(void *rrect); // (SkRRect *rrect)
-int getType(void *rrect); // (SkRRect *rrect) -> SkRRect::Type
-int type(void *rrect); // (SkRRect *rrect) -> SkRRect::Type
+int SkRRect_getType(void *rrect); // (SkRRect *rrect) -> SkRRect::Type
+int SkRRect_type(void *rrect); // (SkRRect *rrect) -> SkRRect::Type
 bool SkRRect_isEmpty(void *rrect); // (SkRRect *rrect) -> bool
 bool SkRRect_isRect(void *rrect); // (SkRRect *rrect) -> bool
 bool SkRRect_isOval(void *rrect); // (SkRRect *rrect) -> bool

@@ -206,6 +206,18 @@
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
   "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_colorfilter.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_colorfilter.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_colorinfo.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_colorinfo.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
   "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_colormatrix.swift",
   "output": "CMakeFiles/main.dir/src/skia/skia_colormatrix.swift.o"
 },
@@ -214,6 +226,24 @@
   "command": ":",
   "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_colorspace.swift",
   "output": "CMakeFiles/main.dir/src/skia/skia_colorspace.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_cubicresampler.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_cubicresampler.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_data.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_data.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_flattenable.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_flattenable.swift.o"
 },
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
@@ -260,8 +290,26 @@
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
   "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_matrix.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_matrix.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
   "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_paint.swift",
   "output": "CMakeFiles/main.dir/src/skia/skia_paint.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_path.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_path.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_pixelref.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_pixelref.swift.o"
 },
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
@@ -272,13 +320,67 @@
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
   "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_point3.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_point3.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_pixmap.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_pixmap.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
   "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_rect.swift",
   "output": "CMakeFiles/main.dir/src/skia/skia_rect.swift.o"
 },
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
   "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_rrect.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_rrect.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_rsxform.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_rsxform.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_samplingoptions.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_samplingoptions.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_shader.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_shader.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
   "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_size.swift",
   "output": "CMakeFiles/main.dir/src/skia/skia_size.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_stream.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_stream.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_string.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_string.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_surfaceprops.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_surfaceprops.swift.o"
 }
 ]

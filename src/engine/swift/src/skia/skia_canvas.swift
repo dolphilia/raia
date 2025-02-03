@@ -1,6 +1,7 @@
 extension Skia {
     class Canvas {
         public var pointer: Skia.CanvasMutablePointer?
+        public var handle: sk_canvas_t?
 
         // void * SkCanvas_new(); // () -> SkCanvas *
         init() {
@@ -11,23 +12,51 @@ extension Skia {
             self.pointer = SkCanvas_new_2(Int32(width), Int32(height), props)
         }
         // void * SkCanvas_new_3(void *bitmap); // (SkBitmap *bitmap) -> SkCanvas *
-        init(bitmap: Skia.BitmapMutablePointer?) {
+        init(bitmap: BitmapMutablePointer?) {
             self.pointer = SkCanvas_new_3(bitmap)
         }
-        init(bitmap: Skia.Bitmap) {
+        init(bitmap: Bitmap) {
             self.pointer = SkCanvas_new_3(bitmap.pointer)
         }
         // void * SkCanvas_new_4(const void *bitmap, const void *props); // (const SkBitmap *bitmap, const SkSurfaceProps *props) -> SkCanvas *
-        init(bitmap: Skia.BitmapConstPointer?, props: Skia.SurfacePropsConstPointer?) {
+        init(bitmap: BitmapConstPointer?, props: Skia.SurfacePropsConstPointer?) {
             self.pointer = SkCanvas_new_4(bitmap, props)
         }
+        init(bitmap: Bitmap, props: Skia.SurfaceProps) {
+            self.pointer = SkCanvas_new_4(bitmap.pointer, props.pointer)
+        }
         // void SkCanvas_delete(void *canvas); // (SkCanvas *canvas)
+
+        deinit {
+            SkCanvas_delete(self.pointer)
+            if let handle = self.handle {
+                static_sk_canvas_delete(handle)
+            }
+        }
         // void * SkCanvas_accessTopLayerPixels(void *canvas, void *info, void *rowBytes, void *origin); // (SkCanvas *canvas, SkImageInfo *info, size_t *rowBytes, SkIPoint *origin) -> void *
+
+        func accessTopLayerPixels(info: ImageInfo, rowBytes: UnsafeMutablePointer<UInt>?, origin: IPoint) -> UnsafeMutableRawPointer? {
+            return SkCanvas_accessTopLayerPixels(self.pointer, info.pointer, rowBytes, origin.pointer)
+        }
         // void * SkCanvas_accessTopRasterHandle(void *canvas); // (SkCanvas *canvas) -> SkRasterHandleAllocator::Handle
         // void SkCanvas_androidFramework_setDeviceClipRestriction(void *canvas, const void *rect); // (SkCanvas *canvas, const SkIRect *rect)
+
+        func androidFramework_setDeviceClipRestriction(rect: Skia.IRect) {
+            SkCanvas_androidFramework_setDeviceClipRestriction(self.pointer, rect.pointer)
+        }
         // void SkCanvas_clear(void *canvas, const void *color); // (SkCanvas *canvas, const SkColor4f *color)
+        func clear(color: Color4f) {
+            SkCanvas_clear(self.pointer, color.pointer)
+        }
         // void SkCanvas_clear_2(void *canvas, unsigned int color); // (SkCanvas *canvas, SkColor color)
+        func clear(color: ColorARGB8888) {
+            SkCanvas_clear_2(self.pointer, color)
+        }
         // void SkCanvas_clipIRect(void *canvas, const void *irect, int op); // (SkCanvas *canvas, const SkIRect *irect, SkClipOp op)
+
+        func clipIRect(irect: Skia.IRect, op: ClipOp) {
+            SkCanvas_clipIRect(self.pointer, irect.pointer, Int32(op.rawValue))
+        }
         // void SkCanvas_clipPath(void *canvas, const void *path, bool doAntiAlias); // (SkCanvas *canvas, const SkPath *path, bool doAntiAlias)
         // void SkCanvas_clipPath_2(void *canvas, const void *path, int op); // (SkCanvas *canvas, const SkPath *path, SkClipOp op)
         // void SkCanvas_clipPath_3(void *canvas, const void *path, int op, bool doAntiAlias); // (SkCanvas *canvas, const SkPath *path, SkClipOp op, bool doAntiAlias)
@@ -84,7 +113,10 @@ extension Skia {
         // void SkCanvas_drawPoints(void *canvas, int mode, unsigned long count, const void * pts, const void *paint); // (SkCanvas *canvas, SkCanvas::PointMode mode, size_t count, const SkPoint pts[], const SkPaint *paint)
         // void SkCanvas_drawRect(void *canvas, int rect, const void *paint); // (SkCanvas *canvas, sk_rect_t rect, const SkPaint *paint)
         func drawRect(rect: Skia.Rect, paint: Skia.Paint) {
-            SkCanvas_drawRect(self.pointer, Int32(rect.handle), paint.pointer)
+            guard let handle = rect.handle else {
+                fatalError("SkCanvas drawRect() rect handle is nil")
+            }
+            SkCanvas_drawRect(self.pointer, Int32(handle), paint.pointer)
         }
         // void SkCanvas_drawRegion(void *canvas, const void *region, const void *paint); // (SkCanvas *canvas, const SkRegion *region, const SkPaint *paint)
         // void SkCanvas_drawRoundRect(void *canvas, const void *rect, float rx, float ry, const void *paint); // (SkCanvas *canvas, const SkRect *rect, SkScalar rx, SkScalar ry, const SkPaint *paint)
@@ -145,6 +177,11 @@ extension Skia {
         // bool SkCanvas_writePixels(void *canvas, const void *bitmap, int x, int y); // (SkCanvas *canvas, const SkBitmap *bitmap, int x, int y) -> bool
         // bool SkCanvas_writePixels_2(void *canvas, const void *info, const void *pixels, unsigned long rowBytes, int x, int y); // (SkCanvas *canvas, const SkImageInfo *info, const void *pixels, size_t rowBytes, int x, int y) -> bool
         // // static
+
+        init(pointer: Skia.CanvasMutablePointer?, handle: sk_canvas_t?) {
+            self.pointer = pointer
+            self.handle = handle
+        }
         // int SkCanvas_MakeRasterDirect(const void *info, void *pixels, unsigned long rowBytes, const void *props); // (const SkImageInfo *info, void *pixels, size_t rowBytes, const SkSurfaceProps *props) -> sk_canvas_t
         // int SkCanvas_MakeRasterDirectN32(int width, int height, void *pixels, unsigned long rowBytes); // (int width, int height, SkPMColor *pixels, size_t rowBytes) -> sk_canvas_t}
 

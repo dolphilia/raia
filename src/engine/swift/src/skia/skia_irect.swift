@@ -87,7 +87,10 @@ extension Skia {
         }
         // void SkIRect_setSize(void *i_rect, int size); // (SkIRect *i_rect, sk_i_size_t size)
         func setSize(size: ISize) {
-            SkIRect_setSize(self.pointer, size.handle)
+            guard let sizeHandle = size.handle else {
+                fatalError("size.handle is nil")
+            }
+            SkIRect_setSize(self.pointer, sizeHandle)
         }
         // int SkIRect_makeOffset(void *i_rect, int dx, int dy); // (SkIRect *i_rect, int32_t dx, int32_t dy) -> sk_i_rect_t
         static func MakeOffset(i_rect: IRect, dx: Int, dy: Int) -> IRect {
@@ -209,7 +212,10 @@ extension Skia {
             guard let ptHandle = pt.handle else {
                 fatalError("pt.handle is nil")
             }
-            let handle = SkIRect_MakePtSize(ptHandle, size.handle);
+            guard let sizeHandle = size.handle else {
+                fatalError("size.handle is nil")
+            }
+            let handle = SkIRect_MakePtSize(ptHandle, sizeHandle);
             let pointer = static_sk_i_rect_get_ptr(handle)
             return IRect(pointer: pointer, handle: handle)
         }

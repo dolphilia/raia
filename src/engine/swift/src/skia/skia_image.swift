@@ -1,9 +1,9 @@
 extension Skia {
     class Image {
         public var pointer: Skia.ImageMutablePointer?
-        public var handle: sk_image_t
+        public var handle: sk_image_t?
 
-        init (pointer: Skia.ImageMutablePointer?, handle: sk_image_t) {
+        init (pointer: Skia.ImageMutablePointer?, handle: sk_image_t?) {
             self.pointer = pointer
             self.handle = handle
         }
@@ -11,7 +11,9 @@ extension Skia {
         // void SkImage_delete(void *image); // (SkImage *image)
         deinit {
             SkImage_delete(self.pointer)
-            static_sk_image_delete(self.handle)
+            if let handle = self.handle {
+                static_sk_image_delete(handle)
+            }
         }
 
         // // TODO

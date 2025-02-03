@@ -9,6 +9,8 @@
 extern "C" {
 #endif
 
+#include <stdarg.h>
+
 // SkString & operator=(const SkString &)
 // SkString & operator=(SkString &&)
 // SkString & operator=(const char text[])
@@ -82,12 +84,12 @@ void SkString_prependS64(void *string, int value, int minDigits); // (SkString *
 void SkString_prependHex(void *string, unsigned int value, int minDigits); // (SkString *string, uint32_t value, int minDigits)
 void SkString_prependScalar(void *string, float value); // (SkString *string, SkScalar value)
 
-//void SkString_printf(SkString *string, const char format[],...);
-//void SkString_printVAList(SkString *string, const char format[], va_list);
-//void SkString_appendf(SkString *string, const char format[],...);
-//void SkString_appendVAList(SkString *string, const char format[], va_list);
-//void SkString_prependf(SkString *string, const char format[],...);
-//void SkString_prependVAList(SkString *string, const char format[], va_list);
+void SkString_printf(void *string, const char format[],...);
+void SkString_printVAList(void *string, const char format[], va_list);
+void SkString_appendf(void *string, const char format[],...);
+void SkString_appendVAList(void *string, const char format[], va_list);
+void SkString_prependf(void *string, const char format[],...);
+void SkString_prependVAList(void *string, const char format[], va_list);
 
 void SkString_remove(void *string, unsigned long offset, unsigned long length); // (SkString *string, size_t offset, size_t length)
 void SkString_swap(void *string, void *other); // (SkString *string, SkString *other)
