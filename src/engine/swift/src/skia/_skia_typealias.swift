@@ -26,8 +26,12 @@ extension Skia {
     typealias CubicResamplerConstPointer = UnsafeRawPointer
     typealias DataMutablePointer = UnsafeMutableRawPointer
     typealias DataConstPointer = UnsafeRawPointer
+    typealias DrawableMutablePointer = UnsafeMutableRawPointer
+    typealias DrawableConstPointer = UnsafeRawPointer
     typealias FlattenableMutablePointer = UnsafeMutableRawPointer
     typealias FlattenableConstPointer = UnsafeRawPointer
+    typealias FontMutablePointer = UnsafeMutableRawPointer
+    typealias FontConstPointer = UnsafeRawPointer
     typealias ImageMutablePointer = UnsafeMutableRawPointer
     typealias ImageConstPointer = UnsafeRawPointer
     typealias ImageInfoMutablePointer = UnsafeMutableRawPointer
@@ -38,6 +42,8 @@ extension Skia {
     typealias IRectConstPointer = UnsafeRawPointer
     typealias ISizeMutablePointer = UnsafeMutableRawPointer
     typealias ISizeConstPointer = UnsafeRawPointer
+    typealias M44MutablePointer = UnsafeMutableRawPointer
+    typealias M44ConstPointer = UnsafeRawPointer
     typealias MaskMutablePointer = UnsafeMutableRawPointer
     typealias MaskConstPointer = UnsafeRawPointer
     typealias MaskBuilderMutablePointer = UnsafeMutableRawPointer
@@ -58,6 +64,8 @@ extension Skia {
     typealias Point3ConstPointer = UnsafeRawPointer
     typealias RectMutablePointer = UnsafeMutableRawPointer
     typealias RectConstPointer = UnsafeRawPointer
+    typealias RegionMutablePointer = UnsafeMutableRawPointer
+    typealias RegionConstPointer = UnsafeRawPointer
     typealias RRectMutablePointer = UnsafeMutableRawPointer
     typealias RRectConstPointer = UnsafeRawPointer
     typealias RSXformMutablePointer = UnsafeMutableRawPointer
@@ -76,4 +84,12 @@ extension Skia {
     typealias StringViewConstPointer = UnsafeRawPointer
     typealias SurfacePropsMutablePointer = UnsafeMutableRawPointer
     typealias SurfacePropsConstPointer = UnsafeRawPointer
+    typealias V2MutablePointer = UnsafeMutableRawPointer
+    typealias V2ConstPointer = UnsafeRawPointer
+    typealias V3MutablePointer = UnsafeMutableRawPointer
+    typealias V3ConstPointer = UnsafeRawPointer
+    typealias V4MutablePointer = UnsafeMutableRawPointer
+    typealias V4ConstPointer = UnsafeRawPointer
+    typealias WStreamMutablePointer = UnsafeMutableRawPointer
+    typealias WStreamConstPointer = UnsafeRawPointer
 }

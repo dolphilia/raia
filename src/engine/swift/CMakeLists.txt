@@ -63,12 +63,15 @@ add_executable(main
     src/skia/skia_colorspace.swift
     src/skia/skia_cubicresampler.swift
     src/skia/skia_data.swift
+    src/skia/skia_drawable.swift
     src/skia/skia_flattenable.swift
+    src/skia/skia_font.swift
     src/skia/skia_image.swift
     src/skia/skia_imageinfo.swift
     src/skia/skia_ipoint.swift
     src/skia/skia_irect.swift
     src/skia/skia_isize.swift
+    src/skia/skia_m44.swift
     src/skia/skia_mask.swift
     src/skia/skia_maskbuilder.swift
     src/skia/skia_matrix.swift
@@ -79,6 +82,7 @@ add_executable(main
     src/skia/skia_point3.swift
     src/skia/skia_pixmap.swift
     src/skia/skia_rect.swift
+    src/skia/skia_region.swift
     src/skia/skia_rrect.swift
     src/skia/skia_rsxform.swift
     src/skia/skia_samplingoptions.swift
@@ -87,6 +91,10 @@ add_executable(main
     src/skia/skia_stream.swift
     src/skia/skia_string.swift
     src/skia/skia_surfaceprops.swift
+    src/skia/skia_v2.swift
+    src/skia/skia_v3.swift
+    src/skia/skia_v4.swift
+    src/skia/skia_wstream.swift
 )
 
 target_link_libraries(main PRIVATE wrapper glfw.3.4 raia_glfw egl GLESv2 raia_gles cglm reskia)

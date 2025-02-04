@@ -13,6 +13,38 @@ extension Skia {
         case yes
     }
 
+    enum BlendMode: Int32 {
+        case clear
+        case src
+        case dst
+        case srcOver
+        case dstOver
+        case srcIn
+        case dstIn
+        case srcOut
+        case dstOut
+        case srcATop
+        case dstATop
+        case xor
+        case plus
+        case modulate
+        case screen
+        case overlay
+        case darken
+        case lighten
+        case colorDodge
+        case colorBurn
+        case hardLight
+        case softLight
+        case difference
+        case exclusion
+        case multiply
+        case hue
+        case saturation
+        case color
+        case luminosity
+    }
+
     enum ClipOp: Int32 {
         case difference
         case intersect

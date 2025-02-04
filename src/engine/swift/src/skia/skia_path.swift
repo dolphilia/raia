@@ -1,8 +1,13 @@
 extension Skia {
     class Path {
+        public enum AddPathMode: Int32 {
+            case append
+            case extend
+        }
+
         public enum ArcSize: Int32 {
-            case small = 0
-            case large = 1
+            case small
+            case large
         }
 
         public var pointer: Skia.PathMutablePointer?
@@ -330,44 +335,225 @@ extension Skia {
             return Path(pointer: pointer, handle: nil)
         }
         // bool SkPath_isRect(void *path, void *rect, void *isClosed, void *direction); // (SkPath *path, SkRect *rect, bool *isClosed, SkPathDirection *direction) -> bool
+
+        func isRect(rect: Rect, isClosed: UnsafeMutablePointer<Bool>?, direction: [PathDirection]) -> Bool {
+            return direction.withUnsafeBufferPointer { buffer in
+                SkPath_isRect(self.pointer, rect.pointer, isClosed, UnsafeMutableRawPointer(mutating: buffer.baseAddress))
+            }
+        }
+
         // void *SkPath_addRect(void *path, const void *rect, int dir, unsigned start); // (SkPath *path, const SkRect *rect, SkPathDirection dir, unsigned start) -> SkPath *
+
+        func addRect(rect: Rect, dir: PathDirection, start: UInt) -> Path {
+            let pointer = SkPath_addRect(self.pointer, rect.pointer, dir.rawValue, UInt32(start));
+            return Path(pointer: pointer, handle: nil)
+        }
         // void *SkPath_addRect_2(void *path, const void *rect, int dir); // (SkPath *path, const SkRect *rect, SkPathDirection dir) -> SkPath *
+
+        func addRect(rect: Rect, dir: PathDirection) -> Path {
+            let pointer = SkPath_addRect_2(self.pointer, rect.pointer, dir.rawValue);
+            return Path(pointer: pointer, handle: nil)
+        }
         // void *SkPath_addRect_3(void *path, float left, float top, float right, float bottom, int dir); // (SkPath *path, SkScalar left, SkScalar top, SkScalar right, SkScalar bottom, SkPathDirection dir) -> SkPath *
+
+        func addRect(left: Float, top: Float, right: Float, bottom: Float, dir: PathDirection) -> Path {
+            let pointer = SkPath_addRect_3(self.pointer, left, top, right, bottom, dir.rawValue);
+            return Path(pointer: pointer, handle: nil)
+        }
         // void *SkPath_addOval(void *path, const void *oval, int dir); // (SkPath *path, const SkRect *oval, SkPathDirection dir) -> SkPath *
+
+        func addOval(oval: Rect, dir: PathDirection) -> Path {
+            let pointer = SkPath_addOval(self.pointer, oval.pointer, dir.rawValue);
+            return Path(pointer: pointer, handle: nil)
+        }
         // void *SkPath_addOval_2(void *path, const void *oval, int dir, unsigned start); // (SkPath *path, const SkRect *oval, SkPathDirection dir, unsigned start) -> SkPath *
+
+        func addOval(oval: Rect, dir: PathDirection, start: UInt) -> Path {
+            let pointer = SkPath_addOval_2(self.pointer, oval.pointer, dir.rawValue, UInt32(start));
+            return Path(pointer: pointer, handle: nil)
+        }
         // void *SkPath_addCircle(void *path, float x, float y, float radius, int dir); // (SkPath *path, SkScalar x, SkScalar y, SkScalar radius, SkPathDirection dir) -> SkPath *
+
+        func addCircle(x: Float, y: Float, radius: Float, dir: PathDirection) -> Path {
+            let pointer = SkPath_addCircle(self.pointer, x, y, radius, dir.rawValue);
+            return Path(pointer: pointer, handle: nil)
+        }
         // void *SkPath_addArc(void *path, const void *oval, float startAngle, float sweepAngle); // (SkPath *path, const SkRect *oval, SkScalar startAngle, SkScalar sweepAngle) -> SkPath *
+
+        func addArc(oval: Rect, startAngle: Float, sweepAngle: Float) -> Path {
+            let pointer = SkPath_addArc(self.pointer, oval.pointer, startAngle, sweepAngle);
+            return Path(pointer: pointer, handle: nil)
+        }
         // void *SkPath_addRoundRect(void *path, const void *rect, float rx, float ry, int dir); // (SkPath *path, const SkRect *rect, SkScalar rx, SkScalar ry, SkPathDirection dir) -> SkPath *
+
+        func addRoundRect(rect: Rect, rx: Float, ry: Float, dir: PathDirection) -> Path {
+            let pointer = SkPath_addRoundRect(self.pointer, rect.pointer, rx, ry, dir.rawValue);
+            return Path(pointer: pointer, handle: nil)
+        }
         // void *SkPath_addRoundRect_2(void *path, const void *rect, const void * radii, int dir); // (SkPath *path, const SkRect *rect, const SkScalar radii[], SkPathDirection dir) -> SkPath *
+
+        func addRoundRect(rect: Rect, radii: [Float], dir: PathDirection) -> Path {
+            return radii.withUnsafeBufferPointer { buffer in
+                let pointer = SkPath_addRoundRect_2(self.pointer, rect.pointer, UnsafeMutableRawPointer(mutating: buffer.baseAddress), dir.rawValue);
+                return Path(pointer: pointer, handle: nil)
+            }
+        }
         // void *SkPath_addRRect(void *path, const void *rrect, int dir); // (SkPath *path, const SkRRect *rrect, SkPathDirection dir) -> SkPath *
+
+        func addRRect(rrect: RRect, dir: PathDirection) -> Path {
+            let pointer = SkPath_addRRect(self.pointer, rrect.pointer, dir.rawValue);
+            return Path(pointer: pointer, handle: nil)
+        }
         // void *SkPath_addRRect_2(void *path, const void *rrect, int dir, unsigned start); // (SkPath *path, const SkRRect *rrect, SkPathDirection dir, unsigned start) -> SkPath *
+
+        func addRRect(rrect: RRect, dir: PathDirection, start: UInt) -> Path {
+            let pointer = SkPath_addRRect_2(self.pointer, rrect.pointer, dir.rawValue, UInt32(start));
+            return Path(pointer: pointer, handle: nil)
+        }
         // void *SkPath_addPoly(void *path, const void * pts, int count, bool close); // (SkPath *path, const SkPoint pts[], int count, bool close) -> SkPath *
+
+        func addPoly(pts: [Point], close: Bool) -> Path {
+            return pts.withUnsafeBufferPointer { buffer in
+                let pointer = SkPath_addPoly(self.pointer, UnsafeMutableRawPointer(mutating: buffer.baseAddress), Int32(pts.count), close);
+                return Path(pointer: pointer, handle: nil)
+            }
+        }
         // void *SkPath_addPoly_2(void *path, const void *list, bool close); // (SkPath *path, const std::initializer_list<SkPoint> *list, bool close) -> SkPath *
         // void *SkPath_addPath(void *path, const void *src, float dx, float dy, int mode); // (SkPath *path, const SkPath *src, SkScalar dx, SkScalar dy, SkPath::AddPathMode mode) -> SkPath *
+
+        func addPath(src: Path, dx: Float, dy: Float, mode: AddPathMode) -> Path {
+            let pointer = SkPath_addPath(self.pointer, src.pointer, dx, dy, mode.rawValue);
+            return Path(pointer: pointer, handle: nil)
+        }
         // void *SkPath_addPath_2(void *path, const void *src, int modeSkPath); // (SkPath *path, const SkPath *src, SkPath::AddPathMode modeSkPath) -> SkPath *
+
+        func addPath(src: Path, modeSkPath: AddPathMode) -> Path {
+            let pointer = SkPath_addPath_2(self.pointer, src.pointer, modeSkPath.rawValue);
+            return Path(pointer: pointer, handle: nil)
+        }
         // void *SkPath_addPath_3(void *path, const void *src, const void *matrix, int mode); // (SkPath *path, const SkPath *src, const SkMatrix *matrix, SkPath::AddPathMode mode) -> SkPath *
+
+        func addPath(src: Path, matrix: Matrix, mode: AddPathMode) -> Path {
+            let pointer = SkPath_addPath_3(self.pointer, src.pointer, matrix.pointer, mode.rawValue);
+            return Path(pointer: pointer, handle: nil)
+        }
         // void *SkPath_reverseAddPath(void *path, const void *src); // (SkPath *path, const SkPath *src) -> SkPath *
+
+        func reverseAddPath(src: Path) -> Path {
+            let pointer = SkPath_reverseAddPath(self.pointer, src.pointer);
+            return Path(pointer: pointer, handle: nil)
+        }
         // void SkPath_offset(void *path, float dx, float dy, void *dst); // (SkPath *path, SkScalar dx, SkScalar dy, SkPath *dst)
+
+        func offset(dx: Float, dy: Float, dst: Path) {
+            SkPath_offset(self.pointer, dx, dy, dst.pointer)
+        }
         // void SkPath_offset_2(void *path, float dx, float dy); // (SkPath *path, SkScalar dx, SkScalar dy)
+
+        func offset(dx: Float, dy: Float) {
+            SkPath_offset_2(self.pointer, dx, dy)
+        }
         // void SkPath_transform(void *path, const void *matrix, void *dst, int pc); // (SkPath *path, const SkMatrix *matrix, SkPath *dst, SkApplyPerspectiveClip pc)
+
+        func transform(matrix: Matrix, dst: Path, pc: ApplyPerspectiveClip) {
+            SkPath_transform(self.pointer, matrix.pointer, dst.pointer, pc.rawValue)
+        }
         // void SkPath_transform_2(void *path, const void *matrix, int pc); // (SkPath *path, const SkMatrix *matrix, SkApplyPerspectiveClip pc)
+
+        func transform(matrix: Matrix, pc: ApplyPerspectiveClip) {
+            SkPath_transform_2(self.pointer, matrix.pointer, pc.rawValue)
+        }
         // int SkPath_makeTransform(void *path, const void *m, int pc); // (SkPath *path, const SkMatrix *m, SkApplyPerspectiveClip pc) -> sk_path_t
+
+        func makeTransform(m: Matrix, pc: ApplyPerspectiveClip) -> Path {
+            let handle = SkPath_makeTransform(self.pointer, m.pointer, pc.rawValue)
+            let pointer = static_sk_path_get_ptr(handle)
+            return Path(pointer: pointer, handle: handle)
+        }
         // int SkPath_makeScale(void *path, float sx, float sy); // (SkPath *path, SkScalar sx, SkScalar sy) -> sk_path_t
+
+        func makeScale(sx: Float, sy: Float) -> Path {
+            let handle = SkPath_makeScale(self.pointer, sx, sy)
+            let pointer = static_sk_path_get_ptr(handle)
+            return Path(pointer: pointer, handle: handle)
+        }
         // bool SkPath_getLastPt(void *path, void *lastPt); // (SkPath *path, SkPoint *lastPt) -> bool
+
+        func getLastPt(lastPt: Point) -> Bool {
+            return SkPath_getLastPt(self.pointer, lastPt.pointer)
+        }
         // void SkPath_setLastPt(void *path, float x, float y); // (SkPath *path, SkScalar x, SkScalar y)
+
+        func setLastPt(x: Float, y: Float) {
+            SkPath_setLastPt(self.pointer, x, y)
+        }
         // void SkPath_setLastPt_2(void *path, const void *p); // (SkPath *path, const SkPoint *p)
+
+        func setLastPt(p: Point) {
+            SkPath_setLastPt_2(self.pointer, p.pointer)
+        }
         // unsigned int SkPath_getSegmentMasks(void *path); // (SkPath *path) -> uint32_t
+
+        func getSegmentMasks() -> UInt {
+            return UInt(SkPath_getSegmentMasks(self.pointer))
+        }
         // bool SkPath_contains(void *path, float x, float y); // (SkPath *path, SkScalar x, SkScalar y) -> bool
+
+        func contains(x: Float, y: Float) -> Bool {
+            return SkPath_contains(self.pointer, x, y)
+        }
         // void SkPath_dump(void *path, void *stream, bool dumpAsHex); // (SkPath *path, SkWStream *stream, bool dumpAsHex)
+
+        func dump(stream: WStream, dumpAsHex: Bool) {
+            SkPath_dump(self.pointer, stream.pointer, dumpAsHex)
+        }
         // void SkPath_dump_2(void *path); // (SkPath *path)
+
+        func dump() {
+            SkPath_dump_2(self.pointer)
+        }
         // void SkPath_dumpHex(void *path); // (SkPath *path)
+
+        func dumpHex() {
+            SkPath_dumpHex(self.pointer)
+        }
         // void SkPath_dumpArrays(void *path, void *stream, bool dumpAsHex); // (SkPath *path, SkWStream *stream, bool dumpAsHex)
+
+        func dumpArrays(stream: WStream, dumpAsHex: Bool) {
+            SkPath_dumpArrays(self.pointer, stream.pointer, dumpAsHex)
+        }
         // void SkPath_dumpArrays_2(void *path); // (SkPath *path)
+
+        func dumpArrays() {
+            SkPath_dumpArrays_2(self.pointer)
+        }
         // unsigned long SkPath_writeToMemory(void *path, void *buffer); // (SkPath *path, void *buffer) -> size_t
+
+        func writeToMemory(buffer: UnsafeMutableRawPointer?) -> UInt {
+            return SkPath_writeToMemory(self.pointer, buffer)
+        }
         // int SkPath_serialize(void *path); // (SkPath *path) -> sk_data_t
+
+        func serialize() -> Skia.Data {
+            let handle = SkPath_serialize(self.pointer)
+            let pointer = static_sk_data_get(handle)
+            return Skia.Data(pointer: pointer, handle: handle)
+        }
         // unsigned long SkPath_readFromMemory(void *path, const void *buffer, unsigned long length); // (SkPath *path, const void *buffer, size_t length) -> size_t
+
+        func readFromMemory(buffer: UnsafeRawPointer, length: UInt) -> UInt {
+            return SkPath_readFromMemory(self.pointer, buffer, length)
+        }
         // unsigned int SkPath_getGenerationID(void *path); // (SkPath *path) -> uint32_t
+
+        func getGenerationID() -> UInt {
+            return UInt(SkPath_getGenerationID(self.pointer))
+        }
         // bool SkPath_isValid(void *path); // (SkPath *path) -> bool
+
+        func isValid() -> Bool {
+            return SkPath_isValid(self.pointer)
+        }
 
         // // static
 
