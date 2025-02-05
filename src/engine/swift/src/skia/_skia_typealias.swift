@@ -10,6 +10,8 @@ extension Skia {
     typealias BitmapConstPointer = UnsafeRawPointer
     typealias BitmapAllocatorMutablePointer = UnsafeMutableRawPointer
     typealias BitmapAllocatorConstPointer = UnsafeRawPointer
+    typealias BlenderMutablePointer = UnsafeMutableRawPointer
+    typealias BlenderConstPointer = UnsafeRawPointer
     typealias CanvasMutablePointer = UnsafeMutableRawPointer
     typealias CanvasConstPointer = UnsafeRawPointer
     typealias Color4fMutablePointer = UnsafeMutableRawPointer
@@ -50,6 +52,8 @@ extension Skia {
     typealias MaskBuilderConstPointer = UnsafeRawPointer
     typealias MatrixMutablePointer = UnsafeMutableRawPointer
     typealias MatrixConstPointer = UnsafeRawPointer
+    typealias MeshMutablePointer = UnsafeMutableRawPointer
+    typealias MeshConstPointer = UnsafeRawPointer
     typealias PaintMutablePointer = UnsafeMutableRawPointer
     typealias PaintConstPointer = UnsafeRawPointer
     typealias PathMutablePointer = UnsafeMutableRawPointer

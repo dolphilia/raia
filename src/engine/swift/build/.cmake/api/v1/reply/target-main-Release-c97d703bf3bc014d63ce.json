@@ -57,7 +57,7 @@
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 100,
+				"line" : 102,
 				"parent" : 0
 			},
 			{
@@ -179,7 +179,9 @@
 				65,
 				66,
 				67,
-				68
+				68,
+				69,
+				70
 			]
 		}
 	],
@@ -349,7 +351,9 @@
 				65,
 				66,
 				67,
-				68
+				68,
+				69,
+				70
 			]
 		}
 	],
@@ -532,6 +536,12 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
+			"path" : "src/skia/skia_blender.swift",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
 			"path" : "src/skia/skia_canvas.swift",
 			"sourceGroupIndex" : 0
 		},
@@ -647,6 +657,12 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "src/skia/skia_matrix.swift",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/skia/skia_mesh.swift",
 			"sourceGroupIndex" : 0
 		},
 		{

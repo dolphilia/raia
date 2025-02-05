@@ -55,6 +55,7 @@ add_executable(main
     src/skia/_skia_type.swift
     src/skia/_skia_typealias.swift
     src/skia/skia_bitmap.swift
+    src/skia/skia_blender.swift
     src/skia/skia_canvas.swift
     src/skia/skia_color4f.swift
     src/skia/skia_colorfilter.swift
@@ -75,6 +76,7 @@ add_executable(main
     src/skia/skia_mask.swift
     src/skia/skia_maskbuilder.swift
     src/skia/skia_matrix.swift
+    src/skia/skia_mesh.swift
     src/skia/skia_paint.swift
     src/skia/skia_path.swift
     src/skia/skia_pixelref.swift

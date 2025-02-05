@@ -329,15 +329,33 @@ extension Skia {
         }
         // void SkCanvas_drawMesh(void *canvas, const void *mesh, int blender, const void *paint); // (SkCanvas *canvas, const SkMesh *mesh, sk_blender_t blender, const SkPaint *paint)
 
-        // func drawMesh(mesh: Skia.Mesh, blender: Skia.Blender, paint: Skia.Paint) {
-        //     guard let meshHandle = mesh.handle else {
-        //         fatalError("Skia.Canvas drawMesh() mesh handle is nil")
-        //     }
-        //     SkCanvas_drawMesh(self.pointer, meshHandle, blender.handle, paint.pointer)
-        // }
+        func drawMesh(mesh: Skia.Mesh, blender: Skia.Blender, paint: Skia.Paint) {
+            guard let blenderHandle = blender.handle else {
+                fatalError("Blender handle is nil")
+            }
+            SkCanvas_drawMesh(self.pointer, mesh.pointer, blenderHandle, paint.pointer)
+        }
         // void SkCanvas_drawOval(void *canvas, const void *oval, const void *paint); // (SkCanvas *canvas, const SkRect *oval, const SkPaint *paint)
+        
+        func drawOval(oval: Skia.Rect, paint: Skia.Paint) {
+            SkCanvas_drawOval(self.pointer, oval.pointer, paint.pointer)
+        }
         // void SkCanvas_drawPaint(void *canvas, const void *paint); // (SkCanvas *canvas, const SkPaint *paint)
+
+        func drawPaint(paint: Skia.Paint) {
+            SkCanvas_drawPaint(self.pointer, paint.pointer)
+        }
         // void SkCanvas_drawPatch(void *canvas, const void * cubics, const unsigned int colors[4], const void * texCoords, int mode, const void *paint); // (SkCanvas *canvas, const SkPoint cubics[12], const SkColor colors[4], const SkPoint texCoords[4], SkBlendMode mode, const SkPaint *paint)
+
+        func drawPatch(cubics: [Point], colors: [ColorARGB8888], texCoords: [Point], mode: BlendMode, paint: Skia.Paint) {
+            cubics.withUnsafeBufferPointer { cubicsPointer in
+                colors.withUnsafeBufferPointer { colorsPointer in
+                    texCoords.withUnsafeBufferPointer { texCoordsPointer in
+                        SkCanvas_drawPatch(self.pointer, cubicsPointer.baseAddress, colorsPointer.baseAddress, texCoordsPointer.baseAddress, Int32(mode.rawValue), paint.pointer)
+                    }
+                }
+            }
+        }
         // void SkCanvas_drawPath(void *canvas, const void *path, const void *paint); // (SkCanvas *canvas, const SkPath *path, const SkPaint *paint)
         // void SkCanvas_drawPicture(void *canvas, int picture); // (SkCanvas *canvas, sk_picture_t picture)
         // void SkCanvas_drawPicture_2(void *canvas, int picture, const void *matrix, const void *paint); // (SkCanvas *canvas, sk_picture_t picture, const SkMatrix *matrix, const SkPaint *paint)

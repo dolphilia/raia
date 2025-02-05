@@ -194,6 +194,12 @@
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
   "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_blender.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_blender.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
   "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_canvas.swift",
   "output": "CMakeFiles/main.dir/src/skia/skia_canvas.swift.o"
 },
@@ -310,6 +316,12 @@
   "command": ":",
   "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_matrix.swift",
   "output": "CMakeFiles/main.dir/src/skia/skia_matrix.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_mesh.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_mesh.swift.o"
 },
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
