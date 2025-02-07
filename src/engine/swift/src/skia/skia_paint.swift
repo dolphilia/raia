@@ -9,6 +9,9 @@ extension Skia {
         // void *SkPaint_new_2(const void *color, void *colorSpace); // (const SkColor4f *color, SkColorSpace *colorSpace) -> SkPaint *
         // void *SkPaint_new_3(const void *paint); // (const SkPaint *paint) -> SkPaint *
         // void SkPaint_delete(void *paint); // (SkPaint *paint)
+        deinit {
+            SkPaint_delete(self.pointer)
+        }
         // void SkPaint_reset(void *paint); // (SkPaint *paint)
         // bool SkPaint_isAntiAlias(void *paint); // (SkPaint *paint) -> bool
         // void SkPaint_setAntiAlias(void *paint, bool aa); // (SkPaint *paint, bool aa)

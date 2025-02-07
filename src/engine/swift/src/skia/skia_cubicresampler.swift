@@ -1,19 +1,19 @@
 extension Skia {
     class CubicResampler {
         public var pointer: Skia.CubicResamplerMutablePointer?
-        public var handle: sk_cubic_resampler_t?
+        public var handle: sk_cubic_resampler_t = -1
 
         // void SkCubicResampler_delete(void *cubicResampler); // (SkCubicResampler *cubicResampler)
         deinit {
             SkCubicResampler_delete(self.pointer)
-            if let handle = self.handle {
+            if handle > -1 {
                 static_sk_cubic_resampler_delete(handle)
             }
         }
 
         // static
 
-        init(pointer: Skia.CubicResamplerMutablePointer?, handle: sk_cubic_resampler_t?) {
+        init(pointer: Skia.CubicResamplerMutablePointer?, handle: sk_cubic_resampler_t) {
             self.pointer = pointer
             self.handle = handle
         }

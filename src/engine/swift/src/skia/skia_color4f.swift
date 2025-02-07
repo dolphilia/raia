@@ -1,7 +1,7 @@
 extension Skia {
     class Color4f {
         public var pointer: Skia.Color4fMutablePointer?
-        public var handle: sk_color_4f_t
+        public var handle: sk_color_4f_t = -1
 
         // void SkColor4f_delete(void *color);
 

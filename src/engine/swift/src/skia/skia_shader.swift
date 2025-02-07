@@ -1,11 +1,11 @@
 extension Skia {
     class Shader {
         public var pointer: Skia.ShaderMutablePointer?
-        public var handle: sk_shader_t?
+        public var handle: sk_shader_t = -1
         // void SkShader_delete(void *shader); // (SkShader *shader)
         deinit {
             SkShader_delete(pointer)
-            if let handle = self.handle {
+            if handle > -1 {
                 static_sk_shader_delete(handle)
             }
         }
@@ -18,7 +18,7 @@ extension Skia {
             guard let image = SkShader_isAImage(pointer, localMatrix.pointer, UnsafeMutableRawPointer(mutating: xy)) else {
                 return nil
             }
-            return Skia.Image(pointer: image, handle: nil)
+            return Skia.Image(pointer: image, handle: -1)
         }
         // bool SkShader_isAImage_2(void *shader); // (SkShader *shader) -> bool
         func isAImage() -> Bool {
@@ -32,19 +32,13 @@ extension Skia {
         }
         // int SkShader_makeWithColorFilter(void *shader, int color_filter); // (SkShader *shader, sk_color_filter_t color_filter) -> sk_shader_t
         func makeWithColorFilter(colorFilter: ColorFilter) -> Shader {
-            guard let colorFilterHandle = colorFilter.handle else {
-                fatalError("ColorFilter handle is nil")
-            }
-            let handle = SkShader_makeWithColorFilter(pointer, colorFilterHandle)
+            let handle = SkShader_makeWithColorFilter(pointer, colorFilter.handle)
             let pointer = static_sk_shader_get(handle)
             return Shader(pointer: pointer, handle: handle)
         }
         // int SkShader_makeWithWorkingColorSpace(void *shader, int color_space); // (SkShader *shader, sk_color_space_t color_space) -> sk_shader_t
         func makeWithWorkingColorSpace(colorSpace: ColorSpace) -> Shader {
-            guard let colorSpaceHandle = colorSpace.handle else {
-                fatalError("ColorSpace handle is nil")
-            }
-            let handle = SkShader_makeWithWorkingColorSpace(pointer, colorSpaceHandle)
+            let handle = SkShader_makeWithWorkingColorSpace(pointer, colorSpace.handle)
             let pointer = static_sk_shader_get(handle)
             return Shader(pointer: pointer, handle: handle)
         }
@@ -91,7 +85,7 @@ extension Skia {
 
         // // static
 
-        init(pointer: Skia.ShaderMutablePointer?, handle: sk_shader_t?) {
+        init(pointer: Skia.ShaderMutablePointer?, handle: sk_shader_t) {
             self.pointer = pointer
             self.handle = handle
         }
@@ -111,41 +105,26 @@ extension Skia {
         }
         // const char *SkShader_FactoryToName(int factory); // (sk_flattenable_factory_t factory) -> const char *
         static func FactoryToName(factory: Flattenable) -> UnsafePointer<CChar>? {
-            guard let handle = factory.handle else {
-                return nil
-            }
-            return SkShader_FactoryToName(handle)
+            return SkShader_FactoryToName(factory.handle)
         }
         static func FactoryToName(factory: Flattenable) -> String? {
-            guard let handle = factory.handle else {
-                return nil
-            }
-            guard let cstr = SkShader_FactoryToName(handle) else {
+            guard let cstr = SkShader_FactoryToName(factory.handle) else {
                 return nil
             }
             return String(cString: cstr)
         }
         // void SkShader_Register(const char name[], int factory); // (const char name[], sk_flattenable_factory_t factory)
         static func Register(name: UnsafePointer<CChar>?, factory: Flattenable) {
-            guard let handle = factory.handle else {
-                return
-            }
-            SkShader_Register(name, handle)
+            SkShader_Register(name, factory.handle)
         }
         static func Register(name: String, factory: Flattenable) {
-            guard let handle = factory.handle else {
-                return
-            }
             name.withCString { cstr in
-                SkShader_Register(cstr, handle)
+                SkShader_Register(cstr, factory.handle)
             }
         }
         // int SkShader_Deserialize(int type, const void *data, unsigned long length, const void *procs); // (SkShader::Type type, const void *data, size_t length, const SkDeserialProcs *procs) -> sk_flattenable_t
         static func Deserialize(type: Flattenable, data: UnsafeRawPointer, length: UInt, procs: UnsafeRawPointer) -> Flattenable {
-            guard let handle = type.handle else {
-                return Flattenable(pointer: nil, handle: nil)
-            }
-            let deserialize_handle = SkShader_Deserialize(handle, data, length, procs)
+            let deserialize_handle = SkShader_Deserialize(type.handle, data, length, procs)
             let pointer = static_sk_flattenable_get(deserialize_handle)
             return Flattenable(pointer: pointer, handle: deserialize_handle)
         }

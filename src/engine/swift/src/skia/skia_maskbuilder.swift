@@ -40,7 +40,7 @@ extension Skia {
         // void * SkMaskBuilder_bounds(void * maskBuilder); // (SkMaskBuilder *maskBuilder) -> SkIRect *
         func bounds() -> IRect {
             let pointer = SkMaskBuilder_bounds(self.pointer)
-            return IRect(pointer: pointer, handle: nil)
+            return IRect(pointer: pointer, handle: -1)
         }
         // unsigned int SkMaskBuilder_rowBytes(void * maskBuilder); // (SkMaskBuilder *maskBuilder) -> uint32_t
         func rowBytes() -> UInt {

@@ -18,25 +18,25 @@ extension Skia {
         }
     
         public var pointer: Skia.RRectMutablePointer?
-        public var handle: sk_r_rect_t?
+        public var handle: sk_r_rect_t = -1
 
         // void *SkRRect_new(); // () -> SkRRect *
 
         init() {
             self.pointer = SkRRect_new()
-            self.handle = nil
+            self.handle = -1
         }
         // void *SkRRect_new_2(const void *rrect); // (const SkRRect *rrect) -> SkRRect *
 
         init(rrect: RRect) {
             self.pointer = SkRRect_new_2(rrect.pointer)
-            self.handle = nil
+            self.handle = -1
         }
         // void SkRRect_delete(void *rrect); // (SkRRect *rrect)
 
         deinit {
             SkRRect_delete(self.pointer)
-            if let handle = self.handle {
+            if handle > -1 {
                 static_sk_r_rect_delete(handle)
             }
         }
@@ -132,7 +132,7 @@ extension Skia {
 
         func rect() -> Skia.Rect {
             let pointer = SkRRect_rect(self.pointer)
-            return Skia.Rect(pointer: UnsafeMutableRawPointer(mutating: pointer), handle: nil)
+            return Skia.Rect(pointer: UnsafeMutableRawPointer(mutating: pointer), handle: -1)
         }
         // int SkRRect_radii(void *rrect, int corner); // (SkRRect *rrect, SkRRect::Corner corner) -> sk_point_t
 
@@ -145,7 +145,7 @@ extension Skia {
 
         func getBounds() -> Skia.Rect {
             let pointer = SkRRect_getBounds(self.pointer)
-            return Skia.Rect(pointer: UnsafeMutableRawPointer(mutating: pointer), handle: nil)
+            return Skia.Rect(pointer: UnsafeMutableRawPointer(mutating: pointer), handle: -1)
         }
         // void SkRRect_inset(void *rrect, float dx, float dy, void *dst); // (SkRRect *rrect, SkScalar dx, SkScalar dy, SkRRect *dst)
 
@@ -229,7 +229,7 @@ extension Skia {
 
         // // static
 
-        init (pointer: Skia.RRectMutablePointer?, handle: sk_r_rect_t?) {
+        init (pointer: Skia.RRectMutablePointer?, handle: sk_r_rect_t) {
             self.pointer = pointer
             self.handle = handle
         }

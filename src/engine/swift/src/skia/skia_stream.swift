@@ -1,12 +1,12 @@
 extension Skia {
     class Stream {
         public var pointer: Skia.StreamMutablePointer?
-        public var handle: sk_stream_t?
+        public var handle: sk_stream_t = -1
         // void SkStream_delete(void *stream); // (SkStream *stream)
         deinit {
             SkStream_delete(self.pointer)
-            if let handle = self.handle {
-                static_sk_stream_delete(handle)
+            if self.handle > -1 {
+                static_sk_stream_delete(self.handle)
             }
         }
         // unsigned long SkStream_read(void *stream, void *buffer, unsigned long size); // (SkStream *stream, void *buffer, size_t size) -> size_t
@@ -108,7 +108,7 @@ extension Skia {
 
         // // static
 
-        init(pointer: Skia.StreamMutablePointer?, handle: sk_stream_t?) {
+        init(pointer: Skia.StreamMutablePointer?, handle: sk_stream_t) {
             self.pointer = pointer
             self.handle = handle
         }

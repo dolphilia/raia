@@ -6,7 +6,7 @@ extension Skia {
         }
 
         public var pointer: Skia.CanvasMutablePointer?
-        public var handle: sk_canvas_t?
+        public var handle: sk_canvas_t = -1
 
         // void * SkCanvas_new(); // () -> SkCanvas *
         init() {
@@ -33,8 +33,8 @@ extension Skia {
         // void SkCanvas_delete(void *canvas); // (SkCanvas *canvas)
 
         deinit {
-            SkCanvas_delete(self.pointer)
-            if let handle = self.handle {
+            //SkCanvas_delete(self.pointer)
+            if handle > -1 {
                 static_sk_canvas_delete(handle)
             }
         }
@@ -115,10 +115,7 @@ extension Skia {
         // void SkCanvas_clipShader(void *canvas, int shader, int op); // (SkCanvas *canvas, sk_shader_t shader, SkClipOp op)
 
         func clipShader(shader: Shader, op: ClipOp) {
-            guard let shaderHandle = shader.handle else {
-                fatalError("Shader handle is nil")
-            }
-            SkCanvas_clipShader(self.pointer, shaderHandle, Int32(op.rawValue))
+            SkCanvas_clipShader(self.pointer, shader.handle, Int32(op.rawValue))
         }
         // void SkCanvas_concat(void *canvas, const void * m44); // (SkCanvas *canvas, const SkM44 *m44)
 
@@ -137,16 +134,10 @@ extension Skia {
         }
         // void SkCanvas_drawAnnotation(void *canvas, const void *rect, const char * key, int data); // (SkCanvas *canvas, const SkRect *rect, const char key[], sk_data_t data)
         func drawAnnotation(rect: Skia.Rect, Key: UnsafePointer<CChar>, data: Data) {
-            guard let dataHandle = data.handle else {
-                fatalError("Data handle is nil")
-            }
-            SkCanvas_drawAnnotation(self.pointer, rect.pointer, Key, Int32(dataHandle))
+            SkCanvas_drawAnnotation(self.pointer, rect.pointer, Key, Int32(data.handle))
         }
         func drawAnnotation(rect: Skia.Rect, key: String, data: Skia.Data) {
-            guard let dataHandle = data.handle else {
-                fatalError("Data handle is nil")
-            }
-            SkCanvas_drawAnnotation(self.pointer, rect.pointer, key, dataHandle)
+            SkCanvas_drawAnnotation(self.pointer, rect.pointer, key, data.handle)
         }
         // void SkCanvas_drawAnnotation_2(void *canvas, const void *rect, const char * key, void *value); // (SkCanvas *canvas, const SkRect *rect, const char key[], SkData *value)
         func drawAnnotation(rect: Skia.Rect, key: UnsafePointer<CChar>, value: Data) {
@@ -172,10 +163,7 @@ extension Skia {
         // void SkCanvas_drawCircle(void *canvas, int center, float radius, const void *paint); // (SkCanvas *canvas, sk_point_t center, SkScalar radius, const SkPaint *paint)
 
         func drawCircle(center: Skia.Point, radius: Float, paint: Skia.Paint) {
-            guard let centerHandle = center.handle else {
-                fatalError("Skia.Canvas drawCircle() center handle is nil")
-            }
-            SkCanvas_drawCircle(self.pointer, Int32(centerHandle), radius, paint.pointer)
+            SkCanvas_drawCircle(self.pointer, Int32(center.handle), radius, paint.pointer)
         }
         // void SkCanvas_drawCircle_2(void *canvas, float cx, float cy, float radius, const void *paint); // (SkCanvas *canvas, SkScalar cx, SkScalar cy, SkScalar radius, const SkPaint *paint)
 
@@ -212,13 +200,10 @@ extension Skia {
         typealias GlyphID = UInt16
 
         func drawGlyphs(count: Int, glyphs: [GlyphID], positions: [Point], clusters: [UInt32], textByteCount: Int, utf8text: String, origin: Point, font: Skia.Font, paint: Skia.Paint) {
-            guard let originHandle = origin.handle else {
-                fatalError("Skia.Canvas drawGlyphs() origin handle is nil")
-            }
             glyphs.withUnsafeBufferPointer { glyphsPointer in
                 positions.withUnsafeBufferPointer { positionsPointer in
                     clusters.withUnsafeBufferPointer { clustersPointer in
-                        SkCanvas_drawGlyphs(self.pointer, Int32(count), glyphsPointer.baseAddress, positionsPointer.baseAddress, clustersPointer.baseAddress, Int32(textByteCount), utf8text, originHandle, font.pointer, paint.pointer)
+                        SkCanvas_drawGlyphs(self.pointer, Int32(count), glyphsPointer.baseAddress, positionsPointer.baseAddress, clustersPointer.baseAddress, Int32(textByteCount), utf8text, origin.handle, font.pointer, paint.pointer)
                     }
                 }
             }
@@ -226,42 +211,30 @@ extension Skia {
         // void SkCanvas_drawGlyphs_2(void *canvas, int count, const void * glyphs, const void * positions, int origin, const void *font, const void *paint); // (SkCanvas *canvas, int count, const SkGlyphID glyphs[], const SkPoint positions[], sk_point_t origin, const SkFont *font, const SkPaint *paint)
 
         func drawGlyphs(count: Int, glyphs: [GlyphID], positions: [Point], origin: Point, font: Skia.Font, paint: Skia.Paint) {
-            guard let originHandle = origin.handle else {
-                fatalError("Skia.Canvas drawGlyphs() origin handle is nil")
-            }
             glyphs.withUnsafeBufferPointer { glyphsPointer in
                 positions.withUnsafeBufferPointer { positionsPointer in
-                    SkCanvas_drawGlyphs_2(self.pointer, Int32(count), glyphsPointer.baseAddress, positionsPointer.baseAddress, originHandle, font.pointer, paint.pointer)
+                    SkCanvas_drawGlyphs_2(self.pointer, Int32(count), glyphsPointer.baseAddress, positionsPointer.baseAddress, origin.handle, font.pointer, paint.pointer)
                 }
             }
         }
         // void SkCanvas_drawGlyphs_3(void *canvas, int count, const void * glyphs, const void * xforms, int origin, const void *font, const void *paint); // (SkCanvas *canvas, int count, const SkGlyphID glyphs[], const SkRSXform xforms[], sk_point_t origin, const SkFont *font, const SkPaint *paint)
 
         func drawGlyphs(count: Int, glyphs: [GlyphID], xforms: [RSXform], origin: Point, font: Skia.Font, paint: Skia.Paint) {
-            guard let originHandle = origin.handle else {
-                fatalError("Skia.Canvas drawGlyphs() origin handle is nil")
-            }
             glyphs.withUnsafeBufferPointer { glyphsPointer in
                 xforms.withUnsafeBufferPointer { xformsPointer in
-                    SkCanvas_drawGlyphs_3(self.pointer, Int32(count), glyphsPointer.baseAddress, xformsPointer.baseAddress, originHandle, font.pointer, paint.pointer)
+                    SkCanvas_drawGlyphs_3(self.pointer, Int32(count), glyphsPointer.baseAddress, xformsPointer.baseAddress, origin.handle, font.pointer, paint.pointer)
                 }
             }
         }
         // void SkCanvas_drawImage(void *canvas, int image, float left, float top); // (SkCanvas *canvas, sk_image_t image, SkScalar left, SkScalar top)
 
         func drawImage(image: Skia.Image, left: Float, top: Float) {
-            guard let imageHandle = image.handle else {
-                fatalError("Skia.Canvas drawImage() image handle is nil")
-            }
-            SkCanvas_drawImage(self.pointer, imageHandle, left, top)
+            SkCanvas_drawImage(self.pointer, image.handle, left, top)
         }
         // void SkCanvas_drawImage_2(void *canvas, int image, float x, float y, const void *sampling, const void *paint); // (SkCanvas *canvas, sk_image_t image, SkScalar x, SkScalar y, const SkSamplingOptions *sampling, const SkPaint *paint)
 
         func drawImage(image: Skia.Image, x: Float, y: Float, sampling: Skia.SamplingOptions, paint: Skia.Paint) {
-            guard let imageHandle = image.handle else {
-                fatalError("Skia.Canvas drawImage() image handle is nil")
-            }
-            SkCanvas_drawImage_2(self.pointer, imageHandle, x, y, sampling.pointer, paint.pointer)
+            SkCanvas_drawImage_2(self.pointer, image.handle, x, y, sampling.pointer, paint.pointer)
         }
         // void SkCanvas_drawImage_3(void *canvas, const void *image, float x, float y, const void *sampling, const void *paint); // (SkCanvas *canvas, const SkImage *image, SkScalar x, SkScalar y, const SkSamplingOptions *sampling, const SkPaint *paint)
 
@@ -283,18 +256,12 @@ extension Skia {
         // void SkCanvas_drawImageRect(void *canvas, int image, const void *dst, const void *sampling, const void *paint); // (SkCanvas *canvas, sk_image_t image, const SkRect *dst, const SkSamplingOptions *sampling, const SkPaint *paint)
 
         func drawImageRect(image: Skia.Image, dst: Skia.Rect, sampling: Skia.SamplingOptions, paint: Skia.Paint) {
-            guard let imageHandle = image.handle else {
-                fatalError("Skia.Canvas drawImageRect() image handle is nil")
-            }
-            SkCanvas_drawImageRect(self.pointer, Int32(imageHandle), dst.pointer, sampling.pointer, paint.pointer)
+            SkCanvas_drawImageRect(self.pointer, Int32(image.handle), dst.pointer, sampling.pointer, paint.pointer)
         }
         // void SkCanvas_drawImageRect_2(void *canvas, int image, const void *src, const void *dst, const void *sampling, const void *paint, int constraint); // (SkCanvas *canvas, sk_image_t image, const SkRect *src, const SkRect *dst, const SkSamplingOptions *sampling, const SkPaint *paint, SkCanvas::SrcRectConstraint constraint)
 
         func drawImageRect(image: Skia.Image, src: Skia.Rect, dst: Skia.Rect, sampling: Skia.SamplingOptions, paint: Skia.Paint, constraint: Skia.Canvas.SrcRectConstraint) {
-            guard let imageHandle = image.handle else {
-                fatalError("Skia.Canvas drawImageRect() image handle is nil")
-            }
-            SkCanvas_drawImageRect_2(self.pointer, Int32(imageHandle), src.pointer, dst.pointer, sampling.pointer, paint.pointer, Int32(constraint.rawValue))
+            SkCanvas_drawImageRect_2(self.pointer, Int32(image.handle), src.pointer, dst.pointer, sampling.pointer, paint.pointer, Int32(constraint.rawValue))
         }
         // void SkCanvas_drawImageRect_3(void *canvas, const void *image, const void *dst, const void *sampling, const void *paint); // (SkCanvas *canvas, const SkImage *image, const SkRect *dst, const SkSamplingOptions *sampling, const SkPaint *paint)
 
@@ -314,13 +281,7 @@ extension Skia {
         // void SkCanvas_drawLine(void *canvas, int p0, int p1, const void *paint); // (SkCanvas *canvas, sk_point_t p0, sk_point_t p1, const SkPaint *paint)
 
         func drawLine(p0: Skia.Point, p1: Skia.Point, paint: Skia.Paint) {
-            guard let p0Handle = p0.handle else {
-                fatalError("Skia.Canvas drawLine() p0 handle is nil")
-            }
-            guard let p1Handle = p1.handle else {
-                fatalError("Skia.Canvas drawLine() p1 handle is nil")
-            }
-            SkCanvas_drawLine(self.pointer, Int32(p0Handle), Int32(p1Handle), paint.pointer)
+            SkCanvas_drawLine(self.pointer, Int32(p0.handle), Int32(p1.handle), paint.pointer)
         }
         // void SkCanvas_drawLine_2(void *canvas, float x0, float y0, float x1, float y1, const void *paint); // (SkCanvas *canvas, SkScalar x0, SkScalar y0, SkScalar x1, SkScalar y1, const SkPaint *paint)
 
@@ -330,10 +291,7 @@ extension Skia {
         // void SkCanvas_drawMesh(void *canvas, const void *mesh, int blender, const void *paint); // (SkCanvas *canvas, const SkMesh *mesh, sk_blender_t blender, const SkPaint *paint)
 
         func drawMesh(mesh: Skia.Mesh, blender: Skia.Blender, paint: Skia.Paint) {
-            guard let blenderHandle = blender.handle else {
-                fatalError("Blender handle is nil")
-            }
-            SkCanvas_drawMesh(self.pointer, mesh.pointer, blenderHandle, paint.pointer)
+            SkCanvas_drawMesh(self.pointer, mesh.pointer, blender.handle, paint.pointer)
         }
         // void SkCanvas_drawOval(void *canvas, const void *oval, const void *paint); // (SkCanvas *canvas, const SkRect *oval, const SkPaint *paint)
         
@@ -366,10 +324,7 @@ extension Skia {
         // void SkCanvas_drawPoints(void *canvas, int mode, unsigned long count, const void * pts, const void *paint); // (SkCanvas *canvas, SkCanvas::PointMode mode, size_t count, const SkPoint pts[], const SkPaint *paint)
         // void SkCanvas_drawRect(void *canvas, int rect, const void *paint); // (SkCanvas *canvas, sk_rect_t rect, const SkPaint *paint)
         func drawRect(rect: Skia.Rect, paint: Skia.Paint) {
-            guard let handle = rect.handle else {
-                fatalError("SkCanvas drawRect() rect handle is nil")
-            }
-            SkCanvas_drawRect(self.pointer, Int32(handle), paint.pointer)
+            SkCanvas_drawRect(self.pointer, Int32(rect.handle), paint.pointer)
         }
         // void SkCanvas_drawRegion(void *canvas, const void *region, const void *paint); // (SkCanvas *canvas, const SkRegion *region, const SkPaint *paint)
         // void SkCanvas_drawRoundRect(void *canvas, const void *rect, float rx, float ry, const void *paint); // (SkCanvas *canvas, const SkRect *rect, SkScalar rx, SkScalar ry, const SkPaint *paint)
@@ -431,7 +386,7 @@ extension Skia {
         // bool SkCanvas_writePixels_2(void *canvas, const void *info, const void *pixels, unsigned long rowBytes, int x, int y); // (SkCanvas *canvas, const SkImageInfo *info, const void *pixels, size_t rowBytes, int x, int y) -> bool
         // // static
 
-        init(pointer: Skia.CanvasMutablePointer?, handle: sk_canvas_t?) {
+        init(pointer: Skia.CanvasMutablePointer?, handle: sk_canvas_t) {
             self.pointer = pointer
             self.handle = handle
         }

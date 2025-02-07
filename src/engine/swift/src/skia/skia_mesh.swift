@@ -2,7 +2,7 @@ extension Skia {
     class Mesh {
         typealias sk_mesh_t = Int32
         public var pointer: Skia.MeshMutablePointer?
-        public var handle: sk_mesh_t?
+        public var handle: sk_mesh_t = -1
 
         // void SkMesh_delete(void * mesh); // (SkMesh * mesh)
         deinit {
@@ -26,7 +26,7 @@ extension Skia {
         // bool SkMesh_isValid(void * mesh); // (SkMesh *mesh) -> bool
         // // static
 
-        init(pointer: Skia.MeshMutablePointer?, handle: sk_mesh_t?) {
+        init(pointer: Skia.MeshMutablePointer?, handle: sk_mesh_t) {
             self.pointer = pointer
             self.handle = handle
         }

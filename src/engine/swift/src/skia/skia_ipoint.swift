@@ -1,11 +1,11 @@
 extension Skia {
     class IPoint {
         public var pointer: Skia.IPointMutablePointer?
-        public var handle: sk_i_point_t?
+        public var handle: sk_i_point_t = -1
 
         deinit {
             SkIPoint_delete(self.pointer)
-            if let handle = self.handle {
+            if handle > -1 {
                 static_sk_i_point_delete(handle)
             }
         }
@@ -33,7 +33,7 @@ extension Skia {
 
         // // static
 
-        init(pointer: Skia.IPointMutablePointer?, handle: sk_i_point_t?) {
+        init(pointer: Skia.IPointMutablePointer?, handle: sk_i_point_t) {
             self.pointer = pointer
             self.handle = handle
         }

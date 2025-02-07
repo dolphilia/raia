@@ -2,22 +2,22 @@ extension Skia {
     class Region {
         typealias sk_region_t = Int32
         public var pointer: Skia.RegionMutablePointer?
-        public var handle: sk_region_t?
+        public var handle: sk_region_t = -1
 
         // void *SkRegion_new(); // () -> SkRegion *
         init() {
             self.pointer = SkRegion_new();
-            self.handle = nil
+            self.handle = -1
         }
         // void *SkRegion_new_2(const void *region); // (const SkRegion *region) -> SkRegion *
         init(region: Region) {
             self.pointer = SkRegion_new_2(region.pointer);
-            self.handle = nil
+            self.handle = -1
         }
         // void *SkRegion_new_3(const void *rect); // (const SkIRect *rect) -> SkRegion *
         init(rect: Skia.IRect) {
             self.pointer = SkRegion_new_3(rect.pointer);
-            self.handle = nil
+            self.handle = -1
         }
         // void SkRegion_delete(void *region); // (SkRegion *region)
         deinit {
@@ -46,7 +46,7 @@ extension Skia {
         // const void *SkRegion_getBounds(void *region); // (SkRegion *region) -> const SkIRect *
         func getBounds() -> Skia.IRect {
             let pointer = SkRegion_getBounds(self.pointer)
-            return Skia.IRect(pointer: UnsafeMutableRawPointer(mutating: pointer), handle: nil)
+            return Skia.IRect(pointer: UnsafeMutableRawPointer(mutating: pointer), handle: -1)
         }
         // int SkRegion_computeRegionComplexity(void *region); // (SkRegion *region) -> int
         func computeRegionComplexity() -> Int {
@@ -150,7 +150,7 @@ extension Skia {
 
         // // static
 
-        init(pointer: Skia.RegionMutablePointer?, handle: sk_region_t?) {
+        init(pointer: Skia.RegionMutablePointer?, handle: sk_region_t) {
             self.pointer = pointer
             self.handle = handle
         }

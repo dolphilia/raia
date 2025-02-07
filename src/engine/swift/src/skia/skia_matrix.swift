@@ -402,10 +402,7 @@ extension Skia {
         }
         // int SkMatrix_mapPoint(void *matrix, int pt); // (SkMatrix *matrix, sk_point_t pt) -> sk_point_t
         func mapPoint(pt: Point) -> Point {
-            guard let point_handle = pt.handle else {
-                fatalError("SkMatrix mapPoint() handle is nil")
-            }
-            let handle = SkMatrix_mapPoint(self.pointer, point_handle);
+            let handle = SkMatrix_mapPoint(self.pointer, pt.handle);
             let pointer = static_sk_point_get_ptr(handle)
             return Point(pointer: pointer, handle: handle)
         }
@@ -523,19 +520,13 @@ extension Skia {
         }
         // int SkMatrix_Translate_2(int t); // (sk_point_t t) -> sk_matrix_t
         static func Translate(t: Point) -> Matrix {
-            guard let point_handle = t.handle else {
-                fatalError("SkMatrix Translate() handle is nil")
-            }
-            let handle = SkMatrix_Translate_2(point_handle);
+            let handle = SkMatrix_Translate_2(t.handle);
             let pointer = static_sk_matrix_get_ptr(handle)
             return Matrix(pointer: pointer, handle: handle)
         }
         // int SkMatrix_Translate_3(int t); // (sk_i_point_t t) -> sk_matrix_t
         static func Translate(t: IPoint) -> Matrix {
-            guard let ipoint_handle = t.handle else {
-                fatalError("SkMatrix Translate() handle is nil")
-            }
-            let handle = SkMatrix_Translate_3(ipoint_handle);
+            let handle = SkMatrix_Translate_3(t.handle);
             let pointer = static_sk_matrix_get_ptr(handle)
             return Matrix(pointer: pointer, handle: handle)
         }
@@ -547,10 +538,7 @@ extension Skia {
         }
         // int SkMatrix_RotateDeg_2(float deg, int pt); // (SkScalar deg, sk_point_t pt) -> sk_matrix_t
         static func RotateDeg(deg: Scalar, pt: Point) -> Matrix {
-            guard let point_handle = pt.handle else {
-                fatalError("SkMatrix RotateDeg() handle is nil")
-            }
-            let handle = SkMatrix_RotateDeg_2(deg, point_handle);
+            let handle = SkMatrix_RotateDeg_2(deg, pt.handle);
             let pointer = static_sk_matrix_get_ptr(handle)
             return Matrix(pointer: pointer, handle: handle)
         }

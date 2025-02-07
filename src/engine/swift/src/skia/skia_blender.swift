@@ -1,7 +1,7 @@
 extension Skia {
     class Blender {
         public var pointer: Skia.BlenderMutablePointer?
-        public var handle: sk_blender_t?
+        public var handle: sk_blender_t = -1
 
         // void SkBlender_delete(void *blender); // (SkBlender *blender)
         // int SkBlender_getFactory(void *blender); // (SkBlender *blender) -> sk_flattenable_factory_t
@@ -16,7 +16,7 @@ extension Skia {
 
         // // static
 
-        init(pointer: Skia.BlenderMutablePointer?, handle: sk_blender_t?) {
+        init(pointer: Skia.BlenderMutablePointer?, handle: sk_blender_t) {
             self.pointer = pointer
             self.handle = handle
         }

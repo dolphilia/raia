@@ -2,7 +2,7 @@ extension Skia {
     class WStream {
         typealias sk_w_stream_t = Int32
         public var pointer: Skia.WStreamMutablePointer?
-        public var handle: sk_w_stream_t?
+        public var handle: sk_w_stream_t = -1
 
         // void SkWStream_delete(void *w_stream); // (SkWStream *w_stream)
         deinit {
@@ -80,7 +80,7 @@ extension Skia {
 
         // // static
 
-        init(pointer: Skia.WStreamMutablePointer?, handle: sk_w_stream_t?) {
+        init(pointer: Skia.WStreamMutablePointer?, handle: sk_w_stream_t) {
             self.pointer = pointer
             self.handle = handle
         }

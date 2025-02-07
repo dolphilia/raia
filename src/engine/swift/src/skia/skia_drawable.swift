@@ -1,7 +1,7 @@
 extension Skia {
     class Drawable {
         public var pointer: Skia.DrawableMutablePointer?
-        public var handle: sk_drawable_t?
+        public var handle: sk_drawable_t = -1
 
         // void SkDrawable_delete(void *drawable); // (SkDrawable *drawable)
         // void SkDrawable_draw(void *drawable, void * canvas, const void * matrix); // (SkDrawable *drawable, SkCanvas *canvas, const SkMatrix *matrix)
@@ -24,7 +24,7 @@ extension Skia {
 
         // // static
 
-        init(pointer: Skia.DrawableMutablePointer?, handle: sk_drawable_t?) {
+        init(pointer: Skia.DrawableMutablePointer?, handle: sk_drawable_t) {
             self.pointer = pointer
             self.handle = handle
         }

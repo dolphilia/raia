@@ -1,7 +1,7 @@
 extension Skia {
     class Size {
         public var pointer: Skia.SizeMutablePointer?
-        public var handle: sk_size_t
+        public var handle: sk_size_t = -1
         // void SkSize_delete(void *size); // (SkSize *size)
         deinit {
             SkSize_delete(self.pointer)

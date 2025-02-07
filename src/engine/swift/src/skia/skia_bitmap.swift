@@ -13,7 +13,7 @@ extension Skia {
         }
 
         public var pointer: Skia.BitmapMutablePointer?
-        public var handle: Int32?
+        public var handle: Int32 = -1
 
         // void * SkBitmap_new(void); // () -> SkBitmap *
         init() {
@@ -28,7 +28,7 @@ extension Skia {
 
         // void SkBitmap_delete(void *bitmap); // (SkBitmap *bitmap)
         deinit {
-            SkBitmap_delete(self.pointer)
+            //SkBitmap_delete(self.pointer)
         }
         // void SkBitmap_allocN32Pixels(void *bitmap, int width, int height, bool isOpaque); // (SkBitmap *bitmap, int width, int height, bool isOpaque)
         func allocN32Pixels(width: Int, height: Int, isOpaque: Bool) {
@@ -77,7 +77,7 @@ extension Skia {
         // void * SkBitmap_colorSpace(void *bitmap); // (SkBitmap *bitmap) -> SkColorSpace *
         func colorSpace() -> ColorSpace {
             let pointer = SkBitmap_colorSpace(self.pointer)
-            return ColorSpace(pointer: pointer, handle: nil)
+            return ColorSpace(pointer: pointer, handle: -1)
         }
         // int SkBitmap_colorType(void *bitmap); // (SkBitmap *bitmap) -> SkColorType
         func colorType() -> ColorType {
@@ -271,7 +271,7 @@ extension Skia {
         // void * SkBitmap_pixelRef(void *bitmap); // (SkBitmap *bitmap) -> SkPixelRef *
         func pixelRef() -> PixelRef {
             let pointer = SkBitmap_pixelRef(self.pointer)
-            return PixelRef(pointer: pointer, handle: nil)
+            return PixelRef(pointer: pointer, handle: -1)
         }
         // int SkBitmap_pixelRefOrigin(void *bitmap); // (SkBitmap *bitmap) -> sk_i_point_t
         func pixelRefOrigin() -> IPoint {
@@ -333,10 +333,7 @@ extension Skia {
         }
         // void SkBitmap_setPixelRef(void *bitmap, int pixelRef, int dx, int dy); // (SkBitmap *bitmap, sk_pixel_ref_t pixelRef, int dx, int dy)
         func setPixelRef(pixelRef: PixelRef, dx: Int, dy: Int) {
-            guard let handle = pixelRef.handle else {
-                fatalError("PixelRef handle is nil")
-            }
-            SkBitmap_setPixelRef(self.pointer, handle, Int32(dx), Int32(dy))
+            SkBitmap_setPixelRef(self.pointer, pixelRef.handle, Int32(dx), Int32(dy))
         }
         // void SkBitmap_setPixels(void *bitmap, void *pixels); // (SkBitmap *bitmap, void *pixels)
         func setPixels(pixels: UnsafeMutablePointer<UInt8>?) {
@@ -388,7 +385,7 @@ extension Skia {
         }
         // // static
 
-        init(pointer: Skia.BitmapMutablePointer?, handle: Int32?) {
+        init(pointer: Skia.BitmapMutablePointer?, handle: Int32) {
             self.pointer = pointer
             self.handle = handle
         }

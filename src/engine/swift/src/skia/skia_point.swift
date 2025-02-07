@@ -2,144 +2,90 @@ extension Skia {
     typealias Vector = Skia.Point
     class Point {
         public var pointer: Skia.PointMutablePointer?
-        public var handle: sk_point_t?
+        public var handle: sk_point_t = -1
         // void SkPoint_delete(void *point); // (SkPoint *point)
         deinit {
             SkPoint_delete(self.pointer)
-            if let handle = self.handle {
+            if handle > -1 {
                 static_sk_point_delete(handle)
             }
         }
         // float SkPoint_x(int point); // (sk_point_t point) -> float
         func x() -> Float {
-            guard let handle = self.handle else {
-                fatalError("SkPoint x() handle is nil")
-            }
-            return SkPoint_x(handle)
+            return SkPoint_x(self.handle)
         }
         // float SkPoint_y(int point); // (sk_point_t point) -> float
         func y() -> Float {
-            guard let handle = self.handle else {
-                fatalError("SkPoint y() handle is nil")
-            }
-            return SkPoint_y(handle)
+            return SkPoint_y(self.handle)
         }
         // float SkPoint_dot(int point, const void *vec); // (sk_point_t point, const SkVector *vec) -> float
         func dot(vec: Skia.Vector) -> Float {
-            guard let handle = self.handle else {
-                fatalError("SkPoint dot() handle is nil")
-            }
-            return SkPoint_dot(handle, vec.pointer)
+            return SkPoint_dot(self.handle, vec.pointer)
         }
         // float SkPoint_length(int point); // (sk_point_t point) -> float
         func length() -> Float {
-            guard let handle = self.handle else {
-                fatalError("SkPoint length() handle is nil")
-            }
-            return SkPoint_length(handle)
+            return SkPoint_length(self.handle)
         }
         // float SkPoint_cross(int point, const void *vec); // (sk_point_t point, const SkVector *vec) -> float
         func cross(vec: Skia.Vector) -> Float {
-            guard let handle = self.handle else {
-                fatalError("SkPoint cross() handle is nil")
-            }
-            return SkPoint_cross(handle, vec.pointer)
+            return SkPoint_cross(self.handle, vec.pointer)
         }
         // void SkPoint_set(int point, float x, float y); // (sk_point_t point, float x, float y)
         func set(x: Float, y: Float) {
-            guard let handle = self.handle else {
-                fatalError("SkPoint set() handle is nil")
-            }
-            SkPoint_set(handle, x, y)
+            SkPoint_set(self.handle, x, y)
         }
         // bool SkPoint_equals(int point, float x, float y); // (sk_point_t point, float x, float y) -> bool
         func equals(x: Float, y: Float) -> Bool {
-            guard let handle = self.handle else {
-                fatalError("SkPoint equals() handle is nil")
-            }
-            return SkPoint_equals(handle, x, y)
+            return SkPoint_equals(self.handle, x, y)
         }
         // bool SkPoint_isZero(int point); // (sk_point_t point) -> bool
         func isZero() -> Bool {
-            guard let handle = self.handle else {
-                fatalError("SkPoint isZero() handle is nil")
-            }
-            return SkPoint_isZero(handle)
+            return SkPoint_isZero(self.handle)
         }
         // void SkPoint_scale(int point, float value); // (sk_point_t point, float value)
         func scale(value: Float) {
-            guard let handle = self.handle else {
-                fatalError("SkPoint scale() handle is nil")
-            }
-            SkPoint_scale(handle, value)
+            SkPoint_scale(self.handle, value)
         }
         // void SkPoint_scale_2(int point, float scale, void *dst); // (sk_point_t point, float scale, SkPoint *dst)
         func scale(scale: Float, dst: Point) {
-            guard let handle = self.handle else {
-                fatalError("SkPoint scale() handle is nil")
-            }
-            SkPoint_scale_2(handle, scale, dst.pointer)
+            SkPoint_scale_2(self.handle, scale, dst.pointer)
         }
         // bool SkPoint_isFinite(int point); // (sk_point_t point) -> bool
         func isFinite() -> Bool {
-            guard let handle = self.handle else {
-                fatalError("SkPoint isFinite() handle is nil")
-            }
-            return SkPoint_isFinite(handle)
+            return SkPoint_isFinite(self.handle)
         }
         // float SkPoint_distanceToOrigin(int point); // (sk_point_t point) -> float
         func distanceToOrigin() -> Float {
-            guard let handle = self.handle else {
-                fatalError("SkPoint distanceToOrigin() handle is nil")
-            }
-            return SkPoint_distanceToOrigin(handle)
+            return SkPoint_distanceToOrigin(self.handle)
         }
         // void SkPoint_iset(int point, const void *p); // (sk_point_t point, const SkIPoint *p)
         func iset(p: Skia.IPoint) {
-            guard let handle = self.handle else {
-                fatalError("SkPoint iset() handle is nil")
-            }
-            SkPoint_iset(handle, p.pointer)
+            SkPoint_iset(self.handle, p.pointer)
         }
         // void SkPoint_iset_2(int point, int x, int y); // (sk_point_t point, int32_t x, int32_t y)
         func iset(x: Int, y: Int) {
-            guard let handle = self.handle else {
-                fatalError("SkPoint iset() handle is nil")
-            }
-            SkPoint_iset_2(handle, Int32(x), Int32(y))
+            SkPoint_iset_2(self.handle, Int32(x), Int32(y))
         }
         // void SkPoint_negate(int point); // (sk_point_t point)
         func negate() {
-            guard let handle = self.handle else {
-                fatalError("SkPoint negate() handle is nil")
-            }
-            SkPoint_negate(handle)
+            SkPoint_negate(self.handle)
         }
         // void SkPoint_setAbs(int point, const void *pt); // (sk_point_t point, const SkPoint *pt)
         func setAbs(pt: Point) {
-            guard let handle = self.handle else {
-                fatalError("SkPoint setAbs() handle is nil")
-            }
-            SkPoint_setAbs(handle, pt.pointer)
+            SkPoint_setAbs(self.handle, pt.pointer)
         }
         // bool SkPoint_setLength(int point, float length); // (sk_point_t point, float length) -> bool
         func setLength(length: Float) -> Bool {
-            guard let handle = self.handle else {
-                fatalError("SkPoint setLength() handle is nil")
-            }
-            return SkPoint_setLength(handle, length)
+            return SkPoint_setLength(self.handle, length)
         }
         // bool SkPoint_setNormalize(int point, float x, float y); // (sk_point_t point, float x, float y) -> bool
         func setNormalize(x: Float, y: Float) -> Bool {
-            guard let handle = self.handle else {
-                fatalError("SkPoint setNormalize() handle is nil")
-            }
-            return SkPoint_setNormalize(handle, x, y)
+            return SkPoint_setNormalize(self.handle, x, y)
         }
 
         // // static
 
-        init(pointer: Skia.PointMutablePointer?, handle: sk_point_t?) {
+        init(pointer: Skia.PointMutablePointer?, handle: sk_point_t) {
             self.pointer = pointer
             self.handle = handle
         }

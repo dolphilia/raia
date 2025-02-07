@@ -1,11 +1,11 @@
 extension Skia {
     class Data {
         public var pointer: Skia.DataMutablePointer?
-        public var handle: sk_data_t?
+        public var handle: sk_data_t = -1
         // void SkData_delete(void *sk_data); // (SkData *sk_data)
         deinit {
             SkData_delete(self.pointer)
-            if let handle = self.handle {
+            if handle > -1 {
                 static_sk_data_delete(handle)
             }
         }
@@ -60,7 +60,7 @@ extension Skia {
 
         // // static
 
-        init(pointer: Skia.DataMutablePointer?, handle: sk_data_t?) {
+        init(pointer: Skia.DataMutablePointer?, handle: sk_data_t) {
             self.pointer = pointer
             self.handle = handle
         }

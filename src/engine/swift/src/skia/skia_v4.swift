@@ -1,14 +1,14 @@
 extension Skia {
     class V4 {
         public var pointer: Skia.V4MutablePointer?
-        public var handle: sk_v4_t?
+        public var handle: sk_v4_t = -1
 
         // void SkV4_delete(void *v4); // (SkV4 *v4)
 
         deinit {
-            SkV4_delete(pointer)
-            if let handle = handle {
-                static_sk_v4_delete(handle)
+            SkV4_delete(self.pointer)
+            if self.handle > -1 {
+                static_sk_v4_delete(self.handle)
             }
         }
         // float SkV4_lengthSquared(void *v4); // (SkV4 *v4) -> SkScalar
@@ -46,7 +46,7 @@ extension Skia {
 
         // // static
 
-        init(pointer: Skia.V4MutablePointer?, handle: sk_v4_t?) {
+        init(pointer: Skia.V4MutablePointer?, handle: sk_v4_t) {
             self.pointer = pointer
             self.handle = handle
         }

@@ -1,11 +1,11 @@
 extension Skia {
     class Rect {
         public var pointer: Skia.RectMutablePointer?
-        public var handle: sk_rect_t?
+        public var handle: sk_rect_t = -1
         // void SkRect_delete(void *rect); // (SkRect *rect)
         deinit {
-            SkRect_delete(self.pointer)
-            if let handle = self.handle {
+            //SkRect_delete(self.pointer)
+            if handle > -1 {
                 static_sk_rect_delete(handle)
             }
         }
@@ -123,10 +123,7 @@ extension Skia {
         }
         // int SkRect_makeOffset_2(void *rect, int v); // (SkRect *rect, sk_point_t v) -> sk_rect_t
         func makeOffset(v: Point) -> Rect {
-            guard let handle_v = v.handle else {
-                fatalError("SkRect makeOffset() handle is nil")
-            }
-            let handle = SkRect_makeOffset_2(self.pointer, handle_v);
+            let handle = SkRect_makeOffset_2(self.pointer, v.handle);
             let pointer = static_sk_rect_get_ptr(handle)
             return Rect(pointer: pointer, handle: handle)
         }
@@ -264,7 +261,7 @@ extension Skia {
 
         // // static
 
-        init(pointer: Skia.RectMutablePointer?, handle: sk_rect_t?) {
+        init(pointer: Skia.RectMutablePointer?, handle: sk_rect_t) {
             self.pointer = pointer
             self.handle = handle
         }

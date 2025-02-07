@@ -1,23 +1,23 @@
 extension Skia {
     class Pixmap {
         public var pointer: Skia.PixmapMutablePointer?
-        public var handle: sk_pixmap_t?
+        public var handle: sk_pixmap_t = -1
 
         // void *SkPixmap_new(); // () -> SkPixmap *
 
         init () {
             self.pointer = SkPixmap_new()
-            self.handle = nil
+            self.handle = -1
         }
         // void *SkPixmap_new_2(const void *info, const void *addr, unsigned long rowBytes); // (const SkImageInfo *info, const void *addr, size_t rowBytes) -> SkPixmap *
         init(info: Skia.ImageInfo, addr: UnsafeRawPointer?, rowBytes: UInt) {
             self.pointer = SkPixmap_new_2(info.pointer, addr, rowBytes)
-            self.handle = nil
+            self.handle = -1
         }
         // void SkPixmap_delete(void *pixmap); // (SkPixmap *pixmap)
         deinit {
             SkPixmap_delete(self.pointer)
-            if let handle = self.handle {
+            if handle > -1 {
                 static_sk_pixmap_delete(handle)
             }
         }
@@ -35,10 +35,7 @@ extension Skia {
         }
         // void SkPixmap_setColorSpace(void *pixmap, int color_space); // (SkPixmap *pixmap, sk_color_space_t color_space)
         func setColorSpace(colorSpace: ColorSpace) {
-            guard let handle = colorSpace.handle else {
-                fatalError("colorSpace.handle is nil")
-            }
-            SkPixmap_setColorSpace(self.pointer, handle)
+            SkPixmap_setColorSpace(self.pointer, colorSpace.handle)
         }
         // bool SkPixmap_extractSubset(void *pixmap, void *subset, const void *area); // (SkPixmap *pixmap, SkPixmap *subset, const SkIRect *area) -> bool
         func extractSubset(subset: Pixmap, area: IRect) -> Bool {
@@ -47,7 +44,7 @@ extension Skia {
         // const void *SkPixmap_info(void *pixmap); // (SkPixmap *pixmap) -> const SkImageInfo *
         func info() -> ImageInfo {
             let pointer = SkPixmap_info(self.pointer)
-            return ImageInfo(pointer: UnsafeMutableRawPointer(mutating: pointer), handle: nil)
+            return ImageInfo(pointer: UnsafeMutableRawPointer(mutating: pointer), handle: -1)
         }
         // unsigned long SkPixmap_rowBytes(void *pixmap); // (SkPixmap *pixmap) -> size_t
         func rowBytes() -> UInt {
@@ -82,7 +79,7 @@ extension Skia {
         // void *SkPixmap_colorSpace(void *pixmap); // (SkPixmap *pixmap) -> SkColorSpace *
         func colorSpace() -> ColorSpace {
             let pointer = SkPixmap_colorSpace(self.pointer)
-            return ColorSpace(pointer: UnsafeMutableRawPointer(mutating: pointer), handle: nil)
+            return ColorSpace(pointer: UnsafeMutableRawPointer(mutating: pointer), handle: -1)
         }
         // int SkPixmap_refColorSpace(void *pixmap); // (SkPixmap *pixmap) -> sk_color_space_t
         func refColorSpace() -> ColorSpace {
@@ -237,7 +234,7 @@ extension Skia {
 
         // static
 
-        init(pointer: Skia.PixmapMutablePointer?, handle: sk_pixmap_t?) {
+        init(pointer: Skia.PixmapMutablePointer?, handle: sk_pixmap_t) {
             self.pointer = pointer
             self.handle = handle
         }

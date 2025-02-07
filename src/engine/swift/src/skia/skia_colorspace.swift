@@ -1,11 +1,11 @@
 extension Skia {
     class ColorSpace {
         public var pointer: Skia.ColorSpaceMutablePointer?
-        public var handle: sk_color_space_t?
+        public var handle: sk_color_space_t = -1
         // void SkColorSpace_delete(void *color_space); // (SkColorSpace *color_space)
         deinit {
             SkColorSpace_delete(self.pointer)
-            if let handle = self.handle {
+            if handle > -1 {
                 static_sk_color_space_delete(handle)
             }
         }
@@ -97,7 +97,7 @@ extension Skia {
 
         // // static
 
-        init(pointer: Skia.ColorSpaceMutablePointer?, handle: sk_color_space_t?) {
+        init(pointer: Skia.ColorSpaceMutablePointer?, handle: sk_color_space_t) {
             self.pointer = pointer
             self.handle = handle
         }

@@ -1,56 +1,56 @@
 extension Skia {
     class SkString {
         public var pointer: Skia.SkStringMutablePointer?
-        public var handle: sk_string_t?
+        public var handle: sk_string_t = -1
 
         // void *SkString_new(); // () -> SkString *
 
         init() {
             self.pointer = SkString_new();
-            self.handle = nil
+            self.handle = -1
         }
         // void *SkString_new_2(unsigned long len); // (size_t len) -> SkString *
 
         init(len: UInt) {
             self.pointer = SkString_new_2(len);
-            self.handle = nil
+            self.handle = -1
         }
         // void *SkString_new_3(const char text[]); // (const char text[]) -> SkString *
 
         init(text: UnsafePointer<CChar>?) {
             self.pointer = SkString_new_3(text);
-            self.handle = nil
+            self.handle = -1
         }
         // void *SkString_new_4(const char text[], unsigned long len); // (const char text[], size_t len) -> SkString *
 
         init(text: UnsafePointer<CChar>?, len: UInt) {
             self.pointer = SkString_new_4(text, len);
-            self.handle = nil
+            self.handle = -1
         }
         // void *SkString_new_5(const void *str); // (const SkString *str) -> SkString *
 
         init(str: SkString) {
             self.pointer = SkString_new_5(str.pointer);
-            self.handle = nil
+            self.handle = -1
         }
         // void *SkString_new_6(const void *str); // (const std::string *str) -> SkString *
 
         init(str: String) {
             self.pointer = SkString_new_6(str);
-            self.handle = nil
+            self.handle = -1
         }
         // void *SkString_new_7(int view); // (string_view_t view) -> SkString *
 
         init(view: StringViewType) {
             self.pointer = SkString_new_7(view.handle);
-            self.handle = nil
+            self.handle = -1
         }
         // void SkString_delete(void *string); // (SkString *string)
 
         deinit {
             SkString_delete(self.pointer)
-            if let handle = self.handle {
-                static_sk_string_delete(handle)
+            if self.handle > -1 {
+                static_sk_string_delete(self.handle)
             }
         }
         // bool SkString_isEmpty(void *string); // (SkString *string) -> bool
@@ -348,7 +348,7 @@ extension Skia {
 
         // static
 
-        init(pointer: Skia.SkStringMutablePointer?, handle: sk_string_t?) {
+        init(pointer: Skia.SkStringMutablePointer?, handle: sk_string_t) {
             self.pointer = pointer
             self.handle = handle
         }

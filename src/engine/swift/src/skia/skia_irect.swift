@@ -1,11 +1,11 @@
 extension Skia {
     class IRect {
         public var pointer: Skia.IRectMutablePointer?
-        public var handle: sk_i_rect_t?
+        public var handle: sk_i_rect_t = -1
         // void SkIRect_delete(void *i_rect); // (SkIRect *i_rect)
         deinit {
             SkIRect_delete(self.pointer)
-            if let handle = self.handle {
+            if handle > -1 {
                 static_sk_i_rect_delete(handle)
             }
         }
@@ -100,10 +100,7 @@ extension Skia {
         }
         // int SkIRect_makeOffset_2(void *i_rect, int offset); // (SkIRect *i_rect, sk_i_point_t offset) -> sk_i_rect_t
         static func MakeOffset(i_rect: IRect, offset: IPoint) -> IRect {
-            guard let offsetHandle = offset.handle else {
-                fatalError("offset.handle is nil")
-            }
-            let handle = SkIRect_makeOffset_2(i_rect.pointer, offsetHandle);
+            let handle = SkIRect_makeOffset_2(i_rect.pointer, offset.handle);
             let pointer = static_sk_i_rect_get_ptr(handle)
             return IRect(pointer: pointer, handle: handle)
         }
@@ -184,7 +181,7 @@ extension Skia {
 
         // // static
 
-        init(pointer: Skia.IRectMutablePointer?, handle: sk_i_rect_t?) {
+        init(pointer: Skia.IRectMutablePointer?, handle: sk_i_rect_t) {
             self.pointer = pointer
             self.handle = handle
         }
@@ -209,13 +206,10 @@ extension Skia {
         }
         // int SkIRect_MakePtSize(int pt, int size); // (sk_i_point_t pt, sk_i_size_t size) -> sk_i_rect_t
         static func MakePtSize(pt: IPoint, size: ISize) -> IRect {
-            guard let ptHandle = pt.handle else {
-                fatalError("pt.handle is nil")
-            }
             guard let sizeHandle = size.handle else {
                 fatalError("size.handle is nil")
             }
-            let handle = SkIRect_MakePtSize(ptHandle, sizeHandle);
+            let handle = SkIRect_MakePtSize(pt.handle, sizeHandle);
             let pointer = static_sk_i_rect_get_ptr(handle)
             return IRect(pointer: pointer, handle: handle)
         }

@@ -1,13 +1,13 @@
 extension Skia {
     class RSXform {
         public var pointer: Skia.RSXformMutablePointer?
-        public var handle: sk_rsx_form_t?
+        public var handle: sk_rsx_form_t = -1
 
         // void SkRSXform_delete(void *rsx_form); // (SkRSXform *rsx_form)
         deinit {
             SkRSXform_delete(self.pointer)
-            if let handle = self.handle {
-                static_sk_rsx_form_delete(handle)
+            if self.handle > -1 {
+                static_sk_rsx_form_delete(self.handle)
             }
         }
         // bool SkRSXform_rectStaysRect(void *rsx_form); // (SkRSXform *rsx_form) -> bool
@@ -37,7 +37,7 @@ extension Skia {
 
         // // static
 
-        init(pointer: Skia.RSXformMutablePointer?, handle: sk_rsx_form_t?) {
+        init(pointer: Skia.RSXformMutablePointer?, handle: sk_rsx_form_t) {
             self.pointer = pointer
             self.handle = handle
         }

@@ -1,17 +1,17 @@
 extension Skia {
     class PixelRef {
         public var pointer: Skia.PixelRefMutablePointer?
-        public var handle: sk_pixel_ref_t?
+        public var handle: sk_pixel_ref_t = -1
 
         // void *SkPixelRef_new(int width, int height, void *addr, unsigned long rowBytes); // (int width, int height, void *addr, size_t rowBytes) -> SkPixelRef *
         init(width: Int32, height: Int32, addr: UnsafeMutableRawPointer?, rowBytes: UInt) {
             self.pointer = SkPixelRef_new(width, height, addr, rowBytes)
-            self.handle = nil
+            self.handle = -1
         }
         // void SkPixelRef_delete(void *pixel_ref); // (SkPixelRef *pixel_ref)
         deinit {
             SkPixelRef_delete(self.pointer)
-            if let handle = self.handle {
+            if handle > -1 {
                 static_sk_pixel_ref_delete(handle)
             }
         }
@@ -74,7 +74,7 @@ extension Skia {
         
         // static
 
-        init(pointer: Skia.PixelRefMutablePointer?, handle: sk_pixel_ref_t?) {
+        init(pointer: Skia.PixelRefMutablePointer?, handle: sk_pixel_ref_t) {
             self.pointer = pointer
             self.handle = handle
         }

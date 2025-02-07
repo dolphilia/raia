@@ -1,12 +1,12 @@
 extension Skia {
     class ColorFilter {
         public var pointer: Skia.ColorFilterMutablePointer?
-        public var handle: sk_color_filter_t?
+        public var handle: sk_color_filter_t = -1
 
         // void SkColorFilter_delete(void *color_filter); // (SkColorFilter *color_filter)
         deinit {
             SkColorFilter_delete(self.pointer)
-            if let handle = self.handle {
+            if handle > -1 {
                 static_sk_color_filter_delete(handle)
             }
         }
@@ -29,7 +29,7 @@ extension Skia {
 
         // // static
 
-        init(pointer: Skia.ColorFilterMutablePointer?, handle: sk_color_filter_t?) {
+        init(pointer: Skia.ColorFilterMutablePointer?, handle: sk_color_filter_t) {
             self.pointer = pointer
             self.handle = handle
         }
@@ -48,33 +48,21 @@ extension Skia {
         }
         // const char *SkColorFilter_FactoryToName(int factory); // (sk_flattenable_factory_t factory) -> const char *
         static func FactoryToName(factory: Flattenable) -> UnsafePointer<CChar>? {
-            guard let handle = factory.handle else {
-                return nil
-            }
-            return SkColorFilter_FactoryToName(handle)
+            return SkColorFilter_FactoryToName(factory.handle)
         }
         static func FactoryToName(factory: Flattenable) -> String? {
-            guard let handle = factory.handle else {
-                return nil
-            }
-            guard let cstr = SkColorFilter_FactoryToName(handle) else {
+            guard let cstr = SkColorFilter_FactoryToName(factory.handle) else {
                 return nil
             }
             return String(cString: cstr)
         }
         // void SkColorFilter_Register(const char name[], int factory); // (const char name[], sk_flattenable_factory_t factory)
         static func Register(name: UnsafePointer<CChar>?, factory: Flattenable) {
-            guard let handle = factory.handle else {
-                return
-            }
-            SkColorFilter_Register(name, handle)
+            SkColorFilter_Register(name, factory.handle)
         }
         static func Register(name: String, factory: Flattenable) {
-            guard let handle = factory.handle else {
-                return
-            }
             name.withCString { cstr in
-                SkColorFilter_Register(cstr, handle)
+                SkColorFilter_Register(cstr, factory.handle)
             }
         }
 

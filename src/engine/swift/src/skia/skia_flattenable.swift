@@ -1,12 +1,12 @@
 extension Skia {
     class Flattenable {
         public var pointer: Skia.FlattenableMutablePointer?
-        public var handle: sk_flattenable_t?
+        public var handle: sk_flattenable_t = -1
 
         // void SkFlattenable_delete(void *flattenable); // (SkFlattenable *flattenable)
         deinit {
             SkFlattenable_delete(self.pointer)
-            if let handle = self.handle {
+            if handle > -1 {
                 static_sk_flattenable_delete(handle)
             }
         }
@@ -37,7 +37,7 @@ extension Skia {
 
         // // static
 
-        init(pointer: Skia.FlattenableMutablePointer?, handle: sk_flattenable_t?) {
+        init(pointer: Skia.FlattenableMutablePointer?, handle: sk_flattenable_t) {
             self.pointer = pointer
             self.handle = handle
         }
