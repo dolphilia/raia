@@ -26,6 +26,10 @@ extension GLFW {
         private var scrollCallback: ((Double, Double) -> Void)?
         private var dropCallback: (([String]) -> Void)?
 
+        //
+
+        private var windowTitle = ""
+
         // MARK: 初期化と実行
 
         init(width: Int, height: Int, title: String) {
@@ -42,25 +46,31 @@ extension GLFW {
             }
 
             self.windowPointer = pointer
-            GLFW.makeContextCurrent(window:pointer)
+            GLFW.makeContextCurrent(window: pointer)
+            self.title = title
         }
 
         deinit {
-            if let window = windowPointer {
-                GLFW.destroyWindow(window:window)
-            }
+           //if let window = windowPointer {
+           //    GLFW.destroyWindow(window: window)
+           //}
         }
 
         func run(mainLoop: (Window) -> Void) {
             guard let window = windowPointer else { return }
-            while GLFW.windowShouldClose(window:window) == 0 {
+            while GLFW.windowShouldClose(window: window) == 0 {
                 mainLoop(self)
-                GLFW.swapBuffers(window:window)
+                GLFW.swapBuffers(window: window)
                 GLFW.pollEvents()
             }
         }
 
         // MARK: プロパティ
+
+        var title: String {
+            get { return windowTitle }
+            set { GLFW.setWindowTitle(window: windowPointer, title: newValue) }
+        }
 
         var position: (x: Int, y: Int) {
             get { return getWindowPosition() }

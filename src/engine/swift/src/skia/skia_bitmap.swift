@@ -28,7 +28,10 @@ extension Skia {
 
         // void SkBitmap_delete(void *bitmap); // (SkBitmap *bitmap)
         deinit {
-            //SkBitmap_delete(self.pointer)
+            //if let pointer = self.pointer {
+                SkBitmap_delete(pointer)
+                //self.pointer = nil
+            //}
         }
         // void SkBitmap_allocN32Pixels(void *bitmap, int width, int height, bool isOpaque); // (SkBitmap *bitmap, int width, int height, bool isOpaque)
         func allocN32Pixels(width: Int, height: Int, isOpaque: Bool) {

@@ -4,9 +4,10 @@ extension Skia {
         public var handle: sk_rect_t = -1
         // void SkRect_delete(void *rect); // (SkRect *rect)
         deinit {
-            //SkRect_delete(self.pointer)
             if handle > -1 {
                 static_sk_rect_delete(handle)
+            } else {
+                SkRect_delete(self.pointer)
             }
         }
         // bool SkRect_isEmpty(void *rect); // (SkRect *rect) -> bool

@@ -6,6 +6,15 @@ extension Game {
         private var isHighDPI: Bool = false
         private var scaleFactor: Int = 1
 
+        var title: String {
+            get {
+                return window.title
+            }
+            set {
+                window.title = newValue
+            }
+        }
+
         init(width: Int, height: Int, title: String, renderer: R) {
             self.config = Game.WindowConfig(width: width, height: height, title: title)
             self.renderer = renderer
@@ -31,6 +40,11 @@ extension Game {
             renderer.setup()
         }
 
+        deinit {
+           //window.destroy()
+            //GLFW.terminate()
+        }
+
         func run(mainLoop: () -> Void) {
             while !window.shouldClose {
                 mainLoop()
@@ -43,7 +57,7 @@ extension Game {
                 window.swapBuffers()
                 window.pollEvents()
             }
-            renderer.cleanup()
+            //renderer.cleanup()
         }
     }
 }

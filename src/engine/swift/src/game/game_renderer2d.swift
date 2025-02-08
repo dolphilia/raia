@@ -33,6 +33,10 @@ extension Game {
             self.textureData = Game.TextureData(width: texWidth, height: texHeight, pixels: nil, id: 0)
         }
 
+        deinit {
+            cleanup()
+        }
+
         func setup() {
             GLES.genVertexArrays(n: 1, arrays: &glResources.VAO)
             GLES.genBuffers(n: 1, buffers: &glResources.VBO)
@@ -74,7 +78,7 @@ extension Game {
         }
 
         func cleanup() {
-            textureData.pixels?.deallocate()
+            //textureData.pixels?.deallocate()
             withUnsafePointer(to: glResources.VAO) {
                 GLES.deleteVertexArrays(n: 1, arrays: UnsafeMutableRawPointer(mutating: $0))
             }

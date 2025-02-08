@@ -33,9 +33,10 @@ extension Skia {
         // void SkCanvas_delete(void *canvas); // (SkCanvas *canvas)
 
         deinit {
-            //SkCanvas_delete(self.pointer)
             if handle > -1 {
                 static_sk_canvas_delete(handle)
+            } else {
+                SkCanvas_delete(self.pointer)
             }
         }
         // void * SkCanvas_accessTopLayerPixels(void *canvas, void *info, void *rowBytes, void *origin); // (SkCanvas *canvas, SkImageInfo *info, size_t *rowBytes, SkIPoint *origin) -> void *
