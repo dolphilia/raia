@@ -62,42 +62,42 @@ extension Skia {
         }
         // void SkCanvas_clipIRect(void *canvas, const void *irect, int op); // (SkCanvas *canvas, const SkIRect *irect, SkClipOp op)
 
-        func clipIRect(irect: Skia.IRect, op: ClipOp) {
+        func clipIRect(irect: Skia.IRect, op: SkClipOp) {
             SkCanvas_clipIRect(self.pointer, irect.pointer, Int32(op.rawValue))
         }
         // void SkCanvas_clipPath(void *canvas, const void *path, bool doAntiAlias); // (SkCanvas *canvas, const SkPath *path, bool doAntiAlias)
 
-        func clipPath(path: Skia.Path, doAntiAlias: Bool) {
+        func clipPath(path: Skia.SkPath, doAntiAlias: Bool) {
             SkCanvas_clipPath(self.pointer, path.pointer, doAntiAlias)
         }
         // void SkCanvas_clipPath_2(void *canvas, const void *path, int op); // (SkCanvas *canvas, const SkPath *path, SkClipOp op)
 
-        func clipPath(path: Skia.Path, op: ClipOp) {
+        func clipPath(path: Skia.SkPath, op: SkClipOp) {
             SkCanvas_clipPath_2(self.pointer, path.pointer, Int32(op.rawValue))
         }
         // void SkCanvas_clipPath_3(void *canvas, const void *path, int op, bool doAntiAlias); // (SkCanvas *canvas, const SkPath *path, SkClipOp op, bool doAntiAlias)
 
-        func clipPath(path: Skia.Path, op: ClipOp, doAntiAlias: Bool) {
+        func clipPath(path: Skia.SkPath, op: SkClipOp, doAntiAlias: Bool) {
             SkCanvas_clipPath_3(self.pointer, path.pointer, Int32(op.rawValue), doAntiAlias)
         }
         // void SkCanvas_clipRect(void *canvas, const void *rect, bool doAntiAlias); // (SkCanvas *canvas, const SkRect *rect, bool doAntiAlias)
 
         func clipRect(rect: Skia.SkRect, doAntiAlias: Bool) {
-            SkCanvas_clipRect(self.pointer,rect.pointer, doAntiAlias)
+            SkCanvas_clipRect(self.pointer, rect.pointer, doAntiAlias)
         }
         // void SkCanvas_clipRect_2(void *canvas, const void *rect, int op); // (SkCanvas *canvas, const SkRect *rect, SkClipOp op)
 
-        func clipRect(rect: Skia.SkRect, op: ClipOp) {
+        func clipRect(rect: Skia.SkRect, op: SkClipOp) {
             SkCanvas_clipRect_2(self.pointer, rect.pointer, Int32(op.rawValue))
         }
         // void SkCanvas_clipRect_3(void *canvas, const void *rect, int op, bool doAntiAlias); // (SkCanvas *canvas, const SkRect *rect, SkClipOp op, bool doAntiAlias)
 
-        func clipRect(rect: Skia.SkRect, op: ClipOp, doAntiAlias: Bool) {
+        func clipRect(rect: Skia.SkRect, op: SkClipOp, doAntiAlias: Bool) {
             SkCanvas_clipRect_3(self.pointer, rect.pointer, Int32(op.rawValue), doAntiAlias)
         }
         // void SkCanvas_clipRegion(void *canvas, const void *deviceRgn, int op); // (SkCanvas *canvas, const SkRegion *deviceRgn, SkClipOp op)
 
-        func clipRegion(deviceRgn: Skia.SkRegion, op: ClipOp) {
+        func clipRegion(deviceRgn: Skia.SkRegion, op: SkClipOp) {
             SkCanvas_clipRegion(self.pointer, deviceRgn.pointer, Int32(op.rawValue))
         }
         // void SkCanvas_clipRRect(void *canvas, const void *rrect, bool doAntiAlias); // (SkCanvas *canvas, const SkRRect *rrect, bool doAntiAlias)
@@ -107,17 +107,17 @@ extension Skia {
         }
         // void SkCanvas_clipRRect_2(void *canvas, const void *rrect, int op); // (SkCanvas *canvas, const SkRRect *rrect, SkClipOp op)
 
-        func clipRRect(rrect: Skia.SkRRect, op: ClipOp) {
+        func clipRRect(rrect: Skia.SkRRect, op: SkClipOp) {
             SkCanvas_clipRRect_2(self.pointer, rrect.pointer, Int32(op.rawValue))
         }
         // void SkCanvas_clipRRect_3(void *canvas, const void *rrect, int op, bool doAntiAlias); // (SkCanvas *canvas, const SkRRect *rrect, SkClipOp op, bool doAntiAlias)
 
-        func clipRRect(rrect: Skia.SkRRect, op: ClipOp, doAntiAlias: Bool) {
+        func clipRRect(rrect: Skia.SkRRect, op: SkClipOp, doAntiAlias: Bool) {
             SkCanvas_clipRRect_3(self.pointer, rrect.pointer, Int32(op.rawValue), doAntiAlias)
         }
         // void SkCanvas_clipShader(void *canvas, int shader, int op); // (SkCanvas *canvas, sk_shader_t shader, SkClipOp op)
 
-        func clipShader(shader: SkShader, op: ClipOp) {
+        func clipShader(shader: SkShader, op: SkClipOp) {
             SkCanvas_clipShader(self.pointer, shader.handle, Int32(op.rawValue))
         }
         // void SkCanvas_concat(void *canvas, const void * m44); // (SkCanvas *canvas, const SkM44 *m44)
@@ -127,7 +127,7 @@ extension Skia {
         }
         // void SkCanvas_concat_2(void *canvas, const void * matrix); // (SkCanvas *canvas, const SkMatrix *matrix)
 
-        func concat(matrix: Skia.Matrix) {
+        func concat(matrix: Skia.SkMatrix) {
             SkCanvas_concat_2(self.pointer, matrix.pointer)
         }
         // void SkCanvas_discard(void *canvas); // (SkCanvas *canvas)
@@ -156,7 +156,7 @@ extension Skia {
         }
         // void SkCanvas_drawAtlas(void *canvas, const void *atlas, const void * xform, const void * tex, const void * colors, int count, int mode, const void *sampling, const void *cullRect, const void *paint); // (SkCanvas *canvas, const SkImage *atlas, const SkRSXform xform[], const SkRect tex[], const SkColor colors[], int count, SkBlendMode mode, const SkSamplingOptions *sampling, const SkRect *cullRect, const SkPaint *paint)
 
-        func drawAtlas(atlas: Skia.Image, xform: [SkRSXform], tex: [Skia.SkRect], colors: [Color], count: Int, mode: Skia.BlendMode, sampling: Skia.SkSamplingOptions, cullRect: Skia.SkRect, paint: Skia.Paint) {
+        func drawAtlas(atlas: Skia.Image, xform: [SkRSXform], tex: [Skia.SkRect], colors: [Color], count: Int, mode: Skia.SkBlendMode, sampling: Skia.SkSamplingOptions, cullRect: Skia.SkRect, paint: Skia.Paint) {
             xform.withUnsafeBufferPointer { xformPointer in
                 tex.withUnsafeBufferPointer { texPointer in
                     SkCanvas_drawAtlas(self.pointer, atlas.pointer, xformPointer.baseAddress, texPointer.baseAddress, colors, Int32(count), Int32(mode.rawValue), sampling.pointer, cullRect.pointer, paint.pointer)
@@ -165,7 +165,7 @@ extension Skia {
         }
         // void SkCanvas_drawCircle(void *canvas, int center, float radius, const void *paint); // (SkCanvas *canvas, sk_point_t center, SkScalar radius, const SkPaint *paint)
 
-        func drawCircle(center: Skia.Point, radius: Float, paint: Skia.Paint) {
+        func drawCircle(center: Skia.SkPoint, radius: Float, paint: Skia.Paint) {
             SkCanvas_drawCircle(self.pointer, Int32(center.handle), radius, paint.pointer)
         }
         // void SkCanvas_drawCircle_2(void *canvas, float cx, float cy, float radius, const void *paint); // (SkCanvas *canvas, SkScalar cx, SkScalar cy, SkScalar radius, const SkPaint *paint)
@@ -175,17 +175,17 @@ extension Skia {
         }
         // void SkCanvas_drawColor(void *canvas, const void * color, int mode); // (SkCanvas *canvas, const SkColor4f *color, SkBlendMode mode)
 
-        func drawColor(color: Color4f, mode: BlendMode) {
+        func drawColor(color: Color4f, mode: SkBlendMode) {
             SkCanvas_drawColor(self.pointer, color.pointer, Int32(mode.rawValue))
         }
         // void SkCanvas_drawColor_2(void *canvas, unsigned int color, int mode); // (SkCanvas *canvas, SkColor color, SkBlendMode mode)
 
-        func drawColor(color: ColorARGB8888, mode: BlendMode) {
+        func drawColor(color: ColorARGB8888, mode: SkBlendMode) {
             SkCanvas_drawColor_2(self.pointer, color, Int32(mode.rawValue))
         }
         // void SkCanvas_drawDrawable(void *canvas, void *drawable, const void *matrix); // (SkCanvas *canvas, SkDrawable *drawable, const SkMatrix *matrix)
 
-        func drawDrawable(drawable: Skia.Drawable, matrix: Skia.Matrix) {
+        func drawDrawable(drawable: Skia.Drawable, matrix: Skia.SkMatrix) {
             SkCanvas_drawDrawable(self.pointer, drawable.pointer, matrix.pointer)
         }
         // void SkCanvas_drawDrawable_2(void *canvas, void *drawable, float x, float y); // (SkCanvas *canvas, SkDrawable *drawable, SkScalar x, SkScalar y)
@@ -202,7 +202,7 @@ extension Skia {
 
         typealias GlyphID = UInt16
 
-        func drawGlyphs(count: Int, glyphs: [GlyphID], positions: [Point], clusters: [UInt32], textByteCount: Int, utf8text: String, origin: Point, font: Skia.Font, paint: Skia.Paint) {
+        func drawGlyphs(count: Int, glyphs: [GlyphID], positions: [SkPoint], clusters: [UInt32], textByteCount: Int, utf8text: String, origin: SkPoint, font: Skia.Font, paint: Skia.Paint) {
             glyphs.withUnsafeBufferPointer { glyphsPointer in
                 positions.withUnsafeBufferPointer { positionsPointer in
                     clusters.withUnsafeBufferPointer { clustersPointer in
@@ -213,7 +213,7 @@ extension Skia {
         }
         // void SkCanvas_drawGlyphs_2(void *canvas, int count, const void * glyphs, const void * positions, int origin, const void *font, const void *paint); // (SkCanvas *canvas, int count, const SkGlyphID glyphs[], const SkPoint positions[], sk_point_t origin, const SkFont *font, const SkPaint *paint)
 
-        func drawGlyphs(count: Int, glyphs: [GlyphID], positions: [Point], origin: Point, font: Skia.Font, paint: Skia.Paint) {
+        func drawGlyphs(count: Int, glyphs: [GlyphID], positions: [SkPoint], origin: SkPoint, font: Skia.Font, paint: Skia.Paint) {
             glyphs.withUnsafeBufferPointer { glyphsPointer in
                 positions.withUnsafeBufferPointer { positionsPointer in
                     SkCanvas_drawGlyphs_2(self.pointer, Int32(count), glyphsPointer.baseAddress, positionsPointer.baseAddress, origin.handle, font.pointer, paint.pointer)
@@ -222,7 +222,7 @@ extension Skia {
         }
         // void SkCanvas_drawGlyphs_3(void *canvas, int count, const void * glyphs, const void * xforms, int origin, const void *font, const void *paint); // (SkCanvas *canvas, int count, const SkGlyphID glyphs[], const SkRSXform xforms[], sk_point_t origin, const SkFont *font, const SkPaint *paint)
 
-        func drawGlyphs(count: Int, glyphs: [GlyphID], xforms: [SkRSXform], origin: Point, font: Skia.Font, paint: Skia.Paint) {
+        func drawGlyphs(count: Int, glyphs: [GlyphID], xforms: [SkRSXform], origin: SkPoint, font: Skia.Font, paint: Skia.Paint) {
             glyphs.withUnsafeBufferPointer { glyphsPointer in
                 xforms.withUnsafeBufferPointer { xformsPointer in
                     SkCanvas_drawGlyphs_3(self.pointer, Int32(count), glyphsPointer.baseAddress, xformsPointer.baseAddress, origin.handle, font.pointer, paint.pointer)
@@ -253,7 +253,7 @@ extension Skia {
         // void SkCanvas_drawImageLattice_2(void *canvas, const void *image, const void *lattice, const void *dst, int filter, const void *paint); // (SkCanvas *canvas, const SkImage *image, const SkCanvas::Lattice *lattice, const SkRect *dst, SkFilterMode filter, const SkPaint *paint)
         // void SkCanvas_drawImageNine(void *canvas, const void *image, const void *center, const void *dst, int filter, const void *paint); // (SkCanvas *canvas, const SkImage *image, const SkIRect *center, const SkRect *dst, SkFilterMode filter, const SkPaint *paint)
 
-        func drawImageNine(image: Skia.Image, center: Skia.IRect, dst: Skia.SkRect, filter: FilterMode, paint: Skia.Paint) {
+        func drawImageNine(image: Skia.Image, center: Skia.IRect, dst: Skia.SkRect, filter: SkFilterMode, paint: Skia.Paint) {
             SkCanvas_drawImageNine(self.pointer, image.pointer, center.pointer, dst.pointer, Int32(filter.rawValue), paint.pointer)
         }
         // void SkCanvas_drawImageRect(void *canvas, int image, const void *dst, const void *sampling, const void *paint); // (SkCanvas *canvas, sk_image_t image, const SkRect *dst, const SkSamplingOptions *sampling, const SkPaint *paint)
@@ -283,7 +283,7 @@ extension Skia {
         }
         // void SkCanvas_drawLine(void *canvas, int p0, int p1, const void *paint); // (SkCanvas *canvas, sk_point_t p0, sk_point_t p1, const SkPaint *paint)
 
-        func drawLine(p0: Skia.Point, p1: Skia.Point, paint: Skia.Paint) {
+        func drawLine(p0: Skia.SkPoint, p1: Skia.SkPoint, paint: Skia.Paint) {
             SkCanvas_drawLine(self.pointer, Int32(p0.handle), Int32(p1.handle), paint.pointer)
         }
         // void SkCanvas_drawLine_2(void *canvas, float x0, float y0, float x1, float y1, const void *paint); // (SkCanvas *canvas, SkScalar x0, SkScalar y0, SkScalar x1, SkScalar y1, const SkPaint *paint)
@@ -308,7 +308,7 @@ extension Skia {
         }
         // void SkCanvas_drawPatch(void *canvas, const void * cubics, const unsigned int colors[4], const void * texCoords, int mode, const void *paint); // (SkCanvas *canvas, const SkPoint cubics[12], const SkColor colors[4], const SkPoint texCoords[4], SkBlendMode mode, const SkPaint *paint)
 
-        func drawPatch(cubics: [Point], colors: [ColorARGB8888], texCoords: [Point], mode: BlendMode, paint: Skia.Paint) {
+        func drawPatch(cubics: [SkPoint], colors: [ColorARGB8888], texCoords: [SkPoint], mode: SkBlendMode, paint: Skia.Paint) {
             cubics.withUnsafeBufferPointer { cubicsPointer in
                 colors.withUnsafeBufferPointer { colorsPointer in
                     texCoords.withUnsafeBufferPointer { texCoordsPointer in

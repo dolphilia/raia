@@ -2,7 +2,7 @@ extension Skia {
     typealias ColorARGB8888 = UInt32
     typealias ColorARGB8888PM = UInt32
     typealias ColorRGBA8888 = UInt32
-    typealias Scalar = Float
+    typealias SkScalar = Float
     // ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
     typealias AndroidCodecMutablePointer = UnsafeMutableRawPointer
     typealias AndroidCodecConstPointer = UnsafeRawPointer
@@ -50,18 +50,18 @@ extension Skia {
     typealias MaskConstPointer = UnsafeRawPointer
     typealias MaskBuilderMutablePointer = UnsafeMutableRawPointer
     typealias MaskBuilderConstPointer = UnsafeRawPointer
-    typealias MatrixMutablePointer = UnsafeMutableRawPointer
-    typealias MatrixConstPointer = UnsafeRawPointer
+    typealias SkMatrixMutablePointer = UnsafeMutableRawPointer
+    typealias SkMatrixConstPointer = UnsafeRawPointer
     typealias MeshMutablePointer = UnsafeMutableRawPointer
     typealias MeshConstPointer = UnsafeRawPointer
     typealias PaintMutablePointer = UnsafeMutableRawPointer
     typealias PaintConstPointer = UnsafeRawPointer
-    typealias PathMutablePointer = UnsafeMutableRawPointer
-    typealias PathConstPointer = UnsafeRawPointer
-    typealias PixelRefMutablePointer = UnsafeMutableRawPointer
-    typealias PixelRefConstPointer = UnsafeRawPointer
-    typealias PixmapMutablePointer = UnsafeMutableRawPointer
-    typealias PixmapConstPointer = UnsafeRawPointer
+    typealias SkPathMutablePointer = UnsafeMutableRawPointer
+    typealias SkPathConstPointer = UnsafeRawPointer
+    typealias SkPixelRefMutablePointer = UnsafeMutableRawPointer
+    typealias SkPixelRefConstPointer = UnsafeRawPointer
+    typealias SkPixmapMutablePointer = UnsafeMutableRawPointer
+    typealias SkPixmapConstPointer = UnsafeRawPointer
     typealias SkPointMutablePointer = UnsafeMutableRawPointer
     typealias SkPointConstPointer = UnsafeRawPointer
     typealias SkPoint3MutablePointer = UnsafeMutableRawPointer

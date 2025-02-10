@@ -1,19 +1,19 @@
 extension Skia {
     // ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
 
-    enum AlphaType: Int32 {
+    enum SkAlphaType: Int32 {
         case unknown
         case opaque
         case premul
         case unpremul
     }
 
-    enum ApplyPerspectiveClip: Int32 {
+    enum SkApplyPerspectiveClip: Int32 {
         case no
         case yes
     }
 
-    enum BlendMode: Int32 {
+    enum SkBlendMode: Int32 {
         case clear
         case src
         case dst
@@ -45,12 +45,12 @@ extension Skia {
         case luminosity
     }
 
-    enum ClipOp: Int32 {
+    enum SkClipOp: Int32 {
         case difference
         case intersect
     }
 
-    enum ColorType: Int32 {
+    enum SkColorType: Int32 {
         case unknown
         case alpha8
         case rgb565
@@ -80,37 +80,37 @@ extension Skia {
         case n32
     }
 
-    enum FilterMode: Int32 {
+    enum SkFilterMode: Int32 {
         case nearest
         case linear
     }
 
-    enum MipmapMode: Int32 {
+    enum SkMipmapMode: Int32 {
         case none
         case nearest
         case linear
     }
     
-    enum PathFillType: Int32 {
+    enum SkPathFillType: Int32 {
         case winding
         case evenOdd
         case inverseWinding
         case inverseEvenOdd
     }
 
-    enum PathDirection: Int32 {
+    enum SkPathDirection: Int32 {
         case cw
         case ccw
     }
 
-    enum PathSegmentMask: Int32 {
+    enum SkPathSegmentMask: Int32 {
         case line
         case quad
         case conic
         case cubic
     }
 
-    enum PathVerb: Int32 {
+    enum SkPathVerb: Int32 {
         case move
         case line
         case quad
@@ -119,7 +119,7 @@ extension Skia {
         case close
     }
 
-    enum PixelGeometry: Int32 {
+    enum SkPixelGeometry: Int32 {
         case unknown
         case rgbH
         case bgrH
@@ -127,14 +127,14 @@ extension Skia {
         case bgrV
     }
 
-    enum TileMode: Int32 {
+    enum SkTileMode: Int32 {
         case clamp
         case kRepeat
         case mirror
         case decal
     }
 
-    enum YUVColorSpace: Int32 {
+    enum SkYUVColorSpace: Int32 {
         case identity
         case ituRec601
         case ituRec709

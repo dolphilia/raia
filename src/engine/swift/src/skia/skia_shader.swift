@@ -14,9 +14,9 @@ extension Skia {
         static func Deserialize(type: Flattenable, data: UnsafeRawPointer, length: UInt, procs: UnsafeRawPointer) -> Flattenable // int SkShader_Deserialize(int type, const void *data, unsigned long length, const void *procs); // (SkShader::Type type, const void *data, size_t length, const SkDeserialProcs *procs) -> sk_flattenable_t
         // Methods
         func isOpaque() -> Bool // bool SkShader_isOpaque(void *shader); // (SkShader *shader) -> bool
-        func isAImage(localMatrix: Skia.Matrix, xy: [TileMode]) -> Skia.Image? // void *SkShader_isAImage(void *shader, void *localMatrix, void * xy); // (SkShader *shader, SkMatrix *localMatrix, SkTileMode xy[2]) -> SkImage *
+        func isAImage(localMatrix: Skia.SkMatrix, xy: [SkTileMode]) -> Skia.Image? // void *SkShader_isAImage(void *shader, void *localMatrix, void * xy); // (SkShader *shader, SkMatrix *localMatrix, SkTileMode xy[2]) -> SkImage *
         func isAImage() -> Bool // bool SkShader_isAImage_2(void *shader); // (SkShader *shader) -> bool
-        func makeWithLocalMatrix(matrix: Skia.Matrix) -> SkShader // int SkShader_makeWithLocalMatrix(void *shader, const void *matrix); // (SkShader *shader, const SkMatrix *matrix) -> sk_shader_t
+        func makeWithLocalMatrix(matrix: Skia.SkMatrix) -> SkShader // int SkShader_makeWithLocalMatrix(void *shader, const void *matrix); // (SkShader *shader, const SkMatrix *matrix) -> sk_shader_t
         func makeWithColorFilter(colorFilter: ColorFilter) -> SkShader // int SkShader_makeWithColorFilter(void *shader, int color_filter); // (SkShader *shader, sk_color_filter_t color_filter) -> sk_shader_t
         func makeWithWorkingColorSpace(colorSpace: ColorSpace) -> SkShader // int SkShader_makeWithWorkingColorSpace(void *shader, int color_space); // (SkShader *shader, sk_color_space_t color_space) -> sk_shader_t
         func getFactory() -> Flattenable // int SkShader_getFactory(void *shader); // (SkShader *shader) -> sk_flattenable_factory_t
@@ -36,9 +36,10 @@ extension Skia {
         public var handle: sk_shader_t = -1
 
         deinit {
-            SkShader_delete(pointer)
-            if handle > -1 {
-                static_sk_shader_delete(handle)
+            if self.handle > -1 {
+                static_sk_shader_delete(self.handle)
+            } else {
+                SkShader_delete(self.pointer)
             }
         }
 
@@ -96,7 +97,7 @@ extension Skia {
             return SkShader_isOpaque(pointer)
         }
 
-        func isAImage(localMatrix: Skia.Matrix, xy: [TileMode]) -> Skia.Image? {
+        func isAImage(localMatrix: Skia.SkMatrix, xy: [SkTileMode]) -> Skia.Image? {
             guard let image = SkShader_isAImage(pointer, localMatrix.pointer, UnsafeMutableRawPointer(mutating: xy)) else {
                 return nil
             }
@@ -107,7 +108,7 @@ extension Skia {
             return SkShader_isAImage_2(pointer)
         }
 
-        func makeWithLocalMatrix(matrix: Skia.Matrix) -> SkShader {
+        func makeWithLocalMatrix(matrix: Skia.SkMatrix) -> SkShader {
             let handle = SkShader_makeWithLocalMatrix(pointer, matrix.pointer)
             let pointer = static_sk_shader_get(handle)
             return SkShader(pointer: pointer, handle: handle)

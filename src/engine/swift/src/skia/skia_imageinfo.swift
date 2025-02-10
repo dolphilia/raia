@@ -28,12 +28,12 @@ extension Skia {
             return Int(SkImageInfo_height(self.pointer))
         }
         // int SkImageInfo_colorType(void *image_info); // (SkImageInfo *image_info) -> SkColorType
-        func colorType() -> ColorType {
-            return ColorType(rawValue: Int32(SkImageInfo_colorType(self.pointer)))!
+        func colorType() -> SkColorType {
+            return SkColorType(rawValue: Int32(SkImageInfo_colorType(self.pointer)))!
         }
         // int SkImageInfo_alphaType(void *image_info); // (SkImageInfo *image_info) -> SkAlphaType
-        func alphaType() -> AlphaType {
-            return AlphaType(rawValue: Int32(SkImageInfo_alphaType(self.pointer)))!
+        func alphaType() -> SkAlphaType {
+            return SkAlphaType(rawValue: Int32(SkImageInfo_alphaType(self.pointer)))!
         }
         // void *SkImageInfo_colorSpace(void *image_info); // (SkImageInfo *image_info) -> SkColorSpace *
         func colorSpace() -> ColorSpace {
@@ -89,13 +89,13 @@ extension Skia {
             return ImageInfo(pointer: pointer, handle: handle)
         }
         // int SkImageInfo_makeAlphaType(void *image_info, int newAlphaType); // (SkImageInfo *image_info, SkAlphaType newAlphaType) -> sk_image_info_t
-        func makeAlphaType(newAlphaType: AlphaType) -> ImageInfo {
+        func makeAlphaType(newAlphaType: SkAlphaType) -> ImageInfo {
             let handle = SkImageInfo_makeAlphaType(self.pointer, Int32(newAlphaType.rawValue))
             let pointer = static_sk_image_info_get_ptr(handle)
             return ImageInfo(pointer: pointer, handle: handle)
         }
         // int SkImageInfo_makeColorType(void *image_info, int newColorType); // (SkImageInfo *image_info, SkColorType newColorType) -> sk_image_info_t
-        func makeColorType(newColorType: ColorType) -> ImageInfo {
+        func makeColorType(newColorType: SkColorType) -> ImageInfo {
             let handle = SkImageInfo_makeColorType(self.pointer, Int32(newColorType.rawValue))
             let pointer = static_sk_image_info_get_ptr(handle)
             return ImageInfo(pointer: pointer, handle: handle)
@@ -152,28 +152,28 @@ extension Skia {
 
         // int SkImageInfo_Make(int width, int height, int ct, int at); // (int width, int height, SkColorType ct, SkAlphaType at) -> sk_image_info_t
 
-        static func Make(width: Int, height: Int, ct: ColorType, at: AlphaType) -> ImageInfo {
+        static func Make(width: Int, height: Int, ct: SkColorType, at: SkAlphaType) -> ImageInfo {
             let handle = SkImageInfo_Make(Int32(width), Int32(height), Int32(ct.rawValue), Int32(at.rawValue))
             let pointer = static_sk_image_info_get_ptr(handle)
             return ImageInfo(pointer: pointer, handle: handle)
         }
         // int SkImageInfo_Make_2(int width, int height, int ct, int at, int color_space); // (int width, int height, SkColorType ct, SkAlphaType at, sk_color_space_t color_space) -> sk_image_info_t
 
-        static func Make(width: Int, height: Int, ct: ColorType, at: AlphaType, colorSpace: ColorSpace) -> ImageInfo {
+        static func Make(width: Int, height: Int, ct: SkColorType, at: SkAlphaType, colorSpace: ColorSpace) -> ImageInfo {
             let handle = SkImageInfo_Make_2(Int32(width), Int32(height), Int32(ct.rawValue), Int32(at.rawValue), colorSpace.handle)
             let pointer = static_sk_image_info_get_ptr(handle)
             return ImageInfo(pointer: pointer, handle: handle)
         }
         // int SkImageInfo_Make_3(int dimensions, int ct, int at); // (sk_i_size_t dimensions, SkColorType ct, SkAlphaType at) -> sk_image_info_t
 
-        static func Make(dimensions: ISize, ct: ColorType, at: AlphaType) -> ImageInfo {
+        static func Make(dimensions: ISize, ct: SkColorType, at: SkAlphaType) -> ImageInfo {
             let handle = SkImageInfo_Make_3(dimensions.handle, Int32(ct.rawValue), Int32(at.rawValue))
             let pointer = static_sk_image_info_get_ptr(handle)
             return ImageInfo(pointer: pointer, handle: handle)
         }
         // int SkImageInfo_Make_4(int dimensions, int ct, int at, int color_space); // (sk_i_size_t dimensions, SkColorType ct, SkAlphaType at, sk_color_space_t color_space) -> sk_image_info_t
 
-        static func Make(dimensions: ISize, ct: ColorType, at: AlphaType, colorSpace: ColorSpace) -> ImageInfo {
+        static func Make(dimensions: ISize, ct: SkColorType, at: SkAlphaType, colorSpace: ColorSpace) -> ImageInfo {
             let handle = SkImageInfo_Make_4(dimensions.handle, Int32(ct.rawValue), Int32(at.rawValue), colorSpace.handle)
             let pointer = static_sk_image_info_get_ptr(handle)
             return ImageInfo(pointer: pointer, handle: handle)
@@ -187,19 +187,19 @@ extension Skia {
         }
         // int SkImageInfo_MakeN32(int width, int height, int at); // (int width, int height, SkAlphaType at) -> sk_image_info_t
 
-        static func MakeN32(width: Int, height: Int, at: AlphaType) -> ImageInfo {
+        static func MakeN32(width: Int, height: Int, at: SkAlphaType) -> ImageInfo {
             let handle = SkImageInfo_MakeN32(Int32(width), Int32(height), Int32(at.rawValue))
             let pointer = static_sk_image_info_get_ptr(handle)
             return ImageInfo(pointer: pointer, handle: handle)
         }
         // int SkImageInfo_MakeN32_2(int width, int height, int at, int color_space); // (int width, int height, SkAlphaType at, sk_color_space_t color_space) -> sk_image_info_t
-        static func MakeN32(width: Int, height: Int, at: AlphaType, colorSpace: ColorSpace) -> ImageInfo {
+        static func MakeN32(width: Int, height: Int, at: SkAlphaType, colorSpace: ColorSpace) -> ImageInfo {
             let handle = SkImageInfo_MakeN32_2(Int32(width), Int32(height), Int32(at.rawValue), colorSpace.handle)
             let pointer = static_sk_image_info_get_ptr(handle)
             return ImageInfo(pointer: pointer, handle: handle)
         }
         // int SkImageInfo_MakeS32(int width, int height, int at); // (int width, int height, SkAlphaType at) -> sk_image_info_t
-        static func MakeS32(width: Int, height: Int, at: AlphaType) -> ImageInfo {
+        static func MakeS32(width: Int, height: Int, at: SkAlphaType) -> ImageInfo {
             let handle = SkImageInfo_MakeS32(Int32(width), Int32(height), Int32(at.rawValue))
             let pointer = static_sk_image_info_get_ptr(handle)
             return ImageInfo(pointer: pointer, handle: handle)

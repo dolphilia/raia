@@ -17,12 +17,12 @@ extension Skia {
         func isComplex() -> Bool // bool SkRegion_isComplex(void *region); // (SkRegion *region) -> bool
         func getBounds() -> Skia.IRect // const void *SkRegion_getBounds(void *region); // (SkRegion *region) -> const SkIRect *
         func computeRegionComplexity() -> Int // int SkRegion_computeRegionComplexity(void *region); // (SkRegion *region) -> int
-        func getBoundaryPath(path: Skia.Path) -> Bool // bool SkRegion_getBoundaryPath(void *region, void *path); // (SkRegion *region, SkPath *path) -> bool
+        func getBoundaryPath(path: Skia.SkPath) -> Bool // bool SkRegion_getBoundaryPath(void *region, void *path); // (SkRegion *region, SkPath *path) -> bool
         func setEmpty() -> Bool // bool SkRegion_setEmpty(void *region); // (SkRegion *region) -> bool
         func setRect(rect: Skia.IRect) -> Bool // bool SkRegion_setRect(void *region, const void *rect); // (SkRegion *region, const SkIRect *rect) -> bool
         func setRects(rects: [Skia.IRect]) -> Bool // bool SkRegion_setRects(void *region, const void * rects, int count); // (SkRegion *region, const SkIRect rects[], int count) -> bool
         func setRegion(region: SkRegion) -> Bool // bool SkRegion_setRegion(void *region, const void *region_2); // (SkRegion *region, const SkRegion *region_2) -> bool
-        func setPath(path: Skia.Path, clip: SkRegion) -> Bool // bool SkRegion_setPath(void *region, const void *path, const void *clip); // (SkRegion *region, const SkPath *path, const SkRegion *clip) -> bool
+        func setPath(path: Skia.SkPath, clip: SkRegion) -> Bool // bool SkRegion_setPath(void *region, const void *path, const void *clip); // (SkRegion *region, const SkPath *path, const SkRegion *clip) -> bool
         func intersects(rect: Skia.IRect) -> Bool // bool SkRegion_intersects(void *region, const void *rect); // (SkRegion *region, const SkIRect *rect) -> bool
         func intersects(other: SkRegion) -> Bool // bool SkRegion_intersects_2(void *region, const void *other); // (SkRegion *region, const SkRegion *other) -> bool
         func contains(x: Int, y: Int) -> Bool // bool SkRegion_contains(void *region, int x, int y); // (SkRegion *region, int32_t x, int32_t y) -> bool
@@ -47,7 +47,11 @@ extension Skia {
         public var handle: sk_region_t = -1
 
         deinit {
-            SkRegion_delete(self.pointer)
+            if self.handle > -1 {
+                // static_sk_region_delete(self.handle)
+            } else {
+                SkRegion_delete(self.pointer)
+            }
         }
 
         required init(pointer: Skia.SkRegionMutablePointer?, handle: sk_region_t) {
@@ -99,7 +103,7 @@ extension Skia {
             return Int(SkRegion_computeRegionComplexity(self.pointer))
         }
 
-        func getBoundaryPath(path: Skia.Path) -> Bool {
+        func getBoundaryPath(path: Skia.SkPath) -> Bool {
             return SkRegion_getBoundaryPath(self.pointer, path.pointer)
         }
 
@@ -122,7 +126,7 @@ extension Skia {
             return SkRegion_setRegion(self.pointer, region.pointer)
         }
 
-        func setPath(path: Skia.Path, clip: SkRegion) -> Bool {
+        func setPath(path: Skia.SkPath, clip: SkRegion) -> Bool {
             return SkRegion_setPath(self.pointer, path.pointer, clip.pointer)
         }
 

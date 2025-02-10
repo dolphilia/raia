@@ -28,24 +28,24 @@ extension Skia {
         func height() -> Float // float SkRect_height(void *rect); // (SkRect *rect) -> float
         func centerX() -> Float // float SkRect_centerX(void *rect); // (SkRect *rect) -> float
         func centerY() -> Float // float SkRect_centerY(void *rect); // (SkRect *rect) -> float
-        func center() -> Point // int SkRect_center(void *rect); // (SkRect *rect) -> sk_point_t
-        func toQuad(quad: [Point]) // void SkRect_toQuad(void *rect, void * quad); // (SkRect *rect, SkPoint quad[4])
+        func center() -> SkPoint // int SkRect_center(void *rect); // (SkRect *rect) -> sk_point_t
+        func toQuad(quad: [SkPoint]) // void SkRect_toQuad(void *rect, void * quad); // (SkRect *rect, SkPoint quad[4])
         func setEmpty() // void SkRect_setEmpty(void *rect); // (SkRect *rect)
         func set(src: IRect) // void SkRect_set(void *rect, const void *src); // (SkRect *rect, const SkIRect *src)
         func setLTRB(left: Float, top: Float, right: Float, bottom: Float) // void SkRect_setLTRB(void *rect, float left, float top, float right, float bottom); // (SkRect *rect, float left, float top, float right, float bottom)
-        func setBounds(pts: [Point]) // void SkRect_setBounds(void *rect, const void * pts, int count); // (SkRect *rect, const SkPoint pts[], int count)
-        func setBoundsCheck(pts: [Point]) -> Bool // bool SkRect_setBoundsCheck(void *rect, const void * pts, int count); // (SkRect *rect, const SkPoint pts[], int count) -> bool
-        func setBoundsNoCheck(pts: [Point]) // void SkRect_setBoundsNoCheck(void *rect, const void * pts, int count); // (SkRect *rect, const SkPoint pts[], int count)
-        func set(p0: Point, p1: Point) // void SkRect_set_2(void *rect, const void *p0, const void *p1); // (SkRect *rect, const SkPoint *p0, const SkPoint *p1)
+        func setBounds(pts: [SkPoint]) // void SkRect_setBounds(void *rect, const void * pts, int count); // (SkRect *rect, const SkPoint pts[], int count)
+        func setBoundsCheck(pts: [SkPoint]) -> Bool // bool SkRect_setBoundsCheck(void *rect, const void * pts, int count); // (SkRect *rect, const SkPoint pts[], int count) -> bool
+        func setBoundsNoCheck(pts: [SkPoint]) // void SkRect_setBoundsNoCheck(void *rect, const void * pts, int count); // (SkRect *rect, const SkPoint pts[], int count)
+        func set(p0: SkPoint, p1: SkPoint) // void SkRect_set_2(void *rect, const void *p0, const void *p1); // (SkRect *rect, const SkPoint *p0, const SkPoint *p1)
         func setXYWH(x: Float, y: Float, width: Float, height: Float) // void SkRect_setXYWH(void *rect, float x, float y, float width, float height); // (SkRect *rect, float x, float y, float width, float height)
         func setWH(width: Float, height: Float) // void SkRect_setWH(void *rect, float width, float height); // (SkRect *rect, float width, float height)
         func setIWH(width: Int, height: Int) // void SkRect_setIWH(void *rect, int width, int height); // (SkRect *rect, int32_t width, int32_t height)
         func makeOffset(dx: Float, dy: Float) -> SkRect // int SkRect_makeOffset(void *rect, float dx, float dy); // (SkRect *rect, float dx, float dy) -> sk_rect_t
-        func makeOffset(v: Point) -> SkRect // int SkRect_makeOffset_2(void *rect, int v); // (SkRect *rect, sk_point_t v) -> sk_rect_t
+        func makeOffset(v: SkPoint) -> SkRect // int SkRect_makeOffset_2(void *rect, int v); // (SkRect *rect, sk_point_t v) -> sk_rect_t
         func makeInset(dx: Float, dy: Float) -> SkRect // int SkRect_makeInset(void *rect, float dx, float dy); // (SkRect *rect, float dx, float dy) -> sk_rect_t
         func makeOutset(dx: Float, dy: Float) -> SkRect // int SkRect_makeOutset(void *rect, float dx, float dy); // (SkRect *rect, float dx, float dy) -> sk_rect_t
         func offset(dx: Float, dy: Float) // void SkRect_offset(void *rect, float dx, float dy); // (SkRect *rect, float dx, float dy)
-        func offset(delta: Point) // void SkRect_offset_2(void *rect, const void *delta); // (SkRect *rect, const SkPoint *delta)
+        func offset(delta: SkPoint) // void SkRect_offset_2(void *rect, const void *delta); // (SkRect *rect, const SkPoint *delta)
         func offsetTo(newX: Float, newY: Float) // void SkRect_offsetTo(void *rect, float newX, float newY); // (SkRect *rect, float newX, float newY)
         func inset(dx: Float, dy: Float) // void SkRect_inset(void *rect, float dx, float dy); // (SkRect *rect, float dx, float dy)
         func outset(dx: Float, dy: Float) // void SkRect_outset(void *rect, float dx, float dy); // (SkRect *rect, float dx, float dy)
@@ -197,13 +197,13 @@ extension Skia {
             return SkRect_centerY(self.pointer)
         }
 
-        func center() -> Point {
+        func center() -> SkPoint {
             let handle = SkRect_center(self.pointer)
             let pointer = static_sk_point_get_ptr(handle)
-            return Point(pointer: pointer, handle: handle)
+            return SkPoint(pointer: pointer, handle: handle)
         }
 
-        func toQuad(quad: [Point]) {
+        func toQuad(quad: [SkPoint]) {
             var quadPointers = quad.map({ $0.pointer })
             SkRect_toQuad(self.pointer, &quadPointers)
         }
@@ -220,22 +220,22 @@ extension Skia {
             SkRect_setLTRB(self.pointer, left, top, right, bottom)
         }
 
-        func setBounds(pts: [Point]) {
+        func setBounds(pts: [SkPoint]) {
             var pointPointers = pts.map({ $0.pointer })
             SkRect_setBounds(self.pointer, &pointPointers, Int32(pts.count))
         }
 
-        func setBoundsCheck(pts: [Point]) -> Bool {
+        func setBoundsCheck(pts: [SkPoint]) -> Bool {
             var pointPointers = pts.map({ $0.pointer })
             return SkRect_setBoundsCheck(self.pointer, &pointPointers, Int32(pts.count))
         }
 
-        func setBoundsNoCheck(pts: [Point]) {
+        func setBoundsNoCheck(pts: [SkPoint]) {
             var pointPointers = pts.map({ $0.pointer })
             SkRect_setBoundsNoCheck(self.pointer, &pointPointers, Int32(pts.count))
         }
 
-        func set(p0: Point, p1: Point) {
+        func set(p0: SkPoint, p1: SkPoint) {
             SkRect_set_2(self.pointer, p0.pointer, p1.pointer)
         }
 
@@ -257,7 +257,7 @@ extension Skia {
             return SkRect(pointer: pointer, handle: handle)
         }
 
-        func makeOffset(v: Point) -> SkRect {
+        func makeOffset(v: SkPoint) -> SkRect {
             let handle = SkRect_makeOffset_2(self.pointer, v.handle);
             let pointer = static_sk_rect_get_ptr(handle)
             return SkRect(pointer: pointer, handle: handle)
@@ -279,7 +279,7 @@ extension Skia {
             SkRect_offset(self.pointer, dx, dy)
         }
 
-        func offset(delta: Point) {
+        func offset(delta: SkPoint) {
             SkRect_offset_2(self.pointer, delta.pointer)
         }
 

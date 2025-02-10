@@ -60,8 +60,8 @@ extension Skia {
             SkBitmap_allocPixelsFlags(self.pointer, info.pointer, UInt32(flags))
         }
         // int SkBitmap_alphaType(void *bitmap); // (SkBitmap *bitmap) -> SkAlphaType
-        func alphaType() -> AlphaType {
-            return Skia.AlphaType(rawValue: SkBitmap_alphaType(self.pointer))!
+        func alphaType() -> SkAlphaType {
+            return Skia.SkAlphaType(rawValue: SkBitmap_alphaType(self.pointer))!
         }
         // int SkBitmap_asImage(void *bitmap); // (SkBitmap *bitmap) -> sk_image_t
         func asImage() -> Image {
@@ -85,8 +85,8 @@ extension Skia {
             return ColorSpace(pointer: pointer, handle: -1)
         }
         // int SkBitmap_colorType(void *bitmap); // (SkBitmap *bitmap) -> SkColorType
-        func colorType() -> ColorType {
-            return Skia.ColorType(rawValue: SkBitmap_colorType(self.pointer))!
+        func colorType() -> SkColorType {
+            return Skia.SkColorType(rawValue: SkBitmap_colorType(self.pointer))!
         }
         // unsigned long SkBitmap_computeByteSize(void *bitmap); // (SkBitmap *bitmap) -> size_t
         func computeByteSize() -> UInt {
@@ -225,7 +225,7 @@ extension Skia {
             return SkBitmap_installPixels_2(self.pointer, info.pointer, pixels, rowBytes, releaseProc, context)
         }
         // bool SkBitmap_installPixels_3(void *bitmap, const void *pixmap); // (SkBitmap *bitmap, const SkPixmap *pixmap) -> bool
-        func installPixels(pixmap: Pixmap) -> Bool {
+        func installPixels(pixmap: SkPixmap) -> Bool {
             return SkBitmap_installPixels_3(self.pointer, pixmap.pointer)
         }
         // bool SkBitmap_isImmutable(void *bitmap); // (SkBitmap *bitmap) -> bool
@@ -242,25 +242,25 @@ extension Skia {
             return SkBitmap_isOpaque(self.pointer)
         }
         // int SkBitmap_makeShader(void *bitmap, const void *sampling, const void *lm); // (SkBitmap *bitmap, const SkSamplingOptions *sampling, const SkMatrix *lm) -> sk_shader_t
-        func makeShader(sampling: SkSamplingOptions, lm: Matrix) -> SkShader {
+        func makeShader(sampling: SkSamplingOptions, lm: SkMatrix) -> SkShader {
             let handle = SkBitmap_makeShader(self.pointer, sampling.pointer, lm.pointer)
             let pointer = static_sk_shader_get(handle)
             return SkShader(pointer: pointer, handle: handle)
         }
         // int SkBitmap_makeShader_2(void *bitmap, const void *sampling, const void *lm); // (SkBitmap *bitmap, const SkSamplingOptions *sampling, const SkMatrix *lm) -> sk_shader_t
-        func makeShader_2(sampling: SkSamplingOptions, lm: Matrix) -> SkShader {
+        func makeShader_2(sampling: SkSamplingOptions, lm: SkMatrix) -> SkShader {
             let handle = SkBitmap_makeShader_2(self.pointer, sampling.pointer, lm.pointer)
             let pointer = static_sk_shader_get(handle)
             return SkShader(pointer: pointer, handle: handle)
         }
         // int SkBitmap_makeShader_3(void *bitmap, int tmx, int tmy, const void *sampling, const void *localMatrix); // (SkBitmap *bitmap, SkTileMode tmx, SkTileMode tmy, const SkSamplingOptions *sampling, const SkMatrix *localMatrix) -> sk_shader_t
-        func makeShader_3(tmx: TileMode, tmy: TileMode, sampling: SkSamplingOptions, localMatrix: Matrix) -> SkShader {
+        func makeShader_3(tmx: SkTileMode, tmy: SkTileMode, sampling: SkSamplingOptions, localMatrix: SkMatrix) -> SkShader {
             let handle = SkBitmap_makeShader_3(self.pointer, Int32(tmx.rawValue), Int32(tmy.rawValue), sampling.pointer, localMatrix.pointer)
             let pointer = static_sk_shader_get(handle)
             return SkShader(pointer: pointer, handle: handle)
         }
         // int SkBitmap_makeShader_4(void *bitmap, int tmx, int tmy, const void *sampling, const void *lm); // (SkBitmap *bitmap, SkTileMode tmx, SkTileMode tmy, const SkSamplingOptions *sampling, const SkMatrix *lm) -> sk_shader_t
-        func makeShader_4(tmx: TileMode, tmy: TileMode, sampling: SkSamplingOptions, lm: Matrix) -> SkShader {
+        func makeShader_4(tmx: SkTileMode, tmy: SkTileMode, sampling: SkSamplingOptions, lm: SkMatrix) -> SkShader {
             let handle = SkBitmap_makeShader_4(self.pointer, Int32(tmx.rawValue), Int32(tmy.rawValue), sampling.pointer, lm.pointer)
             let pointer = static_sk_shader_get(handle)
             return SkShader(pointer: pointer, handle: handle)
@@ -270,13 +270,13 @@ extension Skia {
             SkBitmap_notifyPixelsChanged(self.pointer)
         }
         // bool SkBitmap_peekPixels(void *bitmap, void *pixmap); // (SkBitmap *bitmap, SkPixmap *pixmap) -> bool
-        func peekPixels(pixmap: Pixmap) -> Bool {
+        func peekPixels(pixmap: SkPixmap) -> Bool {
             return SkBitmap_peekPixels(self.pointer, pixmap.pointer)
         }
         // void * SkBitmap_pixelRef(void *bitmap); // (SkBitmap *bitmap) -> SkPixelRef *
-        func pixelRef() -> PixelRef {
+        func pixelRef() -> SkPixelRef {
             let pointer = SkBitmap_pixelRef(self.pointer)
-            return PixelRef(pointer: pointer, handle: -1)
+            return SkPixelRef(pointer: pointer, handle: -1)
         }
         // int SkBitmap_pixelRefOrigin(void *bitmap); // (SkBitmap *bitmap) -> sk_i_point_t
         func pixelRefOrigin() -> IPoint {
@@ -285,21 +285,21 @@ extension Skia {
             return IPoint(pointer: pointer, handle: handle)
         }
         // int SkBitmap_pixmap(void *bitmap); // (SkBitmap *bitmap) -> sk_pixmap_t
-        func pixmap() -> Pixmap {
+        func pixmap() -> SkPixmap {
             let handle = SkBitmap_pixmap(self.pointer)
             let pointer = static_sk_pixmap_get_ptr(handle)
-            return Pixmap(pointer: pointer, handle: handle)
+            return SkPixmap(pointer: pointer, handle: handle)
         }
         // bool SkBitmap_readPixels(void *bitmap, const void *dstInfo, void *dstPixels, unsigned long dstRowBytes, int srcX, int srcY); // (SkBitmap *bitmap, const SkImageInfo *dstInfo, void *dstPixels, size_t dstRowBytes, int srcX, int srcY) -> bool
         func readPixels(dstInfo: ImageInfo, dstPixels: UnsafeMutablePointer<UInt8>?, dstRowBytes: UInt, srcX: Int, srcY: Int) -> Bool {
             return SkBitmap_readPixels(self.pointer, dstInfo.pointer, dstPixels, dstRowBytes, Int32(srcX), Int32(srcY))
         }
         // bool SkBitmap_readPixels_2(void *bitmap, const void *dst); // (SkBitmap *bitmap, const SkPixmap *dst) -> bool
-        func readPixels(dst: Pixmap) -> Bool {
+        func readPixels(dst: SkPixmap) -> Bool {
             return SkBitmap_readPixels_2(self.pointer, dst.pointer)
         }
         // bool SkBitmap_readPixels_3(void *bitmap, const void *dst, int srcX, int srcY); // (SkBitmap *bitmap, const SkPixmap *dst, int srcX, int srcY) -> bool
-        func readPixels(dst: Pixmap, srcX: Int, srcY: Int) -> Bool {
+        func readPixels(dst: SkPixmap, srcX: Int, srcY: Int) -> Bool {
             return SkBitmap_readPixels_3(self.pointer, dst.pointer, Int32(srcX), Int32(srcY))
         }
         // bool SkBitmap_readyToDraw(void *bitmap); // (SkBitmap *bitmap) -> bool
@@ -325,7 +325,7 @@ extension Skia {
             return Int(SkBitmap_rowBytesAsPixels(self.pointer))
         }
         // bool SkBitmap_setAlphaType(void *bitmap, int alphaType); // (SkBitmap *bitmap, SkAlphaType alphaType) -> bool
-        func setAlphaType(alphaType: AlphaType) -> Bool {
+        func setAlphaType(alphaType: SkAlphaType) -> Bool {
             return SkBitmap_setAlphaType(self.pointer, alphaType.rawValue)
         }
         // void SkBitmap_setImmutable(void *bitmap); // (SkBitmap *bitmap)
@@ -337,7 +337,7 @@ extension Skia {
             return SkBitmap_setInfo(self.pointer, imageInfo.pointer, rowBytes)
         }
         // void SkBitmap_setPixelRef(void *bitmap, int pixelRef, int dx, int dy); // (SkBitmap *bitmap, sk_pixel_ref_t pixelRef, int dx, int dy)
-        func setPixelRef(pixelRef: PixelRef, dx: Int, dy: Int) {
+        func setPixelRef(pixelRef: SkPixelRef, dx: Int, dy: Int) {
             SkBitmap_setPixelRef(self.pointer, pixelRef.handle, Int32(dx), Int32(dy))
         }
         // void SkBitmap_setPixels(void *bitmap, void *pixels); // (SkBitmap *bitmap, void *pixels)
@@ -381,11 +381,11 @@ extension Skia {
             return Int(SkBitmap_width(self.pointer))
         }
         // bool SkBitmap_writePixels(void *bitmap, const void *src); // (SkBitmap *bitmap, const SkPixmap *src) -> bool
-        func writePixels(src: Pixmap) -> Bool {
+        func writePixels(src: SkPixmap) -> Bool {
             return SkBitmap_writePixels(self.pointer, src.pointer)
         }
         // bool SkBitmap_writePixels_2(void *bitmap, const void *src, int dstX, int dstY); // (SkBitmap *bitmap, const SkPixmap *src, int dstX, int dstY) -> bool
-        func writePixels(src: Pixmap, dstX: Int, dstY: Int) -> Bool {
+        func writePixels(src: SkPixmap, dstX: Int, dstY: Int) -> Bool {
             return SkBitmap_writePixels_2(self.pointer, src.pointer, Int32(dstX), Int32(dstY))
         }
         // // static

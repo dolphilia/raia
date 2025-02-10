@@ -19,7 +19,7 @@ extension Skia {
         func readU16(i: UnsafeMutablePointer<UInt16>?) -> Bool // bool SkStream_readU16(void *stream, void *i); // (SkStream *stream, uint16_t *i) -> bool
         func readU32(i: UnsafeMutablePointer<UInt32>?) -> Bool // bool SkStream_readU32(void *stream, void *i); // (SkStream *stream, uint32_t *i) -> bool
         func readBool(b: UnsafeMutablePointer<Bool>?) -> Bool // bool SkStream_readBool(void *stream, void *b); // (SkStream *stream, bool *b) -> bool
-        func readScalar(v: UnsafeMutablePointer<Scalar>?) -> Bool // bool SkStream_readScalar(void *stream, void *v); // (SkStream *stream, SkScalar *v) -> bool
+        func readScalar(v: UnsafeMutablePointer<Float>?) -> Bool // bool SkStream_readScalar(void *stream, void *v); // (SkStream *stream, SkScalar *v) -> bool
         func readPackedUInt(size: UnsafeMutablePointer<UInt>?) -> Bool // bool SkStream_readPackedUInt(void *stream, void *size); // (SkStream *stream, size_t *size) -> bool
         func rewind() -> Bool // bool SkStream_rewind(void *stream); // (SkStream *stream) -> bool
         func duplicate() -> SkStream // int SkStream_duplicate(void *stream); // (SkStream *stream) -> sk_stream_t
@@ -109,7 +109,7 @@ extension Skia {
             return SkStream_readBool(self.pointer, b)
         }
 
-        func readScalar(v: UnsafeMutablePointer<Scalar>?) -> Bool {
+        func readScalar(v: UnsafeMutablePointer<Float>?) -> Bool {
             return SkStream_readScalar(self.pointer, v)
         }
 
