@@ -70,12 +70,12 @@ extension Skia {
         }
         // bool SkPath_isOval(void *path, void *bounds); // (SkPath *path, SkRect *bounds) -> bool
 
-        func isOval(bounds: Rect) -> Bool {
+        func isOval(bounds: SkRect) -> Bool {
             return SkPath_isOval(self.pointer, bounds.pointer)
         }
         // bool SkPath_isRRect(void *path, void *rrect); // (SkPath *path, SkRRect *rrect) -> bool
 
-        func isRRect(rrect: RRect) -> Bool {
+        func isRRect(rrect: SkRRect) -> Bool {
             return SkPath_isRRect(self.pointer, rrect.pointer)
         }
         // void *SkPath_reset(void *path); // (SkPath *path) -> SkPath *
@@ -166,13 +166,13 @@ extension Skia {
         }
         // const void *SkPath_getBounds(void *path); // (SkPath *path) -> const SkRect *
 
-        func getBounds() -> Rect {
+        func getBounds() -> SkRect {
             let pointer = SkPath_getBounds(self.pointer)
             // guard let pointer = pointer else {
             //     return Rect(pointer: nil, handle: nil)
             // }
             // let rectPointer: Skia.RectMutablePointer = pointer.assumingMemoryBound(to: Skia.RectMutablePointer.self).pointee
-            return Skia.Rect(pointer: UnsafeMutableRawPointer(mutating: pointer), handle: -1)
+            return Skia.SkRect(pointer: UnsafeMutableRawPointer(mutating: pointer), handle: -1)
         }
         // void SkPath_updateBoundsCache(void *path); // (SkPath *path)
 
@@ -181,14 +181,14 @@ extension Skia {
         }
         // int SkPath_computeTightBounds(void *path); // (SkPath *path) -> sk_rect_t
 
-        func computeTightBounds() -> Rect {
+        func computeTightBounds() -> SkRect {
             let handle = SkPath_computeTightBounds(self.pointer)
             let pointer = static_sk_rect_get_ptr(handle)
-            return Skia.Rect(pointer: pointer, handle: handle)
+            return Skia.SkRect(pointer: pointer, handle: handle)
         }
         // bool SkPath_conservativelyContainsRect(void *path, const void *rect); // (SkPath *path, const SkRect *rect) -> bool
 
-        func conservativelyContainsRect(rect: Rect) -> Bool {
+        func conservativelyContainsRect(rect: SkRect) -> Bool {
             return SkPath_conservativelyContainsRect(self.pointer, rect.pointer)
         }
         // void SkPath_incReserve(void *path, int extraPtCount); // (SkPath *path, int extraPtCount)
@@ -288,7 +288,7 @@ extension Skia {
         }
         // void *SkPath_arcTo(void *path, const void *oval, float startAngle, float sweepAngle, bool forceMoveTo); // (SkPath *path, const SkRect *oval, SkScalar startAngle, SkScalar sweepAngle, bool forceMoveTo) -> SkPath *
 
-        func arcTo(oval: Rect, startAngle: Float, sweepAngle: Float, forceMoveTo: Bool) -> Path {
+        func arcTo(oval: SkRect, startAngle: Float, sweepAngle: Float, forceMoveTo: Bool) -> Path {
             let pointer = SkPath_arcTo(self.pointer, oval.pointer, startAngle, sweepAngle, forceMoveTo);
             return Path(pointer: pointer, handle: -1)
         }
@@ -330,7 +330,7 @@ extension Skia {
         }
         // bool SkPath_isRect(void *path, void *rect, void *isClosed, void *direction); // (SkPath *path, SkRect *rect, bool *isClosed, SkPathDirection *direction) -> bool
 
-        func isRect(rect: Rect, isClosed: UnsafeMutablePointer<Bool>?, direction: [PathDirection]) -> Bool {
+        func isRect(rect: SkRect, isClosed: UnsafeMutablePointer<Bool>?, direction: [PathDirection]) -> Bool {
             return direction.withUnsafeBufferPointer { buffer in
                 SkPath_isRect(self.pointer, rect.pointer, isClosed, UnsafeMutableRawPointer(mutating: buffer.baseAddress))
             }
@@ -338,13 +338,13 @@ extension Skia {
 
         // void *SkPath_addRect(void *path, const void *rect, int dir, unsigned start); // (SkPath *path, const SkRect *rect, SkPathDirection dir, unsigned start) -> SkPath *
 
-        func addRect(rect: Rect, dir: PathDirection, start: UInt) -> Path {
+        func addRect(rect: SkRect, dir: PathDirection, start: UInt) -> Path {
             let pointer = SkPath_addRect(self.pointer, rect.pointer, dir.rawValue, UInt32(start));
             return Path(pointer: pointer, handle: -1)
         }
         // void *SkPath_addRect_2(void *path, const void *rect, int dir); // (SkPath *path, const SkRect *rect, SkPathDirection dir) -> SkPath *
 
-        func addRect(rect: Rect, dir: PathDirection) -> Path {
+        func addRect(rect: SkRect, dir: PathDirection) -> Path {
             let pointer = SkPath_addRect_2(self.pointer, rect.pointer, dir.rawValue);
             return Path(pointer: pointer, handle: -1)
         }
@@ -356,13 +356,13 @@ extension Skia {
         }
         // void *SkPath_addOval(void *path, const void *oval, int dir); // (SkPath *path, const SkRect *oval, SkPathDirection dir) -> SkPath *
 
-        func addOval(oval: Rect, dir: PathDirection) -> Path {
+        func addOval(oval: SkRect, dir: PathDirection) -> Path {
             let pointer = SkPath_addOval(self.pointer, oval.pointer, dir.rawValue);
             return Path(pointer: pointer, handle: -1)
         }
         // void *SkPath_addOval_2(void *path, const void *oval, int dir, unsigned start); // (SkPath *path, const SkRect *oval, SkPathDirection dir, unsigned start) -> SkPath *
 
-        func addOval(oval: Rect, dir: PathDirection, start: UInt) -> Path {
+        func addOval(oval: SkRect, dir: PathDirection, start: UInt) -> Path {
             let pointer = SkPath_addOval_2(self.pointer, oval.pointer, dir.rawValue, UInt32(start));
             return Path(pointer: pointer, handle: -1)
         }
@@ -374,19 +374,19 @@ extension Skia {
         }
         // void *SkPath_addArc(void *path, const void *oval, float startAngle, float sweepAngle); // (SkPath *path, const SkRect *oval, SkScalar startAngle, SkScalar sweepAngle) -> SkPath *
 
-        func addArc(oval: Rect, startAngle: Float, sweepAngle: Float) -> Path {
+        func addArc(oval: SkRect, startAngle: Float, sweepAngle: Float) -> Path {
             let pointer = SkPath_addArc(self.pointer, oval.pointer, startAngle, sweepAngle);
             return Path(pointer: pointer, handle: -1)
         }
         // void *SkPath_addRoundRect(void *path, const void *rect, float rx, float ry, int dir); // (SkPath *path, const SkRect *rect, SkScalar rx, SkScalar ry, SkPathDirection dir) -> SkPath *
 
-        func addRoundRect(rect: Rect, rx: Float, ry: Float, dir: PathDirection) -> Path {
+        func addRoundRect(rect: SkRect, rx: Float, ry: Float, dir: PathDirection) -> Path {
             let pointer = SkPath_addRoundRect(self.pointer, rect.pointer, rx, ry, dir.rawValue);
             return Path(pointer: pointer, handle: -1)
         }
         // void *SkPath_addRoundRect_2(void *path, const void *rect, const void * radii, int dir); // (SkPath *path, const SkRect *rect, const SkScalar radii[], SkPathDirection dir) -> SkPath *
 
-        func addRoundRect(rect: Rect, radii: [Float], dir: PathDirection) -> Path {
+        func addRoundRect(rect: SkRect, radii: [Float], dir: PathDirection) -> Path {
             return radii.withUnsafeBufferPointer { buffer in
                 let pointer = SkPath_addRoundRect_2(self.pointer, rect.pointer, UnsafeMutableRawPointer(mutating: buffer.baseAddress), dir.rawValue);
                 return Path(pointer: pointer, handle: -1)
@@ -394,13 +394,13 @@ extension Skia {
         }
         // void *SkPath_addRRect(void *path, const void *rrect, int dir); // (SkPath *path, const SkRRect *rrect, SkPathDirection dir) -> SkPath *
 
-        func addRRect(rrect: RRect, dir: PathDirection) -> Path {
+        func addRRect(rrect: SkRRect, dir: PathDirection) -> Path {
             let pointer = SkPath_addRRect(self.pointer, rrect.pointer, dir.rawValue);
             return Path(pointer: pointer, handle: -1)
         }
         // void *SkPath_addRRect_2(void *path, const void *rrect, int dir, unsigned start); // (SkPath *path, const SkRRect *rrect, SkPathDirection dir, unsigned start) -> SkPath *
 
-        func addRRect(rrect: RRect, dir: PathDirection, start: UInt) -> Path {
+        func addRRect(rrect: SkRRect, dir: PathDirection, start: UInt) -> Path {
             let pointer = SkPath_addRRect_2(self.pointer, rrect.pointer, dir.rawValue, UInt32(start));
             return Path(pointer: pointer, handle: -1)
         }
@@ -498,7 +498,7 @@ extension Skia {
         }
         // void SkPath_dump(void *path, void *stream, bool dumpAsHex); // (SkPath *path, SkWStream *stream, bool dumpAsHex)
 
-        func dump(stream: WStream, dumpAsHex: Bool) {
+        func dump(stream: SkWStream, dumpAsHex: Bool) {
             SkPath_dump(self.pointer, stream.pointer, dumpAsHex)
         }
         // void SkPath_dump_2(void *path); // (SkPath *path)
@@ -513,7 +513,7 @@ extension Skia {
         }
         // void SkPath_dumpArrays(void *path, void *stream, bool dumpAsHex); // (SkPath *path, SkWStream *stream, bool dumpAsHex)
 
-        func dumpArrays(stream: WStream, dumpAsHex: Bool) {
+        func dumpArrays(stream: SkWStream, dumpAsHex: Bool) {
             SkPath_dumpArrays(self.pointer, stream.pointer, dumpAsHex)
         }
         // void SkPath_dumpArrays_2(void *path); // (SkPath *path)
@@ -573,21 +573,21 @@ extension Skia {
 
         // int SkPath_Rect(const void *rect, int dir, unsigned startIndex); // (const SkRect *rect, SkPathDirection dir, unsigned startIndex) -> sk_path_t
 
-        static func Rect(rect: Rect, dir: PathDirection, startIndex: UInt) -> Path {
+        static func Rect(rect: SkRect, dir: PathDirection, startIndex: UInt) -> Path {
             let handle = SkPath_Rect(rect.pointer, dir.rawValue, UInt32(startIndex))
             let pointer = static_sk_path_get_ptr(handle)
             return Path(pointer: pointer, handle: handle)
         }
         // int SkPath_Oval(const void *rect, int dir); // (const SkRect *rect, SkPathDirection dir) -> sk_path_t
 
-        static func Oval(rect: Rect, dir: PathDirection) -> Path {
+        static func Oval(rect: SkRect, dir: PathDirection) -> Path {
             let handle = SkPath_Oval(rect.pointer, dir.rawValue)
             let pointer = static_sk_path_get_ptr(handle)
             return Path(pointer: pointer, handle: handle)
         }
         // int SkPath_Oval_2(const void *rect, int dir, unsigned startIndex); // (const SkRect *rect, SkPathDirection dir, unsigned startIndex) -> sk_path_t
 
-        static func Oval(rect: Rect, dir: PathDirection, startIndex: UInt) -> Path {
+        static func Oval(rect: SkRect, dir: PathDirection, startIndex: UInt) -> Path {
             let handle = SkPath_Oval_2(rect.pointer, dir.rawValue, UInt32(startIndex))
             let pointer = static_sk_path_get_ptr(handle)
             return Path(pointer: pointer, handle: handle)
@@ -601,21 +601,21 @@ extension Skia {
         }
         // int SkPath_RRect(const void *rrect, int dir); // (const SkRRect *rrect, SkPathDirection dir) -> sk_path_t
 
-        static func RRect(rrect: RRect, dir: PathDirection) -> Path {
+        static func RRect(rrect: SkRRect, dir: PathDirection) -> Path {
             let handle = SkPath_RRect(rrect.pointer, dir.rawValue)
             let pointer = static_sk_path_get_ptr(handle)
             return Path(pointer: pointer, handle: handle)
         }
         // int SkPath_RRect_2(const void *rrect, int dir, unsigned startIndex); // (const SkRRect *rrect, SkPathDirection dir, unsigned startIndex) -> sk_path_t
 
-        static func RRect(rrect: RRect, dir: PathDirection, startIndex: UInt) -> Path {
+        static func RRect(rrect: SkRRect, dir: PathDirection, startIndex: UInt) -> Path {
             let handle = SkPath_RRect_2(rrect.pointer, dir.rawValue, UInt32(startIndex))
             let pointer = static_sk_path_get_ptr(handle)
             return Path(pointer: pointer, handle: handle)
         }
         // int SkPath_RRect_3(const void *bounds, float rx, float ry, int dir); // (const SkRect *bounds, SkScalar rx, SkScalar ry, SkPathDirection dir) -> sk_path_t
 
-        static func RRect(bounds: Rect, rx: Float, ry: Float, dir: PathDirection) -> Path {
+        static func RRect(bounds: SkRect, rx: Float, ry: Float, dir: PathDirection) -> Path {
             let handle = SkPath_RRect_3(bounds.pointer, rx, ry, dir.rawValue)
             let pointer = static_sk_path_get_ptr(handle)
             return Path(pointer: pointer, handle: handle)

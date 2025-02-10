@@ -4,6 +4,13 @@ extension Skia {
         public var handle: sk_drawable_t = -1
 
         // void SkDrawable_delete(void *drawable); // (SkDrawable *drawable)
+        deinit {
+            if self.handle > -1 {
+                static_sk_drawable_delete(self.handle)
+            } else {
+                SkDrawable_delete(self.pointer)
+            }
+        }
         // void SkDrawable_draw(void *drawable, void * canvas, const void * matrix); // (SkDrawable *drawable, SkCanvas *canvas, const SkMatrix *matrix)
         // void SkDrawable_draw_2(void *drawable, void *canvas, float x, float y); // (SkDrawable *drawable, SkCanvas *canvas, SkScalar x, SkScalar y)
         // int SkDrawable_snapGpuDrawHandler(void *drawable, int backendApi, const void *matrix, const void *clipBounds, const void *bufferInfo); // (SkDrawable *drawable, GrBackendApi backendApi, const SkMatrix *matrix, const SkIRect *clipBounds, const SkImageInfo *bufferInfo) -> sk_drawable_gpu_draw_handler_t

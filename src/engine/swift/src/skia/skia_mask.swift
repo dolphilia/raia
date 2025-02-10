@@ -1,11 +1,14 @@
 extension Skia {
     class Mask {
         public var pointer: MaskMutablePointer?
-        public var handle: sk_mask_t
+        public var handle: sk_mask_t = -1
 
         deinit {
-            SkMask_delete(self.pointer)
-            static_sk_mask_delete(self.handle)
+            if self.handle > -1 {
+                static_sk_mask_delete(self.handle)
+            } else {
+                SkMask_delete(self.pointer)
+            }
         }
 
         // int SkMask_new(const void * img, const void * bounds, unsigned int rowBytes, int format); // (const uint8_t* img, const SkIRect * bounds, uint32_t rowBytes, SkMask::Format format) -> sk_mask_t

@@ -5,11 +5,13 @@ extension Skia {
 
         // void SkFlattenable_delete(void *flattenable); // (SkFlattenable *flattenable)
         deinit {
-            SkFlattenable_delete(self.pointer)
-            if handle > -1 {
-                static_sk_flattenable_delete(handle)
+            if self.handle > -1 {
+                static_sk_flattenable_delete(self.handle)
+            } else {
+                SkFlattenable_delete(self.pointer)
             }
         }
+
         // int SkFlattenable_getFactory(void *flattenable); // (SkFlattenable *flattenable) -> sk_flattenable_factory_t
         func getFactory() -> Flattenable {
             let handle = SkFlattenable_getFactory(self.pointer)

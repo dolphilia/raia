@@ -3,6 +3,15 @@ extension Skia {
         public var pointer: Skia.ColorInfoMutablePointer?
         public var handle: sk_color_info_t = -1
 
+        // void SkColorInfo_delete(void *color_info); // (SkColorInfo *color_info)
+        deinit {
+            if self.handle > -1 {
+                static_sk_color_info_delete(self.handle)
+            } else {
+                SkColorInfo_delete(self.pointer)
+            }
+        }
+
         // void *SkColorInfo_new(); // () -> SkColorInfo *
         init() {
             self.pointer = SkColorInfo_new()
@@ -18,13 +27,7 @@ extension Skia {
             self.pointer = SkColorInfo_new_3(colorInfo.pointer)
             self.handle = -1
         }
-        // void SkColorInfo_delete(void *color_info); // (SkColorInfo *color_info)
-        deinit {
-            SkColorInfo_delete(self.pointer)
-            if handle > -1 {
-                static_sk_color_info_delete(handle)
-            }
-        }
+        
         // int SkColorInfo_alphaType(void *color_info); // (SkColorInfo *color_info) -> SkAlphaType
         func alphaType() -> AlphaType {
             return AlphaType(rawValue: Int32(SkColorInfo_alphaType(self.pointer)))!

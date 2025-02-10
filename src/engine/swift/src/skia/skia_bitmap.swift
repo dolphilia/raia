@@ -15,6 +15,15 @@ extension Skia {
         public var pointer: Skia.BitmapMutablePointer?
         public var handle: Int32 = -1
 
+        // void SkBitmap_delete(void *bitmap); // (SkBitmap *bitmap)
+        deinit {
+            if self.handle > -1 {
+                // static_sk_bitmap_delete(self.handle)
+            } else {
+                SkBitmap_delete(self.pointer)
+            }
+        }
+
         // void * SkBitmap_new(void); // () -> SkBitmap *
         init() {
             self.pointer = SkBitmap_new()
@@ -26,13 +35,6 @@ extension Skia {
             self.pointer = SkBitmap_new_2(src.pointer)
         }
 
-        // void SkBitmap_delete(void *bitmap); // (SkBitmap *bitmap)
-        deinit {
-            //if let pointer = self.pointer {
-                SkBitmap_delete(pointer)
-                //self.pointer = nil
-            //}
-        }
         // void SkBitmap_allocN32Pixels(void *bitmap, int width, int height, bool isOpaque); // (SkBitmap *bitmap, int width, int height, bool isOpaque)
         func allocN32Pixels(width: Int, height: Int, isOpaque: Bool) {
             SkBitmap_allocN32Pixels(self.pointer, Int32(width), Int32(height), isOpaque)
@@ -169,7 +171,7 @@ extension Skia {
             SkBitmap_getBounds(self.pointer, bounds.pointer)
         }
         // void SkBitmap_getBounds2(void *bitmap, void *bounds); // (SkBitmap *bitmap, SkRect *bounds)
-        func getBounds(bounds: inout Rect) {
+        func getBounds(bounds: inout SkRect) {
             SkBitmap_getBounds2(self.pointer, bounds.pointer)
         }
         // unsigned int SkBitmap_getColor(void *bitmap, int x, int y); // (SkBitmap *bitmap, int x, int y) -> SkColor
@@ -240,28 +242,28 @@ extension Skia {
             return SkBitmap_isOpaque(self.pointer)
         }
         // int SkBitmap_makeShader(void *bitmap, const void *sampling, const void *lm); // (SkBitmap *bitmap, const SkSamplingOptions *sampling, const SkMatrix *lm) -> sk_shader_t
-        func makeShader(sampling: SamplingOptions, lm: Matrix) -> Shader {
+        func makeShader(sampling: SkSamplingOptions, lm: Matrix) -> SkShader {
             let handle = SkBitmap_makeShader(self.pointer, sampling.pointer, lm.pointer)
             let pointer = static_sk_shader_get(handle)
-            return Shader(pointer: pointer, handle: handle)
+            return SkShader(pointer: pointer, handle: handle)
         }
         // int SkBitmap_makeShader_2(void *bitmap, const void *sampling, const void *lm); // (SkBitmap *bitmap, const SkSamplingOptions *sampling, const SkMatrix *lm) -> sk_shader_t
-        func makeShader_2(sampling: SamplingOptions, lm: Matrix) -> Shader {
+        func makeShader_2(sampling: SkSamplingOptions, lm: Matrix) -> SkShader {
             let handle = SkBitmap_makeShader_2(self.pointer, sampling.pointer, lm.pointer)
             let pointer = static_sk_shader_get(handle)
-            return Shader(pointer: pointer, handle: handle)
+            return SkShader(pointer: pointer, handle: handle)
         }
         // int SkBitmap_makeShader_3(void *bitmap, int tmx, int tmy, const void *sampling, const void *localMatrix); // (SkBitmap *bitmap, SkTileMode tmx, SkTileMode tmy, const SkSamplingOptions *sampling, const SkMatrix *localMatrix) -> sk_shader_t
-        func makeShader_3(tmx: TileMode, tmy: TileMode, sampling: SamplingOptions, localMatrix: Matrix) -> Shader {
+        func makeShader_3(tmx: TileMode, tmy: TileMode, sampling: SkSamplingOptions, localMatrix: Matrix) -> SkShader {
             let handle = SkBitmap_makeShader_3(self.pointer, Int32(tmx.rawValue), Int32(tmy.rawValue), sampling.pointer, localMatrix.pointer)
             let pointer = static_sk_shader_get(handle)
-            return Shader(pointer: pointer, handle: handle)
+            return SkShader(pointer: pointer, handle: handle)
         }
         // int SkBitmap_makeShader_4(void *bitmap, int tmx, int tmy, const void *sampling, const void *lm); // (SkBitmap *bitmap, SkTileMode tmx, SkTileMode tmy, const SkSamplingOptions *sampling, const SkMatrix *lm) -> sk_shader_t
-        func makeShader_4(tmx: TileMode, tmy: TileMode, sampling: SamplingOptions, lm: Matrix) -> Shader {
+        func makeShader_4(tmx: TileMode, tmy: TileMode, sampling: SkSamplingOptions, lm: Matrix) -> SkShader {
             let handle = SkBitmap_makeShader_4(self.pointer, Int32(tmx.rawValue), Int32(tmy.rawValue), sampling.pointer, lm.pointer)
             let pointer = static_sk_shader_get(handle)
-            return Shader(pointer: pointer, handle: handle)
+            return SkShader(pointer: pointer, handle: handle)
         }
         // void SkBitmap_notifyPixelsChanged(void *bitmap); // (SkBitmap *bitmap)
         func notifyPixelsChanged() {

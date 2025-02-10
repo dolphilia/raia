@@ -4,9 +4,10 @@ extension Skia {
         public var handle: sk_color_space_t = -1
         // void SkColorSpace_delete(void *color_space); // (SkColorSpace *color_space)
         deinit {
-            SkColorSpace_delete(self.pointer)
             if handle > -1 {
                 static_sk_color_space_delete(handle)
+            } else {
+                SkColorSpace_delete(self.pointer)
             }
         }
 

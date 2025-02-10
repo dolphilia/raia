@@ -1,15 +1,21 @@
 extension Skia {
     class M44 {
         public var pointer: Skia.M44MutablePointer?
-        public var handle: sk_m_44_t?
+        public var handle: sk_m_44_t = -1
 
-
+        // void SkM44_delete(void *m44); // (SkM44 *m44)
+        deinit {
+            if self.handle > -1 {
+                static_sk_m_44_delete(self.handle)
+            } else {
+                SkM44_delete(self.pointer)
+            }
+        }
         // void *SkM44_new(const void *src); // (const SkM44 *src) -> SkM44 *
         // void *SkM44_new_2(const void *src); // (const SkMatrix *src) -> SkM44 *
         // void *SkM44_new_3(); // () -> SkM44 *
         // void *SkM44_new_4(const void *a, const void *b); // (const SkM44 *a, const SkM44 *b) -> SkM44 *
         // void *SkM44_new_5(float m0, float m4, float m8, float m12, float m1, float m5, float m9, float m13, float m2, float m6, float m10, float m14, float m3, float m7, float m11, float m15); // (SkScalar m0, SkScalar m4, SkScalar m8, SkScalar m12, SkScalar m1, SkScalar m5, SkScalar m9, SkScalar m13, SkScalar m2, SkScalar m6, SkScalar m10, SkScalar m14, SkScalar m3, SkScalar m7, SkScalar m11, SkScalar m15) -> SkM44 *
-        // void SkM44_delete(void *m44); // (SkM44 *m44)
         // void SkM44_getColMajor(void *m44, void *v); // (SkM44 *m44, SkScalar v[])
         // void SkM44_getRowMajor(void *m44, void *v); // (SkM44 *m44, SkScalar v[])
         // float SkM44_rc(void *m44, int r, int c); // (SkM44 *m44, int r, int c) -> SkScalar
@@ -42,7 +48,7 @@ extension Skia {
 
         // // static
 
-        init(pointer: Skia.M44MutablePointer?, handle: sk_m_44_t?) {
+        init(pointer: Skia.M44MutablePointer?, handle: sk_m_44_t) {
             self.pointer = pointer
             self.handle = handle
         }

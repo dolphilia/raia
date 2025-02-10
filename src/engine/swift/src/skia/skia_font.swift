@@ -3,11 +3,21 @@ extension Skia {
         public var pointer: Skia.FontMutablePointer?
         public var handle: sk_font_t = -1
 
+        // void SkFont_delete(void *font); // (SkFont *font)
+
+        deinit {
+            if self.handle > -1 {
+                static_sk_font_delete(self.handle)
+            } else {
+                SkFont_delete(self.pointer)
+            }
+        }
+
         // void *SkFont_new(); // () -> SkFont *
         // void *SkFont_new_2(int typeface, float size); // (sk_typeface_t typeface, SkScalar size) -> SkFont *
         // void *SkFont_new_3(int typeface); // (sk_typeface_t typeface) -> SkFont *
         // void *SkFont_new_4(int typeface, float size, float scaleX, float skewX); // (sk_typeface_t typeface, SkScalar size, SkScalar scaleX, SkScalar skewX) -> SkFont *
-        // void SkFont_delete(void *font); // (SkFont *font)
+        
         // bool SkFont_isForceAutoHinting(void *font); // (SkFont *font) -> bool
         // bool SkFont_isEmbeddedBitmaps(void *font); // (SkFont *font) -> bool
         // bool SkFont_isSubpixel(void *font); // (SkFont *font) -> bool

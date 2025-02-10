@@ -2,13 +2,16 @@ extension Skia {
     class Data {
         public var pointer: Skia.DataMutablePointer?
         public var handle: sk_data_t = -1
+
         // void SkData_delete(void *sk_data); // (SkData *sk_data)
         deinit {
-            SkData_delete(self.pointer)
-            if handle > -1 {
-                static_sk_data_delete(handle)
+            if self.handle > -1 {
+                static_sk_data_delete(self.handle)
+            } else {
+                SkData_delete(self.pointer)
             }
         }
+
         // unsigned long SkData_size(void *sk_data); // (SkData *sk_data) -> size_t
         func size() -> UInt {
             return SkData_size(self.pointer)
@@ -138,7 +141,7 @@ extension Skia {
             return Data(pointer: pointer, handle: handle)
         }
         // int SkData_MakeFromStream(void *stream, unsigned long size); // (SkStream *stream, size_t size) -> sk_data_t
-        static func MakeFromStream(stream: Skia.Stream, size: UInt) -> Data {
+        static func MakeFromStream(stream: Skia.SkStream, size: UInt) -> Data {
             let handle = SkData_MakeFromStream(stream.pointer, size);
             let pointer = static_sk_data_get(handle)
             return Data(pointer: pointer, handle: handle)

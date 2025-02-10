@@ -6,8 +6,11 @@ extension Skia {
         // void SkColor4f_delete(void *color);
 
         deinit {
-            SkColor4f_delete(self.pointer)
-            static_sk_color_4f_delete(self.handle)
+            if self.handle > -1 {
+                static_sk_color_4f_delete(self.handle)
+            } else {
+                SkColor4f_delete(self.pointer)
+            }
         }
 
         // // Public Attributes

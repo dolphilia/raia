@@ -1,7 +1,7 @@
 extension Skia {
     typealias Vector = Skia.Point
     class Point {
-        public var pointer: Skia.PointMutablePointer?
+        public var pointer: Skia.SkPointMutablePointer?
         public var handle: sk_point_t = -1
         // void SkPoint_delete(void *point); // (SkPoint *point)
         deinit {
@@ -9,6 +9,44 @@ extension Skia {
             if handle > -1 {
                 static_sk_point_delete(handle)
             }
+        }
+        init(pointer: Skia.SkPointMutablePointer?, handle: sk_point_t) {
+            self.pointer = pointer
+            self.handle = handle
+        }
+        // int SkPoint_Make(float x, float y); // (float x, float y) -> sk_point_t
+        static func Make(x: Float, y: Float) -> Point {
+            let handle = SkPoint_Make(x, y);
+            let pointer = static_sk_point_get_ptr(handle)
+            return Point(pointer: pointer, handle: handle)
+        }
+        // float SkPoint_Normalize(void *vec); // (SkVector *vec) -> float
+        static func Normalize(vec: Skia.Vector) -> Float {
+            return SkPoint_Normalize(vec.pointer)
+        }
+        // float SkPoint_Length(float x, float y); // (float x, float y) -> float
+        static func Length(x: Float, y: Float) -> Float {
+            return SkPoint_Length(x, y)
+        }
+        // float SkPoint_CrossProduct(const void *a, const void *b); // (const SkVector *a, const SkVector *b) -> float
+        static func CrossProduct(a: Skia.Vector, b: Skia.Vector) -> Float {
+            return SkPoint_CrossProduct(a.pointer, b.pointer)
+        }
+        // float SkPoint_DotProduct(const void *a, const void *b); // (const SkVector *a, const SkVector *b) -> float
+        static func DotProduct(a: Skia.Vector, b: Skia.Vector) -> Float {
+            return SkPoint_DotProduct(a.pointer, b.pointer)
+        }
+        // float SkPoint_Distance(const void *a, const void *b); // (const SkPoint *a, const SkPoint *b) -> float
+        static func Distance(a: Point, b: Point) -> Float {
+            return SkPoint_Distance(a.pointer, b.pointer)
+        }
+        // void SkPoint_Offset(void *points, int count, float dx, float dy); // (SkPoint *points, int count, float dx, float dy)
+        static func Offset(points: Point, count: Int, dx: Float, dy: Float) {
+            SkPoint_Offset(points.pointer, Int32(count), dx, dy)
+        }
+        // void SkPoint_Offset_2(void *points, int count, const void *offset); // (SkPoint *points, int count, const SkVector *offset)
+        static func Offset(points: Point, count: Int, offset: Skia.Vector) {
+            SkPoint_Offset_2(points.pointer, Int32(count), offset.pointer)
         }
         // float SkPoint_x(int point); // (sk_point_t point) -> float
         func x() -> Float {
@@ -82,48 +120,5 @@ extension Skia {
         func setNormalize(x: Float, y: Float) -> Bool {
             return SkPoint_setNormalize(self.handle, x, y)
         }
-
-        // // static
-
-        init(pointer: Skia.PointMutablePointer?, handle: sk_point_t) {
-            self.pointer = pointer
-            self.handle = handle
-        }
-
-        // int SkPoint_Make(float x, float y); // (float x, float y) -> sk_point_t
-        static func Make(x: Float, y: Float) -> Point {
-            let handle = SkPoint_Make(x, y);
-            let pointer = static_sk_point_get_ptr(handle)
-            return Point(pointer: pointer, handle: handle)
-        }
-        // float SkPoint_Normalize(void *vec); // (SkVector *vec) -> float
-        static func Normalize(vec: Skia.Vector) -> Float {
-            return SkPoint_Normalize(vec.pointer)
-        }
-        // float SkPoint_Length(float x, float y); // (float x, float y) -> float
-        static func Length(x: Float, y: Float) -> Float {
-            return SkPoint_Length(x, y)
-        }
-        // float SkPoint_CrossProduct(const void *a, const void *b); // (const SkVector *a, const SkVector *b) -> float
-        static func CrossProduct(a: Skia.Vector, b: Skia.Vector) -> Float {
-            return SkPoint_CrossProduct(a.pointer, b.pointer)
-        }
-        // float SkPoint_DotProduct(const void *a, const void *b); // (const SkVector *a, const SkVector *b) -> float
-        static func DotProduct(a: Skia.Vector, b: Skia.Vector) -> Float {
-            return SkPoint_DotProduct(a.pointer, b.pointer)
-        }
-        // float SkPoint_Distance(const void *a, const void *b); // (const SkPoint *a, const SkPoint *b) -> float
-        static func Distance(a: Point, b: Point) -> Float {
-            return SkPoint_Distance(a.pointer, b.pointer)
-        }
-        // void SkPoint_Offset(void *points, int count, float dx, float dy); // (SkPoint *points, int count, float dx, float dy)
-        static func Offset(points: Point, count: Int, dx: Float, dy: Float) {
-            SkPoint_Offset(points.pointer, Int32(count), dx, dy)
-        }
-        // void SkPoint_Offset_2(void *points, int count, const void *offset); // (SkPoint *points, int count, const SkVector *offset)
-        static func Offset(points: Point, count: Int, offset: Skia.Vector) {
-            SkPoint_Offset_2(points.pointer, Int32(count), offset.pointer)
-        }
-
     }
 }

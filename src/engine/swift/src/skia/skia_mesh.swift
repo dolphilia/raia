@@ -6,7 +6,11 @@ extension Skia {
 
         // void SkMesh_delete(void * mesh); // (SkMesh * mesh)
         deinit {
-            SkMesh_delete(self.pointer)
+            if self.handle > -1 {
+                //static_sk_mesh_delete(self.handle)
+            } else {
+                SkMesh_delete(self.pointer)
+            }
         }
         // int SkMesh_refSpec(void * mesh); // (SkMesh *mesh) -> sk_mesh_specification_t
         // void * SkMesh_spec(void * mesh); // (SkMesh *mesh) -> SkMeshSpecification*

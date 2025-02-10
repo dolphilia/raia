@@ -5,9 +5,10 @@ extension Skia {
 
         // void SkColorFilter_delete(void *color_filter); // (SkColorFilter *color_filter)
         deinit {
-            SkColorFilter_delete(self.pointer)
-            if handle > -1 {
-                static_sk_color_filter_delete(handle)
+            if self.handle > -1 {
+                static_sk_color_filter_delete(self.handle)
+            } else {
+                SkColorFilter_delete(self.pointer)
             }
         }
         // bool SkColorFilter_asAColorMode(void *color_filter, void *color, void *mode); // (SkColorFilter *color_filter, SkColor *color, SkBlendMode *mode) -> bool

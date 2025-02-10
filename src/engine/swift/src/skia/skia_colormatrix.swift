@@ -1,17 +1,23 @@
 extension Skia {
     class ColorMatrix {
-        private var pointer: ColorMatrixMutablePointer?
+        public var pointer: ColorMatrixMutablePointer?
+        public var handle: sk_color_matrix_t = -1
+
+        deinit {
+            if self.handle > -1 {
+                static_sk_color_matrix_delete(self.handle)
+            } else {
+                SkColorMatrix_delete(self.pointer)
+            }
+        }
 
         init() {
             self.pointer = SkColorMatrix_new()
         }
         
         init(m00: Float, m01: Float, m02: Float, m03: Float, m04: Float, m10: Float, m11: Float, m12: Float, m13: Float, m14: Float, m20: Float, m21: Float, m22: Float, m23: Float, m24: Float, m30: Float, m31: Float, m32: Float, m33: Float, m34: Float) {
-            self.pointer = SkColorMatrix_new_2(m00, m01, m02, m03, m04, m10, m11, m12, m13, m14, m20, m21, m22, m23, m24, m30, m31, m32, m33, m34)
-        }
-
-        deinit {
-            SkColorMatrix_delete(self.pointer)
+            self.pointer = SkColorMatrix_new_2(m00, m01, m02, m03, m04, m10, m11, m12, m13, m14, m20, m21, m22, m23, m24, m30, m31, m32, m33, m34)            
+            self.handle = -1
         }
 
         // void SkColorMatrix_setIdentity(void *color_matrix); // (SkColorMatrix *color_matrix)
@@ -58,6 +64,11 @@ extension Skia {
         }
         
         // static
+
+        init(pointer: Skia.ColorMatrixMutablePointer?, handle: sk_color_matrix_t) {
+            self.pointer = pointer
+            self.handle = handle
+        }
 
         //int SkColorMatrix_RGBtoYUV(int color_space); // (SkYUVColorSpace color_space) -> sk_color_matrix_t
         static func RGBtoYUV(colorSpace: Int) -> Skia.ColorMatrixType {

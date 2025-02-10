@@ -16,18 +16,19 @@ extension Skia {
         }
 
         public var pointer: Skia.MatrixMutablePointer?
-        public var handle: sk_matrix_t?
+        public var handle: sk_matrix_t = -1
         
         // void *SkMatrix_new(void *matrix); // (SkMatrix *matrix) -> SkMatrix *
         init(matrix: Matrix) {
-            self.pointer = SkMatrix_new(matrix.pointer);
-            self.handle = nil
+            self.pointer = SkMatrix_new(matrix.pointer)
+            self.handle = -1
         }
         // void SkMatrix_delete(void *matrix); // (SkMatrix *matrix)
         deinit {
-            SkMatrix_delete(self.pointer)
-            if let handle = self.handle {
-                static_sk_matrix_delete(handle)
+            if self.handle > -1 {
+                static_sk_matrix_delete(self.handle)
+            } else {
+                SkMatrix_delete(self.pointer)
             }
         }
         // int SkMatrix_getType(void *matrix); // (SkMatrix *matrix) -> SkMatrix::TypeMask
@@ -238,7 +239,7 @@ extension Skia {
             return Matrix(pointer: pointer, handle: handle)
         }
         // int SkMatrix_setRSXform(void *matrix, const void *rsxForm); // (SkMatrix *matrix, const SkRSXform *rsxForm) -> sk_matrix_t
-        func setRSXform(rsxForm: RSXform) -> Matrix {
+        func setRSXform(rsxForm: SkRSXform) -> Matrix {
             let handle = SkMatrix_setRSXform(self.pointer, rsxForm.pointer);
             let pointer = static_sk_matrix_get_ptr(handle)
             return Matrix(pointer: pointer, handle: handle)
@@ -359,7 +360,7 @@ extension Skia {
             return Matrix(pointer: pointer, handle: handle)
         }
         // bool SkMatrix_setRectToRect(void *matrix, const void * src, const void * dst, int stf); // (SkMatrix *matrix, const SkRect *src, const SkRect *dst, SkMatrix::ScaleToFit stf) -> bool
-        func setRectToRect(src: Rect, dst: Rect, stf: ScaleToFit) -> Bool {
+        func setRectToRect(src: SkRect, dst: SkRect, stf: ScaleToFit) -> Bool {
             return SkMatrix_setRectToRect(self.pointer, src.pointer, dst.pointer, stf.rawValue)
         }
         // bool SkMatrix_setPolyToPoly(void *matrix, const void * src, const void * dst, int count); // (SkMatrix *matrix, const SkPoint src[], const SkPoint dst[], int count) -> bool
@@ -393,11 +394,11 @@ extension Skia {
             SkMatrix_mapPoints_2(self.pointer, UnsafeMutablePointer(mutating: pts), Int32(count))
         }
         // void SkMatrix_mapHomogeneousPoints(void *matrix, void * dst, const void * src, int count); // (SkMatrix *matrix, SkPoint3 dst[], const SkPoint3 src[], int count)
-        func mapHomogeneousPoints(dst: [Point3], src: [Point3], count: Int) {
+        func mapHomogeneousPoints(dst: [SkPoint3], src: [SkPoint3], count: Int) {
             SkMatrix_mapHomogeneousPoints(self.pointer, UnsafeMutablePointer(mutating: dst), UnsafeRawPointer(src), Int32(count))
         }
         // void SkMatrix_mapHomogeneousPoints_2(void *matrix, void * dst, const void * src, int count); // (SkMatrix *matrix, SkPoint3 dst[], const SkPoint src[], int count)
-        func mapHomogeneousPoints(dst: [Point3], src: [Point], count: Int) {
+        func mapHomogeneousPoints(dst: [SkPoint3], src: [Point], count: Int) {
             SkMatrix_mapHomogeneousPoints_2(self.pointer, UnsafeMutablePointer(mutating: dst), UnsafeRawPointer(src), Int32(count))
         }
         // int SkMatrix_mapPoint(void *matrix, int pt); // (SkMatrix *matrix, sk_point_t pt) -> sk_point_t
@@ -441,25 +442,25 @@ extension Skia {
             return Vector(pointer: pointer, handle: handle)
         }
         // bool SkMatrix_mapRect(void *matrix, void *dst, const void *src, int pc); // (SkMatrix *matrix, SkRect *dst, const SkRect *src, SkApplyPerspectiveClip pc) -> bool
-        func mapRect(dst: Rect, src: Rect, pc: ApplyPerspectiveClip) -> Bool {
+        func mapRect(dst: SkRect, src: SkRect, pc: ApplyPerspectiveClip) -> Bool {
             return SkMatrix_mapRect(self.pointer, dst.pointer, src.pointer, pc.rawValue)
         }
         // bool SkMatrix_mapRect_2(void *matrix, void *rect, int pc); // (SkMatrix *matrix, SkRect *rect, SkApplyPerspectiveClip pc) -> bool
-        func mapRect(rect: Rect, pc: ApplyPerspectiveClip) -> Bool {
+        func mapRect(rect: SkRect, pc: ApplyPerspectiveClip) -> Bool {
             return SkMatrix_mapRect_2(self.pointer, rect.pointer, pc.rawValue)
         }
         // int SkMatrix_mapRect_3(void *matrix, const void *src, int pc); // (SkMatrix *matrix, const SkRect *src, SkApplyPerspectiveClip pc) -> sk_matrix_t
-        func mapRect(src: Rect, pc: ApplyPerspectiveClip) -> Matrix {
+        func mapRect(src: SkRect, pc: ApplyPerspectiveClip) -> Matrix {
             let handle = SkMatrix_mapRect_3(self.pointer, src.pointer, pc.rawValue);
             let pointer = static_sk_matrix_get_ptr(handle)
             return Matrix(pointer: pointer, handle: handle)
         }
         // void SkMatrix_mapRectToQuad(void *matrix, void * dst, const void *rect); // (SkMatrix *matrix, SkPoint dst[4], const SkRect *rect)
-        func mapRectToQuad(dst: [Point], rect: Rect) {
+        func mapRectToQuad(dst: [Point], rect: SkRect) {
             SkMatrix_mapRectToQuad(self.pointer, UnsafeMutablePointer(mutating: dst), rect.pointer)
         }
         // void SkMatrix_mapRectScaleTranslate(void *matrix, void *dst, const void *src); // (SkMatrix *matrix, SkRect *dst, const SkRect *src)
-        func mapRectScaleTranslate(dst: Rect, src: Rect) {
+        func mapRectScaleTranslate(dst: SkRect, src: SkRect) {
             SkMatrix_mapRectScaleTranslate(self.pointer, dst.pointer, src.pointer)
         }
         // float SkMatrix_mapRadius(void *matrix, float radius); // (SkMatrix *matrix, SkScalar radius) -> SkScalar
@@ -483,7 +484,7 @@ extension Skia {
             return SkMatrix_getMinMaxScales(self.pointer, UnsafeMutablePointer(mutating: scaleFactors))
         }
         // bool SkMatrix_decomposeScale(void *matrix, void * scale, void * remaining); // (SkMatrix *matrix, SkSize *scale, SkMatrix *remaining) -> bool
-        func decomposeScale(scale: Size, remaining: Matrix) -> Bool {
+        func decomposeScale(scale: SkSize, remaining: Matrix) -> Bool {
             return SkMatrix_decomposeScale(self.pointer, scale.pointer, remaining.pointer)
         }
         // void SkMatrix_dirtyMatrixTypeCache(void *matrix); // (SkMatrix *matrix)
@@ -501,7 +502,7 @@ extension Skia {
 
         // // static
 
-        init(pointer: Skia.MatrixMutablePointer?, handle: sk_matrix_t?) {
+        init(pointer: Skia.MatrixMutablePointer?, handle: sk_matrix_t) {
             self.pointer = pointer
             self.handle = handle
         }
@@ -555,7 +556,7 @@ extension Skia {
             return Matrix(pointer: pointer, handle: handle)
         }
         // int SkMatrix_RectToRect(const void *src, const void *dst, int mode); // (const SkRect *src, const SkRect *dst, SkMatrix::ScaleToFit mode) -> sk_matrix_t
-        static func RectToRect(src: Rect, dst: Rect, mode: ScaleToFit) -> Matrix {
+        static func RectToRect(src: SkRect, dst: SkRect, mode: ScaleToFit) -> Matrix {
             let handle = SkMatrix_RectToRect(src.pointer, dst.pointer, Int32(mode.rawValue));
             let pointer = static_sk_matrix_get_ptr(handle)
             return Matrix(pointer: pointer, handle: handle)
@@ -567,7 +568,7 @@ extension Skia {
             return Matrix(pointer: pointer, handle: handle)
         }
         // int SkMatrix_MakeRectToRect(const void *src, const void *dst, int stf); // (const SkRect *src, const SkRect *dst, SkMatrix::ScaleToFit stf) -> sk_matrix_t
-        static func MakeRectToRect(src: Rect, dst: Rect, stf: ScaleToFit) -> Matrix {
+        static func MakeRectToRect(src: SkRect, dst: SkRect, stf: ScaleToFit) -> Matrix {
             let handle = SkMatrix_MakeRectToRect(src.pointer, dst.pointer, Int32(stf.rawValue));
             let pointer = static_sk_matrix_get_ptr(handle)
             return Matrix(pointer: pointer, handle: handle)

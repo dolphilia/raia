@@ -3,19 +3,22 @@ extension Skia {
         public var pointer: Skia.ImageInfoMutablePointer?
         public var handle: sk_image_info_t = -1
 
+        // void SkImageInfo_delete(void *image_info); // (SkImageInfo *image_info)
+        deinit {
+            if self.handle > -1 {
+                static_sk_image_info_delete(self.handle)
+            } else {
+                SkImageInfo_delete(self.pointer)
+            }
+        }
+
         // void *SkImageInfo_new(); // () -> SkImageInfo *
         init () {
             self.pointer = SkImageInfo_new()
             self.handle = -1
         }
 
-        // void SkImageInfo_delete(void *image_info); // (SkImageInfo *image_info)
-        deinit {
-            SkImageInfo_delete(self.pointer)
-            if handle > -1 {
-                static_sk_image_info_delete(handle)
-            }
-        }
+        
         // int SkImageInfo_width(void *image_info); // (SkImageInfo *image_info) -> int
         func width() -> Int {
             return Int(SkImageInfo_width(self.pointer))
@@ -81,10 +84,7 @@ extension Skia {
         }
         // int SkImageInfo_makeDimensions(void *image_info, int newSize); // (SkImageInfo *image_info, sk_i_size_t newSize) -> sk_image_info_t
         func makeDimensions(newSize: ISize) -> ImageInfo {
-            guard let newSizeHandle = newSize.handle else {
-                fatalError("newSize.handle is nil")
-            }
-            let handle = SkImageInfo_makeDimensions(self.pointer, newSizeHandle)
+            let handle = SkImageInfo_makeDimensions(self.pointer, newSize.handle)
             let pointer = static_sk_image_info_get_ptr(handle)
             return ImageInfo(pointer: pointer, handle: handle)
         }
@@ -167,30 +167,21 @@ extension Skia {
         // int SkImageInfo_Make_3(int dimensions, int ct, int at); // (sk_i_size_t dimensions, SkColorType ct, SkAlphaType at) -> sk_image_info_t
 
         static func Make(dimensions: ISize, ct: ColorType, at: AlphaType) -> ImageInfo {
-            guard let dimensionsHandle = dimensions.handle else {
-                fatalError("dimensions.handle is nil")
-            }
-            let handle = SkImageInfo_Make_3(dimensionsHandle, Int32(ct.rawValue), Int32(at.rawValue))
+            let handle = SkImageInfo_Make_3(dimensions.handle, Int32(ct.rawValue), Int32(at.rawValue))
             let pointer = static_sk_image_info_get_ptr(handle)
             return ImageInfo(pointer: pointer, handle: handle)
         }
         // int SkImageInfo_Make_4(int dimensions, int ct, int at, int color_space); // (sk_i_size_t dimensions, SkColorType ct, SkAlphaType at, sk_color_space_t color_space) -> sk_image_info_t
 
         static func Make(dimensions: ISize, ct: ColorType, at: AlphaType, colorSpace: ColorSpace) -> ImageInfo {
-            guard let dimensionsHandle = dimensions.handle else {
-                fatalError("dimensions.handle is nil")
-            }
-            let handle = SkImageInfo_Make_4(dimensionsHandle, Int32(ct.rawValue), Int32(at.rawValue), colorSpace.handle)
+            let handle = SkImageInfo_Make_4(dimensions.handle, Int32(ct.rawValue), Int32(at.rawValue), colorSpace.handle)
             let pointer = static_sk_image_info_get_ptr(handle)
             return ImageInfo(pointer: pointer, handle: handle)
         }
         // int SkImageInfo_Make_5(int dimensions, const void *colorInfo); // (sk_i_size_t dimensions, const SkColorInfo *colorInfo) -> sk_image_info_t
 
         static func Make(dimensions: ISize, colorInfo: ColorInfo) -> ImageInfo {
-            guard let dimensionsHandle = dimensions.handle else {
-                fatalError("dimensions.handle is nil")
-            }
-            let handle = SkImageInfo_Make_5(dimensionsHandle, colorInfo.pointer);
+            let handle = SkImageInfo_Make_5(dimensions.handle, colorInfo.pointer);
             let pointer = static_sk_image_info_get_ptr(handle)
             return ImageInfo(pointer: pointer, handle: handle)
         }
@@ -227,19 +218,13 @@ extension Skia {
         }
         // int SkImageInfo_MakeN32Premul_3(int dimensions); // (sk_i_size_t dimensions) -> sk_image_info_t
         static func MakeN32Premul(dimensions: ISize) -> ImageInfo {
-            guard let dimensionsHandle = dimensions.handle else {
-                fatalError("dimensions.handle is nil")
-            }
-            let handle = SkImageInfo_MakeN32Premul_3(dimensionsHandle);
+            let handle = SkImageInfo_MakeN32Premul_3(dimensions.handle);
             let pointer = static_sk_image_info_get_ptr(handle)
             return ImageInfo(pointer: pointer, handle: handle)
         }
         // int SkImageInfo_MakeN32Premul_4(int dimensions, int color_space); // (sk_i_size_t dimensions, sk_color_space_t color_space) -> sk_image_info_t
         static func MakeN32Premul(dimensions: ISize, colorSpace: ColorSpace) -> ImageInfo {
-            guard let dimensionsHandle = dimensions.handle else {
-                fatalError("dimensions.handle is nil")
-            }
-            let handle = SkImageInfo_MakeN32Premul_4(dimensionsHandle, colorSpace.handle)
+            let handle = SkImageInfo_MakeN32Premul_4(dimensions.handle, colorSpace.handle)
             let pointer = static_sk_image_info_get_ptr(handle)
             return ImageInfo(pointer: pointer, handle: handle)
         }
@@ -251,10 +236,7 @@ extension Skia {
         }
         // int SkImageInfo_MakeA8_2(int dimensions); // (sk_i_size_t dimensions) -> sk_image_info_t
         static func MakeA8(dimensions: ISize) -> ImageInfo {
-            guard let dimensionsHandle = dimensions.handle else {
-                fatalError("dimensions.handle is nil")
-            }
-            let handle = SkImageInfo_MakeA8_2(dimensionsHandle);
+            let handle = SkImageInfo_MakeA8_2(dimensions.handle);
             let pointer = static_sk_image_info_get_ptr(handle)
             return ImageInfo(pointer: pointer, handle: handle)
         }

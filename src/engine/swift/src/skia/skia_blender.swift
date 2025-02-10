@@ -4,6 +4,13 @@ extension Skia {
         public var handle: sk_blender_t = -1
 
         // void SkBlender_delete(void *blender); // (SkBlender *blender)
+        deinit {
+            if self.handle > -1 {
+                static_sk_blender_delete(self.handle)
+            } else {
+                SkBlender_delete(self.pointer)
+            }
+        }
         // int SkBlender_getFactory(void *blender); // (SkBlender *blender) -> sk_flattenable_factory_t
         // const char *SkBlender_getTypeName(void *blender); // (SkBlender *blender) -> const char *
         // void SkBlender_flatten(void *blender, void *write_buffer); // (SkBlender *blender, SkWriteBuffer *write_buffer)

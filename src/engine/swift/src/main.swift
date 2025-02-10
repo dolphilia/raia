@@ -63,10 +63,12 @@ func main() {
         
         
         
-        let rect = Skia.Rect.MakeXYWH(x: 0, y: 0, w: 300, h: 300)
+        let rect = Skia.SkRect.MakeXYWH(x: 0, y: 0, w: 300, h: 300)
         canvas.drawRect(rect: rect, paint: paint)
         let pixels = bitmap.getPixels()
         renderer.setPixels(pixels: pixels)
+
+        let image = bitmap.asImage()
     }
 }
 

@@ -5,9 +5,10 @@ extension Skia {
 
         // void SkCubicResampler_delete(void *cubicResampler); // (SkCubicResampler *cubicResampler)
         deinit {
-            SkCubicResampler_delete(self.pointer)
-            if handle > -1 {
-                static_sk_cubic_resampler_delete(handle)
+            if self.handle > -1 {
+                static_sk_cubic_resampler_delete(self.handle)
+            } else {
+                SkCubicResampler_delete(self.pointer)
             }
         }
 

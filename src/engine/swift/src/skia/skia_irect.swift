@@ -4,11 +4,13 @@ extension Skia {
         public var handle: sk_i_rect_t = -1
         // void SkIRect_delete(void *i_rect); // (SkIRect *i_rect)
         deinit {
-            SkIRect_delete(self.pointer)
-            if handle > -1 {
-                static_sk_i_rect_delete(handle)
+            if self.handle > -1 {
+                static_sk_i_rect_delete(self.handle)
+            } else {
+                SkIRect_delete(self.pointer)
             }
         }
+
         // int SkIRect_left(void *i_rect); // (SkIRect *i_rect) -> int32_t
         func left() -> Int {
             return Int(SkIRect_left(self.pointer))
@@ -87,10 +89,7 @@ extension Skia {
         }
         // void SkIRect_setSize(void *i_rect, int size); // (SkIRect *i_rect, sk_i_size_t size)
         func setSize(size: ISize) {
-            guard let sizeHandle = size.handle else {
-                fatalError("size.handle is nil")
-            }
-            SkIRect_setSize(self.pointer, sizeHandle)
+            SkIRect_setSize(self.pointer, size.handle)
         }
         // int SkIRect_makeOffset(void *i_rect, int dx, int dy); // (SkIRect *i_rect, int32_t dx, int32_t dy) -> sk_i_rect_t
         static func MakeOffset(i_rect: IRect, dx: Int, dy: Int) -> IRect {
@@ -149,7 +148,7 @@ extension Skia {
             return SkIRect_contains_2(self.pointer, r.pointer)
         }
         // bool SkIRect_contains_3(void *i_rect, const void *r); // (SkIRect *i_rect, const SkRect *r) -> bool
-        func contains(r: Rect) -> Bool {
+        func contains(r: SkRect) -> Bool {
             return SkIRect_contains_3(self.pointer, r.pointer)
         }
         // bool SkIRect_containsNoEmptyCheck(void *i_rect, const void *r); // (SkIRect *i_rect, const SkIRect *r) -> bool
@@ -206,10 +205,7 @@ extension Skia {
         }
         // int SkIRect_MakePtSize(int pt, int size); // (sk_i_point_t pt, sk_i_size_t size) -> sk_i_rect_t
         static func MakePtSize(pt: IPoint, size: ISize) -> IRect {
-            guard let sizeHandle = size.handle else {
-                fatalError("size.handle is nil")
-            }
-            let handle = SkIRect_MakePtSize(pt.handle, sizeHandle);
+            let handle = SkIRect_MakePtSize(pt.handle, size.handle);
             let pointer = static_sk_i_rect_get_ptr(handle)
             return IRect(pointer: pointer, handle: handle)
         }

@@ -216,7 +216,7 @@ extension Skia {
             return SkPixmap_readPixels_4(self.pointer, dst.pointer)
         }
         // bool SkPixmap_scalePixels(void *pixmap, const void *dst, const void *options); // (SkPixmap *pixmap, const SkPixmap *dst, const SkSamplingOptions *options) -> bool
-        func scalePixels(dst: Pixmap, options: SamplingOptions) -> Bool {
+        func scalePixels(dst: Pixmap, options: SkSamplingOptions) -> Bool {
             return SkPixmap_scalePixels(self.pointer, dst.pointer, options.pointer)
         }
         // bool SkPixmap_erase(void *pixmap, unsigned int color, const void *subset); // (SkPixmap *pixmap, SkColor color, const SkIRect *subset) -> bool

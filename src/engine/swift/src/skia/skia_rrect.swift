@@ -1,38 +1,74 @@
 extension Skia {
-    class RRect {
-        public enum RRectType: Int32 {
-            case kEmpty_Type
-            case kRect_Type
-            case kOval_Type
-            case kSimple_Type
-            case kNinePatch_Type
-            case kComplex_Type
-            case kLastType
-        }
+    public enum SkRRectType: Int32 {
+        case kEmpty_Type
+        case kRect_Type
+        case kOval_Type
+        case kSimple_Type
+        case kNinePatch_Type
+        case kComplex_Type
+        case kLastType
+    }
 
-        public enum RRectCorner: Int32 {
-            case kUpperLeft_Corner
-            case kUpperRight_Corner
-            case kLowerRight_Corner
-            case kLowerLeft_Corner
-        }
-    
-        public var pointer: Skia.RRectMutablePointer?
+    public enum SkRRectCorner: Int32 {
+        case kUpperLeft_Corner
+        case kUpperRight_Corner
+        case kLowerRight_Corner
+        case kLowerLeft_Corner
+    }
+
+    protocol SkRRectProtocol {
+        var pointer: Skia.SkRRectMutablePointer? { get set }
+        var handle: sk_r_rect_t { get set }
+        // deinit // void SkRRect_delete(void *rrect); // (SkRRect *rrect)
+        init(pointer: Skia.SkRRectMutablePointer?, handle: sk_r_rect_t)
+        init() // void *SkRRect_new(); // () -> SkRRect *
+        init(rrect: SkRRect) // void *SkRRect_new_2(const void *rrect); // (const SkRRect *rrect) -> SkRRect *
+        // Static Methods
+        static func MakeEmpty() -> SkRRect // int SkRRect_MakeEmpty(); // () -> sk_r_rect_t
+        static func MakeRect(r: Skia.SkRect) -> SkRRect // int SkRRect_MakeRect(const SkRect *r); // (const SkRect *r) -> sk_r_rect_t
+        static func MakeOval(oval: Skia.SkRect) -> SkRRect // int SkRRect_MakeOval(const SkRect *oval); // (const SkRect *oval) -> sk_r_rect_t
+        static func MakeRectXY(rect: Skia.SkRect, xRad: Float, yRad: Float) -> SkRRect // int SkRRect_MakeRectXY(const SkRect *rect, SkScalar xRad, SkScalar yRad); // (const SkRect *rect, SkScalar xRad, SkScalar yRad) -> sk_r_rect_t
+        // Methods
+        func getType() -> SkRRectType // int getType(void *rrect); // (SkRRect *rrect) -> SkRRect::Type
+        func type() -> SkRRectType // int type(void *rrect); // (SkRRect *rrect) -> SkRRect::Type
+        func isEmpty() -> Bool // bool SkRRect_isEmpty(void *rrect); // (SkRRect *rrect) -> bool
+        func isRect() -> Bool // bool SkRRect_isRect(void *rrect); // (SkRRect *rrect) -> bool
+        func isOval() -> Bool // bool SkRRect_isOval(void *rrect); // (SkRRect *rrect) -> bool
+        func isSimple() -> Bool // bool SkRRect_isSimple(void *rrect); // (SkRRect *rrect) -> bool
+        func isNinePatch() -> Bool // bool SkRRect_isNinePatch(void *rrect); // (SkRRect *rrect) -> bool
+        func isComplex() -> Bool // bool SkRRect_isComplex(void *rrect); // (SkRRect *rrect) -> bool
+        func width() -> Scalar // float SkRRect_width(void *rrect); // (SkRRect *rrect) -> SkScalar
+        func height() -> Scalar // float SkRRect_height(void *rrect); // (SkRRect *rrect) -> SkScalar
+        func getSimpleRadii() -> Point // int SkRRect_getSimpleRadii(void *rrect); // (SkRRect *rrect) -> sk_point_t
+        func setEmpty() // void SkRRect_setEmpty(void *rrect); // (SkRRect *rrect)
+        func setRect(rect: Skia.SkRect) // void SkRRect_setRect(void *rrect, const void *rect); // (SkRRect *rrect, const SkRect *rect)
+        func setOval(oval: Skia.SkRect) // void SkRRect_setOval(void *rrect, const void *oval); // (SkRRect *rrect, const SkRect *oval)
+        func setRectXY(rect: Skia.SkRect, xRad: Float, yRad: Float) // void SkRRect_setRectXY(void *rrect, const void *rect, float xRad, float yRad); // (SkRRect *rrect, const SkRect *rect, SkScalar xRad, SkScalar yRad)
+        func setNinePatch(rect: Skia.SkRect, leftRad: Float, topRad: Float, rightRad: Float, bottomRad: Float) // void SkRRect_setNinePatch(void *rrect, const void *rect, float leftRad, float topRad, float rightRad, float bottomRad); // (SkRRect *rrect, const SkRect *rect, SkScalar leftRad, SkScalar topRad, SkScalar rightRad, SkScalar bottomRad)
+        func setRectRadii(rect: Skia.SkRect, radii: [Vector]) // void SkRRect_setRectRadii(void *rrect, const void *rect, const void * radii); // (SkRRect *rrect, const SkRect *rect, const SkVector radii[4])
+        func rect() -> Skia.SkRect // const void *SkRRect_rect(void *rrect); // (SkRRect *rrect) -> const SkRect *
+        func radii(corner: SkRRectCorner) -> Point // int SkRRect_radii(void *rrect, int corner); // (SkRRect *rrect, SkRRect::Corner corner) -> sk_point_t
+        func getBounds() -> Skia.SkRect // const void *SkRRect_getBounds(void *rrect); // (SkRRect *rrect) -> const SkRect *
+        func inset(dx: Float, dy: Float, dst: SkRRect) // void SkRRect_inset(void *rrect, float dx, float dy, void *dst); // (SkRRect *rrect, SkScalar dx, SkScalar dy, SkRRect *dst)
+        func inset(dx: Float, dy: Float) // void SkRRect_inset_2(void *rrect, float dx, float dy); // (SkRRect *rrect, SkScalar dx, SkScalar dy)
+        func outset(dx: Float, dy: Float, dst: SkRRect) // void SkRRect_outset(void *rrect, float dx, float dy, void *dst); // (SkRRect *rrect, SkScalar dx, SkScalar dy, SkRRect *dst)
+        func outset(dx: Float, dy: Float) // void SkRRect_outset_2(void *rrect, float dx, float dy); // (SkRRect *rrect, SkScalar dx, SkScalar dy)
+        func offset(dx: Float, dy: Float) // void SkRRect_offset(void *rrect, float dx, float dy); // (SkRRect *rrect, SkScalar dx, SkScalar dy)
+        func makeOffset(dx: Float, dy: Float) -> SkRRect // int SkRRect_makeOffset(void *rrect, float dx, float dy); // (SkRRect *rrect, SkScalar dx, SkScalar dy) -> sk_r_rect_t
+        func contains(rect: Skia.SkRect) -> Bool // bool SkRRect_contains(void *rrect, const void *rect); // (SkRRect *rrect, const SkRect *rect) -> bool
+        func isValid() -> Bool // bool SkRRect_isValid(void *rrect); // (SkRRect *rrect) -> bool
+        func writeToMemory(buffer: UnsafeMutableRawPointer?) -> UInt // unsigned long SkRRect_writeToMemory(void *rrect, void *buffer); // (SkRRect *rrect, void *buffer) -> size_t
+        func readFromMemory(buffer: UnsafeRawPointer?, length: UInt) -> UInt // unsigned long SkRRect_readFromMemory(void *rrect, const void *buffer, unsigned long length); // (SkRRect *rrect, const void *buffer, size_t length) -> size_t
+        func transform(matrix: Skia.Matrix, dst: SkRRect) -> Bool // bool SkRRect_transform(void *rrect, const void *matrix, void *dst); // (SkRRect *rrect, const SkMatrix *matrix, SkRRect *dst) -> bool
+        func dump(asHex: Bool) // void SkRRect_dump(void *rrect, bool asHex); // (SkRRect *rrect, bool asHex)
+        func dumpToString(asHex: Bool) -> SkString // int SkRRect_dumpToString(void *rrect, bool asHex); // (SkRRect *rrect, bool asHex) -> sk_string_t
+        func dump() // void SkRRect_dump_2(void *rrect); // (SkRRect *rrect)
+        func dumpHex() // void SkRRect_dumpHex(void *rrect); // (SkRRect *rrect)
+    }
+
+    class SkRRect : SkRRectProtocol {
+        public var pointer: Skia.SkRRectMutablePointer?
         public var handle: sk_r_rect_t = -1
-
-        // void *SkRRect_new(); // () -> SkRRect *
-
-        init() {
-            self.pointer = SkRRect_new()
-            self.handle = -1
-        }
-        // void *SkRRect_new_2(const void *rrect); // (const SkRRect *rrect) -> SkRRect *
-
-        init(rrect: RRect) {
-            self.pointer = SkRRect_new_2(rrect.pointer)
-            self.handle = -1
-        }
-        // void SkRRect_delete(void *rrect); // (SkRRect *rrect)
 
         deinit {
             SkRRect_delete(self.pointer)
@@ -40,231 +76,199 @@ extension Skia {
                 static_sk_r_rect_delete(handle)
             }
         }
-        // int getType(void *rrect); // (SkRRect *rrect) -> SkRRect::Type
 
-        func getType() -> RRectType {
-            return RRectType(rawValue: Int32(SkRRect_getType(self.pointer)))!
+        required init (pointer: Skia.SkRRectMutablePointer?, handle: sk_r_rect_t) {
+            self.pointer = pointer
+            self.handle = handle
         }
-        // int type(void *rrect); // (SkRRect *rrect) -> SkRRect::Type
-        
-        func type() -> RRectType {
-            return RRectType(rawValue: Int32(SkRRect_type(self.pointer)))!
+
+        required init() {
+            self.pointer = SkRRect_new()
+            self.handle = -1
         }
-        // bool SkRRect_isEmpty(void *rrect); // (SkRRect *rrect) -> bool
+
+        required init(rrect: SkRRect) {
+            self.pointer = SkRRect_new_2(rrect.pointer)
+            self.handle = -1
+        }
+
+        // Static Methods
+
+        static func MakeEmpty() -> SkRRect {
+            let handle = SkRRect_MakeEmpty()
+            let pointer = static_sk_r_rect_get_ptr(handle)
+            return SkRRect(pointer: pointer, handle: handle)
+        }
+
+        static func MakeRect(r: Skia.SkRect) -> SkRRect {
+            let handle = SkRRect_MakeRect(r.pointer)
+            let pointer = static_sk_r_rect_get_ptr(handle)
+            return SkRRect(pointer: pointer, handle: handle)
+        }
+
+        static func MakeOval(oval: Skia.SkRect) -> SkRRect {
+            let handle = SkRRect_MakeOval(oval.pointer)
+            let pointer = static_sk_r_rect_get_ptr(handle)
+            return SkRRect(pointer: pointer, handle: handle)
+        }
+
+        static func MakeRectXY(rect: Skia.SkRect, xRad: Float, yRad: Float) -> SkRRect {
+            let handle = SkRRect_MakeRectXY(rect.pointer, xRad, yRad)
+            let pointer = static_sk_r_rect_get_ptr(handle)
+            return SkRRect(pointer: pointer, handle: handle)
+        }
+
+        // Methods
+
+        func getType() -> SkRRectType {
+            return SkRRectType(rawValue: Int32(SkRRect_getType(self.pointer)))!
+        }
+
+        func type() -> SkRRectType {
+            return SkRRectType(rawValue: Int32(SkRRect_type(self.pointer)))!
+        }
 
         func isEmpty() -> Bool {
             return SkRRect_isEmpty(self.pointer)
         }
-        // bool SkRRect_isRect(void *rrect); // (SkRRect *rrect) -> bool
 
         func isRect() -> Bool {
             return SkRRect_isRect(self.pointer)
         }
-        // bool SkRRect_isOval(void *rrect); // (SkRRect *rrect) -> bool
 
         func isOval() -> Bool {
             return SkRRect_isOval(self.pointer)
         }
-        // bool SkRRect_isSimple(void *rrect); // (SkRRect *rrect) -> bool
 
         func isSimple() -> Bool {
             return SkRRect_isSimple(self.pointer)
         }
-        // bool SkRRect_isNinePatch(void *rrect); // (SkRRect *rrect) -> bool
 
         func isNinePatch() -> Bool {
             return SkRRect_isNinePatch(self.pointer)
         }
-        // bool SkRRect_isComplex(void *rrect); // (SkRRect *rrect) -> bool
 
         func isComplex() -> Bool {
             return SkRRect_isComplex(self.pointer)
         }
-        // float SkRRect_width(void *rrect); // (SkRRect *rrect) -> SkScalar
 
         func width() -> Scalar {
             return SkRRect_width(self.pointer)
         }
-        // float SkRRect_height(void *rrect); // (SkRRect *rrect) -> SkScalar
 
         func height() -> Scalar {
             return SkRRect_height(self.pointer)
         }
-        // int SkRRect_getSimpleRadii(void *rrect); // (SkRRect *rrect) -> sk_point_t
 
         func getSimpleRadii() -> Point {
             let handle = SkRRect_getSimpleRadii(self.pointer)
             let pointer = static_sk_point_get_ptr(handle)
             return Point(pointer: pointer, handle: handle)
         }
-        // void SkRRect_setEmpty(void *rrect); // (SkRRect *rrect)
 
         func setEmpty() {
             SkRRect_setEmpty(self.pointer)
         }
-        // void SkRRect_setRect(void *rrect, const void *rect); // (SkRRect *rrect, const SkRect *rect)
 
-        func setRect(rect: Skia.Rect) {
+        func setRect(rect: Skia.SkRect) {
             SkRRect_setRect(self.pointer, rect.pointer)
         }
-        // void SkRRect_setOval(void *rrect, const void *oval); // (SkRRect *rrect, const SkRect *oval)
 
-        func setOval(oval: Skia.Rect) {
+        func setOval(oval: Skia.SkRect) {
             SkRRect_setOval(self.pointer, oval.pointer)
         }
-        // void SkRRect_setRectXY(void *rrect, const void *rect, float xRad, float yRad); // (SkRRect *rrect, const SkRect *rect, SkScalar xRad, SkScalar yRad)
 
-        func setRectXY(rect: Skia.Rect, xRad: Float, yRad: Float) {
+        func setRectXY(rect: Skia.SkRect, xRad: Float, yRad: Float) {
             SkRRect_setRectXY(self.pointer, rect.pointer, xRad, yRad)
         }
-        // void SkRRect_setNinePatch(void *rrect, const void *rect, float leftRad, float topRad, float rightRad, float bottomRad); // (SkRRect *rrect, const SkRect *rect, SkScalar leftRad, SkScalar topRad, SkScalar rightRad, SkScalar bottomRad)
-        
-        func setNinePatch(rect: Skia.Rect, leftRad: Float, topRad: Float, rightRad: Float, bottomRad: Float) {
+
+        func setNinePatch(rect: Skia.SkRect, leftRad: Float, topRad: Float, rightRad: Float, bottomRad: Float) {
             SkRRect_setNinePatch(self.pointer, rect.pointer, leftRad, topRad, rightRad, bottomRad)
         }
-        // void SkRRect_setRectRadii(void *rrect, const void *rect, const void * radii); // (SkRRect *rrect, const SkRect *rect, const SkVector radii[4])
 
-        func setRectRadii(rect: Skia.Rect, radii: [Vector]) {
+        func setRectRadii(rect: Skia.SkRect, radii: [Vector]) {
             let radiiPointer = radii.map { $0.pointer }
             SkRRect_setRectRadii(self.pointer, rect.pointer, radiiPointer)
         }
-        // const void *SkRRect_rect(void *rrect); // (SkRRect *rrect) -> const SkRect *
 
-        func rect() -> Skia.Rect {
+        func rect() -> Skia.SkRect {
             let pointer = SkRRect_rect(self.pointer)
-            return Skia.Rect(pointer: UnsafeMutableRawPointer(mutating: pointer), handle: -1)
+            return Skia.SkRect(pointer: UnsafeMutableRawPointer(mutating: pointer), handle: -1)
         }
-        // int SkRRect_radii(void *rrect, int corner); // (SkRRect *rrect, SkRRect::Corner corner) -> sk_point_t
 
-        func radii(corner: RRectCorner) -> Point {
+        func radii(corner: SkRRectCorner) -> Point {
             let handle = SkRRect_radii(self.pointer, corner.rawValue)
             let pointer = static_sk_point_get_ptr(handle)
             return Point(pointer: pointer, handle: handle)
         }
-        // const void *SkRRect_getBounds(void *rrect); // (SkRRect *rrect) -> const SkRect *
 
-        func getBounds() -> Skia.Rect {
+        func getBounds() -> Skia.SkRect {
             let pointer = SkRRect_getBounds(self.pointer)
-            return Skia.Rect(pointer: UnsafeMutableRawPointer(mutating: pointer), handle: -1)
+            return Skia.SkRect(pointer: UnsafeMutableRawPointer(mutating: pointer), handle: -1)
         }
-        // void SkRRect_inset(void *rrect, float dx, float dy, void *dst); // (SkRRect *rrect, SkScalar dx, SkScalar dy, SkRRect *dst)
 
-        func inset(dx: Float, dy: Float, dst: RRect) {
+        func inset(dx: Float, dy: Float, dst: SkRRect) {
             SkRRect_inset(self.pointer, dx, dy, dst.pointer)
         }
-        // void SkRRect_inset_2(void *rrect, float dx, float dy); // (SkRRect *rrect, SkScalar dx, SkScalar dy)
 
         func inset(dx: Float, dy: Float) {
             SkRRect_inset_2(self.pointer, dx, dy)
         }
-        // void SkRRect_outset(void *rrect, float dx, float dy, void *dst); // (SkRRect *rrect, SkScalar dx, SkScalar dy, SkRRect *dst)
 
-        func outset(dx: Float, dy: Float, dst: RRect) {
+        func outset(dx: Float, dy: Float, dst: SkRRect) {
             SkRRect_outset(self.pointer, dx, dy, dst.pointer)
         }
-        // void SkRRect_outset_2(void *rrect, float dx, float dy); // (SkRRect *rrect, SkScalar dx, SkScalar dy)
 
         func outset(dx: Float, dy: Float) {
             SkRRect_outset_2(self.pointer, dx, dy)
         }
-        // void SkRRect_offset(void *rrect, float dx, float dy); // (SkRRect *rrect, SkScalar dx, SkScalar dy)
 
         func offset(dx: Float, dy: Float) {
             SkRRect_offset(self.pointer, dx, dy)
         }
-        // int SkRRect_makeOffset(void *rrect, float dx, float dy); // (SkRRect *rrect, SkScalar dx, SkScalar dy) -> sk_r_rect_t
 
-        func makeOffset(dx: Float, dy: Float) -> RRect {
+        func makeOffset(dx: Float, dy: Float) -> SkRRect {
             let handle = SkRRect_makeOffset(self.pointer, dx, dy)
             let pointer = static_sk_r_rect_get_ptr(handle)
-            return RRect(pointer: pointer, handle: handle)
+            return SkRRect(pointer: pointer, handle: handle)
         }
-        // bool SkRRect_contains(void *rrect, const void *rect); // (SkRRect *rrect, const SkRect *rect) -> bool
 
-        func contains(rect: Skia.Rect) -> Bool {
+        func contains(rect: Skia.SkRect) -> Bool {
             return SkRRect_contains(self.pointer, rect.pointer)
         }
-        // bool SkRRect_isValid(void *rrect); // (SkRRect *rrect) -> bool
 
         func isValid() -> Bool {
             return SkRRect_isValid(self.pointer)
         }
-        // unsigned long SkRRect_writeToMemory(void *rrect, void *buffer); // (SkRRect *rrect, void *buffer) -> size_t
-        
+
         func writeToMemory(buffer: UnsafeMutableRawPointer?) -> UInt {
             return SkRRect_writeToMemory(self.pointer, buffer)
         }
-        // unsigned long SkRRect_readFromMemory(void *rrect, const void *buffer, unsigned long length); // (SkRRect *rrect, const void *buffer, size_t length) -> size_t
 
         func readFromMemory(buffer: UnsafeRawPointer?, length: UInt) -> UInt {
             return SkRRect_readFromMemory(self.pointer, buffer, length)
         }
-        // bool SkRRect_transform(void *rrect, const void *matrix, void *dst); // (SkRRect *rrect, const SkMatrix *matrix, SkRRect *dst) -> bool
 
-        func transform(matrix: Skia.Matrix, dst: RRect) -> Bool {
+        func transform(matrix: Skia.Matrix, dst: SkRRect) -> Bool {
             return SkRRect_transform(self.pointer, matrix.pointer, dst.pointer)
         }
-        // void SkRRect_dump(void *rrect, bool asHex); // (SkRRect *rrect, bool asHex)
 
         func dump(asHex: Bool) {
             SkRRect_dump(self.pointer, asHex)
         }
-        // int SkRRect_dumpToString(void *rrect, bool asHex); // (SkRRect *rrect, bool asHex) -> sk_string_t
 
         func dumpToString(asHex: Bool) -> SkString {
             let handle = SkRRect_dumpToString(self.pointer, asHex)
             let pointer = static_sk_string_get_ptr(handle)
             return SkString(pointer: pointer, handle: handle)
         }
-        // void SkRRect_dump_2(void *rrect); // (SkRRect *rrect)
 
         func dump() {
             SkRRect_dump_2(self.pointer)
         }
-        // void SkRRect_dumpHex(void *rrect); // (SkRRect *rrect)
 
         func dumpHex() {
             SkRRect_dumpHex(self.pointer)
         }
-
-        // // static
-
-        init (pointer: Skia.RRectMutablePointer?, handle: sk_r_rect_t) {
-            self.pointer = pointer
-            self.handle = handle
-        }
-
-        // int SkRRect_MakeEmpty(); // () -> sk_r_rect_t
-
-        static func MakeEmpty() -> RRect {
-            let handle = SkRRect_MakeEmpty()
-            let pointer = static_sk_r_rect_get_ptr(handle)
-            return RRect(pointer: pointer, handle: handle)
-        }
-
-        // int SkRRect_MakeRect(const void *r); // (const SkRect *r) -> sk_r_rect_t
-
-        static func MakeRect(r: Skia.Rect) -> RRect {
-            let handle = SkRRect_MakeRect(r.pointer)
-            let pointer = static_sk_r_rect_get_ptr(handle)
-            return RRect(pointer: pointer, handle: handle)
-        }
-
-        // int SkRRect_MakeOval(const void *oval); // (const SkRect *oval) -> sk_r_rect_t
-
-        static func MakeOval(oval: Skia.Rect) -> RRect {
-            let handle = SkRRect_MakeOval(oval.pointer)
-            let pointer = static_sk_r_rect_get_ptr(handle)
-            return RRect(pointer: pointer, handle: handle)
-        }
-
-        // int SkRRect_MakeRectXY(const void *rect, float xRad, float yRad); // (const SkRect *rect, SkScalar xRad, SkScalar yRad) -> sk_r_rect_t
-
-        static func MakeRectXY(rect: Skia.Rect, xRad: Float, yRad: Float) -> RRect {
-            let handle = SkRRect_MakeRectXY(rect.pointer, xRad, yRad)
-            let pointer = static_sk_r_rect_get_ptr(handle)
-            return RRect(pointer: pointer, handle: handle)
-        }
-
     }
 }

@@ -8,14 +8,15 @@ extension Skia {
 
 
         public var pointer: MaskBuilderMutablePointer?
-        public var handle: sk_mask_builder_t?
+        public var handle: sk_mask_builder_t = -1
 
         // void SkMaskBuilder_delete(void * maskBuilder); // (SkMaskBuilder* maskBuilder)
 
         deinit {
-            SkMaskBuilder_delete(self.pointer)
-            if let handle = self.handle {
-                static_sk_mask_builder_delete(handle)
+            if self.handle > -1 {
+                static_sk_mask_builder_delete(self.handle)
+            } else {
+                SkMaskBuilder_delete(self.pointer)
             }
         }
 
@@ -24,13 +25,13 @@ extension Skia {
             let pointer = SkMaskBuilder_new()
             //let pointer = static_sk_mask_builder_get_ptr(handle)
             self.pointer = pointer
-            self.handle = nil
+            self.handle = -1
         }
         // void * SkMaskBuilder_new_2(void * img, const void * bounds, unsigned int rowBytes, int format); // (uint8_t* img, const SkIRect * bounds, uint32_t rowBytes, SkMask::Format format) -> SkMaskBuilder *
         init(img: UnsafeMutablePointer<UInt8>?, bounds: IRect, rowBytes: UInt32, format: Int32) {
             let pointer = SkMaskBuilder_new_2(img, bounds.pointer, rowBytes, format)
             self.pointer = pointer
-            self.handle = nil
+            self.handle = -1
         }
         
         // void * SkMaskBuilder_image(void * maskBuilder); // (SkMaskBuilder *maskBuilder) -> uint8_t*

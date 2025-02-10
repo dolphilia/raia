@@ -1,13 +1,14 @@
 extension Skia {
     class ISize {
         public var pointer: Skia.ISizeMutablePointer?
-        public var handle: sk_i_size_t?
+        public var handle: sk_i_size_t = -1
 
         // void SkISize_delete(void *i_size); // (SkISize *i_size)
         deinit {
-            SkISize_delete(self.pointer)
-            if let handle = self.handle {
-                static_sk_rect_delete(handle)
+            if self.handle > -1 {
+                static_sk_i_size_delete(self.handle)
+            } else {
+                SkISize_delete(self.pointer)
             }
         }
         // void SkISize_set(void *i_size, int w, int h); // (SkISize *i_size, int32_t w, int32_t h)

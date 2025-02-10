@@ -832,7 +832,7 @@ extension Skia {
     public final class RectType {
         public let handle: sk_rect_t
 
-        public var pointer : RectMutablePointer? {
+        public var pointer : SkRectMutablePointer? {
             return static_sk_rect_get_ptr(handle)
         }
 

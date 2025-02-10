@@ -3,17 +3,18 @@ extension Skia {
         public var pointer: Skia.ImageMutablePointer?
         public var handle: sk_image_t = -1
 
+        // void SkImage_delete(void *image); // (SkImage *image)
+        deinit {
+            if self.handle > -1 {
+                static_sk_image_delete(self.handle)
+            } else {
+                SkImage_delete(self.pointer)
+            }
+        }
+
         init (pointer: Skia.ImageMutablePointer?, handle: sk_image_t) {
             self.pointer = pointer
             self.handle = handle
-        }
-
-        // void SkImage_delete(void *image); // (SkImage *image)
-        deinit {
-            SkImage_delete(self.pointer)
-            if handle > -1 {
-                static_sk_image_delete(handle)
-            }
         }
 
         // // TODO

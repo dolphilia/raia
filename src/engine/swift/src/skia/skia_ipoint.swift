@@ -4,9 +4,10 @@ extension Skia {
         public var handle: sk_i_point_t = -1
 
         deinit {
-            SkIPoint_delete(self.pointer)
-            if handle > -1 {
-                static_sk_i_point_delete(handle)
+            if self.handle > -1 {
+                static_sk_i_point_delete(self.handle)
+            } else {
+                SkIPoint_delete(self.pointer)
             }
         }
 
