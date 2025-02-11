@@ -1,16 +1,28 @@
 extension Skia {
+    class StringView {
+        public let handle: string_view_t
+
+        public init(handle: string_view_t) {
+            self.handle = handle
+        }
+
+        deinit {
+            static_string_view_delete(handle)
+        }
+    }
+
     protocol SkStringProtocol {
-        var pointer: Skia.SkStringMutablePointer? { get set }
+        var pointer: SkStringMutablePointer? { get set }
         var handle: sk_string_t { get set }
         // deinit // void SkString_delete(void *string); // (SkString *string)
-        init(pointer: Skia.SkStringMutablePointer?, handle: sk_string_t)
+        init(pointer: SkStringMutablePointer?, handle: sk_string_t)
         init() // void *SkString_new(); // () -> SkString *
         init(len: UInt) // void *SkString_new_2(unsigned long len); // (size_t len) -> SkString *
         init(text: UnsafePointer<CChar>?) // void *SkString_new_3(const char text[]); // (const char text[]) -> SkString *
         init(text: UnsafePointer<CChar>?, len: UInt) // void *SkString_new_4(const char text[], unsigned long len); // (const char text[], size_t len) -> SkString *
         init(str: SkString) // void *SkString_new_5(const void *str); // (const SkString *str) -> SkString *
         init(str: String) // void *SkString_new_6(const void *str); // (const std::string *str) -> SkString *
-        init(view: StringViewType) // void *SkString_new_7(int view); // (string_view_t view) -> SkString *
+        init(view: StringView) // void *SkString_new_7(int view); // (string_view_t view) -> SkString *
         // Methods
         func isEmpty() -> Bool // bool SkString_isEmpty(void *string); // (SkString *string) -> bool
         func size() -> UInt // unsigned long SkString_size(void *string); // (SkString *string) -> size_t
@@ -33,11 +45,11 @@ extension Skia {
         func set(src: SkString) // void SkString_set(void *string, const void *src); // (SkString *string, const SkString *src)
         func set(text: UnsafePointer<CChar>?) // void SkString_set_2(void *string, const char text[]); // (SkString *string, const char text[])
         func set(text: UnsafePointer<CChar>?, len: UInt) // void SkString_set_3(void *string, const char text[], unsigned long len); // (SkString *string, const char text[], size_t len)
-        func set(str: StringViewType) // void SkString_set_4(void *string, int str); // (SkString *string, string_view_t str)
+        func set(str: StringView) // void SkString_set_4(void *string, int str); // (SkString *string, string_view_t str)
         func insert(offset: UInt, text: UnsafePointer<CChar>?) // void SkString_insert(void *string, unsigned long offset, const char text[]); // (SkString *string, size_t offset, const char text[])
         func insert(offset: UInt, text: UnsafePointer<CChar>?, len: UInt) // void SkString_insert_2(void *string, unsigned long offset, const char text[], unsigned long len); // (SkString *string, size_t offset, const char text[], size_t len)
         func insert(offset: UInt, str: SkString) // void SkString_insert_3(void *string, unsigned long offset, const void *str); // (SkString *string, size_t offset, const SkString *str)
-        func insert(offset: UInt, str: StringViewType) // void SkString_insert_4(void *string, unsigned long offset, int str); // (SkString *string, size_t offset, string_view_t str)
+        func insert(offset: UInt, str: StringView) // void SkString_insert_4(void *string, unsigned long offset, int str); // (SkString *string, size_t offset, string_view_t str)
         func insertUnichar(offset: UInt, unichar: Int) // void SkString_insertUnichar(void *string, unsigned long offset, int unichar); // (SkString *string, size_t offset, SkUnichar unichar)
         func insertS32(offset: UInt, value: Int32) // void SkString_insertS32(void *string, unsigned long offset, int value); // (SkString *string, size_t offset, int32_t value)
         func insertS64(offset: UInt, value: Int64, minDigits: Int) // void SkString_insertS64(void *string, unsigned long offset, long long value, int minDigits); // (SkString *string, size_t offset, int64_t value, int minDigits)
@@ -48,7 +60,7 @@ extension Skia {
         func append(text: UnsafePointer<CChar>?) // void SkString_append(void *string, const char text[]); // (SkString *string, const char text[])
         func append(text: UnsafePointer<CChar>?, len: UInt) // void SkString_append_2(void *string, const char text[], unsigned long len); // (SkString *string, const char text[], size_t len)
         func append(str: SkString) // void SkString_append_3(void *string, const void *str); // (SkString *string, const SkString *str)
-        func append(str: StringViewType) // void SkString_append_4(void *string, int str); // (SkString *string, string_view_t str)
+        func append(str: StringView) // void SkString_append_4(void *string, int str); // (SkString *string, string_view_t str)
         func appendUnichar(uni: Int) // void SkString_appendUnichar(void *string, int uni); // (SkString *string, SkUnichar uni)
         func appendS32(value: Int32) // void SkString_appendS32(void *string, int value); // (SkString *string, int32_t value)
         func appendS64(value: Int64, minDigits: Int) // void SkString_appendS64(void *string, long long value, int minDigits); // (SkString *string, int64_t value, int minDigits)
@@ -59,7 +71,7 @@ extension Skia {
         func prepend(text: UnsafePointer<CChar>?) // void SkString_prepend(void *string, const char text[]); // (SkString *string, const char text[])
         func prepend(text: UnsafePointer<CChar>?, len: UInt) // void SkString_prepend_2(void *string, const char text[], unsigned long len); // (SkString *string, const char text[], size_t len)
         func prepend(str: SkString) // void SkString_prepend_3(void *string, const void *str); // (SkString *string, const SkString *str)
-        func prepend(str: StringViewType) // void SkString_prepend_4(void *string, int str); // (SkString *string, string_view_t str)
+        func prepend(str: StringView) // void SkString_prepend_4(void *string, int str); // (SkString *string, string_view_t str)
         func prependUnichar(uni: Int) // void SkString_prependUnichar(void *string, int uni); // (SkString *string, SkUnichar uni)
         func prependS32(value: Int32) // void SkString_prependS32(void *string, int value); // (SkString *string, int32_t value)
         func prependS64(value: Int32, minDigits: Int) // void SkString_prependS64(void *string, int value, int minDigits); // (SkString *string, int32_t value, int minDigits)
@@ -76,7 +88,7 @@ extension Skia {
     }
 
     class SkString: SkStringProtocol {
-        public var pointer: Skia.SkStringMutablePointer?
+        public var pointer: SkStringMutablePointer?
         public var handle: sk_string_t = -1
 
         deinit {
@@ -87,7 +99,7 @@ extension Skia {
             }
         }
 
-        required init(pointer: Skia.SkStringMutablePointer?, handle: sk_string_t) {
+        required init(pointer: SkStringMutablePointer?, handle: sk_string_t) {
             self.pointer = pointer
             self.handle = handle
         }
@@ -122,7 +134,7 @@ extension Skia {
             self.handle = -1
         }
         
-        required init(view: StringViewType) {
+        required init(view: StringView) {
             self.pointer = SkString_new_7(view.handle);
             self.handle = -1
         }
@@ -208,7 +220,7 @@ extension Skia {
             SkString_set_3(self.pointer, text, len)
         }
 
-        func set(str: StringViewType) {
+        func set(str: StringView) {
             SkString_set_4(self.pointer, str.handle)
         }
 
@@ -224,7 +236,7 @@ extension Skia {
             SkString_insert_3(self.pointer, offset, str.pointer)
         }
 
-        func insert(offset: UInt, str: StringViewType) {
+        func insert(offset: UInt, str: StringView) {
             SkString_insert_4(self.pointer, offset, str.handle)
         }
 
@@ -268,7 +280,7 @@ extension Skia {
             SkString_append_3(self.pointer, str.pointer)
         }
 
-        func append(str: StringViewType) {
+        func append(str: StringView) {
             SkString_append_4(self.pointer, str.handle)
         }
 
@@ -312,7 +324,7 @@ extension Skia {
             SkString_prepend_3(self.pointer, str.pointer)
         }
 
-        func prepend(str: StringViewType) {
+        func prepend(str: StringView) {
             SkString_prepend_4(self.pointer, str.handle)
         }
 

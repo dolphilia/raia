@@ -1,12 +1,12 @@
 extension Skia {
     protocol SkPixelRefProtocol {
-        var pointer: Skia.SkPixelRefMutablePointer? { get set }
+        var pointer: SkPixelRefMutablePointer? { get set }
         var handle: sk_pixel_ref_t { get set }
         // deinit // void SkPixelRef_delete(void *pixel_ref); // (SkPixelRef *pixel_ref)
-        init(pointer: Skia.SkPixelRefMutablePointer?, handle: sk_pixel_ref_t)
+        init(pointer: SkPixelRefMutablePointer?, handle: sk_pixel_ref_t)
         init(width: Int32, height: Int32, addr: UnsafeMutableRawPointer?, rowBytes: UInt) // void *SkPixelRef_new(int width, int height, void *addr, unsigned long rowBytes); // (int width, int height, void *addr, size_t rowBytes) -> SkPixelRef *
         // Methods
-        func dimensions() -> ISize // int SkPixelRef_dimensions(void *pixel_ref); // (SkPixelRef *pixel_ref) -> sk_i_size_t
+        func dimensions() -> SkISize // int SkPixelRef_dimensions(void *pixel_ref); // (SkPixelRef *pixel_ref) -> sk_i_size_t
         func width() -> Int // int SkPixelRef_width(void *pixel_ref); // (SkPixelRef *pixel_ref) -> int
         func height() -> Int // int SkPixelRef_height(void *pixel_ref); // (SkPixelRef *pixel_ref) -> int
         func pixels() -> UnsafeMutableRawPointer? // void * SkPixelRef_pixels(void *pixel_ref); // (SkPixelRef *pixel_ref) -> void *
@@ -24,7 +24,7 @@ extension Skia {
     }
 
     class SkPixelRef : SkPixelRefProtocol {
-        public var pointer: Skia.SkPixelRefMutablePointer?
+        public var pointer: SkPixelRefMutablePointer?
         public var handle: sk_pixel_ref_t = -1
 
         deinit {
@@ -35,7 +35,7 @@ extension Skia {
             }
         }
 
-        required init(pointer: Skia.SkPixelRefMutablePointer?, handle: sk_pixel_ref_t) {
+        required init(pointer: SkPixelRefMutablePointer?, handle: sk_pixel_ref_t) {
             self.pointer = pointer
             self.handle = handle
         }
@@ -47,10 +47,10 @@ extension Skia {
 
         // Methods
 
-        func dimensions() -> ISize {
+        func dimensions() -> SkISize {
             let handle = SkPixelRef_dimensions(self.pointer)
             let pointer = static_sk_i_size_get_ptr(handle)
-            return ISize(pointer: pointer, handle: handle)
+            return SkISize(pointer: pointer, handle: handle)
         }
 
         func width() -> Int {

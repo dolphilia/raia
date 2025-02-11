@@ -1,6 +1,6 @@
 extension Skia {
-    class ColorSpace {
-        public var pointer: Skia.ColorSpaceMutablePointer?
+    class SkColorSpace {
+        public var pointer: SkColorSpaceMutablePointer?
         public var handle: sk_color_space_t = -1
         // void SkColorSpace_delete(void *color_space); // (SkColorSpace *color_space)
         deinit {
@@ -9,6 +9,38 @@ extension Skia {
             } else {
                 SkColorSpace_delete(self.pointer)
             }
+        }
+
+        init(pointer: SkColorSpaceMutablePointer?, handle: sk_color_space_t) {
+            self.pointer = pointer
+            self.handle = handle
+        }
+
+        // int SkColorSpace_MakeSRGB(); // () -> sk_color_space_t
+        static func MakeSRGB() -> SkColorSpace {
+            let handle = SkColorSpace_MakeSRGB();
+            let pointer = static_sk_color_space_get(handle)
+            return SkColorSpace(pointer: pointer, handle: handle)
+        }
+        // int SkColorSpace_MakeSRGBLinear(); // () -> sk_color_space_t
+        static func MakeSRGBLinear() -> SkColorSpace {
+            let handle = SkColorSpace_MakeSRGBLinear();
+            let pointer = static_sk_color_space_get(handle)
+            return SkColorSpace(pointer: pointer, handle: handle)
+        }
+
+        // int SkColorSpace_MakeRGB(const void *transferFn, const void *toXYZ); // (const skcms_TransferFunction *transferFn, const skcms_Matrix3x3 *toXYZ) -> sk_color_space_t
+        // int SkColorSpace_Make(const void * profile); // (const skcms_ICCProfile *profile) -> sk_color_space_t
+
+        // int SkColorSpace_Deserialize(const void *data, unsigned long length); // (const void *data, size_t length) -> sk_color_space_t
+        static func Deserialize(data: UnsafeRawPointer, length: UInt) -> SkColorSpace {
+            let handle = SkColorSpace_Deserialize(data, length);
+            let pointer = static_sk_color_space_get(handle)
+            return SkColorSpace(pointer: pointer, handle: handle)
+        }
+        // bool SkColorSpace_Equals(void *color_space_1, const void *color_space_2); // (SkColorSpace *color_space_1, const SkColorSpace *color_space_2) -> bool
+        static func Equals(x: SkColorSpace, y: SkColorSpace) -> Bool {
+            return SkColorSpace_Equals(x.pointer, y.pointer)
         }
 
         // void SkColorSpace_toProfile(void *color_space, void *profile); // (SkColorSpace *color_space, skcms_ICCProfile *profile)
@@ -27,32 +59,32 @@ extension Skia {
             return SkColorSpace_toXYZD50Hash(self.pointer)
         }
         // int SkColorSpace_makeLinearGamma(void *color_space); // (SkColorSpace *color_space) -> sk_color_space_t
-        func makeLinearGamma() -> ColorSpace {
+        func makeLinearGamma() -> SkColorSpace {
             let handle = SkColorSpace_makeLinearGamma(self.pointer);
             let pointer = static_sk_color_space_get(handle)
-            return ColorSpace(pointer: pointer, handle: handle)
+            return SkColorSpace(pointer: pointer, handle: handle)
         }
         // int SkColorSpace_makeSRGBGamma(void *color_space); // (SkColorSpace *color_space) -> sk_color_space_t
-        func makeSRGBGamma() -> ColorSpace {
+        func makeSRGBGamma() -> SkColorSpace {
             let handle = SkColorSpace_makeSRGBGamma(self.pointer);
             let pointer = static_sk_color_space_get(handle)
-            return ColorSpace(pointer: pointer, handle: handle)
+            return SkColorSpace(pointer: pointer, handle: handle)
         }
         // int SkColorSpace_makeColorSpin(void *color_space); // (SkColorSpace *color_space) -> sk_color_space_t
-        func makeColorSpin() -> ColorSpace {
+        func makeColorSpin() -> SkColorSpace {
             let handle = SkColorSpace_makeColorSpin(self.pointer);
             let pointer = static_sk_color_space_get(handle)
-            return ColorSpace(pointer: pointer, handle: handle)
+            return SkColorSpace(pointer: pointer, handle: handle)
         }
         // bool SkColorSpace_isSRGB(void *color_space); // (SkColorSpace *color_space) -> bool
         func isSRGB() -> Bool {
             return SkColorSpace_isSRGB(self.pointer)
         }
         // int SkColorSpace_serialize(void *color_space); // (SkColorSpace *color_space) -> sk_data_t
-        func serialize() -> Data {
+        func serialize() -> SkData {
             let handle = SkColorSpace_serialize(self.pointer);
             let pointer = static_sk_data_get(handle)
-            return Data(pointer: pointer, handle: handle)
+            return SkData(pointer: pointer, handle: handle)
         }
         // unsigned long SkColorSpace_writeToMemory(void *color_space, void *memory); // (SkColorSpace *color_space, void *memory) -> size_t
         func writeToMemory(memory: UnsafeMutableRawPointer?) -> UInt {
@@ -95,40 +127,5 @@ extension Skia {
         func refCntGreaterThan(threadIsolatedTestCnt: Int) -> Bool {
             return SkColorSpace_refCntGreaterThan(self.pointer, Int32(threadIsolatedTestCnt))
         }
-
-        // // static
-
-        init(pointer: Skia.ColorSpaceMutablePointer?, handle: sk_color_space_t) {
-            self.pointer = pointer
-            self.handle = handle
-        }
-
-        // int SkColorSpace_MakeSRGB(); // () -> sk_color_space_t
-        static func MakeSRGB() -> ColorSpace {
-            let handle = SkColorSpace_MakeSRGB();
-            let pointer = static_sk_color_space_get(handle)
-            return ColorSpace(pointer: pointer, handle: handle)
-        }
-        // int SkColorSpace_MakeSRGBLinear(); // () -> sk_color_space_t
-        static func MakeSRGBLinear() -> ColorSpace {
-            let handle = SkColorSpace_MakeSRGBLinear();
-            let pointer = static_sk_color_space_get(handle)
-            return ColorSpace(pointer: pointer, handle: handle)
-        }
-
-        // int SkColorSpace_MakeRGB(const void *transferFn, const void *toXYZ); // (const skcms_TransferFunction *transferFn, const skcms_Matrix3x3 *toXYZ) -> sk_color_space_t
-        // int SkColorSpace_Make(const void * profile); // (const skcms_ICCProfile *profile) -> sk_color_space_t
-
-        // int SkColorSpace_Deserialize(const void *data, unsigned long length); // (const void *data, size_t length) -> sk_color_space_t
-        static func Deserialize(data: UnsafeRawPointer, length: UInt) -> ColorSpace {
-            let handle = SkColorSpace_Deserialize(data, length);
-            let pointer = static_sk_color_space_get(handle)
-            return ColorSpace(pointer: pointer, handle: handle)
-        }
-        // bool SkColorSpace_Equals(void *color_space_1, const void *color_space_2); // (SkColorSpace *color_space_1, const SkColorSpace *color_space_2) -> bool
-        static func Equals(x: ColorSpace, y: ColorSpace) -> Bool {
-            return SkColorSpace_Equals(x.pointer, y.pointer)
-        }
-
     }
 }

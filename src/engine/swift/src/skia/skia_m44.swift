@@ -1,6 +1,6 @@
 extension Skia {
-    class M44 {
-        public var pointer: Skia.M44MutablePointer?
+    class SkM44 {
+        public var pointer: SkM44MutablePointer?
         public var handle: sk_m_44_t = -1
 
         // void SkM44_delete(void *m44); // (SkM44 *m44)
@@ -48,7 +48,7 @@ extension Skia {
 
         // // static
 
-        init(pointer: Skia.M44MutablePointer?, handle: sk_m_44_t) {
+        init(pointer: SkM44MutablePointer?, handle: sk_m_44_t) {
             self.pointer = pointer
             self.handle = handle
         }

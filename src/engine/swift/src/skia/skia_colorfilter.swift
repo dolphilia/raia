@@ -1,6 +1,6 @@
 extension Skia {
-    class ColorFilter {
-        public var pointer: Skia.ColorFilterMutablePointer?
+    class SkColorFilter {
+        public var pointer: SkColorFilterMutablePointer?
         public var handle: sk_color_filter_t = -1
 
         // void SkColorFilter_delete(void *color_filter); // (SkColorFilter *color_filter)
@@ -30,38 +30,38 @@ extension Skia {
 
         // // static
 
-        init(pointer: Skia.ColorFilterMutablePointer?, handle: sk_color_filter_t) {
+        init(pointer: SkColorFilterMutablePointer?, handle: sk_color_filter_t) {
             self.pointer = pointer
             self.handle = handle
         }
 
         // int SkColorFilter_Deserialize(const void *data, unsigned long size, const void *procs); // (const void *data, size_t size, const SkDeserialProcs *procs) -> sk_color_filter_t
-        static func Deserialize(data: UnsafeRawPointer?, size: UInt, procs: UnsafeRawPointer?) -> ColorFilter {
+        static func Deserialize(data: UnsafeRawPointer?, size: UInt, procs: UnsafeRawPointer?) -> SkColorFilter {
             let handle = SkColorFilter_Deserialize(data, size, procs)
             let pointer = static_sk_color_filter_get(handle)
-            return ColorFilter(pointer: pointer, handle: handle)
+            return SkColorFilter(pointer: pointer, handle: handle)
         }
         // int SkColorFilter_NameToFactory(const char name[]); // (const char name[]) -> sk_flattenable_factory_t
-        static func NameToFactory(name: UnsafePointer<CChar>?) -> Flattenable {
+        static func NameToFactory(name: UnsafePointer<CChar>?) -> SkFlattenable {
             let handle = SkColorFilter_NameToFactory(name)
             let pointer = static_sk_flattenable_get(handle)
-            return Flattenable(pointer: pointer, handle: handle)
+            return SkFlattenable(pointer: pointer, handle: handle)
         }
         // const char *SkColorFilter_FactoryToName(int factory); // (sk_flattenable_factory_t factory) -> const char *
-        static func FactoryToName(factory: Flattenable) -> UnsafePointer<CChar>? {
+        static func FactoryToName(factory: SkFlattenable) -> UnsafePointer<CChar>? {
             return SkColorFilter_FactoryToName(factory.handle)
         }
-        static func FactoryToName(factory: Flattenable) -> String? {
+        static func FactoryToName(factory: SkFlattenable) -> String? {
             guard let cstr = SkColorFilter_FactoryToName(factory.handle) else {
                 return nil
             }
             return String(cString: cstr)
         }
         // void SkColorFilter_Register(const char name[], int factory); // (const char name[], sk_flattenable_factory_t factory)
-        static func Register(name: UnsafePointer<CChar>?, factory: Flattenable) {
+        static func Register(name: UnsafePointer<CChar>?, factory: SkFlattenable) {
             SkColorFilter_Register(name, factory.handle)
         }
-        static func Register(name: String, factory: Flattenable) {
+        static func Register(name: String, factory: SkFlattenable) {
             name.withCString { cstr in
                 SkColorFilter_Register(cstr, factory.handle)
             }

@@ -1,9 +1,9 @@
 extension Skia {
     protocol SkRectProtocol {
-        var pointer: Skia.SkRectMutablePointer? { get set }
+        var pointer: SkRectMutablePointer? { get set }
         var handle: sk_rect_t { get set }
         // void SkRect_delete(void *rect); // (SkRect *rect)
-        init(pointer: Skia.SkRectMutablePointer?, handle: sk_rect_t)
+        init(pointer: SkRectMutablePointer?, handle: sk_rect_t)
         // Static Methods
         static func MakeEmpty() -> SkRect // int SkRect_MakeEmpty(); // () -> sk_rect_t
         static func MakeWH(w: Float, h: Float) -> SkRect // int SkRect_MakeWH(float w, float h); // (float w, float h) -> sk_rect_t
@@ -11,8 +11,8 @@ extension Skia {
         static func MakeSize(size: SkSize) -> SkRect // int SkRect_MakeSize(const void *size); // (const SkSize *size) -> sk_rect_t
         static func MakeLTRB(l: Float, t: Float, r: Float, b: Float) -> SkRect // int SkRect_MakeLTRB(float l, float t, float r, float b); // (float l, float t, float r, float b) -> sk_rect_t
         static func MakeXYWH(x: Float, y: Float, w: Float, h: Float) -> SkRect // int SkRect_MakeXYWH(float x, float y, float w, float h); // (float x, float y, float w, float h) -> sk_rect_t
-        static func Make(size: ISize) -> SkRect // int SkRect_Make(const void *size); // (const SkISize *size) -> sk_rect_t
-        static func Make(irect: IRect) -> SkRect // int SkRect_Make_2(const void *irect); // (const SkIRect *irect) -> sk_rect_t
+        static func Make(size: SkISize) -> SkRect // int SkRect_Make(const void *size); // (const SkISize *size) -> sk_rect_t
+        static func Make(irect: SkIRect) -> SkRect // int SkRect_Make_2(const void *irect); // (const SkIRect *irect) -> sk_rect_t
         static func Intersects(a: SkRect, b: SkRect) -> Bool // bool SkRect_Intersects(const void *a, const void *b); // (const SkRect *a, const SkRect *b) -> bool
         // Methods
         func isEmpty() -> Bool // bool SkRect_isEmpty(void *rect); // (SkRect *rect) -> bool
@@ -31,7 +31,7 @@ extension Skia {
         func center() -> SkPoint // int SkRect_center(void *rect); // (SkRect *rect) -> sk_point_t
         func toQuad(quad: [SkPoint]) // void SkRect_toQuad(void *rect, void * quad); // (SkRect *rect, SkPoint quad[4])
         func setEmpty() // void SkRect_setEmpty(void *rect); // (SkRect *rect)
-        func set(src: IRect) // void SkRect_set(void *rect, const void *src); // (SkRect *rect, const SkIRect *src)
+        func set(src: SkIRect) // void SkRect_set(void *rect, const void *src); // (SkRect *rect, const SkIRect *src)
         func setLTRB(left: Float, top: Float, right: Float, bottom: Float) // void SkRect_setLTRB(void *rect, float left, float top, float right, float bottom); // (SkRect *rect, float left, float top, float right, float bottom)
         func setBounds(pts: [SkPoint]) // void SkRect_setBounds(void *rect, const void * pts, int count); // (SkRect *rect, const SkPoint pts[], int count)
         func setBoundsCheck(pts: [SkPoint]) -> Bool // bool SkRect_setBoundsCheck(void *rect, const void * pts, int count); // (SkRect *rect, const SkPoint pts[], int count) -> bool
@@ -57,14 +57,14 @@ extension Skia {
         func joinPossiblyEmptyRect(r: SkRect) // void SkRect_joinPossiblyEmptyRect(void *rect, const void *r); // (SkRect *rect, const SkRect *r)
         func contains(x: Float, y: Float) -> Bool // bool SkRect_contains(void *rect, float x, float y); // (SkRect *rect, float x, float y) -> bool
         func contains(r: SkRect) -> Bool // bool SkRect_contains_2(void *rect, const void *r); // (SkRect *rect, const SkRect *r) -> bool
-        func contains(r: IRect) -> Bool // bool SkRect_contains_3(void *rect, const void *r); // (SkRect *rect, const SkIRect *r) -> bool
-        func round(dst: IRect) // void SkRect_round(void *rect, void *dst); // (SkRect *rect, SkIRect *dst)
-        func roundOut(dst: IRect) // void SkRect_roundOut(void *rect, void *dst); // (SkRect *rect, SkIRect *dst)
+        func contains(r: SkIRect) -> Bool // bool SkRect_contains_3(void *rect, const void *r); // (SkRect *rect, const SkIRect *r) -> bool
+        func round(dst: SkIRect) // void SkRect_round(void *rect, void *dst); // (SkRect *rect, SkIRect *dst)
+        func roundOut(dst: SkIRect) // void SkRect_roundOut(void *rect, void *dst); // (SkRect *rect, SkIRect *dst)
         func roundOut(dst: SkRect) // void SkRect_roundOut_2(void *rect, void *dst); // (SkRect *rect, SkRect *dst)
-        func roundIn(dst: IRect) // void SkRect_roundIn(void *rect, void *dst); // (SkRect *rect, SkIRect *dst)
-        func round() -> IRect // int SkRect_round_2(void *rect); // (SkRect *rect) -> sk_i_rect_t
-        func roundOut() -> IRect // int SkRect_roundOut_3(void *rect); // (SkRect *rect) -> sk_i_rect_t
-        func roundIn() -> IRect // int SkRect_roundIn_2(void *rect); // (SkRect *rect) -> sk_i_rect_t
+        func roundIn(dst: SkIRect) // void SkRect_roundIn(void *rect, void *dst); // (SkRect *rect, SkIRect *dst)
+        func round() -> SkIRect // int SkRect_round_2(void *rect); // (SkRect *rect) -> sk_i_rect_t
+        func roundOut() -> SkIRect // int SkRect_roundOut_3(void *rect); // (SkRect *rect) -> sk_i_rect_t
+        func roundIn() -> SkIRect // int SkRect_roundIn_2(void *rect); // (SkRect *rect) -> sk_i_rect_t
         func sort() // void SkRect_sort(void *rect); // (SkRect *rect)
         func makeSorted() -> SkRect // int SkRect_makeSorted(void *rect); // (SkRect *rect) -> sk_rect_t
         func asScalars() -> [Float] // const float * SkRect_asScalars(void *rect); // (SkRect *rect) -> const float *
@@ -73,7 +73,7 @@ extension Skia {
         func dumpHex() // void SkRect_dumpHex(void *rect); // (SkRect *rect)
     }
     class SkRect : SkRectProtocol {
-        public var pointer: Skia.SkRectMutablePointer?
+        public var pointer: SkRectMutablePointer?
         public var handle: sk_rect_t = -1
 
         deinit {
@@ -84,7 +84,7 @@ extension Skia {
             }
         }
 
-        required init(pointer: Skia.SkRectMutablePointer?, handle: sk_rect_t) {
+        required init(pointer: SkRectMutablePointer?, handle: sk_rect_t) {
             self.pointer = pointer
             self.handle = handle
         }
@@ -127,13 +127,13 @@ extension Skia {
             return SkRect(pointer: pointer, handle: handle)
         }
 
-        static func Make(size: ISize) -> SkRect {
+        static func Make(size: SkISize) -> SkRect {
             let handle = SkRect_Make(size.pointer);
             let pointer = static_sk_rect_get_ptr(handle)
             return SkRect(pointer: pointer, handle: handle)
         }
 
-        static func Make(irect: IRect) -> SkRect {
+        static func Make(irect: SkIRect) -> SkRect {
             let handle = SkRect_Make_2(irect.pointer);
             let pointer = static_sk_rect_get_ptr(handle)
             return SkRect(pointer: pointer, handle: handle)
@@ -212,7 +212,7 @@ extension Skia {
             SkRect_setEmpty(self.pointer)
         }
 
-        func set(src: IRect) {
+        func set(src: SkIRect) {
             SkRect_set(self.pointer, src.pointer)
         }
 
@@ -327,15 +327,15 @@ extension Skia {
             return SkRect_contains_2(self.pointer, r.pointer)
         }
 
-        func contains(r: IRect) -> Bool {
+        func contains(r: SkIRect) -> Bool {
             return SkRect_contains_3(self.pointer, r.pointer)
         }
 
-        func round(dst: IRect) {
+        func round(dst: SkIRect) {
             SkRect_round(self.pointer, dst.pointer)
         }
 
-        func roundOut(dst: IRect) {
+        func roundOut(dst: SkIRect) {
             SkRect_roundOut(self.pointer, dst.pointer)
         }
 
@@ -343,26 +343,26 @@ extension Skia {
             SkRect_roundOut_2(self.pointer, dst.pointer)
         }
 
-        func roundIn(dst: IRect) {
+        func roundIn(dst: SkIRect) {
             SkRect_roundIn(self.pointer, dst.pointer)
         }
 
-        func round() -> IRect {
+        func round() -> SkIRect {
             let handle = SkRect_round_2(self.pointer);
             let pointer = static_sk_i_rect_get_ptr(handle)
-            return IRect(pointer: pointer, handle: handle)
+            return SkIRect(pointer: pointer, handle: handle)
         }
 
-        func roundOut() -> IRect {
+        func roundOut() -> SkIRect {
             let handle = SkRect_roundOut_3(self.pointer);
             let pointer = static_sk_i_rect_get_ptr(handle)
-            return IRect(pointer: pointer, handle: handle)
+            return SkIRect(pointer: pointer, handle: handle)
         }
 
-        func roundIn() -> IRect {
+        func roundIn() -> SkIRect {
             let handle = SkRect_roundIn_2(self.pointer);
             let pointer = static_sk_i_rect_get_ptr(handle)
-            return IRect(pointer: pointer, handle: handle)
+            return SkIRect(pointer: pointer, handle: handle)
         }
 
         func sort() {

@@ -1,5 +1,5 @@
 extension Skia {
-
+/*
     // #include "static/static_sk_android_codec.h"
 
     public final class AndroidCodecType {
@@ -1414,4 +1414,5 @@ extension Skia {
             static_vector_sk_scalar_delete(handle)
         }
     }
+    */
 }

@@ -1,6 +1,6 @@
 extension Skia {
-    class Font {
-        public var pointer: Skia.FontMutablePointer?
+    class SkFont {
+        public var pointer: SkFontMutablePointer?
         public var handle: sk_font_t = -1
 
         // void SkFont_delete(void *font); // (SkFont *font)
@@ -72,7 +72,7 @@ extension Skia {
 
         // // static
 
-        init(pointer: Skia.FontMutablePointer?, handle: sk_font_t) {
+        init(pointer: SkFontMutablePointer?, handle: sk_font_t) {
             self.pointer = pointer
             self.handle = handle
         }

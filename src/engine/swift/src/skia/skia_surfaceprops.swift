@@ -1,9 +1,9 @@
 extension Skia {
     protocol SkSurfacePropsProtocol {
-        var pointer: Skia.SkSurfacePropsMutablePointer? { get set }
+        var pointer: SkSurfacePropsMutablePointer? { get set }
         var handle: sk_surface_props_t { get set }
         // deinit // void SkSurfaceProps_delete(void *surface_props); // (SkSurfaceProps *surface_props)
-        init(pointer: Skia.SkSurfacePropsMutablePointer?, handle: sk_surface_props_t)
+        init(pointer: SkSurfacePropsMutablePointer?, handle: sk_surface_props_t)
         init() // void *SkSurfaceProps_new(); // () -> SkSurfaceProps *
         init(flags: UInt, geometry: SkPixelGeometry) // void *SkSurfaceProps_new_2(unsigned int flags, int geometry); // (uint32_t flags, SkPixelGeometry geometry) -> SkSurfaceProps *
         init(props: SkSurfaceProps) // void *SkSurfaceProps_new_3(const void *props); // (const SkSurfaceProps *props) -> SkSurfaceProps *
@@ -15,7 +15,7 @@ extension Skia {
     }
 
     class SkSurfaceProps: SkSurfacePropsProtocol {
-        public var pointer: Skia.SkSurfacePropsMutablePointer?
+        public var pointer: SkSurfacePropsMutablePointer?
         public var handle: sk_surface_props_t = -1
 
         deinit {
@@ -26,7 +26,7 @@ extension Skia {
             }
         }
 
-        required init(pointer: Skia.SkSurfacePropsMutablePointer?, handle: sk_surface_props_t) {
+        required init(pointer: SkSurfacePropsMutablePointer?, handle: sk_surface_props_t) {
             self.pointer = pointer
             self.handle = handle
         }

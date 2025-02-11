@@ -1,6 +1,6 @@
 extension Skia {
-    class Blender {
-        public var pointer: Skia.BlenderMutablePointer?
+    class SkBlender {
+        public var pointer: SkBlenderMutablePointer?
         public var handle: sk_blender_t = -1
 
         // void SkBlender_delete(void *blender); // (SkBlender *blender)
@@ -23,7 +23,7 @@ extension Skia {
 
         // // static
 
-        init(pointer: Skia.BlenderMutablePointer?, handle: sk_blender_t) {
+        init(pointer: SkBlenderMutablePointer?, handle: sk_blender_t) {
             self.pointer = pointer
             self.handle = handle
         }

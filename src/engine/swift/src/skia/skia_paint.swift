@@ -1,6 +1,6 @@
 extension Skia {
-    class Paint {
-        public var pointer: Skia.PaintMutablePointer?
+    class SkPaint {
+        public var pointer: SkPaintMutablePointer?
         public var handle: Int32 = -1
 
         // void SkPaint_delete(void *paint); // (SkPaint *paint)
@@ -30,7 +30,7 @@ extension Skia {
         // unsigned int SkPaint_getColor(void *paint); // (SkPaint *paint) -> SkColor
         // int SkPaint_getColor4f(void *paint); // (SkPaint *paint) -> sk_color_4f_t
         // void SkPaint_setColor(void *paint, unsigned int color); // (SkPaint *paint, SkColor color)
-        func setColor(color: Skia.ColorARGB8888) {
+        func setColor(color: SkColor) {
             SkPaint_setColor(self.pointer, color)
         }
         // void SkPaint_setColor_2(void *paint, const void *color, void *colorSpace); // (SkPaint *paint, const SkColor4f *color, SkColorSpace *colorSpace)

@@ -1,9 +1,9 @@
 extension Skia {
     protocol SkPoint3Protocol {
-        var pointer: Skia.SkPoint3MutablePointer? { get set }
+        var pointer: SkPoint3MutablePointer? { get set }
         var handle: sk_point_3_t { get set }
         // deinit // void SkPoint3_delete(void *point3); // (SkPoint3 *point3)
-        init(pointer: Skia.SkPoint3MutablePointer?, handle: sk_point_3_t)
+        init(pointer: SkPoint3MutablePointer?, handle: sk_point_3_t)
         // Static Methods
         static func Make(x: Float, y: Float, z: Float) -> SkPoint3 // int SkPoint3_Make(float x, float y, float z); // (SkScalar x, SkScalar y, SkScalar z) -> sk_point_3_t
         static func Length(x: Float, y: Float, z: Float) -> Float // float SkPoint3_Length(float x, float y, float z); // (SkScalar x, SkScalar y, SkScalar z) -> SkScalar
@@ -24,7 +24,7 @@ extension Skia {
     }
 
     class SkPoint3 : SkPoint3Protocol {
-        public var pointer: Skia.SkPoint3MutablePointer?
+        public var pointer: SkPoint3MutablePointer?
         public var handle: sk_point_3_t = -1
 
         deinit {
@@ -35,7 +35,7 @@ extension Skia {
             }
         }
 
-        required init(pointer: Skia.SkPoint3MutablePointer?, handle: sk_point_3_t) {
+        required init(pointer: SkPoint3MutablePointer?, handle: sk_point_3_t) {
             self.pointer = pointer
             self.handle = handle
         }

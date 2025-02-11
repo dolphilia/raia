@@ -1,6 +1,6 @@
 extension Skia {
-    class Flattenable {
-        public var pointer: Skia.FlattenableMutablePointer?
+    class SkFlattenable {
+        public var pointer: SkFlattenableMutablePointer?
         public var handle: sk_flattenable_t = -1
 
         // void SkFlattenable_delete(void *flattenable); // (SkFlattenable *flattenable)
@@ -13,10 +13,10 @@ extension Skia {
         }
 
         // int SkFlattenable_getFactory(void *flattenable); // (SkFlattenable *flattenable) -> sk_flattenable_factory_t
-        func getFactory() -> Flattenable {
+        func getFactory() -> SkFlattenable {
             let handle = SkFlattenable_getFactory(self.pointer)
             let pointer = static_sk_flattenable_get(handle)
-            return Flattenable(pointer: pointer, handle: handle)
+            return SkFlattenable(pointer: pointer, handle: handle)
         }
         // const char * SkFlattenable_getTypeName(void *flattenable); // (SkFlattenable *flattenable) -> const char *
         func getTypeName() -> UnsafePointer<CChar>? {
@@ -39,7 +39,7 @@ extension Skia {
 
         // // static
 
-        init(pointer: Skia.FlattenableMutablePointer?, handle: sk_flattenable_t) {
+        init(pointer: SkFlattenableMutablePointer?, handle: sk_flattenable_t) {
             self.pointer = pointer
             self.handle = handle
         }

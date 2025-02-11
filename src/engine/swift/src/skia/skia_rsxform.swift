@@ -1,9 +1,9 @@
 extension Skia {
     protocol SkRSXformProtocol {
-        var pointer: Skia.SkRSXformMutablePointer? { get set }
+        var pointer: SkRSXformMutablePointer? { get set }
         var handle: sk_rsx_form_t { get set }
         // deinit // void SkRSXform_delete(void *rsx_form); // (SkRSXform *rsx_form)
-        init(pointer: Skia.SkRSXformMutablePointer?, handle: sk_rsx_form_t)
+        init(pointer: SkRSXformMutablePointer?, handle: sk_rsx_form_t)
         // Static Methods
         static func Make(scos: Float, ssin: Float, tx: Float, ty: Float) -> SkRSXform // int SkRSXform_Make(float scos, float ssin, float tx, float ty); // (SkScalar scos, SkScalar ssin, SkScalar tx, SkScalar ty) -> sk_rsx_form_t
         static func MakeFromRadians(scale: Float, radians: Float, tx: Float, ty: Float, ax: Float, ay: Float) -> SkRSXform // int SkRSXform_MakeFromRadians(float scale, float radians, float tx, float ty, float ax, float ay); // (SkScalar scale, SkScalar radians, SkScalar tx, SkScalar ty, SkScalar ax, SkScalar ay) -> sk_rsx_form_t
@@ -17,7 +17,7 @@ extension Skia {
     }
 
     class SkRSXform : SkRSXformProtocol {
-        public var pointer: Skia.SkRSXformMutablePointer?
+        public var pointer: SkRSXformMutablePointer?
         public var handle: sk_rsx_form_t = -1
 
         deinit {
@@ -28,7 +28,7 @@ extension Skia {
             }
         }
 
-        required init(pointer: Skia.SkRSXformMutablePointer?, handle: sk_rsx_form_t) {
+        required init(pointer: SkRSXformMutablePointer?, handle: sk_rsx_form_t) {
             self.pointer = pointer
             self.handle = handle
         }

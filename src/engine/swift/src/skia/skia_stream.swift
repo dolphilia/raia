@@ -1,9 +1,9 @@
 extension Skia {
     protocol SkStreamProtocol {
-        var pointer: Skia.SkStreamMutablePointer? { get set }
+        var pointer: SkStreamMutablePointer? { get set }
         var handle: sk_stream_t { get set }
         // deinit // void SkStream_delete(void *stream); // (SkStream *stream)
-        init(pointer: Skia.SkStreamMutablePointer?, handle: sk_stream_t)
+        init(pointer: SkStreamMutablePointer?, handle: sk_stream_t)
         // Static Methods
         static func MakeFromFile(path: UnsafePointer<CChar>?) -> SkStream // int SkStream_MakeFromFile(const char path[]); // (const char path[]) -> sk_stream_asset_t
         static func MakeFromFileName(fileName: String) -> SkStream
@@ -34,7 +34,7 @@ extension Skia {
     }
 
     class SkStream : SkStreamProtocol {
-        public var pointer: Skia.SkStreamMutablePointer?
+        public var pointer: SkStreamMutablePointer?
         public var handle: sk_stream_t = -1
 
         deinit {
@@ -45,7 +45,7 @@ extension Skia {
             }
         }
 
-        required init(pointer: Skia.SkStreamMutablePointer?, handle: sk_stream_t) {
+        required init(pointer: SkStreamMutablePointer?, handle: sk_stream_t) {
             self.pointer = pointer
             self.handle = handle
         }

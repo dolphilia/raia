@@ -1,14 +1,14 @@
 extension Skia {
     protocol SkSamplingOptionsProtocol {
-        var pointer: Skia.SkSamplingOptionsMutablePointer? { get set }
+        var pointer: SkSamplingOptionsMutablePointer? { get set }
         var handle: sk_sampling_options_t { get set }
         // deinit // void SkSamplingOptions_delete(void *sampling_options); // (SkSamplingOptions *sampling_options)
-        init(pointer: Skia.SkSamplingOptionsMutablePointer?, handle: sk_sampling_options_t)
+        init(pointer: SkSamplingOptionsMutablePointer?, handle: sk_sampling_options_t)
         init() // void *SkSamplingOptions_new(); // () -> SkSamplingOptions *
         init(options: SkSamplingOptions) // void *SkSamplingOptions_new_2(const void *options); // (const SkSamplingOptions *options) -> SkSamplingOptions *
         init(fm: SkFilterMode, mm: SkMipmapMode) // void *SkSamplingOptions_new_3(int fm, int mm); // (SkFilterMode fm, SkMipmapMode mm) -> SkSamplingOptions *
         init(fm: SkFilterMode) // void *SkSamplingOptions_new_4(int fm); // (SkFilterMode fm) -> SkSamplingOptions *
-        init(c: CubicResampler) // void *SkSamplingOptions_new_5(const void *c); // (const SkCubicResampler *c) -> SkSamplingOptions *
+        init(c: SkCubicResampler) // void *SkSamplingOptions_new_5(const void *c); // (const SkCubicResampler *c) -> SkSamplingOptions *
         // Static Methods
         static func Aniso(maxAniso: Int) -> SkSamplingOptions // int SkSamplingOptions_Aniso(int maxAniso); // (int maxAniso) -> sk_sampling_options_t
         // Methods
@@ -16,7 +16,7 @@ extension Skia {
     }
 
     class SkSamplingOptions : SkSamplingOptionsProtocol {
-        public var pointer: Skia.SkSamplingOptionsMutablePointer?
+        public var pointer: SkSamplingOptionsMutablePointer?
         public var handle: sk_sampling_options_t = -1
 
         deinit {
@@ -27,7 +27,7 @@ extension Skia {
             }
         }
 
-        required init(pointer: Skia.SkSamplingOptionsMutablePointer?, handle: sk_sampling_options_t) {
+        required init(pointer: SkSamplingOptionsMutablePointer?, handle: sk_sampling_options_t) {
             self.pointer = pointer
             self.handle = handle
         }
@@ -52,7 +52,7 @@ extension Skia {
             self.handle = -1
         }
 
-        required init(c: CubicResampler) {
+        required init(c: SkCubicResampler) {
             self.pointer = SkSamplingOptions_new_5(c.pointer);
             self.handle = -1
         }

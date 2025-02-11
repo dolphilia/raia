@@ -10,10 +10,10 @@ extension Skia {
     }
 
     protocol SkPathProtocol {
-        var pointer: Skia.SkPathMutablePointer? { get set }
+        var pointer: SkPathMutablePointer? { get set }
         var handle: sk_path_t { get set }
         // deinit // void SkPath_delete(void *path); // (SkPath *path)
-        init(pointer: Skia.SkPathMutablePointer?, handle: sk_path_t)
+        init(pointer: SkPathMutablePointer?, handle: sk_path_t)
         init() // void *SkPath_new(); // () -> SkPath *
         init(path: SkPath) // void *SkPath_new_2(const void *path); // (const SkPath *path) -> SkPath *
         // Static Methods
@@ -119,14 +119,14 @@ extension Skia {
         func dumpArrays(stream: SkWStream, dumpAsHex: Bool) // void SkPath_dumpArrays(void *path, void *stream, bool dumpAsHex); // (SkPath *path, SkWStream *stream, bool dumpAsHex)
         func dumpArrays() // void SkPath_dumpArrays_2(void *path); // (SkPath *path)
         func writeToMemory(buffer: UnsafeMutableRawPointer?) -> UInt // unsigned long SkPath_writeToMemory(void *path, void *buffer); // (SkPath *path, void *buffer) -> size_t
-        func serialize() -> Skia.Data // int SkPath_serialize(void *path); // (SkPath *path) -> sk_data_t
+        func serialize() -> SkData // int SkPath_serialize(void *path); // (SkPath *path) -> sk_data_t
         func readFromMemory(buffer: UnsafeRawPointer, length: UInt) -> UInt // unsigned long SkPath_readFromMemory(void *path, const void *buffer, unsigned long length); // (SkPath *path, const void *buffer, size_t length) -> size_t
         func getGenerationID() -> UInt // unsigned int SkPath_getGenerationID(void *path); // (SkPath *path) -> uint32_t
         func isValid() -> Bool // bool SkPath_isValid(void *path); // (SkPath *path) -> bool
     }
 
     class SkPath : SkPathProtocol {
-        public var pointer: Skia.SkPathMutablePointer?
+        public var pointer: SkPathMutablePointer?
         public var handle: sk_path_t = -1
 
         deinit {
@@ -136,7 +136,7 @@ extension Skia {
             }
         }
 
-        required init(pointer: Skia.SkPathMutablePointer?, handle: sk_path_t) {
+        required init(pointer: SkPathMutablePointer?, handle: sk_path_t) {
             self.pointer = pointer
             self.handle = handle
         }
@@ -358,7 +358,7 @@ extension Skia {
 
         func getBounds() -> SkRect {
             let pointer = SkPath_getBounds(self.pointer)
-            return Skia.SkRect(pointer: UnsafeMutableRawPointer(mutating: pointer), handle: -1)
+            return SkRect(pointer: UnsafeMutableRawPointer(mutating: pointer), handle: -1)
         }
 
         func updateBoundsCache() {
@@ -368,7 +368,7 @@ extension Skia {
         func computeTightBounds() -> SkRect {
             let handle = SkPath_computeTightBounds(self.pointer)
             let pointer = static_sk_rect_get_ptr(handle)
-            return Skia.SkRect(pointer: pointer, handle: handle)
+            return SkRect(pointer: pointer, handle: handle)
         }
 
         func conservativelyContainsRect(rect: SkRect) -> Bool {
@@ -653,10 +653,10 @@ extension Skia {
             return SkPath_writeToMemory(self.pointer, buffer)
         }
 
-        func serialize() -> Skia.Data {
+        func serialize() -> SkData {
             let handle = SkPath_serialize(self.pointer)
             let pointer = static_sk_data_get(handle)
-            return Skia.Data(pointer: pointer, handle: handle)
+            return SkData(pointer: pointer, handle: handle)
         }
 
         func readFromMemory(buffer: UnsafeRawPointer, length: UInt) -> UInt {

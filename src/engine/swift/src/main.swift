@@ -26,7 +26,7 @@ func getMemoryUsageMB() -> Double? {
     }
 }
 
-let cm = Skia.ColorMatrix()
+let cm = Skia.SkColorMatrix()
 
 //
 
@@ -50,10 +50,10 @@ func main() {
 
 
     window.run {
-        let bitmap = Skia.Bitmap()
+        let bitmap = Skia.SkBitmap()
         bitmap.allocN32Pixels(width: 300, height: 300, isOpaque: false)
-        let canvas = Skia.Canvas(bitmap: bitmap)
-        let paint = Skia.Paint()
+        let canvas = Skia.SkCanvas(bitmap: bitmap)
+        let paint = Skia.SkPaint()
         paint.setColor(color: 0xFFFF0000)
         if let memoryUsage = getMemoryUsageMB() {
             window.title = "use memory: \(memoryUsage) MB"
@@ -68,7 +68,7 @@ func main() {
         let pixels = bitmap.getPixels()
         renderer.setPixels(pixels: pixels)
 
-        let image = bitmap.asImage()
+        //let image = bitmap.asImage()
     }
 }
 

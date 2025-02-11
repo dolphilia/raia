@@ -1,12 +1,12 @@
 extension Skia {
     protocol SkSizeProtocol {
-        var pointer: Skia.SkSizeMutablePointer? { get set }
+        var pointer: SkSizeMutablePointer? { get set }
         var handle: sk_size_t { get set }
         // deinit // void SkSize_delete(void *size); // (SkSize *size)
-        init(pointer: Skia.SkSizeMutablePointer?, handle: sk_size_t)
+        init(pointer: SkSizeMutablePointer?, handle: sk_size_t)
         // Static Methods
         static func Make(w: Float, h: Float) -> SkSize // int SkSize_Make(float w, float h); // (SkScalar w, SkScalar h) -> sk_size_t
-        static func Make(src: Skia.ISizeConstPointer?) -> SkSize // int SkSize_Make_2(const void *src); // (const SkISize *src) -> sk_size_t
+        static func Make(src: SkISizeConstPointer?) -> SkSize // int SkSize_Make_2(const void *src); // (const SkISize *src) -> sk_size_t
         static func MakeEmpty() -> SkSize // int SkSize_MakeEmpty(); // () -> sk_size_t
         // Methods
         func set(w: Float, h: Float) // void SkSize_set(void *size, float w, float h); // (SkSize *size, SkScalar w, SkScalar h)
@@ -16,13 +16,13 @@ extension Skia {
         func width() -> Float // float SkSize_width(void *size); // (SkSize *size) -> SkScalar
         func height() -> Float // float SkSize_height(void *size); // (SkSize *size) -> SkScalar
         func equals(w: Float, h: Float) -> Bool // bool SkSize_equals(void *size, float w, float h); // (SkSize *size, SkScalar w, SkScalar h) -> bool
-        func toRound() -> ISize // int SkSize_toRound(void *size); // (SkSize *size) -> sk_i_size_t
-        func toCeil() -> ISize // int SkSize_toCeil(void *size); // (SkSize *size) -> sk_i_size_t
-        func toFloor() -> ISize // int SkSize_toFloor(void *size); // (SkSize *size) -> sk_i_size_t
+        func toRound() -> SkISize // int SkSize_toRound(void *size); // (SkSize *size) -> sk_i_size_t
+        func toCeil() -> SkISize // int SkSize_toCeil(void *size); // (SkSize *size) -> sk_i_size_t
+        func toFloor() -> SkISize // int SkSize_toFloor(void *size); // (SkSize *size) -> sk_i_size_t
     }
 
     class SkSize : SkSizeProtocol {
-        public var pointer: Skia.SkSizeMutablePointer?
+        public var pointer: SkSizeMutablePointer?
         public var handle: sk_size_t = -1
 
         deinit {
@@ -33,7 +33,7 @@ extension Skia {
             }
         }
 
-        required init(pointer: Skia.SkSizeMutablePointer?, handle: sk_size_t) {
+        required init(pointer: SkSizeMutablePointer?, handle: sk_size_t) {
             self.pointer = pointer
             self.handle = handle
         }
@@ -46,7 +46,7 @@ extension Skia {
             return SkSize(pointer: pointer, handle: handle)
         }
 
-        static func Make(src: Skia.ISizeConstPointer?) -> SkSize {
+        static func Make(src: SkISizeConstPointer?) -> SkSize {
             let handle = SkSize_Make_2(src);
             let pointer = static_sk_size_get_ptr(handle)
             return SkSize(pointer: pointer, handle: handle)
@@ -88,22 +88,22 @@ extension Skia {
             return SkSize_equals(self.pointer, w, h)
         }
 
-        func toRound() -> ISize {
+        func toRound() -> SkISize {
             let handle = SkSize_toRound(self.pointer);
             let pointer = static_sk_i_size_get_ptr(handle)
-            return ISize(pointer: pointer, handle: handle)
+            return SkISize(pointer: pointer, handle: handle)
         }
 
-        func toCeil() -> ISize {
+        func toCeil() -> SkISize {
             let handle = SkSize_toCeil(self.pointer);
             let pointer = static_sk_i_size_get_ptr(handle)
-            return ISize(pointer: pointer, handle: handle)
+            return SkISize(pointer: pointer, handle: handle)
         }
 
-        func toFloor() -> ISize {
+        func toFloor() -> SkISize {
             let handle = SkSize_toFloor(self.pointer);
             let pointer = static_sk_i_size_get_ptr(handle)
-            return ISize(pointer: pointer, handle: handle)
+            return SkISize(pointer: pointer, handle: handle)
         }
     }
 }

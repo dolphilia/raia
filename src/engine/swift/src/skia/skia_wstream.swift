@@ -2,10 +2,10 @@ extension Skia {
     typealias sk_w_stream_t = Int32
 
     protocol SkWStreamProtocol {
-        var pointer: Skia.SkWStreamMutablePointer? { get set }
+        var pointer: SkWStreamMutablePointer? { get set }
         var handle: sk_w_stream_t { get set }
         // deinit // void SkWStream_delete(void *w_stream); // (SkWStream *w_stream)
-        init(pointer: Skia.SkWStreamMutablePointer?, handle: sk_w_stream_t)
+        init(pointer: SkWStreamMutablePointer?, handle: sk_w_stream_t)
         // Static Methods
         static func SizeOfPackedUInt(value: UInt) -> Int // int SkWStream_SizeOfPackedUInt(unsigned long value); // (size_t value) -> int
         // Methods
@@ -29,7 +29,7 @@ extension Skia {
     }
 
     class SkWStream : SkWStreamProtocol {
-        public var pointer: Skia.SkWStreamMutablePointer?
+        public var pointer: SkWStreamMutablePointer?
         public var handle: sk_w_stream_t = -1
 
         deinit {
@@ -41,7 +41,7 @@ extension Skia {
 
         }
 
-        required init(pointer: Skia.SkWStreamMutablePointer?, handle: sk_w_stream_t) {
+        required init(pointer: SkWStreamMutablePointer?, handle: sk_w_stream_t) {
             self.pointer = pointer
             self.handle = handle
         }
