@@ -32,6 +32,8 @@ extension Skia {
     typealias SkDrawableConstPointer = UnsafeRawPointer
     typealias SkFlattenableMutablePointer = UnsafeMutableRawPointer
     typealias SkFlattenableConstPointer = UnsafeRawPointer
+    typealias SkFlattenableFactoryMutablePointer = UnsafeMutableRawPointer
+    typealias SKFlattenableFactoryConstPointer = UnsafeRawPointer
     typealias SkFontMutablePointer = UnsafeMutableRawPointer
     typealias SkFontConstPointer = UnsafeRawPointer
     typealias SkFontArgumentsMutablePointer = UnsafeMutableRawPointer
@@ -114,6 +116,10 @@ extension Skia {
     typealias SkV3ConstPointer = UnsafeRawPointer
     typealias SkV4MutablePointer = UnsafeMutableRawPointer
     typealias SkV4ConstPointer = UnsafeRawPointer
+    typealias SkVerticesMutablePointer = UnsafeMutableRawPointer
+    typealias SkVerticesConstPointer = UnsafeRawPointer
+    typealias SkWriteBufferMutablePointer = UnsafeMutableRawPointer
+    typealias SkWriteBufferConstPointer = UnsafeRawPointer
     typealias SkWStreamMutablePointer = UnsafeMutableRawPointer
     typealias SkWStreamConstPointer = UnsafeRawPointer
 

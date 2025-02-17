@@ -162,31 +162,109 @@ extension Skia {
         // // TODO
         // //void SkFont_setTypeface(void *font, sk_typeface_t typeface); // (SkFont *font, sk_typeface_t typeface)
         // void SkFont_setSize(void *font, float textSize); // (SkFont *font, SkScalar textSize)
+
+        func setSize(textSize: Float) {
+            SkFont_setSize(self.pointer, textSize)
+        }
         // void SkFont_setScaleX(void *font, float scaleX); // (SkFont *font, SkScalar scaleX)
+
+        func setScaleX(scaleX: Float) {
+            SkFont_setScaleX(self.pointer, scaleX)
+        }
         // void SkFont_setSkewX(void *font, float skewX); // (SkFont *font, SkScalar skewX)
+
+        func setSkewX(skewX: Float) {
+            SkFont_setSkewX(self.pointer, skewX)
+        }
         // int SkFont_textToGlyphs(void *font, const void *text, unsigned long byteLength, int encoding, void * glyphs, int maxGlyphCount); // (SkFont *font, const void *text, size_t byteLength, SkTextEncoding encoding, SkGlyphID glyphs[], int maxGlyphCount) -> int
+
+        func textToGlyphs(text: UnsafeRawPointer, byteLength: UInt, encoding: SkTextEncoding, glyphs: inout [UInt16], maxGlyphCount: Int) -> Int {
+            return Int(SkFont_textToGlyphs(self.pointer, text, byteLength, encoding.rawValue, &glyphs, Int32(maxGlyphCount)))
+        }
         // unsigned short SkFont_unicharToGlyph(void *font, int uni); // (SkFont *font, SkUnichar uni) -> SkGlyphID
+
+        func unicharToGlyph(uni: Int) -> UInt16 {
+            return SkFont_unicharToGlyph(self.pointer, Int32(uni))
+        }
         // void SkFont_unicharsToGlyphs(void *font, const void * uni, int count, void * glyphs); // (SkFont *font, const SkUnichar uni[], int count, SkGlyphID glyphs[])
+
+        func unicharsToGlyphs(uni: [Int], glyphs: inout [UInt16]) {
+            SkFont_unicharsToGlyphs(self.pointer, uni, Int32(uni.count), &glyphs)
+        }
         // int SkFont_countText(void *font, const void *text, unsigned long byteLength, int encoding); // (SkFont *font, const void *text, size_t byteLength, SkTextEncoding encoding) -> int
+
+        func countText(text: UnsafeRawPointer, byteLength: UInt, encoding: SkTextEncoding) -> Int {
+            return Int(SkFont_countText(self.pointer, text, byteLength, encoding.rawValue))
+        }
+
         // float SkFont_measureText(void *font, const void *text, unsigned long byteLength, int encoding, void *bounds); // (SkFont *font, const void *text, size_t byteLength, SkTextEncoding encoding, SkRect *bounds) -> SkScalar
+
+        func measureText(text: UnsafeRawPointer, byteLength: UInt, encoding: SkTextEncoding, bounds: SkRect) -> Float {
+            return SkFont_measureText(self.pointer, text, byteLength, encoding.rawValue, bounds.pointer)
+        }
         // float SkFont_measureText_2(void *font, const void *text, unsigned long byteLength, int encoding, void *bounds, const void *paint); // (SkFont *font, const void *text, size_t byteLength, SkTextEncoding encoding, SkRect *bounds, const SkPaint *paint) -> SkScalar
+
+        func measureText(text: UnsafeRawPointer, byteLength: UInt, encoding: SkTextEncoding, bounds: SkRect, paint: SkPaint) -> Float {
+            return SkFont_measureText_2(self.pointer, text, byteLength, encoding.rawValue, bounds.pointer, paint.pointer)
+        }
         // void SkFont_getWidths(void *font, const void * glyphs, int count, void * widths, void * bounds); // (SkFont *font, const SkGlyphID glyphs[], int count, SkScalar widths[], SkRect bounds[])
+
+        func getWidths(glyphs: [UInt16], count: Int, widths: inout [Float], bounds: SkRect) {
+            SkFont_getWidths(self.pointer, glyphs, Int32(count), &widths, bounds.pointer)
+        }
 
         // // TODO
         // //void SkFont_getWidths_2(void *font, const void * glyphs, int count, void * widths, std::nullptr_t ptr); // (SkFont *font, const SkGlyphID glyphs[], int count, SkScalar widths[], std::nullptr_t ptr)
         // void SkFont_getWidths_3(void *font, const void * glyphs, int count, void * widths); // (SkFont *font, const SkGlyphID glyphs[], int count, SkScalar widths[])
+
+        func getWidths(glyphs: [UInt16], count: Int, widths: inout [Float]) {
+            SkFont_getWidths_3(self.pointer, glyphs, Int32(count), &widths)
+        }
         // void SkFont_getWidthsBounds(void *font, const void * glyphs, int count, void * widths, void * bounds, const void *paint); // (SkFont *font, const SkGlyphID glyphs[], int count, SkScalar widths[], SkRect bounds[], const SkPaint *paint)
+
+        func getWidthsBounds(glyphs: [UInt16], count: Int, widths: inout [Float], bounds: SkRect, paint: SkPaint) {
+            SkFont_getWidthsBounds(self.pointer, glyphs, Int32(count), &widths, bounds.pointer, paint.pointer)
+        }
         // void SkFont_getBounds(void *font, const void * glyphs, int count, void * bounds, const void *paint); // (SkFont *font, const SkGlyphID glyphs[], int count, SkRect bounds[], const SkPaint *paint)
+
+        func getBounds(glyphs: [UInt16], count: Int, bounds: SkRect, paint: SkPaint) {
+            SkFont_getBounds(self.pointer, glyphs, Int32(count), bounds.pointer, paint.pointer)
+        }
         // void SkFont_getPos(void *font, const void * glyphs, int count, void * pos, int origin); // (SkFont *font, const SkGlyphID glyphs[], int count, SkPoint pos[], sk_point_t origin)
+
+        func getPos(glyphs: [UInt16], count: Int, pos: SkPoint, origin: SkPoint) {
+            SkFont_getPos(self.pointer, glyphs, Int32(count), pos.pointer, origin.handle)
+        }
         // void SkFont_getXPos(void *font, const void * glyphs, int count, void * xpos, float origin); // (SkFont *font, const SkGlyphID glyphs[], int count, SkScalar xpos[], SkScalar origin)
+
+        func getXPos(glyphs: [UInt16], count: Int, xpos: inout [Float], origin: Float) {
+            SkFont_getXPos(self.pointer, glyphs, Int32(count), &xpos, origin)
+        }
         // int SkFont_getIntercepts(void *font, const void * glyphs, int count, const void * pos, float top, float bottom, const void *paint); // (SkFont *font, const SkGlyphID glyphs[], int count, const SkPoint pos[], SkScalar top, SkScalar bottom, const SkPaint *paint) -> int
+
+        func getIntercepts(glyphs: [UInt16], count: Int, pos: SkPoint, top: Float, bottom: Float, paint: SkPaint) -> Int {
+            return Int(SkFont_getIntercepts(self.pointer, glyphs, Int32(count), pos.pointer, top, bottom, paint.pointer))
+        }
         // bool SkFont_getPath(void *font, unsigned short glyphID, void*path); // (SkFont *font, SkGlyphID glyphID, SkPath *path) -> bool
+
+        func getPath(glyphID: UInt16, path: SkPath) -> Bool {
+            return SkFont_getPath(self.pointer, glyphID, path.pointer)
+        }
 
         // // TODO
         // //void SkFont_getPaths(void *font, const void * glyphIDs, int count, void(*glyphPathProc)(const SkPath *pathOrNull, const SkMatrix &mx, void *ctx), void *ctx); // (SkFont *font, const SkGlyphID glyphIDs[], int count, void(*glyphPathProc)(const SkPath *pathOrNull, const SkMatrix &mx, void *ctx), void *ctx)
         // float SkFont_getMetrics(void *font, void * metrics); // (SkFont *font, SkFontMetrics *metrics) -> SkScalar
         // float SkFont_getSpacing(void *font); // (SkFont *font) -> SkScalar
+
+        func getSpacing() -> Float {
+            return SkFont_getSpacing(self.pointer)
+        }
+        
         // void SkFont_dump(void *font); // (SkFont *font)
+
+        func dump() {
+            SkFont_dump(self.pointer)
+        }
 
         // // static
 

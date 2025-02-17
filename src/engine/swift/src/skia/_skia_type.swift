@@ -1,4 +1,27 @@
 extension Skia {
+    typealias SkSerialProcsMutablePointer = UnsafeMutableRawPointer
+    typealias sk_serial_procs_t = Int32
+    struct SkSerialProcs {
+        public var pointer: SkSerialProcsMutablePointer?
+        public var handle: sk_serial_procs_t = -1
+
+        init(pointer: SkSerialProcsMutablePointer?, handle: sk_serial_procs_t) {
+            self.pointer = pointer
+            self.handle = handle
+        }
+    }
+
+    typealias SkDeserialProcsMutablePointer = UnsafeMutableRawPointer
+    typealias sk_deserial_procs_t = Int32
+    struct SkDeserialProcs {
+        public var pointer: SkDeserialProcsMutablePointer?
+        public var handle: sk_deserial_procs_t = -1
+
+        init(pointer: SkDeserialProcsMutablePointer?, handle: sk_deserial_procs_t) {
+            self.pointer = pointer
+            self.handle = handle
+        }
+    }
 /*
     // #include "static/static_sk_android_codec.h"
 

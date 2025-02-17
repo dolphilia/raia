@@ -1,8 +1,18 @@
 extension Skia {
     public enum SkCanvasSrcRectConstraint: Int32 {
-        case kStrict_SrcRectConstraint
-        case kFast_SrcRectConstraint
+        case strict
+        case fast
     }
+
+    enum SkCanvasQuadAAFlags : UInt32 {
+        case left          = 0b0001
+        case top           = 0b0010
+        case right         = 0b0100
+        case bottom        = 0b1000
+        case none          = 0b0000
+        case all           = 0b1111
+    }
+
     class SkCanvas {
 
 
@@ -403,10 +413,30 @@ extension Skia {
         }
 
         // void SkCanvas_drawVertices(void *canvas, int vertices, int mode, const void *paint); // (SkCanvas *canvas, sk_vertices_t vertices, SkBlendMode mode, const SkPaint *paint)
+
+        func drawVertices(vertices: SkVertices, mode: SkBlendMode, paint: SkPaint) {
+            SkCanvas_drawVertices(self.pointer, vertices.handle, Int32(mode.rawValue), paint.pointer)
+        }
         // void SkCanvas_drawVertices_2(void *canvas, const void *vertices, int mode, const void *paint); // (SkCanvas *canvas, const SkVertices *vertices, SkBlendMode mode, const SkPaint *paint)
+
+        func drawVertices_2(vertices: SkVertices, mode: SkBlendMode, paint: SkPaint) {
+            SkCanvas_drawVertices_2(self.pointer, vertices.pointer, Int32(mode.rawValue), paint.pointer)
+        }
         // void SkCanvas_experimental_DrawEdgeAAImageSet(void *canvas, const void * imageSet, int cnt, const void * dstClips, const void * preViewMatrices, const void *sampling, const void *paint, int constraint); // (SkCanvas *canvas, const SkCanvas::ImageSetEntry imageSet[], int cnt, const SkPoint dstClips[], const SkMatrix preViewMatrices[], const SkSamplingOptions *sampling, const SkPaint *paint, SkCanvas::SrcRectConstraint constraint)
         // void SkCanvas_experimental_DrawEdgeAAQuad(void *canvas, const void *rect, const void * clip, int aaFlags, const void * color, int mode); // (SkCanvas *canvas, const SkRect *rect, const SkPoint clip[4], SkCanvas::QuadAAFlags aaFlags, const SkColor4f *color, SkBlendMode mode)
+
+        func drawEdgeAAQuad(rect: SkRect, clip: [SkPoint], aaFlags: SkCanvasQuadAAFlags, color: SkColor4f, mode: SkBlendMode) {
+            clip.withUnsafeBufferPointer { clipPointer in
+                SkCanvas_experimental_DrawEdgeAAQuad(self.pointer, rect.pointer, clipPointer.baseAddress, Int32(aaFlags.rawValue), color.pointer, Int32(mode.rawValue))
+            }
+        }
         // void SkCanvas_experimental_DrawEdgeAAQuad_2(void *canvas, const void *rect, const void * clip, int aaFlags, unsigned int color, int mode); // (SkCanvas *canvas, const SkRect *rect, const SkPoint clip[4], SkCanvas::QuadAAFlags aaFlags, SkColor color, SkBlendMode mode)
+
+        func drawEdgeAAQuad_2(rect: SkRect, clip: [SkPoint], aaFlags: SkCanvasQuadAAFlags, color: SkColor4f, mode: SkBlendMode) {
+            clip.withUnsafeBufferPointer { clipPointer in
+                SkCanvas_experimental_DrawEdgeAAQuad(self.pointer, rect.pointer, clipPointer.baseAddress, Int32(aaFlags.rawValue), color.pointer, Int32(mode.rawValue))
+            }
+        }
         // int SkCanvas_getBaseLayerSize(void *canvas); // (SkCanvas *canvas) -> sk_i_size_t
 
         func getBaseLayerSize() -> SkISize {

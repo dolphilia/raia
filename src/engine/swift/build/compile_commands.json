@@ -506,6 +506,18 @@
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
   "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_vertices.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_vertices.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_writebuffer.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_writebuffer.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
   "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_wstream.swift",
   "output": "CMakeFiles/main.dir/src/skia/skia_wstream.swift.o"
 }

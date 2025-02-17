@@ -1,4 +1,15 @@
 extension Skia {
+    enum SkShaderType : Int32 {
+        case SkColorFilter
+        case SkBlender
+        case SkDrawable
+        case SkDrawLooper
+        case SkImageFilter
+        case SkMaskFilter
+        case SkPathEffect
+        case SkShader
+    }
+
     protocol SkShaderProtocol {
         var pointer: SkShaderMutablePointer? { get set }
         var handle: sk_shader_t { get set }
@@ -22,8 +33,8 @@ extension Skia {
         func getFactory() -> SkFlattenable // int SkShader_getFactory(void *shader); // (SkShader *shader) -> sk_flattenable_factory_t
         func getTypeName() -> UnsafePointer<CChar>? // const char *SkShader_getTypeName(void *shader); // (SkShader *shader) -> const char *
         func getTypeName() -> String?
-        // void SkShader_flatten(void *shader, void *buffer); // (SkShader *shader, SkWriteBuffer *buffer)
-        // int SkShader_getFlattenableType(void *shader); // (SkShader *shader) -> SkShader::Type
+        func flatten(buffer: SkWriteBuffer) // void SkShader_flatten(void *shader, void *buffer); // (SkShader *shader, SkWriteBuffer *buffer)
+        func getFlattenableType() -> SkShaderType // int SkShader_getFlattenableType(void *shader); // (SkShader *shader) -> SkShader::Type
         func serialize(procs: UnsafeRawPointer) -> SkData // int SkShader_serialize(void *shader, const void *procs); // (SkShader *shader, const SkSerialProcs *procs) -> sk_data_t
         func serialize(memory: UnsafeMutableRawPointer?, memorySize: UInt, procs: UnsafeRawPointer) -> UInt // unsigned long SkShader_serialize_2(void *shader, void *memory, unsigned long memory_size, const void *procs); // (SkShader *shader, void *memory, size_t memory_size, const SkSerialProcs *procs) -> size_t
         func unique() -> Bool // bool SkShader_unique(void *shader); // (SkShader *shader) -> bool
@@ -146,8 +157,13 @@ extension Skia {
             return String(cString: cstr)
         }
 
-        // void SkShader_flatten(void *shader, void *buffer); // (SkShader *shader, SkWriteBuffer *buffer)
-        // int SkShader_getFlattenableType(void *shader); // (SkShader *shader) -> SkShader::Type
+        func flatten(buffer: SkWriteBuffer) {
+            SkShader_flatten(pointer, buffer.pointer)
+        }
+
+        func getFlattenableType() -> SkShaderType {
+            return SkShaderType(rawValue: SkShader_getFlattenableType(pointer))!
+        }
 
         func serialize(procs: UnsafeRawPointer) -> SkData {
             let handle = SkShader_serialize(pointer, procs)

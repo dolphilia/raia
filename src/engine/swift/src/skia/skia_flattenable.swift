@@ -1,4 +1,32 @@
 extension Skia {
+    enum SkFlattenableType: Int32 {
+        case colorFilter
+        case blender
+        case drawable
+        case imageFilter
+        case maskFilter
+        case pathEffect
+        case shader
+    }
+
+    class SkFlattenableFactory {
+        public var pointer: SkFlattenableFactoryMutablePointer?
+        public var handle: sk_flattenable_factory_t = -1
+
+        deinit {
+            if self.handle > -1 {
+                static_sk_flattenable_factory_delete(self.handle)
+            } else {
+                // SkFlattenableFactory_delete(self.pointer)
+            }
+        }
+
+        init(pointer: SkFlattenableFactoryMutablePointer?, handle: sk_flattenable_factory_t) {
+            self.pointer = pointer
+            self.handle = handle
+        }
+    }
+
     class SkFlattenable {
         public var pointer: SkFlattenableMutablePointer?
         public var handle: sk_flattenable_t = -1
@@ -30,12 +58,43 @@ extension Skia {
         }
 
         // void SkFlattenable_flatten(void *flattenable, void *write_buffer); // (SkFlattenable *flattenable, SkWriteBuffer *write_buffer)
+
+        func flatten(writeBuffer: SkWriteBuffer) {
+            SkFlattenable_flatten(self.pointer, writeBuffer.pointer)
+        }
         // int SkFlattenable_getFlattenableType(void *flattenable); // (SkFlattenable *flattenable) -> SkFlattenable::Type
+
+        func getFlattenableType() -> SkFlattenableType {
+            return SkFlattenableType(rawValue: SkFlattenable_getFlattenableType(self.pointer))!
+        }
+
         // int SkFlattenable_serialize(void *flattenable, const void * serial_procs); // (SkFlattenable *flattenable, const SkSerialProcs *serial_procs) -> sk_data_t
+
+        func serialize(serialProcs: SkSerialProcs) -> SkData {
+            let handle = SkFlattenable_serialize(self.pointer, serialProcs.pointer)
+            let pointer = static_sk_data_get(handle)
+            return SkData(pointer: pointer, handle: handle)
+        }
         // unsigned long SkFlattenable_serialize_2(void *flattenable, void *memory, unsigned long memory_size, const void * serial_procs); // (SkFlattenable *flattenable, void *memory, size_t memory_size, const SkSerialProcs *serial_procs) -> size_t
+
+        func serialize(memory: UnsafeMutableRawPointer, memorySize: UInt, serialProcs: SkSerialProcs) -> UInt {
+            return UInt(SkFlattenable_serialize_2(self.pointer, memory, memorySize, serialProcs.pointer))
+        }
         // bool SkFlattenable_unique(void *flattenable); // (SkFlattenable *flattenable) -> bool
+
+        func unique() -> Bool {
+            return SkFlattenable_unique(self.pointer)
+        }
         // void SkFlattenable_ref(void *flattenable); // (SkFlattenable *flattenable)
+
+        func ref() {
+            SkFlattenable_ref(self.pointer)
+        }
         // void SkFlattenable_unref(void *flattenable); // (SkFlattenable *flattenable)
+
+        func unref() {
+            SkFlattenable_unref(self.pointer)
+        }
 
         // // static
 

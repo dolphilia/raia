@@ -32,7 +32,18 @@ extension Skia {
         }
 
         // unsigned long SkTextBlob_serialize(void *text_blob, const void *procs, void *memory, unsigned long memory_size); // (SkTextBlob *text_blob, const SkSerialProcs *procs, void *memory, size_t memory_size) -> size_t
+
+        func serialize(procs: SkSerialProcs, memory: UnsafeMutableRawPointer, size: UInt) -> UInt {
+            return UInt(SkTextBlob_serialize(self.pointer, procs.pointer, memory, size))
+        }
         // int SkTextBlob_serialize_2(void *text_blob, const void *procs); // (SkTextBlob *text_blob, const SkSerialProcs *procs) -> sk_data_t
+
+        func serialize(procs: SkSerialProcs) -> SkData {
+            let handle = SkTextBlob_serialize_2(self.pointer, procs.pointer)
+            let pointer = static_sk_data_get(handle)
+            return SkData(pointer: pointer, handle: handle)
+        }
+        
         // bool SkTextBlob_unique(void *text_blob); // (SkTextBlob *text_blob) -> bool
 
         func unique() -> Bool {
@@ -105,5 +116,11 @@ extension Skia {
             return SkTextBlob(pointer: pointer, handle: handle)
         }
         // int SkTextBlob_Deserialize(const void *data, unsigned long size, const void *procs); // (const void *data, size_t size, const SkDeserialProcs *procs) -> sk_text_blob_t
+
+        static func Deserialize(data: UnsafeRawPointer, size: UInt, procs: SkDeserialProcs) -> SkTextBlob {
+            let handle = SkTextBlob_Deserialize(data, size, procs.pointer)
+            let pointer = static_sk_text_blob_get(handle)
+            return SkTextBlob(pointer: pointer, handle: handle)
+        }
     }
 }

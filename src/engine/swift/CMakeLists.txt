@@ -107,6 +107,8 @@ add_executable(main
     src/skia/skia_v2.swift
     src/skia/skia_v3.swift
     src/skia/skia_v4.swift
+    src/skia/skia_vertices.swift
+    src/skia/skia_writebuffer.swift
     src/skia/skia_wstream.swift
 )
 

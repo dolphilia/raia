@@ -19,16 +19,53 @@ extension Skia {
         // int SkMesh_refVertexBuffer(void * mesh); // (SkMesh *mesh) -> sk_mesh_vertex_buffer_t
         // void * SkMesh_vertexBuffer(void * mesh); // (SkMesh *mesh) -> SkMesh::VertexBuffer*
         // unsigned long SkMesh_vertexOffset(void * mesh); // (SkMesh *mesh) -> size_t
+
+        func vertexOffset() -> UInt {
+            return UInt(SkMesh_vertexOffset(self.pointer))
+        }
         // unsigned long SkMesh_vertexCount(void * mesh); // (SkMesh *mesh) -> size_t
+
+        func vertexCount() -> UInt {
+            return UInt(SkMesh_vertexCount(self.pointer))
+        }
         // int SkMesh_refIndexBuffer(void * mesh); // (SkMesh *mesh) -> sk_mesh_index_buffer_t
         // void * SkMesh_indexBuffer(void * mesh); // (SkMesh *mesh) -> SkMesh::IndexBuffer*
         // unsigned long SkMesh_indexOffset(void * mesh); // (SkMesh *mesh) -> size_t
+
+        func indexOffset() -> UInt {
+            return UInt(SkMesh_indexOffset(self.pointer))
+        }
         // unsigned long SkMesh_indexCount(void * mesh); // (SkMesh *mesh) -> size_t
+
+        func indexCount() -> UInt {
+            return UInt(SkMesh_indexCount(self.pointer))
+        }
         // int SkMesh_refUniforms(void * mesh); // (SkMesh *mesh) -> const_sk_data_t
+
+        func refUniforms() -> SkData {
+            let handle = SkMesh_refUniforms(self.pointer)
+            let pointer = static_sk_data_get(handle)
+            return SkData(pointer: pointer, handle: handle)
+        }
         // const void * SkMesh_uniforms(void * mesh); // (SkMesh *mesh) -> const SkData*
+
+        func uniforms() -> SkData {
+            let pointer = SkMesh_uniforms(self.pointer)
+            return SkData(pointer: UnsafeMutableRawPointer(mutating: pointer), handle: -1)
+        }
         // int SkMesh_children(void * mesh); // (SkMesh *mesh) -> const_sk_mesh_child_ptr_t
         // int SkMesh_bounds(void * mesh); // (SkMesh *mesh) -> sk_rect_t
+
+        func bounds() -> SkRect {
+            let handle = SkMesh_bounds(self.pointer)
+            let pointer = static_sk_rect_get_ptr(handle)
+            return SkRect(pointer: pointer, handle: handle)
+        }
         // bool SkMesh_isValid(void * mesh); // (SkMesh *mesh) -> bool
+
+        func isValid() -> Bool {
+            return SkMesh_isValid(self.pointer)
+        }
         // // static
 
         init(pointer: SkMeshMutablePointer?, handle: sk_mesh_t) {
