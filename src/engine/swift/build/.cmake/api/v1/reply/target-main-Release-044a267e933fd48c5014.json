@@ -57,7 +57,7 @@
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 102,
+				"line" : 113,
 				"parent" : 0
 			},
 			{
@@ -181,7 +181,18 @@
 				67,
 				68,
 				69,
-				70
+				70,
+				71,
+				72,
+				73,
+				74,
+				75,
+				76,
+				77,
+				78,
+				79,
+				80,
+				81
 			]
 		}
 	],
@@ -353,7 +364,18 @@
 				67,
 				68,
 				69,
-				70
+				70,
+				71,
+				72,
+				73,
+				74,
+				75,
+				76,
+				77,
+				78,
+				79,
+				80,
+				81
 			]
 		}
 	],
@@ -608,7 +630,31 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
+			"path" : "src/skia/skia_fontarguments.swift",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/skia/skia_fontmgr.swift",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/skia/skia_fontstyle.swift",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
 			"path" : "src/skia/skia_image.swift",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/skia/skia_imagefilter.swift",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -656,6 +702,12 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
+			"path" : "src/skia/skia_maskfilter.swift",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
 			"path" : "src/skia/skia_matrix.swift",
 			"sourceGroupIndex" : 0
 		},
@@ -675,6 +727,18 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "src/skia/skia_path.swift",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/skia/skia_patheffect.swift",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/skia/skia_picture.swift",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -752,13 +816,37 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
+			"path" : "src/skia/skia_streamasset.swift",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
 			"path" : "src/skia/skia_string.swift",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
+			"path" : "src/skia/skia_surface.swift",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
 			"path" : "src/skia/skia_surfaceprops.swift",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/skia/skia_textblob.swift",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/skia/skia_typeface.swift",
 			"sourceGroupIndex" : 0
 		},
 		{

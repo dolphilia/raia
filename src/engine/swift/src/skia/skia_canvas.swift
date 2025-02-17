@@ -319,75 +319,327 @@ extension Skia {
             }
         }
         // void SkCanvas_drawPath(void *canvas, const void *path, const void *paint); // (SkCanvas *canvas, const SkPath *path, const SkPaint *paint)
+
+        func drawPath(path: SkPath, paint: SkPaint) {
+            SkCanvas_drawPath(self.pointer, path.pointer, paint.pointer)
+        }
         // void SkCanvas_drawPicture(void *canvas, int picture); // (SkCanvas *canvas, sk_picture_t picture)
+
+        func drawPicture(picture: SkPicture) {
+            SkCanvas_drawPicture(self.pointer, picture.handle)
+        }
         // void SkCanvas_drawPicture_2(void *canvas, int picture, const void *matrix, const void *paint); // (SkCanvas *canvas, sk_picture_t picture, const SkMatrix *matrix, const SkPaint *paint)
+
+        func drawPicture(picture: SkPicture, matrix: SkMatrix, paint: SkPaint) {
+            SkCanvas_drawPicture_2(self.pointer, picture.handle, matrix.pointer, paint.pointer)
+        }
+
         // void SkCanvas_drawPicture_3(void *canvas, const void *picture); // (SkCanvas *canvas, const SkPicture *picture)
+
+        func drawPicture_2(picture: SkPicture) {
+            SkCanvas_drawPicture_3(self.pointer, picture.pointer)
+        }
         // void SkCanvas_drawPicture_4(void *canvas, const void *picture, const void *matrix, const void *paint); // (SkCanvas *canvas, const SkPicture *picture, const SkMatrix *matrix, const SkPaint *paint)
+
+        func drawPicture_2(picture: SkPicture, matrix: SkMatrix, paint: SkPaint) {
+            SkCanvas_drawPicture_4(self.pointer, picture.pointer, matrix.pointer, paint.pointer)
+        }
         // void SkCanvas_drawPoint(void *canvas, int p, const void *paint); // (SkCanvas *canvas, sk_point_t p, const SkPaint *paint)
+
+        func drawPoint(p: SkPoint, paint: SkPaint) {
+            SkCanvas_drawPoint(self.pointer, Int32(p.handle), paint.pointer)
+        }
         // void SkCanvas_drawPoint_2(void *canvas, float x, float y, const void *paint); // (SkCanvas *canvas, SkScalar x, SkScalar y, const SkPaint *paint)
+        func drawPoint_2(x: Float, y: Float, paint: SkPaint) {
+            SkCanvas_drawPoint_2(self.pointer, x, y, paint.pointer)
+        }
         // void SkCanvas_drawPoints(void *canvas, int mode, unsigned long count, const void * pts, const void *paint); // (SkCanvas *canvas, SkCanvas::PointMode mode, size_t count, const SkPoint pts[], const SkPaint *paint)
         // void SkCanvas_drawRect(void *canvas, int rect, const void *paint); // (SkCanvas *canvas, sk_rect_t rect, const SkPaint *paint)
         func drawRect(rect: SkRect, paint: SkPaint) {
             SkCanvas_drawRect(self.pointer, Int32(rect.handle), paint.pointer)
         }
         // void SkCanvas_drawRegion(void *canvas, const void *region, const void *paint); // (SkCanvas *canvas, const SkRegion *region, const SkPaint *paint)
+
+        func drawRegion(region: SkRegion, paint: SkPaint) {
+            SkCanvas_drawRegion(self.pointer, region.pointer, paint.pointer)
+        }
         // void SkCanvas_drawRoundRect(void *canvas, const void *rect, float rx, float ry, const void *paint); // (SkCanvas *canvas, const SkRect *rect, SkScalar rx, SkScalar ry, const SkPaint *paint)
+
+        func drawRoundRect(rect: SkRect, rx: Float, ry: Float, paint: SkPaint) {
+            SkCanvas_drawRoundRect(self.pointer, rect.pointer, rx, ry, paint.pointer)
+        }
         // void SkCanvas_drawRRect(void *canvas, const void *rrect, const void *paint); // (SkCanvas *canvas, const SkRRect *rrect, const SkPaint *paint)
+
+        func drawRRect(rrect: SkRRect, paint: SkPaint) {
+            SkCanvas_drawRRect(self.pointer, rrect.pointer, paint.pointer)
+        }
         // void SkCanvas_drawSimpleText(void *canvas, const void *text, unsigned long byteLength, int encoding, float x, float y, const void *font, const void *paint); // (SkCanvas *canvas, const void *text, size_t byteLength, SkTextEncoding encoding, SkScalar x, SkScalar y, const SkFont *font, const SkPaint *paint)
+
+        func drawSimpleText(text: UnsafeRawPointer, byteLength: UInt, encoding: SkTextEncoding, x: Float, y: Float, font: SkFont, paint: SkPaint) {
+            SkCanvas_drawSimpleText(self.pointer, text, byteLength, Int32(encoding.rawValue), x, y, font.pointer, paint.pointer)
+        }
         // void SkCanvas_drawString(void *canvas, const char * str, float x, float y, const void *font, const void *paint); // (SkCanvas *canvas, const char str[], SkScalar x, SkScalar y, const SkFont *font, const SkPaint *paint)
+
+        func drawString(str: String, x: Float, y: Float, font: SkFont, paint: SkPaint) {
+            SkCanvas_drawString(self.pointer, str, x, y, font.pointer, paint.pointer)
+        }
+
         // void SkCanvas_drawString_2(void *canvas, const void *str, float x, float y, const void *font, const void *paint); // (SkCanvas *canvas, const SkString *str, SkScalar x, SkScalar y, const SkFont *font, const SkPaint *paint)
+
+        func drawString(str: SkString, x: Float, y: Float, font: SkFont, paint: SkPaint) {
+            SkCanvas_drawString_2(self.pointer, str.pointer, x, y, font.pointer, paint.pointer)
+        }
+
         // void SkCanvas_drawTextBlob(void *canvas, int text_blob, float x, float y, const void *paint); // (SkCanvas *canvas, sk_text_blob_t text_blob, SkScalar x, SkScalar y, const SkPaint *paint)
+
+        func drawTextBlob(textBlob: SkTextBlob, x: Float, y: Float, paint: SkPaint) {
+            SkCanvas_drawTextBlob(self.pointer, textBlob.handle, x, y, paint.pointer)
+        }
+
         // void SkCanvas_drawTextBlob_2(void *canvas, const void *blob, float x, float y, const void *paint); // (SkCanvas *canvas, const SkTextBlob *blob, SkScalar x, SkScalar y, const SkPaint *paint)
+
+        func drawTextBlob(blob: SkTextBlob, x: Float, y: Float, paint: SkPaint) {
+            SkCanvas_drawTextBlob_2(self.pointer, blob.pointer, x, y, paint.pointer)
+        }
+
         // void SkCanvas_drawVertices(void *canvas, int vertices, int mode, const void *paint); // (SkCanvas *canvas, sk_vertices_t vertices, SkBlendMode mode, const SkPaint *paint)
         // void SkCanvas_drawVertices_2(void *canvas, const void *vertices, int mode, const void *paint); // (SkCanvas *canvas, const SkVertices *vertices, SkBlendMode mode, const SkPaint *paint)
         // void SkCanvas_experimental_DrawEdgeAAImageSet(void *canvas, const void * imageSet, int cnt, const void * dstClips, const void * preViewMatrices, const void *sampling, const void *paint, int constraint); // (SkCanvas *canvas, const SkCanvas::ImageSetEntry imageSet[], int cnt, const SkPoint dstClips[], const SkMatrix preViewMatrices[], const SkSamplingOptions *sampling, const SkPaint *paint, SkCanvas::SrcRectConstraint constraint)
         // void SkCanvas_experimental_DrawEdgeAAQuad(void *canvas, const void *rect, const void * clip, int aaFlags, const void * color, int mode); // (SkCanvas *canvas, const SkRect *rect, const SkPoint clip[4], SkCanvas::QuadAAFlags aaFlags, const SkColor4f *color, SkBlendMode mode)
         // void SkCanvas_experimental_DrawEdgeAAQuad_2(void *canvas, const void *rect, const void * clip, int aaFlags, unsigned int color, int mode); // (SkCanvas *canvas, const SkRect *rect, const SkPoint clip[4], SkCanvas::QuadAAFlags aaFlags, SkColor color, SkBlendMode mode)
         // int SkCanvas_getBaseLayerSize(void *canvas); // (SkCanvas *canvas) -> sk_i_size_t
+
+        func getBaseLayerSize() -> SkISize {
+            let handle = SkCanvas_getBaseLayerSize(self.pointer)
+            let pointer = static_sk_i_size_get_ptr(handle)
+            return SkISize(pointer: pointer, handle: handle)
+        }
         // int SkCanvas_getBaseProps(void *canvas); // (SkCanvas *canvas) -> sk_surface_props_t
+
+        func getBaseProps() -> SkSurfaceProps {
+            let handle = SkCanvas_getBaseProps(self.pointer)
+            let pointer = static_sk_surface_props_get_ptr(handle)
+            return SkSurfaceProps(pointer: pointer, handle: handle)
+        }
         // int SkCanvas_getDeviceClipBounds(void *canvas); // (SkCanvas *canvas) -> sk_i_rect_t
+
+        func getDeviceClipBounds() -> SkIRect {
+            let handle = SkCanvas_getDeviceClipBounds(self.pointer)
+            let pointer = static_sk_i_rect_get_ptr(handle)
+            return SkIRect(pointer: pointer, handle: handle)
+        }
+
         // bool SkCanvas_getDeviceClipBounds_2(void *canvas, void *bounds); // (SkCanvas *canvas, SkIRect *bounds) -> bool
+
+        func getDeviceClipBounds(bounds: SkIRect) -> Bool {
+            return SkCanvas_getDeviceClipBounds_2(self.pointer, bounds.pointer)
+        }
         // int SkCanvas_getLocalClipBounds(void *canvas); // (SkCanvas *canvas) -> sk_rect_t
+
+        func getLocalClipBounds() -> SkRect {
+            let handle = SkCanvas_getLocalClipBounds(self.pointer)
+            let pointer = static_sk_rect_get_ptr(handle)
+            return SkRect(pointer: pointer, handle: handle)
+        }
         // bool SkCanvas_getLocalClipBounds_2(void *canvas, void *bounds); // (SkCanvas *canvas, SkRect *bounds) -> bool
+
+        func getLocalClipBounds(bounds: SkRect) -> Bool {
+            return SkCanvas_getLocalClipBounds_2(self.pointer, bounds.pointer)
+        }
         // int SkCanvas_getLocalToDevice(void *canvas); // (SkCanvas *canvas) -> sk_m_44_t
+
+        func getLocalToDevice() -> SkM44 {
+            let handle = SkCanvas_getLocalToDevice(self.pointer)
+            let pointer = static_sk_m_44_get_ptr(handle)
+            return SkM44(pointer: pointer, handle: handle)
+        }
         // int SkCanvas_getLocalToDeviceAs3x3(void *canvas); // (SkCanvas *canvas) -> sk_matrix_t
+
+        func getLocalToDeviceAs3x3() -> SkMatrix {
+            let handle = SkCanvas_getLocalToDeviceAs3x3(self.pointer)
+            let pointer = static_sk_matrix_get_ptr(handle)
+            return SkMatrix(pointer: pointer, handle: handle)
+        }
         // bool SkCanvas_getProps(void *canvas, void *props); // (SkCanvas *canvas, SkSurfaceProps *props) -> bool
+
+        func getProps(props: SkSurfaceProps) -> Bool {
+            return SkCanvas_getProps(self.pointer, props.pointer)
+        }
         // int SkCanvas_getSaveCount(void *canvas); // (SkCanvas *canvas) -> int
+
+        func getSaveCount() -> Int {
+            return Int(SkCanvas_getSaveCount(self.pointer))
+        }
         // void * SkCanvas_getSurface(void *canvas); // (SkCanvas *canvas) -> SkSurface *
+
+        func getSurface() -> SkSurface {
+            let pointer = SkCanvas_getSurface(self.pointer)
+            return SkSurface(pointer: pointer, handle: -1)
+        }
         // int SkCanvas_getTopProps(void *canvas); // (SkCanvas *canvas) -> sk_surface_props_t
+
+        func getTopProps() -> SkSurfaceProps {
+            let handle = SkCanvas_getTopProps(self.pointer)
+            let pointer = static_sk_surface_props_get_ptr(handle)
+            return SkSurfaceProps(pointer: pointer, handle: handle)
+        }
         // int SkCanvas_getTotalMatrix(void *canvas); // (SkCanvas *canvas) -> sk_matrix_t
+
+        func getTotalMatrix() -> SkMatrix {
+            let handle = SkCanvas_getTotalMatrix(self.pointer)
+            let pointer = static_sk_matrix_get_ptr(handle)
+            return SkMatrix(pointer: pointer, handle: handle)
+        }
         // int SkCanvas_imageInfo(void *canvas); // (SkCanvas *canvas) -> sk_image_info_t
+
+        func imageInfo() -> SkImageInfo {
+            let handle = SkCanvas_imageInfo(self.pointer)
+            let pointer = static_sk_image_info_get_ptr(handle)
+            return SkImageInfo(pointer: pointer, handle: handle)
+        }
         // bool SkCanvas_isClipEmpty(void *canvas); // (SkCanvas *canvas) -> bool
+
+        func isClipEmpty() -> Bool {
+            return SkCanvas_isClipEmpty(self.pointer)
+        }
         // bool SkCanvas_isClipRect(void *canvas); // (SkCanvas *canvas) -> bool
+
+        func isClipRect() -> Bool {
+            return SkCanvas_isClipRect(self.pointer)
+        }
         // int SkCanvas_makeSurface(void *canvas, const void *info, const void *props); // (SkCanvas *canvas, const SkImageInfo *info, const SkSurfaceProps *props) -> sk_surface_t
+
+        func makeSurface(info: SkImageInfo, props: SkSurfaceProps) -> SkSurface {
+            let handle = SkCanvas_makeSurface(self.pointer, info.pointer, props.pointer)
+            let pointer = static_sk_surface_get(handle)
+            return SkSurface(pointer: pointer, handle: handle)
+        }
         // bool SkCanvas_peekPixels(void *canvas, void *pixmap); // (SkCanvas *canvas, SkPixmap *pixmap) -> bool
+
+        func peekPixels(pixmap: SkPixmap) -> Bool {
+            return SkCanvas_peekPixels(self.pointer, pixmap.pointer)
+        }
         // void SkCanvas_private_draw_shadow_rec(void *canvas, const void *path, const void *rec); // (SkCanvas *canvas, const SkPath *path, const SkDrawShadowRec *rec)
         // bool SkCanvas_quickReject(void *canvas, const void *path); // (SkCanvas *canvas, const SkPath *path) -> bool
+
+        func quickReject(path: SkPath) -> Bool {
+            return SkCanvas_quickReject(self.pointer, path.pointer)
+        }
         // bool SkCanvas_quickReject_2(void *canvas, const void *rect); // (SkCanvas *canvas, const SkRect *rect) -> bool
+
+        func quickReject(rect: SkRect) -> Bool {
+            return SkCanvas_quickReject_2(self.pointer, rect.pointer)
+        }
         // bool SkCanvas_readPixels(void *canvas, const void *bitmap, int srcX, int srcY); // (SkCanvas *canvas, const SkBitmap *bitmap, int srcX, int srcY) -> bool
+        
+        func readPixels(bitmap: SkBitmap, srcX: Int, srcY: Int) -> Bool {
+            return SkCanvas_readPixels(self.pointer, bitmap.pointer, Int32(srcX), Int32(srcY))
+        }
+        
         // bool SkCanvas_readPixels_2(void *canvas, const void *dstInfo, void *dstPixels, unsigned long dstRowBytes, int srcX, int srcY); // (SkCanvas *canvas, const SkImageInfo *dstInfo, void *dstPixels, size_t dstRowBytes, int srcX, int srcY) -> bool
+
+        func readPixels(dstInfo: SkImageInfo, dstPixels: UnsafeMutableRawPointer, dstRowBytes: UInt, srcX: Int, srcY: Int) -> Bool {
+            return SkCanvas_readPixels_2(self.pointer, dstInfo.pointer, dstPixels, dstRowBytes, Int32(srcX), Int32(srcY))
+        }
         // bool SkCanvas_readPixels_3(void *canvas, const void *pixmap, int srcX, int srcY); // (SkCanvas *canvas, const SkPixmap *pixmap, int srcX, int srcY) -> bool
+
+        func readPixels(pixmap: SkPixmap, srcX: Int, srcY: Int) -> Bool {
+            return SkCanvas_readPixels_3(self.pointer, pixmap.pointer, Int32(srcX), Int32(srcY))
+        }
         // void * SkCanvas_recorder(void *canvas); // (SkCanvas *canvas) -> skgpu::graphite::Recorder *
         // void * SkCanvas_recordingContext(void *canvas); // (SkCanvas *canvas) -> GrRecordingContext *
         // void SkCanvas_resetMatrix(void *canvas); // (SkCanvas *canvas)
+
+        func resetMatrix() {
+            SkCanvas_resetMatrix(self.pointer)
+        }
         // void SkCanvas_restore(void *canvas); // (SkCanvas *canvas)
+
+        func restore() {
+            SkCanvas_restore(self.pointer)
+        }
         // void SkCanvas_restoreToCount(void *canvas, int saveCount); // (SkCanvas *canvas, int saveCount)
+        
+        func restoreToCount(saveCount: Int) {
+            SkCanvas_restoreToCount(self.pointer, Int32(saveCount))
+        }
         // void SkCanvas_rotate(void *canvas, float degrees); // (SkCanvas *canvas, SkScalar degrees)
+
+        func rotate(degrees: Float) {
+            SkCanvas_rotate(self.pointer, degrees)
+        }
         // void SkCanvas_rotate_2(void *canvas, float degrees, float px, float py); // (SkCanvas *canvas, SkScalar degrees, SkScalar px, SkScalar py)
+
+        func rotate(degrees: Float, px: Float, py: Float) {
+            SkCanvas_rotate_2(self.pointer, degrees, px, py)
+        }
         // int SkCanvas_save(void *canvas); // (SkCanvas *canvas) -> int
+
+        func save() -> Int {
+            return Int(SkCanvas_save(self.pointer))
+        }
         // int SkCanvas_saveLayer(void *canvas, const void *layerRec); // (SkCanvas *canvas, const SkCanvas::SaveLayerRec *layerRec) -> int
         // int SkCanvas_saveLayer_2(void *canvas, const void *bounds, const void *paint); // (SkCanvas *canvas, const SkRect *bounds, const SkPaint *paint) -> int
+
+        func saveLayer(bounds: SkRect, paint: SkPaint) -> Int {
+            return Int(SkCanvas_saveLayer_2(self.pointer, bounds.pointer, paint.pointer))
+        }
         // int SkCanvas_saveLayer_3(void *canvas, const void *bounds, const void *paint); // (SkCanvas *canvas, const SkRect *bounds, const SkPaint *paint) -> int
+
+        func saveLayer_2(bounds: SkRect, paint: SkPaint) -> Int {
+            return Int(SkCanvas_saveLayer_3(self.pointer, bounds.pointer, paint.pointer))
+        }
         // int SkCanvas_saveLayerAlpha(void *canvas, const void *bounds, unsigned int alpha); // (SkCanvas *canvas, const SkRect *bounds, U8CPU alpha) -> int
+
+        func saveLayerAlpha(bounds: SkRect, alpha: UInt8) -> Int {
+            return Int(SkCanvas_saveLayerAlpha(self.pointer, bounds.pointer, UInt32(alpha)))
+        }
         // int SkCanvas_saveLayerAlphaf(void *canvas, const void *bounds, float alpha); // (SkCanvas *canvas, const SkRect *bounds, float alpha) -> int
+
+        func saveLayerAlphaf(bounds: SkRect, alpha: Float) -> Int {
+            return Int(SkCanvas_saveLayerAlphaf(self.pointer, bounds.pointer, alpha))
+        }
         // void SkCanvas_scale(void *canvas, float sx, float sy); // (SkCanvas *canvas, SkScalar sx, SkScalar sy)
+
+        func scale(sx: Float, sy: Float) {
+            SkCanvas_scale(self.pointer, sx, sy)
+        }
+
         // void SkCanvas_setMatrix(void *canvas, const void *matrix); // (SkCanvas *canvas, const SkM44 *matrix)
+
+        func setMatrix(matrix: SkM44) {
+            SkCanvas_setMatrix(self.pointer, matrix.pointer)
+        }
         // void SkCanvas_setMatrix_2(void *canvas, const void *matrix); // (SkCanvas *canvas, const SkMatrix *matrix)
+
+        func setMatrix(matrix: SkMatrix) {
+            SkCanvas_setMatrix_2(self.pointer, matrix.pointer)
+        }
         // void SkCanvas_skew(void *canvas, float sx, float sy); // (SkCanvas *canvas, SkScalar sx, SkScalar sy)
+
+        func skew(sx: Float, sy: Float) {
+            SkCanvas_skew(self.pointer, sx, sy)
+        }
         // void SkCanvas_temporary_internal_getRgnClip(void *canvas, void *region); // (SkCanvas *canvas, SkRegion *region)
+
+        func temporary_internal_getRgnClip(region: SkRegion) {
+            SkCanvas_temporary_internal_getRgnClip(self.pointer, region.pointer)
+        }
         // void SkCanvas_translate(void *canvas, float dx, float dy); // (SkCanvas *canvas, SkScalar dx, SkScalar dy)
+
+        func translate(dx: Float, dy: Float) {
+            SkCanvas_translate(self.pointer, dx, dy)
+        }
         // bool SkCanvas_writePixels(void *canvas, const void *bitmap, int x, int y); // (SkCanvas *canvas, const SkBitmap *bitmap, int x, int y) -> bool
+
+        func writePixels(bitmap: SkBitmap, x: Int, y: Int) -> Bool {
+            return SkCanvas_writePixels(self.pointer, bitmap.pointer, Int32(x), Int32(y))
+        }
         // bool SkCanvas_writePixels_2(void *canvas, const void *info, const void *pixels, unsigned long rowBytes, int x, int y); // (SkCanvas *canvas, const SkImageInfo *info, const void *pixels, size_t rowBytes, int x, int y) -> bool
+
+        func writePixels(info: SkImageInfo, pixels: UnsafeRawPointer, rowBytes: UInt, x: Int, y: Int) -> Bool {
+            return SkCanvas_writePixels_2(self.pointer, info.pointer, pixels, rowBytes, Int32(x), Int32(y))
+        }
         // // static
 
         init(pointer: SkCanvasMutablePointer?, handle: sk_canvas_t) {
@@ -395,7 +647,19 @@ extension Skia {
             self.handle = handle
         }
         // int SkCanvas_MakeRasterDirect(const void *info, void *pixels, unsigned long rowBytes, const void *props); // (const SkImageInfo *info, void *pixels, size_t rowBytes, const SkSurfaceProps *props) -> sk_canvas_t
+
+        static func MakeRasterDirect(info: SkImageInfo, pixels: UnsafeMutableRawPointer, rowBytes: UInt, props: SkSurfaceProps) -> SkCanvas {
+            let handle = SkCanvas_MakeRasterDirect(info.pointer, pixels, rowBytes, props.pointer)
+            let pointer = static_sk_canvas_get(handle)
+            return SkCanvas(pointer: pointer, handle: handle)
+        }
         // int SkCanvas_MakeRasterDirectN32(int width, int height, void *pixels, unsigned long rowBytes); // (int width, int height, SkPMColor *pixels, size_t rowBytes) -> sk_canvas_t}
+
+        static func MakeRasterDirectN32(width: Int, height: Int, pixels: UnsafeMutableRawPointer, rowBytes: UInt) -> SkCanvas {
+            let handle = SkCanvas_MakeRasterDirectN32(Int32(width), Int32(height), pixels, rowBytes)
+            let pointer = static_sk_canvas_get(handle)
+            return SkCanvas(pointer: pointer, handle: handle)
+        }
 
     }
 }

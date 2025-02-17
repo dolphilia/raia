@@ -67,7 +67,11 @@ add_executable(main
     src/skia/skia_drawable.swift
     src/skia/skia_flattenable.swift
     src/skia/skia_font.swift
+    src/skia/skia_fontarguments.swift
+    src/skia/skia_fontmgr.swift
+    src/skia/skia_fontstyle.swift
     src/skia/skia_image.swift
+    src/skia/skia_imagefilter.swift
     src/skia/skia_imageinfo.swift
     src/skia/skia_ipoint.swift
     src/skia/skia_irect.swift
@@ -75,10 +79,13 @@ add_executable(main
     src/skia/skia_m44.swift
     src/skia/skia_mask.swift
     src/skia/skia_maskbuilder.swift
+    src/skia/skia_maskfilter.swift
     src/skia/skia_matrix.swift
     src/skia/skia_mesh.swift
     src/skia/skia_paint.swift
     src/skia/skia_path.swift
+    src/skia/skia_patheffect.swift
+    src/skia/skia_picture.swift
     src/skia/skia_pixelref.swift
     src/skia/skia_point.swift
     src/skia/skia_point3.swift
@@ -91,8 +98,12 @@ add_executable(main
     src/skia/skia_shader.swift
     src/skia/skia_size.swift
     src/skia/skia_stream.swift
+    src/skia/skia_streamasset.swift
     src/skia/skia_string.swift
+    src/skia/skia_surface.swift
     src/skia/skia_surfaceprops.swift
+    src/skia/skia_textblob.swift
+    src/skia/skia_typeface.swift
     src/skia/skia_v2.swift
     src/skia/skia_v3.swift
     src/skia/skia_v4.swift

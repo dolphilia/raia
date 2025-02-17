@@ -4,8 +4,8 @@ extension Skia {
     typealias ColorRGBA8888 = UInt32
     typealias SkScalar = Float
     // ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
-    typealias AndroidCodecMutablePointer = UnsafeMutableRawPointer
-    typealias AndroidCodecConstPointer = UnsafeRawPointer
+    typealias SkAndroidCodecMutablePointer = UnsafeMutableRawPointer
+    typealias SkAndroidCodecConstPointer = UnsafeRawPointer
     typealias SkBitmapMutablePointer = UnsafeMutableRawPointer
     typealias SkBitmapConstPointer = UnsafeRawPointer
     typealias SkBitmapAllocatorMutablePointer = UnsafeMutableRawPointer
@@ -34,8 +34,16 @@ extension Skia {
     typealias SkFlattenableConstPointer = UnsafeRawPointer
     typealias SkFontMutablePointer = UnsafeMutableRawPointer
     typealias SkFontConstPointer = UnsafeRawPointer
+    typealias SkFontArgumentsMutablePointer = UnsafeMutableRawPointer
+    typealias SkFontArgumentsConstPointer = UnsafeRawPointer
+    typealias SkFontMgrMutablePointer = UnsafeMutableRawPointer
+    typealias SkFontMgrConstPointer = UnsafeRawPointer
+    typealias SkFontStyleMutablePointer = UnsafeMutableRawPointer
+    typealias SkFontStyleConstPointer = UnsafeRawPointer
     typealias SkImageMutablePointer = UnsafeMutableRawPointer
     typealias SkImageConstPointer = UnsafeRawPointer
+    typealias SkImageFilterMutablePointer = UnsafeMutableRawPointer
+    typealias SkImageFilterConstPointer = UnsafeRawPointer
     typealias SkImageInfoMutablePointer = UnsafeMutableRawPointer
     typealias SkImageInfoConstPointer = UnsafeRawPointer
     typealias SkIPointMutablePointer = UnsafeMutableRawPointer
@@ -50,6 +58,8 @@ extension Skia {
     typealias SkMaskConstPointer = UnsafeRawPointer
     typealias SkMaskBuilderMutablePointer = UnsafeMutableRawPointer
     typealias SkMaskBuilderConstPointer = UnsafeRawPointer
+    typealias SkMaskFilterMutablePointer = UnsafeMutableRawPointer
+    typealias SkMaskFilterConstPointer = UnsafeRawPointer
     typealias SkMatrixMutablePointer = UnsafeMutableRawPointer
     typealias SkMatrixConstPointer = UnsafeRawPointer
     typealias SkMeshMutablePointer = UnsafeMutableRawPointer
@@ -58,6 +68,10 @@ extension Skia {
     typealias SkPaintConstPointer = UnsafeRawPointer
     typealias SkPathMutablePointer = UnsafeMutableRawPointer
     typealias SkPathConstPointer = UnsafeRawPointer
+    typealias SkPathEffectMutablePointer = UnsafeMutableRawPointer
+    typealias SkPathEffectConstPointer = UnsafeRawPointer
+    typealias SkPictureMutablePointer = UnsafeMutableRawPointer
+    typealias SkPictureConstPointer = UnsafeRawPointer
     typealias SkPixelRefMutablePointer = UnsafeMutableRawPointer
     typealias SkPixelRefConstPointer = UnsafeRawPointer
     typealias SkPixmapMutablePointer = UnsafeMutableRawPointer
@@ -82,12 +96,18 @@ extension Skia {
     typealias SkSizeConstPointer = UnsafeRawPointer
     typealias SkStreamMutablePointer = UnsafeMutableRawPointer
     typealias SkStreamConstPointer = UnsafeRawPointer
+    typealias SkStreamAssetMutablePointer = UnsafeMutableRawPointer
+    typealias SkStreamAssetConstPointer = UnsafeRawPointer
     typealias SkStringMutablePointer = UnsafeMutableRawPointer
     typealias SkStringConstPointer = UnsafeRawPointer
-    typealias StringViewMutablePointer = UnsafeMutableRawPointer
-    typealias StringViewConstPointer = UnsafeRawPointer
+    typealias SkSurfaceMutablePointer = UnsafeMutableRawPointer
+    typealias SkSurfaceConstPointer = UnsafeRawPointer
     typealias SkSurfacePropsMutablePointer = UnsafeMutableRawPointer
     typealias SkSurfacePropsConstPointer = UnsafeRawPointer
+    typealias SkTextBlobMutablePointer = UnsafeMutableRawPointer
+    typealias SkTextBlobConstPointer = UnsafeRawPointer
+    typealias SkTypefaceMutablePointer = UnsafeMutableRawPointer
+    typealias SkTypefaceConstPointer = UnsafeRawPointer
     typealias SkV2MutablePointer = UnsafeMutableRawPointer
     typealias SkV2ConstPointer = UnsafeRawPointer
     typealias SkV3MutablePointer = UnsafeMutableRawPointer
@@ -96,4 +116,7 @@ extension Skia {
     typealias SkV4ConstPointer = UnsafeRawPointer
     typealias SkWStreamMutablePointer = UnsafeMutableRawPointer
     typealias SkWStreamConstPointer = UnsafeRawPointer
+
+    typealias StringViewMutablePointer = UnsafeMutableRawPointer
+    typealias StringViewConstPointer = UnsafeRawPointer
 }

@@ -85,6 +85,23 @@ extension Skia {
         case linear
     }
 
+    enum SkFlattenableType: Int32 {
+        case colorFilter
+        case blender
+        case drawable
+        case imageFilter
+        case maskFilter
+        case pathEffect
+        case shader
+    }
+
+    enum SkFontHinting: Int32 {
+        case none
+        case slight
+        case normal
+        case full
+    }
+
     enum SkMipmapMode: Int32 {
         case none
         case nearest
@@ -125,6 +142,13 @@ extension Skia {
         case bgrH
         case rgbV
         case bgrV
+    }
+
+    enum SkTextEncoding: Int32 {
+        case utf8
+        case utf16
+        case utf32
+        case glyphID
     }
 
     enum SkTileMode: Int32 {

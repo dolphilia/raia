@@ -266,8 +266,32 @@
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
   "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_fontarguments.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_fontarguments.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_fontmgr.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_fontmgr.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_fontstyle.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_fontstyle.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
   "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_image.swift",
   "output": "CMakeFiles/main.dir/src/skia/skia_image.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_imagefilter.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_imagefilter.swift.o"
 },
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
@@ -314,6 +338,12 @@
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
   "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_maskfilter.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_maskfilter.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
   "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_matrix.swift",
   "output": "CMakeFiles/main.dir/src/skia/skia_matrix.swift.o"
 },
@@ -334,6 +364,18 @@
   "command": ":",
   "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_path.swift",
   "output": "CMakeFiles/main.dir/src/skia/skia_path.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_patheffect.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_patheffect.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_picture.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_picture.swift.o"
 },
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
@@ -410,14 +452,38 @@
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
   "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_streamasset.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_streamasset.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
   "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_string.swift",
   "output": "CMakeFiles/main.dir/src/skia/skia_string.swift.o"
 },
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
   "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_surface.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_surface.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
   "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_surfaceprops.swift",
   "output": "CMakeFiles/main.dir/src/skia/skia_surfaceprops.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_textblob.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_textblob.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_typeface.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_typeface.swift.o"
 },
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
