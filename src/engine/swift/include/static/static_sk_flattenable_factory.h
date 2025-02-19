@@ -10,6 +10,7 @@ extern "C" {
 #endif
 typedef int sk_flattenable_factory_t;
 void static_sk_flattenable_factory_delete(int key);
+void * static_sk_flattenable_factory_get_ptr(int key);
 #ifdef __cplusplus
 }
 #endif
