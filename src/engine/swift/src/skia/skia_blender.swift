@@ -36,7 +36,6 @@ extension Skia {
         public var pointer: SkBlenderMutablePointer?
         public var handle: sk_blender_t = -1
 
-        // void SkBlender_delete(void *blender); // (SkBlender *blender)
         deinit {
             if self.handle > -1 {
                 static_sk_blender_delete(self.handle)
@@ -51,7 +50,7 @@ extension Skia {
         }
 
         // Static Methods
-        
+
         static func Mode(mode: SkBlendMode) -> SkBlender {
             let handle = SkBlender_Mode(mode.rawValue)
             let pointer = static_sk_blender_get(handle)

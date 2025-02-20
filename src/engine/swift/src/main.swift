@@ -54,7 +54,7 @@ func main() {
         bitmap.allocN32Pixels(width: 300, height: 300, isOpaque: false)
         let canvas = Skia.SkCanvas(bitmap: bitmap)
         let paint = Skia.SkPaint()
-        paint.setColor(color: Skia.SkColor(color: 0xFFFF0000))
+        paint.setColor(color: 0xFFFF0000)
         if let memoryUsage = getMemoryUsageMB() {
             window.title = "use memory: \(memoryUsage) MB"
         } else {

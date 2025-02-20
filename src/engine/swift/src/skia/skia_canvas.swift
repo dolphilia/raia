@@ -213,7 +213,7 @@ extension Skia {
         }
 
         func clear(color: SkColor) {
-            SkCanvas_clear_2(self.pointer, color.color)
+            SkCanvas_clear_2(self.pointer, color)
         }
 
         func clipIRect(irect: SkIRect, op: SkClipOp) {
@@ -309,7 +309,7 @@ extension Skia {
         }
 
         func drawColor(color: SkColor, mode: SkBlendMode) {
-            SkCanvas_drawColor_2(self.pointer, color.color, Int32(mode.rawValue))
+            SkCanvas_drawColor_2(self.pointer, color, Int32(mode.rawValue))
         }
 
         func drawDrawable(drawable: SkDrawable, matrix: SkMatrix) {
@@ -417,10 +417,7 @@ extension Skia {
             cubics.withUnsafeBufferPointer { cubicsPointer in
                 colors.withUnsafeBufferPointer { colorsPointer in
                     texCoords.withUnsafeBufferPointer { texCoordsPointer in
-                        let colorValues = colors.map { $0.color }
-                        colorValues.withUnsafeBufferPointer { colorValuesPointer in
-                            SkCanvas_drawPatch(self.pointer, cubicsPointer.baseAddress, colorValuesPointer.baseAddress, texCoordsPointer.baseAddress, Int32(mode.rawValue), paint.pointer)
-                        }
+                        SkCanvas_drawPatch(self.pointer, cubicsPointer.baseAddress, colorsPointer.baseAddress, texCoordsPointer.baseAddress, Int32(mode.rawValue), paint.pointer)
                     }
                 }
             }

@@ -45,7 +45,7 @@ extension Skia {
         // Static Methods
 
         static func FromColor(color: SkColor) -> SkColor4f {
-            let handle = SkColor4f_FromColor(color.color);
+            let handle = SkColor4f_FromColor(color);
             let pointer = static_sk_color_4f_get_ptr(handle)
             return SkColor4f(pointer: pointer, handle: handle)
         }
@@ -105,7 +105,7 @@ extension Skia {
         }
 
         func toSkColor() -> SkColor {
-            return SkColor(color: SkColor4f_toSkColor(self.pointer))
+            return SkColor4f_toSkColor(self.pointer)
         }
 
         //SkRGBA4f< kPremul_SkAlphaType > premul (SkColor4f *color);

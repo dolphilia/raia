@@ -92,7 +92,7 @@ extension Skia {
         }
 
         func filterColor(color: SkColor) -> SkColor {
-            return SkColor(color: SkColorFilter_filterColor(self.pointer, color.color))
+            return SkColorFilter_filterColor(self.pointer, color)
         }
 
         func filterColor4f(srcColor: SkColor4f, srcCS: SkColorSpace, dstCS: SkColorSpace) -> SkColor4f {
