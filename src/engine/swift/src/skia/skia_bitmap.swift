@@ -208,7 +208,7 @@ extension Skia {
         }
 
         func erase(c: SkColor, area: SkIRect) {
-            SkBitmap_erase(self.pointer, UInt32(c), area.pointer)
+            SkBitmap_erase(self.pointer, c.color, area.pointer)
         }
 
         func erase(c: SkColor4f, area: SkIRect) {
@@ -216,7 +216,7 @@ extension Skia {
         }
 
         func eraseArea(area: SkIRect, c: SkColor) {
-            SkBitmap_eraseArea(self.pointer, area.pointer, UInt32(c))
+            SkBitmap_eraseArea(self.pointer, area.pointer, c.color)
         }
 
         func eraseARGB(a: UInt, r: UInt, g: UInt, b: UInt) {
@@ -224,7 +224,7 @@ extension Skia {
         }
 
         func eraseColor(c: SkColor) {
-            SkBitmap_eraseColor(self.pointer, UInt32(c))
+            SkBitmap_eraseColor(self.pointer, c.color)
         }
 
         func eraseColor(c: SkColor4f) {
@@ -276,7 +276,7 @@ extension Skia {
         }
 
         func getColor(x: Int, y: Int) -> SkColor {
-            return SkBitmap_getColor(self.pointer, Int32(x), Int32(y))
+            return SkColor(color: SkBitmap_getColor(self.pointer, Int32(x), Int32(y)))
         }
 
         func getColor4f(x: Int, y: Int) -> SkColor4f {

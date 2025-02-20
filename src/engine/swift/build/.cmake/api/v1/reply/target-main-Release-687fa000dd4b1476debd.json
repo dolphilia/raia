@@ -57,7 +57,7 @@
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 115,
+				"line" : 116,
 				"parent" : 0
 			},
 			{
@@ -194,7 +194,8 @@
 				80,
 				81,
 				82,
-				83
+				83,
+				84
 			]
 		}
 	],
@@ -379,7 +380,8 @@
 				80,
 				81,
 				82,
-				83
+				83,
+				84
 			]
 		}
 	],
@@ -569,6 +571,12 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "src/skia/skia_canvas.swift",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/skia/skia_color.swift",
 			"sourceGroupIndex" : 0
 		},
 		{

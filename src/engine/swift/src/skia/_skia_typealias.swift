@@ -1,5 +1,5 @@
 extension Skia {
-    typealias SkColor = UInt32 // ARGB8888
+    //typealias SkColor = UInt32 // ARGB8888
     typealias SkPMColor = UInt32 // ARGB8888
     typealias ColorRGBA8888 = UInt32
     typealias SkScalar = Float

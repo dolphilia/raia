@@ -57,6 +57,7 @@ add_executable(main
     src/skia/skia_bitmap.swift
     src/skia/skia_blender.swift
     src/skia/skia_canvas.swift
+    src/skia/skia_color.swift
     src/skia/skia_color4f.swift
     src/skia/skia_colorfilter.swift
     src/skia/skia_colorinfo.swift

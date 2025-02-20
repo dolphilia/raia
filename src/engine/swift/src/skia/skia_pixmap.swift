@@ -181,7 +181,7 @@ extension Skia {
         }
 
         func getColor(x: Int, y: Int) -> SkColor {
-            return SkPixmap_getColor(self.pointer, Int32(x), Int32(y))
+            return SkColor(color: SkPixmap_getColor(self.pointer, Int32(x), Int32(y)))
         }
 
         func getColor4f(x: Int, y: Int) -> SkColor4f {
@@ -287,11 +287,11 @@ extension Skia {
         }
 
         func erase(color: SkColor, subset: SkIRect) -> Bool {
-            return SkPixmap_erase(self.pointer, color, subset.pointer)
+            return SkPixmap_erase(self.pointer, color.color, subset.pointer)
         }
 
         func erase(color: SkColor) -> Bool {
-            return SkPixmap_erase_2(self.pointer, color)
+            return SkPixmap_erase_2(self.pointer, color.color)
         }
 
         func erase(color: SkColor4f, subset: SkIRect) -> Bool {

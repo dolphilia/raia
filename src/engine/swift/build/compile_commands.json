@@ -206,6 +206,12 @@
 {
   "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
   "command": ":",
+  "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_color.swift",
+  "output": "CMakeFiles/main.dir/src/skia/skia_color.swift.o"
+},
+{
+  "directory": "/Users/dolphilia/github/raia/src/engine/swift/build",
+  "command": ":",
   "file": "/Users/dolphilia/github/raia/src/engine/swift/src/skia/skia_color4f.swift",
   "output": "CMakeFiles/main.dir/src/skia/skia_color4f.swift.o"
 },

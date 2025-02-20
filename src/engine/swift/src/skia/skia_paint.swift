@@ -104,7 +104,7 @@ extension Skia {
         }
         // unsigned int SkPaint_getColor(void *paint); // (SkPaint *paint) -> SkColor
         func getColor() -> SkColor {
-            return SkPaint_getColor(self.pointer)
+            return SkColor(color: SkPaint_getColor(self.pointer))
         }
         // int SkPaint_getColor4f(void *paint); // (SkPaint *paint) -> sk_color_4f_t
         func getColor4f() -> SkColor4f {
@@ -114,7 +114,7 @@ extension Skia {
         }
         // void SkPaint_setColor(void *paint, unsigned int color); // (SkPaint *paint, SkColor color)
         func setColor(color: SkColor) {
-            SkPaint_setColor(self.pointer, color)
+            SkPaint_setColor(self.pointer, color.color)
         }
         // void SkPaint_setColor_2(void *paint, const void *color, void *colorSpace); // (SkPaint *paint, const SkColor4f *color, SkColorSpace *colorSpace)
         func setColor(color: SkColor4f, colorSpace: SkColorSpace) {

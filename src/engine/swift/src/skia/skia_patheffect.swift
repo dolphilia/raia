@@ -99,6 +99,8 @@ extension Skia {
             return SkPathEffect(pointer: pointer, handle: handle)
         }
         // int SkPathEffect_NameToFactory(const char name[]); // (const char name[]) -> sk_flattenable_factory_t
+
+        
         // const char * SkPathEffect_FactoryToName(int factory); // (sk_flattenable_factory_t factory) -> const char *
         // void SkPathEffect_Register(const char name[], int factory); // (const char name[], sk_flattenable_factory_t factory)
 

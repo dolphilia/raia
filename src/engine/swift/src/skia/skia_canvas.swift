@@ -51,7 +51,7 @@ extension Skia {
         func drawAnnotation(rect: SkRect, key: String, data: SkData) // void SkCanvas_drawAnnotation(void *canvas, const void *rect, const char * key, int data); // (SkCanvas *canvas, const SkRect *rect, const char key[], sk_data_t data)
         func drawAnnotation(rect: SkRect, key: String, value: SkData) // void SkCanvas_drawAnnotation_2(void *canvas, const void *rect, const char * key, void *value); // (SkCanvas *canvas, const SkRect *rect, const char key[], SkData *value)
         func drawArc(oval: SkRect, startAngle: Float, sweepAngle: Float, useCenter: Bool, paint: SkPaint) // void SkCanvas_drawArc(void *canvas, const void *oval, float startAngle, float sweepAngle, bool useCenter, const void *paint); // (SkCanvas *canvas, const SkRect *oval, SkScalar startAngle, SkScalar sweepAngle, bool useCenter, const SkPaint *paint)
-        func drawAtlas(atlas: SkImage, xform: [SkRSXform], tex: [SkRect], colors: [Color], count: Int, mode: SkBlendMode, sampling: SkSamplingOptions, cullRect: SkRect, paint: SkPaint) // void SkCanvas_drawAtlas(void *canvas, const void *atlas, const void * xform, const void * tex, const void * colors, int count, int mode, const void *sampling, const void *cullRect, const void *paint); // (SkCanvas *canvas, const SkImage *atlas, const SkRSXform xform[], const SkRect tex[], const SkColor colors[], int count, SkBlendMode mode, const SkSamplingOptions *sampling, const SkRect *cullRect, const SkPaint *paint)
+        func drawAtlas(atlas: SkImage, xform: [SkRSXform], tex: [SkRect], colors: [SkColor], count: Int, mode: SkBlendMode, sampling: SkSamplingOptions, cullRect: SkRect, paint: SkPaint) // void SkCanvas_drawAtlas(void *canvas, const void *atlas, const void * xform, const void * tex, const void * colors, int count, int mode, const void *sampling, const void *cullRect, const void *paint); // (SkCanvas *canvas, const SkImage *atlas, const SkRSXform xform[], const SkRect tex[], const SkColor colors[], int count, SkBlendMode mode, const SkSamplingOptions *sampling, const SkRect *cullRect, const SkPaint *paint)
         func drawCircle(center: SkPoint, radius: Float, paint: SkPaint) // void SkCanvas_drawCircle(void *canvas, int center, float radius, const void *paint); // (SkCanvas *canvas, sk_point_t center, SkScalar radius, const SkPaint *paint)
         func drawCircle(cx: Float, cy: Float, radius: Float, paint: SkPaint) // void SkCanvas_drawCircle_2(void *canvas, float cx, float cy, float radius, const void *paint); // (SkCanvas *canvas, SkScalar cx, SkScalar cy, SkScalar radius, const SkPaint *paint)
         func drawColor(color: SkColor4f, mode: SkBlendMode) // void SkCanvas_drawColor(void *canvas, const void * color, int mode); // (SkCanvas *canvas, const SkColor4f *color, SkBlendMode mode)
@@ -213,7 +213,7 @@ extension Skia {
         }
 
         func clear(color: SkColor) {
-            SkCanvas_clear_2(self.pointer, color)
+            SkCanvas_clear_2(self.pointer, color.color)
         }
 
         func clipIRect(irect: SkIRect, op: SkClipOp) {
@@ -288,7 +288,7 @@ extension Skia {
             SkCanvas_drawArc(self.pointer, oval.pointer, startAngle, sweepAngle, useCenter, paint.pointer)
         }
 
-        func drawAtlas(atlas: SkImage, xform: [SkRSXform], tex: [SkRect], colors: [Color], count: Int, mode: SkBlendMode, sampling: SkSamplingOptions, cullRect: SkRect, paint: SkPaint) {
+        func drawAtlas(atlas: SkImage, xform: [SkRSXform], tex: [SkRect], colors: [SkColor], count: Int, mode: SkBlendMode, sampling: SkSamplingOptions, cullRect: SkRect, paint: SkPaint) {
             xform.withUnsafeBufferPointer { xformPointer in
                 tex.withUnsafeBufferPointer { texPointer in
                     SkCanvas_drawAtlas(self.pointer, atlas.pointer, xformPointer.baseAddress, texPointer.baseAddress, colors, Int32(count), Int32(mode.rawValue), sampling.pointer, cullRect.pointer, paint.pointer)
@@ -309,7 +309,7 @@ extension Skia {
         }
 
         func drawColor(color: SkColor, mode: SkBlendMode) {
-            SkCanvas_drawColor_2(self.pointer, color, Int32(mode.rawValue))
+            SkCanvas_drawColor_2(self.pointer, color.color, Int32(mode.rawValue))
         }
 
         func drawDrawable(drawable: SkDrawable, matrix: SkMatrix) {
@@ -417,7 +417,10 @@ extension Skia {
             cubics.withUnsafeBufferPointer { cubicsPointer in
                 colors.withUnsafeBufferPointer { colorsPointer in
                     texCoords.withUnsafeBufferPointer { texCoordsPointer in
-                        SkCanvas_drawPatch(self.pointer, cubicsPointer.baseAddress, colorsPointer.baseAddress, texCoordsPointer.baseAddress, Int32(mode.rawValue), paint.pointer)
+                        let colorValues = colors.map { $0.color }
+                        colorValues.withUnsafeBufferPointer { colorValuesPointer in
+                            SkCanvas_drawPatch(self.pointer, cubicsPointer.baseAddress, colorValuesPointer.baseAddress, texCoordsPointer.baseAddress, Int32(mode.rawValue), paint.pointer)
+                        }
                     }
                 }
             }
