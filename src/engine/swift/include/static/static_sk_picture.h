@@ -10,7 +10,7 @@ extern "C" {
 #endif
 typedef int sk_picture_t;
 void static_sk_picture_delete(int key);
-void *static_sk_picture_get(int key); // -> SkPicture *
+void *static_sk_picture_get_ptr(int key); // -> SkPicture *
 #ifdef __cplusplus
 }
 #endif

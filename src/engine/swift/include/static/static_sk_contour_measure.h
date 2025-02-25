@@ -10,7 +10,7 @@ extern "C" {
 #endif
 typedef int sk_contour_measure_t;
 void static_sk_contour_measure_delete(int key);
-void *static_sk_contour_measure_get(int key); // -> SkContourMeasure *
+void *static_sk_contour_measure_get_ptr(int key); // -> SkContourMeasure *
 #ifdef __cplusplus
 }
 #endif

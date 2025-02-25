@@ -4,5 +4,5 @@
 #include <map>
 #include "include/core/SkSamplingOptions.h"
 int static_sk_cubic_resampler_make(SkCubicResampler value);
-SkCubicResampler static_sk_cubic_resampler_get(int key);
+SkCubicResampler static_sk_cubic_resampler_get_entity(int key);
 #endif // STATIC_SK_CUBIC_RESAMPLER_INTERNAL_H

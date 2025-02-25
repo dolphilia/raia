@@ -54,12 +54,12 @@ extension Skia {
 
         static func MakeFromFile(path: UnsafePointer<CChar>?) -> SkStream {
             let handle = SkStream_MakeFromFile(path);
-            let pointer = static_sk_stream_get(handle)
+            let pointer = static_sk_stream_get_ptr(handle)
             return SkStream(pointer: pointer, handle: handle)
         }
         static func MakeFromFileName(fileName: String) -> SkStream {
             let handle = SkStream_MakeFromFile(fileName)
-            let pointer = static_sk_stream_get(handle)
+            let pointer = static_sk_stream_get_ptr(handle)
             return SkStream(pointer: pointer, handle: handle)
         }
 
@@ -123,13 +123,13 @@ extension Skia {
 
         func duplicate() -> SkStream {
             let handle = SkStream_duplicate(self.pointer);
-            let pointer = static_sk_stream_get(handle)
+            let pointer = static_sk_stream_get_ptr(handle)
             return SkStream(pointer: pointer, handle: handle)
         }
 
         func fork() -> SkStream {
             let handle = SkStream_fork(self.pointer);
-            let pointer = static_sk_stream_get(handle)
+            let pointer = static_sk_stream_get_ptr(handle)
             return SkStream(pointer: pointer, handle: handle)
         }
 

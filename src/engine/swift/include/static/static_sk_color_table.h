@@ -10,7 +10,7 @@ extern "C" {
 #endif
 typedef int sk_color_table_t;
 void static_sk_color_table_delete(int key);
-void *static_sk_color_table_get(int key); // -> SkColorTable *
+void *static_sk_color_table_get_ptr(int key); // -> SkColorTable *
 #ifdef __cplusplus
 }
 #endif

@@ -4,6 +4,6 @@
 #include <map>
 #include "include/effects/SkRuntimeEffect.h"
 int static_sk_runtime_effect_builder_builder_uniform_make(SkRuntimeEffectBuilder::BuilderUniform value);
-SkRuntimeEffectBuilder::BuilderUniform static_sk_runtime_effect_builder_builder_uniform_get(int key);
+SkRuntimeEffectBuilder::BuilderUniform static_sk_runtime_effect_builder_builder_uniform_get_entity(int key);
 void static_sk_runtime_effect_builder_builder_uniform_set(int key, SkRuntimeEffectBuilder::BuilderUniform value);
 #endif // STATIC_SK_RUNTIME_EFFECT_BUILDER_BUILDER_UNIFORM_INTERNAL_H

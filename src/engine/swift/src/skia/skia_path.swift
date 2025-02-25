@@ -655,7 +655,7 @@ extension Skia {
 
         func serialize() -> SkData {
             let handle = SkPath_serialize(self.pointer)
-            let pointer = static_sk_data_get(handle)
+            let pointer = static_sk_data_get_ptr(handle)
             return SkData(pointer: pointer, handle: handle)
         }
 

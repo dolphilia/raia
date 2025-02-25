@@ -10,7 +10,7 @@ extern "C" {
 #endif
 typedef int sk_text_blob_t;
 void static_sk_text_blob_delete(int key);
-void * static_sk_text_blob_get(int key); // -> SkTextBlob *
+void * static_sk_text_blob_get_ptr(int key); // -> SkTextBlob *
 #ifdef __cplusplus
 }
 #endif

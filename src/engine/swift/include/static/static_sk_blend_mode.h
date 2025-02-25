@@ -12,7 +12,7 @@ extern "C" {
 typedef int optional_sk_blend_mode_t;
 
 void static_optional_sk_blend_mode_delete(int key);
-int static_optional_sk_blend_mode_get(int key); // -> (int)SkBlendMode
+int static_optional_sk_blend_mode_get_ptr(int key); // -> (int)SkBlendMode
 
 #ifdef __cplusplus
 }

@@ -26,14 +26,14 @@ extension Skia {
 
         func duplicate() -> SkStreamAsset {
             let handle = SkStreamAsset_duplicate(self.pointer)
-            let pointer = static_sk_stream_asset_get(handle)
+            let pointer = static_sk_stream_asset_get_ptr(handle)
             return SkStreamAsset(pointer: pointer, handle: handle)
         }
         // int SkStreamAsset_fork(void *stream_asset); // (SkStreamAsset *stream_asset) -> sk_stream_asset_t
 
         func fork() -> SkStreamAsset {
             let handle = SkStreamAsset_fork(self.pointer)
-            let pointer = static_sk_stream_asset_get(handle)
+            let pointer = static_sk_stream_asset_get_ptr(handle)
             return SkStreamAsset(pointer: pointer, handle: handle)
         }
         // bool SkStreamAsset_hasPosition(void *stream_asset); // (SkStreamAsset *stream_asset) -> bool
@@ -144,7 +144,7 @@ extension Skia {
 
         static func MakeFromFile(path: String) -> SkStreamAsset {
             let handle = SkStreamAsset_MakeFromFile(path)
-            let pointer = static_sk_stream_asset_get(handle)
+            let pointer = static_sk_stream_asset_get_ptr(handle)
             return SkStreamAsset(pointer: pointer, handle: handle)
         }
     }

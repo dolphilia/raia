@@ -10,7 +10,7 @@ extern "C" {
 #endif
 typedef int sk_stream_memory_t;
 void static_sk_stream_memory_delete(int key);
-void *static_sk_stream_memory_get(int key); // -> SkStreamMemory *
+void *static_sk_stream_memory_get_ptr(int key); // -> SkStreamMemory *
 #ifdef __cplusplus
 }
 #endif

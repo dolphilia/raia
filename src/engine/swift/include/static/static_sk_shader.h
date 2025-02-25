@@ -10,7 +10,7 @@ extern "C" {
 #endif
 typedef int sk_shader_t;
 void static_sk_shader_delete(int key);
-void * static_sk_shader_get(int key); // -> SkShader *
+void * static_sk_shader_get_ptr(int key); // -> SkShader *
 #ifdef __cplusplus
 }
 #endif

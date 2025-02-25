@@ -12,7 +12,7 @@ extern "C" {
 typedef int sk_android_codec_t;
 
 void static_sk_android_codec_delete(int key);
-void *static_sk_android_codec_get(int key); // -> SkAndroidCodec *
+void *static_sk_android_codec_get_ptr(int key); // -> SkAndroidCodec *
 
 #ifdef __cplusplus
 }

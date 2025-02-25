@@ -45,19 +45,19 @@ extension Skia {
 
         static func MakeFromText(text: UnsafeRawPointer?, byteLength: UInt, font: Skia.SkFont, encoding: SkTextEncoding) -> SkTextBlob {
             let handle = SkTextBlob_MakeFromText(text, byteLength, font.pointer, encoding.rawValue)
-            let pointer = static_sk_text_blob_get(handle)
+            let pointer = static_sk_text_blob_get_ptr(handle)
             return SkTextBlob(pointer: pointer, handle: handle)
         }
 
         static func MakeFromString(string: String, font: SkFont, encoding: SkTextEncoding) -> SkTextBlob {
             let handle = SkTextBlob_MakeFromString(string, font.pointer, encoding.rawValue)
-            let pointer = static_sk_text_blob_get(handle)
+            let pointer = static_sk_text_blob_get_ptr(handle)
             return SkTextBlob(pointer: pointer, handle: handle)
         }
 
         static func MakeFromPosTextH(text: UnsafeRawPointer?, byteLength: UInt, xpos: [Float], constY: Float, font: SkFont, encoding: SkTextEncoding) -> SkTextBlob {
             let handle = SkTextBlob_MakeFromPosTextH(text, byteLength, xpos, constY, font.pointer, encoding.rawValue)
-            let pointer = static_sk_text_blob_get(handle)
+            let pointer = static_sk_text_blob_get_ptr(handle)
             return SkTextBlob(pointer: pointer, handle: handle)
         }
 
@@ -65,7 +65,7 @@ extension Skia {
             let handle = pos.withUnsafeBufferPointer { buffer in
                 SkTextBlob_MakeFromPosText(text, byteLength, buffer.baseAddress, font.pointer, encoding.rawValue)
             }
-            let pointer = static_sk_text_blob_get(handle)
+            let pointer = static_sk_text_blob_get_ptr(handle)
             return SkTextBlob(pointer: pointer, handle: handle)
         }
 
@@ -73,13 +73,13 @@ extension Skia {
             let handle = xform.withUnsafeBufferPointer { buffer in
                 SkTextBlob_MakeFromRSXform(text, byteLength, buffer.baseAddress, font.pointer, encoding.rawValue)
             }
-            let pointer = static_sk_text_blob_get(handle)
+            let pointer = static_sk_text_blob_get_ptr(handle)
             return SkTextBlob(pointer: pointer, handle: handle)
         }
 
         static func Deserialize(data: UnsafeRawPointer, size: UInt, procs: SkDeserialProcs) -> SkTextBlob {
             let handle = SkTextBlob_Deserialize(data, size, procs.pointer)
-            let pointer = static_sk_text_blob_get(handle)
+            let pointer = static_sk_text_blob_get_ptr(handle)
             return SkTextBlob(pointer: pointer, handle: handle)
         }
 
@@ -106,7 +106,7 @@ extension Skia {
 
         func serialize(procs: SkSerialProcs) -> SkData {
             let handle = SkTextBlob_serialize_2(self.pointer, procs.pointer)
-            let pointer = static_sk_data_get(handle)
+            let pointer = static_sk_data_get_ptr(handle)
             return SkData(pointer: pointer, handle: handle)
         }
 

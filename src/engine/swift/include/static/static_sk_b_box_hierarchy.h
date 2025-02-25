@@ -12,7 +12,7 @@ extern "C" {
 typedef int sk_b_box_hierarchy_t;
 
 void static_sk_b_box_hierarchy_delete(int key);
-void *static_sk_b_box_hierarchy_get(int key); // -> SkBBoxHierarchy
+void *static_sk_b_box_hierarchy_get_ptr(int key); // -> SkBBoxHierarchy
 
 #ifdef __cplusplus
 }

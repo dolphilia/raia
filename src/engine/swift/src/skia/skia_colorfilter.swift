@@ -49,7 +49,7 @@ extension Skia {
 
         static func Deserialize(data: UnsafeRawPointer, size: UInt, procs: SkDeserialProcs) -> SkColorFilter {
             let handle = SkColorFilter_Deserialize(data, size, procs.pointer)
-            let pointer = static_sk_color_filter_get(handle)
+            let pointer = static_sk_color_filter_get_ptr(handle)
             return SkColorFilter(pointer: pointer, handle: handle)
         }
 
@@ -103,13 +103,13 @@ extension Skia {
 
         func makeComposed(inner: SkColorFilter) -> SkColorFilter {
             let handle = SkColorFilter_makeComposed(self.pointer, inner.handle)
-            let pointer = static_sk_color_filter_get(handle)
+            let pointer = static_sk_color_filter_get_ptr(handle)
             return SkColorFilter(pointer: pointer, handle: handle)
         }
 
         func makeWithWorkingColorSpace(colorSpace: SkColorSpace) -> SkColorFilter {
             let handle = SkColorFilter_makeWithWorkingColorSpace(self.pointer, colorSpace.handle)
-            let pointer = static_sk_color_filter_get(handle)
+            let pointer = static_sk_color_filter_get_ptr(handle)
             return SkColorFilter(pointer: pointer, handle: handle)
         }
 
@@ -136,7 +136,7 @@ extension Skia {
 
         func serialize(serialProcs: UnsafeRawPointer?) -> SkData {
             let handle = SkColorFilter_serialize(self.pointer, serialProcs)
-            let pointer = static_sk_data_get(handle)
+            let pointer = static_sk_data_get_ptr(handle)
             return SkData(pointer: pointer, handle: handle)
         }
 

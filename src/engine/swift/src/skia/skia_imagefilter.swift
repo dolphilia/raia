@@ -59,7 +59,7 @@ extension Skia {
 
         func makeWithLocalMatrix(matrix: SkMatrix) -> SkImageFilter {
             let handle = SkImageFilter_makeWithLocalMatrix(self.pointer, matrix.pointer)
-            let pointer = static_sk_image_filter_get(handle)
+            let pointer = static_sk_image_filter_get_ptr(handle)
             return SkImageFilter(pointer: pointer, handle: handle)
         }
         // int SkImageFilter_getFactory(void *image_filter); // (SkImageFilter *image_filter) -> sk_flattenable_factory_t

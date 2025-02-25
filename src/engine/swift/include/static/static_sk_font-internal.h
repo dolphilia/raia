@@ -4,6 +4,6 @@
 #include <map>
 #include "include/core/SkFont.h"
 int static_sk_font_make(SkFont value);
-SkFont static_sk_font_get(int key);
+SkFont static_sk_font_get_entity(int key);
 void static_sk_font_set(int key, SkFont value);
 #endif // STATIC_SK_FONT_INTERNAL_H

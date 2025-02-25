@@ -67,7 +67,7 @@ extension Skia {
 
         func refColorSpace() -> SkColorSpace {
             let handle = SkImage_refColorSpace(self.pointer)
-            let pointer = static_sk_color_space_get(handle)
+            let pointer = static_sk_color_space_get_ptr(handle)
             return SkColorSpace(pointer: pointer, handle: handle)
         }
         // bool SkImage_isAlphaOnly(void *image); // (SkImage *image) -> bool
@@ -84,49 +84,49 @@ extension Skia {
 
         func makeShader(tmx: SkTileMode, tmy: SkTileMode, sampling: SkSamplingOptions, localMatrix: SkMatrix) -> SkShader {
             let handle = SkImage_makeShader(self.pointer, tmx.rawValue, tmy.rawValue, sampling.pointer, localMatrix.pointer)
-            let pointer = static_sk_shader_get(handle)
+            let pointer = static_sk_shader_get_ptr(handle)
             return SkShader(pointer: pointer, handle: handle)
         }
         // int SkImage_makeShader_2(void *image, int tmx, int tmy, const void *sampling, const void *lm); // (SkImage *image, SkTileMode tmx, SkTileMode tmy, const SkSamplingOptions *sampling, const SkMatrix *lm) -> sk_shader_t
 
         func makeShader(tmx: SkTileMode, tmy: SkTileMode, sampling: SkSamplingOptions, lm: SkMatrix) -> SkShader {
             let handle = SkImage_makeShader_2(self.pointer, tmx.rawValue, tmy.rawValue, sampling.pointer, lm.pointer)
-            let pointer = static_sk_shader_get(handle)
+            let pointer = static_sk_shader_get_ptr(handle)
             return SkShader(pointer: pointer, handle: handle)
         }
         // int SkImage_makeShader_3(void *image, const void *sampling, const void *lm); // (SkImage *image, const SkSamplingOptions *sampling, const SkMatrix *lm) -> sk_shader_t
 
         func makeShader(sampling: SkSamplingOptions, lm: SkMatrix) -> SkShader {
             let handle = SkImage_makeShader_3(self.pointer, sampling.pointer, lm.pointer)
-            let pointer = static_sk_shader_get(handle)
+            let pointer = static_sk_shader_get_ptr(handle)
             return SkShader(pointer: pointer, handle: handle)
         }
         // int SkImage_makeShader_4(void *image, const void *sampling, const void *lm); // (SkImage *image, const SkSamplingOptions *sampling, const SkMatrix *lm) -> sk_shader_t
 
         func makeShader_2(sampling: SkSamplingOptions, lm: SkMatrix) -> SkShader {
             let handle = SkImage_makeShader_4(self.pointer, sampling.pointer, lm.pointer)
-            let pointer = static_sk_shader_get(handle)
+            let pointer = static_sk_shader_get_ptr(handle)
             return SkShader(pointer: pointer, handle: handle)
         }
         // int SkImage_makeRawShader(void *image, int tmx, int tmy, const void *sampling, const void *localMatrix); // (SkImage *image, SkTileMode tmx, SkTileMode tmy, const SkSamplingOptions *sampling, const SkMatrix *localMatrix) -> sk_shader_t
 
         func makeRawShader(tmx: SkTileMode, tmy: SkTileMode, sampling: SkSamplingOptions, localMatrix: SkMatrix) -> SkShader {
             let handle = SkImage_makeRawShader(self.pointer, tmx.rawValue, tmy.rawValue, sampling.pointer, localMatrix.pointer)
-            let pointer = static_sk_shader_get(handle)
+            let pointer = static_sk_shader_get_ptr(handle)
             return SkShader(pointer: pointer, handle: handle)
         }
         // int SkImage_makeRawShader_2(void *image, int tmx, int tmy, const void *sampling, const void *lm); // (SkImage *image, SkTileMode tmx, SkTileMode tmy, const SkSamplingOptions *sampling, const SkMatrix *lm) -> sk_shader_t
 
         func makeRawShader_2(tmx: SkTileMode, tmy: SkTileMode, sampling: SkSamplingOptions, lm: SkMatrix) -> SkShader {
             let handle = SkImage_makeRawShader_2(self.pointer, tmx.rawValue, tmy.rawValue, sampling.pointer, lm.pointer)
-            let pointer = static_sk_shader_get(handle)
+            let pointer = static_sk_shader_get_ptr(handle)
             return SkShader(pointer: pointer, handle: handle)
         }
         // int SkImage_makeRawShader_3(void *image, const void *sampling, const void *lm); // (SkImage *image, const SkSamplingOptions *sampling, const SkMatrix *lm) -> sk_shader_t
         
         func makeRawShader(sampling: SkSamplingOptions, lm: SkMatrix) -> SkShader {
             let handle = SkImage_makeRawShader_3(self.pointer, sampling.pointer, lm.pointer)
-            let pointer = static_sk_shader_get(handle)
+            let pointer = static_sk_shader_get_ptr(handle)
             return SkShader(pointer: pointer, handle: handle)
         }
         
@@ -134,7 +134,7 @@ extension Skia {
 
         func makeRawShader_2(sampling: SkSamplingOptions, lm: SkMatrix) -> SkShader {
             let handle = SkImage_makeRawShader_4(self.pointer, sampling.pointer, lm.pointer)
-            let pointer = static_sk_shader_get(handle)
+            let pointer = static_sk_shader_get_ptr(handle)
             return SkShader(pointer: pointer, handle: handle)
         }
         // bool SkImage_peekPixels(void *image, void *pixmap); // (SkImage *image, SkPixmap *pixmap) -> bool
@@ -167,7 +167,7 @@ extension Skia {
 
         func refEncodedData() -> SkData {
             let handle = SkImage_refEncodedData(self.pointer)
-            let pointer = static_sk_data_get(handle)
+            let pointer = static_sk_data_get_ptr(handle)
             return SkData(pointer: pointer, handle: handle)
         }
         // int SkImage_makeSubset(void *image, void *direct, const void *subset); // (SkImage *image, GrDirectContext *direct, const SkIRect *subset) -> sk_image_t
@@ -186,7 +186,7 @@ extension Skia {
 
         func withDefaultMipmaps() -> SkImage {
             let handle = SkImage_withDefaultMipmaps(self.pointer)
-            let pointer = static_sk_image_get(handle)
+            let pointer = static_sk_image_get_ptr(handle)
             return SkImage(pointer: pointer, handle: handle)
         }
         // int SkImage_makeNonTextureImage(void *image, void *context); // (SkImage *image, GrDirectContext *context) -> sk_image_t
@@ -206,7 +206,7 @@ extension Skia {
 
         func reinterpretColorSpace(colorSpace: SkColorSpace) -> SkImage {
             let handle = SkImage_reinterpretColorSpace(self.pointer, colorSpace.handle)
-            let pointer = static_sk_image_get(handle)
+            let pointer = static_sk_image_get_ptr(handle)
             return SkImage(pointer: pointer, handle: handle)
         }
         // bool SkImage_unique(void *image); // (SkImage *image) -> bool

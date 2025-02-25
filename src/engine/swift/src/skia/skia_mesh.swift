@@ -44,7 +44,7 @@ extension Skia {
 
         func refUniforms() -> SkData {
             let handle = SkMesh_refUniforms(self.pointer)
-            let pointer = static_sk_data_get(handle)
+            let pointer = static_sk_data_get_ptr(handle)
             return SkData(pointer: pointer, handle: handle)
         }
         // const void * SkMesh_uniforms(void * mesh); // (SkMesh *mesh) -> const SkData*

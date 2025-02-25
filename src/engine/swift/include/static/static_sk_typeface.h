@@ -10,7 +10,7 @@ extern "C" {
 #endif
 typedef int sk_typeface_t;
 void static_sk_typeface_delete(int key);
-void * static_sk_typeface_get(int key); // -> SkTypeface *
+void * static_sk_typeface_get_ptr(int key); // -> SkTypeface *
 #ifdef __cplusplus
 }
 #endif

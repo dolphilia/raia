@@ -56,13 +56,13 @@ extension Skia {
 
         static func MakeSRGB() -> SkColorSpace {
             let handle = SkColorSpace_MakeSRGB();
-            let pointer = static_sk_color_space_get(handle)
+            let pointer = static_sk_color_space_get_ptr(handle)
             return SkColorSpace(pointer: pointer, handle: handle)
         }
 
         static func MakeSRGBLinear() -> SkColorSpace {
             let handle = SkColorSpace_MakeSRGBLinear();
-            let pointer = static_sk_color_space_get(handle)
+            let pointer = static_sk_color_space_get_ptr(handle)
             return SkColorSpace(pointer: pointer, handle: handle)
         }
 
@@ -71,7 +71,7 @@ extension Skia {
 
         static func Deserialize(data: UnsafeRawPointer, length: UInt) -> SkColorSpace {
             let handle = SkColorSpace_Deserialize(data, length);
-            let pointer = static_sk_color_space_get(handle)
+            let pointer = static_sk_color_space_get_ptr(handle)
             return SkColorSpace(pointer: pointer, handle: handle)
         }
 
@@ -100,19 +100,19 @@ extension Skia {
 
         func makeLinearGamma() -> SkColorSpace {
             let handle = SkColorSpace_makeLinearGamma(self.pointer);
-            let pointer = static_sk_color_space_get(handle)
+            let pointer = static_sk_color_space_get_ptr(handle)
             return SkColorSpace(pointer: pointer, handle: handle)
         }
 
         func makeSRGBGamma() -> SkColorSpace {
             let handle = SkColorSpace_makeSRGBGamma(self.pointer);
-            let pointer = static_sk_color_space_get(handle)
+            let pointer = static_sk_color_space_get_ptr(handle)
             return SkColorSpace(pointer: pointer, handle: handle)
         }
 
         func makeColorSpin() -> SkColorSpace {
             let handle = SkColorSpace_makeColorSpin(self.pointer);
-            let pointer = static_sk_color_space_get(handle)
+            let pointer = static_sk_color_space_get_ptr(handle)
             return SkColorSpace(pointer: pointer, handle: handle)
         }
 
@@ -122,7 +122,7 @@ extension Skia {
 
         func serialize() -> SkData {
             let handle = SkColorSpace_serialize(self.pointer);
-            let pointer = static_sk_data_get(handle)
+            let pointer = static_sk_data_get_ptr(handle)
             return SkData(pointer: pointer, handle: handle)
         }
 

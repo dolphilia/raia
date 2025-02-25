@@ -55,7 +55,7 @@ extension Skia {
 
         static func Deserialize(data: UnsafeRawPointer, size: UInt, procs: SkDeserialProcs) -> SkDrawable {
             let handle = SkDrawable_Deserialize(data, size, procs.pointer)
-            let pointer = static_sk_drawable_get(handle)
+            let pointer = static_sk_drawable_get_ptr(handle)
             return SkDrawable(pointer: pointer, handle: handle)
         }
 
@@ -91,7 +91,7 @@ extension Skia {
 
         func makePictureSnapshot() -> SkPicture {
             let handle = SkDrawable_makePictureSnapshot(self.pointer)
-            let pointer = static_sk_picture_get(handle)
+            let pointer = static_sk_picture_get_ptr(handle)
             return SkPicture(pointer: pointer, handle: handle)
         }
 
@@ -133,7 +133,7 @@ extension Skia {
 
         func serialize(serialProcs: SkSerialProcs) -> SkData {
             let handle = SkDrawable_serialize(self.pointer, serialProcs.pointer)
-            let pointer = static_sk_data_get(handle)
+            let pointer = static_sk_data_get_ptr(handle)
             return SkData(pointer: pointer, handle: handle)
         }
 

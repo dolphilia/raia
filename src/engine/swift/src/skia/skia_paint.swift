@@ -184,7 +184,7 @@ extension Skia {
         // int SkPaint_refShader(void *paint); // (SkPaint *paint) -> sk_shader_t
         func refShader() -> SkShader {
             let handle = SkPaint_refShader(self.pointer)
-            let pointer = static_sk_shader_get(handle)
+            let pointer = static_sk_shader_get_ptr(handle)
             return SkShader(pointer: pointer, handle: handle)
         }
         // void SkPaint_setShader(void *paint, int shader); // (SkPaint *paint, sk_shader_t shader)
@@ -199,7 +199,7 @@ extension Skia {
         // int SkPaint_refColorFilter(void *paint); // (SkPaint *paint) -> sk_color_filter_t
         func refColorFilter() -> SkColorFilter {
             let handle = SkPaint_refColorFilter(self.pointer)
-            let pointer = static_sk_color_filter_get(handle)
+            let pointer = static_sk_color_filter_get_ptr(handle)
             return SkColorFilter(pointer: pointer, handle: handle)
         }
         // void SkPaint_setColorFilter(void *paint, int color_filter); // (SkPaint *paint, sk_color_filter_t color_filter)
@@ -231,7 +231,7 @@ extension Skia {
         // int SkPaint_refBlender(void *paint); // (SkPaint *paint) -> sk_blender_t
         func refBlender() -> SkBlender {
             let handle = SkPaint_refBlender(self.pointer)
-            let pointer = static_sk_blender_get(handle)
+            let pointer = static_sk_blender_get_ptr(handle)
             return SkBlender(pointer: pointer, handle: handle)
         }
         // void SkPaint_setBlender(void *paint, int blender); // (SkPaint *paint, sk_blender_t blender)
@@ -246,7 +246,7 @@ extension Skia {
         // int SkPaint_refPathEffect(void *paint); // (SkPaint *paint) -> sk_path_effect_t
         func refPathEffect() -> SkPathEffect {
             let handle = SkPaint_refPathEffect(self.pointer)
-            let pointer = static_sk_path_effect_get(handle)
+            let pointer = static_sk_path_effect_get_ptr(handle)
             return SkPathEffect(pointer: pointer, handle: handle)
         }
         // void SkPaint_setPathEffect(void *paint, int path_effect); // (SkPaint *paint, sk_path_effect_t path_effect)
@@ -261,7 +261,7 @@ extension Skia {
         // int SkPaint_refMaskFilter(void *paint); // (SkPaint *paint) -> sk_mask_filter_t
         func refMaskFilter() -> SkMaskFilter {
             let handle = SkPaint_refMaskFilter(self.pointer)
-            let pointer = static_sk_mask_filter_get(handle)
+            let pointer = static_sk_mask_filter_get_ptr(handle)
             return SkMaskFilter(pointer: pointer, handle: handle)
         }
         // void SkPaint_setMaskFilter(void *paint, int mask_filter); // (SkPaint *paint, sk_mask_filter_t mask_filter)
@@ -276,7 +276,7 @@ extension Skia {
         // int SkPaint_refImageFilter(void *paint); // (SkPaint *paint) -> sk_image_filter_t
         func refImageFilter() -> SkImageFilter {
             let handle = SkPaint_refImageFilter(self.pointer)
-            let pointer = static_sk_image_filter_get(handle)
+            let pointer = static_sk_image_filter_get_ptr(handle)
             return SkImageFilter(pointer: pointer, handle: handle)
         }
         // void SkPaint_setImageFilter(void *paint, int image_filter); // (SkPaint *paint, sk_image_filter_t image_filter)

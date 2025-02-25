@@ -12,7 +12,7 @@ extern "C" {
 typedef int const_sk_capabilities_t;
 
 void static_const_sk_capabilities_delete(int key);
-const void *static_const_sk_capabilities_get(int key); // -> const SkCapabilities *
+const void *static_const_sk_capabilities_get_ptr(int key); // -> const SkCapabilities *
 
 #ifdef __cplusplus
 }

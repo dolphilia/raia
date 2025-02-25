@@ -10,7 +10,7 @@ extern "C" {
 #endif
 typedef int sk_path_effect_t;
 void static_sk_path_effect_delete(int key);
-void *static_sk_path_effect_get(int key); // -> SkPathEffect *
+void *static_sk_path_effect_get_ptr(int key); // -> SkPathEffect *
 #ifdef __cplusplus
 }
 #endif

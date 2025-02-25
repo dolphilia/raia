@@ -10,7 +10,7 @@ extern "C" {
 #endif
 typedef int sk_id_change_listener_t;
 void static_sk_id_change_listener_delete(int key);
-void *static_sk_id_change_listener_get(int key); // -> SkIDChangeListener *
+void *static_sk_id_change_listener_get_ptr(int key); // -> SkIDChangeListener *
 #ifdef __cplusplus
 }
 #endif

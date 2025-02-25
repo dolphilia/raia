@@ -150,7 +150,7 @@ extension Skia {
 
         func refColorSpace() -> SkColorSpace {
             let handle = SkPixmap_refColorSpace(self.pointer)
-            let pointer = static_sk_color_space_get(handle)
+            let pointer = static_sk_color_space_get_ptr(handle)
             return SkColorSpace(pointer: pointer, handle: handle)
         }
 

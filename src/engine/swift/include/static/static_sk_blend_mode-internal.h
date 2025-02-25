@@ -11,5 +11,5 @@
 #endif
 int static_optional_sk_blend_mode_make(std::optional<SkBlendMode> value);
 void static_optional_sk_blend_mode_set(int key, std::optional<SkBlendMode> value);
-std::optional<SkBlendMode> static_optional_sk_blend_mode_move(int key);
+std::optional<SkBlendMode> static_optional_sk_blend_mode_get_entity(int key);
 #endif //STATIC_SK_BLEND_MODE_INTERNAL_H

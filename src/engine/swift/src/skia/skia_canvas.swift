@@ -186,13 +186,13 @@ extension Skia {
 
         static func MakeRasterDirect(info: SkImageInfo, pixels: UnsafeMutableRawPointer, rowBytes: UInt, props: SkSurfaceProps) -> SkCanvas {
             let handle = SkCanvas_MakeRasterDirect(info.pointer, pixels, rowBytes, props.pointer)
-            let pointer = static_sk_canvas_get(handle)
+            let pointer = static_sk_canvas_get_ptr(handle)
             return SkCanvas(pointer: pointer, handle: handle)
         }
 
         static func MakeRasterDirectN32(width: Int, height: Int, pixels: UnsafeMutableRawPointer, rowBytes: UInt) -> SkCanvas {
             let handle = SkCanvas_MakeRasterDirectN32(Int32(width), Int32(height), pixels, rowBytes)
-            let pointer = static_sk_canvas_get(handle)
+            let pointer = static_sk_canvas_get_ptr(handle)
             return SkCanvas(pointer: pointer, handle: handle)
         }
 
@@ -596,7 +596,7 @@ extension Skia {
 
         func makeSurface(info: SkImageInfo, props: SkSurfaceProps) -> SkSurface {
             let handle = SkCanvas_makeSurface(self.pointer, info.pointer, props.pointer)
-            let pointer = static_sk_surface_get(handle)
+            let pointer = static_sk_surface_get_ptr(handle)
             return SkSurface(pointer: pointer, handle: handle)
         }
 

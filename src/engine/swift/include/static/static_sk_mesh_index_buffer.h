@@ -10,7 +10,7 @@ extern "C" {
 #endif
 typedef int sk_mesh_index_buffer_t;
 void static_sk_mesh_index_buffer_delete(int key);
-void *static_sk_mesh_index_buffer_get(int key); // -> SkMesh::IndexBuffer *
+void *static_sk_mesh_index_buffer_get_ptr(int key); // -> SkMesh::IndexBuffer *
 #ifdef __cplusplus
 }
 #endif

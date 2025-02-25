@@ -10,7 +10,7 @@ extern "C" {
 #endif
 typedef int sk_color_filter_t;
 void static_sk_color_filter_delete(int key);
-void *static_sk_color_filter_get(int key); // -> SkColorFilter *
+void *static_sk_color_filter_get_ptr(int key); // -> SkColorFilter *
 #ifdef __cplusplus
 }
 #endif

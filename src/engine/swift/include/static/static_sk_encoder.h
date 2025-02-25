@@ -10,7 +10,7 @@ extern "C" {
 #endif
 typedef int sk_encoder_t;
 void static_sk_encoder_delete(int key);
-void *static_sk_encoder_get(int key); // -> SkEncoder *
+void *static_sk_encoder_get_ptr(int key); // -> SkEncoder *
 #ifdef __cplusplus
 }
 #endif

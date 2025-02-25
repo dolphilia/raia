@@ -10,7 +10,7 @@ extern "C" {
 #endif
 typedef int sk_vertices_t;
 void static_sk_vertices_delete(int key);
-void * static_sk_vertices_get(int key); // -> SkVertices *
+void * static_sk_vertices_get_ptr(int key); // -> SkVertices *
 #ifdef __cplusplus
 }
 #endif

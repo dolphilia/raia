@@ -10,7 +10,7 @@ extern "C" {
 #endif
 typedef int sk_image_t;
 void static_sk_image_delete(int key);
-void *static_sk_image_get(int key); // -> SkImage *
+void *static_sk_image_get_ptr(int key); // -> SkImage *
 #ifdef __cplusplus
 }
 #endif

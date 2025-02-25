@@ -56,91 +56,91 @@ extension Skia {
 
         static func MakeWithCopy(data: UnsafeRawPointer?, length: UInt) -> SkData {
             let handle = SkData_MakeWithCopy(data, length);
-            let pointer = static_sk_data_get(handle)
+            let pointer = static_sk_data_get_ptr(handle)
             return SkData(pointer: pointer, handle: handle)
         }
 
         static func MakeUninitialized(length: UInt) -> SkData {
             let handle = SkData_MakeUninitialized(length);
-            let pointer = static_sk_data_get(handle)
+            let pointer = static_sk_data_get_ptr(handle)
             return SkData(pointer: pointer, handle: handle)
         }
 
         static func MakeZeroInitialized(length: UInt) -> SkData {
             let handle = SkData_MakeZeroInitialized(length);
-            let pointer = static_sk_data_get(handle)
+            let pointer = static_sk_data_get_ptr(handle)
             return SkData(pointer: pointer, handle: handle)
         }
 
         static func MakeWithCString(cstr: UnsafePointer<CChar>?) -> SkData {
             let handle = SkData_MakeWithCString(cstr);
-            let pointer = static_sk_data_get(handle)
+            let pointer = static_sk_data_get_ptr(handle)
             return SkData(pointer: pointer, handle: handle)
         }
 
         static func MakwWithString(string: String) -> SkData {
             let handle = SkData_MakeWithCString(string)
-            let pointer = static_sk_data_get(handle)
+            let pointer = static_sk_data_get_ptr(handle)
             return SkData(pointer: pointer, handle: handle)
         }
 
         static func MakeWithProc(ptr: UnsafeRawPointer?, length: UInt, proc: @escaping SkDataReleaseProc, ctx: UnsafeMutableRawPointer?) -> SkData {
             let handle = SkData_MakeWithProc(ptr, length, proc, ctx);
-            let pointer = static_sk_data_get(handle)
+            let pointer = static_sk_data_get_ptr(handle)
             return SkData(pointer: pointer, handle: handle)
         }
 
         static func MakeWithoutCopy(data: UnsafeRawPointer?, length: UInt) -> SkData {
             let handle = SkData_MakeWithoutCopy(data, length);
-            let pointer = static_sk_data_get(handle)
+            let pointer = static_sk_data_get_ptr(handle)
             return SkData(pointer: pointer, handle: handle)
         }
 
         static func MakeFromMalloc(data: UnsafeRawPointer?, length: UInt) -> SkData {
             let handle = SkData_MakeFromMalloc(data, length);
-            let pointer = static_sk_data_get(handle)
+            let pointer = static_sk_data_get_ptr(handle)
             return SkData(pointer: pointer, handle: handle)
         }
 
         static func MakeFromFileName(path: UnsafePointer<CChar>?) -> SkData {
             let handle = SkData_MakeFromFileName(path);
-            let pointer = static_sk_data_get(handle)
+            let pointer = static_sk_data_get_ptr(handle)
             return SkData(pointer: pointer, handle: handle)
         }
 
         static func MakeFromaFileName(path: String) -> SkData {
             let handle = SkData_MakeFromFileName(path)
-            let pointer = static_sk_data_get(handle)
+            let pointer = static_sk_data_get_ptr(handle)
             return SkData(pointer: pointer, handle: handle)
         }
 
         static func MakeFromFILE(f: UnsafeMutableRawPointer?) -> SkData {
             let handle = SkData_MakeFromFILE(f);
-            let pointer = static_sk_data_get(handle)
+            let pointer = static_sk_data_get_ptr(handle)
             return SkData(pointer: pointer, handle: handle)
         }
 
         static func MakeFromFD(fd: Int) -> SkData {
             let handle = SkData_MakeFromFD(Int32(fd));
-            let pointer = static_sk_data_get(handle)
+            let pointer = static_sk_data_get_ptr(handle)
             return SkData(pointer: pointer, handle: handle)
         }
 
         static func MakeFromStream(stream: SkStream, size: UInt) -> SkData {
             let handle = SkData_MakeFromStream(stream.pointer, size);
-            let pointer = static_sk_data_get(handle)
+            let pointer = static_sk_data_get_ptr(handle)
             return SkData(pointer: pointer, handle: handle)
         }
 
         static func MakeSubset(src: SkData, offset: UInt, length: UInt) -> SkData {
             let handle = SkData_MakeSubset(src.pointer, offset, length);
-            let pointer = static_sk_data_get(handle)
+            let pointer = static_sk_data_get_ptr(handle)
             return SkData(pointer: pointer, handle: handle)
         }
 
         static func MakeEmpty() -> SkData {
             let handle = SkData_MakeEmpty();
-            let pointer = static_sk_data_get(handle)
+            let pointer = static_sk_data_get_ptr(handle)
             return SkData(pointer: pointer, handle: handle)
         }
 

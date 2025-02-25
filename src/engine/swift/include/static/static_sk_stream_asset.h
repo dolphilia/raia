@@ -10,7 +10,7 @@ extern "C" {
 #endif
 typedef int sk_stream_asset_t;
 void static_sk_stream_asset_delete(int key);
-void *static_sk_stream_asset_get(int key); // -> SkStreamAsset *
+void *static_sk_stream_asset_get_ptr(int key); // -> SkStreamAsset *
 #ifdef __cplusplus
 }
 #endif

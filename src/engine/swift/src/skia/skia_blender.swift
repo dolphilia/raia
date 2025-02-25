@@ -53,7 +53,7 @@ extension Skia {
 
         static func Mode(mode: SkBlendMode) -> SkBlender {
             let handle = SkBlender_Mode(mode.rawValue)
-            let pointer = static_sk_blender_get(handle)
+            let pointer = static_sk_blender_get_ptr(handle)
             return SkBlender(pointer: pointer, handle: handle)
         }
 
@@ -77,7 +77,7 @@ extension Skia {
 
         static func Deserialize(type: SkBlenderType, data: UnsafeRawPointer, length: UInt, procs: SkDeserialProcs) -> SkBlender {
             let handle = SkBlender_Deserialize(type.rawValue, data, length, procs.pointer)
-            let pointer = static_sk_blender_get(handle)
+            let pointer = static_sk_blender_get_ptr(handle)
             return SkBlender(pointer: pointer, handle: handle)
         }
 
@@ -85,7 +85,7 @@ extension Skia {
 
         func getFactory() -> SkFlattenableFactory {
             let handle = SkBlender_getFactory(self.pointer)
-            let pointer = static_sk_blender_get(handle)
+            let pointer = static_sk_blender_get_ptr(handle)
             return SkFlattenableFactory(pointer: pointer, handle: handle)
         }
 
@@ -103,7 +103,7 @@ extension Skia {
 
         func serialize(procs: SkSerialProcs) -> SkData {
             let handle = SkBlender_serialize(self.pointer, procs.pointer)
-            let pointer = static_sk_data_get(handle)
+            let pointer = static_sk_data_get_ptr(handle)
             return SkData(pointer: pointer, handle: handle)
         }
 

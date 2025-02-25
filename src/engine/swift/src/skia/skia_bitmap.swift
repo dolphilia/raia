@@ -166,7 +166,7 @@ extension Skia {
 
         func asImage() -> SkImage {
             let handle = SkBitmap_asImage(self.pointer)
-            let pointer = static_sk_image_get(handle)
+            let pointer = static_sk_image_get_ptr(handle)
             return SkImage(pointer: pointer, handle: handle)
         }
 
@@ -343,25 +343,25 @@ extension Skia {
 
         func makeShader(sampling: SkSamplingOptions, lm: SkMatrix) -> SkShader {
             let handle = SkBitmap_makeShader(self.pointer, sampling.pointer, lm.pointer)
-            let pointer = static_sk_shader_get(handle)
+            let pointer = static_sk_shader_get_ptr(handle)
             return SkShader(pointer: pointer, handle: handle)
         }
 
         func makeShader_2(sampling: SkSamplingOptions, lm: SkMatrix) -> SkShader {
             let handle = SkBitmap_makeShader_2(self.pointer, sampling.pointer, lm.pointer)
-            let pointer = static_sk_shader_get(handle)
+            let pointer = static_sk_shader_get_ptr(handle)
             return SkShader(pointer: pointer, handle: handle)
         }
 
         func makeShader_3(tmx: SkTileMode, tmy: SkTileMode, sampling: SkSamplingOptions, localMatrix: SkMatrix) -> SkShader {
             let handle = SkBitmap_makeShader_3(self.pointer, Int32(tmx.rawValue), Int32(tmy.rawValue), sampling.pointer, localMatrix.pointer)
-            let pointer = static_sk_shader_get(handle)
+            let pointer = static_sk_shader_get_ptr(handle)
             return SkShader(pointer: pointer, handle: handle)
         }
 
         func makeShader_4(tmx: SkTileMode, tmy: SkTileMode, sampling: SkSamplingOptions, lm: SkMatrix) -> SkShader {
             let handle = SkBitmap_makeShader_4(self.pointer, Int32(tmx.rawValue), Int32(tmy.rawValue), sampling.pointer, lm.pointer)
-            let pointer = static_sk_shader_get(handle)
+            let pointer = static_sk_shader_get_ptr(handle)
             return SkShader(pointer: pointer, handle: handle)
         }
 
@@ -408,7 +408,7 @@ extension Skia {
 
         func refColorSpace() -> SkColorSpace {
             let handle = SkBitmap_refColorSpace(self.pointer)
-            let pointer = static_sk_color_space_get(handle)
+            let pointer = static_sk_color_space_get_ptr(handle)
             return SkColorSpace(pointer: pointer, handle: handle)
         }
 

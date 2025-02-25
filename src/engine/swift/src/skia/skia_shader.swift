@@ -63,7 +63,7 @@ extension Skia {
 
         static func NameToFactory(name: UnsafePointer<CChar>?) -> SkFlattenable {
             let handle = SkShader_NameToFactory(name)
-            let pointer = static_sk_flattenable_get(handle)
+            let pointer = static_sk_flattenable_get_ptr(handle)
             return SkFlattenable(pointer: pointer, handle: handle)
         }
 
@@ -71,7 +71,7 @@ extension Skia {
             let handle = name.withCString { cstr in
                 return SkShader_NameToFactory(cstr)
             }
-            let pointer = static_sk_flattenable_get(handle)
+            let pointer = static_sk_flattenable_get_ptr(handle)
             return SkFlattenable(pointer: pointer, handle: handle)
         }
 
@@ -98,7 +98,7 @@ extension Skia {
 
         static func Deserialize(type: SkFlattenable, data: UnsafeRawPointer, length: UInt, procs: UnsafeRawPointer) -> SkFlattenable {
             let deserialize_handle = SkShader_Deserialize(type.handle, data, length, procs)
-            let pointer = static_sk_flattenable_get(deserialize_handle)
+            let pointer = static_sk_flattenable_get_ptr(deserialize_handle)
             return SkFlattenable(pointer: pointer, handle: deserialize_handle)
         }
 
@@ -124,25 +124,25 @@ extension Skia {
 
         func makeWithLocalMatrix(matrix: SkMatrix) -> SkShader {
             let handle = SkShader_makeWithLocalMatrix(pointer, matrix.pointer)
-            let pointer = static_sk_shader_get(handle)
+            let pointer = static_sk_shader_get_ptr(handle)
             return SkShader(pointer: pointer, handle: handle)
         }
 
         func makeWithColorFilter(colorFilter: SkColorFilter) -> SkShader {
             let handle = SkShader_makeWithColorFilter(pointer, colorFilter.handle)
-            let pointer = static_sk_shader_get(handle)
+            let pointer = static_sk_shader_get_ptr(handle)
             return SkShader(pointer: pointer, handle: handle)
         }
 
         func makeWithWorkingColorSpace(colorSpace: SkColorSpace) -> SkShader {
             let handle = SkShader_makeWithWorkingColorSpace(pointer, colorSpace.handle)
-            let pointer = static_sk_shader_get(handle)
+            let pointer = static_sk_shader_get_ptr(handle)
             return SkShader(pointer: pointer, handle: handle)
         }
 
         func getFactory() -> SkFlattenable {
             let handle = SkShader_getFactory(pointer)
-            let pointer = static_sk_flattenable_get(handle)
+            let pointer = static_sk_flattenable_get_ptr(handle)
             return SkFlattenable(pointer: pointer, handle: handle)
         }
 
@@ -167,7 +167,7 @@ extension Skia {
 
         func serialize(procs: UnsafeRawPointer) -> SkData {
             let handle = SkShader_serialize(pointer, procs)
-            let pointer = static_sk_data_get(handle)
+            let pointer = static_sk_data_get_ptr(handle)
             return SkData(pointer: pointer, handle: handle)
         }
 

@@ -95,7 +95,7 @@ extension Skia {
 
         func getFactory() -> SkFlattenable {
             let handle = SkFlattenable_getFactory(self.pointer)
-            let pointer = static_sk_flattenable_get(handle)
+            let pointer = static_sk_flattenable_get_ptr(handle)
             return SkFlattenable(pointer: pointer, handle: handle)
         }
 
@@ -116,7 +116,7 @@ extension Skia {
 
         func serialize(serialProcs: SkSerialProcs) -> SkData {
             let handle = SkFlattenable_serialize(self.pointer, serialProcs.pointer)
-            let pointer = static_sk_data_get(handle)
+            let pointer = static_sk_data_get_ptr(handle)
             return SkData(pointer: pointer, handle: handle)
         }
 

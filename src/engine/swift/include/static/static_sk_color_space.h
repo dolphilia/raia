@@ -10,7 +10,7 @@ extern "C" {
 #endif
 typedef int sk_color_space_t;
 void static_sk_color_space_delete(int key);
-void *static_sk_color_space_get(int key); // -> SkColorSpace *
+void *static_sk_color_space_get_ptr(int key); // -> SkColorSpace *
 #ifdef __cplusplus
 }
 #endif

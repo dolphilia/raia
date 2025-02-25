@@ -10,7 +10,7 @@ extern "C" {
 #endif
 typedef int sk_surface_t;
 void static_sk_surface_delete(int key);
-void * static_sk_surface_get(int key); // -> SkSurface *
+void * static_sk_surface_get_ptr(int key); // -> SkSurface *
 #ifdef __cplusplus
 }
 #endif

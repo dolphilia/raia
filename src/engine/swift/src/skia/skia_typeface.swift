@@ -49,7 +49,7 @@ extension Skia {
 
         func makeClone(arguments: SkFontArguments) -> SkTypeface {
             let handle = SkTypeface_makeClone(self.pointer, arguments.pointer)
-            let pointer = static_sk_typeface_get(handle)
+            let pointer = static_sk_typeface_get_ptr(handle)
             return SkTypeface(pointer: pointer, handle: handle)
         }
         // void SkTypeface_serialize(void *typeface, void *stream, int behavior); // (SkTypeface *typeface, SkWStream *stream, SkTypeface::SerializeBehavior behavior)
@@ -57,7 +57,7 @@ extension Skia {
 
         func serialize(behavior: SkTypefaceSerializeBehavior) -> SkData {
             let handle = SkTypeface_serialize_2(self.pointer, behavior.rawValue)
-            let pointer = static_sk_data_get(handle)
+            let pointer = static_sk_data_get_ptr(handle)
             return SkData(pointer: pointer, handle: handle)
         }
         // void SkTypeface_unicharsToGlyphs(void *typeface, const void * uni, int count, void * glyphs); // (SkTypeface *typeface, const SkUnichar uni[], int count, SkGlyphID glyphs[])
@@ -110,7 +110,7 @@ extension Skia {
 
         func copyTableData(tag: UInt32) -> SkData {
             let handle = SkTypeface_copyTableData(self.pointer, tag)
-            let pointer = static_sk_data_get(handle)
+            let pointer = static_sk_data_get_ptr(handle)
             return SkData(pointer: pointer, handle: handle)
         }
         // int SkTypeface_getUnitsPerEm(void *typeface); // (SkTypeface *typeface) -> int
@@ -141,14 +141,14 @@ extension Skia {
 
         func openStream(ttcIndex: UnsafeMutablePointer<Int32>?) -> SkStreamAsset {
             let handle = SkTypeface_openStream(self.pointer, ttcIndex)
-            let pointer = static_sk_stream_asset_get(handle)
+            let pointer = static_sk_stream_asset_get_ptr(handle)
             return SkStreamAsset(pointer: pointer, handle: handle)
         }
         // int SkTypeface_openExistingStream(void *typeface, int *ttcIndex); // (SkTypeface *typeface, int *ttcIndex) -> sk_stream_asset_t
 
         func openExistingStream(ttcIndex: UnsafeMutablePointer<Int32>?) -> SkStreamAsset {
             let handle = SkTypeface_openExistingStream(self.pointer, ttcIndex)
-            let pointer = static_sk_stream_asset_get(handle)
+            let pointer = static_sk_stream_asset_get_ptr(handle)
             return SkStreamAsset(pointer: pointer, handle: handle)
         }
         // // TODO
@@ -185,14 +185,14 @@ extension Skia {
 
         static func MakeEmpty() -> SkTypeface {
             let handle = SkTypeface_MakeEmpty()
-            let pointer = static_sk_typeface_get(handle)
+            let pointer = static_sk_typeface_get_ptr(handle)
             return SkTypeface(pointer: pointer, handle: handle)
         }
         // int SkTypeface_MakeDeserialize(void *stream, int font_mgr); // (SkStream *stream, sk_font_mgr_t font_mgr) -> sk_typeface_t
 
         static func MakeDeserialize(stream: SkStream, font_mgr: SkFontMgr) -> SkTypeface {
             let handle = SkTypeface_MakeDeserialize(stream.pointer, font_mgr.handle)
-            let pointer = static_sk_typeface_get(handle)
+            let pointer = static_sk_typeface_get_ptr(handle)
             return SkTypeface(pointer: pointer, handle: handle)
         }
 
@@ -204,42 +204,42 @@ extension Skia {
 
         static func MakeDefault() -> SkTypeface {
             let handle = SkTypeface_MakeDefault()
-            let pointer = static_sk_typeface_get(handle)
+            let pointer = static_sk_typeface_get_ptr(handle)
             return SkTypeface(pointer: pointer, handle: handle)
         }
         // int SkTypeface_MakeFromName(const char familyName[], int fontStyle); // (const char familyName[], sk_font_style_t fontStyle) -> sk_typeface_t
 
         static func MakeFromName(familyName: String, fontStyle: SkFontStyle) -> SkTypeface {
             let handle = SkTypeface_MakeFromName(familyName, fontStyle.handle)
-            let pointer = static_sk_typeface_get(handle)
+            let pointer = static_sk_typeface_get_ptr(handle)
             return SkTypeface(pointer: pointer, handle: handle)
         }
         // int SkTypeface_MakeFromFile(const char path[], int index); // (const char path[], int index) -> sk_typeface_t
 
         static func MakeFromFile(path: String, index: Int) -> SkTypeface {
             let handle = SkTypeface_MakeFromFile(path, Int32(index))
-            let pointer = static_sk_typeface_get(handle)
+            let pointer = static_sk_typeface_get_ptr(handle)
             return SkTypeface(pointer: pointer, handle: handle)
         }
         // int SkTypeface_MakeFromStream(int stream_asset, int index); // (sk_stream_asset_t stream_asset, int index) -> sk_typeface_t
 
         static func MakeFromStream(stream_asset: SkStreamAsset, index: Int) -> SkTypeface {
             let handle = SkTypeface_MakeFromStream(stream_asset.handle, Int32(index))
-            let pointer = static_sk_typeface_get(handle)
+            let pointer = static_sk_typeface_get_ptr(handle)
             return SkTypeface(pointer: pointer, handle: handle)
         }
         // int SkTypeface_MakeFromData(int data, int index); // (sk_data_t data, int index) -> sk_typeface_t
 
         static func MakeFromData(data: SkData, index: Int) -> SkTypeface {
             let handle = SkTypeface_MakeFromData(data.handle, Int32(index))
-            let pointer = static_sk_typeface_get(handle)
+            let pointer = static_sk_typeface_get_ptr(handle)
             return SkTypeface(pointer: pointer, handle: handle)
         }
         // int SkTypeface_MakeDeserialize_2(void *stream); // (SkStream *stream) -> sk_typeface_t
 
         static func MakeDeserialize(stream: SkStream) -> SkTypeface {
             let handle = SkTypeface_MakeDeserialize_2(stream.pointer)
-            let pointer = static_sk_typeface_get(handle)
+            let pointer = static_sk_typeface_get_ptr(handle)
             return SkTypeface(pointer: pointer, handle: handle)
         }
     }

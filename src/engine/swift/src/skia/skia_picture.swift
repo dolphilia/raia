@@ -40,14 +40,14 @@ extension Skia {
 
         func makeShader(tmx: SkTileMode, tmy: SkTileMode, mode: SkFilterMode, localMatrix: SkMatrix, tileRect: SkRect) -> SkShader {
             let handle = SkPicture_makeShader(self.pointer, tmx.rawValue, tmy.rawValue, mode.rawValue, localMatrix.pointer, tileRect.pointer)
-            let pointer = static_sk_shader_get(handle)
+            let pointer = static_sk_shader_get_ptr(handle)
             return SkShader(pointer: pointer, handle: handle)
         }
         // int SkPicture_makeShader_2(void *picture, int tmx, int tmy, int mode); // (SkPicture *picture, SkTileMode tmx, SkTileMode tmy, SkFilterMode mode) -> sk_shader_t
 
         func makeShader(tmx: SkTileMode, tmy: SkTileMode, mode: SkFilterMode) -> SkShader {
             let handle = SkPicture_makeShader_2(self.pointer, tmx.rawValue, tmy.rawValue, mode.rawValue)
-            let pointer = static_sk_shader_get(handle)
+            let pointer = static_sk_shader_get_ptr(handle)
             return SkShader(pointer: pointer, handle: handle)
         }
         // bool SkPicture_unique(void *picture); // (SkPicture *picture) -> bool
@@ -80,7 +80,7 @@ extension Skia {
 
         static func MakePlaceholder(cull: SkRect) -> SkPicture {
             let handle = SkPicture_MakePlaceholder(cull.handle)
-            let pointer = static_sk_picture_get(handle)
+            let pointer = static_sk_picture_get_ptr(handle)
             return SkPicture(pointer: pointer, handle: handle)
         }
     }

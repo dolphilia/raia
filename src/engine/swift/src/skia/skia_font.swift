@@ -190,7 +190,7 @@ extension Skia {
 
         func refTypeface() -> SkTypeface {
             let handle = SkFont_refTypeface(self.pointer)
-            let pointer = static_sk_typeface_get(handle)
+            let pointer = static_sk_typeface_get_ptr(handle)
             return SkTypeface(pointer: pointer, handle: handle)
         }
         

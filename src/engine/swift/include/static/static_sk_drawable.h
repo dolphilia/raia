@@ -10,7 +10,7 @@ extern "C" {
 #endif
 typedef int sk_drawable_t;
 void static_sk_drawable_delete(int key);
-void *static_sk_drawable_get(int key); // -> SkDrawable *
+void *static_sk_drawable_get_ptr(int key); // -> SkDrawable *
 #ifdef __cplusplus
 }
 #endif

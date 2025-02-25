@@ -12,7 +12,7 @@ extern "C" {
 typedef int sk_blender_t;
 
 void static_sk_blender_delete(int key);
-void *static_sk_blender_get(int key); // -> SkBlender *
+void *static_sk_blender_get_ptr(int key); // -> SkBlender *
 
 #ifdef __cplusplus
 }

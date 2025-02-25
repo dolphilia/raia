@@ -10,7 +10,7 @@ extern "C" {
 #endif
 typedef int sk_executor_t;
 void static_sk_executor_delete(int key);
-void *static_sk_executor_get(int key); // -> SkExecutor *
+void *static_sk_executor_get_ptr(int key); // -> SkExecutor *
 #ifdef __cplusplus
 }
 #endif

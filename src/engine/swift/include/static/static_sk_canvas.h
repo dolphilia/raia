@@ -12,7 +12,7 @@ extern "C" {
 typedef int sk_canvas_t;
 
 void static_sk_canvas_delete(int key);
-void *static_sk_canvas_get(int key); // -> SkCanvas *
+void *static_sk_canvas_get_ptr(int key); // -> SkCanvas *
 
 #ifdef __cplusplus
 }

@@ -10,7 +10,7 @@ extern "C" {
 #endif
 typedef int sk_document_t;
 void static_sk_document_delete(int key);
-void *static_sk_document_get(int key); // -> SkDocument *
+void *static_sk_document_get_ptr(int key); // -> SkDocument *
 #ifdef __cplusplus
 }
 #endif

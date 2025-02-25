@@ -50,27 +50,27 @@ extension Skia {
 
         func makeSurface(imageInfo: SkImageInfo) -> SkSurface {
             let handle = SkSurface_makeSurface(self.pointer, imageInfo.pointer)
-            let pointer = static_sk_surface_get(handle)
+            let pointer = static_sk_surface_get_ptr(handle)
             return SkSurface(pointer: pointer, handle: handle)
         }
         // int SkSurface_makeSurface_2(void *surface, int width, int height); // (SkSurface *surface, int width, int height) -> sk_surface_t
 
         func makeSurface(width: Int, height: Int) -> SkSurface {
             let handle = SkSurface_makeSurface_2(self.pointer, Int32(width), Int32(height))
-            let pointer = static_sk_surface_get(handle)
+            let pointer = static_sk_surface_get_ptr(handle)
             return SkSurface(pointer: pointer, handle: handle)
         }
         // int SkSurface_makeImageSnapshot(void *surface); // (SkSurface *surface) -> sk_image_t
         func makeImageSnapshot() -> SkImage {
             let handle = SkSurface_makeImageSnapshot(self.pointer)
-            let pointer = static_sk_image_get(handle)
+            let pointer = static_sk_image_get_ptr(handle)
             return SkImage(pointer: pointer, handle: handle)
         }
         // int SkSurface_makeImageSnapshot_2(void *surface, const void *bounds); // (SkSurface *surface, const SkIRect *bounds) -> sk_image_t
 
         func makeImageSnapshot(bounds: SkIRect) -> SkImage {
             let handle = SkSurface_makeImageSnapshot_2(self.pointer, bounds.pointer)
-            let pointer = static_sk_image_get(handle)
+            let pointer = static_sk_image_get_ptr(handle)
             return SkImage(pointer: pointer, handle: handle)
         }
         // void SkSurface_draw(void *surface, void *canvas, float x, float y, const void *sampling, const void *paint); // (SkSurface *surface, SkCanvas *canvas, SkScalar x, SkScalar y, const SkSamplingOptions *sampling, const SkPaint *paint)

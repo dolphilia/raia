@@ -10,7 +10,7 @@ extern "C" {
 #endif
 typedef int sk_drawable_gpu_draw_handler_t;
 void static_sk_drawable_gpu_draw_handler_delete(int key);
-void *static_sk_drawable_gpu_draw_handler_get(int key); // -> SkDrawable::GpuDrawHandler *
+void *static_sk_drawable_gpu_draw_handler_get_ptr(int key); // -> SkDrawable::GpuDrawHandler *
 #ifdef __cplusplus
 }
 #endif

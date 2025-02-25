@@ -48,7 +48,7 @@ extension Skia {
 
         func serialize(procs: UnsafeRawPointer) -> SkData {
             let handle = SkPathEffect_serialize(pointer, procs)
-            let pointer = static_sk_data_get(handle)
+            let pointer = static_sk_data_get_ptr(handle)
             return SkData(pointer: pointer, handle: handle)
         }
         // unsigned long SkPathEffect_serialize_2(void *path_effect, void *memory, unsigned long memory_size, const void *procs); // void *path_effect, void *memory, size_t memory_size, const void *procs) -> size_t
@@ -78,14 +78,14 @@ extension Skia {
         // int SkPathEffect_MakeSum(int first, int second); // (sk_path_effect_t first, sk_path_effect_t second) -> sk_path_effect_t
         static func MakeSum(first: SkPathEffect, second: SkPathEffect) -> SkPathEffect {
            let handle = SkPathEffect_MakeSum(first.handle, second.handle)
-           let pointer = static_sk_path_effect_get(handle)
+           let pointer = static_sk_path_effect_get_ptr(handle)
            return SkPathEffect(pointer: pointer, handle: handle)
             //return SkPathEffect(pointer: , handle: -1)
         }
         // int SkPathEffect_MakeCompose(int outer, int inner); //  (sk_path_effect_t outer, sk_path_effect_t inner) -> sk_path_effect_t
         static func MakeCompose(outer: SkPathEffect, inner: SkPathEffect) -> SkPathEffect {
             let handle = SkPathEffect_MakeCompose(outer.handle, inner.handle)
-            let pointer = static_sk_path_effect_get(handle)
+            let pointer = static_sk_path_effect_get_ptr(handle)
             return SkPathEffect(pointer: pointer, handle: handle)
         }
         // int SkPathEffect_GetFlattenableType(); // () -> int
@@ -95,7 +95,7 @@ extension Skia {
         // int SkPathEffect_Deserialize(const void *data, unsigned long size, const void *procs); // (const void *data, size_t size, const void *procs) -> sk_path_effect_t
         static func Deserialize(data: UnsafeRawPointer, size: UInt, procs: UnsafeRawPointer) -> SkPathEffect {
             let handle = SkPathEffect_Deserialize(data, size, procs)
-            let pointer = static_sk_path_effect_get(handle)
+            let pointer = static_sk_path_effect_get_ptr(handle)
             return SkPathEffect(pointer: pointer, handle: handle)
         }
         // int SkPathEffect_NameToFactory(const char name[]); // (const char name[]) -> sk_flattenable_factory_t

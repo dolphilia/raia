@@ -9,6 +9,6 @@
 #include <utility>
 #include "include/core/SkMesh.h"
 int static_sk_mesh_result_make(SkMesh::Result value);
-SkMesh::Result static_sk_mesh_result_get(int key);
+SkMesh::Result static_sk_mesh_result_get_entity(int key);
 void static_sk_mesh_result_set(int key, SkMesh::Result value);
 #endif //STATIC_SK_MESH_RESULT_INTERNAL_H

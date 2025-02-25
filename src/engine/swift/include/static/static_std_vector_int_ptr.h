@@ -11,7 +11,7 @@ extern "C" {
 
 typedef int vector_int_ptr_t;
 void static_int_vector_ptr_delete(int key);
-void* static_int_vector_ptr_get(int key);
+void* static_int_vector_ptr_get_ptr(int key);
 
 #ifdef __cplusplus
 }
